@@ -21,6 +21,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "test:watch": "react-scripts test --env=jsdom --watchAll --coverage",
+    "test:coverage": "react-scripts test --env=jsdom --coverage",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
@@ -29,5 +31,23 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "gh-pages": "^1.1.0",
     "redux-mock-store": "^1.5.1"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/registerServiceWorker.js",
+      "!src/index.js",
+      "!src/ducks/store/**.js",
+      "!src/setupTests.js"
+    ],
+    "coverageReporters": ["text", "lcov"],
+    "coverageThreshold": {
+      "global": {
+        "branches": 75,
+        "functions": 75,
+        "lines": 75,
+        "statements": 75
+      }
+    }
   }
 }

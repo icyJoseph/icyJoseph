@@ -1,4 +1,4 @@
-const INC = "increment";
+export const INC = "increment";
 
 export default function counter(state = { counter: 0 }, action) {
   switch (action.type) {

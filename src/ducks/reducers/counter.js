@@ -1,10 +1,10 @@
 export const INC = "increment";
 
-export default function counter(state = { counter: 0 }, action) {
+export default function counter(counter = 0, action) {
   switch (action.type) {
     case INC:
-      return Object.assign({}, state, { counter: state.counter + 1 });
+      return counter + 1;
     default:
-      return state;
+      return counter;
   }
 }

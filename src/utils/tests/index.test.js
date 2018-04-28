@@ -19,6 +19,9 @@ describe("localStorage mock", () => {
 });
 
 describe("saveState", () => {
+  afterAll(() => {
+    localStorage.removeItem("state");
+  });
   const stateToSave = {
     counter: 1
   };
@@ -31,32 +34,36 @@ describe("saveState", () => {
 });
 
 describe("getStateAndSave", () => {
-  const state = {
-    counter: 1
-  };
+  afterAll(() => {
+    localStorage.removeItem("state");
+  });
+
+  const state = { counter: 0 };
 
   const store = { subscribe: jest.fn(), getState: jest.fn(() => state) };
 
   it("saves the given state as a side effect", () => {
-    getStateAndSave(store);
+    getStateAndSave(store)();
     const savedState = JSON.parse(localStorage.getItem("state"));
     expect(savedState).toEqual(state);
   });
 });
 
 describe("saveStore", () => {
-  const state = {
-    counter: 1
-  };
+  afterAll(() => {
+    localStorage.removeItem("state");
+  });
 
+  const state = { counter: 1 };
+  const expectedState = { counter: 2 };
   const store = saveStore()(createStore)(rootReducer, state);
 
   it("returns the store with the given state", () => {
     expect(store.getState()).toEqual(state);
   });
-
-  it("saves the given state as a side effect", () => {
+  it("saves the state when the state changes", () => {
+    store.dispatch({ type: "increment" });
     const savedState = JSON.parse(localStorage.getItem("state"));
-    expect(savedState).toEqual(state);
+    expect(savedState).toEqual(expectedState);
   });
 });

@@ -4,7 +4,10 @@ import { shallow } from "enzyme";
 import App from "../";
 
 describe("App", () => {
-  const wrapper = shallow(<App />);
+  const props = {
+    match: { path: "/" }
+  };
+  const wrapper = shallow(<App {...props} />);
   it("renders without crashing", () => {
     expect(wrapper).toMatchSnapshot();
   });

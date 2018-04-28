@@ -1,11 +1,13 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class App extends Component {
   render() {
+    const { match } = this.props;
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Welcome to {match.path}</h1>
         </header>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
@@ -16,3 +18,9 @@ class App extends Component {
 }
 
 export default App;
+
+App.propTypes = {
+  location: PropTypes.object,
+  match: PropTypes.object,
+  history: PropTypes.object
+};

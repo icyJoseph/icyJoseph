@@ -4,7 +4,13 @@ exports[`App renders without crashing 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <App />,
+  Symbol(enzyme.__unrendered__): <App
+    match={
+        Object {
+            "path": "/",
+          }
+    }
+/>,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -24,7 +30,8 @@ ShallowWrapper {
           <h1
                     className="App-title"
           >
-                    Welcome to React
+                    Welcome to 
+                    /
           </h1>
 </header>,
         <p
@@ -49,7 +56,8 @@ ShallowWrapper {
           "children": <h1
             className="App-title"
 >
-            Welcome to React
+            Welcome to 
+            /
 </h1>,
           "className": "App-header",
         },
@@ -59,11 +67,17 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "Welcome to React",
+            "children": Array [
+              "Welcome to ",
+              "/",
+            ],
             "className": "App-title",
           },
           "ref": null,
-          "rendered": "Welcome to React",
+          "rendered": Array [
+            "Welcome to ",
+            "/",
+          ],
           "type": "h1",
         },
         "type": "header",
@@ -116,7 +130,8 @@ ShallowWrapper {
             <h1
                         className="App-title"
             >
-                        Welcome to React
+                        Welcome to 
+                        /
             </h1>
 </header>,
           <p
@@ -141,7 +156,8 @@ ShallowWrapper {
             "children": <h1
               className="App-title"
 >
-              Welcome to React
+              Welcome to 
+              /
 </h1>,
             "className": "App-header",
           },
@@ -151,11 +167,17 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": "Welcome to React",
+              "children": Array [
+                "Welcome to ",
+                "/",
+              ],
               "className": "App-title",
             },
             "ref": null,
-            "rendered": "Welcome to React",
+            "rendered": Array [
+              "Welcome to ",
+              "/",
+            ],
             "type": "h1",
           },
           "type": "header",

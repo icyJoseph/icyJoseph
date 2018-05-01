@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-class App extends Component {
+export class App extends Component {
   render() {
     const { match } = this.props;
     return (

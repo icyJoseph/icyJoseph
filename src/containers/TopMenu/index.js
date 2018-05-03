@@ -18,7 +18,12 @@ export class TopMenu extends Component {
     const { activeItem } = this.state;
 
     return (
-      <Menu fluid widths={3} inverted style={{ borderRadius: 0 }}>
+      <Menu
+        fluid
+        widths={3}
+        inverted
+        style={{ borderRadius: 0, marginBottom: 0 }}
+      >
         <Menu.Item
           name="home"
           active={activeItem === "home"}

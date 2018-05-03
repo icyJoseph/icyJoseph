@@ -1,17 +1,27 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Grid } from "semantic-ui-react";
 
 import HexGridColumn from "./HexGridColumn";
 
-const HexGridRow = ({ row }) => {
+const HexGridRow = ({ row, clickHandler }) => {
   return (
     <Grid.Row style={style}>
-      {row.map(tile => <HexGridColumn key={tile} />)}
+      {row.map(tile => (
+        <HexGridColumn key={tile.id} clickHandler={clickHandler} tile={tile} />
+      ))}
     </Grid.Row>
   );
 };
 export default HexGridRow;
 
+HexGridRow.propTypes = {
+  rows: PropTypes.arrayOf({
+    row: PropTypes.array
+  }),
+  clickHandler: PropTypes.func
+};
+
 const style = {
-  maxHeight: "120px"
+  maxHeight: "135px"
 };

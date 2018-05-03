@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import { Grid } from "semantic-ui-react";
 import HexGridRow from "./HexGridRow";
 
-const HexGrid = ({ rows }) => {
-  const dummyRows = [[1, 2, 3], [4, 5, 6, 7], [8, 9, 10]];
+const HexGrid = ({ rows, clickHandler }) => {
   return (
     <Grid centered>
-      {dummyRows.map(row => <HexGridRow key={row} row={row} />)}
+      {rows.map((row, i) => (
+        <HexGridRow key={`GridRow${i}`} row={row} clickHandler={clickHandler} />
+      ))}
     </Grid>
   );
 };
@@ -15,7 +16,6 @@ const HexGrid = ({ rows }) => {
 export default HexGrid;
 
 HexGrid.propTypes = {
-  rows: PropTypes.arrayOf({
-    row: PropTypes.array
-  })
+  rows: PropTypes.arrayOf(PropTypes.array),
+  clickHandler: PropTypes.func
 };

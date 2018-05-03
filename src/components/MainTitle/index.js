@@ -18,9 +18,11 @@ class MainTitle extends Component {
   render() {
     const { title } = this.props;
     return (
-      <Container style={style}>
-        <Header as="h1" textAlign="center">
-          <ReactRevealText show={this.state.reveal}>{title}</ReactRevealText>
+      <Container style={style.container}>
+        <Header as="h1" size="huge" textAlign="center">
+          <ReactRevealText show={this.state.reveal} style={style.title}>
+            {title}
+          </ReactRevealText>
         </Header>
       </Container>
     );
@@ -32,12 +34,19 @@ MainTitle.propTypes = {
 };
 
 const style = {
-  display: "flex",
-  flex: 1,
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-  minHeight: "150px"
+  container: {
+    display: "flex",
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: "150px"
+  },
+  title: {
+    fontSize: "35px",
+    letterSpacing: "1em",
+    lineHeight: "36px"
+  }
 };
 
 export default MainTitle;

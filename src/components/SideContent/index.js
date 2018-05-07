@@ -11,7 +11,7 @@ export const SideContent = ({ visibility, Content, close }) => {
       visible={visibility}
       direction="right"
     >
-      <Segment basic>{visibility && Content}</Segment>
+      <Segment basic>{Content}</Segment>
       <Button onClick={close}>Close</Button>
     </Sidebar>
   );

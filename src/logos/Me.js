@@ -12,27 +12,29 @@ const Me = ({ fill, handler }) => {
       }}
     >
       <text
+        onClick={handler}
         stroke="#000"
         transform="rotate(-30 279.4453124999999,186.42306518554685) matrix(3.5363574959800985,0,0,3.2310659197700176,-245.73786896740947,-260.43491243154347) "
-        text-anchor="start"
-        font-family="Helvetica, Arial, sans-serif"
-        font-size="54"
+        textAnchor="start"
+        fontFamily="Roboto, sans-serif"
+        fontSize="54"
         y="190"
         x="190"
-        stroke-width="0"
+        strokeWidth="0"
         fill={fill}
       >
         About
       </text>
       <text
+        onClick={handler}
         stroke="#000"
         transform="rotate(-30 279.4453124999999,186.42306518554685) matrix(3.5363574959800985,0,0,3.2310659197700176,-245.73786896740947,-260.43491243154347) "
-        text-anchor="start"
-        font-family="Helvetica, Arial, sans-serif"
-        font-size="54"
+        textAnchor="start"
+        fontFamily="Roboto, sans-serif"
+        fontSize="54"
         y="240"
         x="220"
-        stroke-width="0"
+        strokeWidth="0"
         fill={fill}
       >
         Me

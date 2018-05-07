@@ -54,7 +54,7 @@ export default HomeDesktopGrid;
 
 HomeDesktopGrid.propTypes = {
   visibility: PropTypes.bool,
-  Content: PropTypes.func,
+  Content: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   closeSideContent: PropTypes.func,
   openSideContent: PropTypes.func,
   data: PropTypes.shape({

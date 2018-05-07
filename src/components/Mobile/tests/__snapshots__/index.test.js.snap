@@ -15,25 +15,89 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "host",
+    "nodeType": "function",
     "props": Object {
-      "children": "Mobile View",
+      "children": Array [
+        <MainTitle
+          title="Meet Joseph"
+/>,
+        <p>
+          Mobile View
+</p>,
+        ";",
+      ],
     },
     "ref": null,
-    "rendered": "Mobile View",
-    "type": "p",
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "title": "Meet Joseph",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Mobile View",
+        },
+        "ref": null,
+        "rendered": "Mobile View",
+        "type": "p",
+      },
+      ";",
+    ],
+    "type": Symbol(react.fragment),
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "host",
+      "nodeType": "function",
       "props": Object {
-        "children": "Mobile View",
+        "children": Array [
+          <MainTitle
+            title="Meet Joseph"
+/>,
+          <p>
+            Mobile View
+</p>,
+          ";",
+        ],
       },
       "ref": null,
-      "rendered": "Mobile View",
-      "type": "p",
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "title": "Meet Joseph",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Mobile View",
+          },
+          "ref": null,
+          "rendered": "Mobile View",
+          "type": "p",
+        },
+        ";",
+      ],
+      "type": Symbol(react.fragment),
     },
   ],
   Symbol(enzyme.__options__): Object {

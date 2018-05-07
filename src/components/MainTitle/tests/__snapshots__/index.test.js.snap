@@ -21,6 +21,7 @@ ShallowWrapper {
     "props": Object {
       "children": <Header
         as="h1"
+        size="huge"
         textAlign="center"
 >
         <ReactRevealText
@@ -28,7 +29,13 @@ ShallowWrapper {
                 delayMax={1200}
                 delayMin={200}
                 show={false}
-                style={Object {}}
+                style={
+                        Object {
+                                "fontSize": "35px",
+                                "letterSpacing": "1em",
+                                "lineHeight": "36px",
+                              }
+                }
                 text=""
                 threshold={0.2}
                 timingFunction="linear"
@@ -58,7 +65,13 @@ ShallowWrapper {
           delayMax={1200}
           delayMin={200}
           show={false}
-          style={Object {}}
+          style={
+                    Object {
+                              "fontSize": "35px",
+                              "letterSpacing": "1em",
+                              "lineHeight": "36px",
+                            }
+          }
           text=""
           threshold={0.2}
           timingFunction="linear"
@@ -66,6 +79,7 @@ ShallowWrapper {
 >
           Test Title
 </ReactRevealText>,
+        "size": "huge",
         "textAlign": "center",
       },
       "ref": null,
@@ -79,7 +93,11 @@ ShallowWrapper {
           "delayMax": 1200,
           "delayMin": 200,
           "show": false,
-          "style": Object {},
+          "style": Object {
+            "fontSize": "35px",
+            "letterSpacing": "1em",
+            "lineHeight": "36px",
+          },
           "text": "",
           "threshold": 0.2,
           "timingFunction": "linear",
@@ -101,6 +119,7 @@ ShallowWrapper {
       "props": Object {
         "children": <Header
           as="h1"
+          size="huge"
           textAlign="center"
 >
           <ReactRevealText
@@ -108,7 +127,13 @@ ShallowWrapper {
                     delayMax={1200}
                     delayMin={200}
                     show={false}
-                    style={Object {}}
+                    style={
+                              Object {
+                                        "fontSize": "35px",
+                                        "letterSpacing": "1em",
+                                        "lineHeight": "36px",
+                                      }
+                    }
                     text=""
                     threshold={0.2}
                     timingFunction="linear"
@@ -138,7 +163,13 @@ ShallowWrapper {
             delayMax={1200}
             delayMin={200}
             show={false}
-            style={Object {}}
+            style={
+                        Object {
+                                    "fontSize": "35px",
+                                    "letterSpacing": "1em",
+                                    "lineHeight": "36px",
+                                  }
+            }
             text=""
             threshold={0.2}
             timingFunction="linear"
@@ -146,6 +177,7 @@ ShallowWrapper {
 >
             Test Title
 </ReactRevealText>,
+          "size": "huge",
           "textAlign": "center",
         },
         "ref": null,
@@ -159,7 +191,11 @@ ShallowWrapper {
             "delayMax": 1200,
             "delayMin": 200,
             "show": false,
-            "style": Object {},
+            "style": Object {
+              "fontSize": "35px",
+              "letterSpacing": "1em",
+              "lineHeight": "36px",
+            },
             "text": "",
             "threshold": 0.2,
             "timingFunction": "linear",

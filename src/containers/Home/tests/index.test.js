@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import Media from "react-media";
-import { Home } from "../";
+import { Home, mapStateToProps } from "../";
 
 describe("Home", () => {
   const wrapper = shallow(<Home />);
@@ -28,14 +28,16 @@ describe("Mobile", () => {
     delete window.matchMedia;
   });
 
-  const nonSpy = jest.spyOn(Home.prototype, "renderGrid");
-  const spy = jest.spyOn(Home.prototype, "renderMobile");
   const mobileWrapper = shallow(<Home />);
   it("renders mobile", () => {
     expect(mobileWrapper).toMatchSnapshot();
     mobileWrapper.render();
-    expect(spy).toHaveBeenCalled();
-    expect(nonSpy).toHaveBeenCalledTimes(0);
+    expect(
+      mobileWrapper
+        .find(Media)
+        .at(1)
+        .render()
+    ).toHaveLength(0);
   });
 });
 
@@ -56,22 +58,34 @@ describe("Desktop", () => {
   afterAll(() => {
     delete window.matchMedia;
   });
-  const spy = jest.spyOn(Home.prototype, "renderGrid");
-  const nonSpy = jest.spyOn(Home.prototype, "renderMobile");
   const desktopWrapper = shallow(<Home />);
   it("renders desktop", () => {
     expect(desktopWrapper).toMatchSnapshot();
     desktopWrapper.render();
-    expect(spy).toHaveBeenCalled();
-    // The MobileView function gets called with no arguments
-    // This is most likely a bug with react-media
-    // To make sure it is not rendered we check for the length at Media[0]
-    expect(nonSpy).toHaveBeenCalledTimes(1);
     expect(
       desktopWrapper
         .find(Media)
         .at(0)
         .render()
     ).toHaveLength(0);
+  });
+});
+
+describe("Redux methods, mapStateToProps", () => {
+  const state = {
+    sideContainer: {
+      open: false,
+      Content: <div>hi</div>
+    },
+    counter: 1
+  };
+
+  const expectedProps = {
+    visibility: false,
+    Content: <div>hi</div>
+  };
+
+  it("returns the expected keys", () => {
+    expect(mapStateToProps(state)).toEqual(expectedProps);
   });
 });

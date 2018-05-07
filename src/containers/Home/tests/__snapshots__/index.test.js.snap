@@ -4,7 +4,7 @@ exports[`Desktop renders desktop 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Home />,
+  Symbol(enzyme.__unrendered__): <Unknown />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -18,9 +18,6 @@ ShallowWrapper {
     "nodeType": "function",
     "props": Object {
       "children": Array [
-        <MainTitle
-          title="Meet Joseph"
-/>,
         <Media
           defaultMatches={true}
           query={
@@ -43,17 +40,6 @@ ShallowWrapper {
     },
     "ref": null,
     "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "title": "Meet Joseph",
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
       Object {
         "instance": null,
         "key": undefined,
@@ -94,9 +80,6 @@ ShallowWrapper {
       "nodeType": "function",
       "props": Object {
         "children": Array [
-          <MainTitle
-            title="Meet Joseph"
-/>,
           <Media
             defaultMatches={true}
             query={
@@ -119,17 +102,6 @@ ShallowWrapper {
       },
       "ref": null,
       "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "title": "Meet Joseph",
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
         Object {
           "instance": null,
           "key": undefined,
@@ -178,7 +150,7 @@ exports[`Home renders 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Home />,
+  Symbol(enzyme.__unrendered__): <Unknown />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -192,9 +164,6 @@ ShallowWrapper {
     "nodeType": "function",
     "props": Object {
       "children": Array [
-        <MainTitle
-          title="Meet Joseph"
-/>,
         <Media
           defaultMatches={true}
           query={
@@ -217,17 +186,6 @@ ShallowWrapper {
     },
     "ref": null,
     "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "title": "Meet Joseph",
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
       Object {
         "instance": null,
         "key": undefined,
@@ -268,9 +226,6 @@ ShallowWrapper {
       "nodeType": "function",
       "props": Object {
         "children": Array [
-          <MainTitle
-            title="Meet Joseph"
-/>,
           <Media
             defaultMatches={true}
             query={
@@ -293,17 +248,6 @@ ShallowWrapper {
       },
       "ref": null,
       "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "title": "Meet Joseph",
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
         Object {
           "instance": null,
           "key": undefined,
@@ -352,7 +296,7 @@ exports[`Mobile renders mobile 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Home />,
+  Symbol(enzyme.__unrendered__): <Unknown />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -366,9 +310,6 @@ ShallowWrapper {
     "nodeType": "function",
     "props": Object {
       "children": Array [
-        <MainTitle
-          title="Meet Joseph"
-/>,
         <Media
           defaultMatches={true}
           query={
@@ -391,17 +332,6 @@ ShallowWrapper {
     },
     "ref": null,
     "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "title": "Meet Joseph",
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
       Object {
         "instance": null,
         "key": undefined,
@@ -442,9 +372,6 @@ ShallowWrapper {
       "nodeType": "function",
       "props": Object {
         "children": Array [
-          <MainTitle
-            title="Meet Joseph"
-/>,
           <Media
             defaultMatches={true}
             query={
@@ -467,17 +394,6 @@ ShallowWrapper {
       },
       "ref": null,
       "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "title": "Meet Joseph",
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
         Object {
           "instance": null,
           "key": undefined,

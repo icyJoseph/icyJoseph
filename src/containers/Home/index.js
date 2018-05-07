@@ -48,5 +48,5 @@ Home.propTypes = {
   closeSideContent: PropTypes.func,
   changeContent: PropTypes.func,
   visibility: PropTypes.bool,
-  Content: PropTypes.func
+  Content: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
 };

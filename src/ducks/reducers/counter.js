@@ -1,4 +1,4 @@
-export const INC = "increment";
+import { INC } from "../constants/counter";
 
 export default function counter(counter = 0, action) {
   switch (action.type) {

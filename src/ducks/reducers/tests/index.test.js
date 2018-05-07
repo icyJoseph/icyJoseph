@@ -1,21 +1,10 @@
-import counter, { INC } from "../counter";
 import rootReducer from "../";
-
-describe("counter", () => {
-  const action = {
-    type: INC
-  };
-
-  const result = 1;
-
-  it("increments the default state", () => {
-    expect(counter(undefined, action)).toEqual(result);
-  });
-});
+import { INC } from "../../constants/counter";
 
 describe("rootReducer", () => {
   const expectedState = {
-    counter: 1
+    counter: 1,
+    sideContainer: { Content: null, open: false }
   };
 
   const action = {

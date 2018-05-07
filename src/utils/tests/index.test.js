@@ -54,8 +54,11 @@ describe("saveStore", () => {
     localStorage.removeItem("state");
   });
 
-  const state = { counter: 1 };
-  const expectedState = { counter: 2 };
+  const state = { counter: 1, sideContainer: { Content: null, open: false } };
+  const expectedState = {
+    counter: 2,
+    sideContainer: { Content: null, open: false }
+  };
   const store = saveStore()(createStore)(rootReducer, state);
 
   it("returns the store with the given state", () => {

@@ -16,11 +16,18 @@ class MainTitle extends Component {
   }
 
   render() {
-    const { title } = this.props;
+    const { title, desktop } = this.props;
     return (
       <Container style={style.container}>
         <Header as="h1" size="huge" textAlign="center">
-          <ReactRevealText show={this.state.reveal} style={style.title}>
+          <ReactRevealText
+            show={this.state.reveal}
+            style={{
+              ...style.title,
+              letterSpacing: desktop ? "0.7em" : "0.5em",
+              color: desktop ? "black" : "FloralWhite"
+            }}
+          >
             {title}
           </ReactRevealText>
         </Header>
@@ -30,7 +37,8 @@ class MainTitle extends Component {
 }
 
 MainTitle.propTypes = {
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  desktop: PropTypes.bool
 };
 
 const style = {
@@ -44,7 +52,6 @@ const style = {
   },
   title: {
     fontSize: "35px",
-    letterSpacing: "1em",
     lineHeight: "36px"
   }
 };

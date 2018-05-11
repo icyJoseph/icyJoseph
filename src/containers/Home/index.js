@@ -4,8 +4,9 @@ import Media from "react-media";
 
 import { connect } from "react-redux";
 
-import Mobile from "../../components/Mobile";
-import HomeDesktopGrid from "../../components/HomeDesktopGrid";
+// import Mobile from "../Mobile";
+import HomeDesktopGrid from "../HomeDesktopGrid";
+import Tablet from "..//Tablet";
 
 import data from "../../data";
 
@@ -16,12 +17,16 @@ import {
 } from "../../ducks/actions/sideContainer";
 
 export const Home = props => {
-  // Consider adding another breakpoint at 1024px
   return (
     <Fragment>
-      <Media query={{ maxWidth: 920 }} render={() => <Mobile />} />
+      {/* <Media query={{ maxWidth: 767 }} render={() => <Mobile />} /> */}
       <Media
-        query={{ minWidth: 921 }}
+        // query={{ minWidth: 768, maxWidth: 1023 }}
+        query={{ maxWidth: 1023 }}
+        render={() => <Tablet {...props} data={data} />}
+      />
+      <Media
+        query={{ minWidth: 1023 }}
         render={() => <HomeDesktopGrid {...props} data={data} />}
       />
     </Fragment>

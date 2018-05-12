@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 
 // import Mobile from "../Mobile";
 import HomeDesktopGrid from "../HomeDesktopGrid";
-import Tablet from "..//Tablet";
+import Tablet from "../Tablet";
 
 import data from "../../data";
 

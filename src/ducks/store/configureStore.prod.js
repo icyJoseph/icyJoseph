@@ -5,7 +5,7 @@ import saveToStorage from "../../utils/saveStateToLocalStorage";
 
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = applyMiddleware(sagaMiddleware);
-sagaMiddleware.run();
+//sagaMiddleware.run(rootSaga);
 
 const enhancer = compose(middlewares, saveToStorage());
 

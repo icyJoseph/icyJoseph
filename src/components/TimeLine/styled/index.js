@@ -4,7 +4,6 @@ export const CardWrapper = styled.div`
   position: absolute;
   width: 164px;
   margin: 5px;
-  height: auto;
   border-radius: 5%;
   margin-left: ${props => (props.left ? "-170px" : "10px")};
   padding: 15px;

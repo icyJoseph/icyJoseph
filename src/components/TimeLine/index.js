@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import Element from "./Element";
+import Event from "./Event";
 
 export const TimeLine = ({ data }) => {
   const description =
@@ -7,11 +7,11 @@ export const TimeLine = ({ data }) => {
 
   return (
     <Fragment>
-      <Element left title="Joseph" meta="CTO" description={description} />
-      <Element title="Joseph" meta="CTO" description={description} />
-      <Element left title="Joseph" meta="CTO" description={description} />
-      <Element title="Joseph" meta="CTO" description={description} />
-      <Element left title="Joseph" meta="CTO" description={description} />
+      <Event left title="Joseph" meta="CTO" description={description} />
+      <Event title="Joseph" meta="CTO" description={description} />
+      <Event left title="Joseph" meta="CTO" description={description} />
+      <Event title="Joseph" meta="CTO" description={description} />
+      <Event left title="Joseph" meta="CTO" description={description} />
     </Fragment>
   );
 };

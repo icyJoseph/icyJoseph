@@ -1,11 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const ReactLogo = ({ fill, handler }) => {
+const ReactLogo = ({
+  fill,
+  handler,
+  scale = 0.0125,
+  translate = { Y: -70, X: 112 }
+}) => {
   return (
     <g
-      fill={"#61DAFB"}
-      transform="scale(0.0125)translate(-70, 112)"
+      fill={fill || "#61DAFB"}
+      transform={`scale(${scale})translate(${translate.Y}, ${translate.X})`}
       onClick={handler}
       style={{
         cursor: "pointer"

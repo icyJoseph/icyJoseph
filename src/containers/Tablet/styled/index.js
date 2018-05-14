@@ -6,3 +6,10 @@ export const TabletWrapper = styled.div`
   padding: 10%;
   margin-bottom: 15px;
 `;
+
+export const MobileLogoWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;

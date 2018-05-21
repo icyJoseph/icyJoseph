@@ -1,14 +1,13 @@
 import rootReducer from "../";
-import { INC } from "../../constants/counter";
+import { OPEN } from "../../drawer";
 
 describe("rootReducer", () => {
   const expectedState = {
-    counter: 1,
-    sideContainer: { Content: null, open: false }
+    drawer: { Content: undefined, open: true }
   };
 
   const action = {
-    type: INC
+    type: OPEN
   };
 
   const state = rootReducer(undefined, action);

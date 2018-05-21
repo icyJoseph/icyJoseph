@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore, compose } from "redux";
 import createSagaMiddleware from "redux-saga";
 
-import rootReducer from "../reducers/";
+import rootReducer from "../rootReducer";
 import saveToStore from "../../utils/saveStateToLocalStorage";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -20,8 +20,8 @@ export default function(initialState) {
   const store = createStore(rootReducer, initialState, enhancer);
 
   if (module.hot) {
-    module.hot.accept("../reducers", () => {
-      const nextRootReducer = require("../reducers");
+    module.hot.accept("../rootReducer", () => {
+      const nextRootReducer = require("../rootReducer");
       store.replaceReducer(nextRootReducer);
     });
     return store;

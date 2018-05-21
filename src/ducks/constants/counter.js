@@ -1,1 +1,0 @@
-export const INC = "increment";

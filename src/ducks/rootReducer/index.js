@@ -1,10 +1,8 @@
 import { combineReducers } from "redux";
-import counter from "./counter";
-import sideContainer from "./sideContainer";
+import drawer from "../drawer";
 
 const rootReducer = combineReducers({
-  counter,
-  sideContainer
+  drawer
 });
 
 export default rootReducer;

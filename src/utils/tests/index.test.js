@@ -4,7 +4,9 @@ import saveStore, {
   getStateAndSave
 } from "../saveStateToLocalStorage";
 
-import rootReducer from "../../../src/ducks/reducers/";
+import { OPEN } from "../../ducks/drawer";
+
+import rootReducer from "../../../src/ducks/rootReducer/";
 
 describe("localStorage mock", () => {
   it("reads from empty local storage", () => {
@@ -54,10 +56,9 @@ describe("saveStore", () => {
     localStorage.removeItem("state");
   });
 
-  const state = { counter: 1, sideContainer: { Content: null, open: false } };
+  const state = { drawer: { Content: null, open: false } };
   const expectedState = {
-    counter: 2,
-    sideContainer: { Content: null, open: false }
+    drawer: { Content: null, open: true }
   };
   const store = saveStore()(createStore)(rootReducer, state);
 
@@ -65,7 +66,7 @@ describe("saveStore", () => {
     expect(store.getState()).toEqual(state);
   });
   it("saves the state when the state changes", () => {
-    store.dispatch({ type: "increment" });
+    store.dispatch({ type: OPEN, payload: null });
     const savedState = JSON.parse(localStorage.getItem("state"));
     expect(savedState).toEqual(expectedState);
   });

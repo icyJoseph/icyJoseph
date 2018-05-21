@@ -18,7 +18,7 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": <Unknown>
-        <withRouter(Connect(TopMenu)) />
+        <LoadableComponent />
         <Switch>
                 <Route
                         component={[Function]}
@@ -30,7 +30,6 @@ ShallowWrapper {
                 />
                 <Route
                         component={[Function]}
-                        exact={true}
                         path="/"
                 />
                 <Route
@@ -46,7 +45,7 @@ ShallowWrapper {
       "nodeType": "function",
       "props": Object {
         "children": Array [
-          <withRouter(Connect(TopMenu)) />,
+          <LoadableComponent />,
           <Switch>
             <Route
                         component={[Function]}
@@ -58,7 +57,6 @@ ShallowWrapper {
             />
             <Route
                         component={[Function]}
-                        exact={true}
                         path="/"
             />
             <Route
@@ -72,7 +70,7 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "function",
+          "nodeType": "class",
           "props": Object {},
           "ref": null,
           "rendered": null,
@@ -94,7 +92,6 @@ ShallowWrapper {
 />,
               <Route
                 component={[Function]}
-                exact={true}
                 path="/"
 />,
               <Route
@@ -134,7 +131,6 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "component": [Function],
-                "exact": true,
                 "path": "/",
               },
               "ref": null,
@@ -167,7 +163,7 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": <Unknown>
-          <withRouter(Connect(TopMenu)) />
+          <LoadableComponent />
           <Switch>
                     <Route
                               component={[Function]}
@@ -179,7 +175,6 @@ ShallowWrapper {
                     />
                     <Route
                               component={[Function]}
-                              exact={true}
                               path="/"
                     />
                     <Route
@@ -195,7 +190,7 @@ ShallowWrapper {
         "nodeType": "function",
         "props": Object {
           "children": Array [
-            <withRouter(Connect(TopMenu)) />,
+            <LoadableComponent />,
             <Switch>
               <Route
                             component={[Function]}
@@ -207,7 +202,6 @@ ShallowWrapper {
               />
               <Route
                             component={[Function]}
-                            exact={true}
                             path="/"
               />
               <Route
@@ -221,7 +215,7 @@ ShallowWrapper {
           Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "function",
+            "nodeType": "class",
             "props": Object {},
             "ref": null,
             "rendered": null,
@@ -243,7 +237,6 @@ ShallowWrapper {
 />,
                 <Route
                   component={[Function]}
-                  exact={true}
                   path="/"
 />,
                 <Route
@@ -283,7 +276,6 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "component": [Function],
-                  "exact": true,
                   "path": "/",
                 },
                 "ref": null,

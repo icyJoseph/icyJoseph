@@ -31,8 +31,9 @@ ShallowWrapper {
                 show={false}
                 style={
                         Object {
+                                "color": "FloralWhite",
                                 "fontSize": "35px",
-                                "letterSpacing": "1em",
+                                "letterSpacing": "0.5em",
                                 "lineHeight": "36px",
                               }
                 }
@@ -50,7 +51,7 @@ ShallowWrapper {
         "flex": 1,
         "flexDirection": "column",
         "justifyContent": "center",
-        "minHeight": "150px",
+        "minHeight": "90px",
       },
     },
     "ref": null,
@@ -67,8 +68,9 @@ ShallowWrapper {
           show={false}
           style={
                     Object {
+                              "color": "FloralWhite",
                               "fontSize": "35px",
-                              "letterSpacing": "1em",
+                              "letterSpacing": "0.5em",
                               "lineHeight": "36px",
                             }
           }
@@ -94,8 +96,9 @@ ShallowWrapper {
           "delayMin": 200,
           "show": false,
           "style": Object {
+            "color": "FloralWhite",
             "fontSize": "35px",
-            "letterSpacing": "1em",
+            "letterSpacing": "0.5em",
             "lineHeight": "36px",
           },
           "text": "",
@@ -129,8 +132,9 @@ ShallowWrapper {
                     show={false}
                     style={
                               Object {
+                                        "color": "FloralWhite",
                                         "fontSize": "35px",
-                                        "letterSpacing": "1em",
+                                        "letterSpacing": "0.5em",
                                         "lineHeight": "36px",
                                       }
                     }
@@ -148,7 +152,7 @@ ShallowWrapper {
           "flex": 1,
           "flexDirection": "column",
           "justifyContent": "center",
-          "minHeight": "150px",
+          "minHeight": "90px",
         },
       },
       "ref": null,
@@ -165,8 +169,9 @@ ShallowWrapper {
             show={false}
             style={
                         Object {
+                                    "color": "FloralWhite",
                                     "fontSize": "35px",
-                                    "letterSpacing": "1em",
+                                    "letterSpacing": "0.5em",
                                     "lineHeight": "36px",
                                   }
             }
@@ -192,8 +197,9 @@ ShallowWrapper {
             "delayMin": 200,
             "show": false,
             "style": Object {
+              "color": "FloralWhite",
               "fontSize": "35px",
-              "letterSpacing": "1em",
+              "letterSpacing": "0.5em",
               "lineHeight": "36px",
             },
             "text": "",

@@ -48,7 +48,7 @@ const style = {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    minHeight: "150px"
+    minHeight: "90px"
   },
   title: {
     fontSize: "35px",

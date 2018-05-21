@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const TabletWrapper = styled.div`
   background: dodgerblue;
   height: 100%;
-  padding: 2% 10%;
+  padding: 3% 5%;
   margin-bottom: 15px;
 `;
 

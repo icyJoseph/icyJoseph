@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { TabletWrapper } from "./styled";
 import MainTitle from "../../components/MainTitle";
+import { Statistics } from "../../components/Statistics";
 import TimeLine from "../../components/TimeLine";
 
 export const Tablet = ({
@@ -14,6 +15,7 @@ export const Tablet = ({
   return (
     <TabletWrapper>
       <MainTitle title="Meet Joseph" />
+      <Statistics />
       <TimeLine data={[...firstRow, ...secondRow, ...thirdRow]} />
     </TabletWrapper>
   );

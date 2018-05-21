@@ -5,31 +5,35 @@ import { Point, Line } from "./styled";
 
 export class Event extends Component {
   state = {
-    height: 0
+    height: 20,
+    lineHeight: 60
   };
 
   toggle = this.toggle.bind(this);
   toggle() {
-    const { height } = this.state;
+    const { height, lineHeight } = this.state;
 
     this.setState({
-      height: height === 0 ? "auto" : 0
+      height: height === 20 ? "auto" : 20,
+      lineHeight: lineHeight === 60 ? "auto" : 60
     });
   }
 
   render() {
-    const { height } = this.state;
+    const { height, lineHeight } = this.state;
     const { title, meta, description, left } = this.props;
     return (
       <Fragment>
-        <Point onClick={this.toggle} />
-        <AnimateHeight duration={500} height={height}>
+        <Point />
+        <AnimateHeight duration={500} height={lineHeight}>
           <Line>
             <Card
               left={left}
               title={title}
               meta={meta}
               description={description}
+              height={height}
+              toggle={this.toggle}
             />
           </Line>
         </AnimateHeight>

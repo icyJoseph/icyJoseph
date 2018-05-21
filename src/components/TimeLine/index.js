@@ -12,6 +12,8 @@ export const TimeLine = ({ data }) => {
       <Event left title="Joseph" meta="CTO" description={description} />
       <Event title="Joseph" meta="CTO" description={description} />
       <Event left title="Joseph" meta="CTO" description={description} />
+      <Event title="Joseph" meta="CTO" description={description} />
+      <Event left title="Joseph" meta="CTO" description={description} />
     </Fragment>
   );
 };

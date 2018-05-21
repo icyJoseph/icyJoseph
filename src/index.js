@@ -7,7 +7,7 @@ import Routes from "./routes";
 import registerServiceWorker from "./registerServiceWorker";
 import configureStore from "./ducks/store/";
 
-const store = configureStore({ counter: 0 });
+const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>

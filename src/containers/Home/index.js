@@ -10,11 +10,7 @@ import Tablet from "../Tablet";
 
 import data from "../../data";
 
-import {
-  openSideContent,
-  closeSideContent,
-  changeContent
-} from "../../ducks/actions/sideContainer";
+import { openDrawer, closeDrawer, changeContent } from "../../ducks/drawer";
 
 export const Home = props => {
   return (
@@ -35,22 +31,22 @@ export const Home = props => {
 
 export const mapStateToProps = state => {
   return {
-    visibility: state.sideContainer.open,
-    Content: state.sideContainer.Content
+    visibility: state.drawer.open,
+    Content: state.drawer.Content
   };
 };
 
 export const mapDispatchToProps = {
-  openSideContent,
-  closeSideContent,
+  openDrawer,
+  closeDrawer,
   changeContent
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 Home.propTypes = {
-  openSideContent: PropTypes.func,
-  closeSideContent: PropTypes.func,
+  openDrawer: PropTypes.func,
+  closeDrawer: PropTypes.func,
   changeContent: PropTypes.func,
   visibility: PropTypes.bool,
   Content: PropTypes.oneOfType([PropTypes.func, PropTypes.object])

@@ -7,8 +7,8 @@ import TimeLine from "../../components/TimeLine";
 export const Tablet = ({
   visibility,
   Content,
-  closeSideContent,
-  openSideContent,
+  closeDrawer,
+  openDrawer,
   data: { firstRow, secondRow, thirdRow }
 }) => {
   return (
@@ -24,8 +24,8 @@ export default Tablet;
 Tablet.propTypes = {
   visibility: PropTypes.bool,
   Content: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-  closeSideContent: PropTypes.func,
-  openSideContent: PropTypes.func,
+  closeDrawer: PropTypes.func,
+  openDrawer: PropTypes.func,
   data: PropTypes.shape({
     firstRow: PropTypes.arr,
     secondRow: PropTypes.arr,

@@ -6,13 +6,13 @@ import Background from "./codingBackground.jpg";
 
 import MainTitle from "../../components/MainTitle";
 import HexGrid from "../../components/HexGrid";
-import SideContent from "../../components/SideContent";
+import Drawer from "../../components/Drawer";
 
 export const HomeDesktopGrid = ({
   visibility,
   Content,
-  closeSideContent,
-  openSideContent,
+  closeDrawer,
+  openDrawer,
   data: { firstRow, secondRow, thirdRow }
 }) => {
   return (
@@ -29,11 +29,7 @@ export const HomeDesktopGrid = ({
           backgroundSize: "cover"
         }}
       >
-        <SideContent
-          visibility={visibility}
-          Content={Content}
-          close={closeSideContent}
-        />
+        <Drawer visibility={visibility} Content={Content} close={closeDrawer} />
         <Sidebar.Pusher
           style={{
             background: "rgba(0,0,0,0)"
@@ -41,7 +37,7 @@ export const HomeDesktopGrid = ({
         >
           <MainTitle title="Meet Joseph" desktop />
           <HexGrid
-            clickHandler={openSideContent}
+            clickHandler={openDrawer}
             rows={[firstRow, secondRow, thirdRow]}
           />
         </Sidebar.Pusher>
@@ -55,8 +51,8 @@ export default HomeDesktopGrid;
 HomeDesktopGrid.propTypes = {
   visibility: PropTypes.bool,
   Content: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-  closeSideContent: PropTypes.func,
-  openSideContent: PropTypes.func,
+  closeDrawer: PropTypes.func,
+  openDrawer: PropTypes.func,
   data: PropTypes.shape({
     firstRow: PropTypes.arr,
     secondRow: PropTypes.arr,

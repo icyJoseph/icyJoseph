@@ -73,11 +73,10 @@ describe("Desktop", () => {
 
 describe("Redux methods, mapStateToProps", () => {
   const state = {
-    sideContainer: {
+    drawer: {
       open: false,
       Content: <div>hi</div>
-    },
-    counter: 1
+    }
   };
 
   const expectedProps = {

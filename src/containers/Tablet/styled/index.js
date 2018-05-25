@@ -2,9 +2,7 @@ import styled from "styled-components";
 
 export const TabletWrapper = styled.div`
   background: dodgerblue;
-  height: 100%;
-  padding: 3% 5%;
-  margin-bottom: 15px;
+  padding: 5% 5% 10% 5%;
 `;
 
 export const MobileLogoWrapper = styled.div`

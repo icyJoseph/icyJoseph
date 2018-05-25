@@ -8,6 +8,8 @@ export default {
   firstRow: [
     {
       id: 0,
+      title: "Certified",
+      meta: "Framework",
       Component: ReactLogo,
       fill: "#61DAFB",
       backgroundFill: "#000",
@@ -15,6 +17,8 @@ export default {
     },
     {
       id: 1,
+      title: "Certified",
+      meta: "Algorithms",
       Component: PythonLogo,
       fill: "#000",
       backgroundFill: "#000",
@@ -22,6 +26,8 @@ export default {
     },
     {
       id: 2,
+      title: "Certified",
+      meta: "Favorite Language",
       Component: JavaScriptLogo,
       fill: "#F7DF1E",
       backgroundFill: "#F7DF1E",
@@ -31,6 +37,8 @@ export default {
   secondRow: [
     {
       id: 3,
+      title: "Certified",
+      meta: "Framework",
       Component: ReactLogo,
       fill: "#61DAFB",
       backgroundFill: "#000",
@@ -38,6 +46,8 @@ export default {
     },
     {
       id: 4,
+      title: "Certified",
+      meta: "Algorithms",
       Component: PythonLogo,
       fill: "#000",
       backgroundFill: "#000",
@@ -45,6 +55,8 @@ export default {
     },
     {
       id: 5,
+      title: "Certified",
+      meta: "Developer",
       Component: Me,
       fill: "white",
       backgroundFill: "tomato",
@@ -52,6 +64,8 @@ export default {
     },
     {
       id: 6,
+      title: "Certified",
+      meta: "Framework",
       Component: ReactLogo,
       fill: "#61DAFB",
       backgroundFill: "#000",
@@ -61,6 +75,8 @@ export default {
   thirdRow: [
     {
       id: 7,
+      title: "Certified",
+      meta: "Framework",
       Component: ReactLogo,
       fill: "#61DAFB",
       backgroundFill: "#000",
@@ -68,6 +84,8 @@ export default {
     },
     {
       id: 8,
+      title: "Certified",
+      meta: "Algorithms",
       Component: PythonLogo,
       fill: "#000",
       backgroundFill: "#000",
@@ -75,6 +93,8 @@ export default {
     },
     {
       id: 9,
+      title: "Certified",
+      meta: "Favorite Language",
       Component: JavaScriptLogo,
       fill: "#F7DF1E",
       backgroundFill: "#F7DF1E",

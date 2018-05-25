@@ -1,21 +1,21 @@
-import React, { Fragment } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import Event from "./Event";
 
 export const TimeLine = ({ data }) => {
-  const description =
-    "Worked as CTO for Enatics Sports AB. This is a very long description with the only purpose of testing.";
-
   return (
-    <Fragment>
-      <Event left title="Joseph" meta="CTO" description={description} />
-      <Event title="Joseph" meta="CTO" description={description} />
-      <Event left title="Joseph" meta="CTO" description={description} />
-      <Event title="Joseph" meta="CTO" description={description} />
-      <Event left title="Joseph" meta="CTO" description={description} />
-      <Event title="Joseph" meta="CTO" description={description} />
-      <Event left title="Joseph" meta="CTO" description={description} />
-    </Fragment>
+    <div>
+      <div style={{ marginBottom: "50px" }}>
+        {data.map((event, index) => (
+          <Event key={event.id} left={index % 2 === 0} {...event} />
+        ))}
+      </div>
+    </div>
   );
 };
 
 export default TimeLine;
+
+TimeLine.propTypes = {
+  data: PropTypes.array
+};

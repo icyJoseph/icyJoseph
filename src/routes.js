@@ -28,6 +28,12 @@ const AsyncTopMenu = Loadable({
   delay: 600
 });
 
+const AsyncBottomMenu = Loadable({
+  loader: () => import("./containers/BottomMenu"),
+  loading: HeaderLoader,
+  delay: 600
+});
+
 export const Routes = () => (
   <BrowserRouter>
     <Fragment>
@@ -38,6 +44,7 @@ export const Routes = () => (
         <Route path="/" component={asyncHome} />
         <Route component={asyncNoMatch} />
       </Switch>
+      <AsyncBottomMenu />
     </Fragment>
   </BrowserRouter>
 );

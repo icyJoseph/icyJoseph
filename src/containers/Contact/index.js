@@ -1,16 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Header, Modal, Button } from "semantic-ui-react";
+import { ModalWrapper } from "./styled";
 
 export const Contact = ({ open, handleClose }) => (
-  <Modal
+  <ModalWrapper
     dimmer={true}
     open={open}
     onClose={handleClose}
-    style={{
-      width: "100%",
-      marginTop: "33.33%"
-    }}
     closeOnDocumentClick
   >
     <Modal.Header>Contact</Modal.Header>
@@ -27,7 +24,7 @@ export const Contact = ({ open, handleClose }) => (
         Close
       </Button>
     </Modal.Actions>
-  </Modal>
+  </ModalWrapper>
 );
 
 export default Contact;

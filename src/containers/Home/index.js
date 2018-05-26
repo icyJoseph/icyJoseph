@@ -22,7 +22,7 @@ export const Home = props => {
         render={() => <Tablet {...props} data={data} />}
       />
       <Media
-        query={{ minWidth: 1023 }}
+        query={{ minWidth: 1024 }}
         render={() => <HomeDesktopGrid {...props} data={data} />}
       />
     </Fragment>

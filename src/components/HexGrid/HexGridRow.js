@@ -6,7 +6,7 @@ import HexGridColumn from "./HexGridColumn";
 
 const HexGridRow = ({ row, clickHandler }) => {
   return (
-    <Grid.Row style={style}>
+    <Grid.Row>
       {row.map(tile => (
         <HexGridColumn key={tile.id} clickHandler={clickHandler} tile={tile} />
       ))}
@@ -20,8 +20,4 @@ HexGridRow.propTypes = {
     row: PropTypes.array
   }),
   clickHandler: PropTypes.func
-};
-
-const style = {
-  maxHeight: "135px"
 };

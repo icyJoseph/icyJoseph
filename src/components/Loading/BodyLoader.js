@@ -1,13 +1,30 @@
 import React from "react";
 import { Segment, Loader as Spinner } from "semantic-ui-react";
-import Error from "../../logos/Error";
+import { Message } from "semantic-ui-react";
+import Broken from "../../logos/Broken";
 
 export const Loader = ({ pastDelay, error }) => {
   // Handle the error state
   if (error) {
     return (
       <Segment inverted style={style}>
-        <Error />
+        <Broken />
+        <Message
+          error
+          style={{
+            marginTop: "-100px",
+            borderRadius: 0,
+            boxShadow: "none"
+          }}
+          color="black"
+        >
+          <Message.Content>
+            <Message.Header>
+              There was a problem loading this page.
+            </Message.Header>
+            Please reload the page.
+          </Message.Content>
+        </Message>
       </Segment>
     );
   } else if (pastDelay) {
@@ -24,9 +41,16 @@ export const Loader = ({ pastDelay, error }) => {
 
 const style = {
   margin: 0,
+  position: "absolute",
   top: 0,
+  bottom: 0,
   borderRadius: 0,
-  height: "calc(100vh - 140px)"
+  width: "100%",
+  flexL: 1,
+  display: "flex",
+  justifyContent: "center",
+  flexDirection: "column",
+  alignItems: "center"
 };
 
 export default Loader;

@@ -7,7 +7,14 @@ export const HeaderLoader = ({ pastDelay, error }) => {
     return (
       <Message
         error
-        style={{ margin: 0, borderRadius: 0, boxShadow: "none" }}
+        style={{
+          position: "absolute",
+          top: 0,
+          margin: 0,
+          borderRadius: 0,
+          boxShadow: "none",
+          zIndex: 2
+        }}
         color="black"
         icon
       >
@@ -23,7 +30,17 @@ export const HeaderLoader = ({ pastDelay, error }) => {
   } else if (pastDelay) {
     // Handle the loading state
     return (
-      <Message style={{ margin: 0, borderRadius: 0 }} icon color="black">
+      <Message
+        style={{
+          position: "absolute",
+          top: 0,
+          margin: 0,
+          borderRadius: 0,
+          zIndex: 2
+        }}
+        icon
+        color="black"
+      >
         <Icon name="circle notched" loading color="grey" />
         <Message.Content>
           <Message.Header>Just one second...</Message.Header>

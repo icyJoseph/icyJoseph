@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Loadable from "react-loadable";
 import BodyLoader from "./components/Loading/BodyLoader";
 import HeaderLoader from "./components/Loading/HeaderLoader";
+import BottomLoader from "./components/Loading/BottomLoader";
 
 const asyncHome = Loadable({
   loader: () => import("./containers/Home"),
@@ -30,7 +31,7 @@ const AsyncTopMenu = Loadable({
 
 const AsyncBottomMenu = Loadable({
   loader: () => import("./containers/BottomMenu"),
-  loading: HeaderLoader,
+  loading: BottomLoader,
   delay: 600
 });
 

@@ -5,7 +5,12 @@ export const HeaderLoader = ({ pastDelay, error }) => {
   // Handle the error state
   if (error) {
     return (
-      <Message error style={{ margin: 0 }} color="black" icon>
+      <Message
+        error
+        style={{ margin: 0, borderRadius: 0, boxShadow: "none" }}
+        color="black"
+        icon
+      >
         <Icon name="circle notched" color="grey" />
         <Message.Content>
           <Message.Header>

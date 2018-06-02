@@ -22,20 +22,19 @@ export const HomeDesktopGrid = ({
         style={{
           border: "none",
           boxShadow: "none",
-          height: "calc(100vh - 40px)",
           marginTop: "0px",
           borderRadius: 0,
           backgroundImage: `url(${Background})`,
           backgroundSize: "cover"
         }}
       >
+        <MainTitle title="Meet Joseph" desktop />
         <Drawer visibility={visibility} Content={Content} close={closeDrawer} />
         <Sidebar.Pusher
           style={{
             background: "rgba(0,0,0,0)"
           }}
         >
-          <MainTitle title="Meet Joseph" desktop />
           <HexGrid
             clickHandler={openDrawer}
             rows={[firstRow, secondRow, thirdRow]}

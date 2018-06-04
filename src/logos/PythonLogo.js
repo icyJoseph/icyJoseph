@@ -5,7 +5,7 @@ const PythonLogo = ({ fill, handler }) => {
   return (
     <g
       fill={fill || "#000"}
-      transform="scale(0.048)translate(27, 42)"
+      transform="scale(0.48)translate(27, 42)"
       onClick={handler}
       style={{
         cursor: "pointer"

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const JavaScriptLogo = ({ fill, handler }) => {
   return (
     <g
-      transform="scale(0.02)translate(90, 120)"
+      transform="scale(0.2)translate(90, 120)"
       onClick={handler}
       style={{
         cursor: "pointer"

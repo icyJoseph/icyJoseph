@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const ReactLogo = ({
   fill,
   handler,
-  scale = 0.0125,
+  scale = 0.125,
   translate = { Y: -70, X: 112 }
 }) => {
   return (

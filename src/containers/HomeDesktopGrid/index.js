@@ -20,6 +20,9 @@ export const HomeDesktopGrid = ({
       <Sidebar.Pushable
         as={Segment}
         style={{
+          minHeight: "600px",
+          height: "calc(100vh - 100px)",
+          overflow: "hidden",
           border: "none",
           boxShadow: "none",
           marginTop: "0px",
@@ -32,7 +35,8 @@ export const HomeDesktopGrid = ({
         <Drawer visibility={visibility} Content={Content} close={closeDrawer} />
         <Sidebar.Pusher
           style={{
-            background: "rgba(0,0,0,0)"
+            background: "rgba(0,0,0,0)",
+            marginTop: "5%"
           }}
         >
           <HexGrid

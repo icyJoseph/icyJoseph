@@ -7,10 +7,10 @@ const HexGridColumn = ({ tile, clickHandler }) => {
   const { Component, fill, backgroundFill, Content } = tile;
   const injectHandlerWithContent = () => clickHandler(Content);
   return (
-    <Grid.Column largeScreen={3} widescreen={1}>
+    <Grid.Column>
       <Hexagon
         style={{ stroke: "none", fill: backgroundFill }}
-        diagonal={10}
+        diagonal={100}
         onClick={injectHandlerWithContent}
         children={<Component handler={injectHandlerWithContent} fill={fill} />}
       />

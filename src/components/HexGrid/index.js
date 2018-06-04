@@ -5,7 +5,7 @@ import HexGridRow from "./HexGridRow";
 
 const HexGrid = ({ rows, clickHandler }) => {
   return (
-    <Grid centered container stretched>
+    <Grid centered container columns={10}>
       {rows.map((row, i) => (
         <HexGridRow key={`GridRow${i}`} row={row} clickHandler={clickHandler} />
       ))}

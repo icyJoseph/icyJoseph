@@ -6,10 +6,11 @@ export const SideContent = ({ visibility, Content, close }) => {
   return (
     <Sidebar
       as={Segment}
-      animation="scale down"
+      animation="overlay"
       width="wide"
       visible={visibility}
       direction="right"
+      style={{ height: "calc(100vh - 100px) !important" }}
     >
       <Segment basic>{Content}</Segment>
       <Button onClick={close}>Close</Button>

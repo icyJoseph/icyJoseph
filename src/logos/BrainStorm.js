@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export const Idea = ({ fill, handler }) => {
+export const BrainStorm = ({ fill, handler }) => {
   return (
     <g
       transform="scale(0.15)translate(40,85)"
@@ -73,4 +74,9 @@ export const Idea = ({ fill, handler }) => {
   );
 };
 
-export default Idea;
+export default BrainStorm;
+
+BrainStorm.propTypes = {
+  fill: PropTypes.string,
+  handler: PropTypes.func
+};

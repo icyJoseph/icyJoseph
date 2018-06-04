@@ -51,7 +51,7 @@ export const Me = ({ fill, handler }) => {
       />
       <path
         d="M100 450 H 400 Z"
-        stroke="black"
+        stroke="#141414"
         strokeWidth="10px"
         fill="#9F6459"
       />

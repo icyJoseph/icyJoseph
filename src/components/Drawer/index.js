@@ -12,7 +12,7 @@ export const SideContent = ({ visibility, Content, close }) => {
       direction="right"
       style={{ height: "calc(100vh - 100px) !important" }}
     >
-      <Segment basic>{Content}</Segment>
+      <Segment basic>{Content && <Content />}</Segment>
       <Button onClick={close}>Close</Button>
     </Sidebar>
   );
@@ -22,6 +22,6 @@ export default SideContent;
 
 SideContent.propTypes = {
   visibility: PropTypes.bool,
-  Content: PropTypes.object,
+  Content: PropTypes.func,
   close: PropTypes.func
 };

@@ -25,7 +25,7 @@ HexGridColumn.propTypes = {
     Component: PropTypes.func,
     fill: PropTypes.string,
     backgroundFill: PropTypes.string,
-    Content: PropTypes.object
+    Content: PropTypes.func
   }),
   clickHandler: PropTypes.func
 };

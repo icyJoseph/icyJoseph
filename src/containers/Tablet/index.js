@@ -1,9 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
+
+import Loadable from "react-loadable";
 import { TabletWrapper } from "./styled";
 import MainTitle from "../../components/MainTitle";
-import { Statistics } from "../../components/Statistics";
-import TimeLine from "../../components/TimeLine";
+import Spinner from "../../components/Loading/Spinner";
+
+const AsyncStatistics = Loadable({
+  loader: () => import("../../components/Statistics"),
+  loading: Spinner,
+  delay: 600
+});
+
+const AsyncTimeLine = Loadable({
+  loader: () => import("../../components/TimeLine"),
+  loading: Spinner,
+  delay: 600
+});
 
 export const Tablet = ({
   visibility,
@@ -15,8 +28,8 @@ export const Tablet = ({
   return (
     <TabletWrapper>
       <MainTitle title="Meet Joseph" />
-      <Statistics />
-      <TimeLine data={[...firstRow, ...secondRow, ...thirdRow]} />
+      <AsyncStatistics />
+      <AsyncTimeLine data={[...firstRow, ...secondRow, ...thirdRow]} />
     </TabletWrapper>
   );
 };

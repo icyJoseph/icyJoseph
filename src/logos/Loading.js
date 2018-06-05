@@ -2,16 +2,8 @@ import React from "react";
 
 export const Loading = () => {
   return (
-    <g>
-      <animateTransform
-        attributeName="transform"
-        type="rotate"
-        from="0 45 50"
-        to="360 45 50"
-        dur="3s"
-        repeatCount="indefinite"
-      />
-      <g transform="scale(2)translate(8,11)">
+    <g transform="scale(2)translate(8,11)">
+      <g>
         <path
           fill="white"
           d="M12.768,3.674v-2.17C12.768,0.676,13.443,0,14.273,0l0,0c0.83,0,1.505,0.676,1.505,1.504l0,0v2.17
@@ -56,6 +48,15 @@ export const Loading = () => {
 		c0.586,0.584,0.586,1.541,0,2.129l0,0C7.549,8.135,7.165,8.283,6.78,8.283l0,0C6.394,8.283,6.009,8.135,5.714,7.844L5.714,7.844z"
         />
       </g>
+      <animateTransform
+        attributeName="transform"
+        attributeType="XML"
+        type="rotate"
+        from="0 45 50"
+        to="360 45 50"
+        dur="0.5s"
+        repeatCount="indefinite"
+      />
     </g>
   );
 };

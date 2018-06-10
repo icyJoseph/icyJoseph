@@ -1,49 +1,77 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import Loadable from "react-loadable";
+import { connect } from "react-redux";
 import { TabletWrapper } from "./styled";
-import MainTitle from "../../components/MainTitle";
+import { fetchUserData, fetchUserRepos } from "../../ducks/github";
 import Spinner from "../../components/Loading/Spinner";
+import { mapValueToFunctions } from "../../functional";
+
+const AsyncTitle = Loadable({
+  loader: () => import("../../components/MainTitle"),
+  loading: Spinner,
+  delay: 400
+});
 
 const AsyncStatistics = Loadable({
   loader: () => import("../../components/Statistics"),
   loading: Spinner,
-  delay: 600
+  delay: 400
 });
 
 const AsyncTimeLine = Loadable({
   loader: () => import("../../components/TimeLine"),
   loading: Spinner,
-  delay: 600
+  delay: 400
 });
 
-export const Tablet = ({
-  visibility,
-  Content,
-  closeDrawer,
-  openDrawer,
-  data: { firstRow, secondRow, thirdRow }
-}) => {
-  return (
-    <TabletWrapper>
-      <MainTitle title="Meet Joseph" />
-      <AsyncStatistics />
-      <AsyncTimeLine data={[...firstRow, ...secondRow, ...thirdRow]} />
-    </TabletWrapper>
-  );
-};
+export class Tablet extends Component {
+  componentDidMount() {
+    const {
+      github: { expiry }
+    } = this.props;
+    const now = new Date();
+    const lastSave = new Date(expiry);
 
-export default Tablet;
+    return (
+      now > lastSave &&
+      mapValueToFunctions(this.props.fetchUserRepos, this.props.fetchUserData)(
+        "icyJoseph"
+      )
+    );
+  }
+
+  render() {
+    const { data, github } = this.props;
+    const {
+      user: { public_repos },
+      commits,
+      languages
+    } = github;
+
+    return (
+      <TabletWrapper>
+        <AsyncTitle title="Meet Joseph" />
+        <AsyncStatistics
+          publicRepos={public_repos}
+          commits={commits}
+          languages={languages}
+        />
+        <AsyncTimeLine data={data} />
+      </TabletWrapper>
+    );
+  }
+}
+
+export const mapStateToProps = ({ github }) => ({ github });
+export const mapDispatchToProps = { fetchUserData, fetchUserRepos };
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Tablet);
 
 Tablet.propTypes = {
-  visibility: PropTypes.bool,
-  Content: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-  closeDrawer: PropTypes.func,
-  openDrawer: PropTypes.func,
-  data: PropTypes.shape({
-    firstRow: PropTypes.arr,
-    secondRow: PropTypes.arr,
-    thirdRow: PropTypes.arr
-  })
+  data: PropTypes.array
 };

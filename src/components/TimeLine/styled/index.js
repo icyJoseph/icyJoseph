@@ -1,19 +1,18 @@
 import styled from "styled-components";
 
 export const CardWrapper = styled.div`
-  position: absolute;
-  width: 164px;
+  width: 300px;
   margin: 5px;
-  border-radius: 5%;
-  margin-left: ${props => (props.left ? "-170px" : "10px")};
+  border-radius: 3%;
   padding: 15px;
-  background: ${props => (props.color ? props.color : "white")};
+  background: white;
 `;
 
 export const TitleWrapper = styled.span`
   font-size: 14pt;
   display: block;
   padding-bottom: 10px;
+  margin: 3px;
 `;
 
 export const MetaWrapper = styled.span`
@@ -21,27 +20,41 @@ export const MetaWrapper = styled.span`
   opacity: 0.7;
   display: block;
   font-size: 12pt;
+  margin: 3px;
 `;
 
 export const DescriptionWrapper = styled.span`
   font-size: 12pt;
-  display: block;
-`;
-
-export const Line = styled.div`
-  background: white;
-  width: 4px;
-  min-height: 150px;
-  height: 220px;
-  margin: auto;
+  overflow: hidden;
+  margin: 3px;
 `;
 
 export const Point = styled.div`
   background: white;
   width: 10px;
   height: 10px;
-  margin: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 10 0;
   border-radius: 100%;
+`;
+
+export const Line = styled.div`
+  background: white;
+  width: 4px;
+  margin: 10px auto;
+  height: 20px;
+`;
+
+export const TimeWrapper = styled.div`
+  display: flex;
+  overflow: hidden;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Connection = styled.div`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
 `;

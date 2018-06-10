@@ -9,21 +9,13 @@ import {
 
 export class Card extends Component {
   render() {
-    const {
-      title,
-      meta,
-      description,
-      left,
-      color = "",
-      height,
-      toggle
-    } = this.props;
+    const { title, meta, description, height, toggle } = this.props;
 
     return (
-      <CardWrapper color={color} left={left} onClick={toggle}>
+      <CardWrapper onClick={toggle}>
+        <TitleWrapper>{title}</TitleWrapper>
+        <MetaWrapper>{meta}</MetaWrapper>
         <AnimateHeight duration={500} height={height}>
-          <TitleWrapper>{title}</TitleWrapper>
-          <MetaWrapper>{meta}</MetaWrapper>
           <DescriptionWrapper>{description}</DescriptionWrapper>
         </AnimateHeight>
       </CardWrapper>

@@ -31,7 +31,7 @@ ShallowWrapper {
           defaultMatches={true}
           query={
                     Object {
-                              "minWidth": 1023,
+                              "minWidth": 1024,
                             }
           }
           render={[Function]}
@@ -62,7 +62,7 @@ ShallowWrapper {
         "props": Object {
           "defaultMatches": true,
           "query": Object {
-            "minWidth": 1023,
+            "minWidth": 1024,
           },
           "render": [Function],
         },
@@ -93,7 +93,7 @@ ShallowWrapper {
             defaultMatches={true}
             query={
                         Object {
-                                    "minWidth": 1023,
+                                    "minWidth": 1024,
                                   }
             }
             render={[Function]}
@@ -124,7 +124,7 @@ ShallowWrapper {
           "props": Object {
             "defaultMatches": true,
             "query": Object {
-              "minWidth": 1023,
+              "minWidth": 1024,
             },
             "render": [Function],
           },
@@ -177,7 +177,7 @@ ShallowWrapper {
           defaultMatches={true}
           query={
                     Object {
-                              "minWidth": 1023,
+                              "minWidth": 1024,
                             }
           }
           render={[Function]}
@@ -208,7 +208,7 @@ ShallowWrapper {
         "props": Object {
           "defaultMatches": true,
           "query": Object {
-            "minWidth": 1023,
+            "minWidth": 1024,
           },
           "render": [Function],
         },
@@ -239,7 +239,7 @@ ShallowWrapper {
             defaultMatches={true}
             query={
                         Object {
-                                    "minWidth": 1023,
+                                    "minWidth": 1024,
                                   }
             }
             render={[Function]}
@@ -270,7 +270,7 @@ ShallowWrapper {
           "props": Object {
             "defaultMatches": true,
             "query": Object {
-              "minWidth": 1023,
+              "minWidth": 1024,
             },
             "render": [Function],
           },
@@ -323,7 +323,7 @@ ShallowWrapper {
           defaultMatches={true}
           query={
                     Object {
-                              "minWidth": 1023,
+                              "minWidth": 1024,
                             }
           }
           render={[Function]}
@@ -354,7 +354,7 @@ ShallowWrapper {
         "props": Object {
           "defaultMatches": true,
           "query": Object {
-            "minWidth": 1023,
+            "minWidth": 1024,
           },
           "render": [Function],
         },
@@ -385,7 +385,7 @@ ShallowWrapper {
             defaultMatches={true}
             query={
                         Object {
-                                    "minWidth": 1023,
+                                    "minWidth": 1024,
                                   }
             }
             render={[Function]}
@@ -416,7 +416,7 @@ ShallowWrapper {
           "props": Object {
             "defaultMatches": true,
             "query": Object {
-              "minWidth": 1023,
+              "minWidth": 1024,
             },
             "render": [Function],
           },

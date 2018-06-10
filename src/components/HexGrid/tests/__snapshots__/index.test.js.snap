@@ -30,7 +30,7 @@ ShallowWrapper {
     "nodeType": "function",
     "props": Object {
       "children": <Hexagon
-        diagonal={10}
+        diagonal={100}
         flatTop={false}
         onClick={[Function]}
         style={
@@ -45,8 +45,6 @@ ShallowWrapper {
                 handler={[Function]}
         />
 </Hexagon>,
-      "largeScreen": 2,
-      "widescreen": 1,
     },
     "ref": null,
     "rendered": Object {
@@ -58,7 +56,7 @@ ShallowWrapper {
           fill="#222"
           handler={[Function]}
 />,
-        "diagonal": 10,
+        "diagonal": 100,
         "flatTop": false,
         "onClick": [Function],
         "style": Object {
@@ -90,7 +88,7 @@ ShallowWrapper {
       "nodeType": "function",
       "props": Object {
         "children": <Hexagon
-          diagonal={10}
+          diagonal={100}
           flatTop={false}
           onClick={[Function]}
           style={
@@ -105,8 +103,6 @@ ShallowWrapper {
                     handler={[Function]}
           />
 </Hexagon>,
-        "largeScreen": 2,
-        "widescreen": 1,
       },
       "ref": null,
       "rendered": Object {
@@ -118,7 +114,7 @@ ShallowWrapper {
             fill="#222"
             handler={[Function]}
 />,
-          "diagonal": 10,
+          "diagonal": 100,
           "flatTop": false,
           "onClick": [Function],
           "style": Object {

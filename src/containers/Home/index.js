@@ -5,6 +5,7 @@ import Loadable from "react-loadable";
 import { connect } from "react-redux";
 
 import data from "../../data";
+import TimeLine from "../../data/TimeLine";
 import Spinner from "../../components/Loading/Spinner";
 import { openDrawer, closeDrawer, changeContent } from "../../ducks/drawer";
 
@@ -25,7 +26,7 @@ export const Home = props => {
     <Fragment>
       <Media
         query={{ maxWidth: 1023 }}
-        render={() => <AsyncTablet {...props} data={data} />}
+        render={() => <AsyncTablet {...props} data={TimeLine} />}
       />
       <Media
         query={{ minWidth: 1024 }}
@@ -48,7 +49,10 @@ export const mapDispatchToProps = {
   changeContent
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);
 
 Home.propTypes = {
   openDrawer: PropTypes.func,

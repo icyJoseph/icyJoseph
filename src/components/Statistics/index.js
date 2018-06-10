@@ -1,45 +1,40 @@
 import React, { Fragment } from "react";
 import CountUp from "react-countup";
-import Statistic from "semantic-ui-react/dist/commonjs/views/Statistic";
-import Icon from "semantic-ui-react/dist/commonjs/elements/Icon";
+import MainTitle from "../MainTitle";
+import { Group, Stat, Value, Label, IconWrapper } from "./styled";
+import Github from "../../logos/Github";
 
-export const Statistics = () => (
+export const Statistics = ({ publicRepos = 0, commits = 0, languages }) => (
   <Fragment>
-    <Statistic.Group inverted widths="three" style={{ margin: "15px 0" }}>
-      <Statistic>
-        <Statistic.Value>
-          <Icon name="github" />
-          <CountUp start={0} end={5} />
-        </Statistic.Value>
-        <Statistic.Label>Repos</Statistic.Label>
-      </Statistic>
-      <Statistic>
-        <Statistic.Value>
-          <CountUp start={0} end={4} />
-        </Statistic.Value>
-        <Statistic.Label>Hacks</Statistic.Label>
-      </Statistic>
-      <Statistic>
-        <Statistic.Value>
-          <CountUp start={0} end={700} />
-        </Statistic.Value>
-        <Statistic.Label>Commits</Statistic.Label>
-      </Statistic>
-    </Statistic.Group>
-    <Statistic.Group inverted widths="two" style={{ margin: "15px 0" }}>
-      <Statistic>
-        <Statistic.Value>
-          <CountUp start={0} end={8000} />
-        </Statistic.Value>
-        <Statistic.Label>Javascript Bytes</Statistic.Label>
-      </Statistic>
-      <Statistic>
-        <Statistic.Value>
-          <CountUp start={0} end={1000} />
-        </Statistic.Value>
-        <Statistic.Label>Python Bytes</Statistic.Label>
-      </Statistic>
-    </Statistic.Group>
+    <Group>
+      <Stat>
+        <Value>
+          <IconWrapper>
+            <Github width={52} height={50} />
+          </IconWrapper>
+          <CountUp start={0} end={publicRepos} />
+        </Value>
+        <Label margin={25}>Public Repos</Label>
+      </Stat>
+      <Stat>
+        <Value>
+          <CountUp start={0} end={commits} />
+        </Value>
+        <Label margin={25}>Commits</Label>
+      </Stat>
+    </Group>
+    <MainTitle title="With" />
+    <Group>
+      {languages.map(({ lang, bytes }) => (
+        <Stat key={lang}>
+          <Value>
+            <CountUp start={0} end={bytes} />
+          </Value>
+          <Label margin={10}>bytes written</Label>
+          <Label margin={10}>in {lang}</Label>
+        </Stat>
+      ))}
+    </Group>
   </Fragment>
 );
 

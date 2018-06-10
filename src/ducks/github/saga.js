@@ -103,7 +103,7 @@ export function* loadLanguages() {
       bytes: aggregate[lang]
     })),
     curry(filterf)(({ bytes }) => bytes >= 10000),
-    sort
+    curry(sort)("bytes")
   )(aggregate);
 
   yield put({ type: LOAD_LANGUAGES, payload: format });

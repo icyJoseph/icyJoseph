@@ -6,7 +6,9 @@ import Routes from "./routes";
 import registerServiceWorker from "./registerServiceWorker";
 import configureStore from "./ducks/store/";
 
-const store = configureStore();
+const storedState = localStorage.getItem("state");
+
+const store = configureStore(storedState ? JSON.parse(storedState) : undefined);
 
 ReactDOM.render(
   <Provider store={store}>

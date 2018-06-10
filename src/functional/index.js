@@ -9,14 +9,14 @@ export const curry = f => a => (...b) => f(a, ...b);
 export const take = n => array => array.slice(0, n);
 
 // Apply the same argument against many functions
-export const mapValueToFunctions = (...funcs) => arg =>
-  funcs.map(func => func(arg));
+export const mapValueToFunctions = (...funcs) => (...args) =>
+  funcs.map(func => func(...args));
 
 // Flatten
 export const flatten = arr => [].concat(...arr);
 
 // Sort descending
-export const sort = (arr, type) => arr.sort((a, b) => b[type] - a[type]);
+export const sort = (type, arr) => arr.sort((a, b) => b[type] - a[type]);
 
 // Map
 export const mapf = (func, arr) => arr.map(func);

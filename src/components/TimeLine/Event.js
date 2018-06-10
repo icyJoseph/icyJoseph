@@ -1,43 +1,54 @@
-import React, { Component, Fragment } from "react";
-import AnimateHeight from "react-animate-height";
+import React, { Component } from "react";
 import { Card } from "./Card";
-import { Point, Line } from "./styled";
+import { Connection, Point, Line, TimeWrapper } from "./styled";
 
 export class Event extends Component {
   state = {
-    height: 20,
-    lineHeight: 60
+    height: 1
   };
 
   toggle = this.toggle.bind(this);
   toggle() {
-    const { height, lineHeight } = this.state;
+    const { height } = this.state;
 
     this.setState({
-      height: height === 20 ? "auto" : 20,
-      lineHeight: lineHeight === 60 ? "auto" : 60
+      height: height === 1 ? "auto" : 1
     });
   }
 
-  render() {
-    const { height, lineHeight } = this.state;
-    const { title, meta, description, left } = this.props;
+  renderCard = this.renderCard.bind(this);
+  renderCard() {
+    const { height } = this.state;
+    const { title, meta, description } = this.props;
+
     return (
-      <Fragment>
+      <Card
+        title={title}
+        meta={meta}
+        description={description}
+        height={height}
+        toggle={this.toggle}
+      />
+    );
+  }
+
+  renderLineAndPoint = this.renderLineAndPoint.bind(this);
+  renderLineAndPoint() {
+    return (
+      <Connection>
         <Point />
-        <AnimateHeight duration={500} height={lineHeight}>
-          <Line>
-            <Card
-              left={left}
-              title={title}
-              meta={meta}
-              description={description}
-              height={height}
-              toggle={this.toggle}
-            />
-          </Line>
-        </AnimateHeight>
-      </Fragment>
+        <Line />
+        <Point />
+      </Connection>
+    );
+  }
+  render() {
+    const { last } = this.props;
+    return (
+      <TimeWrapper>
+        {this.renderCard()}
+        {!last && this.renderLineAndPoint()}
+      </TimeWrapper>
     );
   }
 }

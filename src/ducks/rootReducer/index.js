@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
 import drawer from "../drawer";
+import github from "../github";
 
 const rootReducer = combineReducers({
-  drawer
+  drawer,
+  github
 });
 
 export default rootReducer;

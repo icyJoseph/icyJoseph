@@ -56,9 +56,30 @@ describe("saveStore", () => {
     localStorage.removeItem("state");
   });
 
-  const state = { drawer: { Content: null, open: false } };
+  const state = {
+    drawer: { Content: null, open: false },
+    github: {
+      commits: 0,
+      expiry: "",
+      languages: [],
+      loadingRepos: false,
+      loadingUser: false,
+      repos: [],
+      user: {}
+    }
+  };
+
   const expectedState = {
-    drawer: { Content: null, open: true }
+    drawer: { Content: null, open: true },
+    github: {
+      commits: 0,
+      expiry: "",
+      languages: [],
+      loadingRepos: false,
+      loadingUser: false,
+      repos: [],
+      user: {}
+    }
   };
   const store = saveStore()(createStore)(rootReducer, state);
 

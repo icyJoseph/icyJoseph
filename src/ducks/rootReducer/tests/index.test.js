@@ -3,7 +3,16 @@ import { OPEN } from "../../drawer";
 
 describe("rootReducer", () => {
   const expectedState = {
-    drawer: { Content: undefined, open: true }
+    drawer: { Content: undefined, open: true },
+    github: {
+      commits: 0,
+      expiry: "",
+      languages: [],
+      loadingRepos: false,
+      loadingUser: false,
+      repos: [],
+      user: {}
+    }
   };
 
   const action = {

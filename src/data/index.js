@@ -1,104 +1,203 @@
 import React from "react";
-import ReactLogo from "../logos/ReactLogo";
-import PythonLogo from "../logos/PythonLogo";
-import JavaScriptLogo from "../logos/JavaScriptLogo";
-import Me from "../logos/Me";
+import Loadable from "react-loadable";
+import Spinner from "../components/Loading/Spinner";
+import Loading from "../logos/Loading";
 
 export default {
   firstRow: [
     {
       id: 0,
-      title: "Certified",
-      meta: "Framework",
-      Component: ReactLogo,
-      fill: "#61DAFB",
-      backgroundFill: "#000",
-      Content: <p>React Info</p>
+      title: "About Me",
+      meta: "Joseph",
+      Component: Loadable({
+        loader: () => import("../logos/Me"),
+        loading() {
+          return <Loading />;
+        }
+      }),
+      fill: "#273B7A",
+      backgroundFill: "tomato",
+      Content: Loadable({
+        loader: () => import("../components/About"),
+        loading() {
+          return <Spinner />;
+        }
+      })
     },
     {
       id: 1,
-      title: "Certified",
-      meta: "Algorithms",
-      Component: PythonLogo,
-      fill: "#000",
-      backgroundFill: "#000",
-      Content: <p>Python Info</p>
+      title: "ReactJS",
+      meta: "Certified",
+      Component: Loadable({
+        loader: () => import("../logos/ReactLogo"),
+        loading() {
+          return <Loading />;
+        }
+      }),
+      fill: "#292929",
+      backgroundFill: "tomato",
+      Content: Loadable({
+        loader: () => import("../components/About"),
+        loading() {
+          return <Spinner />;
+        }
+      })
     },
     {
       id: 2,
-      title: "Certified",
+      title: "JavaScript",
       meta: "Favorite Language",
-      Component: JavaScriptLogo,
-      fill: "#F7DF1E",
-      backgroundFill: "#F7DF1E",
-      Content: <p>Javascript Info</p>
+      Component: Loadable({
+        loader: () => import("../logos/JavaScriptLogo"),
+        loading() {
+          return <Loading />;
+        }
+      }),
+      fill: "#F0DB4F",
+      backgroundFill: "tomato",
+      Content: Loadable({
+        loader: () => import("../components/About"),
+        loading() {
+          return <Spinner />;
+        }
+      })
     }
   ],
   secondRow: [
     {
       id: 3,
-      title: "Certified",
+      title: "Redux",
       meta: "Framework",
-      Component: ReactLogo,
-      fill: "#61DAFB",
-      backgroundFill: "#000",
-      Content: <p>React Info</p>
+      Component: Loadable({
+        loader: () => import("../logos/Redux"),
+        loading() {
+          return <Loading />;
+        }
+      }),
+      fill: "#292929",
+      backgroundFill: "#5159BF",
+      Content: Loadable({
+        loader: () => import("../components/About"),
+        loading() {
+          return <Spinner />;
+        }
+      })
     },
     {
       id: 4,
-      title: "Certified",
-      meta: "Algorithms",
-      Component: PythonLogo,
-      fill: "#000",
-      backgroundFill: "#000",
-      Content: <p>Python Info</p>
+      title: "Algorithms",
+      meta: "Problem Solving",
+      Component: Loadable({
+        loader: () => import("../logos/Problem"),
+        loading() {
+          return <Loading />;
+        }
+      }),
+      fill: "#273B7A",
+      backgroundFill: "tomato",
+      Content: Loadable({
+        loader: () => import("../components/About"),
+        loading() {
+          return <Spinner />;
+        }
+      })
     },
     {
       id: 5,
-      title: "Certified",
-      meta: "Developer",
-      Component: Me,
-      fill: "white",
+      title: "Work Experience",
+      meta: "Career",
+      Component: Loadable({
+        loader: () => import("../logos/Experience"),
+        loading() {
+          return <Loading />;
+        }
+      }),
+      fill: "#273B7A",
       backgroundFill: "tomato",
-      Content: <p>Info About me</p>
+      Content: Loadable({
+        loader: () => import("../components/About"),
+        loading() {
+          return <Spinner />;
+        }
+      })
     },
     {
       id: 6,
-      title: "Certified",
-      meta: "Framework",
-      Component: ReactLogo,
-      fill: "#61DAFB",
-      backgroundFill: "#000",
-      Content: <p>React Info</p>
+      title: "Python",
+      meta: "Code as a hobby",
+      Component: Loadable({
+        loader: () => import("../logos/PythonLogo"),
+        loading() {
+          return <Loading />;
+        }
+      }),
+      fill: "#273B7A",
+      backgroundFill: "tomato",
+      Content: Loadable({
+        loader: () => import("../components/About"),
+        loading() {
+          return <Spinner />;
+        }
+      })
     }
   ],
   thirdRow: [
     {
       id: 7,
-      title: "Certified",
-      meta: "Framework",
-      Component: ReactLogo,
-      fill: "#61DAFB",
-      backgroundFill: "#000",
-      Content: <p>React Info</p>
+      title: "Hacks",
+      meta: "Value Creation",
+      Component: Loadable({
+        loader: () => import("../logos/Rocket"),
+        loading() {
+          return <Loading />;
+        }
+      }),
+      fill: "#273B7A",
+      backgroundFill: "tomato",
+      Content: Loadable({
+        loader: () => import("../components/About"),
+        loading() {
+          return <Spinner />;
+        }
+      })
     },
     {
       id: 8,
-      title: "Certified",
-      meta: "Algorithms",
-      Component: PythonLogo,
-      fill: "#000",
-      backgroundFill: "#000",
-      Content: <p>Python Info</p>
+      title: "Winner of...",
+      meta: "Acknowledgments",
+      Component: Loadable({
+        loader: () => import("../logos/Award"),
+        loading() {
+          return <Loading />;
+        }
+      }),
+      fill: "#C92F00",
+      backgroundFill: "tomato",
+      Content: Loadable({
+        loader: () => import("../components/About"),
+        loading() {
+          return <Spinner />;
+        }
+      })
     },
     {
       id: 9,
-      title: "Certified",
-      meta: "Favorite Language",
-      Component: JavaScriptLogo,
-      fill: "#F7DF1E",
-      backgroundFill: "#F7DF1E",
-      Content: <p>Javascript Info</p>
+      title: "Currently",
+      meta: "Life as a React Developer",
+      Component: Loadable({
+        loader: () => import("../logos/Report"),
+        loading() {
+          return <Loading />;
+        }
+      }),
+      fill: "#273B7A",
+      backgroundFill: "tomato",
+      Content: Loadable({
+        loader: () => import("../components/About"),
+        loading() {
+          return <Spinner />;
+        }
+      })
     }
   ]
 };

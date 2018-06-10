@@ -9,7 +9,7 @@ describe("HexGridColumn", () => {
   const props = {
     tile: {
       Component: () => <div>Hi</div>,
-      Content: <div>hi</div>,
+      Content: () => <div>hi</div>,
       fill: "#222",
       backgroundFill: "#333"
     },

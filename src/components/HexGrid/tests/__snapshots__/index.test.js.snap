@@ -9,9 +9,7 @@ ShallowWrapper {
     tile={
         Object {
             "Component": [Function],
-            "Content": <div>
-              hi
-        </div>,
+            "Content": [Function],
             "backgroundFill": "#333",
             "fill": "#222",
           }

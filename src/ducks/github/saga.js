@@ -28,7 +28,7 @@ import {
   getRepoLanguages
 } from "./api";
 
-import { pipe, curry, flatten, sort, mapf, filterf } from "../../functional";
+import { curry, flatten, filterf, mapf, pipe, sort } from "../../functional";
 
 export function* loadUser({ payload }) {
   try {
@@ -42,6 +42,7 @@ export function* loadUser({ payload }) {
 export function* loadRepos({ payload }) {
   try {
     const repos = yield call(getUserRepos, payload);
+
     const now = new Date();
     const inOneHour = new Date(now.getTime() + 60 * 60 * 1000);
 

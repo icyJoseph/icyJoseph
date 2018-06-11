@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rootSaga returns a generator with gitHubSaga 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "ALL": Array [
+    Object {
+      "@@redux-saga/IO": true,
+      "FORK": Object {
+        "args": Array [],
+        "context": null,
+        "fn": [Function],
+      },
+    },
+  ],
+}
+`;

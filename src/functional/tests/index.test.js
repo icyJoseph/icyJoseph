@@ -17,6 +17,9 @@ describe("take", () => {
   it("handles out of bounds", () => {
     expect(take(6)(target)).toEqual(target);
   });
+  it("takes a starting point", () => {
+    expect(take(2, 2)(target)).toEqual([3, 4]);
+  });
 });
 
 describe("pipe", () => {

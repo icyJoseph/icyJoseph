@@ -6,7 +6,7 @@ export const pipe = (...funcs) => (...args) =>
 export const curry = f => a => (...b) => f(a, ...b);
 
 // Take the first n elements of an array
-export const take = n => array => array.slice(0, n);
+export const take = (n, m = 0) => array => array.slice(m, n + m);
 
 // Apply the same argument against many functions
 export const mapValueToFunctions = (...funcs) => (...args) =>

@@ -44,9 +44,13 @@
       "!src/registerServiceWorker.js",
       "!src/index.js",
       "!src/ducks/store/**.js",
-      "!src/setupTests.js"
+      "!src/setupTests.js",
+      "!src/data/*.js"
     ],
-    "coverageReporters": ["text", "lcov"],
+    "coverageReporters": [
+      "text",
+      "lcov"
+    ],
     "coverageThreshold": {
       "global": {
         "branches": 75,

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const github = `https://api.github.com`;
+export const github = `https://api.github.com`;
 
 export const getUserRepos = user => {
   return axios

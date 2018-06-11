@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import CountUp from "react-countup";
-import MainTitle from "../MainTitle";
 import { Group, Stat, Value, Label, IconWrapper } from "./styled";
 import Github from "../../logos/Github";
 
@@ -23,7 +22,6 @@ export const Statistics = ({ publicRepos = 0, commits = 0, languages }) => (
         <Label margin={25}>Commits</Label>
       </Stat>
     </Group>
-    <MainTitle title="With" />
     <Group>
       {languages.map(({ lang, bytes }) => (
         <Stat key={lang}>

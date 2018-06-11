@@ -8,13 +8,21 @@ import MainTitle from "../../components/MainTitle";
 import HexGrid from "../../components/HexGrid";
 import Drawer from "../../components/Drawer";
 
+import { take } from "../../functional";
+
 export const HomeDesktopGrid = ({
   visibility,
   Content,
   closeDrawer,
   openDrawer,
-  data: { firstRow, secondRow, thirdRow }
+  data
 }) => {
+  const [firstRow, secondRow, thirdRow] = [
+    take(3, 0),
+    take(4, 3),
+    take(3, 7)
+  ].map(f => f(data));
+
   return (
     <Fragment>
       <Sidebar.Pushable

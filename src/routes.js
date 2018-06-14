@@ -5,31 +5,31 @@ import BodyLoader from "./components/Loading/BodyLoader";
 import HeaderLoader from "./components/Loading/HeaderLoader";
 import BottomLoader from "./components/Loading/BottomLoader";
 
-const asyncHome = Loadable({
+export const AsyncHome = Loadable({
   loader: () => import("./containers/Home"),
   loading: BodyLoader,
   delay: 600
 });
 
-const asyncApp = Loadable({
+export const AsyncApp = Loadable({
   loader: () => import("./containers/App"),
   loading: BodyLoader,
   delay: 600
 });
 
-const asyncNoMatch = Loadable({
+export const AsyncNoMatch = Loadable({
   loader: () => import("./containers/NoMatch"),
   loading: BodyLoader,
   delay: 600
 });
 
-const AsyncTopMenu = Loadable({
+export const AsyncTopMenu = Loadable({
   loader: () => import("./containers/TopMenu"),
   loading: HeaderLoader,
   delay: 600
 });
 
-const AsyncBottomMenu = Loadable({
+export const AsyncBottomMenu = Loadable({
   loader: () => import("./containers/BottomMenu"),
   loading: BottomLoader,
   delay: 600
@@ -40,10 +40,10 @@ export const Routes = () => (
     <Fragment>
       <AsyncTopMenu />
       <Switch>
-        <Route path="/blog" component={asyncApp} />
-        <Route path="/hacks" component={asyncApp} />
-        <Route path="/" component={asyncHome} />
-        <Route component={asyncNoMatch} />
+        <Route path="/blog" component={AsyncApp} />
+        <Route path="/hacks" component={AsyncApp} />
+        <Route path="/" component={AsyncHome} />
+        <Route component={AsyncNoMatch} />
       </Switch>
       <AsyncBottomMenu />
     </Fragment>

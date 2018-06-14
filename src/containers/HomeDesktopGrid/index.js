@@ -64,9 +64,5 @@ HomeDesktopGrid.propTypes = {
   Content: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   closeDrawer: PropTypes.func,
   openDrawer: PropTypes.func,
-  data: PropTypes.shape({
-    firstRow: PropTypes.arr,
-    secondRow: PropTypes.arr,
-    thirdRow: PropTypes.arr
-  })
+  data: PropTypes.array
 };

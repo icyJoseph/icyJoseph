@@ -6,7 +6,9 @@ import {
   sort,
   mapf,
   filterf,
-  take
+  take,
+  head,
+  last
 } from "../";
 
 describe("take", () => {
@@ -86,5 +88,19 @@ describe("filterf", () => {
   const f = a => a > 2;
   it("filters using a function over some values", () => {
     expect(filterf(f, values)).toEqual([3, 4]);
+  });
+});
+
+describe("head", () => {
+  const values = [1, 2, 3, 4];
+  it("takes the head (first element)", () => {
+    expect(head(values)).toEqual(1);
+  });
+});
+
+describe("last", () => {
+  const values = [1, 2, 3, 4];
+  it("takes the last element", () => {
+    expect(last(values)).toEqual(4);
   });
 });

@@ -23,3 +23,9 @@ export const mapf = (func, arr) => arr.map(func);
 
 // Filter
 export const filterf = (func, arr) => arr.filter(func);
+
+// Head
+export const head = ([head]) => head;
+
+// Last
+export const last = arr => head(arr.slice(arr.length - 1));

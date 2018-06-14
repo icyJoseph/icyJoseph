@@ -7,6 +7,7 @@ import { TabletWrapper } from "./styled";
 import { fetchUserData, fetchUserRepos } from "../../ducks/github";
 import Spinner from "../../components/Loading/Spinner";
 import { mapValueToFunctions } from "../../functional";
+import { shouldFetch } from "./helpers";
 
 const AsyncTitle = Loadable({
   loader: () => import("../../components/MainTitle"),
@@ -31,11 +32,9 @@ export class Tablet extends Component {
     const {
       github: { expiry }
     } = this.props;
-    const now = new Date();
-    const lastSave = new Date(expiry);
 
     return (
-      now > lastSave &&
+      shouldFetch(expiry) &&
       mapValueToFunctions(this.props.fetchUserRepos, this.props.fetchUserData)(
         "icyJoseph"
       )
@@ -73,5 +72,8 @@ export default connect(
 )(Tablet);
 
 Tablet.propTypes = {
-  data: PropTypes.array
+  data: PropTypes.array,
+  github: PropTypes.object,
+  fetchUserData: PropTypes.func,
+  fetchUserRepos: PropTypes.func
 };

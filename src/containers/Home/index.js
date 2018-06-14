@@ -9,29 +9,31 @@ import TimeLine from "../../data/TimeLine";
 import Spinner from "../../components/Loading/Spinner";
 import { openDrawer, closeDrawer, changeContent } from "../../ducks/drawer";
 
-const AsyncTablet = Loadable({
+import { curry } from "../../functional";
+
+export const AsyncTablet = Loadable({
   loader: () => import("../Tablet"),
   loading: Spinner,
   delay: 600
 });
 
-const AsyncDesktop = Loadable({
+export const AsyncDesktop = Loadable({
   loader: () => import("../HomeDesktopGrid"),
   loading: Spinner,
   delay: 600
 });
 
+export const MediaRoutes = (props, matches) => {
+  return matches ? (
+    <AsyncTablet {...props} data={TimeLine} />
+  ) : (
+    <AsyncDesktop {...props} data={data} />
+  );
+};
 export const Home = props => {
   return (
     <Fragment>
-      <Media
-        query={{ maxWidth: 1023 }}
-        render={() => <AsyncTablet {...props} data={TimeLine} />}
-      />
-      <Media
-        query={{ minWidth: 1024 }}
-        render={() => <AsyncDesktop {...props} data={data} />}
-      />
+      <Media query={{ maxWidth: 1023 }}>{curry(MediaRoutes)(props)}</Media>
     </Fragment>
   );
 };

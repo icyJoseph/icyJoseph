@@ -1,7 +1,16 @@
 import React from "react";
 import { shallow } from "enzyme";
 import Media from "react-media";
-import { Home, mapStateToProps } from "../";
+import {
+  Home,
+  MediaRoutes,
+  mapStateToProps,
+  AsyncTablet,
+  AsyncDesktop
+} from "../";
+
+import { Tablet } from "../../Tablet";
+import { HomeDesktopGrid } from "../../HomeDesktopGrid";
 
 describe("Home", () => {
   const wrapper = shallow(<Home />);
@@ -10,64 +19,25 @@ describe("Home", () => {
   });
 });
 
-describe("Mobile", () => {
-  beforeAll(() => {
-    Object.defineProperty(window, "matchMedia", {
-      configurable: true,
-      value: query => {
-        return {
-          matches: query === "(max-width: 920px)",
-          addListener: () => {},
-          removeListener: () => {}
-        };
-      }
-    });
-  });
+describe("MediaRoutes", () => {
+  const props = {
+    Content: null,
+    changeContent: jest.fn(),
+    closeDrawer: jest.fn(),
+    history: { push: jest.fn() },
+    location: {},
+    match: {}
+  };
 
-  afterAll(() => {
-    delete window.matchMedia;
-  });
-
-  const mobileWrapper = shallow(<Home />);
+  const mobileLoaded = shallow(MediaRoutes(props, true));
   it("renders mobile", () => {
-    expect(mobileWrapper).toMatchSnapshot();
-    mobileWrapper.render();
-    expect(
-      mobileWrapper
-        .find(Media)
-        .at(1)
-        .render()
-    ).toHaveLength(0);
+    expect(mobileLoaded).toMatchSnapshot();
+    expect(mobileLoaded).toHaveLength(1);
   });
-});
-
-describe("Desktop", () => {
-  beforeAll(() => {
-    Object.defineProperty(window, "matchMedia", {
-      configurable: true,
-      value: query => {
-        return {
-          matches: query === "(min-width: 921px)",
-          addListener: () => {},
-          removeListener: () => {}
-        };
-      }
-    });
-  });
-
-  afterAll(() => {
-    delete window.matchMedia;
-  });
-  const desktopWrapper = shallow(<Home />);
+  const desktopLoaded = shallow(MediaRoutes(props, false));
   it("renders desktop", () => {
-    expect(desktopWrapper).toMatchSnapshot();
-    desktopWrapper.render();
-    expect(
-      desktopWrapper
-        .find(Media)
-        .at(0)
-        .render()
-    ).toHaveLength(0);
+    expect(desktopLoaded).toMatchSnapshot();
+    expect(desktopLoaded).toHaveLength(1);
   });
 });
 
@@ -86,5 +56,19 @@ describe("Redux methods, mapStateToProps", () => {
 
   it("returns the expected keys", () => {
     expect(mapStateToProps(state)).toEqual(expectedProps);
+  });
+});
+
+describe("AsyncTablet", () => {
+  const loaded = shallow(<AsyncTablet />);
+  it("returns", () => {
+    expect(loaded.exists()).toEqual(true);
+  });
+});
+
+describe("AsyncDesktop", () => {
+  const loaded = shallow(<AsyncDesktop />);
+  it("returns", () => {
+    expect(loaded.exists()).toEqual(true);
   });
 });

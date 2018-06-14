@@ -1,0 +1,495 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BottomMenu renders 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <BottomMenu />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <Styled(Menu)
+          fluid={true}
+          icon="labeled"
+          inverted={true}
+          style={
+                    Object {
+                              "borderRadius": 0,
+                              "bottom": 0,
+                              "position": "fixed",
+                              "width": "100%",
+                            }
+          }
+          widths={3}
+>
+          <MenuItem
+                    active={false}
+                    name="LinkedIn"
+                    onClick={[Function]}
+          >
+                    <Icon
+                              as="i"
+                              name="linkedin"
+                    />
+                    LinkedIn
+          </MenuItem>
+          <MenuItem
+                    active={false}
+                    name="GitHub"
+                    onClick={[Function]}
+          >
+                    <Icon
+                              as="i"
+                              name="github alternate"
+                    />
+                    GitHub
+          </MenuItem>
+          <MenuItem
+                    active={false}
+                    name="Contact"
+                    onClick={[Function]}
+          >
+                    <Icon
+                              as="i"
+                              name="vcard outline"
+                    />
+                    Contact
+          </MenuItem>
+</Styled(Menu)>,
+        <Unknown
+          handleClose={[Function]}
+          open={false}
+/>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <MenuItem
+              active={false}
+              name="LinkedIn"
+              onClick={[Function]}
+>
+              <Icon
+                            as="i"
+                            name="linkedin"
+              />
+              LinkedIn
+</MenuItem>,
+            <MenuItem
+              active={false}
+              name="GitHub"
+              onClick={[Function]}
+>
+              <Icon
+                            as="i"
+                            name="github alternate"
+              />
+              GitHub
+</MenuItem>,
+            <MenuItem
+              active={false}
+              name="Contact"
+              onClick={[Function]}
+>
+              <Icon
+                            as="i"
+                            name="vcard outline"
+              />
+              Contact
+</MenuItem>,
+          ],
+          "fluid": true,
+          "icon": "labeled",
+          "inverted": true,
+          "style": Object {
+            "borderRadius": 0,
+            "bottom": 0,
+            "position": "fixed",
+            "width": "100%",
+          },
+          "widths": 3,
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "active": false,
+              "children": Array [
+                <Icon
+                  as="i"
+                  name="linkedin"
+/>,
+                "LinkedIn",
+              ],
+              "name": "LinkedIn",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "as": "i",
+                  "name": "linkedin",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              "LinkedIn",
+            ],
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "active": false,
+              "children": Array [
+                <Icon
+                  as="i"
+                  name="github alternate"
+/>,
+                "GitHub",
+              ],
+              "name": "GitHub",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "as": "i",
+                  "name": "github alternate",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              "GitHub",
+            ],
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "active": false,
+              "children": Array [
+                <Icon
+                  as="i"
+                  name="vcard outline"
+/>,
+                "Contact",
+              ],
+              "name": "Contact",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "as": "i",
+                  "name": "vcard outline",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              "Contact",
+            ],
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "handleClose": [Function],
+          "open": false,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": Symbol(react.fragment),
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <Styled(Menu)
+            fluid={true}
+            icon="labeled"
+            inverted={true}
+            style={
+                        Object {
+                                    "borderRadius": 0,
+                                    "bottom": 0,
+                                    "position": "fixed",
+                                    "width": "100%",
+                                  }
+            }
+            widths={3}
+>
+            <MenuItem
+                        active={false}
+                        name="LinkedIn"
+                        onClick={[Function]}
+            >
+                        <Icon
+                                    as="i"
+                                    name="linkedin"
+                        />
+                        LinkedIn
+            </MenuItem>
+            <MenuItem
+                        active={false}
+                        name="GitHub"
+                        onClick={[Function]}
+            >
+                        <Icon
+                                    as="i"
+                                    name="github alternate"
+                        />
+                        GitHub
+            </MenuItem>
+            <MenuItem
+                        active={false}
+                        name="Contact"
+                        onClick={[Function]}
+            >
+                        <Icon
+                                    as="i"
+                                    name="vcard outline"
+                        />
+                        Contact
+            </MenuItem>
+</Styled(Menu)>,
+          <Unknown
+            handleClose={[Function]}
+            open={false}
+/>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              <MenuItem
+                active={false}
+                name="LinkedIn"
+                onClick={[Function]}
+>
+                <Icon
+                                as="i"
+                                name="linkedin"
+                />
+                LinkedIn
+</MenuItem>,
+              <MenuItem
+                active={false}
+                name="GitHub"
+                onClick={[Function]}
+>
+                <Icon
+                                as="i"
+                                name="github alternate"
+                />
+                GitHub
+</MenuItem>,
+              <MenuItem
+                active={false}
+                name="Contact"
+                onClick={[Function]}
+>
+                <Icon
+                                as="i"
+                                name="vcard outline"
+                />
+                Contact
+</MenuItem>,
+            ],
+            "fluid": true,
+            "icon": "labeled",
+            "inverted": true,
+            "style": Object {
+              "borderRadius": 0,
+              "bottom": 0,
+              "position": "fixed",
+              "width": "100%",
+            },
+            "widths": 3,
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "active": false,
+                "children": Array [
+                  <Icon
+                    as="i"
+                    name="linkedin"
+/>,
+                  "LinkedIn",
+                ],
+                "name": "LinkedIn",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "as": "i",
+                    "name": "linkedin",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                "LinkedIn",
+              ],
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "active": false,
+                "children": Array [
+                  <Icon
+                    as="i"
+                    name="github alternate"
+/>,
+                  "GitHub",
+                ],
+                "name": "GitHub",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "as": "i",
+                    "name": "github alternate",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                "GitHub",
+              ],
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "active": false,
+                "children": Array [
+                  <Icon
+                    as="i"
+                    name="vcard outline"
+/>,
+                  "Contact",
+                ],
+                "name": "Contact",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "as": "i",
+                    "name": "vcard outline",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                "Contact",
+              ],
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "handleClose": [Function],
+            "open": false,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": Symbol(react.fragment),
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

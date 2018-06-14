@@ -1,0 +1,318 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BodyLoader error 1`] = `
+<Segment
+  inverted={true}
+  style={
+    Object {
+      "alignItems": "center",
+      "borderRadius": 0,
+      "bottom": 0,
+      "display": "flex",
+      "flexDirection": "column",
+      "flexL": 1,
+      "justifyContent": "center",
+      "margin": 0,
+      "position": "absolute",
+      "top": 0,
+      "width": "100%",
+    }
+  }
+>
+  <Unknown />
+  <Message
+    color="black"
+    error={true}
+    style={
+      Object {
+        "borderRadius": 0,
+        "boxShadow": "none",
+        "marginTop": "-100px",
+      }
+    }
+  >
+    <MessageContent>
+      <MessageHeader>
+        There was a problem loading this page.
+      </MessageHeader>
+      Please reload the page.
+    </MessageContent>
+  </Message>
+</Segment>
+`;
+
+exports[`BodyLoader pastDelay 1`] = `
+<Segment
+  inverted={true}
+  style={
+    Object {
+      "alignItems": "center",
+      "borderRadius": 0,
+      "bottom": 0,
+      "display": "flex",
+      "flexDirection": "column",
+      "flexL": 1,
+      "justifyContent": "center",
+      "margin": 0,
+      "position": "absolute",
+      "top": 0,
+      "width": "100%",
+    }
+  }
+>
+  <Loader
+    active={true}
+    indeterminate={true}
+    size="massive"
+  />
+</Segment>
+`;
+
+exports[`BottomLoader error 1`] = `
+<Message
+  color="black"
+  error={true}
+  icon={true}
+  style={
+    Object {
+      "borderRadius": 0,
+      "bottom": 0,
+      "boxShadow": "none",
+      "margin": 0,
+      "position": "absolute",
+      "zIndex": 2,
+    }
+  }
+>
+  <Icon
+    as="i"
+    color="grey"
+    name="circle notched"
+  />
+  <MessageContent>
+    <MessageHeader>
+      There was a problem loading this component.
+    </MessageHeader>
+    Please reload the page.
+  </MessageContent>
+</Message>
+`;
+
+exports[`BottomLoader pastDelay 1`] = `
+<Message
+  color="black"
+  icon={true}
+  style={
+    Object {
+      "borderRadius": 0,
+      "bottom": 0,
+      "margin": 0,
+      "position": "absolute",
+      "zIndex": 2,
+    }
+  }
+>
+  <Icon
+    as="i"
+    color="grey"
+    loading={true}
+    name="circle notched"
+  />
+  <MessageContent>
+    <MessageHeader>
+      Just one second...
+    </MessageHeader>
+    Fetching this component for you.
+  </MessageContent>
+</Message>
+`;
+
+exports[`HeaderLoader error 1`] = `
+<Message
+  color="black"
+  error={true}
+  icon={true}
+  style={
+    Object {
+      "borderRadius": 0,
+      "boxShadow": "none",
+      "margin": 0,
+      "position": "absolute",
+      "top": 0,
+      "zIndex": 2,
+    }
+  }
+>
+  <Icon
+    as="i"
+    color="grey"
+    name="circle notched"
+  />
+  <MessageContent>
+    <MessageHeader>
+      There was a problem loading this component.
+    </MessageHeader>
+    Please reload the page.
+  </MessageContent>
+</Message>
+`;
+
+exports[`HeaderLoader pastDelay 1`] = `
+<Message
+  color="black"
+  icon={true}
+  style={
+    Object {
+      "borderRadius": 0,
+      "margin": 0,
+      "position": "absolute",
+      "top": 0,
+      "zIndex": 2,
+    }
+  }
+>
+  <Icon
+    as="i"
+    color="grey"
+    loading={true}
+    name="circle notched"
+  />
+  <MessageContent>
+    <MessageHeader>
+      Just one second...
+    </MessageHeader>
+    Fetching this component for you.
+  </MessageContent>
+</Message>
+`;
+
+exports[`Spinner error 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Unknown
+    error="404"
+    pastDelay={true}
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "active": true,
+      "inline": "centered",
+    },
+    "ref": null,
+    "rendered": null,
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "active": true,
+        "inline": "centered",
+      },
+      "ref": null,
+      "rendered": null,
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`Spinner error 2`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Unknown
+    error={null}
+    pastDelay={false}
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): null,
+  Symbol(enzyme.__nodes__): Array [
+    null,
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`Spinner pastDelay 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Unknown
+    error={null}
+    pastDelay={true}
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "active": true,
+      "inline": "centered",
+    },
+    "ref": null,
+    "rendered": null,
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "active": true,
+        "inline": "centered",
+      },
+      "ref": null,
+      "rendered": null,
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

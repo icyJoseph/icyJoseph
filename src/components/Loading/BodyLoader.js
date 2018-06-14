@@ -3,7 +3,7 @@ import { Segment, Loader as Spinner } from "semantic-ui-react";
 import { Message } from "semantic-ui-react";
 import Broken from "../../logos/Broken";
 
-export const Loader = ({ pastDelay, error }) => {
+export const BodyLoader = ({ pastDelay, error }) => {
   // Handle the error state
   if (error) {
     return (
@@ -53,4 +53,4 @@ const style = {
   alignItems: "center"
 };
 
-export default Loader;
+export default BodyLoader;

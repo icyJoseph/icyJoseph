@@ -1,10 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Grid } from "semantic-ui-react";
-
 import HexGridColumn from "./HexGridColumn";
 
-const HexGridRow = ({ row, clickHandler }) => {
+export const HexGridRow = ({ row, clickHandler }) => {
   return (
     <Grid.Row>
       {row.map(tile => (

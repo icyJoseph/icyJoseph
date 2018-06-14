@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Grid } from "semantic-ui-react";
 import Hexagon from "react-hexagon";
 
-const HexGridColumn = ({ tile, clickHandler }) => {
+export const HexGridColumn = ({ tile, clickHandler }) => {
   const { Component, fill, backgroundFill, Content } = tile;
   const injectHandlerWithContent = () => clickHandler(Content);
   return (

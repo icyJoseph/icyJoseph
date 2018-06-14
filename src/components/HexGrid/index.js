@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Grid } from "semantic-ui-react";
 import HexGridRow from "./HexGridRow";
 
-const HexGrid = ({ rows, clickHandler }) => {
+export const HexGrid = ({ rows, clickHandler }) => {
   return (
     <Grid centered container columns={10}>
       {rows.map((row, i) => (

@@ -3,7 +3,11 @@ import CountUp from "react-countup";
 import { Group, Stat, Value, Label, IconWrapper } from "./styled";
 import Github from "../../logos/Github";
 
-export const Statistics = ({ publicRepos = 0, commits = 0, languages }) => (
+export const Statistics = ({
+  publicRepos = 0,
+  commits = 0,
+  languages = []
+}) => (
   <Fragment>
     <Group>
       <Stat>

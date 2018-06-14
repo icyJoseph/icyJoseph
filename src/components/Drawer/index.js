@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Button, Sidebar, Segment } from "semantic-ui-react";
 
-export const SideContent = ({ visibility, Content, close }) => {
+export const Drawer = ({ visibility, Content, close }) => {
   return (
     <Sidebar
       as={Segment}
@@ -18,9 +18,9 @@ export const SideContent = ({ visibility, Content, close }) => {
   );
 };
 
-export default SideContent;
+export default Drawer;
 
-SideContent.propTypes = {
+Drawer.propTypes = {
   visibility: PropTypes.bool,
   Content: PropTypes.func,
   close: PropTypes.func

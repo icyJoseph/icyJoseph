@@ -6,11 +6,16 @@ import ReactRevealText from "react-reveal-text";
 class MainTitle extends Component {
   state = { reveal: false };
 
+  revealTitle = this.revealTitle.bind(this);
+
   componentDidMount() {
-    setTimeout(this.revealTitle, 1000);
+    this.timer = setTimeout(this.revealTitle, 1000);
   }
 
-  revealTitle = this.revealTitle.bind(this);
+  componentWillUnmount() {
+    clearTimeout(this.timer);
+  }
+
   revealTitle() {
     return this.setState({ reveal: true });
   }

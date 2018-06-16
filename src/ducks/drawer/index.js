@@ -4,10 +4,10 @@ export const CLOSE = "close";
 export const CHANGE_CONTENT = "change_content";
 
 // Action creators
-export const openDrawer = content => {
+export const openDrawer = id => {
   return {
     type: OPEN,
-    payload: content
+    payload: id
   };
 };
 
@@ -25,15 +25,12 @@ export const changeContent = content => {
 };
 
 // Reducer
-export default function reducer(
-  drawer = { open: false, Content: null },
-  action
-) {
+export default function reducer(drawer = { open: false, id: 0 }, action) {
   switch (action.type) {
     case OPEN:
-      return { open: true, Content: action.payload };
+      return { open: true, id: action.payload };
     case CHANGE_CONTENT:
-      return { ...drawer, Content: action.payload };
+      return { ...drawer, id: action.payload };
     case CLOSE:
       return { ...drawer, open: false };
     default:

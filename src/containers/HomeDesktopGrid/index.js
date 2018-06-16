@@ -8,11 +8,11 @@ import MainTitle from "../../components/MainTitle";
 import HexGrid from "../../components/HexGrid";
 import Drawer from "../../components/Drawer";
 
-import { take } from "../../functional";
+import { head, take } from "../../functional";
 
 export const HomeDesktopGrid = ({
   visibility,
-  Content,
+  contentId,
   closeDrawer,
   openDrawer,
   data
@@ -23,6 +23,7 @@ export const HomeDesktopGrid = ({
     take(3, 7)
   ].map(f => f(data));
 
+  const { Content } = head(data.filter(d => d.id === contentId));
   return (
     <Fragment>
       <Sidebar.Pushable
@@ -61,7 +62,7 @@ export default HomeDesktopGrid;
 
 HomeDesktopGrid.propTypes = {
   visibility: PropTypes.bool,
-  Content: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  contentId: PropTypes.number,
   closeDrawer: PropTypes.func,
   openDrawer: PropTypes.func,
   data: PropTypes.array

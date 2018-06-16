@@ -2,10 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Grid } from "semantic-ui-react";
 import Hexagon from "react-hexagon";
+import { curry } from "../../functional";
 
 export const HexGridColumn = ({ tile, clickHandler }) => {
-  const { Component, fill, backgroundFill, Content } = tile;
-  const injectHandlerWithContent = () => clickHandler(Content);
+  const { id, Component, fill, backgroundFill } = tile;
+  const injectHandlerWithContent = curry(clickHandler)(id);
   return (
     <Grid.Column>
       <Hexagon

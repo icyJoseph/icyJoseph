@@ -41,7 +41,7 @@ export const Home = props => {
 export const mapStateToProps = state => {
   return {
     visibility: state.drawer.open,
-    Content: state.drawer.Content
+    contentId: state.drawer.id
   };
 };
 

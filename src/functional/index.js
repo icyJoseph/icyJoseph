@@ -29,3 +29,9 @@ export const head = ([head]) => head;
 
 // Last
 export const last = arr => head(arr.slice(arr.length - 1));
+
+// keys
+export const keys = obj => Object.keys(obj);
+
+// values
+export const values = obj => Object.values(obj);

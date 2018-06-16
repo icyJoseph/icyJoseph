@@ -8,7 +8,9 @@ import {
   filterf,
   take,
   head,
-  last
+  last,
+  keys,
+  values
 } from "../";
 
 describe("take", () => {
@@ -102,5 +104,19 @@ describe("last", () => {
   const values = [1, 2, 3, 4];
   it("takes the last element", () => {
     expect(last(values)).toEqual(4);
+  });
+});
+
+describe("keys", () => {
+  const obj = { a: 1, b: 2, c: 3 };
+  it("takes the keys of the object", () => {
+    expect(keys(obj)).toEqual(["a", "b", "c"]);
+  });
+});
+
+describe("values", () => {
+  const obj = { a: 1, b: 2, c: 3 };
+  it("takes the keys of the object", () => {
+    expect(values(obj)).toEqual([1, 2, 3]);
   });
 });

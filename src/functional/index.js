@@ -5,6 +5,9 @@ export const pipe = (...funcs) => (...args) =>
 // curry
 export const curry = f => a => (...b) => f(a, ...b);
 
+// curry Right
+export const curryRight = f => (...b) => a => f(a, ...b);
+
 // Take the first n elements of an array
 export const take = (n, m = 0) => array => array.slice(m, n + m);
 
@@ -35,3 +38,6 @@ export const keys = obj => Object.keys(obj);
 
 // values
 export const values = obj => Object.values(obj);
+
+// get
+export const get = (obj, key) => obj[key];

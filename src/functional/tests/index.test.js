@@ -1,6 +1,7 @@
 import {
   pipe,
   curry,
+  curryRight,
   mapValueToFunctions,
   flatten,
   sort,
@@ -10,7 +11,8 @@ import {
   head,
   last,
   keys,
-  values
+  values,
+  get
 } from "../";
 
 describe("take", () => {
@@ -39,12 +41,27 @@ describe("pipe", () => {
   });
 });
 
-describe("pipe", () => {
+describe("curry", () => {
   const add = (a, b) => a + b;
   const mult = (a, b) => a * b;
   const curriedAdd = curry(add);
   const curriedMult = curry(mult);
   it("curries the functions", () => {
+    expect(curriedAdd).toBeInstanceOf(Function);
+    expect(curriedMult).toBeInstanceOf(Function);
+  });
+  it("allows to pass arguments separately", () => {
+    expect(curriedAdd(2)(3)).toEqual(5);
+    expect(curriedMult(2)(3)).toEqual(6);
+  });
+});
+
+describe("curryRight", () => {
+  const add = (a, b) => a + b;
+  const mult = (a, b) => a * b;
+  const curriedAdd = curryRight(add);
+  const curriedMult = curryRight(mult);
+  it("curries the functions from the Right", () => {
     expect(curriedAdd).toBeInstanceOf(Function);
     expect(curriedMult).toBeInstanceOf(Function);
   });
@@ -118,5 +135,12 @@ describe("values", () => {
   const obj = { a: 1, b: 2, c: 3 };
   it("takes the keys of the object", () => {
     expect(values(obj)).toEqual([1, 2, 3]);
+  });
+});
+
+describe("get", () => {
+  const obj = { a: 1, b: 2, c: 3 };
+  it("takes key of the object", () => {
+    expect(get(obj, "a")).toEqual(1);
   });
 });

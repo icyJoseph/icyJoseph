@@ -36,7 +36,7 @@ export default [
     fill: "#292929",
     backgroundFill: "tomato",
     Content: Loadable({
-      loader: () => import("../components/About"),
+      loader: () => import("../components/Portfolio"),
       loading() {
         return <Spinner />;
       }
@@ -46,6 +46,7 @@ export default [
     id: 2,
     title: "JavaScript",
     meta: "Favorite Language",
+    background: "rgba(25,54,73)",
     Component: Loadable({
       loader: () => import("../logos/JavaScriptLogo"),
       loading() {
@@ -55,7 +56,7 @@ export default [
     fill: "#F0DB4F",
     backgroundFill: "tomato",
     Content: Loadable({
-      loader: () => import("../components/About"),
+      loader: () => import("../components/Recast"),
       loading() {
         return <Spinner />;
       }
@@ -74,7 +75,7 @@ export default [
     fill: "#292929",
     backgroundFill: "#5159BF",
     Content: Loadable({
-      loader: () => import("../components/About"),
+      loader: () => import("../components/Portfolio"),
       loading() {
         return <Spinner />;
       }
@@ -93,7 +94,11 @@ export default [
     fill: "#273B7A",
     backgroundFill: "tomato",
     Content: Loadable({
-      loader: () => import("../components/About"),
+      loader: () => import("../components/Common"),
+      render(loaded, props) {
+        let Component = loaded.default;
+        return <Component {...props} meta={"meta"} />;
+      },
       loading() {
         return <Spinner />;
       }
@@ -112,7 +117,11 @@ export default [
     fill: "#273B7A",
     backgroundFill: "tomato",
     Content: Loadable({
-      loader: () => import("../components/About"),
+      loader: () => import("../components/Common"),
+      render(loaded, props) {
+        let Component = loaded.default;
+        return <Component {...props} meta={"meta"} />;
+      },
       loading() {
         return <Spinner />;
       }
@@ -131,7 +140,11 @@ export default [
     fill: "#273B7A",
     backgroundFill: "tomato",
     Content: Loadable({
-      loader: () => import("../components/About"),
+      loader: () => import("../components/Common"),
+      render(loaded, props) {
+        let Component = loaded.default;
+        return <Component {...props} meta={"meta"} />;
+      },
       loading() {
         return <Spinner />;
       }
@@ -150,7 +163,11 @@ export default [
     fill: "#273B7A",
     backgroundFill: "tomato",
     Content: Loadable({
-      loader: () => import("../components/About"),
+      loader: () => import("../components/Common"),
+      render(loaded, props) {
+        let Component = loaded.default;
+        return <Component {...props} meta={"meta"} />;
+      },
       loading() {
         return <Spinner />;
       }
@@ -169,7 +186,11 @@ export default [
     fill: "#C92F00",
     backgroundFill: "tomato",
     Content: Loadable({
-      loader: () => import("../components/About"),
+      loader: () => import("../components/Common"),
+      render(loaded, props) {
+        let Component = loaded.default;
+        return <Component {...props} meta={"meta"} />;
+      },
       loading() {
         return <Spinner />;
       }
@@ -188,7 +209,11 @@ export default [
     fill: "#273B7A",
     backgroundFill: "tomato",
     Content: Loadable({
-      loader: () => import("../components/About"),
+      loader: () => import("../components/Common"),
+      render(loaded, props) {
+        let Component = loaded.default;
+        return <Component {...props} meta={"meta"} />;
+      },
       loading() {
         return <Spinner />;
       }

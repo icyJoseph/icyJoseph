@@ -23,3 +23,15 @@ export const getRepoLanguages = (user, repo) => {
     .get(`${github}/repos/${user}/${repo}/languages`)
     .then(({ data }) => data);
 };
+
+export const getRepoTopics = (user, repo) => {
+  return axios
+    .get(`${github}/repos/${user}/${repo}/topics`, {
+      headers: {
+        Accept: "application/vnd.github.mercy-preview+json"
+      }
+    })
+    .then(({ data: { names } }) => ({
+      [repo]: names
+    }));
+};

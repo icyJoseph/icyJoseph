@@ -44,6 +44,9 @@ export class BottomMenu extends Component {
             name="LinkedIn"
             active={activeItem === "LinkedIn"}
             onClick={this.handleItemClick}
+            href="https://www.linkedin.com/in/joseph-chamochumbi-280255b3/"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <Icon name="linkedin" />
             LinkedIn
@@ -52,6 +55,9 @@ export class BottomMenu extends Component {
             name="GitHub"
             active={activeItem === "GitHub"}
             onClick={this.handleItemClick}
+            href="https://github.com/icyJoseph"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <Icon name="github alternate" />
             GitHub

@@ -44,7 +44,7 @@ export class Portfolio extends Component {
     } = this.props;
     return (
       <Fragment>
-        <h3>{capitalize(meta)}</h3>
+        <h3>{capitalize(meta)} projects</h3>
         {topics.length > 0 && this.renderRelevantEntries()}
       </Fragment>
     );

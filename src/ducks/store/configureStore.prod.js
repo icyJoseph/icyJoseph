@@ -13,6 +13,7 @@ const enhancer = compose(
 );
 
 export default function(initialState) {
+  const store = createStore(rootReducer, initialState, enhancer);
   sagaMiddleware.run(rootSaga);
-  return createStore(rootReducer, initialState, enhancer);
+  return store;
 }

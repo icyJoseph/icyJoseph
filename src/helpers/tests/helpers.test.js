@@ -1,4 +1,4 @@
-import { shouldFetch } from "../helpers";
+import { shouldFetch } from "../";
 
 describe("shouldFetch", () => {
   const expiry = "2018-06-11T04:49:03.603Z";

@@ -91,7 +91,7 @@ export default [
   },
   {
     id: 4,
-    title: "Algorithms",
+    title: "algorithms",
     meta: "Problem Solving",
     Component: Loadable({
       loader: () => import("../logos/Problem"),
@@ -105,7 +105,7 @@ export default [
       loader: () => import("../components/Common"),
       render(loaded, props) {
         let Component = loaded.default;
-        return <Component {...props} meta={"meta"} />;
+        return <Component {...props} title={"algorithms"} />;
       },
       loading() {
         return <Spinner />;
@@ -114,8 +114,8 @@ export default [
   },
   {
     id: 5,
-    title: "Work Experience",
-    meta: "Career",
+    title: "experience",
+    meta: "My career",
     Component: Loadable({
       loader: () => import("../logos/Experience"),
       loading() {
@@ -128,7 +128,7 @@ export default [
       loader: () => import("../components/Common"),
       render(loaded, props) {
         let Component = loaded.default;
-        return <Component {...props} meta={"meta"} />;
+        return <Component {...props} title={"experience"} />;
       },
       loading() {
         return <Spinner />;
@@ -137,7 +137,7 @@ export default [
   },
   {
     id: 6,
-    title: "Python",
+    title: "python",
     meta: "Code as a hobby",
     Component: Loadable({
       loader: () => import("../logos/PythonLogo"),
@@ -151,7 +151,7 @@ export default [
       loader: () => import("../components/Common"),
       render(loaded, props) {
         let Component = loaded.default;
-        return <Component {...props} meta={"meta"} />;
+        return <Component {...props} title={"python"} />;
       },
       loading() {
         return <Spinner />;
@@ -160,7 +160,7 @@ export default [
   },
   {
     id: 7,
-    title: "Hacks",
+    title: "hackatons",
     meta: "Value Creation",
     Component: Loadable({
       loader: () => import("../logos/Rocket"),
@@ -174,7 +174,7 @@ export default [
       loader: () => import("../components/Common"),
       render(loaded, props) {
         let Component = loaded.default;
-        return <Component {...props} meta={"meta"} />;
+        return <Component {...props} title={"hackatons"} />;
       },
       loading() {
         return <Spinner />;
@@ -183,7 +183,7 @@ export default [
   },
   {
     id: 8,
-    title: "Winner of...",
+    title: "awards",
     meta: "Acknowledgments",
     Component: Loadable({
       loader: () => import("../logos/Award"),
@@ -197,7 +197,7 @@ export default [
       loader: () => import("../components/Common"),
       render(loaded, props) {
         let Component = loaded.default;
-        return <Component {...props} meta={"meta"} />;
+        return <Component {...props} title={"awards"} />;
       },
       loading() {
         return <Spinner />;
@@ -206,7 +206,7 @@ export default [
   },
   {
     id: 9,
-    title: "Currently",
+    title: "currently",
     meta: "Life as a React Developer",
     Component: Loadable({
       loader: () => import("../logos/Report"),
@@ -220,7 +220,7 @@ export default [
       loader: () => import("../components/Common"),
       render(loaded, props) {
         let Component = loaded.default;
-        return <Component {...props} meta={"meta"} />;
+        return <Component {...props} title={"currently"} />;
       },
       loading() {
         return <Spinner />;

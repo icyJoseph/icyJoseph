@@ -12,7 +12,10 @@ import {
   last,
   keys,
   values,
-  get
+  get,
+  purify,
+  split,
+  capitalize
 } from "../";
 
 describe("take", () => {
@@ -142,5 +145,27 @@ describe("get", () => {
   const obj = { a: 1, b: 2, c: 3 };
   it("takes key of the object", () => {
     expect(get(obj, "a")).toEqual(1);
+  });
+});
+
+describe("purify", () => {
+  const arr = [1, 2, false, null];
+  it("removes falsy from an array", () => {
+    expect(purify(arr)).toEqual([1, 2]);
+  });
+});
+
+describe("split", () => {
+  const str = "react.redux.app";
+  const pattern = ".";
+  it("splits at the pattern", () => {
+    expect(split(str, pattern)).toEqual(["react", "redux", "app"]);
+  });
+});
+
+describe("capitalize", () => {
+  const str = "react";
+  it("capitalizes the string", () => {
+    expect(capitalize(str)).toEqual("React");
   });
 });

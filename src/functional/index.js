@@ -41,3 +41,13 @@ export const values = obj => Object.values(obj);
 
 // get
 export const get = (obj, key) => obj[key];
+
+// purify
+export const purify = arr => arr.filter(a => a);
+
+// split
+export const split = (string, pattern) => string.split(pattern);
+
+// capitalizer
+export const capitalize = string =>
+  string.charAt(0).toUpperCase() + string.slice(1);

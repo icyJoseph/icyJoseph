@@ -1,5 +1,6 @@
 {
   "name": "icyjoseph",
+  "homepage": "https://icyJoseph.github.io/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -29,7 +30,9 @@
     "test": "react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom --watchAll --coverage",
     "test:coverage": "react-scripts test --env=jsdom --coverage",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.15.0",

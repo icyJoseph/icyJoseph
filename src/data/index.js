@@ -37,6 +37,10 @@ export default [
     backgroundFill: "tomato",
     Content: Loadable({
       loader: () => import("../components/Portfolio"),
+      render(loaded, props) {
+        let Component = loaded.default;
+        return <Component {...props} meta="react" />;
+      },
       loading() {
         return <Spinner />;
       }
@@ -76,6 +80,10 @@ export default [
     backgroundFill: "#5159BF",
     Content: Loadable({
       loader: () => import("../components/Portfolio"),
+      render(loaded, props) {
+        let Component = loaded.default;
+        return <Component {...props} meta="redux" />;
+      },
       loading() {
         return <Spinner />;
       }

@@ -32,7 +32,7 @@
     "test:coverage": "react-scripts test --env=jsdom --coverage",
     "eject": "react-scripts eject",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -b master -d build"
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.15.0",

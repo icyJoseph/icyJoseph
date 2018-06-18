@@ -7,7 +7,7 @@ import { TabletWrapper } from "./styled";
 import { fetchUserData, fetchUserRepos } from "../../ducks/github";
 import Spinner from "../../components/Loading/Spinner";
 import { mapValueToFunctions } from "../../functional";
-import { shouldFetch } from "./helpers";
+import { shouldFetch } from "../../helpers";
 
 const AsyncTitle = Loadable({
   loader: () => import("../../components/MainTitle"),

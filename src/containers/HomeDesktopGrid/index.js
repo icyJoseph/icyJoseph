@@ -8,7 +8,20 @@ import MainTitle from "../../components/MainTitle";
 import HexGrid from "../../components/HexGrid";
 import Drawer from "../../components/Drawer";
 
-import { head, take } from "../../functional";
+import {
+  curry,
+  curryRight,
+  filterf,
+  head,
+  mapValueToFunctions,
+  take,
+  pipe
+} from "../../functional";
+
+const isEqualId = (test, { id }) => id === test;
+const takeFirstRow = take(3, 0);
+const takeSecondRow = take(4, 3);
+const takeThirdRow = take(3, 7);
 
 export const HomeDesktopGrid = ({
   visibility,
@@ -17,13 +30,18 @@ export const HomeDesktopGrid = ({
   openDrawer,
   data
 }) => {
-  const [firstRow, secondRow, thirdRow] = [
-    take(3, 0),
-    take(4, 3),
-    take(3, 7)
-  ].map(f => f(data));
+  const [firstRow, secondRow, thirdRow] = mapValueToFunctions(
+    takeFirstRow,
+    takeSecondRow,
+    takeThirdRow
+  )(data);
 
-  const { Content } = head(data.filter(d => d.id === contentId));
+  const { Content, background } = pipe(
+    curry(isEqualId),
+    curryRight(filterf)(data),
+    head
+  )(contentId);
+
   return (
     <Fragment>
       <Sidebar.Pushable
@@ -41,7 +59,12 @@ export const HomeDesktopGrid = ({
         }}
       >
         <MainTitle title="Meet Joseph" desktop />
-        <Drawer visibility={visibility} Content={Content} close={closeDrawer} />
+        <Drawer
+          visibility={visibility}
+          Content={Content}
+          background={background}
+          close={closeDrawer}
+        />
         <Sidebar.Pusher
           style={{
             background: "rgba(0,0,0,0)",

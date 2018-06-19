@@ -50,7 +50,7 @@ export default [
     id: 2,
     title: "JavaScript",
     meta: "Favorite Language",
-    background: "rgba(25,54,73)",
+    background: "#193549",
     Component: Loadable({
       loader: () => import("../logos/JavaScriptLogo"),
       loading() {

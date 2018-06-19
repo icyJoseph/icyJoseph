@@ -66,7 +66,7 @@ export class About extends Component {
   }
 }
 
-const mapStateToProps = ({ github: { user }, expiry }) => {
+const mapStateToProps = ({ github: { user, expiry } }) => {
   return {
     expiry,
     user

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import Media from "react-media";
 import Loadable from "react-loadable";
@@ -8,7 +8,7 @@ import data from "../../data";
 import TimeLine from "../../data/TimeLine";
 import Spinner from "../../components/Loading/Spinner";
 import { openDrawer, closeDrawer, changeContent } from "../../ducks/drawer";
-
+import { fetchToken } from "../../ducks/auth";
 import { curry } from "../../functional";
 
 export const AsyncTablet = Loadable({
@@ -30,22 +30,32 @@ export const MediaRoutes = (props, matches) => {
     <AsyncDesktop {...props} data={data} />
   );
 };
-export const Home = props => {
-  return (
-    <Fragment>
-      <Media query={{ maxWidth: 1023 }}>{curry(MediaRoutes)(props)}</Media>
-    </Fragment>
-  );
-};
+export class Home extends Component {
+  componentDidMount() {
+    return !this.props.token && this.props.fetchToken();
+  }
+
+  render() {
+    return (
+      <Fragment>
+        <Media query={{ maxWidth: 1023 }}>
+          {curry(MediaRoutes)(this.props)}
+        </Media>
+      </Fragment>
+    );
+  }
+}
 
 export const mapStateToProps = state => {
   return {
+    token: state.auth.token,
     visibility: state.drawer.open,
     contentId: state.drawer.id
   };
 };
 
 export const mapDispatchToProps = {
+  fetchToken,
   openDrawer,
   closeDrawer,
   changeContent

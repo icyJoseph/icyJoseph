@@ -1,36 +1,52 @@
 import axios from "axios";
 
 export const github = `https://api.github.com`;
-const auth = {
-  auth: {
-    username: "icyJoseph",
-    password: `${process.env.REACT_APP_GITHUB_TOKEN}`
-  }
-};
 
-export const getUserRepos = user => {
+export const getUserRepos = (user, token) => {
   return axios
-    .get(`${github}/users/${user}/repos`, auth)
+    .get(`${github}/users/${user}/repos`, {
+      auth: {
+        username: "icyJoseph",
+        password: `${token}`
+      }
+    })
     .then(({ data }) => [...data]);
 };
 
-export const getUser = user => {
-  return axios.get(`${github}/users/${user}`, auth).then(({ data }) => data);
-};
-
-export const getRepoContributors = (user, repo) => {
+export const getUser = (user, token) => {
   return axios
-    .get(`${github}/repos/${user}/${repo}/contributors`, auth)
-    .then(({ data }) => [...data]);
-};
-
-export const getRepoLanguages = (user, repo) => {
-  return axios
-    .get(`${github}/repos/${user}/${repo}/languages`, auth)
+    .get(`${github}/users/${user}`, {
+      auth: {
+        username: "icyJoseph",
+        password: `${token}`
+      }
+    })
     .then(({ data }) => data);
 };
 
-export const getRepoTopics = (user, repo) => {
+export const getRepoContributors = (user, repo, token) => {
+  return axios
+    .get(`${github}/repos/${user}/${repo}/contributors`, {
+      auth: {
+        username: "icyJoseph",
+        password: `${token}`
+      }
+    })
+    .then(({ data }) => [...data]);
+};
+
+export const getRepoLanguages = (user, repo, token) => {
+  return axios
+    .get(`${github}/repos/${user}/${repo}/languages`, {
+      auth: {
+        username: "icyJoseph",
+        password: `${token}`
+      }
+    })
+    .then(({ data }) => data);
+};
+
+export const getRepoTopics = (user, repo, token) => {
   return axios
     .get(`${github}/repos/${user}/${repo}/topics`, {
       headers: {
@@ -38,7 +54,7 @@ export const getRepoTopics = (user, repo) => {
       },
       auth: {
         username: "icyJoseph",
-        password: `${process.env.REACT_APP_GITHUB_TOKEN}`
+        password: `${token}`
       }
     })
     .then(({ data: { names } }) => ({

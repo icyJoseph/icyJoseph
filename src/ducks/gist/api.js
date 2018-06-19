@@ -3,12 +3,12 @@ import { curry, curryRight, get, head, keys, pipe } from "../../functional";
 
 import { github } from "../github/api";
 
-export const getGist = gist => {
+export const getGist = (gist, token) => {
   return axios
     .get(`${github}/gists/${gist}`, {
       auth: {
         username: "icyJoseph",
-        password: `${process.env.REACT_APP_GITHUB_TOKEN}`
+        password: `${token}`
       }
     })
     .then(({ data: { files } }) => {

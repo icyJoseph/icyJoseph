@@ -40,6 +40,7 @@ import {
   sort,
   keys
 } from "../../functional";
+import { selectToken } from "../auth";
 
 const buildLang = (aggregate, lang) => ({
   lang,
@@ -48,7 +49,8 @@ const buildLang = (aggregate, lang) => ({
 
 export function* loadUser({ payload }) {
   try {
-    const user = yield call(getUser, payload);
+    const token = yield select(selectToken);
+    const user = yield call(getUser, payload, token);
     yield put({ type: SUCCESS_USER_DATA, payload: user });
   } catch (error) {
     yield put({ type: FAILED_USER_DATA, error });
@@ -57,7 +59,8 @@ export function* loadUser({ payload }) {
 
 export function* loadRepos({ payload }) {
   try {
-    const repos = yield call(getUserRepos, payload);
+    const token = yield select(selectToken);
+    const repos = yield call(getUserRepos, payload, token);
 
     const now = new Date();
     const inOneHour = new Date(now.getTime() + 60 * 60 * 1000);
@@ -72,11 +75,12 @@ export function* loadRepos({ payload }) {
 export function* loadContributions() {
   yield all([take(SUCCESS_USER_REPOS), take(SUCCESS_USER_DATA)]);
 
+  const token = yield select(selectToken);
   const repos = yield select(selectRepos);
   const { login } = yield select(selectUser);
 
   const contributors = yield all(
-    repos.map(({ name }) => call(getRepoContributors, login, name))
+    repos.map(({ name }) => call(getRepoContributors, login, name, token))
   );
 
   const userContributions = flatten(contributors).filter(
@@ -93,12 +97,14 @@ export function* loadContributions() {
 
 export function* loadLanguages() {
   yield all([take(SUCCESS_USER_REPOS), take(SUCCESS_USER_DATA)]);
+
+  const token = yield select(selectToken);
   const repos = yield select(selectRepos);
   const { login } = yield select(selectUser);
 
   const ownedByUser = repos.filter(({ owner }) => owner.login === login);
   const languages = yield all(
-    ownedByUser.map(({ name }) => call(getRepoLanguages, login, name))
+    ownedByUser.map(({ name }) => call(getRepoLanguages, login, name, token))
   );
 
   const aggregate = languages.reduce((acc, val) => {
@@ -127,13 +133,14 @@ export function* loadLanguages() {
 }
 
 export function* loadTopics() {
+  const token = yield select(selectToken);
   const repos = yield select(selectRepos);
   const { login } = yield select(selectUser);
 
   const ownedByUser = repos.filter(({ owner }) => owner.login === login);
 
   const payload = yield all(
-    ownedByUser.map(({ name }) => call(getRepoTopics, login, name))
+    ownedByUser.map(({ name }) => call(getRepoTopics, login, name, token))
   );
 
   yield put({ type: SUCCESS_REPOS_TOPICS, payload });

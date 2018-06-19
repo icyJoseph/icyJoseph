@@ -6,18 +6,19 @@ import { SideBarWrapper } from "./styled";
 
 export const Drawer = ({ visibility, Content, close, background }) => {
   return (
-    <SidebarWrapper
+    <SideBarWrapper
       as={Segment}
       animation="overlay"
       width="wide"
       visible={visibility}
       direction="right"
+      background={background}
     >
       <Button onClick={close}>Close</Button>
       <Segment basic style={{ marginBottom: "30px" }}>
         {Content && <Content />}
       </Segment>
-    </SidebarWrapper>
+    </SideBarWrapper>
   );
 };
 

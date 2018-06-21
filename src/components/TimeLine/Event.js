@@ -19,7 +19,7 @@ export class Event extends Component {
   renderCard = this.renderCard.bind(this);
   renderCard() {
     const { height } = this.state;
-    const { title, meta, description } = this.props;
+    const { title, meta, description, experience } = this.props;
 
     return (
       <Card
@@ -28,6 +28,7 @@ export class Event extends Component {
         description={description}
         height={height}
         toggle={this.toggle}
+        experience={experience}
       />
     );
   }

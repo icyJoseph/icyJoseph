@@ -9,14 +9,16 @@ import {
 
 export class Card extends Component {
   render() {
-    const { title, meta, description, height, toggle } = this.props;
+    const { title, meta, description, height, toggle, experience } = this.props;
 
     return (
-      <CardWrapper onClick={toggle}>
-        <TitleWrapper>{title}</TitleWrapper>
-        <MetaWrapper>{meta}</MetaWrapper>
+      <CardWrapper experience={experience} onClick={toggle}>
+        <TitleWrapper experience={experience}>{title}</TitleWrapper>
+        <MetaWrapper experience={experience}>{meta}</MetaWrapper>
         <AnimateHeight duration={500} height={height}>
-          <DescriptionWrapper>{description}</DescriptionWrapper>
+          <DescriptionWrapper experience={experience}>
+            {description}
+          </DescriptionWrapper>
         </AnimateHeight>
       </CardWrapper>
     );

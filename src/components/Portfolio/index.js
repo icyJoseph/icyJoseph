@@ -1,17 +1,20 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
+import { Item, Loader, Icon, Label } from "semantic-ui-react";
 import Entry from "./Entry";
 import { fetchUserRepos } from "../../ducks/github";
 import { shouldFetch } from "../../helpers";
 import { capitalize } from "../../functional";
 import { filterCriteria } from "./helpers";
+import { icyJoseph, darkBlue } from "../../constants";
 
 export class Portfolio extends Component {
   componentDidMount() {
     const {
-      github: { expiry }
+      github: { expiry, topics }
     } = this.props;
-    return shouldFetch(expiry) && this.props.fetchUserRepos("icyJoseph");
+    const noTopicsOrExpired = topics.length === 0 || shouldFetch(expiry);
+    return noTopicsOrExpired && this.props.fetchUserRepos(icyJoseph);
   }
 
   renderRelevantEntries() {
@@ -32,20 +35,37 @@ export class Portfolio extends Component {
         name,
         topics: topicsObject[name]
       }));
-    return relevantRepos.map(({ name, ...rest }) => (
-      <Entry key={name} name={name} {...rest} />
-    ));
+    return (
+      <Fragment>
+        <Label style={{ color: darkBlue }}>
+          <Icon name="github" />
+          {relevantRepos.length}
+        </Label>
+        <Item.Group divided>
+          {relevantRepos.map(({ name, ...rest }) => (
+            <Entry key={name} name={name} {...rest} />
+          ))}
+        </Item.Group>
+      </Fragment>
+    );
   }
 
   render() {
     const {
       github: { topics },
-      meta
+      meta,
+      type = "projects"
     } = this.props;
     return (
       <Fragment>
-        <h3>{capitalize(meta)} projects</h3>
-        {topics.length > 0 && this.renderRelevantEntries()}
+        <h3 style={{ color: "white" }}>
+          {capitalize(meta)} {type}
+        </h3>
+        {topics.length === 0 ? (
+          <Loader active inline="centered" />
+        ) : (
+          this.renderRelevantEntries()
+        )}
       </Fragment>
     );
   }

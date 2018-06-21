@@ -18,23 +18,25 @@ const AsyncTitle = Loadable({
 const AsyncStatistics = Loadable({
   loader: () => import("../../components/Statistics"),
   loading: Spinner,
-  delay: 400
+  delay: 700
 });
 
 const AsyncTimeLine = Loadable({
   loader: () => import("../../components/TimeLine"),
   loading: Spinner,
-  delay: 400
+  delay: 700
 });
 
 export class Tablet extends Component {
   componentDidMount() {
     const {
-      github: { expiry }
+      github: { expiry, commits, languages }
     } = this.props;
 
+    const noDataOrExpired =
+      languages.length === 0 || commits === 0 || shouldFetch(expiry);
     return (
-      shouldFetch(expiry) &&
+      noDataOrExpired &&
       mapValueToFunctions(this.props.fetchUserRepos, this.props.fetchUserData)(
         "icyJoseph"
       )

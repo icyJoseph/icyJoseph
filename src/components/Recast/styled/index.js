@@ -25,17 +25,15 @@ export const FunctionCard = styled.div`
 
 export const FunctionName = styled.div`
   font-size: 12pt;
-  margin: 5px;
+  margin: 5px 0;
   color: ${golden};
 `;
 
 export const FunctionDescription = styled.div`
-  margin: 5px;
+  margin: 5px 0;
 `;
 
 export const Frame = styled.div`
-  border: 1px solid ${golden};
-  border-radius: 10px;
   padding: 20px;
 `;
 

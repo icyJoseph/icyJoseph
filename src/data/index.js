@@ -2,6 +2,7 @@ import React from "react";
 import Loadable from "react-loadable";
 import Spinner from "../components/Loading/Spinner";
 import Loading from "../logos/Loading";
+import TimeLine from "./TimeLine";
 
 export default [
   {
@@ -15,6 +16,7 @@ export default [
       }
     }),
     fill: "#273B7A",
+    background: "#193549",
     backgroundFill: "tomato",
     Content: Loadable({
       loader: () => import("../components/About"),
@@ -34,12 +36,13 @@ export default [
       }
     }),
     fill: "#292929",
+    background: "#193549",
     backgroundFill: "tomato",
     Content: Loadable({
       loader: () => import("../components/Portfolio"),
       render(loaded, props) {
         let Component = loaded.default;
-        return <Component {...props} meta="react" />;
+        return <Component {...props} meta="react" type="repos" />;
       },
       loading() {
         return <Spinner />;
@@ -77,12 +80,13 @@ export default [
       }
     }),
     fill: "#292929",
+    background: "#193549",
     backgroundFill: "#5159BF",
     Content: Loadable({
       loader: () => import("../components/Portfolio"),
       render(loaded, props) {
         let Component = loaded.default;
-        return <Component {...props} meta="redux" />;
+        return <Component {...props} meta="redux" type="repos" />;
       },
       loading() {
         return <Spinner />;
@@ -100,12 +104,13 @@ export default [
       }
     }),
     fill: "#273B7A",
+    background: "#193549",
     backgroundFill: "tomato",
     Content: Loadable({
-      loader: () => import("../components/Common"),
+      loader: () => import("../components/Portfolio"),
       render(loaded, props) {
         let Component = loaded.default;
-        return <Component {...props} title={"algorithms"} />;
+        return <Component {...props} meta="algorithms" type="solutions" />;
       },
       loading() {
         return <Spinner />;
@@ -123,12 +128,13 @@ export default [
       }
     }),
     fill: "#273B7A",
+    background: "#193549",
     backgroundFill: "tomato",
     Content: Loadable({
-      loader: () => import("../components/Common"),
+      loader: () => import("../components/TimeLine"),
       render(loaded, props) {
         let Component = loaded.default;
-        return <Component {...props} title={"experience"} />;
+        return <Component {...props} experience data={TimeLine} />;
       },
       loading() {
         return <Spinner />;
@@ -146,12 +152,13 @@ export default [
       }
     }),
     fill: "#273B7A",
+    background: "#193549",
     backgroundFill: "tomato",
     Content: Loadable({
-      loader: () => import("../components/Common"),
+      loader: () => import("../components/Portfolio"),
       render(loaded, props) {
         let Component = loaded.default;
-        return <Component {...props} title={"python"} />;
+        return <Component {...props} meta="python" />;
       },
       loading() {
         return <Spinner />;
@@ -160,7 +167,7 @@ export default [
   },
   {
     id: 7,
-    title: "hackatons",
+    title: "hackathon",
     meta: "Value Creation",
     Component: Loadable({
       loader: () => import("../logos/Rocket"),
@@ -169,12 +176,13 @@ export default [
       }
     }),
     fill: "#273B7A",
+    background: "#193549",
     backgroundFill: "tomato",
     Content: Loadable({
-      loader: () => import("../components/Common"),
+      loader: () => import("../components/Portfolio"),
       render(loaded, props) {
         let Component = loaded.default;
-        return <Component {...props} title={"hackatons"} />;
+        return <Component {...props} meta="hackathon" type="hacks" />;
       },
       loading() {
         return <Spinner />;

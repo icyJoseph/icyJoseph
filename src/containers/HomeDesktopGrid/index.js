@@ -58,7 +58,6 @@ export const HomeDesktopGrid = ({
           backgroundSize: "cover"
         }}
       >
-        <MainTitle title="Meet Joseph" desktop />
         <Drawer
           visibility={visibility}
           Content={Content}
@@ -68,9 +67,13 @@ export const HomeDesktopGrid = ({
         <Sidebar.Pusher
           style={{
             background: "rgba(0,0,0,0)",
-            marginTop: "5%"
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center"
           }}
         >
+          <MainTitle title="Meet Joseph" desktop />
           <HexGrid
             clickHandler={openDrawer}
             rows={[firstRow, secondRow, thirdRow]}

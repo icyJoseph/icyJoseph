@@ -28,7 +28,7 @@ export const Statistics = ({
     </Group>
     <Group>
       {languages.map(({ lang, bytes }) => (
-        <Stat key={lang}>
+        <Stat key={lang} fontSize="14pt">
           <Value>
             <CountUp start={0} end={bytes} />
           </Value>

@@ -4,7 +4,7 @@ export const Group = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  margin: 3% 25%;
+  margin: 3% 10%;
   color: white;
 `;
 
@@ -32,6 +32,7 @@ export const Label = styled.div`
   flex: 1;
   display: flex;
   flex-wrap: wrap;
+  text-align: center;
   justify-content: center;
   align-items: center;
   margin: ${props => props.margin}px 0;

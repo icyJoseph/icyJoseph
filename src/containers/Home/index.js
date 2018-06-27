@@ -18,16 +18,17 @@ export const AsyncTablet = Loadable({
 });
 
 export const AsyncDesktop = Loadable({
-  loader: () => import("../HomeDesktopGrid"),
+  loader: () => import("../Desktop"),
   loading: Spinner,
   delay: 600
 });
 
 export const MediaRoutes = (props, matches) => {
+  const toShow = data.filter(e => !e.hide);
   return matches ? (
     <AsyncTablet {...props} data={TimeLine} />
   ) : (
-    <AsyncDesktop {...props} data={data} />
+    <AsyncDesktop {...props} data={toShow} />
   );
 };
 export class Home extends Component {

@@ -9,7 +9,8 @@ class MainTitle extends Component {
   revealTitle = this.revealTitle.bind(this);
 
   componentDidMount() {
-    this.timer = setTimeout(this.revealTitle, 1000);
+    const { timeout = 1000 } = this.props;
+    this.timer = setTimeout(this.revealTitle, timeout);
   }
 
   componentWillUnmount() {
@@ -21,7 +22,13 @@ class MainTitle extends Component {
   }
 
   render() {
-    const { title, desktop } = this.props;
+    const {
+      title,
+      desktop,
+      timeout = 500,
+      delayMin = 200,
+      delayMax = 1200
+    } = this.props;
     return (
       <Container style={style.container}>
         <Header as="h1" size="huge" textAlign="center">
@@ -32,6 +39,9 @@ class MainTitle extends Component {
               letterSpacing: desktop ? "0.7em" : "0.5em",
               color: desktop ? "black" : "FloralWhite"
             }}
+            transitionTime={timeout}
+            delayMin={delayMin}
+            delayMax={delayMax}
           >
             {title}
           </ReactRevealText>

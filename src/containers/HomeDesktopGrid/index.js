@@ -1,13 +1,15 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import { Sidebar, Segment } from "semantic-ui-react";
+import { Sidebar } from "semantic-ui-react";
 
-import Background from "./codingBackground.jpg";
+import codingBackground from "./codingBackground.jpg";
 
 import MainTitle from "../../components/MainTitle";
 import HexGrid from "../../components/HexGrid";
 import Drawer from "../../components/Drawer";
 
+import { Pushable } from "./styled";
+import { shadow } from "../../constants";
 import {
   curry,
   curryRight,
@@ -19,9 +21,9 @@ import {
 } from "../../functional";
 
 const isEqualId = (test, { id }) => id === test;
-const takeFirstRow = take(3, 0);
-const takeSecondRow = take(4, 3);
-const takeThirdRow = take(3, 7);
+const takeFirstRow = take(2, 0);
+const takeSecondRow = take(3, 2);
+const takeThirdRow = take(2, 5);
 
 export const HomeDesktopGrid = ({
   visibility,
@@ -44,20 +46,7 @@ export const HomeDesktopGrid = ({
 
   return (
     <Fragment>
-      <Sidebar.Pushable
-        as={Segment}
-        style={{
-          minHeight: "600px",
-          height: "calc(100vh - 100px)",
-          overflow: "hidden",
-          border: "none",
-          boxShadow: "none",
-          marginTop: "0px",
-          borderRadius: 0,
-          backgroundImage: `url(${Background})`,
-          backgroundSize: "cover"
-        }}
-      >
+      <Pushable background={codingBackground}>
         <Drawer
           visibility={visibility}
           Content={Content}
@@ -66,20 +55,21 @@ export const HomeDesktopGrid = ({
         />
         <Sidebar.Pusher
           style={{
-            background: "rgba(0,0,0,0)",
+            background: shadow,
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
+            flex: 1
           }}
         >
-          <MainTitle title="Meet Joseph" desktop />
+          <MainTitle title="Coding/Hacks" />
           <HexGrid
             clickHandler={openDrawer}
             rows={[firstRow, secondRow, thirdRow]}
           />
         </Sidebar.Pusher>
-      </Sidebar.Pushable>
+      </Pushable>
     </Fragment>
   );
 };

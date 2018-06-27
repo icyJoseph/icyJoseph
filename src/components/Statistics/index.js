@@ -5,6 +5,7 @@ import Github from "../../logos/Github";
 
 export const Statistics = ({
   publicRepos = 0,
+  publicGists = 0,
   commits = 0,
   languages = []
 }) => (
@@ -18,6 +19,12 @@ export const Statistics = ({
           <CountUp start={0} end={publicRepos} />
         </Value>
         <Label margin={25}>Public Repos</Label>
+      </Stat>
+      <Stat>
+        <Value>
+          <CountUp start={0} end={publicGists} />
+        </Value>
+        <Label margin={25}>Public Gists</Label>
       </Stat>
       <Stat>
         <Value>

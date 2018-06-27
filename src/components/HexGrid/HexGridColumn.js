@@ -1,21 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Grid } from "semantic-ui-react";
 import Hexagon from "react-hexagon";
+
 import { curry } from "../../functional";
 
 export const HexGridColumn = ({ tile, clickHandler }) => {
   const { id, Component, fill, backgroundFill } = tile;
   const injectHandlerWithContent = curry(clickHandler)(id);
   return (
-    <Grid.Column>
-      <Hexagon
-        style={{ stroke: "none", fill: backgroundFill }}
-        diagonal={100}
-        onClick={injectHandlerWithContent}
-        children={<Component handler={injectHandlerWithContent} fill={fill} />}
-      />
-    </Grid.Column>
+    <div>
+      <svg
+        style={{
+          height: "100px",
+          width: "100px",
+          margin: "5px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <Hexagon
+          style={{ stroke: "none", fill: backgroundFill }}
+          diagonal={100}
+          flatTop
+          onClick={injectHandlerWithContent}
+          children={
+            <Component handler={injectHandlerWithContent} fill={fill} />
+          }
+        />
+      </svg>
+    </div>
   );
 };
 

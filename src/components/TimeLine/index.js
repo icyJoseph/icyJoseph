@@ -4,7 +4,7 @@ import Event from "./Event";
 
 export const TimeLine = ({ data, experience }) => {
   return (
-    <div style={{ marginBottom: "50px" }}>
+    <div style={{ marginBottom: "120px" }}>
       {data.map(({ meta, ...rest }, index) => (
         <Event
           key={meta}

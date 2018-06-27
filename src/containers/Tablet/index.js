@@ -1,13 +1,15 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 
 import Loadable from "react-loadable";
 import { connect } from "react-redux";
-import { TabletWrapper } from "./styled";
+import { TabletWrapper, Background } from "./styled";
 import { fetchUserData, fetchUserRepos } from "../../ducks/github";
 import Spinner from "../../components/Loading/Spinner";
 import { mapValueToFunctions } from "../../functional";
 import { shouldFetch } from "../../helpers";
+
+import nightBackground from "./night-coding.jpg";
 
 const AsyncTitle = Loadable({
   loader: () => import("../../components/MainTitle"),
@@ -44,23 +46,34 @@ export class Tablet extends Component {
   }
 
   render() {
-    const { data, github } = this.props;
+    const { data, github, desktop } = this.props;
     const {
-      user: { public_repos },
+      user: { public_repos, public_gists },
       commits,
       languages
     } = github;
 
+    const noTransition = {
+      timeout: 0,
+      delayMin: 0,
+      delayMax: 0
+    };
     return (
-      <TabletWrapper>
-        <AsyncTitle title="Meet Joseph" />
-        <AsyncStatistics
-          publicRepos={public_repos}
-          commits={commits}
-          languages={languages}
-        />
-        <AsyncTimeLine data={data} />
-      </TabletWrapper>
+      <Fragment>
+        {desktop && <Background background={nightBackground} />}
+        <TabletWrapper desktop={desktop}>
+          <AsyncTitle title="Joseph" {...noTransition} />
+          <AsyncTitle title="Front-end developer" />
+          <AsyncStatistics
+            publicRepos={public_repos}
+            commits={commits}
+            publicGists={public_gists}
+            languages={languages}
+            desktop={desktop}
+          />
+          {!desktop && <AsyncTimeLine data={data} />}
+        </TabletWrapper>
+      </Fragment>
     );
   }
 }

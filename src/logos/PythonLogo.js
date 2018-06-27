@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const PythonLogo = ({ fill, handler }) => {
   return (
     <g
-      transform="scale(0.48)translate(27, 42)"
+      transform="scale(0.48)translate(40, 42)"
       onClick={handler}
       style={{
         cursor: "pointer"

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 export const Redux = ({ fill, handler }) => {
   return (
     <g
-      transform="scale(0.25)translate(50,65)"
+      transform="scale(0.25)translate(70,65)"
       onClick={handler}
       style={{
         cursor: "pointer"

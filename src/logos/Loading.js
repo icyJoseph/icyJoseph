@@ -2,7 +2,7 @@ import React from "react";
 
 export const Loading = () => {
   return (
-    <g transform="scale(2)translate(8,11)">
+    <g transform="scale(2)translate(10,11)">
       <g>
         <path
           fill="white"

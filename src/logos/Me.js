@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 export const Me = ({ fill, handler }) => {
   return (
     <g
-      transform="scale(0.15)translate(42,60)"
+      transform="scale(0.15)translate(80,50)"
       onClick={handler}
       style={{
         cursor: "pointer"

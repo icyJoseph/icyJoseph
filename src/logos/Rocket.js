@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 export const Rocket = ({ fill, handler }) => {
   return (
     <g
-      transform="scale(0.15)translate(40,85)"
+      transform="scale(0.15)translate(75,85)"
       onClick={handler}
       style={{
         cursor: "pointer"

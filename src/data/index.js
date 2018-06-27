@@ -119,6 +119,7 @@ export default [
   },
   {
     id: 5,
+    hide: true,
     title: "experience",
     meta: "My career",
     Component: Loadable({
@@ -158,7 +159,7 @@ export default [
       loader: () => import("../components/Portfolio"),
       render(loaded, props) {
         let Component = loaded.default;
-        return <Component {...props} meta="python" />;
+        return <Component {...props} meta="python" type="scripts" />;
       },
       loading() {
         return <Spinner />;
@@ -182,7 +183,7 @@ export default [
       loader: () => import("../components/Portfolio"),
       render(loaded, props) {
         let Component = loaded.default;
-        return <Component {...props} meta="hackathon" type="hacks" />;
+        return <Component {...props} meta="hackathon" />;
       },
       loading() {
         return <Spinner />;
@@ -191,6 +192,7 @@ export default [
   },
   {
     id: 8,
+    hide: true,
     title: "awards",
     meta: "Acknowledgments",
     Component: Loadable({
@@ -214,6 +216,7 @@ export default [
   },
   {
     id: 9,
+    hide: true,
     title: "currently",
     meta: "Life as a React Developer",
     Component: Loadable({

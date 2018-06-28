@@ -15,7 +15,7 @@ export const Drawer = ({ visibility, Content, close, background }) => {
       background={background}
     >
       <Button onClick={close}>Close</Button>
-      <Segment basic style={{ marginBottom: "30px" }}>
+      <Segment basic style={{ marginBottom: "60px" }}>
         {Content && <Content />}
       </Segment>
     </SideBarWrapper>

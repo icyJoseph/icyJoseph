@@ -16,7 +16,6 @@ export const Contact = ({ open, handleClose }) => (
         <Header>Email</Header>
         <p>You can reach me via email to:</p>
         <p>contact@icjoseph.com</p>
-        <p>Click outside or the close button to resume.</p>
       </Modal.Description>
     </Modal.Content>
     <Modal.Actions>

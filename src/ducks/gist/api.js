@@ -1,4 +1,12 @@
-import { curry, curryRight, get, head, keys, pipe } from "../../functional";
+import {
+  curry,
+  curryRight,
+  get,
+  head,
+  keys,
+  pipe,
+  getByFileName
+} from "../../functional";
 import { github } from "../github/api";
 
 export const getGist = (gist, token) => {
@@ -8,7 +16,7 @@ export const getGist = (gist, token) => {
       return pipe(
         keys,
         head,
-        curry(get)(files),
+        curry(getByFileName)(files),
         curryRight(get)("content")
       )(files);
     });

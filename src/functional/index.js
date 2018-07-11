@@ -39,6 +39,10 @@ export const keys = obj => Object.keys(obj);
 // values
 export const values = obj => Object.values(obj);
 
+// get when the key is a file name with extesion => script.js
+export const getByFileName = (obj, filename, fail = null) =>
+  obj ? obj[filename] : fail;
+
 // get
 export const get = (obj, key, fail = null) => {
   const path = key.split(".");

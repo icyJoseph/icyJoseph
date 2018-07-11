@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Container, Card } from "semantic-ui-react";
+import { Container, Card, Loader } from "semantic-ui-react";
 
 import Feed, { Bio } from "../../components/Feed";
 import { fetchFeed } from "../../ducks/medium";
@@ -19,7 +19,7 @@ export class Blog extends Component {
       feed: { user, articles }
     } = this.props.medium;
     const posts = Object.keys(articles).map(id => get(articles, id, []));
-    return (
+    return posts.length > 0 ? (
       <Container
         style={{
           padding: 10,
@@ -32,6 +32,8 @@ export class Blog extends Component {
           {posts.map(post => <Feed key={post.id} {...post} />)}
         </Card.Group>
       </Container>
+    ) : (
+      <Loader active inline="centered" />
     );
   }
 }

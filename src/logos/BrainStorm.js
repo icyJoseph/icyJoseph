@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 export const BrainStorm = ({ fill, handler }) => {
   return (
     <g
-      transform="scale(0.15)translate(40,85)"
       onClick={handler}
       style={{
         cursor: "pointer"

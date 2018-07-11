@@ -8,7 +8,6 @@ import { shouldFetch } from "../../helpers";
 const Extra = ({ repos, gists, company }) => (
   <div style={{ display: "flex", flexDirection: "row" }}>
     <a
-      key="repos"
       style={{ display: "flex", flex: 1 }}
       href="https://github.com/icyJoseph"
       target="_blank"
@@ -18,7 +17,6 @@ const Extra = ({ repos, gists, company }) => (
       {repos} repos
     </a>
     <a
-      key="gists"
       style={{ display: "flex", flex: 1 }}
       href="https://gist.github.com/icyJoseph"
       target="_blank"
@@ -28,7 +26,6 @@ const Extra = ({ repos, gists, company }) => (
       {gists} gists
     </a>
     <a
-      key="company"
       style={{ display: "flex", flex: 1 }}
       href="http://skill-it.se/"
       target="_blank"
@@ -53,7 +50,7 @@ export class About extends Component {
         image={photo}
         header={`${user.name}`}
         meta="Front-end developer"
-        description="Peruvian living in Gothenburg, Sweden. React Ninja, JavaScript enthusiast, enjoys football and swimming."
+        description={user.bio}
         extra={
           <Extra
             repos={user.public_repos}

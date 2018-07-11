@@ -11,8 +11,8 @@ export const AsyncHome = Loadable({
   delay: 600
 });
 
-export const AsyncApp = Loadable({
-  loader: () => import("./containers/App"),
+export const AsyncHacks = Loadable({
+  loader: () => import("./containers/Hacks"),
   loading: BodyLoader,
   delay: 600
 });
@@ -47,7 +47,7 @@ export const Routes = () => (
       <AsyncTopMenu />
       <Switch>
         <Route path="/blog" component={AsyncBlog} />
-        <Route path="/hacks" component={AsyncApp} />
+        <Route path="/hacks" component={AsyncHacks} />
         <Route path="/" exact component={AsyncHome} />
         <Route component={AsyncNoMatch} />
       </Switch>

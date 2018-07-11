@@ -24,8 +24,9 @@ export const Feed = ({ title, uniqueSlug, virtuals, content }) => (
         </Label.Group>
       </Card.Meta>
       <Button
-        primary
-        floated="left"
+        basic
+        color="blue"
+        floated="right"
         href={`${medium}/${uniqueSlug}`}
         target="_blank"
         rel="noopener noreferrer"

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Header } from "semantic-ui-react";
 import BrainStorm from "../../logos/BrainStorm";
 

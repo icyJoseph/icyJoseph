@@ -1,11 +1,23 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { Menu } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
+import { head, pipe, curryRight, split, take } from "../../functional";
 
+const takeSecond = take(1, 1);
+const splitDash = curryRight(split)("/");
 export class TopMenu extends Component {
   state = { activeItem: "home" };
+
+  componentDidMount() {
+    const { pathname } = this.props.location;
+    const activeItem = pipe(
+      splitDash,
+      takeSecond,
+      head
+    )(pathname);
+    return this.setState({ activeItem });
+  }
 
   handleClick = this.handleClick.bind(this);
 
@@ -44,7 +56,7 @@ export class TopMenu extends Component {
   }
 }
 
-export default withRouter(connect(undefined, null)(TopMenu));
+export default withRouter(TopMenu);
 
 TopMenu.propTypes = {
   location: PropTypes.object,

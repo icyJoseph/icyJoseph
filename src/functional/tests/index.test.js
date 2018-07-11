@@ -15,7 +15,8 @@ import {
   get,
   purify,
   split,
-  capitalize
+  capitalize,
+  len
 } from "../";
 
 describe("take", () => {
@@ -167,5 +168,18 @@ describe("capitalize", () => {
   const str = "react";
   it("capitalizes the string", () => {
     expect(capitalize(str)).toEqual("React");
+  });
+});
+
+describe("len", () => {
+  const arr = [1, 2, 3];
+  it("gets the length of an array", () => {
+    expect(len(arr)).toEqual(3);
+  });
+  it("gets length safely for undefined", () => {
+    expect(len(undefined)).toEqual(0);
+  });
+  it("gets length safely for null", () => {
+    expect(len(null)).toEqual(0);
   });
 });

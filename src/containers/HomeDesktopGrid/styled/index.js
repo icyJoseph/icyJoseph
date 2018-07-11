@@ -8,5 +8,5 @@ export const Pushable = styled(Sidebar.Pushable)`
   margin-top: 0px;
   border-radius: 0;
   background-image: ${props => `url(${props.background})`};
-  background-size: "cover no-repeat";
+  background-size: 100% 100%;
 `;

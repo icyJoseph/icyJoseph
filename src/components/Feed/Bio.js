@@ -9,7 +9,13 @@ export const Bio = ({ imageId, name, username, bio }) => (
   <Header as="h1" block size="huge" dividing color="blue">
     <Media
       query="(min-width: 579px)"
-      render={() => <Image circular src={`${imageSrc}/${imageId}`} />}
+      render={() => (
+        <Image
+          circular
+          style={{ width: "150px" }}
+          src={`${imageSrc}/${imageId}`}
+        />
+      )}
     />
     <Header.Content>
       {name}

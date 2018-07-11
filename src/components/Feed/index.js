@@ -2,7 +2,8 @@ import React from "react";
 import { Button, Icon, Card, Label } from "semantic-ui-react";
 import Bio from "./Bio";
 
-const medium = "https://medium.com/@icjoseph";
+export const imageSrc = "https://miro.medium.com/fit/c/240/240";
+export const medium = "https://medium.com/@icjoseph";
 
 export const Feed = ({ title, uniqueSlug, virtuals, content }) => (
   <Card fluid>

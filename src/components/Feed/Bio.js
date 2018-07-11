@@ -1,9 +1,9 @@
 import React from "react";
 import Media from "react-media";
 import { Header, Icon, Image, Button } from "semantic-ui-react";
+import { imageSrc, medium } from "./";
 
-const mediumFeed = "https://medium.com/@icjoseph/?feed=latest";
-const imageSrc = "https://miro.medium.com/fit/c/240/240";
+const mediumFeed = `${medium}/?feed=latest`;
 
 export const Bio = ({ imageId, name, username, bio }) => (
   <Header as="h1" block size="huge" dividing color="blue">

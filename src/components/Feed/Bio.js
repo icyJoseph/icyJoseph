@@ -8,7 +8,7 @@ const mediumFeed = `${medium}/?feed=latest`;
 export const Bio = ({ imageId, name, username, bio }) => (
   <Header as="h1" block size="huge" dividing color="blue">
     <Media
-      query="(min-width: 579px)"
+      query="(min-width: 689px)"
       render={() => (
         <Image
           circular

@@ -35,9 +35,10 @@ const SubTitle = () => {
 
 export class Recasted extends Component {
   componentDidMount() {
-    const { expiry } = this.props;
+    const { expiry, gist } = this.props;
+    const noGistOrExpired = !gist || shouldFetch(expiry);
     return (
-      shouldFetch(expiry) &&
+      noGistOrExpired &&
       this.props.fetchGist("729f18a57c8e6b498f40690c12b14574")
     );
   }
@@ -45,12 +46,16 @@ export class Recasted extends Component {
   renderGists() {
     const { gist } = this.props;
 
-    const body = pipe(
-      splitOnLineBreak,
-      purify
-    )(gist);
+    const body =
+      gist &&
+      pipe(
+        splitOnLineBreak,
+        purify
+      )(gist);
 
-    return body.map((func, index) => <FunctionDoc key={index} func={func} />);
+    return (
+      gist && body.map((func, index) => <FunctionDoc key={index} func={func} />)
+    );
   }
 
   render() {

@@ -7,16 +7,18 @@ const mediumFeed = `${medium}/?feed=latest`;
 
 export const Bio = ({ imageId, name, username, bio }) => (
   <Header as="h1" block size="huge" dividing color="blue">
-    <Media
-      query="(min-width: 689px)"
-      render={() => (
-        <Image
-          circular
-          style={{ width: "150px" }}
-          src={`${imageSrc}/${imageId}`}
-        />
-      )}
-    />
+    {imageId && (
+      <Media
+        query="(min-width: 689px)"
+        render={() => (
+          <Image
+            circular
+            style={{ width: "150px" }}
+            src={`${imageSrc}/${imageId}`}
+          />
+        )}
+      />
+    )}
     <Header.Content>
       {name}
       <Header.Subheader>{username}</Header.Subheader>

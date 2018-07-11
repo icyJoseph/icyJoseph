@@ -18,17 +18,19 @@ export const Feed = ({ title, uniqueSlug, virtuals, content }) => (
     <Card.Content>
       <Card.Header>{title}</Card.Header>
       <Content>
-        <Media
-          query="(min-width: 689px)"
-          render={() => (
-            <Image
-              circular
-              floated="left"
-              style={{ width: "150px" }}
-              src={`${imageSrc}/${virtuals.previewImage.imageId}`}
-            />
-          )}
-        />
+        {virtuals && (
+          <Media
+            query="(min-width: 689px)"
+            render={() => (
+              <Image
+                circular
+                floated="left"
+                style={{ width: "150px" }}
+                src={`${imageSrc}/${virtuals.previewImage.imageId}`}
+              />
+            )}
+          />
+        )}
         <Card.Description>{content.subtitle}</Card.Description>
         <Card.Meta>
           <Label.Group>

@@ -48,7 +48,7 @@ export const Routes = () => (
       <Switch>
         <Route path="/blog" component={AsyncBlog} />
         <Route path="/hacks" component={AsyncApp} />
-        <Route path="/" component={AsyncHome} />
+        <Route path="/" exact component={AsyncHome} />
         <Route component={AsyncNoMatch} />
       </Switch>
       <AsyncBottomMenu />

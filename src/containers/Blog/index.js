@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Container, Grid, Card } from "semantic-ui-react";
+import { Container, Card } from "semantic-ui-react";
 
 import Feed, { Bio } from "../../components/Feed";
 import { fetchFeed } from "../../ducks/medium";
@@ -28,11 +28,9 @@ export class Blog extends Component {
         }}
       >
         <Bio {...user} />
-        <Grid style={{ marginTop: 20 }}>
-          <Card.Group>
-            {posts.map(post => <Feed key={post.id} {...post} />)}
-          </Card.Group>
-        </Grid>
+        <Card.Group>
+          {posts.map(post => <Feed key={post.id} {...post} />)}
+        </Card.Group>
       </Container>
     );
   }

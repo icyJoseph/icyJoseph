@@ -31,9 +31,10 @@ export const MediaRoutes = (props, matches) => {
     <AsyncDesktop {...props} data={toShow} />
   );
 };
+
 export class Home extends Component {
   componentDidMount() {
-    return !this.props.token && this.props.fetchToken();
+    return this.props.fetchToken();
   }
 
   render() {

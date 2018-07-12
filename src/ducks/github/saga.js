@@ -40,7 +40,7 @@ import {
   sort,
   keys
 } from "../../functional";
-import { selectToken } from "../auth";
+import { selectToken, SUCCESS_TOKEN } from "../auth";
 
 const buildLang = (aggregate, lang) => ({
   lang,
@@ -49,6 +49,7 @@ const buildLang = (aggregate, lang) => ({
 
 export function* loadUser({ payload }) {
   try {
+    yield take(SUCCESS_TOKEN);
     const token = yield select(selectToken);
     const user = yield call(getUser, payload, token);
     yield put({ type: SUCCESS_USER_DATA, payload: user });
@@ -59,6 +60,7 @@ export function* loadUser({ payload }) {
 
 export function* loadRepos({ payload }) {
   try {
+    yield take(SUCCESS_TOKEN);
     const token = yield select(selectToken);
     const repos = yield call(getUserRepos, payload, token);
 

@@ -1,6 +1,7 @@
 export const FETCH_TOKEN = "fetch_token";
 export const FAILED_TOKEN = "failed_token";
 export const SUCCESS_TOKEN = "success_token";
+export const UPDATE_TOKEN = "update_token";
 
 export const fetchToken = () => {
   return {
@@ -17,7 +18,7 @@ export default function reducer(
   { type, payload }
 ) {
   switch (type) {
-    case SUCCESS_TOKEN:
+    case UPDATE_TOKEN:
       return { ...auth, token: payload, failed: false };
     case FAILED_TOKEN:
       return { ...auth, failed: true };

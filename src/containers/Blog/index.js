@@ -18,7 +18,9 @@ export class Blog extends Component {
     const {
       feed: { user, articles }
     } = this.props.medium;
-    const posts = Object.keys(articles).map(id => get(articles, id, []));
+    const posts = articles
+      ? Object.keys(articles).map(id => get(articles, id, []))
+      : [];
     return posts.length > 0 ? (
       <Container
         style={{

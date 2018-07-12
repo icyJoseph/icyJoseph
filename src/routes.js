@@ -4,6 +4,7 @@ import Loadable from "react-loadable";
 import BodyLoader from "./components/Loading/BodyLoader";
 import HeaderLoader from "./components/Loading/HeaderLoader";
 import BottomLoader from "./components/Loading/BottomLoader";
+import ServiceWorkerMessage from "./components/ServiceWorkerMessage";
 
 export const AsyncHome = Loadable({
   loader: () => import("./containers/Home"),
@@ -51,6 +52,7 @@ export const Routes = () => (
         <Route path="/" exact component={AsyncHome} />
         <Route component={AsyncNoMatch} />
       </Switch>
+      <ServiceWorkerMessage />
       <AsyncBottomMenu />
     </Fragment>
   </BrowserRouter>

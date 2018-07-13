@@ -25,7 +25,7 @@ const takeFirstRow = take(2, 0);
 const takeSecondRow = take(3, 2);
 const takeThirdRow = take(2, 5);
 
-export const HomeDesktopGrid = ({
+export const Grid = ({
   visibility,
   contentId,
   closeDrawer,
@@ -74,9 +74,9 @@ export const HomeDesktopGrid = ({
   );
 };
 
-export default HomeDesktopGrid;
+export default Grid;
 
-HomeDesktopGrid.propTypes = {
+Grid.propTypes = {
   visibility: PropTypes.bool,
   contentId: PropTypes.number,
   closeDrawer: PropTypes.func,

@@ -6,6 +6,7 @@ import { head, pipe, curryRight, split, take } from "../../functional";
 
 const takeSecond = take(1, 1);
 const splitDash = curryRight(split)("/");
+
 export class TopMenu extends Component {
   state = { activeItem: "home" };
 

@@ -4,7 +4,7 @@ export const Group = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  margin: 3% 10%;
+  margin: 1%;
   color: white;
 `;
 

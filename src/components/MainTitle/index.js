@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Container, Header } from "semantic-ui-react";
+import { Header } from "semantic-ui-react";
 import ReactRevealText from "react-reveal-text";
+import { TitleContainer } from "./styled";
 
 class MainTitle extends Component {
   state = { reveal: false };
@@ -30,12 +31,12 @@ class MainTitle extends Component {
       delayMax = 1200
     } = this.props;
     return (
-      <Container style={style.container}>
+      <TitleContainer>
         <Header as="h1" size="huge" textAlign="center">
           <ReactRevealText
             show={this.state.reveal}
             style={{
-              ...style.title,
+              ...style,
               letterSpacing: desktop ? "0.7em" : "0.5em",
               color: desktop ? "black" : "FloralWhite"
             }}
@@ -46,7 +47,7 @@ class MainTitle extends Component {
             {title}
           </ReactRevealText>
         </Header>
-      </Container>
+      </TitleContainer>
     );
   }
 }
@@ -57,18 +58,8 @@ MainTitle.propTypes = {
 };
 
 const style = {
-  container: {
-    display: "flex",
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    minHeight: "90px"
-  },
-  title: {
-    fontSize: "35px",
-    lineHeight: "36px"
-  }
+  fontSize: "35px",
+  lineHeight: "36px"
 };
 
 export default MainTitle;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { shadow } from "../../../constants";
 
 export const TabletWrapper = styled.div`
-  height: 100%;
+  height: ${props => (props.desktop ? "calc(100vh - 100px)" : "100%")};
   background: ${props => (props.desktop ? shadow : "dodgerblue")};
   display: flex;
   align-items: center;

@@ -2,8 +2,12 @@ import styled from "styled-components";
 import { shadow } from "../../../constants";
 
 export const TabletWrapper = styled.div`
-  height: ${props => (props.desktop ? "100vh" : "100%")};
+  height: 100%;
   background: ${props => (props.desktop ? shadow : "dodgerblue")};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   z-index: 1;
 `;
 

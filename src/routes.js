@@ -43,7 +43,7 @@ export const AsyncBottomMenu = Loadable({
 });
 
 export const Routes = () => (
-  <BrowserRouter>
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Fragment>
       <AsyncTopMenu />
       <Switch>

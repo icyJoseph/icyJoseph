@@ -3,7 +3,7 @@ import { Loader } from "semantic-ui-react";
 
 class Redirect extends Component {
   componentDidMount() {
-    window.location = this.props.homepage;
+    window.location.replace(this.props.url);
   }
   render() {
     return <div>Redirecting!</div>;
@@ -11,11 +11,7 @@ class Redirect extends Component {
 }
 
 export const Searching = ({ url }) => {
-  return url ? (
-    <Redirect homepage={url} />
-  ) : (
-    <Loader active inline="centered" />
-  );
+  return url ? <Redirect url={url} /> : <Loader active inline="centered" />;
 };
 
 export default Searching;

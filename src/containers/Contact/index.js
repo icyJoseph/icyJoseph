@@ -4,12 +4,7 @@ import { Header, Modal, Button } from "semantic-ui-react";
 import { ModalWrapper } from "./styled";
 
 export const Contact = ({ open, handleClose }) => (
-  <ModalWrapper
-    dimmer={true}
-    open={open}
-    onClose={handleClose}
-    closeOnDocumentClick
-  >
+  <ModalWrapper dimmer={true} open={open} onClose={handleClose}>
     <Modal.Header>Contact</Modal.Header>
     <Modal.Content>
       <Modal.Description>

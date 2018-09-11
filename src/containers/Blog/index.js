@@ -24,14 +24,16 @@ export class Blog extends Component {
     return posts.length > 0 ? (
       <Container
         style={{
-          padding: 10,
-          marginBottom: 100,
+          padding: "10px 3px 100px 3px",
+          marginBottom: 50,
           marginTop: 50
         }}
       >
         <Bio {...user} />
         <Card.Group>
-          {posts.map(post => <Feed key={post.id} {...post} />)}
+          {posts.map(post => (
+            <Feed key={post.id} {...post} />
+          ))}
         </Card.Group>
       </Container>
     ) : (

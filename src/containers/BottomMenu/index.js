@@ -20,7 +20,7 @@ export class BottomMenu extends Component {
   }
 
   handleCloseContact() {
-    return this.setState({ contact: false });
+    return this.setState({ activeItem: "", contact: false });
   }
 
   render() {

@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
-export const Group = styled.div`
+export const Group = styled.div.attrs({
+  style: props => ({
+    maxHeight: props.grow ? "140px" : "120px"
+  })
+})`
+  transition: max-height 2s linear;
+  min-height: 120px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;

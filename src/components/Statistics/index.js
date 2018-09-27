@@ -10,7 +10,7 @@ export const Statistics = ({
   languages = []
 }) => (
   <Fragment>
-    <Group>
+    <Group grow>
       <Stat>
         <Value>
           <IconWrapper>
@@ -33,7 +33,7 @@ export const Statistics = ({
         <Label margin={25}>Commits</Label>
       </Stat>
     </Group>
-    <Group>
+    <Group grow={languages.length > 0}>
       {languages.map(({ lang, bytes }) => (
         <Stat key={lang} fontSize="14pt">
           <Value>

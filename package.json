@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
-    "prop-types": "^15.6.1",
+    "prop-types": "^15.6.2",
     "ramda": "^0.25.0",
     "react": "^16.3.2",
     "react-animate-height": "^1.0.2",
@@ -22,7 +22,7 @@
     "redux-saga": "^0.16.0",
     "reselect": "^3.0.1",
     "semantic-ui-react": "^0.79.1",
-    "styled-components": "^3.2.6"
+    "styled-components": "^3.4.9"
   },
   "scripts": {
     "start": "react-scripts start",

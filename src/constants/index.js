@@ -9,3 +9,6 @@ export const darkBlue = "#193549";
 // names
 
 export const icyJoseph = "icyJoseph";
+
+// breakpoints
+export const desktopBreakPoint = "(min-width: 1023px)";

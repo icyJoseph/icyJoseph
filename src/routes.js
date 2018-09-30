@@ -6,8 +6,8 @@ import HeaderLoader from "./components/Loading/HeaderLoader";
 import BottomLoader from "./components/Loading/BottomLoader";
 import ServiceWorkerMessage from "./components/ServiceWorkerMessage";
 
-export const AsyncHome = Loadable({
-  loader: () => import("./containers/Home"),
+export const AsyncLanding = Loadable({
+  loader: () => import("./containers/Landing"),
   loading: BodyLoader,
   delay: 600
 });
@@ -49,7 +49,7 @@ export const Routes = () => (
       <Switch>
         <Route path="/blog" component={AsyncBlog} />
         <Route path="/hacks" component={AsyncHacks} />
-        <Route path="/" exact component={AsyncHome} />
+        <Route path="/" exact component={AsyncLanding} />
         <Route component={AsyncNoMatch} />
       </Switch>
       <ServiceWorkerMessage />

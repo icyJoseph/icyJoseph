@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { HomeDesktopGrid } from "../";
+import { Hacks } from "../";
 import data from "../../../data";
 
 describe("HomeDesktopGrid", () => {
@@ -8,12 +8,12 @@ describe("HomeDesktopGrid", () => {
   const openDrawer = jest.fn();
   const props = {
     visibility: false,
-    Content: null,
+    contentId: 1,
     closeDrawer,
     openDrawer,
     data
   };
-  const wrapper = shallow(<HomeDesktopGrid {...props} />);
+  const wrapper = shallow(<Hacks {...props} />);
   it("renders", () => {
     expect(wrapper).toMatchSnapshot();
   });

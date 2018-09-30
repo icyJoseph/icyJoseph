@@ -12,7 +12,7 @@ export const TabletWrapper = styled.div`
 `;
 
 export const Background = styled.div`
-  position: absolute;
+  position: fixed;
   background-image: ${props => `url(${props.background})`};
   background-size: 100% 100%;
   width: 100%;

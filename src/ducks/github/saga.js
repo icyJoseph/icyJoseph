@@ -40,7 +40,7 @@ import {
   sort,
   keys
 } from "../../functional";
-import { selectToken, SUCCESS_TOKEN } from "../auth";
+import { selectToken, FETCH_TOKEN, SUCCESS_TOKEN } from "../auth";
 
 const buildLang = (aggregate, lang) => ({
   lang,
@@ -59,6 +59,7 @@ export function* loadUser({ payload }) {
 }
 
 export function* loadRepos({ payload }) {
+  yield put({ type: FETCH_TOKEN });
   try {
     yield take(SUCCESS_TOKEN);
     const token = yield select(selectToken);

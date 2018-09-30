@@ -708,8 +708,12 @@ ShallowWrapper {
         Object {
             "Component": [Function],
             "Content": [Function],
-            "backgroundFill": "#333",
-            "fill": "#222",
+            "background": "#193549",
+            "backgroundFill": "tomato",
+            "fill": "#273B7A",
+            "id": 0,
+            "meta": "Joseph",
+            "title": "About Me",
           }
     }
 />,
@@ -744,13 +748,13 @@ ShallowWrapper {
                 onClick={[Function]}
                 style={
                         Object {
-                                "fill": "#333",
+                                "fill": "tomato",
                                 "stroke": "none",
                               }
                 }
         >
-                <Component
-                        fill="#222"
+                <LoadableComponent
+                        fill="#273B7A"
                         handler={[Function]}
                 />
         </Hexagon>
@@ -768,13 +772,13 @@ ShallowWrapper {
           onClick={[Function]}
           style={
                     Object {
-                              "fill": "#333",
+                              "fill": "tomato",
                               "stroke": "none",
                             }
           }
 >
-          <Component
-                    fill="#222"
+          <LoadableComponent
+                    fill="#273B7A"
                     handler={[Function]}
           />
 </Hexagon>,
@@ -793,15 +797,15 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "children": <Component
-            fill="#222"
+          "children": <LoadableComponent
+            fill="#273B7A"
             handler={[Function]}
 />,
           "diagonal": 100,
           "flatTop": true,
           "onClick": [Function],
           "style": Object {
-            "fill": "#333",
+            "fill": "tomato",
             "stroke": "none",
           },
         },
@@ -809,9 +813,9 @@ ShallowWrapper {
         "rendered": Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "function",
+          "nodeType": "class",
           "props": Object {
-            "fill": "#222",
+            "fill": "#273B7A",
             "handler": [Function],
           },
           "ref": null,
@@ -848,13 +852,13 @@ ShallowWrapper {
                     onClick={[Function]}
                     style={
                               Object {
-                                        "fill": "#333",
+                                        "fill": "tomato",
                                         "stroke": "none",
                                       }
                     }
           >
-                    <Component
-                              fill="#222"
+                    <LoadableComponent
+                              fill="#273B7A"
                               handler={[Function]}
                     />
           </Hexagon>
@@ -872,13 +876,13 @@ ShallowWrapper {
             onClick={[Function]}
             style={
                         Object {
-                                    "fill": "#333",
+                                    "fill": "tomato",
                                     "stroke": "none",
                                   }
             }
 >
-            <Component
-                        fill="#222"
+            <LoadableComponent
+                        fill="#273B7A"
                         handler={[Function]}
             />
 </Hexagon>,
@@ -897,15 +901,15 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "children": <Component
-              fill="#222"
+            "children": <LoadableComponent
+              fill="#273B7A"
               handler={[Function]}
 />,
             "diagonal": 100,
             "flatTop": true,
             "onClick": [Function],
             "style": Object {
-              "fill": "#333",
+              "fill": "tomato",
               "stroke": "none",
             },
           },
@@ -913,9 +917,9 @@ ShallowWrapper {
           "rendered": Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "function",
+            "nodeType": "class",
             "props": Object {
-              "fill": "#222",
+              "fill": "#273B7A",
               "handler": [Function],
             },
             "ref": null,

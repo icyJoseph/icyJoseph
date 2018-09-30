@@ -16,7 +16,8 @@ import {
   purify,
   split,
   capitalize,
-  len
+  len,
+  getByFileName
 } from "../";
 
 describe("take", () => {
@@ -142,10 +143,28 @@ describe("values", () => {
   });
 });
 
+describe("getByFileName", () => {
+  const obj = { "file.js": 1 };
+  it("takes key of the object", () => {
+    expect(getByFileName(obj, "file.js")).toEqual(1);
+  });
+  it("fail safes undefined object", () => {
+    expect(getByFileName(undefined, "a")).toEqual(null);
+  });
+});
+
 describe("get", () => {
   const obj = { a: 1, b: 2, c: 3 };
   it("takes key of the object", () => {
     expect(get(obj, "a")).toEqual(1);
+  });
+  it("takes key in a nested object", () => {
+    const nested = { a: { b: 2, c: 3 } };
+    expect(get(nested, "a.b")).toEqual(2);
+    expect(get(nested, "a.d")).toEqual(null);
+  });
+  it("fail safes undefined object", () => {
+    expect(get(undefined, "a")).toEqual(null);
   });
 });
 

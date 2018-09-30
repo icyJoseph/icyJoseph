@@ -1,7 +1,7 @@
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import {
-  github,
+  baseURL,
   getUserRepos,
   getUser,
   getRepoContributors,
@@ -29,16 +29,16 @@ const mockLanguagesResponse = {
 const mockAxios = new MockAdapter(axios);
 
 // mock user repos response
-mockAxios.onGet(`${github}/users/${user}/repos`).reply(200, mockRepoResponse);
+mockAxios.onGet(`${baseURL}/users/${user}/repos`).reply(200, mockRepoResponse);
 // mock user info resposne
-mockAxios.onGet(`${github}/users/${user}`).reply(200, mockUserResponse);
+mockAxios.onGet(`${baseURL}/users/${user}`).reply(200, mockUserResponse);
 // mock repo contributors response
 mockAxios
-  .onGet(`${github}/repos/${user}/${repo}/contributors`)
+  .onGet(`${baseURL}/repos/${user}/${repo}/contributors`)
   .reply(200, mockContributorsResponse);
 // mock repo languages response
 mockAxios
-  .onGet(`${github}/repos/${user}/${repo}/languages`)
+  .onGet(`${baseURL}/repos/${user}/${repo}/languages`)
   .reply(200, mockLanguagesResponse);
 
 describe("Data returned from network", () => {

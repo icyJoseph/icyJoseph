@@ -143,6 +143,7 @@ describe("reducer", () => {
       user: {},
       commits: 0,
       languages: [],
+      topics: [],
       loadingRepos: false,
       loadingUser: false,
       expiry: ""

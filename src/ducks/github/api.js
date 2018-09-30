@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL =
+export const baseURL =
   process.env.NODE_ENV === "production"
     ? "https://api.github.com"
     : "http://localhost:1337";

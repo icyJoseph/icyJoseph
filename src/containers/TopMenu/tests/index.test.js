@@ -6,7 +6,8 @@ import { Menu } from "semantic-ui-react";
 
 describe("TopMenu", () => {
   const props = {
-    history: { push: jest.fn() }
+    history: { push: jest.fn() },
+    location: { pathname: "" }
   };
   const spy = jest.spyOn(TopMenu.prototype, "handleClick");
   const wrapper = shallow(<TopMenu {...props} />);

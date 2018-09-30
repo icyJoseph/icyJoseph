@@ -57,28 +57,52 @@ describe("saveStore", () => {
   });
 
   const state = {
-    drawer: { Content: null, open: false },
+    auth: { failed: false, token: "" },
+    drawer: { id: null, open: false },
     github: {
       commits: 0,
       expiry: "",
       languages: [],
       loadingRepos: false,
       loadingUser: false,
+      topics: [],
       repos: [],
       user: {}
+    },
+    gist: { expiry: "", gist: "" },
+    medium: {
+      feed: {
+        articles: {},
+        user: {}
+      },
+      loadingFeed: false,
+      loadingPost: false,
+      post: []
     }
   };
 
   const expectedState = {
-    drawer: { Content: null, open: true },
+    auth: { failed: false, token: "" },
+    drawer: { id: null, open: true },
     github: {
       commits: 0,
       expiry: "",
       languages: [],
       loadingRepos: false,
       loadingUser: false,
+      topics: [],
       repos: [],
       user: {}
+    },
+    gist: { expiry: "", gist: "" },
+    medium: {
+      feed: {
+        articles: {},
+        user: {}
+      },
+      loadingFeed: false,
+      loadingPost: false,
+      post: []
     }
   };
   const store = saveStore()(createStore)(rootReducer, state);

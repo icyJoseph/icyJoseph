@@ -11,10 +11,7 @@ describe("HexGridColumn", () => {
   const spy = jest.fn();
   const props = {
     tile: {
-      Component: () => <div>Hi</div>,
-      Content: () => <div>hi</div>,
-      fill: "#222",
-      backgroundFill: "#333"
+      ...data[0]
     },
     clickHandler: spy
   };
@@ -27,7 +24,7 @@ describe("HexGridColumn", () => {
 
   it("onClick, Hexagon uses clickHandler", () => {
     wrapper.find(Hexagon).simulate("click");
-    expect(spy).toHaveBeenCalledWith(props.tile.Content);
+    expect(spy).toHaveBeenCalledWith(props.tile.id);
   });
 
   it("injects clickHanlder with Content into Hexagon", () => {

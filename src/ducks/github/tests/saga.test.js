@@ -1,3 +1,5 @@
+import { getUser, getUserRepos } from "../api";
+import { selectToken } from "../../auth";
 import {
   loadUser,
   loadRepos,
@@ -19,7 +21,20 @@ import {
 describe("load user", () => {
   it("loads a user", () => {
     const gen = loadUser({ payload: "user" });
-    gen.next();
+    expect(gen.next().value).toMatchObject({
+      TAKE: { pattern: "success_token" }
+    });
+    expect(gen.next().value).toMatchObject({
+      SELECT: {
+        selector: selectToken
+      }
+    });
+    expect(gen.next("token").value).toMatchObject({
+      CALL: {
+        args: ["user", "token"],
+        fn: getUser
+      }
+    });
     expect(gen.next("user").value).toMatchObject({
       PUT: { action: { payload: "user", type: SUCCESS_USER_DATA } }
     });
@@ -36,13 +51,30 @@ describe("load user", () => {
 describe("load repos", () => {
   it("loads a repo", () => {
     const gen = loadRepos({ payload: "user" });
-    gen.next();
+    expect(gen.next().value).toMatchObject({
+      PUT: { action: { type: "fetch_token" } }
+    });
+    expect(gen.next().value).toMatchObject({
+      TAKE: { pattern: "success_token" }
+    });
+    expect(gen.next("token").value).toMatchObject({
+      SELECT: {
+        selector: selectToken
+      }
+    });
+    expect(gen.next("token").value).toMatchObject({
+      CALL: {
+        args: ["user", "token"],
+        fn: getUserRepos
+      }
+    });
     expect(gen.next([{ id: "repo" }]).value).toMatchObject({
       PUT: { action: { payload: [{ id: "repo" }], type: SUCCESS_USER_REPOS } }
     });
   });
   it("returns error", () => {
     const gen = loadRepos({ payload: "user" });
+    gen.next();
     gen.next();
     expect(gen.throw("error").value).toMatchObject({
       PUT: { action: { error: "error", type: FAILED_REPOS } }
@@ -56,6 +88,7 @@ describe("load contributions", () => {
 
     gen.next(SUCCESS_USER_DATA);
     gen.next(SUCCESS_USER_REPOS);
+    gen.next("token");
     gen.next([{ id: "repo" }]);
     gen.next({ login: "user" });
 
@@ -73,6 +106,7 @@ describe("load languages", () => {
 
     gen.next(SUCCESS_USER_REPOS);
     gen.next(SUCCESS_USER_DATA);
+    gen.next("token");
     gen.next([{ id: "repo", owner: { login: "user" } }]);
     gen.next({ login: "user" });
 

@@ -1,8 +1,9 @@
 import React from "react";
 import { shallow } from "enzyme";
 import Routes, {
-  AsyncHome,
-  AsyncApp,
+  AsyncLanding,
+  AsyncHacks,
+  AsyncBlog,
   AsyncNoMatch,
   AsyncTopMenu,
   AsyncBottomMenu
@@ -15,35 +16,42 @@ describe("SnapShot Routes", () => {
   });
 });
 
-describe("AsyncHome", () => {
-  const loaded = shallow(<AsyncHome />);
+describe("AsyncLanding", () => {
+  const loaded = shallow(<AsyncLanding />);
   it("returns", () => {
     expect(loaded.exists()).toEqual(true);
   });
 });
 
-describe("AsyncHome", () => {
-  const loaded = shallow(<AsyncApp />);
+describe("AsyncHacks", () => {
+  const loaded = shallow(<AsyncHacks />);
   it("returns", () => {
     expect(loaded.exists()).toEqual(true);
   });
 });
 
-describe("AsyncHome", () => {
+describe("AsyncBlog", () => {
+  const loaded = shallow(<AsyncBlog />);
+  it("returns", () => {
+    expect(loaded.exists()).toEqual(true);
+  });
+});
+
+describe("AsyncNoMatch", () => {
   const loaded = shallow(<AsyncNoMatch />);
   it("returns", () => {
     expect(loaded.exists()).toEqual(true);
   });
 });
 
-describe("AsyncHome", () => {
+describe("AsyncTopMenu", () => {
   const loaded = shallow(<AsyncTopMenu />);
   it("returns", () => {
     expect(loaded.exists()).toEqual(true);
   });
 });
 
-describe("AsyncHome", () => {
+describe("AsyncBottomMenu", () => {
   const loaded = shallow(<AsyncBottomMenu />);
   it("returns", () => {
     expect(loaded.exists()).toEqual(true);

@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import Event from "./Event";
 
-export const TimeLine = ({ data, experience }) => {
+export const TimeLine = ({ timeLine, experience }) => {
   return (
     <div style={{ marginBottom: "120px" }}>
-      {data.map(({ meta, ...rest }, index) => (
+      {timeLine.map(({ meta, ...rest }, index) => (
         <Event
           key={meta}
-          last={index + 1 === data.length}
+          last={index + 1 === timeLine.length}
           meta={meta}
           experience={experience}
           {...rest}
@@ -21,5 +21,5 @@ export const TimeLine = ({ data, experience }) => {
 export default TimeLine;
 
 TimeLine.propTypes = {
-  data: PropTypes.array
+  timeLine: PropTypes.array
 };

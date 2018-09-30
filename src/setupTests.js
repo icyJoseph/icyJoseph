@@ -26,3 +26,20 @@ const localStorageMock = (function() {
 Object.defineProperty(window, "localStorage", {
   value: localStorageMock
 });
+
+// Mock matchMedia
+const matchMediaMock = function() {
+  return {
+    matchMedia: function(query) {
+      return {
+        matches: query => !query
+      };
+    },
+    addListener: function() {},
+    removeListener: function() {}
+  };
+};
+
+Object.defineProperty(window, "matchMedia", {
+  value: matchMediaMock
+});

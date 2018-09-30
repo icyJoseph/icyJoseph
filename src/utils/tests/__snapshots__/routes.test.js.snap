@@ -2,13 +2,13 @@
 
 exports[`SnapShot Routes renders 1`] = `
 ShallowWrapper {
-  "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Unknown />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
     "render": [Function],
+    "simulateError": [Function],
     "simulateEvent": [Function],
     "unmount": [Function],
   },
@@ -17,6 +17,7 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "class",
     "props": Object {
+      "basename": "",
       "children": <Unknown>
         <LoadableComponent />
         <Switch>
@@ -30,12 +31,14 @@ ShallowWrapper {
                 />
                 <Route
                         component={[Function]}
+                        exact={true}
                         path="/"
                 />
                 <Route
                         component={[Function]}
                 />
         </Switch>
+        <ServiceWorkerMessage />
         <LoadableComponent />
 </Unknown>,
     },
@@ -58,12 +61,14 @@ ShallowWrapper {
             />
             <Route
                         component={[Function]}
+                        exact={true}
                         path="/"
             />
             <Route
                         component={[Function]}
             />
 </Switch>,
+          <ServiceWorkerMessage />,
           <LoadableComponent />,
         ],
       },
@@ -94,6 +99,7 @@ ShallowWrapper {
 />,
               <Route
                 component={[Function]}
+                exact={true}
                 path="/"
 />,
               <Route
@@ -133,6 +139,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "component": [Function],
+                "exact": true,
                 "path": "/",
               },
               "ref": null,
@@ -162,6 +169,15 @@ ShallowWrapper {
           "rendered": null,
           "type": [Function],
         },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
       ],
       "type": Symbol(react.fragment),
     },
@@ -173,6 +189,7 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "class",
       "props": Object {
+        "basename": "",
         "children": <Unknown>
           <LoadableComponent />
           <Switch>
@@ -186,12 +203,14 @@ ShallowWrapper {
                     />
                     <Route
                               component={[Function]}
+                              exact={true}
                               path="/"
                     />
                     <Route
                               component={[Function]}
                     />
           </Switch>
+          <ServiceWorkerMessage />
           <LoadableComponent />
 </Unknown>,
       },
@@ -214,12 +233,14 @@ ShallowWrapper {
               />
               <Route
                             component={[Function]}
+                            exact={true}
                             path="/"
               />
               <Route
                             component={[Function]}
               />
 </Switch>,
+            <ServiceWorkerMessage />,
             <LoadableComponent />,
           ],
         },
@@ -250,6 +271,7 @@ ShallowWrapper {
 />,
                 <Route
                   component={[Function]}
+                  exact={true}
                   path="/"
 />,
                 <Route
@@ -289,6 +311,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "component": [Function],
+                  "exact": true,
                   "path": "/",
                 },
                 "ref": null,
@@ -318,6 +341,15 @@ ShallowWrapper {
             "rendered": null,
             "type": [Function],
           },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
         ],
         "type": Symbol(react.fragment),
       },
@@ -328,8 +360,20 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
       },
     },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
   },
 }
 `;

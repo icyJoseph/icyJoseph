@@ -2,7 +2,6 @@
 
 exports[`Tablet renders 1`] = `
 ShallowWrapper {
-  "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Tablet
     data={
@@ -10,6 +9,7 @@ ShallowWrapper {
             Object {
               "Component": [Function],
               "Content": [Function],
+              "background": "#193549",
               "backgroundFill": "tomato",
               "fill": "#273B7A",
               "id": 0,
@@ -19,6 +19,7 @@ ShallowWrapper {
             Object {
               "Component": [Function],
               "Content": [Function],
+              "background": "#193549",
               "backgroundFill": "tomato",
               "fill": "#292929",
               "id": 1,
@@ -28,6 +29,7 @@ ShallowWrapper {
             Object {
               "Component": [Function],
               "Content": [Function],
+              "background": "#193549",
               "backgroundFill": "tomato",
               "fill": "#F0DB4F",
               "id": 2,
@@ -37,6 +39,7 @@ ShallowWrapper {
             Object {
               "Component": [Function],
               "Content": [Function],
+              "background": "#193549",
               "backgroundFill": "#5159BF",
               "fill": "#292929",
               "id": 3,
@@ -46,56 +49,63 @@ ShallowWrapper {
             Object {
               "Component": [Function],
               "Content": [Function],
+              "background": "#193549",
               "backgroundFill": "tomato",
               "fill": "#273B7A",
               "id": 4,
               "meta": "Problem Solving",
-              "title": "Algorithms",
+              "title": "algorithms",
             },
             Object {
               "Component": [Function],
               "Content": [Function],
+              "background": "#193549",
               "backgroundFill": "tomato",
               "fill": "#273B7A",
+              "hide": true,
               "id": 5,
-              "meta": "Career",
-              "title": "Work Experience",
+              "meta": "My career",
+              "title": "experience",
             },
             Object {
               "Component": [Function],
               "Content": [Function],
+              "background": "#193549",
               "backgroundFill": "tomato",
               "fill": "#273B7A",
               "id": 6,
               "meta": "Code as a hobby",
-              "title": "Python",
+              "title": "python",
             },
             Object {
               "Component": [Function],
               "Content": [Function],
+              "background": "#193549",
               "backgroundFill": "tomato",
               "fill": "#273B7A",
               "id": 7,
               "meta": "Value Creation",
-              "title": "Hacks",
+              "title": "hackathon",
             },
             Object {
               "Component": [Function],
               "Content": [Function],
               "backgroundFill": "tomato",
               "fill": "#C92F00",
+              "hide": true,
               "id": 8,
               "meta": "Acknowledgments",
-              "title": "Winner of...",
+              "title": "awards",
             },
             Object {
               "Component": [Function],
               "Content": [Function],
               "backgroundFill": "tomato",
               "fill": "#273B7A",
+              "hide": true,
               "id": 9,
               "meta": "Life as a React Developer",
-              "title": "Currently",
+              "title": "currently",
             },
           ]
     }
@@ -126,527 +136,932 @@ ShallowWrapper {
     "batchedUpdates": [Function],
     "getNode": [Function],
     "render": [Function],
+    "simulateError": [Function],
     "simulateEvent": [Function],
     "unmount": [Function],
   },
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "class",
+    "nodeType": "function",
     "props": Object {
       "children": Array [
-        <LoadableComponent
-          title="Meet Joseph"
-/>,
-        <LoadableComponent
-          commits={10}
-          languages={
-                    Array [
-                              Object {
-                                "bytes": 100000,
-                                "lang": "js",
-                              },
-                            ]
-          }
-          publicRepos={undefined}
-/>,
-        <LoadableComponent
-          data={
-                    Array [
-                              Object {
-                                "Component": [Function],
-                                "Content": [Function],
-                                "backgroundFill": "tomato",
-                                "fill": "#273B7A",
-                                "id": 0,
-                                "meta": "Joseph",
-                                "title": "About Me",
-                              },
-                              Object {
-                                "Component": [Function],
-                                "Content": [Function],
-                                "backgroundFill": "tomato",
-                                "fill": "#292929",
-                                "id": 1,
-                                "meta": "Certified",
-                                "title": "ReactJS",
-                              },
-                              Object {
-                                "Component": [Function],
-                                "Content": [Function],
-                                "backgroundFill": "tomato",
-                                "fill": "#F0DB4F",
-                                "id": 2,
-                                "meta": "Favorite Language",
-                                "title": "JavaScript",
-                              },
-                              Object {
-                                "Component": [Function],
-                                "Content": [Function],
-                                "backgroundFill": "#5159BF",
-                                "fill": "#292929",
-                                "id": 3,
-                                "meta": "Framework",
-                                "title": "Redux",
-                              },
-                              Object {
-                                "Component": [Function],
-                                "Content": [Function],
-                                "backgroundFill": "tomato",
-                                "fill": "#273B7A",
-                                "id": 4,
-                                "meta": "Problem Solving",
-                                "title": "Algorithms",
-                              },
-                              Object {
-                                "Component": [Function],
-                                "Content": [Function],
-                                "backgroundFill": "tomato",
-                                "fill": "#273B7A",
-                                "id": 5,
-                                "meta": "Career",
-                                "title": "Work Experience",
-                              },
-                              Object {
-                                "Component": [Function],
-                                "Content": [Function],
-                                "backgroundFill": "tomato",
-                                "fill": "#273B7A",
-                                "id": 6,
-                                "meta": "Code as a hobby",
-                                "title": "Python",
-                              },
-                              Object {
-                                "Component": [Function],
-                                "Content": [Function],
-                                "backgroundFill": "tomato",
-                                "fill": "#273B7A",
-                                "id": 7,
-                                "meta": "Value Creation",
-                                "title": "Hacks",
-                              },
-                              Object {
-                                "Component": [Function],
-                                "Content": [Function],
-                                "backgroundFill": "tomato",
-                                "fill": "#C92F00",
-                                "id": 8,
-                                "meta": "Acknowledgments",
-                                "title": "Winner of...",
-                              },
-                              Object {
-                                "Component": [Function],
-                                "Content": [Function],
-                                "backgroundFill": "tomato",
-                                "fill": "#273B7A",
-                                "id": 9,
-                                "meta": "Life as a React Developer",
-                                "title": "Currently",
-                              },
-                            ]
-          }
-/>,
+        undefined,
+        <styled.div
+          desktop={undefined}
+>
+          <LoadableComponent
+                    delayMax={0}
+                    delayMin={0}
+                    timeout={0}
+                    title="Joseph"
+          />
+          <LoadableComponent
+                    title="Front-end developer"
+          />
+          <LoadableComponent
+                    commits={10}
+                    desktop={undefined}
+                    languages={
+                              Array [
+                                        Object {
+                                          "bytes": 100000,
+                                          "lang": "js",
+                                        },
+                                      ]
+                    }
+                    publicGists={undefined}
+                    publicRepos={undefined}
+          />
+          <LoadableComponent
+                    data={
+                              Array [
+                                        Object {
+                                          "Component": [Function],
+                                          "Content": [Function],
+                                          "background": "#193549",
+                                          "backgroundFill": "tomato",
+                                          "fill": "#273B7A",
+                                          "id": 0,
+                                          "meta": "Joseph",
+                                          "title": "About Me",
+                                        },
+                                        Object {
+                                          "Component": [Function],
+                                          "Content": [Function],
+                                          "background": "#193549",
+                                          "backgroundFill": "tomato",
+                                          "fill": "#292929",
+                                          "id": 1,
+                                          "meta": "Certified",
+                                          "title": "ReactJS",
+                                        },
+                                        Object {
+                                          "Component": [Function],
+                                          "Content": [Function],
+                                          "background": "#193549",
+                                          "backgroundFill": "tomato",
+                                          "fill": "#F0DB4F",
+                                          "id": 2,
+                                          "meta": "Favorite Language",
+                                          "title": "JavaScript",
+                                        },
+                                        Object {
+                                          "Component": [Function],
+                                          "Content": [Function],
+                                          "background": "#193549",
+                                          "backgroundFill": "#5159BF",
+                                          "fill": "#292929",
+                                          "id": 3,
+                                          "meta": "Framework",
+                                          "title": "Redux",
+                                        },
+                                        Object {
+                                          "Component": [Function],
+                                          "Content": [Function],
+                                          "background": "#193549",
+                                          "backgroundFill": "tomato",
+                                          "fill": "#273B7A",
+                                          "id": 4,
+                                          "meta": "Problem Solving",
+                                          "title": "algorithms",
+                                        },
+                                        Object {
+                                          "Component": [Function],
+                                          "Content": [Function],
+                                          "background": "#193549",
+                                          "backgroundFill": "tomato",
+                                          "fill": "#273B7A",
+                                          "hide": true,
+                                          "id": 5,
+                                          "meta": "My career",
+                                          "title": "experience",
+                                        },
+                                        Object {
+                                          "Component": [Function],
+                                          "Content": [Function],
+                                          "background": "#193549",
+                                          "backgroundFill": "tomato",
+                                          "fill": "#273B7A",
+                                          "id": 6,
+                                          "meta": "Code as a hobby",
+                                          "title": "python",
+                                        },
+                                        Object {
+                                          "Component": [Function],
+                                          "Content": [Function],
+                                          "background": "#193549",
+                                          "backgroundFill": "tomato",
+                                          "fill": "#273B7A",
+                                          "id": 7,
+                                          "meta": "Value Creation",
+                                          "title": "hackathon",
+                                        },
+                                        Object {
+                                          "Component": [Function],
+                                          "Content": [Function],
+                                          "backgroundFill": "tomato",
+                                          "fill": "#C92F00",
+                                          "hide": true,
+                                          "id": 8,
+                                          "meta": "Acknowledgments",
+                                          "title": "awards",
+                                        },
+                                        Object {
+                                          "Component": [Function],
+                                          "Content": [Function],
+                                          "backgroundFill": "tomato",
+                                          "fill": "#273B7A",
+                                          "hide": true,
+                                          "id": 9,
+                                          "meta": "Life as a React Developer",
+                                          "title": "currently",
+                                        },
+                                      ]
+                    }
+          />
+</styled.div>,
       ],
     },
     "ref": null,
     "rendered": Array [
+      undefined,
       Object {
         "instance": null,
         "key": undefined,
         "nodeType": "class",
         "props": Object {
-          "title": "Meet Joseph",
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "commits": 10,
-          "languages": Array [
-            Object {
-              "bytes": 100000,
-              "lang": "js",
-            },
+          "children": Array [
+            <LoadableComponent
+              delayMax={0}
+              delayMin={0}
+              timeout={0}
+              title="Joseph"
+/>,
+            <LoadableComponent
+              title="Front-end developer"
+/>,
+            <LoadableComponent
+              commits={10}
+              desktop={undefined}
+              languages={
+                            Array [
+                                          Object {
+                                            "bytes": 100000,
+                                            "lang": "js",
+                                          },
+                                        ]
+              }
+              publicGists={undefined}
+              publicRepos={undefined}
+/>,
+            <LoadableComponent
+              data={
+                            Array [
+                                          Object {
+                                            "Component": [Function],
+                                            "Content": [Function],
+                                            "background": "#193549",
+                                            "backgroundFill": "tomato",
+                                            "fill": "#273B7A",
+                                            "id": 0,
+                                            "meta": "Joseph",
+                                            "title": "About Me",
+                                          },
+                                          Object {
+                                            "Component": [Function],
+                                            "Content": [Function],
+                                            "background": "#193549",
+                                            "backgroundFill": "tomato",
+                                            "fill": "#292929",
+                                            "id": 1,
+                                            "meta": "Certified",
+                                            "title": "ReactJS",
+                                          },
+                                          Object {
+                                            "Component": [Function],
+                                            "Content": [Function],
+                                            "background": "#193549",
+                                            "backgroundFill": "tomato",
+                                            "fill": "#F0DB4F",
+                                            "id": 2,
+                                            "meta": "Favorite Language",
+                                            "title": "JavaScript",
+                                          },
+                                          Object {
+                                            "Component": [Function],
+                                            "Content": [Function],
+                                            "background": "#193549",
+                                            "backgroundFill": "#5159BF",
+                                            "fill": "#292929",
+                                            "id": 3,
+                                            "meta": "Framework",
+                                            "title": "Redux",
+                                          },
+                                          Object {
+                                            "Component": [Function],
+                                            "Content": [Function],
+                                            "background": "#193549",
+                                            "backgroundFill": "tomato",
+                                            "fill": "#273B7A",
+                                            "id": 4,
+                                            "meta": "Problem Solving",
+                                            "title": "algorithms",
+                                          },
+                                          Object {
+                                            "Component": [Function],
+                                            "Content": [Function],
+                                            "background": "#193549",
+                                            "backgroundFill": "tomato",
+                                            "fill": "#273B7A",
+                                            "hide": true,
+                                            "id": 5,
+                                            "meta": "My career",
+                                            "title": "experience",
+                                          },
+                                          Object {
+                                            "Component": [Function],
+                                            "Content": [Function],
+                                            "background": "#193549",
+                                            "backgroundFill": "tomato",
+                                            "fill": "#273B7A",
+                                            "id": 6,
+                                            "meta": "Code as a hobby",
+                                            "title": "python",
+                                          },
+                                          Object {
+                                            "Component": [Function],
+                                            "Content": [Function],
+                                            "background": "#193549",
+                                            "backgroundFill": "tomato",
+                                            "fill": "#273B7A",
+                                            "id": 7,
+                                            "meta": "Value Creation",
+                                            "title": "hackathon",
+                                          },
+                                          Object {
+                                            "Component": [Function],
+                                            "Content": [Function],
+                                            "backgroundFill": "tomato",
+                                            "fill": "#C92F00",
+                                            "hide": true,
+                                            "id": 8,
+                                            "meta": "Acknowledgments",
+                                            "title": "awards",
+                                          },
+                                          Object {
+                                            "Component": [Function],
+                                            "Content": [Function],
+                                            "backgroundFill": "tomato",
+                                            "fill": "#273B7A",
+                                            "hide": true,
+                                            "id": 9,
+                                            "meta": "Life as a React Developer",
+                                            "title": "currently",
+                                          },
+                                        ]
+              }
+/>,
           ],
-          "publicRepos": undefined,
+          "desktop": undefined,
         },
         "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "data": Array [
-            Object {
-              "Component": [Function],
-              "Content": [Function],
-              "backgroundFill": "tomato",
-              "fill": "#273B7A",
-              "id": 0,
-              "meta": "Joseph",
-              "title": "About Me",
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "delayMax": 0,
+              "delayMin": 0,
+              "timeout": 0,
+              "title": "Joseph",
             },
-            Object {
-              "Component": [Function],
-              "Content": [Function],
-              "backgroundFill": "tomato",
-              "fill": "#292929",
-              "id": 1,
-              "meta": "Certified",
-              "title": "ReactJS",
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "title": "Front-end developer",
             },
-            Object {
-              "Component": [Function],
-              "Content": [Function],
-              "backgroundFill": "tomato",
-              "fill": "#F0DB4F",
-              "id": 2,
-              "meta": "Favorite Language",
-              "title": "JavaScript",
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "commits": 10,
+              "desktop": undefined,
+              "languages": Array [
+                Object {
+                  "bytes": 100000,
+                  "lang": "js",
+                },
+              ],
+              "publicGists": undefined,
+              "publicRepos": undefined,
             },
-            Object {
-              "Component": [Function],
-              "Content": [Function],
-              "backgroundFill": "#5159BF",
-              "fill": "#292929",
-              "id": 3,
-              "meta": "Framework",
-              "title": "Redux",
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "data": Array [
+                Object {
+                  "Component": [Function],
+                  "Content": [Function],
+                  "background": "#193549",
+                  "backgroundFill": "tomato",
+                  "fill": "#273B7A",
+                  "id": 0,
+                  "meta": "Joseph",
+                  "title": "About Me",
+                },
+                Object {
+                  "Component": [Function],
+                  "Content": [Function],
+                  "background": "#193549",
+                  "backgroundFill": "tomato",
+                  "fill": "#292929",
+                  "id": 1,
+                  "meta": "Certified",
+                  "title": "ReactJS",
+                },
+                Object {
+                  "Component": [Function],
+                  "Content": [Function],
+                  "background": "#193549",
+                  "backgroundFill": "tomato",
+                  "fill": "#F0DB4F",
+                  "id": 2,
+                  "meta": "Favorite Language",
+                  "title": "JavaScript",
+                },
+                Object {
+                  "Component": [Function],
+                  "Content": [Function],
+                  "background": "#193549",
+                  "backgroundFill": "#5159BF",
+                  "fill": "#292929",
+                  "id": 3,
+                  "meta": "Framework",
+                  "title": "Redux",
+                },
+                Object {
+                  "Component": [Function],
+                  "Content": [Function],
+                  "background": "#193549",
+                  "backgroundFill": "tomato",
+                  "fill": "#273B7A",
+                  "id": 4,
+                  "meta": "Problem Solving",
+                  "title": "algorithms",
+                },
+                Object {
+                  "Component": [Function],
+                  "Content": [Function],
+                  "background": "#193549",
+                  "backgroundFill": "tomato",
+                  "fill": "#273B7A",
+                  "hide": true,
+                  "id": 5,
+                  "meta": "My career",
+                  "title": "experience",
+                },
+                Object {
+                  "Component": [Function],
+                  "Content": [Function],
+                  "background": "#193549",
+                  "backgroundFill": "tomato",
+                  "fill": "#273B7A",
+                  "id": 6,
+                  "meta": "Code as a hobby",
+                  "title": "python",
+                },
+                Object {
+                  "Component": [Function],
+                  "Content": [Function],
+                  "background": "#193549",
+                  "backgroundFill": "tomato",
+                  "fill": "#273B7A",
+                  "id": 7,
+                  "meta": "Value Creation",
+                  "title": "hackathon",
+                },
+                Object {
+                  "Component": [Function],
+                  "Content": [Function],
+                  "backgroundFill": "tomato",
+                  "fill": "#C92F00",
+                  "hide": true,
+                  "id": 8,
+                  "meta": "Acknowledgments",
+                  "title": "awards",
+                },
+                Object {
+                  "Component": [Function],
+                  "Content": [Function],
+                  "backgroundFill": "tomato",
+                  "fill": "#273B7A",
+                  "hide": true,
+                  "id": 9,
+                  "meta": "Life as a React Developer",
+                  "title": "currently",
+                },
+              ],
             },
-            Object {
-              "Component": [Function],
-              "Content": [Function],
-              "backgroundFill": "tomato",
-              "fill": "#273B7A",
-              "id": 4,
-              "meta": "Problem Solving",
-              "title": "Algorithms",
-            },
-            Object {
-              "Component": [Function],
-              "Content": [Function],
-              "backgroundFill": "tomato",
-              "fill": "#273B7A",
-              "id": 5,
-              "meta": "Career",
-              "title": "Work Experience",
-            },
-            Object {
-              "Component": [Function],
-              "Content": [Function],
-              "backgroundFill": "tomato",
-              "fill": "#273B7A",
-              "id": 6,
-              "meta": "Code as a hobby",
-              "title": "Python",
-            },
-            Object {
-              "Component": [Function],
-              "Content": [Function],
-              "backgroundFill": "tomato",
-              "fill": "#273B7A",
-              "id": 7,
-              "meta": "Value Creation",
-              "title": "Hacks",
-            },
-            Object {
-              "Component": [Function],
-              "Content": [Function],
-              "backgroundFill": "tomato",
-              "fill": "#C92F00",
-              "id": 8,
-              "meta": "Acknowledgments",
-              "title": "Winner of...",
-            },
-            Object {
-              "Component": [Function],
-              "Content": [Function],
-              "backgroundFill": "tomato",
-              "fill": "#273B7A",
-              "id": 9,
-              "meta": "Life as a React Developer",
-              "title": "Currently",
-            },
-          ],
-        },
-        "ref": null,
-        "rendered": null,
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
         "type": [Function],
       },
     ],
-    "type": [Function],
+    "type": Symbol(react.fragment),
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
+      "nodeType": "function",
       "props": Object {
         "children": Array [
-          <LoadableComponent
-            title="Meet Joseph"
-/>,
-          <LoadableComponent
-            commits={10}
-            languages={
-                        Array [
-                                    Object {
-                                      "bytes": 100000,
-                                      "lang": "js",
-                                    },
-                                  ]
-            }
-            publicRepos={undefined}
-/>,
-          <LoadableComponent
-            data={
-                        Array [
-                                    Object {
-                                      "Component": [Function],
-                                      "Content": [Function],
-                                      "backgroundFill": "tomato",
-                                      "fill": "#273B7A",
-                                      "id": 0,
-                                      "meta": "Joseph",
-                                      "title": "About Me",
-                                    },
-                                    Object {
-                                      "Component": [Function],
-                                      "Content": [Function],
-                                      "backgroundFill": "tomato",
-                                      "fill": "#292929",
-                                      "id": 1,
-                                      "meta": "Certified",
-                                      "title": "ReactJS",
-                                    },
-                                    Object {
-                                      "Component": [Function],
-                                      "Content": [Function],
-                                      "backgroundFill": "tomato",
-                                      "fill": "#F0DB4F",
-                                      "id": 2,
-                                      "meta": "Favorite Language",
-                                      "title": "JavaScript",
-                                    },
-                                    Object {
-                                      "Component": [Function],
-                                      "Content": [Function],
-                                      "backgroundFill": "#5159BF",
-                                      "fill": "#292929",
-                                      "id": 3,
-                                      "meta": "Framework",
-                                      "title": "Redux",
-                                    },
-                                    Object {
-                                      "Component": [Function],
-                                      "Content": [Function],
-                                      "backgroundFill": "tomato",
-                                      "fill": "#273B7A",
-                                      "id": 4,
-                                      "meta": "Problem Solving",
-                                      "title": "Algorithms",
-                                    },
-                                    Object {
-                                      "Component": [Function],
-                                      "Content": [Function],
-                                      "backgroundFill": "tomato",
-                                      "fill": "#273B7A",
-                                      "id": 5,
-                                      "meta": "Career",
-                                      "title": "Work Experience",
-                                    },
-                                    Object {
-                                      "Component": [Function],
-                                      "Content": [Function],
-                                      "backgroundFill": "tomato",
-                                      "fill": "#273B7A",
-                                      "id": 6,
-                                      "meta": "Code as a hobby",
-                                      "title": "Python",
-                                    },
-                                    Object {
-                                      "Component": [Function],
-                                      "Content": [Function],
-                                      "backgroundFill": "tomato",
-                                      "fill": "#273B7A",
-                                      "id": 7,
-                                      "meta": "Value Creation",
-                                      "title": "Hacks",
-                                    },
-                                    Object {
-                                      "Component": [Function],
-                                      "Content": [Function],
-                                      "backgroundFill": "tomato",
-                                      "fill": "#C92F00",
-                                      "id": 8,
-                                      "meta": "Acknowledgments",
-                                      "title": "Winner of...",
-                                    },
-                                    Object {
-                                      "Component": [Function],
-                                      "Content": [Function],
-                                      "backgroundFill": "tomato",
-                                      "fill": "#273B7A",
-                                      "id": 9,
-                                      "meta": "Life as a React Developer",
-                                      "title": "Currently",
-                                    },
-                                  ]
-            }
-/>,
+          undefined,
+          <styled.div
+            desktop={undefined}
+>
+            <LoadableComponent
+                        delayMax={0}
+                        delayMin={0}
+                        timeout={0}
+                        title="Joseph"
+            />
+            <LoadableComponent
+                        title="Front-end developer"
+            />
+            <LoadableComponent
+                        commits={10}
+                        desktop={undefined}
+                        languages={
+                                    Array [
+                                                Object {
+                                                  "bytes": 100000,
+                                                  "lang": "js",
+                                                },
+                                              ]
+                        }
+                        publicGists={undefined}
+                        publicRepos={undefined}
+            />
+            <LoadableComponent
+                        data={
+                                    Array [
+                                                Object {
+                                                  "Component": [Function],
+                                                  "Content": [Function],
+                                                  "background": "#193549",
+                                                  "backgroundFill": "tomato",
+                                                  "fill": "#273B7A",
+                                                  "id": 0,
+                                                  "meta": "Joseph",
+                                                  "title": "About Me",
+                                                },
+                                                Object {
+                                                  "Component": [Function],
+                                                  "Content": [Function],
+                                                  "background": "#193549",
+                                                  "backgroundFill": "tomato",
+                                                  "fill": "#292929",
+                                                  "id": 1,
+                                                  "meta": "Certified",
+                                                  "title": "ReactJS",
+                                                },
+                                                Object {
+                                                  "Component": [Function],
+                                                  "Content": [Function],
+                                                  "background": "#193549",
+                                                  "backgroundFill": "tomato",
+                                                  "fill": "#F0DB4F",
+                                                  "id": 2,
+                                                  "meta": "Favorite Language",
+                                                  "title": "JavaScript",
+                                                },
+                                                Object {
+                                                  "Component": [Function],
+                                                  "Content": [Function],
+                                                  "background": "#193549",
+                                                  "backgroundFill": "#5159BF",
+                                                  "fill": "#292929",
+                                                  "id": 3,
+                                                  "meta": "Framework",
+                                                  "title": "Redux",
+                                                },
+                                                Object {
+                                                  "Component": [Function],
+                                                  "Content": [Function],
+                                                  "background": "#193549",
+                                                  "backgroundFill": "tomato",
+                                                  "fill": "#273B7A",
+                                                  "id": 4,
+                                                  "meta": "Problem Solving",
+                                                  "title": "algorithms",
+                                                },
+                                                Object {
+                                                  "Component": [Function],
+                                                  "Content": [Function],
+                                                  "background": "#193549",
+                                                  "backgroundFill": "tomato",
+                                                  "fill": "#273B7A",
+                                                  "hide": true,
+                                                  "id": 5,
+                                                  "meta": "My career",
+                                                  "title": "experience",
+                                                },
+                                                Object {
+                                                  "Component": [Function],
+                                                  "Content": [Function],
+                                                  "background": "#193549",
+                                                  "backgroundFill": "tomato",
+                                                  "fill": "#273B7A",
+                                                  "id": 6,
+                                                  "meta": "Code as a hobby",
+                                                  "title": "python",
+                                                },
+                                                Object {
+                                                  "Component": [Function],
+                                                  "Content": [Function],
+                                                  "background": "#193549",
+                                                  "backgroundFill": "tomato",
+                                                  "fill": "#273B7A",
+                                                  "id": 7,
+                                                  "meta": "Value Creation",
+                                                  "title": "hackathon",
+                                                },
+                                                Object {
+                                                  "Component": [Function],
+                                                  "Content": [Function],
+                                                  "backgroundFill": "tomato",
+                                                  "fill": "#C92F00",
+                                                  "hide": true,
+                                                  "id": 8,
+                                                  "meta": "Acknowledgments",
+                                                  "title": "awards",
+                                                },
+                                                Object {
+                                                  "Component": [Function],
+                                                  "Content": [Function],
+                                                  "backgroundFill": "tomato",
+                                                  "fill": "#273B7A",
+                                                  "hide": true,
+                                                  "id": 9,
+                                                  "meta": "Life as a React Developer",
+                                                  "title": "currently",
+                                                },
+                                              ]
+                        }
+            />
+</styled.div>,
         ],
       },
       "ref": null,
       "rendered": Array [
+        undefined,
         Object {
           "instance": null,
           "key": undefined,
           "nodeType": "class",
           "props": Object {
-            "title": "Meet Joseph",
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "commits": 10,
-            "languages": Array [
-              Object {
-                "bytes": 100000,
-                "lang": "js",
-              },
+            "children": Array [
+              <LoadableComponent
+                delayMax={0}
+                delayMin={0}
+                timeout={0}
+                title="Joseph"
+/>,
+              <LoadableComponent
+                title="Front-end developer"
+/>,
+              <LoadableComponent
+                commits={10}
+                desktop={undefined}
+                languages={
+                                Array [
+                                                Object {
+                                                  "bytes": 100000,
+                                                  "lang": "js",
+                                                },
+                                              ]
+                }
+                publicGists={undefined}
+                publicRepos={undefined}
+/>,
+              <LoadableComponent
+                data={
+                                Array [
+                                                Object {
+                                                  "Component": [Function],
+                                                  "Content": [Function],
+                                                  "background": "#193549",
+                                                  "backgroundFill": "tomato",
+                                                  "fill": "#273B7A",
+                                                  "id": 0,
+                                                  "meta": "Joseph",
+                                                  "title": "About Me",
+                                                },
+                                                Object {
+                                                  "Component": [Function],
+                                                  "Content": [Function],
+                                                  "background": "#193549",
+                                                  "backgroundFill": "tomato",
+                                                  "fill": "#292929",
+                                                  "id": 1,
+                                                  "meta": "Certified",
+                                                  "title": "ReactJS",
+                                                },
+                                                Object {
+                                                  "Component": [Function],
+                                                  "Content": [Function],
+                                                  "background": "#193549",
+                                                  "backgroundFill": "tomato",
+                                                  "fill": "#F0DB4F",
+                                                  "id": 2,
+                                                  "meta": "Favorite Language",
+                                                  "title": "JavaScript",
+                                                },
+                                                Object {
+                                                  "Component": [Function],
+                                                  "Content": [Function],
+                                                  "background": "#193549",
+                                                  "backgroundFill": "#5159BF",
+                                                  "fill": "#292929",
+                                                  "id": 3,
+                                                  "meta": "Framework",
+                                                  "title": "Redux",
+                                                },
+                                                Object {
+                                                  "Component": [Function],
+                                                  "Content": [Function],
+                                                  "background": "#193549",
+                                                  "backgroundFill": "tomato",
+                                                  "fill": "#273B7A",
+                                                  "id": 4,
+                                                  "meta": "Problem Solving",
+                                                  "title": "algorithms",
+                                                },
+                                                Object {
+                                                  "Component": [Function],
+                                                  "Content": [Function],
+                                                  "background": "#193549",
+                                                  "backgroundFill": "tomato",
+                                                  "fill": "#273B7A",
+                                                  "hide": true,
+                                                  "id": 5,
+                                                  "meta": "My career",
+                                                  "title": "experience",
+                                                },
+                                                Object {
+                                                  "Component": [Function],
+                                                  "Content": [Function],
+                                                  "background": "#193549",
+                                                  "backgroundFill": "tomato",
+                                                  "fill": "#273B7A",
+                                                  "id": 6,
+                                                  "meta": "Code as a hobby",
+                                                  "title": "python",
+                                                },
+                                                Object {
+                                                  "Component": [Function],
+                                                  "Content": [Function],
+                                                  "background": "#193549",
+                                                  "backgroundFill": "tomato",
+                                                  "fill": "#273B7A",
+                                                  "id": 7,
+                                                  "meta": "Value Creation",
+                                                  "title": "hackathon",
+                                                },
+                                                Object {
+                                                  "Component": [Function],
+                                                  "Content": [Function],
+                                                  "backgroundFill": "tomato",
+                                                  "fill": "#C92F00",
+                                                  "hide": true,
+                                                  "id": 8,
+                                                  "meta": "Acknowledgments",
+                                                  "title": "awards",
+                                                },
+                                                Object {
+                                                  "Component": [Function],
+                                                  "Content": [Function],
+                                                  "backgroundFill": "tomato",
+                                                  "fill": "#273B7A",
+                                                  "hide": true,
+                                                  "id": 9,
+                                                  "meta": "Life as a React Developer",
+                                                  "title": "currently",
+                                                },
+                                              ]
+                }
+/>,
             ],
-            "publicRepos": undefined,
+            "desktop": undefined,
           },
           "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "data": Array [
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "backgroundFill": "tomato",
-                "fill": "#273B7A",
-                "id": 0,
-                "meta": "Joseph",
-                "title": "About Me",
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "delayMax": 0,
+                "delayMin": 0,
+                "timeout": 0,
+                "title": "Joseph",
               },
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "backgroundFill": "tomato",
-                "fill": "#292929",
-                "id": 1,
-                "meta": "Certified",
-                "title": "ReactJS",
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "title": "Front-end developer",
               },
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "backgroundFill": "tomato",
-                "fill": "#F0DB4F",
-                "id": 2,
-                "meta": "Favorite Language",
-                "title": "JavaScript",
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "commits": 10,
+                "desktop": undefined,
+                "languages": Array [
+                  Object {
+                    "bytes": 100000,
+                    "lang": "js",
+                  },
+                ],
+                "publicGists": undefined,
+                "publicRepos": undefined,
               },
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "backgroundFill": "#5159BF",
-                "fill": "#292929",
-                "id": 3,
-                "meta": "Framework",
-                "title": "Redux",
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "data": Array [
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#273B7A",
+                    "id": 0,
+                    "meta": "Joseph",
+                    "title": "About Me",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#292929",
+                    "id": 1,
+                    "meta": "Certified",
+                    "title": "ReactJS",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#F0DB4F",
+                    "id": 2,
+                    "meta": "Favorite Language",
+                    "title": "JavaScript",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "#5159BF",
+                    "fill": "#292929",
+                    "id": 3,
+                    "meta": "Framework",
+                    "title": "Redux",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#273B7A",
+                    "id": 4,
+                    "meta": "Problem Solving",
+                    "title": "algorithms",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#273B7A",
+                    "hide": true,
+                    "id": 5,
+                    "meta": "My career",
+                    "title": "experience",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#273B7A",
+                    "id": 6,
+                    "meta": "Code as a hobby",
+                    "title": "python",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#273B7A",
+                    "id": 7,
+                    "meta": "Value Creation",
+                    "title": "hackathon",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "backgroundFill": "tomato",
+                    "fill": "#C92F00",
+                    "hide": true,
+                    "id": 8,
+                    "meta": "Acknowledgments",
+                    "title": "awards",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "backgroundFill": "tomato",
+                    "fill": "#273B7A",
+                    "hide": true,
+                    "id": 9,
+                    "meta": "Life as a React Developer",
+                    "title": "currently",
+                  },
+                ],
               },
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "backgroundFill": "tomato",
-                "fill": "#273B7A",
-                "id": 4,
-                "meta": "Problem Solving",
-                "title": "Algorithms",
-              },
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "backgroundFill": "tomato",
-                "fill": "#273B7A",
-                "id": 5,
-                "meta": "Career",
-                "title": "Work Experience",
-              },
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "backgroundFill": "tomato",
-                "fill": "#273B7A",
-                "id": 6,
-                "meta": "Code as a hobby",
-                "title": "Python",
-              },
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "backgroundFill": "tomato",
-                "fill": "#273B7A",
-                "id": 7,
-                "meta": "Value Creation",
-                "title": "Hacks",
-              },
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "backgroundFill": "tomato",
-                "fill": "#C92F00",
-                "id": 8,
-                "meta": "Acknowledgments",
-                "title": "Winner of...",
-              },
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "backgroundFill": "tomato",
-                "fill": "#273B7A",
-                "id": 9,
-                "meta": "Life as a React Developer",
-                "title": "Currently",
-              },
-            ],
-          },
-          "ref": null,
-          "rendered": null,
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
           "type": [Function],
         },
       ],
-      "type": [Function],
+      "type": Symbol(react.fragment),
     },
   ],
   Symbol(enzyme.__options__): Object {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
       },
     },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
   },
 }
 `;

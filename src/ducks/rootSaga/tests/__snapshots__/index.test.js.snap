@@ -12,6 +12,30 @@ Object {
         "fn": [Function],
       },
     },
+    Object {
+      "@@redux-saga/IO": true,
+      "FORK": Object {
+        "args": Array [],
+        "context": null,
+        "fn": [Function],
+      },
+    },
+    Object {
+      "@@redux-saga/IO": true,
+      "FORK": Object {
+        "args": Array [],
+        "context": null,
+        "fn": [Function],
+      },
+    },
+    Object {
+      "@@redux-saga/IO": true,
+      "FORK": Object {
+        "args": Array [],
+        "context": null,
+        "fn": [Function],
+      },
+    },
   ],
 }
 `;

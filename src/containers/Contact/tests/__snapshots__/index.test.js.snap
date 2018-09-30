@@ -2,7 +2,6 @@
 
 exports[`Contact renders 1`] = `
 ShallowWrapper {
-  "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Unknown
     handleClose={[Function]}
@@ -12,6 +11,7 @@ ShallowWrapper {
     "batchedUpdates": [Function],
     "getNode": [Function],
     "render": [Function],
+    "simulateError": [Function],
     "simulateEvent": [Function],
     "unmount": [Function],
   },
@@ -35,9 +35,6 @@ ShallowWrapper {
                     <p>
                               contact@icjoseph.com
                     </p>
-                    <p>
-                              Click outside or the close button to resume.
-                    </p>
           </ModalDescription>
 </ModalContent>,
         <ModalActions>
@@ -50,7 +47,6 @@ ShallowWrapper {
           </Button>
 </ModalActions>,
       ],
-      "closeOnDocumentClick": true,
       "dimmer": true,
       "onClose": [Function],
       "open": true,
@@ -83,9 +79,6 @@ ShallowWrapper {
             <p>
                         contact@icjoseph.com
             </p>
-            <p>
-                        Click outside or the close button to resume.
-            </p>
 </ModalDescription>,
         },
         "ref": null,
@@ -103,9 +96,6 @@ ShallowWrapper {
 </p>,
               <p>
                 contact@icjoseph.com
-</p>,
-              <p>
-                Click outside or the close button to resume.
 </p>,
             ],
           },
@@ -142,17 +132,6 @@ ShallowWrapper {
               },
               "ref": null,
               "rendered": "contact@icjoseph.com",
-              "type": "p",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Click outside or the close button to resume.",
-              },
-              "ref": null,
-              "rendered": "Click outside or the close button to resume.",
               "type": "p",
             },
           ],
@@ -214,9 +193,6 @@ ShallowWrapper {
                         <p>
                                     contact@icjoseph.com
                         </p>
-                        <p>
-                                    Click outside or the close button to resume.
-                        </p>
             </ModalDescription>
 </ModalContent>,
           <ModalActions>
@@ -229,7 +205,6 @@ ShallowWrapper {
             </Button>
 </ModalActions>,
         ],
-        "closeOnDocumentClick": true,
         "dimmer": true,
         "onClose": [Function],
         "open": true,
@@ -262,9 +237,6 @@ ShallowWrapper {
               <p>
                             contact@icjoseph.com
               </p>
-              <p>
-                            Click outside or the close button to resume.
-              </p>
 </ModalDescription>,
           },
           "ref": null,
@@ -282,9 +254,6 @@ ShallowWrapper {
 </p>,
                 <p>
                   contact@icjoseph.com
-</p>,
-                <p>
-                  Click outside or the close button to resume.
 </p>,
               ],
             },
@@ -321,17 +290,6 @@ ShallowWrapper {
                 },
                 "ref": null,
                 "rendered": "contact@icjoseph.com",
-                "type": "p",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "Click outside or the close button to resume.",
-                },
-                "ref": null,
-                "rendered": "Click outside or the close button to resume.",
                 "type": "p",
               },
             ],
@@ -377,8 +335,20 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
       },
     },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
   },
 }
 `;

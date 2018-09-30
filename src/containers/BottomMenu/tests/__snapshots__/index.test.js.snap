@@ -2,13 +2,13 @@
 
 exports[`BottomMenu renders 1`] = `
 ShallowWrapper {
-  "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <BottomMenu />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
     "render": [Function],
+    "simulateError": [Function],
     "simulateEvent": [Function],
     "unmount": [Function],
   },
@@ -34,8 +34,11 @@ ShallowWrapper {
 >
           <MenuItem
                     active={false}
+                    href="https://www.linkedin.com/in/joseph-chamochumbi-280255b3/"
                     name="LinkedIn"
                     onClick={[Function]}
+                    rel="noopener noreferrer"
+                    target="_blank"
           >
                     <Icon
                               as="i"
@@ -45,8 +48,11 @@ ShallowWrapper {
           </MenuItem>
           <MenuItem
                     active={false}
+                    href="https://github.com/icyJoseph"
                     name="GitHub"
                     onClick={[Function]}
+                    rel="noopener noreferrer"
+                    target="_blank"
           >
                     <Icon
                               as="i"
@@ -82,8 +88,11 @@ ShallowWrapper {
           "children": Array [
             <MenuItem
               active={false}
+              href="https://www.linkedin.com/in/joseph-chamochumbi-280255b3/"
               name="LinkedIn"
               onClick={[Function]}
+              rel="noopener noreferrer"
+              target="_blank"
 >
               <Icon
                             as="i"
@@ -93,8 +102,11 @@ ShallowWrapper {
 </MenuItem>,
             <MenuItem
               active={false}
+              href="https://github.com/icyJoseph"
               name="GitHub"
               onClick={[Function]}
+              rel="noopener noreferrer"
+              target="_blank"
 >
               <Icon
                             as="i"
@@ -140,8 +152,11 @@ ShallowWrapper {
 />,
                 "LinkedIn",
               ],
+              "href": "https://www.linkedin.com/in/joseph-chamochumbi-280255b3/",
               "name": "LinkedIn",
               "onClick": [Function],
+              "rel": "noopener noreferrer",
+              "target": "_blank",
             },
             "ref": null,
             "rendered": Array [
@@ -174,8 +189,11 @@ ShallowWrapper {
 />,
                 "GitHub",
               ],
+              "href": "https://github.com/icyJoseph",
               "name": "GitHub",
               "onClick": [Function],
+              "rel": "noopener noreferrer",
+              "target": "_blank",
             },
             "ref": null,
             "rendered": Array [
@@ -270,8 +288,11 @@ ShallowWrapper {
 >
             <MenuItem
                         active={false}
+                        href="https://www.linkedin.com/in/joseph-chamochumbi-280255b3/"
                         name="LinkedIn"
                         onClick={[Function]}
+                        rel="noopener noreferrer"
+                        target="_blank"
             >
                         <Icon
                                     as="i"
@@ -281,8 +302,11 @@ ShallowWrapper {
             </MenuItem>
             <MenuItem
                         active={false}
+                        href="https://github.com/icyJoseph"
                         name="GitHub"
                         onClick={[Function]}
+                        rel="noopener noreferrer"
+                        target="_blank"
             >
                         <Icon
                                     as="i"
@@ -318,8 +342,11 @@ ShallowWrapper {
             "children": Array [
               <MenuItem
                 active={false}
+                href="https://www.linkedin.com/in/joseph-chamochumbi-280255b3/"
                 name="LinkedIn"
                 onClick={[Function]}
+                rel="noopener noreferrer"
+                target="_blank"
 >
                 <Icon
                                 as="i"
@@ -329,8 +356,11 @@ ShallowWrapper {
 </MenuItem>,
               <MenuItem
                 active={false}
+                href="https://github.com/icyJoseph"
                 name="GitHub"
                 onClick={[Function]}
+                rel="noopener noreferrer"
+                target="_blank"
 >
                 <Icon
                                 as="i"
@@ -376,8 +406,11 @@ ShallowWrapper {
 />,
                   "LinkedIn",
                 ],
+                "href": "https://www.linkedin.com/in/joseph-chamochumbi-280255b3/",
                 "name": "LinkedIn",
                 "onClick": [Function],
+                "rel": "noopener noreferrer",
+                "target": "_blank",
               },
               "ref": null,
               "rendered": Array [
@@ -410,8 +443,11 @@ ShallowWrapper {
 />,
                   "GitHub",
                 ],
+                "href": "https://github.com/icyJoseph",
                 "name": "GitHub",
                 "onClick": [Function],
+                "rel": "noopener noreferrer",
+                "target": "_blank",
               },
               "ref": null,
               "rendered": Array [
@@ -488,8 +524,20 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
       },
     },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
   },
 }
 `;

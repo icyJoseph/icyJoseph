@@ -2,7 +2,6 @@
 
 exports[`Desktop MainTitle renders 1`] = `
 ShallowWrapper {
-  "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <MainTitle
     desktop={true}
@@ -12,13 +11,14 @@ ShallowWrapper {
     "batchedUpdates": [Function],
     "getNode": [Function],
     "render": [Function],
+    "simulateError": [Function],
     "simulateEvent": [Function],
     "unmount": [Function],
   },
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "function",
+    "nodeType": "class",
     "props": Object {
       "children": <Header
         as="h1"
@@ -41,19 +41,11 @@ ShallowWrapper {
                 text=""
                 threshold={0.2}
                 timingFunction="linear"
-                transitionTime={1300}
+                transitionTime={500}
         >
                 Test Title
         </ReactRevealText>
 </Header>,
-      "style": Object {
-        "alignItems": "center",
-        "display": "flex",
-        "flex": 1,
-        "flexDirection": "column",
-        "justifyContent": "center",
-        "minHeight": "90px",
-      },
     },
     "ref": null,
     "rendered": Object {
@@ -78,7 +70,7 @@ ShallowWrapper {
           text=""
           threshold={0.2}
           timingFunction="linear"
-          transitionTime={1300}
+          transitionTime={500}
 >
           Test Title
 </ReactRevealText>,
@@ -105,7 +97,7 @@ ShallowWrapper {
           "text": "",
           "threshold": 0.2,
           "timingFunction": "linear",
-          "transitionTime": 1300,
+          "transitionTime": 500,
         },
         "ref": null,
         "rendered": "Test Title",
@@ -119,7 +111,7 @@ ShallowWrapper {
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "function",
+      "nodeType": "class",
       "props": Object {
         "children": <Header
           as="h1"
@@ -142,19 +134,11 @@ ShallowWrapper {
                     text=""
                     threshold={0.2}
                     timingFunction="linear"
-                    transitionTime={1300}
+                    transitionTime={500}
           >
                     Test Title
           </ReactRevealText>
 </Header>,
-        "style": Object {
-          "alignItems": "center",
-          "display": "flex",
-          "flex": 1,
-          "flexDirection": "column",
-          "justifyContent": "center",
-          "minHeight": "90px",
-        },
       },
       "ref": null,
       "rendered": Object {
@@ -179,7 +163,7 @@ ShallowWrapper {
             text=""
             threshold={0.2}
             timingFunction="linear"
-            transitionTime={1300}
+            transitionTime={500}
 >
             Test Title
 </ReactRevealText>,
@@ -206,7 +190,7 @@ ShallowWrapper {
             "text": "",
             "threshold": 0.2,
             "timingFunction": "linear",
-            "transitionTime": 1300,
+            "transitionTime": 500,
           },
           "ref": null,
           "rendered": "Test Title",
@@ -221,15 +205,26 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
       },
     },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
   },
 }
 `;
 
 exports[`MainTitle renders 1`] = `
 ShallowWrapper {
-  "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <MainTitle
     title="Test Title"
@@ -238,13 +233,14 @@ ShallowWrapper {
     "batchedUpdates": [Function],
     "getNode": [Function],
     "render": [Function],
+    "simulateError": [Function],
     "simulateEvent": [Function],
     "unmount": [Function],
   },
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "function",
+    "nodeType": "class",
     "props": Object {
       "children": <Header
         as="h1"
@@ -267,19 +263,11 @@ ShallowWrapper {
                 text=""
                 threshold={0.2}
                 timingFunction="linear"
-                transitionTime={1300}
+                transitionTime={500}
         >
                 Test Title
         </ReactRevealText>
 </Header>,
-      "style": Object {
-        "alignItems": "center",
-        "display": "flex",
-        "flex": 1,
-        "flexDirection": "column",
-        "justifyContent": "center",
-        "minHeight": "90px",
-      },
     },
     "ref": null,
     "rendered": Object {
@@ -304,7 +292,7 @@ ShallowWrapper {
           text=""
           threshold={0.2}
           timingFunction="linear"
-          transitionTime={1300}
+          transitionTime={500}
 >
           Test Title
 </ReactRevealText>,
@@ -331,7 +319,7 @@ ShallowWrapper {
           "text": "",
           "threshold": 0.2,
           "timingFunction": "linear",
-          "transitionTime": 1300,
+          "transitionTime": 500,
         },
         "ref": null,
         "rendered": "Test Title",
@@ -345,7 +333,7 @@ ShallowWrapper {
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "function",
+      "nodeType": "class",
       "props": Object {
         "children": <Header
           as="h1"
@@ -368,19 +356,11 @@ ShallowWrapper {
                     text=""
                     threshold={0.2}
                     timingFunction="linear"
-                    transitionTime={1300}
+                    transitionTime={500}
           >
                     Test Title
           </ReactRevealText>
 </Header>,
-        "style": Object {
-          "alignItems": "center",
-          "display": "flex",
-          "flex": 1,
-          "flexDirection": "column",
-          "justifyContent": "center",
-          "minHeight": "90px",
-        },
       },
       "ref": null,
       "rendered": Object {
@@ -405,7 +385,7 @@ ShallowWrapper {
             text=""
             threshold={0.2}
             timingFunction="linear"
-            transitionTime={1300}
+            transitionTime={500}
 >
             Test Title
 </ReactRevealText>,
@@ -432,7 +412,7 @@ ShallowWrapper {
             "text": "",
             "threshold": 0.2,
             "timingFunction": "linear",
-            "transitionTime": 1300,
+            "transitionTime": 500,
           },
           "ref": null,
           "rendered": "Test Title",
@@ -447,8 +427,20 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
       },
     },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
   },
 }
 `;

@@ -2,7 +2,6 @@
 
 exports[`Drawer renders 1`] = `
 ShallowWrapper {
-  "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Unknown
     Content={[Function]}
@@ -13,6 +12,7 @@ ShallowWrapper {
     "batchedUpdates": [Function],
     "getNode": [Function],
     "render": [Function],
+    "simulateError": [Function],
     "simulateEvent": [Function],
     "unmount": [Function],
   },
@@ -23,48 +23,31 @@ ShallowWrapper {
     "props": Object {
       "animation": "overlay",
       "as": [Function],
+      "background": undefined,
       "children": Array [
-        <Segment
-          basic={true}
->
-          <mockConstructor />
-</Segment>,
         <Button
           as="button"
           onClick={[Function]}
 >
           Close
 </Button>,
+        <Segment
+          basic={true}
+          style={
+                    Object {
+                              "marginBottom": "60px",
+                            }
+          }
+>
+          <mockConstructor />
+</Segment>,
       ],
       "direction": "right",
-      "style": Object {
-        "height": "calc(100vh - 100px) !important",
-      },
       "visible": true,
       "width": "wide",
     },
     "ref": null,
     "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "basic": true,
-          "children": <mockConstructor />,
-        },
-        "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {},
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        "type": [Function],
-      },
       Object {
         "instance": null,
         "key": undefined,
@@ -78,6 +61,29 @@ ShallowWrapper {
         "rendered": "Close",
         "type": [Function],
       },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "basic": true,
+          "children": <mockConstructor />,
+          "style": Object {
+            "marginBottom": "60px",
+          },
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        "type": [Function],
+      },
     ],
     "type": [Function],
   },
@@ -89,48 +95,31 @@ ShallowWrapper {
       "props": Object {
         "animation": "overlay",
         "as": [Function],
+        "background": undefined,
         "children": Array [
-          <Segment
-            basic={true}
->
-            <mockConstructor />
-</Segment>,
           <Button
             as="button"
             onClick={[Function]}
 >
             Close
 </Button>,
+          <Segment
+            basic={true}
+            style={
+                        Object {
+                                    "marginBottom": "60px",
+                                  }
+            }
+>
+            <mockConstructor />
+</Segment>,
         ],
         "direction": "right",
-        "style": Object {
-          "height": "calc(100vh - 100px) !important",
-        },
         "visible": true,
         "width": "wide",
       },
       "ref": null,
       "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "basic": true,
-            "children": <mockConstructor />,
-          },
-          "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "function",
-            "props": Object {},
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-          "type": [Function],
-        },
         Object {
           "instance": null,
           "key": undefined,
@@ -144,6 +133,29 @@ ShallowWrapper {
           "rendered": "Close",
           "type": [Function],
         },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "basic": true,
+            "children": <mockConstructor />,
+            "style": Object {
+              "marginBottom": "60px",
+            },
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          "type": [Function],
+        },
       ],
       "type": [Function],
     },
@@ -152,8 +164,20 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
       },
     },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
   },
 }
 `;

@@ -29,7 +29,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom --watchAll --coverage",
-    "test:coverage": "react-scripts test --env=jsdom --coverage",
+    "test:report": "react-scripts test --env=jsdom --coverage",
     "eject": "react-scripts eject",
     "predeploy": "yarn build",
     "deploy": "gh-pages -b master -d build"

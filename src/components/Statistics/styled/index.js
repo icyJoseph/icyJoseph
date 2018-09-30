@@ -1,12 +1,9 @@
 import styled from "styled-components";
 
-export const Group = styled.div.attrs({
-  style: props => ({
-    maxHeight: props.grow ? "140px" : "120px"
-  })
-})`
-  transition: max-height 2s linear;
+export const Group = styled.div`
   min-height: 120px;
+  height: auto !important;
+  height: 120px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -39,6 +36,9 @@ export const Label = styled.div`
   display: flex;
   flex-wrap: wrap;
   text-align: center;
+  word-wrap: wrap;
+  min-width: 150px;
+  max-width: 150px;
   justify-content: center;
   align-items: center;
   margin: ${props => props.margin}px 0;

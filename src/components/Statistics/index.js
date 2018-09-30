@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import CountUp from "react-countup";
+import { Loader } from "semantic-ui-react";
 import { Group, Stat, Value, Label, IconWrapper } from "./styled";
 import Github from "../../logos/Github";
 
@@ -10,7 +11,7 @@ export const Statistics = ({
   languages = []
 }) => (
   <Fragment>
-    <Group grow>
+    <Group>
       <Stat>
         <Value>
           <IconWrapper>
@@ -33,16 +34,19 @@ export const Statistics = ({
         <Label margin={25}>Commits</Label>
       </Stat>
     </Group>
-    <Group grow={languages.length > 0}>
-      {languages.map(({ lang, bytes }) => (
-        <Stat key={lang} fontSize="14pt">
-          <Value>
-            <CountUp start={0} end={bytes} />
-          </Value>
-          <Label margin={10}>bytes written</Label>
-          <Label margin={10}>in {lang}</Label>
-        </Stat>
-      ))}
+    <Group>
+      {languages.length === 0 ? (
+        <Loader active inline="centered" />
+      ) : (
+        languages.map(({ lang, bytes }) => (
+          <Stat key={lang} fontSize="14pt">
+            <Value>
+              <CountUp start={0} end={bytes} />
+            </Value>
+            <Label margin={10}>bytes written in {lang}</Label>
+          </Stat>
+        ))
+      )}
     </Group>
   </Fragment>
 );

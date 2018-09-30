@@ -1,8 +1,13 @@
 import axios from "axios";
 
+const baseURL =
+  process.env.NODE_ENV === "production"
+    ? "https://api.github.com"
+    : "http://localhost:1337";
+
 export const github = token =>
   axios.create({
-    baseURL: `https://api.github.com`,
+    baseURL,
     auth: {
       username: "icyJoseph",
       password: `${token}`

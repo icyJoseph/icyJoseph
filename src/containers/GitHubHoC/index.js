@@ -51,6 +51,10 @@ export function withGitHub(toRender) {
       return this.setState({ desktop: matches });
     };
 
+    componentWillUnmount() {
+      return this.mediaQueryList.removeListener(this.updateMatches);
+    }
+
     render() {
       return toRender({ ...this.props, ...this.state });
     }

@@ -31,13 +31,15 @@ export const Hacks = ({
   contentId,
   closeDrawer,
   openDrawer,
-  data
+  data,
+  desktop
 }) => {
+  const filteredData = data.filter(d => !d.hide);
   const [firstRow, secondRow, thirdRow] = mapValueToFunctions(
     takeFirstRow,
     takeSecondRow,
     takeThirdRow
-  )(data);
+  )(filteredData);
 
   const { Content, background } = pipe(
     curry(isEqualId),
@@ -48,7 +50,7 @@ export const Hacks = ({
   return (
     <Fragment>
       <Pushable>
-        <Background background={codingBackground} />
+        {desktop && <Background background={codingBackground} />}
         <Drawer
           visibility={visibility}
           Content={Content}
@@ -57,7 +59,7 @@ export const Hacks = ({
         />
         <Sidebar.Pusher
           style={{
-            background: shadow,
+            background: desktop ? shadow : "dodgerblue",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -65,7 +67,7 @@ export const Hacks = ({
             flex: 1
           }}
         >
-          <MainTitle title="Coding/Hacks" />
+          <MainTitle title="Hacks" />
           <HexGrid
             clickHandler={openDrawer}
             rows={[firstRow, secondRow, thirdRow]}

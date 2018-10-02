@@ -7,8 +7,13 @@ export const Group = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  margin: 1%;
+  margin: 10px 10px;
+  justify-content: space-around;
+  width: ${props => (props.compact ? "auto" : "60%")};
   color: white;
+  @media (max-width: 649px) {
+    margin: 20px 10px;
+  }
 `;
 
 export const Stat = styled.div`
@@ -17,14 +22,16 @@ export const Stat = styled.div`
   flex-direction: column;
   color: white;
   font-size: 16pt;
-  justify-content: center;
   align-items: center;
-  margin: 20px;
+  margin: 5px 5px;
+  flex-wrap: wrap;
+  @media (max-width: 649px) {
+    margin: 10px 10px;
+  }
 `;
 
 export const Value = styled.div`
   flex: 4;
-  height: 20px;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,9 +1,11 @@
 import styled from "styled-components";
-import Menu from "semantic-ui-react/dist/commonjs/collections/Menu";
 
-export const MenuWrapper = styled(Menu)`
-  width: 100%;
+export const MenuWrapper = styled.div`
   border-radius: 0;
   position: fixed;
-  bottom: 0;
+  bottom: 25px;
+  z-index: 100;
+  display: flex;
+  right: 25px;
+  flex-direction: column;
 `;

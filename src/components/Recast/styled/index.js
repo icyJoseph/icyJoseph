@@ -3,7 +3,9 @@ import { colorPicker } from "../helpers";
 import { white, golden, orange } from "../../../constants";
 
 export const LibraryWrapper = styled.div`
+  margin: 0 auto;
   color: ${white};
+  width: 80%;
 `;
 
 export const TitleWrapper = styled.h3`
@@ -16,11 +18,12 @@ export const SubTitleWrapper = styled.h4`
 
 export const Description = styled.div`
   padding: 5px;
+  width: 80%;
 `;
 
 export const FunctionCard = styled.div`
-  margin: 10px 0 20px 0;
-  width: 300px;
+  margin: 0 auto;
+  width: 80%;
 `;
 
 export const FunctionName = styled.div`

@@ -1,75 +1,58 @@
 import React, { Component, Fragment } from "react";
+import { Button } from "semantic-ui-react";
 import Icon from "semantic-ui-react/dist/commonjs/elements/Icon";
-import Item from "semantic-ui-react/dist/commonjs/collections/Menu/MenuItem";
+
 import { MenuWrapper } from "./styled";
 import Contact from "../Contact";
 
 export class BottomMenu extends Component {
   state = { contact: false };
 
-  handleItemClick = this.handleItemClick.bind(this);
   handleClickContact = this.handleClickContact.bind(this);
   handleCloseContact = this.handleCloseContact.bind(this);
 
-  handleItemClick(e, { name }) {
-    return this.setState({ activeItem: name });
-  }
-
-  handleClickContact(e, { name }) {
-    return this.setState({ activeItem: name, contact: !this.state.contact });
+  handleClickContact() {
+    return this.setState(prevState => ({ contact: !prevState.contact }));
   }
 
   handleCloseContact() {
-    return this.setState({ activeItem: "", contact: false });
+    return this.setState({ contact: false });
   }
 
   render() {
-    const { activeItem, contact } = this.state;
+    const { contact } = this.state;
 
     return (
       <Fragment>
-        <MenuWrapper
-          fluid
-          widths={3}
-          icon="labeled"
-          inverted
-          style={{
-            borderRadius: 0,
-            position: "fixed",
-            bottom: 0,
-            width: "100%"
-          }}
-        >
-          <Item
-            name="LinkedIn"
-            active={activeItem === "LinkedIn"}
-            onClick={this.handleItemClick}
-            href="https://www.linkedin.com/in/joseph-chamochumbi-280255b3/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Icon name="linkedin" />
-            LinkedIn
-          </Item>
-          <Item
-            name="GitHub"
-            active={activeItem === "GitHub"}
-            onClick={this.handleItemClick}
+        <MenuWrapper>
+          <Button
+            circular
+            size="huge"
+            color="black"
             href="https://github.com/icyJoseph"
             target="_blank"
             rel="noopener noreferrer"
-          >
-            <Icon name="github alternate" />
-            GitHub
-          </Item>
-          <Item
-            name="Contact"
-            active={activeItem === "Contact"}
+            icon={<Icon name="github alternate" size="large" />}
+            style={{ margin: "5px" }}
+          />
+          <Button
+            circular
+            size="huge"
+            color="black"
+            href="https://medium.com/@icjoseph"
+            target="_blank"
+            rel="noopener noreferrer"
+            icon={<Icon name="medium" size="large" />}
+            style={{ margin: "5px" }}
+          />
+          <Button
+            circular
+            size="huge"
+            color="black"
             onClick={this.handleClickContact}
-          >
-            <Icon name="vcard outline" />
-            Contact
-          </Item>
+            icon={<Icon name="mail" size="large" />}
+            style={{ margin: "5px" }}
+          />
         </MenuWrapper>
         <Contact open={contact} handleClose={this.handleCloseContact} />
       </Fragment>

@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import Loadable from "react-loadable";
 import withGitHub from "../GitHubHoC";
-import { TabletWrapper, Background } from "./styled";
+import { Background, Container, Mask } from "../../components/Background";
 import Spinner from "../../components/Loading/Spinner";
 import nightBackground from "./night-coding.jpg";
 
@@ -40,8 +40,9 @@ export const Landing = ({
   desktop
 }) => (
   <Fragment>
-    {desktop && <Background background={nightBackground} />}
-    <TabletWrapper desktop={desktop}>
+    <Background desktop={desktop} background={nightBackground} />
+    <Mask tint={0.5} />
+    <Container>
       <AsyncTitle title="Joseph" {...noTransition} />
       <AsyncTitle title="Front-end developer" />
       <AsyncStatistics
@@ -52,7 +53,7 @@ export const Landing = ({
         desktop={desktop}
       />
       {!desktop && <AsyncTimeLine timeLine={timeLine} />}
-    </TabletWrapper>
+    </Container>
   </Fragment>
 );
 

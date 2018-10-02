@@ -11,7 +11,7 @@ export const Statistics = ({
   languages = []
 }) => (
   <Fragment>
-    <Group>
+    <Group compact>
       <Stat>
         <Value>
           <IconWrapper>
@@ -19,19 +19,19 @@ export const Statistics = ({
           </IconWrapper>
           <CountUp start={0} end={publicRepos} />
         </Value>
-        <Label margin={25}>Public Repos</Label>
+        <Label margin={10}>Public Repos</Label>
       </Stat>
       <Stat>
         <Value>
           <CountUp start={0} end={publicGists} />
         </Value>
-        <Label margin={25}>Public Gists</Label>
+        <Label margin={10}>Public Gists</Label>
       </Stat>
       <Stat>
         <Value>
           <CountUp start={0} end={commits} />
         </Value>
-        <Label margin={25}>Commits</Label>
+        <Label margin={10}>Commits</Label>
       </Stat>
     </Group>
     <Group>
@@ -39,7 +39,7 @@ export const Statistics = ({
         <Loader active inline="centered" />
       ) : (
         languages.map(({ lang, bytes }) => (
-          <Stat key={lang} fontSize="14pt">
+          <Stat key={lang} fontSize="14pt" direction="column">
             <Value>
               <CountUp start={0} end={bytes} />
             </Value>

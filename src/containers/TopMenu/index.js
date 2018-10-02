@@ -48,8 +48,8 @@ export class TopMenu extends Component {
           onClick={this.handleClick}
         />
         <Menu.Item
-          name="hacks"
-          active={activeItem === "hacks"}
+          name="coding"
+          active={activeItem === "coding"}
           onClick={this.handleClick}
         />
       </Menu>

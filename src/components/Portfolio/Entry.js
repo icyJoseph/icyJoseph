@@ -10,7 +10,9 @@ export const Entry = ({ name, description, topics, html_url }) => {
           <p>{description}</p>
         </Item.Description>
         <Item.Extra>
-          {topics.map(topic => <Label key={topic}>{topic}</Label>)}
+          {topics.map(topic => (
+            <Label key={topic}>{topic}</Label>
+          ))}
           <Button
             primary
             floated="right"

@@ -48,7 +48,7 @@ export const Routes = () => (
       <AsyncTopMenu />
       <Switch>
         <Route path="/blog" component={AsyncBlog} />
-        <Route path="/hacks" component={AsyncHacks} />
+        <Route path="/coding" component={AsyncHacks} />
         <Route path="/" exact component={AsyncLanding} />
         <Route component={AsyncNoMatch} />
       </Switch>

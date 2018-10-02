@@ -1,25 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, Segment } from "semantic-ui-react";
+import { Segment } from "semantic-ui-react";
 
-import { SideBarWrapper } from "./styled";
-
-export const Drawer = ({ visibility, Content, close, background }) => {
-  return (
-    <SideBarWrapper
-      as={Segment}
-      animation="overlay"
-      width="wide"
-      visible={visibility}
-      direction="right"
-      background={background}
-    >
-      <Button onClick={close}>Close</Button>
-      <Segment basic style={{ marginBottom: "60px" }}>
-        {Content && <Content />}
-      </Segment>
-    </SideBarWrapper>
-  );
+export const Drawer = ({ Content }) => {
+  return <Segment basic>{Content && <Content />}</Segment>;
 };
 
 export default Drawer;

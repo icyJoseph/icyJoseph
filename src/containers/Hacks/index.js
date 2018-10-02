@@ -1,30 +1,16 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import { Sidebar } from "semantic-ui-react";
 import withGitHub from "../GitHubHoC";
 import codingBackground from "./codingBackground.jpg";
-import { Background } from "../Landing/styled";
 
+import { Background, Mask } from "../../components/Background";
 import MainTitle from "../../components/MainTitle";
-import HexGrid from "../../components/HexGrid";
+import Dock from "../../components/Dock";
 import Drawer from "../../components/Drawer";
 
-import { Pushable } from "./styled";
-import { shadow } from "../../constants";
-import {
-  curry,
-  curryRight,
-  filterf,
-  head,
-  mapValueToFunctions,
-  take,
-  pipe
-} from "../../functional";
+import { curry, curryRight, filterf, head, pipe } from "../../functional";
 
 const isEqualId = (test, { id }) => id === test;
-const takeFirstRow = take(2, 0);
-const takeSecondRow = take(3, 2);
-const takeThirdRow = take(2, 5);
 
 export const Hacks = ({
   visibility,
@@ -35,11 +21,6 @@ export const Hacks = ({
   desktop
 }) => {
   const filteredData = data.filter(d => !d.hide);
-  const [firstRow, secondRow, thirdRow] = mapValueToFunctions(
-    takeFirstRow,
-    takeSecondRow,
-    takeThirdRow
-  )(filteredData);
 
   const { Content, background } = pipe(
     curry(isEqualId),
@@ -49,31 +30,16 @@ export const Hacks = ({
 
   return (
     <Fragment>
-      <Pushable>
-        {desktop && <Background background={codingBackground} />}
-        <Drawer
-          visibility={visibility}
-          Content={Content}
-          background={background}
-          close={closeDrawer}
-        />
-        <Sidebar.Pusher
-          style={{
-            background: desktop ? shadow : "dodgerblue",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            flex: 1
-          }}
-        >
-          <MainTitle title="Hacks" />
-          <HexGrid
-            clickHandler={openDrawer}
-            rows={[firstRow, secondRow, thirdRow]}
-          />
-        </Sidebar.Pusher>
-      </Pushable>
+      <Background desktop={desktop} background={codingBackground} />
+      <Mask tint={0.8} />
+      <MainTitle title="Coding" />
+      <Dock clickHandler={openDrawer} items={filteredData} />
+      <Drawer
+        visibility={visibility}
+        Content={Content}
+        background={background}
+        close={closeDrawer}
+      />
     </Fragment>
   );
 };

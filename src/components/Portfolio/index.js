@@ -57,7 +57,7 @@ export class Portfolio extends Component {
       type = "projects"
     } = this.props;
     return (
-      <Fragment>
+      <div style={{ width: "70%", margin: "0 auto" }}>
         <h3 style={{ color: "white" }}>
           {capitalize(meta)} {type}
         </h3>
@@ -66,7 +66,7 @@ export class Portfolio extends Component {
         ) : (
           this.renderRelevantEntries()
         )}
-      </Fragment>
+      </div>
     );
   }
 }

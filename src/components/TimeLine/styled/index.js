@@ -56,6 +56,7 @@ export const TimeWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 25px;
 `;
 
 export const Connection = styled.div`

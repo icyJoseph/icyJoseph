@@ -5,7 +5,7 @@ export const white = "rgb(255, 255, 255)";
 export const transparent = "rgba(0,0,0,0)";
 export const shadow = "rgba(0,0,0,0.4)";
 export const darkBlue = "#193549";
-
+export const dodgerblue = "dodgerblue";
 // names
 
 export const icyJoseph = "icyJoseph";

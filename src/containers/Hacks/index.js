@@ -1,28 +1,21 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import withGitHub from "../GitHubHoC";
-import codingBackground from "./codingBackground.jpg";
 
 import { Background, Mask } from "../../components/Background";
 import MainTitle from "../../components/MainTitle";
 import Dock from "../../components/Dock";
-import Drawer from "../../components/Drawer";
+import HacksContainer from "../../components/HacksContainer";
 
 import { curry, curryRight, filterf, head, pipe } from "../../functional";
+import codingBackground from "./codingBackground.jpg";
 
 const isEqualId = (test, { id }) => id === test;
 
-export const Hacks = ({
-  visibility,
-  contentId,
-  closeDrawer,
-  openDrawer,
-  data,
-  desktop
-}) => {
+export const Hacks = ({ contentId, openDrawer, data, desktop, github }) => {
   const filteredData = data.filter(d => !d.hide);
 
-  const { Content, background } = pipe(
+  const { Content } = pipe(
     curry(isEqualId),
     curryRight(filterf)(data),
     head
@@ -34,12 +27,7 @@ export const Hacks = ({
       <Mask tint={0.8} />
       <MainTitle title="Coding" />
       <Dock clickHandler={openDrawer} items={filteredData} />
-      <Drawer
-        visibility={visibility}
-        Content={Content}
-        background={background}
-        close={closeDrawer}
-      />
+      <HacksContainer Content={Content} github={github} />
     </Fragment>
   );
 };
@@ -47,9 +35,7 @@ export const Hacks = ({
 export default withGitHub(Hacks);
 
 Hacks.propTypes = {
-  visibility: PropTypes.bool,
   contentId: PropTypes.number,
-  closeDrawer: PropTypes.func,
   openDrawer: PropTypes.func,
   data: PropTypes.array
 };

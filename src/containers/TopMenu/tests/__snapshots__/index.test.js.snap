@@ -41,7 +41,7 @@ ShallowWrapper {
 />,
         <MenuItem
           active={false}
-          name="hacks"
+          name="coding"
           onClick={[Function]}
 />,
       ],
@@ -87,7 +87,7 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "active": false,
-          "name": "hacks",
+          "name": "coding",
           "onClick": [Function],
         },
         "ref": null,
@@ -116,7 +116,7 @@ ShallowWrapper {
 />,
           <MenuItem
             active={false}
-            name="hacks"
+            name="coding"
             onClick={[Function]}
 />,
         ],
@@ -162,7 +162,7 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "active": false,
-            "name": "hacks",
+            "name": "coding",
             "onClick": [Function],
           },
           "ref": null,

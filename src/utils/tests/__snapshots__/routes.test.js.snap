@@ -27,7 +27,7 @@ ShallowWrapper {
                 />
                 <Route
                         component={[Function]}
-                        path="/hacks"
+                        path="/coding"
                 />
                 <Route
                         component={[Function]}
@@ -57,7 +57,7 @@ ShallowWrapper {
             />
             <Route
                         component={[Function]}
-                        path="/hacks"
+                        path="/coding"
             />
             <Route
                         component={[Function]}
@@ -95,7 +95,7 @@ ShallowWrapper {
 />,
               <Route
                 component={[Function]}
-                path="/hacks"
+                path="/coding"
 />,
               <Route
                 component={[Function]}
@@ -127,7 +127,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "component": [Function],
-                "path": "/hacks",
+                "path": "/coding",
               },
               "ref": null,
               "rendered": null,
@@ -199,7 +199,7 @@ ShallowWrapper {
                     />
                     <Route
                               component={[Function]}
-                              path="/hacks"
+                              path="/coding"
                     />
                     <Route
                               component={[Function]}
@@ -229,7 +229,7 @@ ShallowWrapper {
               />
               <Route
                             component={[Function]}
-                            path="/hacks"
+                            path="/coding"
               />
               <Route
                             component={[Function]}
@@ -267,7 +267,7 @@ ShallowWrapper {
 />,
                 <Route
                   component={[Function]}
-                  path="/hacks"
+                  path="/coding"
 />,
                 <Route
                   component={[Function]}
@@ -299,7 +299,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "component": [Function],
-                  "path": "/hacks",
+                  "path": "/coding",
                 },
                 "ref": null,
                 "rendered": null,

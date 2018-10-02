@@ -29,7 +29,9 @@ ShallowWrapper {
     "nodeType": "function",
     "props": Object {
       "children": Array [
-        <styled.div>
+        <styled.div
+          compact={true}
+>
           <styled.div>
                     <styled.div>
                               <styled.div>
@@ -58,7 +60,7 @@ ShallowWrapper {
                               />
                     </styled.div>
                     <styled.div
-                              margin={25}
+                              margin={10}
                     >
                               Public Repos
                     </styled.div>
@@ -85,7 +87,7 @@ ShallowWrapper {
                               />
                     </styled.div>
                     <styled.div
-                              margin={25}
+                              margin={10}
                     >
                               Public Gists
                     </styled.div>
@@ -112,7 +114,7 @@ ShallowWrapper {
                               />
                     </styled.div>
                     <styled.div
-                              margin={25}
+                              margin={10}
                     >
                               Commits
                     </styled.div>
@@ -120,6 +122,7 @@ ShallowWrapper {
 </styled.div>,
         <styled.div>
           <styled.div
+                    direction="column"
                     fontSize="14pt"
           >
                     <styled.div>
@@ -188,7 +191,7 @@ ShallowWrapper {
                             />
               </styled.div>
               <styled.div
-                            margin={25}
+                            margin={10}
               >
                             Public Repos
               </styled.div>
@@ -215,7 +218,7 @@ ShallowWrapper {
                             />
               </styled.div>
               <styled.div
-                            margin={25}
+                            margin={10}
               >
                             Public Gists
               </styled.div>
@@ -242,12 +245,13 @@ ShallowWrapper {
                             />
               </styled.div>
               <styled.div
-                            margin={25}
+                            margin={10}
               >
                             Commits
               </styled.div>
 </styled.div>,
           ],
+          "compact": true,
         },
         "ref": null,
         "rendered": Array [
@@ -284,7 +288,7 @@ ShallowWrapper {
                   />
 </styled.div>,
                 <styled.div
-                  margin={25}
+                  margin={10}
 >
                   Public Repos
 </styled.div>,
@@ -386,7 +390,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "children": "Public Repos",
-                  "margin": 25,
+                  "margin": 10,
                 },
                 "ref": null,
                 "rendered": "Public Repos",
@@ -422,7 +426,7 @@ ShallowWrapper {
                   />
 </styled.div>,
                 <styled.div
-                  margin={25}
+                  margin={10}
 >
                   Public Gists
 </styled.div>,
@@ -489,7 +493,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "children": "Public Gists",
-                  "margin": 25,
+                  "margin": 10,
                 },
                 "ref": null,
                 "rendered": "Public Gists",
@@ -525,7 +529,7 @@ ShallowWrapper {
                   />
 </styled.div>,
                 <styled.div
-                  margin={25}
+                  margin={10}
 >
                   Commits
 </styled.div>,
@@ -592,7 +596,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "children": "Commits",
-                  "margin": 25,
+                  "margin": 10,
                 },
                 "ref": null,
                 "rendered": "Commits",
@@ -611,6 +615,7 @@ ShallowWrapper {
         "props": Object {
           "children": Array [
             <styled.div
+              direction="column"
               fontSize="14pt"
 >
               <styled.div>
@@ -677,6 +682,7 @@ ShallowWrapper {
                   javascript
 </styled.div>,
               ],
+              "direction": "column",
               "fontSize": "14pt",
             },
             "ref": null,
@@ -768,7 +774,9 @@ ShallowWrapper {
       "nodeType": "function",
       "props": Object {
         "children": Array [
-          <styled.div>
+          <styled.div
+            compact={true}
+>
             <styled.div>
                         <styled.div>
                                     <styled.div>
@@ -797,7 +805,7 @@ ShallowWrapper {
                                     />
                         </styled.div>
                         <styled.div
-                                    margin={25}
+                                    margin={10}
                         >
                                     Public Repos
                         </styled.div>
@@ -824,7 +832,7 @@ ShallowWrapper {
                                     />
                         </styled.div>
                         <styled.div
-                                    margin={25}
+                                    margin={10}
                         >
                                     Public Gists
                         </styled.div>
@@ -851,7 +859,7 @@ ShallowWrapper {
                                     />
                         </styled.div>
                         <styled.div
-                                    margin={25}
+                                    margin={10}
                         >
                                     Commits
                         </styled.div>
@@ -859,6 +867,7 @@ ShallowWrapper {
 </styled.div>,
           <styled.div>
             <styled.div
+                        direction="column"
                         fontSize="14pt"
             >
                         <styled.div>
@@ -927,7 +936,7 @@ ShallowWrapper {
                                 />
                 </styled.div>
                 <styled.div
-                                margin={25}
+                                margin={10}
                 >
                                 Public Repos
                 </styled.div>
@@ -954,7 +963,7 @@ ShallowWrapper {
                                 />
                 </styled.div>
                 <styled.div
-                                margin={25}
+                                margin={10}
                 >
                                 Public Gists
                 </styled.div>
@@ -981,12 +990,13 @@ ShallowWrapper {
                                 />
                 </styled.div>
                 <styled.div
-                                margin={25}
+                                margin={10}
                 >
                                 Commits
                 </styled.div>
 </styled.div>,
             ],
+            "compact": true,
           },
           "ref": null,
           "rendered": Array [
@@ -1023,7 +1033,7 @@ ShallowWrapper {
                     />
 </styled.div>,
                   <styled.div
-                    margin={25}
+                    margin={10}
 >
                     Public Repos
 </styled.div>,
@@ -1125,7 +1135,7 @@ ShallowWrapper {
                   "nodeType": "class",
                   "props": Object {
                     "children": "Public Repos",
-                    "margin": 25,
+                    "margin": 10,
                   },
                   "ref": null,
                   "rendered": "Public Repos",
@@ -1161,7 +1171,7 @@ ShallowWrapper {
                     />
 </styled.div>,
                   <styled.div
-                    margin={25}
+                    margin={10}
 >
                     Public Gists
 </styled.div>,
@@ -1228,7 +1238,7 @@ ShallowWrapper {
                   "nodeType": "class",
                   "props": Object {
                     "children": "Public Gists",
-                    "margin": 25,
+                    "margin": 10,
                   },
                   "ref": null,
                   "rendered": "Public Gists",
@@ -1264,7 +1274,7 @@ ShallowWrapper {
                     />
 </styled.div>,
                   <styled.div
-                    margin={25}
+                    margin={10}
 >
                     Commits
 </styled.div>,
@@ -1331,7 +1341,7 @@ ShallowWrapper {
                   "nodeType": "class",
                   "props": Object {
                     "children": "Commits",
-                    "margin": 25,
+                    "margin": 10,
                   },
                   "ref": null,
                   "rendered": "Commits",
@@ -1350,6 +1360,7 @@ ShallowWrapper {
           "props": Object {
             "children": Array [
               <styled.div
+                direction="column"
                 fontSize="14pt"
 >
                 <styled.div>
@@ -1416,6 +1427,7 @@ ShallowWrapper {
                     javascript
 </styled.div>,
                 ],
+                "direction": "column",
                 "fontSize": "14pt",
               },
               "ref": null,
@@ -1541,7 +1553,9 @@ ShallowWrapper {
     "nodeType": "function",
     "props": Object {
       "children": Array [
-        <styled.div>
+        <styled.div
+          compact={true}
+>
           <styled.div>
                     <styled.div>
                               <styled.div>
@@ -1570,7 +1584,7 @@ ShallowWrapper {
                               />
                     </styled.div>
                     <styled.div
-                              margin={25}
+                              margin={10}
                     >
                               Public Repos
                     </styled.div>
@@ -1597,7 +1611,7 @@ ShallowWrapper {
                               />
                     </styled.div>
                     <styled.div
-                              margin={25}
+                              margin={10}
                     >
                               Public Gists
                     </styled.div>
@@ -1624,7 +1638,7 @@ ShallowWrapper {
                               />
                     </styled.div>
                     <styled.div
-                              margin={25}
+                              margin={10}
                     >
                               Commits
                     </styled.div>
@@ -1674,7 +1688,7 @@ ShallowWrapper {
                             />
               </styled.div>
               <styled.div
-                            margin={25}
+                            margin={10}
               >
                             Public Repos
               </styled.div>
@@ -1701,7 +1715,7 @@ ShallowWrapper {
                             />
               </styled.div>
               <styled.div
-                            margin={25}
+                            margin={10}
               >
                             Public Gists
               </styled.div>
@@ -1728,12 +1742,13 @@ ShallowWrapper {
                             />
               </styled.div>
               <styled.div
-                            margin={25}
+                            margin={10}
               >
                             Commits
               </styled.div>
 </styled.div>,
           ],
+          "compact": true,
         },
         "ref": null,
         "rendered": Array [
@@ -1770,7 +1785,7 @@ ShallowWrapper {
                   />
 </styled.div>,
                 <styled.div
-                  margin={25}
+                  margin={10}
 >
                   Public Repos
 </styled.div>,
@@ -1872,7 +1887,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "children": "Public Repos",
-                  "margin": 25,
+                  "margin": 10,
                 },
                 "ref": null,
                 "rendered": "Public Repos",
@@ -1908,7 +1923,7 @@ ShallowWrapper {
                   />
 </styled.div>,
                 <styled.div
-                  margin={25}
+                  margin={10}
 >
                   Public Gists
 </styled.div>,
@@ -1975,7 +1990,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "children": "Public Gists",
-                  "margin": 25,
+                  "margin": 10,
                 },
                 "ref": null,
                 "rendered": "Public Gists",
@@ -2011,7 +2026,7 @@ ShallowWrapper {
                   />
 </styled.div>,
                 <styled.div
-                  margin={25}
+                  margin={10}
 >
                   Commits
 </styled.div>,
@@ -2078,7 +2093,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "children": "Commits",
-                  "margin": 25,
+                  "margin": 10,
                 },
                 "ref": null,
                 "rendered": "Commits",
@@ -2125,7 +2140,9 @@ ShallowWrapper {
       "nodeType": "function",
       "props": Object {
         "children": Array [
-          <styled.div>
+          <styled.div
+            compact={true}
+>
             <styled.div>
                         <styled.div>
                                     <styled.div>
@@ -2154,7 +2171,7 @@ ShallowWrapper {
                                     />
                         </styled.div>
                         <styled.div
-                                    margin={25}
+                                    margin={10}
                         >
                                     Public Repos
                         </styled.div>
@@ -2181,7 +2198,7 @@ ShallowWrapper {
                                     />
                         </styled.div>
                         <styled.div
-                                    margin={25}
+                                    margin={10}
                         >
                                     Public Gists
                         </styled.div>
@@ -2208,7 +2225,7 @@ ShallowWrapper {
                                     />
                         </styled.div>
                         <styled.div
-                                    margin={25}
+                                    margin={10}
                         >
                                     Commits
                         </styled.div>
@@ -2258,7 +2275,7 @@ ShallowWrapper {
                                 />
                 </styled.div>
                 <styled.div
-                                margin={25}
+                                margin={10}
                 >
                                 Public Repos
                 </styled.div>
@@ -2285,7 +2302,7 @@ ShallowWrapper {
                                 />
                 </styled.div>
                 <styled.div
-                                margin={25}
+                                margin={10}
                 >
                                 Public Gists
                 </styled.div>
@@ -2312,12 +2329,13 @@ ShallowWrapper {
                                 />
                 </styled.div>
                 <styled.div
-                                margin={25}
+                                margin={10}
                 >
                                 Commits
                 </styled.div>
 </styled.div>,
             ],
+            "compact": true,
           },
           "ref": null,
           "rendered": Array [
@@ -2354,7 +2372,7 @@ ShallowWrapper {
                     />
 </styled.div>,
                   <styled.div
-                    margin={25}
+                    margin={10}
 >
                     Public Repos
 </styled.div>,
@@ -2456,7 +2474,7 @@ ShallowWrapper {
                   "nodeType": "class",
                   "props": Object {
                     "children": "Public Repos",
-                    "margin": 25,
+                    "margin": 10,
                   },
                   "ref": null,
                   "rendered": "Public Repos",
@@ -2492,7 +2510,7 @@ ShallowWrapper {
                     />
 </styled.div>,
                   <styled.div
-                    margin={25}
+                    margin={10}
 >
                     Public Gists
 </styled.div>,
@@ -2559,7 +2577,7 @@ ShallowWrapper {
                   "nodeType": "class",
                   "props": Object {
                     "children": "Public Gists",
-                    "margin": 25,
+                    "margin": 10,
                   },
                   "ref": null,
                   "rendered": "Public Gists",
@@ -2595,7 +2613,7 @@ ShallowWrapper {
                     />
 </styled.div>,
                   <styled.div
-                    margin={25}
+                    margin={10}
 >
                     Commits
 </styled.div>,
@@ -2662,7 +2680,7 @@ ShallowWrapper {
                   "nodeType": "class",
                   "props": Object {
                     "children": "Commits",
-                    "margin": 25,
+                    "margin": 10,
                   },
                   "ref": null,
                   "rendered": "Commits",

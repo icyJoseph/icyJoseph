@@ -11,7 +11,8 @@ export const Background = styled.div.attrs({
   width: 100%;
   height: 100%;
   position: fixed;
-  top: 0px;
+  top: 0;
+  bottom: 0;
   z-index: -1;
 `;
 
@@ -23,7 +24,8 @@ export const Mask = styled.div.attrs({
   width: 100%;
   height: 100%;
   position: fixed;
-  top: 0px;
+  top: 0;
+  bottom: 0;
   z-index: -1;
 `;
 

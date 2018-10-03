@@ -21,7 +21,7 @@ const SadFace = styled.div`
   margin: 40px;
 `;
 
-const Error = styled.span`
+export const Error = styled.span`
   background: #fff;
   color: dodgerblue;
   padding: 2px 8px;

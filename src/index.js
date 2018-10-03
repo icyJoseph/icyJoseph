@@ -1,37 +1,28 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import "./index.css";
-import Routes from "./routes";
-import BSOD from "./containers/BSOD";
 import registerServiceWorker from "./registerServiceWorker";
 import configureStore from "./ducks/store/";
+import { browserRender } from "./config";
 
-const userAgent = window.navigator.userAgent;
-const userHasIE = /MSIE|Trident/.test(userAgent);
-const appRoot = document.getElementById("root");
+import "./index.css";
 
-if (userHasIE) {
-  ReactDOM.render(<BSOD />, appRoot);
-} else {
-  if ("ontouchstart" in document.documentElement) {
-    const highlight = "-webkit-tap-highlight-color";
-    document.body.style.cursor = "pointer";
-    document.body.style[highlight] = "transparent";
-  }
-
-  const storedState = localStorage.getItem("state");
-
-  const store = configureStore(
-    storedState ? JSON.parse(storedState) : undefined
-  );
-
-  ReactDOM.render(
-    <Provider store={store}>
-      <Routes />
-    </Provider>,
-    appRoot
-  );
-
-  registerServiceWorker();
+if ("ontouchstart" in document.documentElement) {
+  const highlight = "-webkit-tap-highlight-color";
+  document.body.style.cursor = "pointer";
+  document.body.style[highlight] = "transparent";
 }
+
+const storedState = localStorage.getItem("state");
+const store = configureStore(storedState ? JSON.parse(storedState) : undefined);
+// if the browser is IE it returns blue screen of death
+// otherwise return the routes for the app
+const App = browserRender();
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
+registerServiceWorker();

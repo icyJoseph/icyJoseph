@@ -56,11 +56,14 @@ export const TimeWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 25px;
 `;
 
 export const Connection = styled.div`
   flex: 1;
   align-items: center;
   justify-content: center;
+`;
+
+export const TimeLineContainer = styled.div`
+  margin-top: 25px;
 `;

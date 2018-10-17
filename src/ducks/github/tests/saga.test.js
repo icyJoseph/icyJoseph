@@ -89,7 +89,7 @@ describe("load contributions", () => {
     gen.next(SUCCESS_USER_DATA);
     gen.next(SUCCESS_USER_REPOS);
     gen.next("token");
-    gen.next([{ id: "repo" }]);
+    gen.next([{ id: "repo", fork: false, owner: { login: "user" } }]);
     gen.next({ login: "user" });
 
     expect(

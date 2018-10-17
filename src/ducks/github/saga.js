@@ -82,8 +82,12 @@ export function* loadContributions() {
   const repos = yield select(selectRepos);
   const { login } = yield select(selectUser);
 
+  const ownedByUser = repos.filter(
+    ({ owner, fork }) => owner.login === login && !fork
+  );
+
   const contributors = yield all(
-    repos.map(({ name }) => call(getRepoContributors, login, name, token))
+    ownedByUser.map(({ name }) => call(getRepoContributors, login, name, token))
   );
 
   const userContributions = flatten(contributors).filter(
@@ -105,7 +109,9 @@ export function* loadLanguages() {
   const repos = yield select(selectRepos);
   const { login } = yield select(selectUser);
 
-  const ownedByUser = repos.filter(({ owner }) => owner.login === login);
+  const ownedByUser = repos.filter(
+    ({ owner, fork }) => owner.login === login && !fork
+  );
   const languages = yield all(
     ownedByUser.map(({ name }) => call(getRepoLanguages, login, name, token))
   );

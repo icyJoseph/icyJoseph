@@ -12,6 +12,12 @@ const AsyncTitle = Loadable({
   delay: 400
 });
 
+const AsyncAssignment = Loadable({
+  loader: () => import("../../components/Assignment"),
+  loading: Spinner,
+  delay: 400
+});
+
 const AsyncStatistics = Loadable({
   loader: () => import("../../components/Statistics"),
   loading: Spinner,
@@ -23,12 +29,6 @@ const AsyncTimeLine = Loadable({
   loading: Spinner,
   delay: 700
 });
-
-const noTransition = {
-  timeout: 0,
-  delayMin: 0,
-  delayMax: 0
-};
 
 export const Landing = ({
   timeLine,
@@ -43,8 +43,9 @@ export const Landing = ({
     <Background desktop={desktop} background={nightBackground} />
     <Mask tint={0.5} />
     <Container>
-      <AsyncTitle title="Joseph" {...noTransition} />
-      <AsyncTitle title="Front-end developer" />
+      <AsyncTitle title="Joseph" subtitle="Front End Developer" center />
+      <AsyncAssignment title="By Day" subtitle="I work at Volvo Group" />
+      <AsyncTitle title="By Night" subtitle="I commit to GitHub" center />
       <AsyncStatistics
         publicRepos={public_repos}
         commits={commits}

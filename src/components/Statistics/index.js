@@ -1,8 +1,16 @@
-import React, { Fragment } from "react";
+import React from "react";
 import CountUp from "react-countup";
-import { Loader } from "semantic-ui-react";
-import { Group, Stat, Value, Label, IconWrapper } from "./styled";
-import Github from "../../logos/Github";
+import { Loader, Icon } from "semantic-ui-react";
+import { Group, Stat, Value, Label } from "./styled";
+
+const languageIcons = {
+  JavaScript: "js",
+  HTML: "html5",
+  CSS: "css3 alternate",
+  Python: "python"
+};
+
+const LangIcon = ({ icon }) => <Icon name={icon} />;
 
 export const Statistics = ({
   publicRepos = 0,
@@ -10,45 +18,44 @@ export const Statistics = ({
   commits = 0,
   languages = []
 }) => (
-  <Fragment>
-    <Group compact>
+  <div>
+    <Group inverted widths={3}>
       <Stat>
         <Value>
-          <IconWrapper>
-            <Github width={52} height={50} />
-          </IconWrapper>
+          <Icon name="github alternate" />
           <CountUp start={0} end={publicRepos} />
         </Value>
-        <Label margin={10}>Public Repos</Label>
-      </Stat>
-      <Stat>
-        <Value>
-          <CountUp start={0} end={publicGists} />
-        </Value>
-        <Label margin={10}>Public Gists</Label>
+        <Label>Public Repos</Label>
       </Stat>
       <Stat>
         <Value>
           <CountUp start={0} end={commits} />
         </Value>
-        <Label margin={10}>Commits</Label>
+        <Label>Commits</Label>
+      </Stat>
+      <Stat>
+        <Value>
+          <CountUp start={0} end={publicGists} />
+        </Value>
+        <Label>Public Gists</Label>
       </Stat>
     </Group>
-    <Group>
+    <Group inverted widths={2}>
       {languages.length === 0 ? (
         <Loader active inline="centered" />
       ) : (
         languages.map(({ lang, bytes }) => (
-          <Stat key={lang} fontSize="14pt" direction="column">
+          <Stat key={lang}>
             <Value>
+              <LangIcon icon={languageIcons[lang]} />
               <CountUp start={0} end={bytes} />
             </Value>
-            <Label margin={10}>bytes written in {lang}</Label>
+            <Label>bytes in {lang}</Label>
           </Stat>
         ))
       )}
     </Group>
-  </Fragment>
+  </div>
 );
 
 export default Statistics;

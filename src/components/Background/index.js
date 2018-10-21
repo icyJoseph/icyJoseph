@@ -9,9 +9,9 @@ export const Background = styled.div.attrs({
   })
 })`
   width: 100%;
-  height: 100%;
+  height: calc(100vh + 100px);
   position: fixed;
-  top: 0;
+  top: -100px;
   bottom: 0;
   z-index: -1;
 `;
@@ -22,9 +22,9 @@ export const Mask = styled.div.attrs({
   })
 })`
   width: 100%;
-  height: 100%;
+  height: calc(100vh + 100px);
   position: fixed;
-  top: 0;
+  top: -100px;
   bottom: 0;
   z-index: -1;
 `;

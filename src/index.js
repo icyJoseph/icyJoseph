@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
+import "react-app-polyfill/ie9";
+import "react-app-polyfill/ie11";
 import registerServiceWorker from "./registerServiceWorker";
 import configureStore from "./ducks/store/";
 import { browserRender } from "./config";

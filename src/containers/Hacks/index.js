@@ -25,7 +25,7 @@ export const Hacks = ({ contentId, openDrawer, data, desktop, github }) => {
     <Fragment>
       <Background desktop={desktop} background={codingBackground} />
       <Mask tint={0.8} />
-      <MainTitle title="Coding" />
+      <MainTitle title="Coding" subtitle="About me and my code" center />
       <Dock clickHandler={openDrawer} items={filteredData} />
       <HacksContainer Content={Content} github={github} />
     </Fragment>

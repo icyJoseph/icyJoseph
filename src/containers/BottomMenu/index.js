@@ -42,7 +42,7 @@ export class BottomMenu extends Component {
             href="https://medium.com/@icjoseph"
             target="_blank"
             rel="noopener noreferrer"
-            icon={<Icon name="medium" size="large" />}
+            icon={<Icon name="medium m" size="large" />}
             style={{ margin: "5px" }}
           />
           <Button

@@ -3,10 +3,10 @@
 exports[`Contact renders 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Unknown
-    handleClose={[Function]}
+  Symbol(enzyme.__unrendered__): <Contact
+    handleClose={[MockFunction]}
     open={true}
-/>,
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -23,32 +23,33 @@ ShallowWrapper {
       "children": Array [
         <ModalHeader>
           Contact
-</ModalHeader>,
+        </ModalHeader>,
         <ModalContent>
           <ModalDescription>
-                    <Header>
-                              Email
-                    </Header>
-                    <p>
-                              You can reach me via email to:
-                    </p>
-                    <p>
-                              contact@icjoseph.com
-                    </p>
+            <Header>
+              Email
+            </Header>
+            <p>
+              You can reach me via email to:
+            </p>
+            <p>
+              contact@icjoseph.com
+            </p>
           </ModalDescription>
-</ModalContent>,
+        </ModalContent>,
         <ModalActions>
           <Button
-                    as="button"
-                    color="black"
-                    onClick={[Function]}
+            as="button"
+            color="black"
+            onClick={[MockFunction]}
+            role="button"
           >
-                    Close
+            Close
           </Button>
-</ModalActions>,
+        </ModalActions>,
       ],
       "dimmer": true,
-      "onClose": [Function],
+      "onClose": [MockFunction],
       "open": true,
     },
     "ref": null,
@@ -71,15 +72,15 @@ ShallowWrapper {
         "props": Object {
           "children": <ModalDescription>
             <Header>
-                        Email
+              Email
             </Header>
             <p>
-                        You can reach me via email to:
+              You can reach me via email to:
             </p>
             <p>
-                        contact@icjoseph.com
+              contact@icjoseph.com
             </p>
-</ModalDescription>,
+          </ModalDescription>,
         },
         "ref": null,
         "rendered": Object {
@@ -90,13 +91,13 @@ ShallowWrapper {
             "children": Array [
               <Header>
                 Email
-</Header>,
+              </Header>,
               <p>
                 You can reach me via email to:
-</p>,
+              </p>,
               <p>
                 contact@icjoseph.com
-</p>,
+              </p>,
             ],
           },
           "ref": null,
@@ -147,10 +148,11 @@ ShallowWrapper {
           "children": <Button
             as="button"
             color="black"
-            onClick={[Function]}
->
+            onClick={[MockFunction]}
+            role="button"
+          >
             Close
-</Button>,
+          </Button>,
         },
         "ref": null,
         "rendered": Object {
@@ -161,7 +163,8 @@ ShallowWrapper {
             "as": "button",
             "children": "Close",
             "color": "black",
-            "onClick": [Function],
+            "onClick": [MockFunction],
+            "role": "button",
           },
           "ref": null,
           "rendered": "Close",
@@ -181,32 +184,33 @@ ShallowWrapper {
         "children": Array [
           <ModalHeader>
             Contact
-</ModalHeader>,
+          </ModalHeader>,
           <ModalContent>
             <ModalDescription>
-                        <Header>
-                                    Email
-                        </Header>
-                        <p>
-                                    You can reach me via email to:
-                        </p>
-                        <p>
-                                    contact@icjoseph.com
-                        </p>
+              <Header>
+                Email
+              </Header>
+              <p>
+                You can reach me via email to:
+              </p>
+              <p>
+                contact@icjoseph.com
+              </p>
             </ModalDescription>
-</ModalContent>,
+          </ModalContent>,
           <ModalActions>
             <Button
-                        as="button"
-                        color="black"
-                        onClick={[Function]}
+              as="button"
+              color="black"
+              onClick={[MockFunction]}
+              role="button"
             >
-                        Close
+              Close
             </Button>
-</ModalActions>,
+          </ModalActions>,
         ],
         "dimmer": true,
-        "onClose": [Function],
+        "onClose": [MockFunction],
         "open": true,
       },
       "ref": null,
@@ -229,15 +233,15 @@ ShallowWrapper {
           "props": Object {
             "children": <ModalDescription>
               <Header>
-                            Email
+                Email
               </Header>
               <p>
-                            You can reach me via email to:
+                You can reach me via email to:
               </p>
               <p>
-                            contact@icjoseph.com
+                contact@icjoseph.com
               </p>
-</ModalDescription>,
+            </ModalDescription>,
           },
           "ref": null,
           "rendered": Object {
@@ -248,13 +252,13 @@ ShallowWrapper {
               "children": Array [
                 <Header>
                   Email
-</Header>,
+                </Header>,
                 <p>
                   You can reach me via email to:
-</p>,
+                </p>,
                 <p>
                   contact@icjoseph.com
-</p>,
+                </p>,
               ],
             },
             "ref": null,
@@ -305,10 +309,11 @@ ShallowWrapper {
             "children": <Button
               as="button"
               color="black"
-              onClick={[Function]}
->
+              onClick={[MockFunction]}
+              role="button"
+            >
               Close
-</Button>,
+            </Button>,
           },
           "ref": null,
           "rendered": Object {
@@ -319,7 +324,8 @@ ShallowWrapper {
               "as": "button",
               "children": "Close",
               "color": "black",
-              "onClick": [Function],
+              "onClick": [MockFunction],
+              "role": "button",
             },
             "ref": null,
             "rendered": "Close",
@@ -347,8 +353,6 @@ ShallowWrapper {
         },
       },
     },
-    "attachTo": undefined,
-    "hydrateIn": undefined,
   },
 }
 `;

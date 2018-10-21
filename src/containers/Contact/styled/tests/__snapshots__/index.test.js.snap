@@ -17,6 +17,7 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "class",
     "props": Object {
+      "centered": true,
       "className": "sc-bdVaJa dPbbNX",
       "closeOnDimmerClick": true,
       "closeOnDocumentClick": false,
@@ -33,6 +34,7 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "class",
       "props": Object {
+        "centered": true,
         "className": "sc-bdVaJa dPbbNX",
         "closeOnDimmerClick": true,
         "closeOnDocumentClick": false,
@@ -60,8 +62,6 @@ ShallowWrapper {
         },
       },
     },
-    "attachTo": undefined,
-    "hydrateIn": undefined,
   },
 }
 `;

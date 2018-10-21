@@ -5,16 +5,16 @@ ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <TopMenu
     history={
-        Object {
-            "push": [Function],
-          }
+      Object {
+        "push": [MockFunction],
+      }
     }
     location={
-        Object {
-            "pathname": "",
-          }
+      Object {
+        "pathname": "",
+      }
     }
-/>,
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -33,17 +33,17 @@ ShallowWrapper {
           active={false}
           name="home"
           onClick={[Function]}
-/>,
+        />,
         <MenuItem
           active={false}
           name="blog"
           onClick={[Function]}
-/>,
+        />,
         <MenuItem
           active={false}
           name="coding"
           onClick={[Function]}
-/>,
+        />,
       ],
       "fluid": true,
       "inverted": true,
@@ -108,17 +108,17 @@ ShallowWrapper {
             active={false}
             name="home"
             onClick={[Function]}
-/>,
+          />,
           <MenuItem
             active={false}
             name="blog"
             onClick={[Function]}
-/>,
+          />,
           <MenuItem
             active={false}
             name="coding"
             onClick={[Function]}
-/>,
+          />,
         ],
         "fluid": true,
         "inverted": true,
@@ -189,8 +189,6 @@ ShallowWrapper {
         },
       },
     },
-    "attachTo": undefined,
-    "hydrateIn": undefined,
   },
 }
 `;

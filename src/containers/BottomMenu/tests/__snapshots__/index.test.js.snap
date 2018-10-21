@@ -1,0 +1,531 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BottomMenu renders 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <BottomMenu />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <styled.div>
+          <Button
+            as="button"
+            circular={true}
+            color="black"
+            href="https://github.com/icyJoseph"
+            icon={
+              <Icon
+                as="i"
+                name="github alternate"
+                size="large"
+              />
+            }
+            rel="noopener noreferrer"
+            role="button"
+            size="huge"
+            style={
+              Object {
+                "margin": "5px",
+              }
+            }
+            target="_blank"
+          />
+          <Button
+            as="button"
+            circular={true}
+            color="black"
+            href="https://medium.com/@icjoseph"
+            icon={
+              <Icon
+                as="i"
+                name="medium m"
+                size="large"
+              />
+            }
+            rel="noopener noreferrer"
+            role="button"
+            size="huge"
+            style={
+              Object {
+                "margin": "5px",
+              }
+            }
+            target="_blank"
+          />
+          <Button
+            as="button"
+            circular={true}
+            color="black"
+            icon={
+              <Icon
+                as="i"
+                name="mail"
+                size="large"
+              />
+            }
+            onClick={[Function]}
+            role="button"
+            size="huge"
+            style={
+              Object {
+                "margin": "5px",
+              }
+            }
+          />
+        </styled.div>,
+        <Contact
+          handleClose={[Function]}
+          open={false}
+        />,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <Button
+              as="button"
+              circular={true}
+              color="black"
+              href="https://github.com/icyJoseph"
+              icon={
+                <Icon
+                  as="i"
+                  name="github alternate"
+                  size="large"
+                />
+              }
+              rel="noopener noreferrer"
+              role="button"
+              size="huge"
+              style={
+                Object {
+                  "margin": "5px",
+                }
+              }
+              target="_blank"
+            />,
+            <Button
+              as="button"
+              circular={true}
+              color="black"
+              href="https://medium.com/@icjoseph"
+              icon={
+                <Icon
+                  as="i"
+                  name="medium m"
+                  size="large"
+                />
+              }
+              rel="noopener noreferrer"
+              role="button"
+              size="huge"
+              style={
+                Object {
+                  "margin": "5px",
+                }
+              }
+              target="_blank"
+            />,
+            <Button
+              as="button"
+              circular={true}
+              color="black"
+              icon={
+                <Icon
+                  as="i"
+                  name="mail"
+                  size="large"
+                />
+              }
+              onClick={[Function]}
+              role="button"
+              size="huge"
+              style={
+                Object {
+                  "margin": "5px",
+                }
+              }
+            />,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "as": "button",
+              "circular": true,
+              "color": "black",
+              "href": "https://github.com/icyJoseph",
+              "icon": <Icon
+                as="i"
+                name="github alternate"
+                size="large"
+              />,
+              "rel": "noopener noreferrer",
+              "role": "button",
+              "size": "huge",
+              "style": Object {
+                "margin": "5px",
+              },
+              "target": "_blank",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "as": "button",
+              "circular": true,
+              "color": "black",
+              "href": "https://medium.com/@icjoseph",
+              "icon": <Icon
+                as="i"
+                name="medium m"
+                size="large"
+              />,
+              "rel": "noopener noreferrer",
+              "role": "button",
+              "size": "huge",
+              "style": Object {
+                "margin": "5px",
+              },
+              "target": "_blank",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "as": "button",
+              "circular": true,
+              "color": "black",
+              "icon": <Icon
+                as="i"
+                name="mail"
+                size="large"
+              />,
+              "onClick": [Function],
+              "role": "button",
+              "size": "huge",
+              "style": Object {
+                "margin": "5px",
+              },
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "handleClose": [Function],
+          "open": false,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": Symbol(react.fragment),
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <styled.div>
+            <Button
+              as="button"
+              circular={true}
+              color="black"
+              href="https://github.com/icyJoseph"
+              icon={
+                <Icon
+                  as="i"
+                  name="github alternate"
+                  size="large"
+                />
+              }
+              rel="noopener noreferrer"
+              role="button"
+              size="huge"
+              style={
+                Object {
+                  "margin": "5px",
+                }
+              }
+              target="_blank"
+            />
+            <Button
+              as="button"
+              circular={true}
+              color="black"
+              href="https://medium.com/@icjoseph"
+              icon={
+                <Icon
+                  as="i"
+                  name="medium m"
+                  size="large"
+                />
+              }
+              rel="noopener noreferrer"
+              role="button"
+              size="huge"
+              style={
+                Object {
+                  "margin": "5px",
+                }
+              }
+              target="_blank"
+            />
+            <Button
+              as="button"
+              circular={true}
+              color="black"
+              icon={
+                <Icon
+                  as="i"
+                  name="mail"
+                  size="large"
+                />
+              }
+              onClick={[Function]}
+              role="button"
+              size="huge"
+              style={
+                Object {
+                  "margin": "5px",
+                }
+              }
+            />
+          </styled.div>,
+          <Contact
+            handleClose={[Function]}
+            open={false}
+          />,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              <Button
+                as="button"
+                circular={true}
+                color="black"
+                href="https://github.com/icyJoseph"
+                icon={
+                  <Icon
+                    as="i"
+                    name="github alternate"
+                    size="large"
+                  />
+                }
+                rel="noopener noreferrer"
+                role="button"
+                size="huge"
+                style={
+                  Object {
+                    "margin": "5px",
+                  }
+                }
+                target="_blank"
+              />,
+              <Button
+                as="button"
+                circular={true}
+                color="black"
+                href="https://medium.com/@icjoseph"
+                icon={
+                  <Icon
+                    as="i"
+                    name="medium m"
+                    size="large"
+                  />
+                }
+                rel="noopener noreferrer"
+                role="button"
+                size="huge"
+                style={
+                  Object {
+                    "margin": "5px",
+                  }
+                }
+                target="_blank"
+              />,
+              <Button
+                as="button"
+                circular={true}
+                color="black"
+                icon={
+                  <Icon
+                    as="i"
+                    name="mail"
+                    size="large"
+                  />
+                }
+                onClick={[Function]}
+                role="button"
+                size="huge"
+                style={
+                  Object {
+                    "margin": "5px",
+                  }
+                }
+              />,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "as": "button",
+                "circular": true,
+                "color": "black",
+                "href": "https://github.com/icyJoseph",
+                "icon": <Icon
+                  as="i"
+                  name="github alternate"
+                  size="large"
+                />,
+                "rel": "noopener noreferrer",
+                "role": "button",
+                "size": "huge",
+                "style": Object {
+                  "margin": "5px",
+                },
+                "target": "_blank",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "as": "button",
+                "circular": true,
+                "color": "black",
+                "href": "https://medium.com/@icjoseph",
+                "icon": <Icon
+                  as="i"
+                  name="medium m"
+                  size="large"
+                />,
+                "rel": "noopener noreferrer",
+                "role": "button",
+                "size": "huge",
+                "style": Object {
+                  "margin": "5px",
+                },
+                "target": "_blank",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "as": "button",
+                "circular": true,
+                "color": "black",
+                "icon": <Icon
+                  as="i"
+                  name="mail"
+                  size="large"
+                />,
+                "onClick": [Function],
+                "role": "button",
+                "size": "huge",
+                "style": Object {
+                  "margin": "5px",
+                },
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "handleClose": [Function],
+            "open": false,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": Symbol(react.fragment),
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

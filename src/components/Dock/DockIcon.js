@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { curry } from "../../functional";
 
-export const HexGridColumn = ({ tile, clickHandler }) => {
+export const DockIcon = ({ tile, clickHandler }) => {
   const { id, Component, fill } = tile;
   const injectHandlerWithContent = curry(clickHandler)(id);
   return (
@@ -17,14 +17,13 @@ export const HexGridColumn = ({ tile, clickHandler }) => {
       }}
     >
       <Component handler={injectHandlerWithContent} fill={fill} />
-      />
     </svg>
   );
 };
 
-export default HexGridColumn;
+export default DockIcon;
 
-HexGridColumn.propTypes = {
+DockIcon.propTypes = {
   tile: PropTypes.shape({
     Component: PropTypes.func,
     fill: PropTypes.string,

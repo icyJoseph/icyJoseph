@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Icon from "./Icon";
+import DockIcon from "./DockIcon";
 
-export const HexGrid = ({ items, clickHandler }) => {
+export const Dock = ({ items, clickHandler }) => {
   return (
     <div
       style={{
@@ -13,15 +13,15 @@ export const HexGrid = ({ items, clickHandler }) => {
       }}
     >
       {items.map(tile => (
-        <Icon key={tile.id} clickHandler={clickHandler} tile={tile} />
+        <DockIcon key={tile.id} clickHandler={clickHandler} tile={tile} />
       ))}
     </div>
   );
 };
 
-export default HexGrid;
+export default Dock;
 
-HexGrid.propTypes = {
+Dock.propTypes = {
   rows: PropTypes.arrayOf(PropTypes.array),
   clickHandler: PropTypes.func
 };

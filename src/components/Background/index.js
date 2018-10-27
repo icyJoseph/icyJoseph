@@ -1,30 +1,27 @@
 import styled from "styled-components";
-import { dodgerblue } from "../../constants";
 
 export const Background = styled.div.attrs({
-  style: props => ({
-    background: props.desktop
-      ? `url(${props.background}) 100% 100% / cover`
-      : dodgerblue
+  style: ({ background, desktop }) => ({
+    background: desktop && `url(${background}) 100% 100% / cover`
   })
 })`
   width: 100%;
-  height: calc(100vh + 100px);
+  height: 100%;
   position: fixed;
-  top: -100px;
+  top: 0;
   bottom: 0;
   z-index: -1;
 `;
 
 export const Mask = styled.div.attrs({
-  style: ({ tint = 0.3 }) => ({
-    backgroundColor: `rgba(0,0,0,${tint})`
+  style: ({ desktop, tint = 0.3 }) => ({
+    backgroundColor: desktop && `rgba(0,0,0,${tint})`
   })
 })`
   width: 100%;
-  height: calc(100vh + 100px);
+  height: 100%;
   position: fixed;
-  top: -100px;
+  top: 0;
   bottom: 0;
   z-index: -1;
 `;

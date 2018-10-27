@@ -10,13 +10,13 @@ import HacksContainer from "../../components/HacksContainer";
 import { curry, curryRight, filterf, head, pipe } from "../../functional";
 import codingBackground from "../../assets/images/codingBackground.jpg";
 
-const isEqualId = (test, { id }) => id === test;
+const isEqualId = (contentId, { id }) => id === contentId;
 
 export const Hacks = ({ contentId, openDrawer, data, desktop, github }) => {
   const filteredData = data.filter(d => !d.hide);
 
   const { Content } = pipe(
-    curry(isEqualId),
+    curry(isEqualId), // -> pass this function as the next argument
     curryRight(filterf)(data),
     head
   )(contentId);
@@ -27,7 +27,11 @@ export const Hacks = ({ contentId, openDrawer, data, desktop, github }) => {
       <Mask desktop={desktop} tint={0.5} />
       <ContentWrap>
         <MainTitle title="Coding" subtitle="About me and my code" center />
-        <Dock clickHandler={openDrawer} items={filteredData} />
+        <Dock
+          clickHandler={openDrawer}
+          items={filteredData}
+          contentId={contentId}
+        />
         <HacksContainer Content={Content} github={github} />
       </ContentWrap>
     </Fragment>

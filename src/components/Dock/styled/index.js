@@ -6,6 +6,9 @@ export const DockWrap = styled.div`
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
+  @media (min-width: 1023px) {
+    width: 60%;
+  }
 `;
 
 export const IconWrap = styled.div`

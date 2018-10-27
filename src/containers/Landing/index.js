@@ -27,12 +27,30 @@ const AsyncStatistics = Loadable({
   delay: 700
 });
 
+const AsyncFeatured = Loadable({
+  loader: () =>
+    import(/*webpackChunkName: "AsyncFeatured"*/ "../../components/Featured"),
+  loading: Spinner,
+  delay: 700
+});
+
 const AsyncTimeLine = Loadable({
   loader: () =>
     import(/*webpackChunkName: "AsyncTimeLine"*/ "../../components/TimeLine"),
   loading: Spinner,
   delay: 700
 });
+
+const titles = [
+  {
+    title: "By Day",
+    subtitle: "I work at Volvo Group"
+  },
+  {
+    title: "By Night",
+    subtitle: "I commit to GitHub"
+  }
+];
 
 export const Landing = ({
   timeLine,
@@ -48,8 +66,7 @@ export const Landing = ({
     <Mask desktop={desktop} tint={0.5} />
     <ContentWrap>
       <AsyncTitle title="Joseph" subtitle="Front End Developer" center />
-      <AsyncAssignment title="By Day" subtitle="I work at Volvo Group" />
-      <AsyncTitle title="By Night" subtitle="I commit to GitHub" center />
+      <AsyncAssignment titles={titles} />
       <AsyncStatistics
         publicRepos={public_repos}
         commits={commits}
@@ -57,6 +74,7 @@ export const Landing = ({
         languages={languages}
         desktop={desktop}
       />
+      {languages.length > 0 && <AsyncFeatured />}
       {!desktop && <AsyncTimeLine timeLine={timeLine} />}
     </ContentWrap>
   </Fragment>

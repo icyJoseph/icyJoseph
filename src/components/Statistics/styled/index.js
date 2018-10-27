@@ -10,15 +10,12 @@ export const Group = styled(Statistic.Group)`
 `;
 
 export const Stat = styled(Statistic)`
-  font-size: 16pt;
   padding: 5px 5px;
   @media (max-width: 649px) {
     padding: 10px 10px;
   }
 `;
 
-export const Value = styled(Statistic.Value)`
-  font-size: 32pt;
-`;
+export const Value = styled(Statistic.Value)``;
 
 export const Label = styled(Statistic.Label)``;

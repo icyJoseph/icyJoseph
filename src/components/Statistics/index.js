@@ -16,10 +16,11 @@ export const Statistics = ({
   publicRepos = 0,
   publicGists = 0,
   commits = 0,
-  languages = []
+  languages = [],
+  desktop
 }) => (
   <div>
-    <Group inverted widths={3}>
+    <Group inverted widths={3} size={desktop ? "large" : "small"}>
       <Stat>
         <Value>
           <Icon name="github alternate" />
@@ -40,7 +41,7 @@ export const Statistics = ({
         <Label>Public Gists</Label>
       </Stat>
     </Group>
-    <Group inverted widths={2}>
+    <Group inverted widths={2} size={desktop ? "small" : "tiny"}>
       {languages.length === 0 ? (
         <Loader active inline="centered" />
       ) : (

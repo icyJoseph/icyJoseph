@@ -10,7 +10,8 @@ export default [
     title: "About Me",
     meta: "Joseph",
     Component: Loadable({
-      loader: () => import("../logos"),
+      loader: () =>
+        import(/*webpackChunkName: "AboutMe_Component"*/ "../logos"),
       loading() {
         return <SpinLogo />;
       },
@@ -23,7 +24,8 @@ export default [
     background: "#193549",
     backgroundFill: "tomato",
     Content: Loadable({
-      loader: () => import("../components/About"),
+      loader: () =>
+        import(/*webpackChunkName: "AboutMe_Content"*/ "../components/About"),
       loading() {
         return <Spinner />;
       }
@@ -34,7 +36,8 @@ export default [
     title: "ReactJS",
     meta: "Certified",
     Component: Loadable({
-      loader: () => import("../logos"),
+      loader: () =>
+        import(/*webpackChunkName: "ReactJS_Component"*/ "../logos"),
       loading() {
         return <SpinLogo />;
       },
@@ -47,7 +50,8 @@ export default [
     background: "#193549",
     backgroundFill: "tomato",
     Content: Loadable({
-      loader: () => import("../components/Portfolio"),
+      loader: () =>
+        import(/*webpackChunkName: "ReactJS_Content"*/ "../components/Portfolio"),
       render(loaded, props) {
         let Component = loaded.default;
         return <Component {...props} meta="react" type="repos" />;
@@ -63,7 +67,8 @@ export default [
     meta: "Favorite Language",
     background: "#193549",
     Component: Loadable({
-      loader: () => import("../logos"),
+      loader: () =>
+        import(/*webpackChunkName: "JavaScript_Component"*/ "../logos"),
       loading() {
         return <SpinLogo />;
       },
@@ -75,7 +80,8 @@ export default [
     fill: "#F0DB4F",
     backgroundFill: "tomato",
     Content: Loadable({
-      loader: () => import("../components/Recast"),
+      loader: () =>
+        import(/*webpackChunkName: "JavaScript_Content"*/ "../components/Recast"),
       loading() {
         return <Spinner />;
       }
@@ -86,7 +92,7 @@ export default [
     title: "Redux",
     meta: "Framework",
     Component: Loadable({
-      loader: () => import("../logos"),
+      loader: () => import(/*webpackChunkName: "Redux_Component"*/ "../logos"),
       loading() {
         return <SpinLogo />;
       },
@@ -99,7 +105,8 @@ export default [
     background: "#193549",
     backgroundFill: "#5159BF",
     Content: Loadable({
-      loader: () => import("../components/Portfolio"),
+      loader: () =>
+        import(/*webpackChunkName: "JavaScript_Content"*/ "../components/Portfolio"),
       render(loaded, props) {
         let Component = loaded.default;
         return <Component {...props} meta="redux" type="repos" />;
@@ -114,7 +121,8 @@ export default [
     title: "algorithms",
     meta: "Problem Solving",
     Component: Loadable({
-      loader: () => import("../logos"),
+      loader: () =>
+        import(/*webpackChunkName: "Algorithms_Component"*/ "../logos"),
       loading() {
         return <SpinLogo />;
       },
@@ -127,7 +135,8 @@ export default [
     background: "#193549",
     backgroundFill: "tomato",
     Content: Loadable({
-      loader: () => import("../components/Portfolio"),
+      loader: () =>
+        import(/*webpackChunkName: "Algorithms_Content"*/ "../components/Portfolio"),
       render(loaded, props) {
         let Component = loaded.default;
         return <Component {...props} meta="algorithms" type="solutions" />;
@@ -143,7 +152,8 @@ export default [
     title: "experience",
     meta: "My career",
     Component: Loadable({
-      loader: () => import("../logos/Experience"),
+      loader: () =>
+        import(/*webpackChunkName: "Experience_Component"*/ "../logos/Experience"),
       loading() {
         return <SpinLogo />;
       }
@@ -152,7 +162,8 @@ export default [
     background: "#193549",
     backgroundFill: "tomato",
     Content: Loadable({
-      loader: () => import("../components/TimeLine"),
+      loader: () =>
+        import(/*webpackChunkName: "Experience_Content"*/ "../components/TimeLine"),
       render(loaded, props) {
         let Component = loaded.default;
         return <Component {...props} experience data={TimeLine} />;
@@ -167,7 +178,7 @@ export default [
     title: "python",
     meta: "Code as a hobby",
     Component: Loadable({
-      loader: () => import("../logos"),
+      loader: () => import(/*webpackChunkName: "Python_Component"*/ "../logos"),
       loading() {
         return <SpinLogo />;
       },
@@ -180,7 +191,8 @@ export default [
     background: "#193549",
     backgroundFill: "tomato",
     Content: Loadable({
-      loader: () => import("../components/Portfolio"),
+      loader: () =>
+        import(/*webpackChunkName: "Python_Content"*/ "../components/Portfolio"),
       render(loaded, props) {
         let Component = loaded.default;
         return <Component {...props} meta="python" type="scripts" />;
@@ -195,7 +207,8 @@ export default [
     title: "hackathon",
     meta: "Value Creation",
     Component: Loadable({
-      loader: () => import("../logos"),
+      loader: () =>
+        import(/*webpackChunkName: "Hackathon_Component"*/ "../logos"),
       loading() {
         return <SpinLogo />;
       },
@@ -208,7 +221,8 @@ export default [
     background: "#193549",
     backgroundFill: "tomato",
     Content: Loadable({
-      loader: () => import("../components/Portfolio"),
+      loader: () =>
+        import(/*webpackChunkName: "Hackathon_Content"*/ "../components/Portfolio"),
       render(loaded, props) {
         let Component = loaded.default;
         return <Component {...props} meta="hackathon" />;
@@ -224,7 +238,8 @@ export default [
     title: "awards",
     meta: "Acknowledgments",
     Component: Loadable({
-      loader: () => import("../logos/Award"),
+      loader: () =>
+        import(/*webpackChunkName: "Awards_Component"*/ "../logos/Award"),
       loading() {
         return <SpinLogo />;
       }
@@ -232,7 +247,8 @@ export default [
     fill: "#C92F00",
     backgroundFill: "tomato",
     Content: Loadable({
-      loader: () => import("../components/Common"),
+      loader: () =>
+        import(/*webpackChunkName: "Awards_Content"*/ "../components/Common"),
       render(loaded, props) {
         let Component = loaded.default;
         return <Component {...props} title={"awards"} />;
@@ -248,7 +264,8 @@ export default [
     title: "currently",
     meta: "Life as a React Developer",
     Component: Loadable({
-      loader: () => import("../logos/Report"),
+      loader: () =>
+        import(/*webpackChunkName: "Currently_Component"*/ "../logos/Report"),
       loading() {
         return <SpinLogo />;
       }
@@ -256,7 +273,8 @@ export default [
     fill: "#273B7A",
     backgroundFill: "tomato",
     Content: Loadable({
-      loader: () => import("../components/Common"),
+      loader: () =>
+        import(/*webpackChunkName: "Currently_Content"*/ "../components/Common"),
       render(loaded, props) {
         let Component = loaded.default;
         return <Component {...props} title={"currently"} />;

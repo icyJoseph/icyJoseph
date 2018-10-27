@@ -7,25 +7,29 @@ import Spinner from "../../logos/Spinner";
 import nightBackground from "../../assets/images/night-coding.jpg";
 
 const AsyncTitle = Loadable({
-  loader: () => import("../../components/MainTitle"),
+  loader: () =>
+    import(/*webpackChunkName: "AsyncTitle"*/ "../../components/MainTitle"),
   loading: Spinner,
   delay: 400
 });
 
 const AsyncAssignment = Loadable({
-  loader: () => import("../../components/Assignment"),
+  loader: () =>
+    import(/*webpackChunkName: "AsyncAssignment"*/ "../../components/Assignment"),
   loading: Spinner,
   delay: 400
 });
 
 const AsyncStatistics = Loadable({
-  loader: () => import("../../components/Statistics"),
+  loader: () =>
+    import(/*webpackChunkName: "AsyncStatistics"*/ "../../components/Statistics"),
   loading: Spinner,
   delay: 700
 });
 
 const AsyncTimeLine = Loadable({
-  loader: () => import("../../components/TimeLine"),
+  loader: () =>
+    import(/*webpackChunkName: "AsyncTimeLine"*/ "../../components/TimeLine"),
   loading: Spinner,
   delay: 700
 });

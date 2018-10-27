@@ -7,37 +7,41 @@ import BottomLoader from "./components/Loading/BottomLoader";
 import ServiceWorkerMessage from "./components/ServiceWorkerMessage";
 
 export const AsyncLanding = Loadable({
-  loader: () => import("./containers/Landing"),
+  loader: () =>
+    import(/*webpackChunkName: "AsyncLanding"*/ "./containers/Landing"),
   loading: BodyLoader,
   delay: 600
 });
 
 export const AsyncHacks = Loadable({
-  loader: () => import("./containers/Hacks"),
+  loader: () => import(/*webpackChunkName: "AsyncHacks"*/ "./containers/Hacks"),
   loading: BodyLoader,
   delay: 600
 });
 
 export const AsyncBlog = Loadable({
-  loader: () => import("./containers/Blog"),
+  loader: () => import(/*webpackChunkName: "AsyncBlog"*/ "./containers/Blog"),
   loading: BodyLoader,
   delay: 600
 });
 
 export const AsyncNoMatch = Loadable({
-  loader: () => import("./containers/NoMatch"),
+  loader: () =>
+    import(/*webpackChunkName: "AsyncNoMatch"*/ "./containers/NoMatch"),
   loading: BodyLoader,
   delay: 600
 });
 
 export const AsyncTopMenu = Loadable({
-  loader: () => import("./containers/TopMenu"),
+  loader: () =>
+    import(/*webpackChunkName: "AsyncTopMenu"*/ "./containers/TopMenu"),
   loading: HeaderLoader,
   delay: 600
 });
 
 export const AsyncBottomMenu = Loadable({
-  loader: () => import("./containers/BottomMenu"),
+  loader: () =>
+    import(/*webpackChunkName: "AsyncBottomMenu"*/ "./containers/BottomMenu"),
   loading: BottomLoader,
   delay: 600
 });

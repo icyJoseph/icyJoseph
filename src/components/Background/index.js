@@ -26,7 +26,7 @@ export const Mask = styled.div.attrs({
   z-index: -1;
 `;
 
-export const Container = styled.div`
+export const ContentWrap = styled.div`
   position: absolute;
   top: 100px;
   width: 100%;

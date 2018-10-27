@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import Loadable from "react-loadable";
 import withGitHub from "../GitHubHoC";
-import { Background, Container, Mask } from "../../components/Background";
+import { Background, ContentWrap, Mask } from "../../components/Background";
 import Spinner from "../../components/Loading/Spinner";
 import nightBackground from "../../assets/images/night-coding.jpg";
 
@@ -42,7 +42,7 @@ export const Landing = ({
   <Fragment>
     <Background desktop={desktop} background={nightBackground} />
     <Mask desktop={desktop} tint={0.5} />
-    <Container>
+    <ContentWrap>
       <AsyncTitle title="Joseph" subtitle="Front End Developer" center />
       <AsyncAssignment title="By Day" subtitle="I work at Volvo Group" />
       <AsyncTitle title="By Night" subtitle="I commit to GitHub" center />
@@ -54,7 +54,7 @@ export const Landing = ({
         desktop={desktop}
       />
       {!desktop && <AsyncTimeLine timeLine={timeLine} />}
-    </Container>
+    </ContentWrap>
   </Fragment>
 );
 

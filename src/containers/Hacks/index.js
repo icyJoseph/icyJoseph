@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import withGitHub from "../GitHubHoC";
 
-import { Background, Mask, Container } from "../../components/Background";
+import { Background, Mask, ContentWrap } from "../../components/Background";
 import MainTitle from "../../components/MainTitle";
 import Dock from "../../components/Dock";
 import HacksContainer from "../../components/HacksContainer";
@@ -25,11 +25,11 @@ export const Hacks = ({ contentId, openDrawer, data, desktop, github }) => {
     <Fragment>
       <Background desktop={desktop} background={codingBackground} />
       <Mask desktop={desktop} tint={0.5} />
-      <Container>
+      <ContentWrap>
         <MainTitle title="Coding" subtitle="About me and my code" center />
         <Dock clickHandler={openDrawer} items={filteredData} />
         <HacksContainer Content={Content} github={github} />
-      </Container>
+      </ContentWrap>
     </Fragment>
   );
 };

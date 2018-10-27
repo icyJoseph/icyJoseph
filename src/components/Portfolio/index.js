@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { Item, Loader, Icon, Label } from "semantic-ui-react";
+import { Container, Item, Loader, Icon, Label } from "semantic-ui-react";
 import Entry from "./Entry";
 import { fetchUserRepos } from "../../ducks/github";
 import { shouldFetch } from "../../helpers";
@@ -56,9 +56,10 @@ export class Portfolio extends Component {
       meta,
       type = "projects"
     } = this.props;
+
     return (
-      <div style={{ width: "70%", margin: "0 auto" }}>
-        <h3 style={{ color: "white" }}>
+      <Container>
+        <h3 style={portFolioTitleStyle}>
           {capitalize(meta)} {type}
         </h3>
         {topics.length === 0 ? (
@@ -66,13 +67,16 @@ export class Portfolio extends Component {
         ) : (
           this.renderRelevantEntries()
         )}
-      </div>
+      </Container>
     );
   }
 }
 
 const mapStateToProps = ({ github }) => ({ github });
 const mapDispatchToProps = { fetchUserRepos };
+const portFolioTitleStyle = {
+  color: "white"
+};
 
 export default connect(
   mapStateToProps,

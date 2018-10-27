@@ -7,7 +7,7 @@ const CompositeLogo = ({ name, corner, handler, isSelected }) => {
   return (
     <Icon.Group size="huge" onClick={handler}>
       <Icon inverted name={name} {...semanticProps} />
-      {corner && <Icon corner name={corner} />}
+      {corner && <Icon corner name={corner} color="purple" />}
     </Icon.Group>
   );
 };

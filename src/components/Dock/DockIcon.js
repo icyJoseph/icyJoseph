@@ -1,23 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { IconWrap } from "./styled";
 import { curry } from "../../functional";
 
 export const DockIcon = ({ tile, clickHandler }) => {
   const { id, Component, fill } = tile;
   const injectHandlerWithContent = curry(clickHandler)(id);
   return (
-    <svg
-      style={{
-        height: "100px",
-        width: "100px",
-        margin: "5px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center"
-      }}
-    >
+    <IconWrap>
       <Component handler={injectHandlerWithContent} fill={fill} />
-    </svg>
+    </IconWrap>
   );
 };
 

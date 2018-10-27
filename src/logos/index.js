@@ -10,19 +10,7 @@ const CompositeLogo = ({ name, corner, handler }) => (
 );
 
 export const Logo = props => {
-  return (
-    <div
-      style={{
-        display: "flex",
-        minWidth: "100px",
-        height: "100px",
-        justifyContent: "center",
-        alignItems: "center"
-      }}
-    >
-      <CompositeLogo {...props} />
-    </div>
-  );
+  return <CompositeLogo {...props} />;
 };
 
 export default Logo;

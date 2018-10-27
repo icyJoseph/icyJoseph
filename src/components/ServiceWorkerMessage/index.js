@@ -33,7 +33,7 @@ export class ServiceWorkerMessage extends Component {
   refreshPage() {
     return new Promise(resolve =>
       resolve(localStorage.removeItem("state"))
-    ).then(() => window.location.reload());
+    ).then(() => window.location.reload(true));
   }
 
   render() {

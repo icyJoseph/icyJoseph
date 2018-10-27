@@ -1,7 +1,7 @@
 import React from "react";
 import Loadable from "react-loadable";
 import Spinner from "../components/Loading/Spinner";
-import Loading from "../logos/Loading";
+import SpinLogo from "../logos/Spinner";
 import TimeLine from "./TimeLine";
 
 export default [
@@ -10,9 +10,13 @@ export default [
     title: "About Me",
     meta: "Joseph",
     Component: Loadable({
-      loader: () => import("../logos/Me"),
+      loader: () => import("../logos"),
       loading() {
-        return <Loading />;
+        return <SpinLogo />;
+      },
+      render(loaded, props) {
+        let Component = loaded.default;
+        return <Component {...props} name="user" />;
       }
     }),
     fill: "#273B7A",
@@ -30,9 +34,13 @@ export default [
     title: "ReactJS",
     meta: "Certified",
     Component: Loadable({
-      loader: () => import("../logos/ReactLogo"),
+      loader: () => import("../logos"),
       loading() {
-        return <Loading />;
+        return <SpinLogo />;
+      },
+      render(loaded, props) {
+        let Component = loaded.default;
+        return <Component {...props} name="react" />;
       }
     }),
     fill: "#292929",
@@ -55,9 +63,13 @@ export default [
     meta: "Favorite Language",
     background: "#193549",
     Component: Loadable({
-      loader: () => import("../logos/JavaScriptLogo"),
+      loader: () => import("../logos"),
       loading() {
-        return <Loading />;
+        return <SpinLogo />;
+      },
+      render(loaded, props) {
+        let Component = loaded.default;
+        return <Component {...props} name="js" />;
       }
     }),
     fill: "#F0DB4F",
@@ -74,9 +86,13 @@ export default [
     title: "Redux",
     meta: "Framework",
     Component: Loadable({
-      loader: () => import("../logos/Redux"),
+      loader: () => import("../logos"),
       loading() {
-        return <Loading />;
+        return <SpinLogo />;
+      },
+      render(loaded, props) {
+        let Component = loaded.default;
+        return <Component {...props} name="react" corner="plug" />;
       }
     }),
     fill: "#292929",
@@ -98,9 +114,13 @@ export default [
     title: "algorithms",
     meta: "Problem Solving",
     Component: Loadable({
-      loader: () => import("../logos/Problem"),
+      loader: () => import("../logos"),
       loading() {
-        return <Loading />;
+        return <SpinLogo />;
+      },
+      render(loaded, props) {
+        let Component = loaded.default;
+        return <Component {...props} name="puzzle" />;
       }
     }),
     fill: "#273B7A",
@@ -125,7 +145,7 @@ export default [
     Component: Loadable({
       loader: () => import("../logos/Experience"),
       loading() {
-        return <Loading />;
+        return <SpinLogo />;
       }
     }),
     fill: "#273B7A",
@@ -147,9 +167,13 @@ export default [
     title: "python",
     meta: "Code as a hobby",
     Component: Loadable({
-      loader: () => import("../logos/PythonLogo"),
+      loader: () => import("../logos"),
       loading() {
-        return <Loading />;
+        return <SpinLogo />;
+      },
+      render(loaded, props) {
+        let Component = loaded.default;
+        return <Component {...props} name="python" />;
       }
     }),
     fill: "#273B7A",
@@ -171,9 +195,13 @@ export default [
     title: "hackathon",
     meta: "Value Creation",
     Component: Loadable({
-      loader: () => import("../logos/Rocket"),
+      loader: () => import("../logos"),
       loading() {
-        return <Loading />;
+        return <SpinLogo />;
+      },
+      render(loaded, props) {
+        let Component = loaded.default;
+        return <Component {...props} name="rocket" />;
       }
     }),
     fill: "#273B7A",
@@ -198,7 +226,7 @@ export default [
     Component: Loadable({
       loader: () => import("../logos/Award"),
       loading() {
-        return <Loading />;
+        return <SpinLogo />;
       }
     }),
     fill: "#C92F00",
@@ -222,7 +250,7 @@ export default [
     Component: Loadable({
       loader: () => import("../logos/Report"),
       loading() {
-        return <Loading />;
+        return <SpinLogo />;
       }
     }),
     fill: "#273B7A",

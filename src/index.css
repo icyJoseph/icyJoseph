@@ -10,6 +10,12 @@ body {
   bottom: 0;
 }
 
+@media (max-width: 1023px) {
+  body {
+    background: #3f3fbf;
+  }
+}
+
 body::-webkit-scrollbar {
   display: none;
 }

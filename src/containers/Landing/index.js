@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Loadable from "react-loadable";
 import withGitHub from "../GitHubHoC";
 import { Background, ContentWrap, Mask } from "../../components/Background";
-import Spinner from "../../components/Loading/Spinner";
+import Spinner from "../../logos/Spinner";
 import nightBackground from "../../assets/images/night-coding.jpg";
 
 const AsyncTitle = Loadable({

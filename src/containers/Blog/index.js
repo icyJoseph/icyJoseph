@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { Container, Card, Loader } from "semantic-ui-react";
+import { Container, Card } from "semantic-ui-react";
 import { Background, Mask } from "../../components/Background";
 import Feed, { Bio } from "../../components/Feed";
 import { fetchFeed } from "../../ducks/medium";
 import { shouldFetch, setUpMediaQuery } from "../../helpers/";
 import { get } from "../../functional";
 import { desktopBreakPoint } from "../../constants";
+import Spinner from "../../logos/Spinner";
 import blogBackground from "../../assets/images/blogBackground.jpg";
 
 export class Blog extends Component {
@@ -58,7 +59,7 @@ export class Blog extends Component {
             </Card.Group>
           </Container>
         ) : (
-          <Loader active inline="centered" />
+          <Spinner />
         )}
       </Fragment>
     );

@@ -16,7 +16,7 @@ export const github = token =>
 
 export const getUserRepos = (user, token) => {
   return github(token)
-    .get(`/users/${user}/repos`)
+    .get(`/users/${user}/repos?per_page=100`)
     .then(({ data }) => [...data]);
 };
 

@@ -1,12 +1,4 @@
-import {
-  all,
-  takeEvery,
-  takeLatest,
-  call,
-  put,
-  select,
-  take
-} from "redux-saga/effects";
+import { all, takeLatest, call, put, select, take } from "redux-saga/effects";
 
 import {
   selectRepos,
@@ -48,6 +40,7 @@ const buildLang = (aggregate, lang) => ({
 });
 
 export function* loadUser({ payload }) {
+  yield put({ type: FETCH_TOKEN });
   try {
     yield take(SUCCESS_TOKEN);
     const token = yield select(selectToken);
@@ -157,8 +150,8 @@ export function* loadTopics() {
 
 export function* gitHubSaga() {
   yield all([
-    takeEvery(FETCH_USER_REPOS, loadRepos),
-    takeEvery(FETCH_USER_DATA, loadUser),
+    takeLatest(FETCH_USER_REPOS, loadRepos),
+    takeLatest(FETCH_USER_DATA, loadUser),
     takeLatest(FETCH_USER_REPOS, loadContributions),
     takeLatest(FETCH_USER_REPOS, loadLanguages),
     takeLatest(FETCH_REPOS_TOPICS, loadTopics)

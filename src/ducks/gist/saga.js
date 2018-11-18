@@ -1,13 +1,11 @@
-import { all, takeLatest, call, put, select } from "redux-saga/effects";
+import { all, takeLatest, call, put } from "redux-saga/effects";
 
 import { FETCH_GIST, SUCCESS_FETCH_GIST, FAILED_FETCH_GIST } from "./";
-import { selectToken } from "../auth";
 import { getGist } from "./api";
 
 export function* loadGist({ payload }) {
   try {
-    const token = yield select(selectToken);
-    const gist = yield call(getGist, payload, token);
+    const gist = yield call(getGist, payload);
     const now = new Date();
     const inOneHour = new Date(now.getTime() + 60 * 60 * 1000);
     yield put({ type: SUCCESS_FETCH_GIST, payload: gist, expiry: inOneHour });

@@ -2,7 +2,6 @@ import { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { openDrawer, closeDrawer, changeContent } from "../../ducks/drawer";
-import { fetchToken } from "../../ducks/auth";
 
 import { fetchUserData, fetchUserRepos } from "../../ducks/github";
 import { mapValueToFunctions } from "../../functional";
@@ -19,7 +18,6 @@ export function withGitHub(toRender) {
       visibility: PropTypes.bool,
       contentId: PropTypes.number,
       timeLine: PropTypes.array,
-      fetchToken: PropTypes.func,
       openDrawer: PropTypes.func,
       closeDrawer: PropTypes.func,
       changeContent: PropTypes.func,
@@ -69,7 +67,6 @@ export function withGitHub(toRender) {
   });
 
   const mapDispatchToProps = {
-    fetchToken,
     openDrawer,
     closeDrawer,
     changeContent,

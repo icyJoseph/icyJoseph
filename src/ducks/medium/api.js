@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const feedEndPoint = `https://wt-eb857ce9bac13bdd2efcf8e93fb9fdcc-0.sandbox.auth0-extend.com/Medium-Call`;
-const postEndPoint = `https://wt-eb857ce9bac13bdd2efcf8e93fb9fdcc-0.sandbox.auth0-extend.com/Medium-Article`;
+const feedEndPoint = process.env.REACT_APP_MEDIUM_FEED;
+const postEndPoint = process.env.REACT_APP_MEDIUM_ARTICLE;
 
 export const fetchFeed = () => {
   return axios

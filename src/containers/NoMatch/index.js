@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import { getUserRepos } from "../../ducks/github/api";
-import { getToken } from "../../ducks/auth/api";
 import { curryRight, head, take, pipe, split } from "../../functional";
 
 import Searching from "./Searching";
@@ -30,8 +29,7 @@ export class NoMatch extends Component {
       head
     )(pathname);
 
-    const token = await getToken();
-    const repos = await getUserRepos("icyJoseph", token);
+    const repos = await getUserRepos();
 
     const existingRepo = repos.find(
       ({ name, homepage }) => name === possibleRepo && homepage

@@ -2,50 +2,40 @@ import axios from "axios";
 
 export const baseURL =
   process.env.NODE_ENV === "production"
-    ? "https://api.github.com"
+    ? process.env.REACT_APP_GITHUB_ENDPOINT
     : "http://localhost:1337";
 
-export const github = token =>
+export const github = () =>
   axios.create({
-    baseURL,
-    auth: {
-      username: "icyJoseph",
-      password: `${token}`
-    }
+    baseURL
   });
 
-export const getUserRepos = (user, token) => {
-  return github(token)
-    .get(`/users/${user}/repos?per_page=100`)
-    .then(({ data }) => [...data]);
-};
-
-export const getUser = (user, token) => {
-  return github(token)
-    .get(`/users/${user}`)
+export const getUser = () => {
+  return github()
+    .get(`/user`)
     .then(({ data }) => data);
 };
 
-export const getRepoContributors = (user, repo, token) => {
-  return github(token)
-    .get(`/repos/${user}/${repo}/contributors`)
+export const getUserRepos = () => {
+  return github()
+    .get(`/repos`)
     .then(({ data }) => [...data]);
 };
 
-export const getRepoLanguages = (user, repo, token) => {
-  return github(token)
-    .get(`/repos/${user}/${repo}/languages`)
+export const getRepoContributors = repos => {
+  return github()
+    .post(`/contributions`, { repos })
     .then(({ data }) => data);
 };
 
-export const getRepoTopics = (user, repo, token) => {
-  return github(token)
-    .get(`/repos/${user}/${repo}/topics`, {
-      headers: {
-        Accept: "application/vnd.github.mercy-preview+json"
-      }
-    })
-    .then(({ data: { names } }) => ({
-      [repo]: names
-    }));
+export const getRepoLanguages = repos => {
+  return github()
+    .post(`/languages`, { repos })
+    .then(({ data }) => data);
+};
+
+export const getRepoTopics = repos => {
+  return github()
+    .post(`/topics`, { repos })
+    .then(({ data }) => data);
 };

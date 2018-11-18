@@ -28,6 +28,9 @@ export class Portfolio extends Component {
       .filter(repo => {
         const { name } = repo;
         const repoTopics = topicsObject[name];
+        if (!repoTopics) {
+          return false;
+        }
         return repoTopics.length > 0 && filterCriteria(repoTopics, meta);
       })
       .map(({ name, ...rest }) => ({

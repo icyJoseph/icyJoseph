@@ -22,8 +22,13 @@ describe("load user", () => {
   it("loads a user", () => {
     const gen = loadUser({ payload: "user" });
     expect(gen.next().value).toMatchObject({
+      PUT: { action: { type: "fetch_token" } }
+    });
+
+    expect(gen.next().value).toMatchObject({
       TAKE: { pattern: "success_token" }
     });
+
     expect(gen.next().value).toMatchObject({
       SELECT: {
         selector: selectToken
@@ -41,6 +46,8 @@ describe("load user", () => {
   });
   it("returns error", () => {
     const gen = loadUser({ payload: "user" });
+    gen.next();
+    // get inside the try catch block
     gen.next();
     expect(gen.throw("error").value).toMatchObject({
       PUT: { action: { error: "error", type: FAILED_USER_DATA } }

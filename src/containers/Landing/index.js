@@ -65,7 +65,7 @@ export const Landing = ({
     <Background desktop={desktop} background={nightBackground} />
     <Mask desktop={desktop} tint={0.5} />
     <ContentWrap>
-      <AsyncTitle title="Joseph" subtitle="Front End Developer" center />
+      <AsyncTitle title="Joseph" subtitle="Front-end Developer" center />
       <AsyncAssignment titles={titles} />
       <AsyncStatistics
         publicRepos={public_repos}

@@ -29,8 +29,10 @@ const mockLanguagesResponse = {
 const mockAxios = new MockAdapter(axios);
 
 // mock user repos response
-mockAxios.onGet(`${baseURL}/users/${user}/repos`).reply(200, mockRepoResponse);
-// mock user info resposne
+mockAxios
+  .onGet(`${baseURL}/users/${user}/repos?per_page=100`)
+  .reply(200, mockRepoResponse);
+// mock user info response
 mockAxios.onGet(`${baseURL}/users/${user}`).reply(200, mockUserResponse);
 // mock repo contributors response
 mockAxios

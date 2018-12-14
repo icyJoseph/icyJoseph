@@ -48,8 +48,7 @@ ShallowWrapper {
       "fluid": true,
       "inverted": true,
       "style": Object {
-        "borderRadius": 0,
-        "marginBottom": 0,
+        "background": "transparent",
       },
       "widths": 3,
     },
@@ -123,8 +122,7 @@ ShallowWrapper {
         "fluid": true,
         "inverted": true,
         "style": Object {
-          "borderRadius": 0,
-          "marginBottom": 0,
+          "background": "transparent",
         },
         "widths": 3,
       },

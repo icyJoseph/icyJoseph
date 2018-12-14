@@ -132,251 +132,17 @@ ShallowWrapper {
           background="codingBackground.jpg"
         />,
         <styled.div
-          tint={0.8}
+          tint={0.5}
         />,
-        <MainTitle
-          center={true}
-          subtitle="About me and my code"
-          title="Coding"
-        />,
-        <Dock
-          clickHandler={[MockFunction]}
-          items={
-            Array [
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "background": "#193549",
-                "backgroundFill": "tomato",
-                "fill": "#273B7A",
-                "id": 0,
-                "meta": "Joseph",
-                "title": "About Me",
-              },
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "background": "#193549",
-                "backgroundFill": "tomato",
-                "fill": "#292929",
-                "id": 1,
-                "meta": "Certified",
-                "title": "ReactJS",
-              },
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "background": "#193549",
-                "backgroundFill": "tomato",
-                "fill": "#F0DB4F",
-                "id": 2,
-                "meta": "Favorite Language",
-                "title": "JavaScript",
-              },
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "background": "#193549",
-                "backgroundFill": "#5159BF",
-                "fill": "#292929",
-                "id": 3,
-                "meta": "Framework",
-                "title": "Redux",
-              },
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "background": "#193549",
-                "backgroundFill": "tomato",
-                "fill": "#273B7A",
-                "id": 4,
-                "meta": "Problem Solving",
-                "title": "algorithms",
-              },
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "background": "#193549",
-                "backgroundFill": "tomato",
-                "fill": "#273B7A",
-                "id": 6,
-                "meta": "Code as a hobby",
-                "title": "python",
-              },
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "background": "#193549",
-                "backgroundFill": "tomato",
-                "fill": "#273B7A",
-                "id": 7,
-                "meta": "Value Creation",
-                "title": "hackathon",
-              },
-            ]
-          }
-        />,
-        <Drawer
-          Content={[Function]}
-        />,
-      ],
-    },
-    "ref": null,
-    "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "background": "codingBackground.jpg",
-          "desktop": undefined,
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "tint": 0.8,
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "center": true,
-          "subtitle": "About me and my code",
-          "title": "Coding",
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "clickHandler": [MockFunction],
-          "items": Array [
-            Object {
-              "Component": [Function],
-              "Content": [Function],
-              "background": "#193549",
-              "backgroundFill": "tomato",
-              "fill": "#273B7A",
-              "id": 0,
-              "meta": "Joseph",
-              "title": "About Me",
-            },
-            Object {
-              "Component": [Function],
-              "Content": [Function],
-              "background": "#193549",
-              "backgroundFill": "tomato",
-              "fill": "#292929",
-              "id": 1,
-              "meta": "Certified",
-              "title": "ReactJS",
-            },
-            Object {
-              "Component": [Function],
-              "Content": [Function],
-              "background": "#193549",
-              "backgroundFill": "tomato",
-              "fill": "#F0DB4F",
-              "id": 2,
-              "meta": "Favorite Language",
-              "title": "JavaScript",
-            },
-            Object {
-              "Component": [Function],
-              "Content": [Function],
-              "background": "#193549",
-              "backgroundFill": "#5159BF",
-              "fill": "#292929",
-              "id": 3,
-              "meta": "Framework",
-              "title": "Redux",
-            },
-            Object {
-              "Component": [Function],
-              "Content": [Function],
-              "background": "#193549",
-              "backgroundFill": "tomato",
-              "fill": "#273B7A",
-              "id": 4,
-              "meta": "Problem Solving",
-              "title": "algorithms",
-            },
-            Object {
-              "Component": [Function],
-              "Content": [Function],
-              "background": "#193549",
-              "backgroundFill": "tomato",
-              "fill": "#273B7A",
-              "id": 6,
-              "meta": "Code as a hobby",
-              "title": "python",
-            },
-            Object {
-              "Component": [Function],
-              "Content": [Function],
-              "background": "#193549",
-              "backgroundFill": "tomato",
-              "fill": "#273B7A",
-              "id": 7,
-              "meta": "Value Creation",
-              "title": "hackathon",
-            },
-          ],
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "Content": [Function],
-          "github": undefined,
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-    ],
-    "type": Symbol(react.fragment),
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "function",
-      "props": Object {
-        "children": Array [
-          <styled.div
-            background="codingBackground.jpg"
-          />,
-          <styled.div
-            tint={0.8}
-          />,
+        <styled.div>
           <MainTitle
             center={true}
             subtitle="About me and my code"
             title="Coding"
-          />,
+          />
           <Dock
             clickHandler={[MockFunction]}
+            contentId={1}
             items={
               Array [
                 Object {
@@ -451,10 +217,351 @@ ShallowWrapper {
                 },
               ]
             }
-          />,
+          />
           <Drawer
             Content={[Function]}
+          />
+        </styled.div>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "background": "codingBackground.jpg",
+          "desktop": undefined,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "desktop": undefined,
+          "tint": 0.5,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <MainTitle
+              center={true}
+              subtitle="About me and my code"
+              title="Coding"
+            />,
+            <Dock
+              clickHandler={[MockFunction]}
+              contentId={1}
+              items={
+                Array [
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#273B7A",
+                    "id": 0,
+                    "meta": "Joseph",
+                    "title": "About Me",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#292929",
+                    "id": 1,
+                    "meta": "Certified",
+                    "title": "ReactJS",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#F0DB4F",
+                    "id": 2,
+                    "meta": "Favorite Language",
+                    "title": "JavaScript",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "#5159BF",
+                    "fill": "#292929",
+                    "id": 3,
+                    "meta": "Framework",
+                    "title": "Redux",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#273B7A",
+                    "id": 4,
+                    "meta": "Problem Solving",
+                    "title": "algorithms",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#273B7A",
+                    "id": 6,
+                    "meta": "Code as a hobby",
+                    "title": "python",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#273B7A",
+                    "id": 7,
+                    "meta": "Value Creation",
+                    "title": "hackathon",
+                  },
+                ]
+              }
+            />,
+            <Drawer
+              Content={[Function]}
+            />,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "center": true,
+              "subtitle": "About me and my code",
+              "title": "Coding",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "clickHandler": [MockFunction],
+              "contentId": 1,
+              "items": Array [
+                Object {
+                  "Component": [Function],
+                  "Content": [Function],
+                  "background": "#193549",
+                  "backgroundFill": "tomato",
+                  "fill": "#273B7A",
+                  "id": 0,
+                  "meta": "Joseph",
+                  "title": "About Me",
+                },
+                Object {
+                  "Component": [Function],
+                  "Content": [Function],
+                  "background": "#193549",
+                  "backgroundFill": "tomato",
+                  "fill": "#292929",
+                  "id": 1,
+                  "meta": "Certified",
+                  "title": "ReactJS",
+                },
+                Object {
+                  "Component": [Function],
+                  "Content": [Function],
+                  "background": "#193549",
+                  "backgroundFill": "tomato",
+                  "fill": "#F0DB4F",
+                  "id": 2,
+                  "meta": "Favorite Language",
+                  "title": "JavaScript",
+                },
+                Object {
+                  "Component": [Function],
+                  "Content": [Function],
+                  "background": "#193549",
+                  "backgroundFill": "#5159BF",
+                  "fill": "#292929",
+                  "id": 3,
+                  "meta": "Framework",
+                  "title": "Redux",
+                },
+                Object {
+                  "Component": [Function],
+                  "Content": [Function],
+                  "background": "#193549",
+                  "backgroundFill": "tomato",
+                  "fill": "#273B7A",
+                  "id": 4,
+                  "meta": "Problem Solving",
+                  "title": "algorithms",
+                },
+                Object {
+                  "Component": [Function],
+                  "Content": [Function],
+                  "background": "#193549",
+                  "backgroundFill": "tomato",
+                  "fill": "#273B7A",
+                  "id": 6,
+                  "meta": "Code as a hobby",
+                  "title": "python",
+                },
+                Object {
+                  "Component": [Function],
+                  "Content": [Function],
+                  "background": "#193549",
+                  "backgroundFill": "tomato",
+                  "fill": "#273B7A",
+                  "id": 7,
+                  "meta": "Value Creation",
+                  "title": "hackathon",
+                },
+              ],
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "Content": [Function],
+              "github": undefined,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+    ],
+    "type": Symbol(react.fragment),
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <styled.div
+            background="codingBackground.jpg"
           />,
+          <styled.div
+            tint={0.5}
+          />,
+          <styled.div>
+            <MainTitle
+              center={true}
+              subtitle="About me and my code"
+              title="Coding"
+            />
+            <Dock
+              clickHandler={[MockFunction]}
+              contentId={1}
+              items={
+                Array [
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#273B7A",
+                    "id": 0,
+                    "meta": "Joseph",
+                    "title": "About Me",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#292929",
+                    "id": 1,
+                    "meta": "Certified",
+                    "title": "ReactJS",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#F0DB4F",
+                    "id": 2,
+                    "meta": "Favorite Language",
+                    "title": "JavaScript",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "#5159BF",
+                    "fill": "#292929",
+                    "id": 3,
+                    "meta": "Framework",
+                    "title": "Redux",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#273B7A",
+                    "id": 4,
+                    "meta": "Problem Solving",
+                    "title": "algorithms",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#273B7A",
+                    "id": 6,
+                    "meta": "Code as a hobby",
+                    "title": "python",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#273B7A",
+                    "id": 7,
+                    "meta": "Value Creation",
+                    "title": "hackathon",
+                  },
+                ]
+              }
+            />
+            <Drawer
+              Content={[Function]}
+            />
+          </styled.div>,
         ],
       },
       "ref": null,
@@ -476,7 +583,8 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
-            "tint": 0.8,
+            "desktop": undefined,
+            "tint": 0.5,
           },
           "ref": null,
           "rendered": null,
@@ -485,109 +593,209 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "function",
+          "nodeType": "class",
           "props": Object {
-            "center": true,
-            "subtitle": "About me and my code",
-            "title": "Coding",
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "clickHandler": [MockFunction],
-            "items": Array [
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "background": "#193549",
-                "backgroundFill": "tomato",
-                "fill": "#273B7A",
-                "id": 0,
-                "meta": "Joseph",
-                "title": "About Me",
-              },
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "background": "#193549",
-                "backgroundFill": "tomato",
-                "fill": "#292929",
-                "id": 1,
-                "meta": "Certified",
-                "title": "ReactJS",
-              },
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "background": "#193549",
-                "backgroundFill": "tomato",
-                "fill": "#F0DB4F",
-                "id": 2,
-                "meta": "Favorite Language",
-                "title": "JavaScript",
-              },
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "background": "#193549",
-                "backgroundFill": "#5159BF",
-                "fill": "#292929",
-                "id": 3,
-                "meta": "Framework",
-                "title": "Redux",
-              },
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "background": "#193549",
-                "backgroundFill": "tomato",
-                "fill": "#273B7A",
-                "id": 4,
-                "meta": "Problem Solving",
-                "title": "algorithms",
-              },
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "background": "#193549",
-                "backgroundFill": "tomato",
-                "fill": "#273B7A",
-                "id": 6,
-                "meta": "Code as a hobby",
-                "title": "python",
-              },
-              Object {
-                "Component": [Function],
-                "Content": [Function],
-                "background": "#193549",
-                "backgroundFill": "tomato",
-                "fill": "#273B7A",
-                "id": 7,
-                "meta": "Value Creation",
-                "title": "hackathon",
-              },
+            "children": Array [
+              <MainTitle
+                center={true}
+                subtitle="About me and my code"
+                title="Coding"
+              />,
+              <Dock
+                clickHandler={[MockFunction]}
+                contentId={1}
+                items={
+                  Array [
+                    Object {
+                      "Component": [Function],
+                      "Content": [Function],
+                      "background": "#193549",
+                      "backgroundFill": "tomato",
+                      "fill": "#273B7A",
+                      "id": 0,
+                      "meta": "Joseph",
+                      "title": "About Me",
+                    },
+                    Object {
+                      "Component": [Function],
+                      "Content": [Function],
+                      "background": "#193549",
+                      "backgroundFill": "tomato",
+                      "fill": "#292929",
+                      "id": 1,
+                      "meta": "Certified",
+                      "title": "ReactJS",
+                    },
+                    Object {
+                      "Component": [Function],
+                      "Content": [Function],
+                      "background": "#193549",
+                      "backgroundFill": "tomato",
+                      "fill": "#F0DB4F",
+                      "id": 2,
+                      "meta": "Favorite Language",
+                      "title": "JavaScript",
+                    },
+                    Object {
+                      "Component": [Function],
+                      "Content": [Function],
+                      "background": "#193549",
+                      "backgroundFill": "#5159BF",
+                      "fill": "#292929",
+                      "id": 3,
+                      "meta": "Framework",
+                      "title": "Redux",
+                    },
+                    Object {
+                      "Component": [Function],
+                      "Content": [Function],
+                      "background": "#193549",
+                      "backgroundFill": "tomato",
+                      "fill": "#273B7A",
+                      "id": 4,
+                      "meta": "Problem Solving",
+                      "title": "algorithms",
+                    },
+                    Object {
+                      "Component": [Function],
+                      "Content": [Function],
+                      "background": "#193549",
+                      "backgroundFill": "tomato",
+                      "fill": "#273B7A",
+                      "id": 6,
+                      "meta": "Code as a hobby",
+                      "title": "python",
+                    },
+                    Object {
+                      "Component": [Function],
+                      "Content": [Function],
+                      "background": "#193549",
+                      "backgroundFill": "tomato",
+                      "fill": "#273B7A",
+                      "id": 7,
+                      "meta": "Value Creation",
+                      "title": "hackathon",
+                    },
+                  ]
+                }
+              />,
+              <Drawer
+                Content={[Function]}
+              />,
             ],
           },
           "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "Content": [Function],
-            "github": undefined,
-          },
-          "ref": null,
-          "rendered": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "center": true,
+                "subtitle": "About me and my code",
+                "title": "Coding",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "clickHandler": [MockFunction],
+                "contentId": 1,
+                "items": Array [
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#273B7A",
+                    "id": 0,
+                    "meta": "Joseph",
+                    "title": "About Me",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#292929",
+                    "id": 1,
+                    "meta": "Certified",
+                    "title": "ReactJS",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#F0DB4F",
+                    "id": 2,
+                    "meta": "Favorite Language",
+                    "title": "JavaScript",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "#5159BF",
+                    "fill": "#292929",
+                    "id": 3,
+                    "meta": "Framework",
+                    "title": "Redux",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#273B7A",
+                    "id": 4,
+                    "meta": "Problem Solving",
+                    "title": "algorithms",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#273B7A",
+                    "id": 6,
+                    "meta": "Code as a hobby",
+                    "title": "python",
+                  },
+                  Object {
+                    "Component": [Function],
+                    "Content": [Function],
+                    "background": "#193549",
+                    "backgroundFill": "tomato",
+                    "fill": "#273B7A",
+                    "id": 7,
+                    "meta": "Value Creation",
+                    "title": "hackathon",
+                  },
+                ],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "Content": [Function],
+                "github": undefined,
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
           "type": [Function],
         },
       ],

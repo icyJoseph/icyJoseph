@@ -1,6 +1,4 @@
 import React, { Component, Fragment } from "react";
-import { Button } from "semantic-ui-react";
-import Icon from "semantic-ui-react/dist/commonjs/elements/Icon";
 
 import { MenuWrapper } from "./styled";
 import Contact from "../Contact";

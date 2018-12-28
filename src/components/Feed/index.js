@@ -1,12 +1,4 @@
 import React, { Component } from "react";
-import {
-  Button,
-  Icon,
-  Card,
-  Feed as Content,
-  Label,
-  Image
-} from "semantic-ui-react";
 import Bio from "./Bio";
 import { setUpMediaQuery } from "../../helpers";
 

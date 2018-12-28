@@ -1,6 +1,5 @@
 import React from "react";
 import CountUp from "react-countup";
-import { Loader, Icon } from "semantic-ui-react";
 import { Group, Stat, Value, Label } from "./styled";
 
 const languageIcons = {

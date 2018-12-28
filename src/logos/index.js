@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Icon } from "semantic-ui-react";
 
 const CompositeLogo = ({ name, corner, handler, isSelected }) => {
   const semanticProps = isSelected ? { color: "red" } : {};

@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Header } from "semantic-ui-react";
 import { TitleContainer } from "./styled";
 
 const MainTitle = ({ title, subtitle, as = "h1", center }) => (

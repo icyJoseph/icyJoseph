@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Divider } from "semantic-ui-react";
 import { fetchGist } from "../../ducks/gist";
 import { shouldFetch } from "../../helpers";
 import { curryRight, split, pipe, purify } from "../../functional";

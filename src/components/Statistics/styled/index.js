@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Statistic } from "semantic-ui-react";
 
 export const Group = styled(Statistic.Group)`
   padding: 10px 10px;

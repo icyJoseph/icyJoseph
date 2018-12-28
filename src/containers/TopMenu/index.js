@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Menu } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 import { head, pipe, curryRight, split, take } from "../../functional";
 

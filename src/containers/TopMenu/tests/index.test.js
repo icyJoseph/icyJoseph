@@ -2,7 +2,6 @@ import React from "react";
 import { shallow } from "enzyme";
 
 import { TopMenu } from "../";
-import { Menu } from "semantic-ui-react";
 
 describe("TopMenu", () => {
   const props = {

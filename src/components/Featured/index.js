@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import { Image, Header } from "semantic-ui-react";
 import {
   FeaturedWrap,
   FeaturedApp,

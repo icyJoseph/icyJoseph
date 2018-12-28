@@ -9,12 +9,6 @@ import { browserRender } from "./config";
 
 import "./index.css";
 
-if ("ontouchstart" in document.documentElement) {
-  const highlight = "-webkit-tap-highlight-color";
-  document.body.style.cursor = "pointer";
-  document.body.style[highlight] = "transparent";
-}
-
 const storedState = localStorage.getItem("state");
 const store = configureStore(storedState ? JSON.parse(storedState) : undefined);
 // if the browser is IE it returns blue screen of death

@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { Container, Card } from "semantic-ui-react";
 import { Background, Mask } from "../../components/Background";
 import Feed, { Bio } from "../../components/Feed";
 import { fetchFeed } from "../../ducks/medium";

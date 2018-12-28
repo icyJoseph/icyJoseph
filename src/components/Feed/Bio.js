@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Header, Icon, Image, Button } from "semantic-ui-react";
 import { imageSrc, medium } from "./";
 import { setUpMediaQuery } from "../../helpers";
 

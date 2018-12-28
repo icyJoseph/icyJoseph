@@ -1,6 +1,5 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { Button } from "semantic-ui-react";
 import { Contact } from "../";
 
 describe("Contact", () => {

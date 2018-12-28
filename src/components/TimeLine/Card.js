@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import AnimateHeight from "react-animate-height";
 import {
   CardWrapper,
   TitleWrapper,
@@ -15,11 +14,9 @@ export class Card extends Component {
       <CardWrapper experience={experience} onClick={toggle}>
         <TitleWrapper experience={experience}>{title}</TitleWrapper>
         <MetaWrapper experience={experience}>{meta}</MetaWrapper>
-        <AnimateHeight duration={500} height={height}>
-          <DescriptionWrapper experience={experience}>
-            {description}
-          </DescriptionWrapper>
-        </AnimateHeight>
+        <DescriptionWrapper experience={experience}>
+          {description}
+        </DescriptionWrapper>
       </CardWrapper>
     );
   }

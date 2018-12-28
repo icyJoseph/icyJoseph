@@ -1,5 +1,4 @@
 import React from "react";
-import { Button, Icon, Item, Label } from "semantic-ui-react";
 
 export const Entry = ({ name, description, topics, html_url }) => {
   return (

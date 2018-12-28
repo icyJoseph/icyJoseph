@@ -1,6 +1,4 @@
 import React from "react";
-import { Segment, Loader as Spinner } from "semantic-ui-react";
-import { Message } from "semantic-ui-react";
 import Broken from "../../logos/Broken";
 
 export const BodyLoader = ({ pastDelay, error }) => {

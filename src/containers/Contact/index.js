@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Header, Modal, Button } from "semantic-ui-react";
 import { ModalWrapper } from "./styled";
 
 export const Contact = ({ open, handleClose }) => (

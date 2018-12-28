@@ -1,5 +1,4 @@
 import React from "react";
-import { Card, Icon } from "semantic-ui-react";
 import { capitalize } from "../../functional";
 
 const description = ["Coming soon..."].join(" ");

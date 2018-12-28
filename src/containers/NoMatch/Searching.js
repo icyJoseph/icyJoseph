@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Loader } from "semantic-ui-react";
 
 class Redirect extends Component {
   componentDidMount() {

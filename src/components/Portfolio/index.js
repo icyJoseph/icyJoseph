@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { Container, Item, Loader, Icon, Label } from "semantic-ui-react";
 import Entry from "./Entry";
 import { fetchUserRepos } from "../../ducks/github";
 import { shouldFetch } from "../../helpers";

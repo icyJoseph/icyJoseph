@@ -1,5 +1,4 @@
 import React from "react";
-import { Image, Icon } from "semantic-ui-react";
 import {
   GitHubCard,
   GitHubBio,

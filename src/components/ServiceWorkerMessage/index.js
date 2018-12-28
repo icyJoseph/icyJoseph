@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { Message, Transition } from "semantic-ui-react";
 
 const portal = document.getElementById("reload-sw");
 

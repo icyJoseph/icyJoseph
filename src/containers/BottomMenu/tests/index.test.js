@@ -1,6 +1,5 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { Button, Modal } from "semantic-ui-react";
 import { BottomMenu } from "../";
 import { Contact } from "../../Contact";
 import { ModalWrapper } from "../../Contact/styled";

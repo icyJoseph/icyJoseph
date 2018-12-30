@@ -1,8 +1,8 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import Loadable from "react-loadable";
+// import Loadable from "react-loadable";
 import withGitHub from "../GitHubHoC";
-import nightBackground from "../../assets/images/night-coding.jpg";
+// import nightBackground from "../../assets/images/night-coding.jpg";
 
 // const AsyncTitle = Loadable({
 //   loader: () =>
@@ -39,17 +39,6 @@ import nightBackground from "../../assets/images/night-coding.jpg";
 //   delay: 700
 // });
 
-const titles = [
-  {
-    title: "By Day",
-    subtitle: "I work at Volvo Group"
-  },
-  {
-    title: "By Night",
-    subtitle: "I commit to GitHub"
-  }
-];
-
 export const Landing = ({
   timeLine,
   github: {
@@ -58,7 +47,10 @@ export const Landing = ({
     languages
   },
   desktop
-}) => <div>Landing</div>;
+}) => {
+  console.log(commits);
+  return <div>Landing</div>;
+};
 
 // in the GUI seen as Home
 export default withGitHub(Landing);

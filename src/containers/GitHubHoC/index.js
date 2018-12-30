@@ -2,15 +2,14 @@ import { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { openDrawer, closeDrawer, changeContent } from "../../ducks/drawer";
-
 import { fetchUserData, fetchUserRepos } from "../../ducks/github";
 import { mapValueToFunctions } from "../../functional";
-import { shouldFetch, setUpMediaQuery } from "../../helpers";
+import { shouldFetch } from "../../helpers";
+// import { shouldFetch, setUpMediaQuery } from "../../helpers";
 import { icyJoseph } from "../../constants";
 // import { desktopBreakPoint, icyJoseph } from "../../constants";
 
 import data from "../../data";
-import timeLine from "../../data/TimeLine";
 
 export function withGitHub(toRender) {
   class GitHubHoC extends Component {
@@ -19,7 +18,6 @@ export function withGitHub(toRender) {
       data: PropTypes.array,
       visibility: PropTypes.bool,
       contentId: PropTypes.number,
-      timeLine: PropTypes.array,
       openDrawer: PropTypes.func,
       closeDrawer: PropTypes.func,
       changeContent: PropTypes.func,
@@ -64,8 +62,7 @@ export function withGitHub(toRender) {
     github,
     visibility: open,
     contentId: id,
-    data,
-    timeLine
+    data
   });
 
   const mapDispatchToProps = {

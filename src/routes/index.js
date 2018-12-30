@@ -1,12 +1,12 @@
 import React, { Fragment } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Loadable from "react-loadable";
+// import Loadable from "react-loadable";
 
-import AsyncBlog from "./containers/Blog";
-import AsyncTopMenu from "./containers/TopMenu";
+import AsyncBlog from "../containers/Blog";
+import AsyncTopMenu from "../containers/TopMenu";
 
-import AsyncLanding from "./containers/Landing";
-import AsyncNoMatch from "./containers/NoMatch";
+import AsyncLanding from "../containers/Landing";
+import AsyncNoMatch from "../containers/NoMatch";
 
 // import BodyLoader from "./components/Loading/BodyLoader";
 // import HeaderLoader from "./components/Loading/HeaderLoader";

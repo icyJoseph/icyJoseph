@@ -30,23 +30,23 @@ export class TopMenu extends Component {
     const { activeItem } = this.state;
 
     return (
-      <Menu fluid widths={3} inverted style={{ background: "transparent" }}>
-        <Menu.Item
+      <ul fluid widths={3} inverted style={{ background: "transparent" }}>
+        <li
           name="home"
           active={activeItem === "home"}
           onClick={this.handleClick}
         />
-        <Menu.Item
+        <li
           name="blog"
           active={activeItem === "blog"}
           onClick={this.handleClick}
         />
-        <Menu.Item
+        <li
           name="coding"
           active={activeItem === "coding"}
           onClick={this.handleClick}
         />
-      </Menu>
+      </ul>
     );
   }
 }

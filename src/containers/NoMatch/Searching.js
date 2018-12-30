@@ -10,7 +10,7 @@ class Redirect extends Component {
 }
 
 export const Searching = ({ url }) => {
-  return url ? <Redirect url={url} /> : <Loader active inline="centered" />;
+  return url ? <Redirect url={url} /> : <div>Searching...</div>;
 };
 
 export default Searching;

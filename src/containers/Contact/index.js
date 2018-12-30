@@ -1,24 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ModalWrapper } from "./styled";
 
-export const Contact = ({ open, handleClose }) => (
-  <ModalWrapper dimmer={true} open={open} onClose={handleClose}>
-    <Modal.Header>Contact</Modal.Header>
-    <Modal.Content>
-      <Modal.Description>
-        <Header>Email</Header>
-        <p>You can reach me via email to:</p>
-        <p>contact@icjoseph.com</p>
-      </Modal.Description>
-    </Modal.Content>
-    <Modal.Actions>
-      <Button color="black" onClick={handleClose}>
-        Close
-      </Button>
-    </Modal.Actions>
-  </ModalWrapper>
-);
+export const Contact = ({ open, handleClose }) =>
+  open && (
+    <div dimmer={true} open={open} onClose={handleClose}>
+      <h2>Contact</h2>
+      <div>
+        <div>
+          <h3>Email</h3>
+          <p>You can reach me via email to:</p>
+          <p>contact@icjoseph.com</p>
+        </div>
+      </div>
+      <div>
+        <button color="black" onClick={handleClose}>
+          Close
+        </button>
+      </div>
+    </div>
+  );
 
 export default Contact;
 

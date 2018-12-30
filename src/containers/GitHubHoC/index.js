@@ -6,7 +6,9 @@ import { openDrawer, closeDrawer, changeContent } from "../../ducks/drawer";
 import { fetchUserData, fetchUserRepos } from "../../ducks/github";
 import { mapValueToFunctions } from "../../functional";
 import { shouldFetch, setUpMediaQuery } from "../../helpers";
-import { desktopBreakPoint, icyJoseph } from "../../constants";
+import { icyJoseph } from "../../constants";
+// import { desktopBreakPoint, icyJoseph } from "../../constants";
+
 import data from "../../data";
 import timeLine from "../../data/TimeLine";
 
@@ -34,7 +36,7 @@ export function withGitHub(toRender) {
       const noDataOrExpired =
         languages.length === 0 || commits === 0 || shouldFetch(expiry);
 
-      setUpMediaQuery.bind(this)(desktopBreakPoint);
+      // setUpMediaQuery.bind(this)(desktopBreakPoint);
       return (
         noDataOrExpired &&
         mapValueToFunctions(
@@ -50,7 +52,7 @@ export function withGitHub(toRender) {
     };
 
     componentWillUnmount() {
-      return this.mediaQueryList.removeListener(this.updateMatches);
+      // return this.mediaQueryList.removeListener(this.updateMatches);
     }
 
     render() {

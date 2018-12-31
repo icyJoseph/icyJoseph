@@ -3,6 +3,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 // import Loadable from "react-loadable";
 
 import AsyncBlog from "../containers/Blog";
+import AsyncHacks from "../containers/Hacks";
+
 import AsyncTopMenu from "../containers/TopMenu";
 
 import AsyncLanding from "../containers/Landing";
@@ -58,7 +60,8 @@ export const Routes = () => (
     <Fragment>
       <AsyncTopMenu />
       <Switch>
-        <Route path="/blog" component={AsyncBlog} />
+        <Route path="/hacks" exact component={AsyncHacks} />
+        <Route path="/blog" exact component={AsyncBlog} />
         <Route path="/" exact component={AsyncLanding} />
         <Route component={AsyncNoMatch} />
       </Switch>

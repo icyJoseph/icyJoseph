@@ -8,8 +8,6 @@ body {
   font-family: "Roboto", sans-serif;
   top: 0;
   bottom: 0;
-  color: white;
-  background: #3f3fbf;
 }
 
 body::-webkit-scrollbar {

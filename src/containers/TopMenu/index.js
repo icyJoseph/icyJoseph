@@ -43,7 +43,10 @@ export class TopMenu extends Component {
       <NavBar>
         <div onClick={curryRight(this.handleClick)("")}>
           <img src={brand} alt="brand" />
-          <span>icyJoseph</span>
+          <span>
+            icy<span>J</span>
+            oseph
+          </span>
         </div>
         <NavItems>
           <li

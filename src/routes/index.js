@@ -60,8 +60,8 @@ import { baseColors } from "../theme";
 
 const GlobalStyle = createGlobalStyle`
   body {
-    color: ${baseColors.white};
-    background: ${baseColors.dark};
+    color: ${baseColors.primary};
+    background: ${baseColors.background};
   }
 `;
 

@@ -30,6 +30,6 @@ export const Fader = styled.span`
 
   > a {
     text-decoration: none;
-    color: ${baseColors.red};
+    color: ${baseColors.heading};
   }
 `;

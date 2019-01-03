@@ -48,7 +48,6 @@ export const Landing = ({
   },
   desktop
 }) => {
-  console.log(commits);
   return <div>Landing</div>;
 };
 

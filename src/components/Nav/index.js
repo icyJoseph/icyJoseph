@@ -1,5 +1,7 @@
 import styled, { css } from "styled-components";
 
+const ImageLength = "50px";
+
 const shadow = css`
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -12,23 +14,16 @@ const shadow = css`
   }
 `;
 
-const underLine = css`
-  content: "";
-  position: absolute;
-  width: 30%;
-  height: 5px;
-  background: #e3e8dc;
-  bottom: 0;
-  left: 35%;
-  transition: transform 0.5s;
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-`;
-
 export const NavBar = styled.nav`
   display: flex;
   padding: 0.5em;
 
+  > div {
+    flex: 1;
+  }
+
   > * > img {
+    max-width: ${ImageLength};
     width: auto;
     height: 100%;
     ${shadow}
@@ -39,47 +34,14 @@ export const NavBar = styled.nav`
   > * > span {
     font-weight: 900;
     transition: color 0.3s;
-    color: gray;
+    color: black;
     position: relative;
     padding: 10px 0;
-
-    &:before,
-    :after {
-      ${underLine}
-    }
-
-    &:hover:before {
-      transform: translate3d(300%, 0, 0) scale3d(0, 1, 1);
-    }
-
-    &:hover:after {
-      transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
-    }
-
-    &:after {
-      background: #acd07a;
-      transform: translate3d(-300%, 0, 0) scale3d(0, 1, 1);
-    }
-
-    &:hover {
-      color: black;
-    }
-
-    > span {
-      color: black;
-      transition: transform 0.5s, color 0.5s;
-      transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-      transform: perspective(1000px) rotate3d(0, 1, 0, 180deg);
-    }
-
-    &:hover > span {
-      transform: perspective(1000px) rotate3d(0, 1, 0, 0deg);
-      color: gray;
-    }
+    flex: 1;
   }
 
   > *:first-child {
-    max-height: 50px;
+    max-height: ${ImageLength};
   }
 
   > * {

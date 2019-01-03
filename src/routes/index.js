@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { createGlobalStyle } from "styled-components";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 // import Loadable from "react-loadable";
 
@@ -9,6 +10,8 @@ import AsyncTopMenu from "../containers/TopMenu";
 
 import AsyncLanding from "../containers/Landing";
 import AsyncNoMatch from "../containers/NoMatch";
+
+import { baseColors } from "../theme";
 
 // import BodyLoader from "./components/Loading/BodyLoader";
 // import HeaderLoader from "./components/Loading/HeaderLoader";
@@ -55,9 +58,17 @@ import AsyncNoMatch from "../containers/NoMatch";
 //   delay: 600
 // });
 
+const GlobalStyle = createGlobalStyle`
+  body {
+    color: ${baseColors.white};
+    background: ${baseColors.dark};
+  }
+`;
+
 export const Routes = () => (
   <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Fragment>
+      <GlobalStyle />
       <AsyncTopMenu />
       <Switch>
         <Route path="/hacks" exact component={AsyncHacks} />

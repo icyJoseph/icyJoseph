@@ -4,9 +4,12 @@ import { withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faCode } from "@fortawesome/free-solid-svg-icons";
 import { faMediumM } from "@fortawesome/free-brands-svg-icons";
-
+import { connect } from "react-redux";
+import { compose } from "redux";
 import { NavBar, NavItems } from "../../components/Nav";
+import { TextCycle } from "../../components/TextCycle";
 import { head, pipe, curryRight, split, take } from "../../functional";
+
 import brand from "../../assets/featured/web.png";
 
 const takeSecond = take(1, 1);
@@ -38,15 +41,17 @@ export class TopMenu extends Component {
 
   render() {
     // const { activeItem } = this.state;
+    const { repoUrls, repos, topics } = this.props;
 
     return (
       <NavBar>
-        <div onClick={curryRight(this.handleClick)("")}>
-          <img src={brand} alt="brand" />
-          <span>
-            icy<span>J</span>
-            oseph
-          </span>
+        <div>
+          <img
+            src={brand}
+            alt="brand"
+            onClick={curryRight(this.handleClick)("")}
+          />
+          <TextCycle tags={repos} subtags={topics} homepages={repoUrls} />
         </div>
         <NavItems>
           <li
@@ -79,7 +84,24 @@ export class TopMenu extends Component {
   }
 }
 
-export default withRouter(TopMenu);
+const mapStateToProps = ({ github: { repos, topics } }) => ({
+  repos: repos.map(({ name }) => name),
+  repoUrls: repos.reduce(
+    (prev, { name, html_url }) => ({
+      ...prev,
+      [name]: html_url
+    }),
+    {}
+  ),
+  topics: topics.reduce((prev, curr) => ({ ...prev, ...curr }), {})
+});
+
+const withConnect = connect(mapStateToProps);
+
+export default compose(
+  withConnect,
+  withRouter
+)(TopMenu);
 
 TopMenu.propTypes = {
   location: PropTypes.object,

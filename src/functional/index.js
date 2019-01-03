@@ -65,3 +65,10 @@ export const capitalize = string =>
 
 // length
 export const len = (arr, fail = 0) => (arr ? arr.length : fail);
+
+// unique
+export const unique = arr =>
+  arr.reduce(
+    (prev, curr) => (prev.includes(curr) ? prev : prev.concat(curr)),
+    []
+  );

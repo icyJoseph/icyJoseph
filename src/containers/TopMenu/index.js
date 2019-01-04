@@ -40,7 +40,7 @@ export class TopMenu extends Component {
   }
 
   render() {
-    // const { activeItem } = this.state;
+    const { activeItem } = this.state;
     const { repoUrls, repos, topics } = this.props;
 
     return (
@@ -54,27 +54,18 @@ export class TopMenu extends Component {
           <TextCycle tags={repos} subtags={topics} homepages={repoUrls} />
         </div>
         <NavItems>
-          <li
-            // active={activeItem === ""}
-            onClick={curryRight(this.handleClick)("")}
-          >
-            <button>
+          <li onClick={curryRight(this.handleClick)("")}>
+            <button className={activeItem === "" ? "active" : ""}>
               <FontAwesomeIcon icon={faHome} />
             </button>
           </li>
-          <li
-            // active={activeItem === "blog"}
-            onClick={curryRight(this.handleClick)("blog")}
-          >
-            <button>
+          <li onClick={curryRight(this.handleClick)("blog")}>
+            <button className={activeItem === "blog" ? "active" : ""}>
               <FontAwesomeIcon icon={faMediumM} />
             </button>
           </li>
-          <li
-            // active={activeItem === "blog"}
-            onClick={curryRight(this.handleClick)("hacks")}
-          >
-            <button>
+          <li onClick={curryRight(this.handleClick)("hacks")}>
+            <button className={activeItem === "hacks" ? "active" : ""}>
               <FontAwesomeIcon icon={faCode} />
             </button>
           </li>

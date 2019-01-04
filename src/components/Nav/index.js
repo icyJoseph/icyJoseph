@@ -5,6 +5,7 @@ const ImageLength = "50px";
 const shadow = css`
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  &.active,
   &:hover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   }
@@ -23,12 +24,17 @@ export const NavBar = styled.nav`
   }
 
   > * > img {
-    max-width: ${ImageLength};
-    width: auto;
-    height: 100%;
-    ${shadow}
-    border-radius: 50%;
-    margin: 0 0.5em;
+    display: none;
+
+    @media (min-width: 600px) {
+      display: block;
+      max-width: ${ImageLength};
+      width: auto;
+      height: 100%;
+      ${shadow}
+      border-radius: 50%;
+      margin: 0 0.5em;
+    }
   }
 
   > * > span {
@@ -57,6 +63,22 @@ export const NavBar = styled.nav`
     cursor: pointer;
     margin: 0 1em;
   }
+
+  @media (max-width: 599px) {
+    position: fixed;
+    bottom: 0;
+    padding-bottom: 1em;
+    flex-direction: column;
+    width: 100%;
+
+    > div {
+      text-align: center;
+    }
+
+    > ul {
+      padding: 0;
+    }
+  }
 `;
 
 export const NavItems = styled.ul`
@@ -68,6 +90,15 @@ export const NavItems = styled.ul`
   > * {
     height: 35px;
     width: 35px;
+
+    @media (max-width: 599px) {
+      height: 50px;
+      width: 50px;
+
+      > button {
+        font-size: 1.5em;
+      }
+    }
   }
 
   > * > button {
@@ -77,7 +108,6 @@ export const NavItems = styled.ul`
     color: inherit;
     border: none;
     padding: 0 !important;
-    font: inherit;
     cursor: pointer;
     text-align: center;
     text-decoration: none;

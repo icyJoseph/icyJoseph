@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 // import Loadable from "react-loadable";
 import withGitHub from "../GitHubHoC";
+import { Container } from "../../components/Container";
 // import nightBackground from "../../assets/images/night-coding.jpg";
 
 // const AsyncTitle = Loadable({
@@ -48,7 +49,7 @@ export const Landing = ({
   },
   desktop
 }) => {
-  return <div>Landing</div>;
+  return <Container>Landing</Container>;
 };
 
 // in the GUI seen as Home

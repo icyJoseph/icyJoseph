@@ -65,11 +65,8 @@ export const NavBar = styled.nav`
   }
 
   @media (max-width: 599px) {
-    position: fixed;
-    bottom: 0;
     padding-bottom: 1em;
     flex-direction: column;
-    width: 100%;
 
     > div {
       text-align: center;

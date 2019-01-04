@@ -7,7 +7,7 @@ import AsyncBlog from "../containers/Blog";
 import AsyncHacks from "../containers/Hacks";
 
 import AsyncTopMenu from "../containers/TopMenu";
-
+import { Container } from "../components/Container";
 import AsyncLanding from "../containers/Landing";
 import AsyncNoMatch from "../containers/NoMatch";
 
@@ -70,12 +70,14 @@ export const Routes = () => (
     <Fragment>
       <GlobalStyle />
       <AsyncTopMenu />
-      <Switch>
-        <Route path="/hacks" exact component={AsyncHacks} />
-        <Route path="/blog" exact component={AsyncBlog} />
-        <Route path="/" exact component={AsyncLanding} />
-        <Route component={AsyncNoMatch} />
-      </Switch>
+      <Container>
+        <Switch>
+          <Route path="/hacks" exact component={AsyncHacks} />
+          <Route path="/blog" exact component={AsyncBlog} />
+          <Route path="/" exact component={AsyncLanding} />
+          <Route component={AsyncNoMatch} />
+        </Switch>
+      </Container>
       {/* <ServiceWorkerMessage /> */}
       {/* <AsyncBottomMenu /> */}
     </Fragment>

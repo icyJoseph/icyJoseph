@@ -13,15 +13,3 @@ body {
 body::-webkit-scrollbar {
   display: none;
 }
-
-#root {
-  display: flex;
-  height: 100%;
-  flex-direction: column-reverse;
-}
-
-@media (min-width: 600px) {
-  #root {
-    flex-direction: column;
-  }
-}

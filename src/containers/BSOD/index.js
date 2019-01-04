@@ -4,21 +4,20 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   background: dodgerblue;
   color: white;
-  height: 100%;
-  width: 100%;
-  position: fixed;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Container = styled.div`
-  margin-top: 100px;
   text-align: center;
-  height: 100%;
-  width: 100%;
+  margin-top: 1em;
 `;
 
 const SadFace = styled.div`
   font-size: 48pt;
-  margin: 40px;
+  margin: 0.5em;
 `;
 
 export const Error = styled.span`
@@ -30,16 +29,16 @@ export const Error = styled.span`
 
 const Menu = styled.div`
   text-align: center;
-  margin-top: 50px;
+  margin-top: 1em;
 `;
 
 const Paragraph = styled.p`
-  margin: 30px 100px;
+  margin: 0.5em auto;
   text-align: center;
 `;
 
 const Link = styled.a`
-  margin: 10px;
+  margin: 0.5em;
   color: white;
   text-decoration: underline;
 `;
@@ -52,10 +51,9 @@ const BSOD = () => (
       <Paragraph>
         Unfortunately, I do not have access to a computer with IE.
         <br />
-        You can either wait until I do, or download another browser.
+        You can either:
       </Paragraph>
-      <Paragraph>* Do not send me an e-mail to notify about this.</Paragraph>
-      <Paragraph>You can instead visit my GitHub page.</Paragraph>
+      <Paragraph>Visit my GitHub page, or download another browser.</Paragraph>
       <Menu>
         <Link
           href="https://github.com/icyJoseph"
@@ -72,6 +70,7 @@ const BSOD = () => (
           Chrome
         </Link>
       </Menu>
+      <Paragraph>* Do not send me an e-mail to notify about this.</Paragraph>
     </Container>
   </Wrapper>
 );

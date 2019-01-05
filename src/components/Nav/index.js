@@ -3,12 +3,14 @@ import { baseColors } from "../../theme";
 const ImageLength = "50px";
 
 const shadow = css`
-  box-shadow: 0 1px 7px rgba(0, 0, 0, 0.12), 0 1px 6px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 7px rgba(255, 255, 255, 0.12),
+    0 1px 6px rgba(255, 255, 255, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   &.active,
   &:hover {
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 7px 15px rgba(0, 0, 0, 0.22),
-      0 -3px 15px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 14px 28px rgba(255, 255, 255, 0.25),
+      0 7px 15px rgba(255, 255, 255, 0.22),
+      0 -3px 15px rgba(255, 255, 255, 0.22);
   }
 
   @media (max-width: 599px) {
@@ -21,7 +23,7 @@ const shadow = css`
       background-image: radial-gradient(
         circle at 50% 87%,
         ${baseColors.info} 2px,
-        transparent 5px
+        transparent 0.1%
       );
     }
   }
@@ -64,6 +66,7 @@ export const NavBar = styled.nav`
 
   > *:first-child {
     max-height: ${ImageLength};
+    justify-content: center;
   }
 
   > * {
@@ -85,9 +88,10 @@ export const NavBar = styled.nav`
     align-self: center;
     padding-bottom: 1em;
     flex-direction: column;
+    bottom: 0;
 
     > div {
-      text-align: center;
+      display: none;
     }
 
     > ul {
@@ -101,6 +105,8 @@ export const NavItems = styled.ul`
   list-style: none;
   justify-content: flex-end;
   margin: auto;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
 
   > * {
     height: 35px;

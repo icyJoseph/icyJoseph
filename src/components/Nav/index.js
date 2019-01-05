@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { baseColors } from "../../theme";
+
 const ImageLength = "50px";
 
 const shadow = css`

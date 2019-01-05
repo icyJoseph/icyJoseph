@@ -5,7 +5,7 @@ export const Container = styled.div`
   flex: 1;
 
   > div > div:last-child {
-    margin-bottom: 15%;
+    margin-bottom: 80px;
   }
 
   @media (max-width: 599px) {

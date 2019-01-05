@@ -3,7 +3,7 @@ import axios from "axios";
 export const baseURL =
   process.env.NODE_ENV === "production"
     ? process.env.REACT_APP_GITHUB_ENDPOINT
-    : "http://localhost:1337";
+    : "http://192.168.0.4:1337";
 
 export const github = () =>
   axios.create({

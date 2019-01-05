@@ -1,17 +1,15 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { openDrawer, closeDrawer, changeContent } from "../../ducks/drawer";
 import { fetchUserData, fetchUserRepos } from "../../ducks/github";
 import { mapValueToFunctions } from "../../functional";
 import { shouldFetch } from "../../helpers";
-// import { shouldFetch, setUpMediaQuery } from "../../helpers";
 import { icyJoseph } from "../../constants";
-// import { desktopBreakPoint, icyJoseph } from "../../constants";
 
 import data from "../../data";
 
-export function withGitHub(toRender) {
+export function withGitHub(Render) {
   class GitHubHoC extends Component {
     static propTypes = {
       github: PropTypes.object,
@@ -25,7 +23,6 @@ export function withGitHub(toRender) {
       fetchUserRepo: PropTypes.func
     };
 
-    state = { desktop: false };
     componentDidMount() {
       const {
         github: { expiry, commits, languages }
@@ -44,17 +41,8 @@ export function withGitHub(toRender) {
       );
     }
 
-    updateMatches = () => {
-      const { matches } = this.mediaQueryList;
-      return this.setState({ desktop: matches });
-    };
-
-    componentWillUnmount() {
-      // return this.mediaQueryList.removeListener(this.updateMatches);
-    }
-
     render() {
-      return toRender({ ...this.props, ...this.state });
+      return <Render {...this.props} />;
     }
   }
 

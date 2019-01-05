@@ -54,6 +54,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     display: flex;
     flex-direction: column-reverse;
+    position: relative;
     
     @media (min-width: 600px) {
         flex-direction: column;

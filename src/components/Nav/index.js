@@ -1,13 +1,29 @@
 import styled, { css } from "styled-components";
-
+import { baseColors } from "../../theme";
 const ImageLength = "50px";
 
 const shadow = css`
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 7px rgba(0, 0, 0, 0.12), 0 1px 6px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   &.active,
   &:hover {
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 7px 15px rgba(0, 0, 0, 0.22),
+      0 -3px 15px rgba(0, 0, 0, 0.22);
+  }
+
+  @media (max-width: 599px) {
+    &.active::after {
+      content: "";
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      left: 0;
+      background-image: radial-gradient(
+        circle at 50% 87%,
+        ${baseColors.info} 2px,
+        transparent 5px
+      );
+    }
   }
 
   &:active {
@@ -17,7 +33,7 @@ const shadow = css`
 
 export const NavBar = styled.nav`
   display: flex;
-  padding: 0.5em;
+  padding: 0.5em 0;
 
   > div {
     flex: 1;
@@ -65,6 +81,8 @@ export const NavBar = styled.nav`
   }
 
   @media (max-width: 599px) {
+    position: fixed;
+    align-self: center;
     padding-bottom: 1em;
     flex-direction: column;
 
@@ -99,7 +117,8 @@ export const NavItems = styled.ul`
   }
 
   > * > button {
-    background: none !important;
+    position: relative;
+    background: ${baseColors.background};
     height: 100%;
     width: 100%;
     color: inherit;
@@ -115,6 +134,21 @@ export const NavItems = styled.ul`
     &:focus {
       /* add outline to focus pseudo-class */
       outline-style: none;
+    }
+  }
+
+  @media (max-width: 599px) {
+    &:before {
+      content: "";
+      background: ${baseColors.dark};
+      position: absolute;
+      height: 30px;
+      width: 100%;
+      z-index: -1;
+      bottom: 0;
+      border-radius: 10px 10px 0 0;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+        0 10px 10px rgba(0, 0, 0, 0.22);
     }
   }
 

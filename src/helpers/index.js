@@ -15,3 +15,14 @@ export function setUpMediaQuery(query) {
   // are we matching?
   return this.updateMatches();
 }
+
+export const softTopScroll = () => {
+  const { documentElement, body } = document;
+  const distance = documentElement.scrollTop || body.scrollTop;
+  const step = 8;
+  if (distance > 0) {
+    window.requestAnimationFrame(softTopScroll);
+    window.scrollTo(0, distance - distance / step);
+  }
+  return null;
+};

@@ -9,7 +9,7 @@ import { compose } from "redux";
 import { NavBar, NavItems } from "../../components/Nav";
 import { TextCycle } from "../../components/TextCycle";
 import { head, pipe, curryRight, split, take } from "../../functional";
-
+import { softTopScroll } from "../../helpers";
 import brand from "../../assets/featured/web.png";
 
 const takeSecond = take(1, 1);
@@ -31,7 +31,11 @@ export class TopMenu extends Component {
   handleClick = this.handleClick.bind(this);
 
   handleClick(e, name) {
-    this.props.history.push(`/${name}`);
+    const { activeItem } = this.state;
+    if (activeItem === name) {
+      return softTopScroll();
+    }
+
     return this.setState({ activeItem: name }, () => this.navigateTo(name));
   }
 

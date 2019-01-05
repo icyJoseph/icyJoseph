@@ -51,13 +51,13 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #root {
-    height: 100%;
     display: flex;
     flex-direction: column-reverse;
     position: relative;
+    min-height: 100%;
     
     @media (min-width: 600px) {
-        flex-direction: column;
+      flex-direction: column;
     }
   }
 `;

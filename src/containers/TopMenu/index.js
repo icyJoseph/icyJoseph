@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { compose } from "redux";
+import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faCode } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faCode, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { faMediumM } from "@fortawesome/free-brands-svg-icons";
-import { connect } from "react-redux";
-import { compose } from "redux";
 import { NavBar, NavItems } from "../../components/Nav";
 import { TextCycle } from "../../components/TextCycle";
 import { head, pipe, curryRight, split, take } from "../../functional";
@@ -16,9 +16,10 @@ const takeSecond = take(1, 1);
 const splitDash = curryRight(split)("/");
 
 export class TopMenu extends Component {
-  state = { activeItem: "" };
+  state = { activeItem: "", scrolled: false };
 
   componentDidMount() {
+    window.addEventListener("scroll", this.toggleScrolled);
     const { pathname } = this.props.location;
     const activeItem = pipe(
       splitDash,
@@ -28,15 +29,27 @@ export class TopMenu extends Component {
     return this.setState({ activeItem });
   }
 
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.showButton);
+  }
+
   handleClick = this.handleClick.bind(this);
+  toggleScrolled = this.toggleScrolled.bind(this);
 
   handleClick(e, name) {
     const { activeItem } = this.state;
-    if (activeItem === name) {
-      return softTopScroll();
+    if (activeItem !== name) {
+      return this.setState({ activeItem: name }, () => this.navigateTo(name));
     }
+    return null;
+  }
 
-    return this.setState({ activeItem: name }, () => this.navigateTo(name));
+  toggleScrolled() {
+    const { scrolled } = this.state;
+    if (window.scrollY > 100) {
+      return !scrolled && this.setState({ scrolled: true });
+    }
+    return scrolled && this.setState({ scrolled: false });
   }
 
   navigateTo(path) {
@@ -44,11 +57,11 @@ export class TopMenu extends Component {
   }
 
   render() {
-    const { activeItem } = this.state;
+    const { activeItem, scrolled } = this.state;
     const { repoUrls, repos, topics } = this.props;
 
     return (
-      <NavBar>
+      <NavBar scrolled={scrolled}>
         <div>
           <img
             src={brand}
@@ -58,20 +71,53 @@ export class TopMenu extends Component {
           <TextCycle tags={repos} subtags={topics} homepages={repoUrls} />
         </div>
         <NavItems>
-          <li onClick={curryRight(this.handleClick)("")}>
-            <button className={activeItem === "" ? "active" : ""}>
+          <li className={scrolled && activeItem === "" ? "flipped" : ""}>
+            <button
+              className={activeItem === "" ? "active" : ""}
+              onClick={curryRight(this.handleClick)("")}
+            >
               <FontAwesomeIcon icon={faHome} />
             </button>
+            {activeItem === "" && (
+              <button
+                className={activeItem === "" ? "active" : ""}
+                onClick={softTopScroll}
+              >
+                <FontAwesomeIcon icon={faChevronUp} />
+              </button>
+            )}
           </li>
-          <li onClick={curryRight(this.handleClick)("blog")}>
-            <button className={activeItem === "blog" ? "active" : ""}>
+          <li className={scrolled && activeItem === "blog" ? "flipped" : ""}>
+            <button
+              className={activeItem === "blog" ? "active" : ""}
+              onClick={curryRight(this.handleClick)("blog")}
+            >
               <FontAwesomeIcon icon={faMediumM} />
             </button>
+            {activeItem === "blog" && (
+              <button
+                className={activeItem === "blog" ? "active" : ""}
+                onClick={softTopScroll}
+              >
+                <FontAwesomeIcon icon={faChevronUp} />
+              </button>
+            )}
           </li>
-          <li onClick={curryRight(this.handleClick)("hacks")}>
-            <button className={activeItem === "hacks" ? "active" : ""}>
+          <li className={scrolled && activeItem === "hacks" ? "flipped" : ""}>
+            <button
+              className={activeItem === "hacks" ? "active" : ""}
+              onClick={curryRight(this.handleClick)("hacks")}
+            >
               <FontAwesomeIcon icon={faCode} />
             </button>
+            {activeItem === "hacks" && (
+              <button
+                className={activeItem === "hacks" ? "active" : ""}
+                onClick={softTopScroll}
+              >
+                <FontAwesomeIcon icon={faChevronUp} />
+              </button>
+            )}
           </li>
         </NavItems>
       </NavBar>

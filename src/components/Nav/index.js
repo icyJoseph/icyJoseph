@@ -37,9 +37,15 @@ const shadow = css`
 export const NavBar = styled.nav`
   display: flex;
   padding: 0.5em 0;
+  position: sticky;
+  top: 0;
+  bottom: auto;
 
   > div {
     flex: 1;
+    transform: ${({ scrolled }) =>
+      !scrolled ? "translateX(0%)" : "translateX(-50%)"};
+    transition: transform 1s ease;
   }
 
   > * > img {
@@ -89,6 +95,7 @@ export const NavBar = styled.nav`
     align-self: center;
     padding-bottom: 1em;
     flex-direction: column;
+    top: auto;
     bottom: 0;
 
     > div {
@@ -108,6 +115,31 @@ export const NavItems = styled.ul`
   margin: auto;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent;
+
+  > li {
+    position: relative;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    transition: transform 1s ease;
+  }
+
+  > li > button {
+    &:nth-child(1) {
+      position: absolute;
+      backface-visibility: hidden;
+      transform: rotateX(0deg) translateZ(-10px);
+    }
+
+    &:nth-child(2) {
+      position: absolute;
+      backface-visibility: hidden;
+      transform: rotateX(-180deg) translateZ(-10px);
+    }
+  }
+
+  > li.flipped {
+    transform: rotateX(180deg);
+  }
 
   > * {
     height: 35px;

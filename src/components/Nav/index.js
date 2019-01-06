@@ -1,4 +1,8 @@
+import React from "react";
 import styled, { css } from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { curryRight } from "../../functional";
 import { baseColors } from "../../theme";
 
 const ImageLength = "50px";
@@ -202,3 +206,30 @@ export const NavItems = styled.ul`
     }
   }
 `;
+
+export function NavItem({
+  name,
+  mainHandler,
+  subHandler,
+  activeItem,
+  scrolled,
+  icon
+}) {
+  const isActive = activeItem === name;
+  const shouldFlip = scrolled && isActive ? "flipped" : "";
+  return (
+    <li className={shouldFlip}>
+      <button
+        className={isActive ? "active" : ""}
+        onClick={curryRight(mainHandler)(name)}
+      >
+        <FontAwesomeIcon icon={icon} />
+      </button>
+      {isActive && (
+        <button className={isActive ? "active" : ""} onClick={subHandler}>
+          <FontAwesomeIcon icon={faChevronUp} />
+        </button>
+      )}
+    </li>
+  );
+}

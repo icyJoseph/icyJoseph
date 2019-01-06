@@ -3,10 +3,9 @@ import PropTypes from "prop-types";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faCode, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faCode } from "@fortawesome/free-solid-svg-icons";
 import { faMediumM } from "@fortawesome/free-brands-svg-icons";
-import { NavBar, NavItems } from "../../components/Nav";
+import { NavBar, NavItems, NavItem } from "../../components/Nav";
 import { TextCycle } from "../../components/TextCycle";
 import { head, pipe, curryRight, split, take } from "../../functional";
 import { softTopScroll } from "../../helpers";
@@ -17,6 +16,10 @@ const splitDash = curryRight(split)("/");
 
 export class TopMenu extends Component {
   state = { activeItem: "", scrolled: false };
+
+  handleClick = this.handleClick.bind(this);
+  toggleScrolled = this.toggleScrolled.bind(this);
+  navigateTo = this.navigateTo.bind(this);
 
   componentDidMount() {
     window.addEventListener("scroll", this.toggleScrolled);
@@ -32,9 +35,6 @@ export class TopMenu extends Component {
   componentWillUnmount() {
     window.removeEventListener("scroll", this.showButton);
   }
-
-  handleClick = this.handleClick.bind(this);
-  toggleScrolled = this.toggleScrolled.bind(this);
 
   handleClick(e, name) {
     const { activeItem } = this.state;
@@ -57,7 +57,7 @@ export class TopMenu extends Component {
   }
 
   render() {
-    const { activeItem, scrolled } = this.state;
+    const { scrolled } = this.state;
     const { repoUrls, repos, topics } = this.props;
 
     return (
@@ -71,54 +71,20 @@ export class TopMenu extends Component {
           <TextCycle tags={repos} subtags={topics} homepages={repoUrls} />
         </div>
         <NavItems>
-          <li className={scrolled && activeItem === "" ? "flipped" : ""}>
-            <button
-              className={activeItem === "" ? "active" : ""}
-              onClick={curryRight(this.handleClick)("")}
-            >
-              <FontAwesomeIcon icon={faHome} />
-            </button>
-            {activeItem === "" && (
-              <button
-                className={activeItem === "" ? "active" : ""}
-                onClick={softTopScroll}
-              >
-                <FontAwesomeIcon icon={faChevronUp} />
-              </button>
-            )}
-          </li>
-          <li className={scrolled && activeItem === "blog" ? "flipped" : ""}>
-            <button
-              className={activeItem === "blog" ? "active" : ""}
-              onClick={curryRight(this.handleClick)("blog")}
-            >
-              <FontAwesomeIcon icon={faMediumM} />
-            </button>
-            {activeItem === "blog" && (
-              <button
-                className={activeItem === "blog" ? "active" : ""}
-                onClick={softTopScroll}
-              >
-                <FontAwesomeIcon icon={faChevronUp} />
-              </button>
-            )}
-          </li>
-          <li className={scrolled && activeItem === "hacks" ? "flipped" : ""}>
-            <button
-              className={activeItem === "hacks" ? "active" : ""}
-              onClick={curryRight(this.handleClick)("hacks")}
-            >
-              <FontAwesomeIcon icon={faCode} />
-            </button>
-            {activeItem === "hacks" && (
-              <button
-                className={activeItem === "hacks" ? "active" : ""}
-                onClick={softTopScroll}
-              >
-                <FontAwesomeIcon icon={faChevronUp} />
-              </button>
-            )}
-          </li>
+          {[
+            { name: "", icon: faHome },
+            { name: "blog", icon: faMediumM },
+            { name: "hacks", icon: faCode }
+          ].map(({ name, icon }) => (
+            <NavItem
+              key={name}
+              name={name}
+              {...this.state}
+              mainHandler={this.handleClick}
+              subHandler={softTopScroll}
+              icon={icon}
+            />
+          ))}
         </NavItems>
       </NavBar>
     );

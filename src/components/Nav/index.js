@@ -44,6 +44,7 @@ export const NavBar = styled.nav`
   position: sticky;
   top: 0;
   bottom: auto;
+  z-index: 10;
 
   > div {
     flex: 1;

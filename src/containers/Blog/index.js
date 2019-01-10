@@ -1,24 +1,89 @@
-import React from "react";
-// import { connect } from "react-redux";
-// import { Background, Mask } from "../../components/Background";
-// import Feed, { Bio } from "../../components/Feed";
-// import { fetchFeed } from "../../ducks/medium";
-// import { shouldFetch, setUpMediaQuery } from "../../helpers";
+import React, { Component } from "react";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { withGitHub } from "../GitHubHoC";
+import { Card, CardWrapper, Author } from "../../components/Card";
+import { Title } from "../../components/Title";
+import { fetchFeed } from "../../ducks/medium";
+import { shouldFetch } from "../../helpers";
 // import { get } from "../../functional";
-// import { desktopBreakPoint } from "../../constants";
-// import Spinner from "../../logos/Spinner";
-// import blogBackground from "../../assets/images/blogBackground.jpg";
 
-export const Blog = () => <div>Blog goes here</div>;
+import { imageSrc } from "../../constants";
 
-export default Blog;
+export class Blog extends Component {
+  componentDidMount() {
+    document.title = "Blog - icyJoseph";
 
-// const mapStateToProps = ({ medium }) => ({ medium });
-// const mapDispatchToProps = {
-//   fetchFeed
-// };
+    const {
+      medium: { expiry }
+    } = this.props;
+    return shouldFetch(expiry) && this.props.fetchFeed();
+  }
 
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(Blog);
+  render() {
+    const { medium } = this.props;
+    const {
+      feed: { articles, user }
+    } = medium;
+
+    return (
+      <div>
+        <Title sticky>
+          <h1>Blog</h1>
+        </Title>
+        {!!user.username && (
+          <div>
+            <Author>
+              <img src={`${imageSrc()}/${user.imageId}`} alt="user" />
+              <div>
+                <span>{user.name}</span>
+                <span>
+                  <code>@{user.username}</code>
+                </span>
+                <span>{user.bio}</span>
+              </div>
+            </Author>
+            <CardWrapper>
+              {Object.keys(articles).map(id => {
+                const article = articles[id];
+                const {
+                  title,
+                  virtuals: {
+                    subtitle,
+                    previewImage: { imageId },
+                    wordCount
+                  }
+                } = article;
+                return (
+                  <Card key={id}>
+                    <img src={`${imageSrc(512)}/${imageId}`} alt="user" />
+                    <div>
+                      <span>{title}</span>
+                      <span>{subtitle}</span>
+                      <span>words: {wordCount}</span>
+                    </div>
+                  </Card>
+                );
+              })}
+            </CardWrapper>
+          </div>
+        )}
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = ({ medium }) => ({ medium });
+const mapDispatchToProps = {
+  fetchFeed
+};
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
+
+export default compose(
+  withConnect,
+  withGitHub
+)(Blog);

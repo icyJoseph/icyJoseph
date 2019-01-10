@@ -9,5 +9,5 @@ export const extras = [
 ];
 
 // Medium
-export const imageSrc = "https://miro.medium.com/fit/c/120/120";
+export const imageSrc = (w = 120) => `https://miro.medium.com/fit/c/${w}/${w}`;
 export const medium = "https://medium.com/@icjoseph";

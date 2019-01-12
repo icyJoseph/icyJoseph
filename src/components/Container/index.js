@@ -5,7 +5,8 @@ export const Container = styled.div`
   flex: 1;
 
   > div:first-child {
-    width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   > div > div:last-child {
@@ -14,7 +15,7 @@ export const Container = styled.div`
 
   @media (max-width: 599px) {
     > div > div:first-child {
-      margin-top: 10%;
+      margin-top: 20px;
     }
   }
 `;

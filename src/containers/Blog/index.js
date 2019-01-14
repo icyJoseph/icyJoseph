@@ -74,9 +74,13 @@ export class Blog extends Component {
                   <Card key={id}>
                     <img src={`${imageSrc(512)}/${imageId}`} alt="user" />
                     <div>
-                      <span>{title}</span>
-                      <span>{subtitle}</span>
-                      <span>words: {wordCount}</span>
+                      <div>
+                        <span>{title}</span>
+                        <span>{subtitle}</span>
+                        <span>
+                          <span>{wordCount}</span> words
+                        </span>
+                      </div>
                     </div>
                   </Card>
                 );

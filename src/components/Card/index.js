@@ -14,20 +14,32 @@ export const Card = styled.div`
   background: ${baseColors.foreground};
   border-radius: 5px;
   max-width: 300px;
+  position: relative;
 
   > img {
     width: 100%;
     height: auto;
-    border-radius: 5px 5px 0 0;
+    border-radius: 5px;
   }
 
   > div {
-    display: flex;
-    flex-direction: column;
-    padding: 1em;
+    position: absolute;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
 
-    > span:first-child {
+    > * {
+      height: 100%;
+      flex-direction: column;
+      display: flex;
+      padding: 0 1em;
+      justify-content: space-evenly;
+    }
+
+    > div > span:first-child {
       color: ${baseColors.info};
+      font-size: 1.5rem;
     }
   }
 `;

@@ -17,13 +17,14 @@ const titleShadow = css`
 
 const StyledTitle = styled.div`
   ${stickyElem}
-  background: ${({ shadow }) =>
-    shadow ? baseColors.foreground : baseColors.background};
+  background: ${baseColors.background};
+  opacity: ${({ shadow }) => (shadow ? "0.9" : "1")};
   ${titleShadow}
-  min-width: ${({ shadow }) => (shadow ? "200px" : "150px")} ;
+  min-width: ${({ shadow }) => (shadow ? "150px" : "100px")} ;
   border-radius: 0 0 5px 5px;
   align-self: center;
   transition: all 1s ease;
+  z-index: 10;
 
   
   > div.sticky_sentinel {

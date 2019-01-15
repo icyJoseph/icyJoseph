@@ -71,14 +71,17 @@ export class Blog extends Component {
                   }
                 } = article;
                 return (
-                  <Card key={id}>
+                  <Card key={id} words={wordCount}>
                     <img src={`${imageSrc(512)}/${imageId}`} alt="user" />
                     <div>
                       <div>
-                        <span>{title}</span>
-                        <span>{subtitle}</span>
+                        <span content={title}>{title}</span>
+                        <span content={subtitle}>{subtitle}</span>
                         <span>
-                          <span>{wordCount}</span> words
+                          <span content={`${wordCount} words`}>
+                            {wordCount}
+                          </span>{" "}
+                          words
                         </span>
                       </div>
                     </div>

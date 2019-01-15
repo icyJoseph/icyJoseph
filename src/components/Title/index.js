@@ -47,7 +47,7 @@ const StyledTitle = styled.div`
   > * {
     margin: 0;
     padding: 0.2em;
-    font-size: 16pt;
+    font-size: 1.5em;
     color: ${baseColors.heading};
     text-align: center;  
   }

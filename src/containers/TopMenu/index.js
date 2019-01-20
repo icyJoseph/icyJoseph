@@ -1,75 +1,64 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { compose } from "redux";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+
 import { faHome, faCode } from "@fortawesome/free-solid-svg-icons";
 import { faMediumM } from "@fortawesome/free-brands-svg-icons";
-import { NavBar, NavItems, NavItem } from "../../components/Nav";
-import { TextCycle } from "../../components/TextCycle";
-import { head, pipe, curryRight, split, take } from "../../functional";
-import { softTopScroll } from "../../helpers";
-import brand from "../../assets/featured/web.png";
 
-const takeSecond = take(1, 1);
-const splitDash = curryRight(split)("/");
+import { NavBar, NavItems, NavItem } from "../../components/Nav";
+import Brand from "../../components/Brand";
+
+import { curryRight } from "../../functional";
+import { softTopScroll, onScrollThreshold } from "../../helpers";
+
+import brand from "../../assets/featured/web.png";
 
 export class TopMenu extends Component {
   state = { activeItem: "", scrolled: false };
 
+  toggleScrolled = onScrollThreshold.bind(this, "scrolled");
   handleClick = this.handleClick.bind(this);
-  toggleScrolled = this.toggleScrolled.bind(this);
-  navigateTo = this.navigateTo.bind(this);
 
   componentDidMount() {
     window.addEventListener("scroll", this.toggleScrolled);
-    const { pathname } = this.props.location;
-    const activeItem = pipe(
-      splitDash,
-      takeSecond,
-      head
-    )(pathname);
+
+    const {
+      match: {
+        params: { activeItem = "" }
+      }
+    } = this.props;
+
     return this.setState({ activeItem });
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.showButton);
+    window.removeEventListener("scroll", this.toggleScrolled);
   }
 
-  handleClick(e, name) {
+  handleClick(e, path) {
     const { activeItem } = this.state;
-    if (activeItem !== name) {
-      return this.setState({ activeItem: name }, () => this.navigateTo(name));
+    const {
+      history: { push }
+    } = this.props;
+
+    if (activeItem !== path) {
+      return this.setState({ activeItem: path }, () => push(`/${path}`));
     }
     return null;
   }
 
-  toggleScrolled() {
-    const { scrolled } = this.state;
-    if (window.scrollY > 100) {
-      return !scrolled && this.setState({ scrolled: true });
-    }
-    return scrolled && this.setState({ scrolled: false });
-  }
-
-  navigateTo(path) {
-    return this.props.history.push(`/${path}`);
-  }
-
   render() {
     const { scrolled } = this.state;
-    const { repoUrls, repos, topics } = this.props;
+    const { repos, links } = this.props;
 
     return (
       <NavBar scrolled={scrolled}>
-        <div>
-          <img
-            src={brand}
-            alt="brand"
-            onClick={curryRight(this.handleClick)("")}
-          />
-          <TextCycle tags={repos} subtags={topics} homepages={repoUrls} />
-        </div>
+        <Brand
+          brand={brand}
+          titles={repos}
+          links={links}
+          clickHandler={curryRight(this.handleClick)("")}
+        />
         <NavItems>
           {[
             { name: "", icon: faHome },
@@ -79,10 +68,10 @@ export class TopMenu extends Component {
             <NavItem
               key={name}
               name={name}
-              {...this.state}
               mainHandler={this.handleClick}
               subHandler={softTopScroll}
               icon={icon}
+              {...this.state}
             />
           ))}
         </NavItems>
@@ -91,27 +80,22 @@ export class TopMenu extends Component {
   }
 }
 
-const mapStateToProps = ({ github: { repos, topics } }) => ({
+export const mapStateToProps = ({ github: { repos } }) => ({
   repos: repos.map(({ name }) => name),
-  repoUrls: repos.reduce(
+  links: repos.reduce(
     (prev, { name, html_url }) => ({
       ...prev,
       [name]: html_url
     }),
     {}
-  ),
-  topics: topics.reduce((prev, curr) => ({ ...prev, ...curr }), {})
+  )
 });
 
-const withConnect = connect(mapStateToProps);
-
-export default compose(
-  withConnect,
-  withRouter
-)(TopMenu);
+export default connect(mapStateToProps)(TopMenu);
 
 TopMenu.propTypes = {
-  location: PropTypes.object,
+  repos: PropTypes.array,
+  links: PropTypes.object,
   history: PropTypes.object,
   match: PropTypes.object
 };

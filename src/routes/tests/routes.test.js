@@ -7,7 +7,7 @@ import Routes, {
   AsyncNoMatch,
   AsyncTopMenu,
   AsyncBottomMenu
-} from "../../routes";
+} from "..";
 
 describe("SnapShot Routes", () => {
   const wrapper = shallow(<Routes />);

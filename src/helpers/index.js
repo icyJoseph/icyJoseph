@@ -1,3 +1,4 @@
+// figure out if expiry date is past
 export const shouldFetch = expiry => {
   if (!expiry) return true;
   const now = new Date();
@@ -6,16 +7,7 @@ export const shouldFetch = expiry => {
   return now >= lastSave;
 };
 
-export function setUpMediaQuery(query) {
-  const targetWindow = this.props.targetWindow || window;
-  // get the matchMedia function
-  this.mediaQueryList = targetWindow.matchMedia(query);
-  // listen to updates
-  this.mediaQueryList.addListener(this.updateMatches);
-  // are we matching?
-  return this.updateMatches();
-}
-
+// softly scroll to top
 export const softTopScroll = () => {
   const { documentElement, body } = document;
   const distance = documentElement.scrollTop || body.scrollTop;
@@ -26,3 +18,12 @@ export const softTopScroll = () => {
   }
   return null;
 };
+
+// toggles the key on threshold pass
+export function onScrollThreshold(key, { threshold = 100 }) {
+  const { [key]: stateKey } = this.state;
+  if (window.scrollY > threshold) {
+    return !stateKey && this.setState({ [key]: true });
+  }
+  return stateKey && this.setState({ [key]: false });
+}

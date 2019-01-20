@@ -7,6 +7,7 @@ export const Container = styled.div`
   > div:first-child {
     display: flex;
     flex-direction: column;
+    width: 100%;
   }
 
   > div > div:last-child {

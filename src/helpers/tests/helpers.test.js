@@ -1,4 +1,4 @@
-import { shouldFetch, setUpMediaQuery } from "../";
+import { shouldFetch } from "../";
 
 describe("shouldFetch", () => {
   const expiry = "2018-06-11T04:49:03.603Z";
@@ -12,16 +12,5 @@ describe("shouldFetch", () => {
   });
   it("evaluates expiry < now", () => {
     expect(shouldFetch(veryLateDate)).toEqual(false);
-  });
-});
-
-describe("setUpMediaQuery", () => {
-  it("uses the window", () => {
-    const ctx = {
-      updateMatches: jest.fn(),
-      props: {}
-    };
-    setUpMediaQuery.bind(ctx)("some query");
-    expect(ctx.updateMatches).toHaveBeenCalled();
   });
 });

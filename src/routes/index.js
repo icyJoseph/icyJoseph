@@ -1,10 +1,9 @@
 import React, { Fragment } from "react";
-import { createGlobalStyle } from "styled-components";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Loadable from "react-loadable";
 
 import { Container } from "../components/Container";
-import { baseColors } from "../theme";
+import GlobalStyle from "../theme/globalStyle";
 
 // import ServiceWorkerMessage from "./components/ServiceWorkerMessage";
 
@@ -44,29 +43,11 @@ export const AsyncTopMenu = Loadable({
   delay
 });
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    color: ${baseColors.primary};
-    background: ${baseColors.background};
-  }
-
-  #root {
-    display: flex;
-    flex-direction: column-reverse;
-    position: relative;
-    min-height: 100%;
-    
-    @media (min-width: 600px) {
-      flex-direction: column;
-    }
-  }
-`;
-
 export const Routes = () => (
   <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Fragment>
       <GlobalStyle />
-      <AsyncTopMenu />
+      <Route path="/:activeItem?" component={AsyncTopMenu} />
       <Container>
         <Switch>
           <Route path="/hacks" exact component={AsyncHacks} />

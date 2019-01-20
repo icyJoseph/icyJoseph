@@ -9,7 +9,7 @@ import { browserRender } from "./config";
 
 import "./index.css";
 
-const storedState = localStorage.getItem("state");
+const storedState = localStorage.getItem("icyJoseph");
 const store = configureStore(storedState ? JSON.parse(storedState) : undefined);
 // if the browser is IE it returns blue screen of death
 // otherwise return the routes for the app

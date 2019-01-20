@@ -31,7 +31,6 @@ export function withGitHub(Render) {
       const noDataOrExpired =
         languages.length === 0 || commits === 0 || shouldFetch(expiry);
 
-      // setUpMediaQuery.bind(this)(desktopBreakPoint);
       return (
         noDataOrExpired &&
         mapValueToFunctions(

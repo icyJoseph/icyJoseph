@@ -12,7 +12,8 @@ import { observeHeader } from "../../utils/stickyEvent";
 import { imageSrc } from "../../constants";
 
 export class Blog extends Component {
-  state = { shadow: false };
+  state = { shadow: false, loadedImages: [], errorImages: [] };
+
   componentDidMount() {
     document.title = "Blog - icyJoseph";
 
@@ -35,8 +36,18 @@ export class Blog extends Component {
     document.removeEventListener("sticky-change", this.appendShadow);
   }
 
+  handleImageLoaded = id => () =>
+    this.setState(prev => ({
+      loadedImages: prev.loadedImages.concat(id)
+    }));
+
+  handleImageError = id => () =>
+    this.setState(prev => ({
+      errorImages: prev.errorImages.concat(id)
+    }));
+
   render() {
-    const { shadow } = this.state;
+    const { shadow, loadedImages } = this.state;
     const { medium } = this.props;
     const {
       feed: { articles, user }
@@ -72,19 +83,26 @@ export class Blog extends Component {
                 } = article;
                 return (
                   <Card key={id} words={wordCount}>
-                    <img src={`${imageSrc(512)}/${imageId}`} alt="user" />
-                    <div>
+                    <img
+                      src={`${imageSrc(512)}/${imageId}`}
+                      alt="user"
+                      onLoad={this.handleImageLoaded(id)}
+                      onError={this.handleImageError(id)}
+                    />
+                    {loadedImages.includes(id) && (
                       <div>
-                        <span content={title}>{title}</span>
-                        <span content={subtitle}>{subtitle}</span>
-                        <span>
-                          <span content={`${wordCount} words`}>
-                            {wordCount}
-                          </span>{" "}
-                          words
-                        </span>
+                        <div>
+                          <span content={title}>{title}</span>
+                          <span content={subtitle}>{subtitle}</span>
+                          <span>
+                            <span content={`${wordCount} words`}>
+                              {wordCount}
+                            </span>{" "}
+                            words
+                          </span>
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </Card>
                 );
               })}

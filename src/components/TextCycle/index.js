@@ -19,12 +19,11 @@ export class TextCycle extends Component {
   interval = null;
 
   componentDidMount() {
-    const { tags } = this.props;
-    const safeTagsInc = curry(safeInc)(tags.length);
-    this.interval = setInterval(
-      () => this.setState(prev => ({ index: safeTagsInc(prev.index) })),
-      this.state.time * 1000
-    );
+    this.interval = setInterval(() => {
+      const { titles } = this.props;
+      const safeTitlesInc = curry(safeInc)(titles.length);
+      return this.setState(prev => ({ index: safeTitlesInc(prev.index) }));
+    }, this.state.time * 1000);
   }
 
   componentWillUnmount() {
@@ -33,14 +32,14 @@ export class TextCycle extends Component {
 
   render() {
     const { index, time } = this.state;
-    const { tags, homepages } = this.props;
-    const current = tags[index];
-    const href = homepages[current];
+    const { titles, links } = this.props;
+    const current = titles[index];
+    const href = links[current];
 
     return (
       <Fader time={time}>
         <a href={href} target="_blank" rel="noopener noreferrer">
-          {tags[index]}
+          {current}
         </a>
       </Fader>
     );

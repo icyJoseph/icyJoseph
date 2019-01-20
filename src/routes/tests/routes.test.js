@@ -1,13 +1,20 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
+import { Provider } from "react-redux";
+import { MemoryRouter } from "react-router-dom";
 import Routes, {
   AsyncLanding,
   AsyncHacks,
   AsyncBlog,
   AsyncNoMatch,
-  AsyncTopMenu,
-  AsyncBottomMenu
+  AsyncTopMenu
 } from "..";
+
+// jest.mock("react", () => {
+//   const r = jest.requireActual("react");
+
+//   return { ...r, memo: x => x };
+// });
 
 describe("SnapShot Routes", () => {
   const wrapper = shallow(<Routes />);
@@ -51,9 +58,26 @@ describe("AsyncTopMenu", () => {
   });
 });
 
-describe("AsyncBottomMenu", () => {
-  const loaded = shallow(<AsyncBottomMenu />);
-  it("returns", () => {
-    expect(loaded.exists()).toEqual(true);
+describe("Routes", () => {
+  const mockedStore = {
+    getState: jest.fn(() => ({
+      github: { repos: [] },
+      drawer: { open: false, id: 0 },
+      medium: { feed: { articles: {}, user: {} } }
+    })),
+    dispatch: jest.fn(),
+    subscribe: jest.fn()
+  };
+
+  it("renders for blog", () => {
+    const wrapper = mount(
+      <Provider store={mockedStore}>
+        <MemoryRouter initialEntries={["/blog"]}>
+          <Routes />
+        </MemoryRouter>
+      </Provider>
+    );
+    expect(wrapper.find(AsyncBlog)).toHaveLength(1);
+    expect(wrapper.find(AsyncLanding)).toHaveLength(0);
   });
 });

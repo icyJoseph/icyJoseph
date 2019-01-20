@@ -6,8 +6,6 @@ import { Card, CardWrapper, Author } from "../../components/Card";
 import { Title } from "../../components/Title";
 import { fetchFeed } from "../../ducks/medium";
 import { shouldFetch } from "../../helpers";
-import { observeHeader } from "../../utils/stickyEvent";
-// import { get } from "../../functional";
 
 import { imageSrc } from "../../constants";
 
@@ -17,23 +15,10 @@ export class Blog extends Component {
   componentDidMount() {
     document.title = "Blog - icyJoseph";
 
-    observeHeader(document.getElementById("blog"));
-
-    document.addEventListener("sticky-change", this.appendShadow);
-
     const {
       medium: { expiry }
     } = this.props;
     return shouldFetch(expiry) && this.props.fetchFeed();
-  }
-
-  appendShadow = e => {
-    const stuck = e.detail.stuck;
-    return this.setState({ shadow: stuck });
-  };
-
-  componentWillUnmount() {
-    document.removeEventListener("sticky-change", this.appendShadow);
   }
 
   handleImageLoaded = id => () =>
@@ -54,8 +39,8 @@ export class Blog extends Component {
     } = medium;
 
     return (
-      <div id="blog">
-        <Title sticky id="sticky-blog" shadow={shadow}>
+      <div>
+        <Title>
           <h1>Blog</h1>
         </Title>
         {!!user.username && (

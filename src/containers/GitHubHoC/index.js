@@ -25,7 +25,7 @@ export function withGitHub(Render) {
 
     componentDidMount() {
       const {
-        github: { expiry, commits, languages }
+        github: { expiry, commits, languages = [] }
       } = this.props;
 
       const noDataOrExpired =

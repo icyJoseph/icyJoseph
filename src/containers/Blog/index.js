@@ -1,41 +1,41 @@
-import React, { Component } from "react";
-import { compose } from "redux";
-import { connect } from "react-redux";
-import { withGitHub } from "../GitHubHoC";
-import { Card, CardWrapper, Author } from "../../components/Card";
-import { Title } from "../../components/Title";
-import { fetchFeed } from "../../ducks/medium";
-import { shouldFetch } from "../../helpers";
+import React, {Component} from 'react';
+import {compose} from 'redux';
+import {connect} from 'react-redux';
+import {withGitHub} from '../GitHubHoC';
+import {Card, CardWrapper, Author} from '../../components/Card';
+import {Title} from '../../components/Title';
+import {fetchFeed} from '../../ducks/medium';
+import {shouldFetch} from '../../helpers';
 
-import { imageSrc } from "../../constants";
+import {imageSrc} from '../../constants';
 
 export class Blog extends Component {
-  state = { shadow: false, loadedImages: [], errorImages: [] };
+  state = {shadow: false, loadedImages: [], errorImages: []};
 
   componentDidMount() {
-    document.title = "Blog - icyJoseph";
+    document.title = 'Blog - icyJoseph';
 
     const {
-      medium: { expiry }
+      medium: {expiry},
     } = this.props;
     return shouldFetch(expiry) && this.props.fetchFeed();
   }
 
   handleImageLoaded = id => () =>
     this.setState(prev => ({
-      loadedImages: prev.loadedImages.concat(id)
+      loadedImages: prev.loadedImages.concat(id),
     }));
 
   handleImageError = id => () =>
     this.setState(prev => ({
-      errorImages: prev.errorImages.concat(id)
+      errorImages: prev.errorImages.concat(id),
     }));
 
   render() {
-    const { shadow, loadedImages } = this.state;
-    const { medium } = this.props;
+    const {loadedImages} = this.state;
+    const {medium} = this.props;
     const {
-      feed: { articles, user }
+      feed: {articles, user},
     } = medium;
 
     return (
@@ -62,9 +62,9 @@ export class Blog extends Component {
                   title,
                   virtuals: {
                     subtitle,
-                    previewImage: { imageId },
-                    wordCount
-                  }
+                    previewImage: {imageId},
+                    wordCount,
+                  },
                 } = article;
                 return (
                   <Card key={id} words={wordCount}>
@@ -82,7 +82,7 @@ export class Blog extends Component {
                           <span>
                             <span content={`${wordCount} words`}>
                               {wordCount}
-                            </span>{" "}
+                            </span>{' '}
                             words
                           </span>
                         </div>
@@ -99,17 +99,17 @@ export class Blog extends Component {
   }
 }
 
-const mapStateToProps = ({ medium }) => ({ medium });
+const mapStateToProps = ({medium}) => ({medium});
 const mapDispatchToProps = {
-  fetchFeed
+  fetchFeed,
 };
 
 const withConnect = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 );
 
 export default compose(
   withConnect,
-  withGitHub
+  withGitHub,
 )(Blog);

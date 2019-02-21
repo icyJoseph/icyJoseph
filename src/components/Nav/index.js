@@ -49,7 +49,7 @@ export const NavBar = styled.nav`
   > div {
     flex: 1;
     transform: ${({ scrolled }) =>
-      !scrolled ? "translateX(0%)" : "translateX(-50%)"};
+      !scrolled ? "translateX(0%)" : "translateX(-100%)"};
     transition: transform 1s ease;
   }
 

@@ -1,43 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import Loadable from "react-loadable";
+import Stat from "../../components/Stat";
+import { Statistics } from "../../components/Stat/styled";
+import Title from "../../components/Title";
 import withGitHub from "../GitHubHoC";
-// import nightBackground from "../../assets/images/night-coding.jpg";
-
-// const AsyncTitle = Loadable({
-//   loader: () =>
-//     import(/*webpackChunkName: "AsyncTitle"*/ "../../components/MainTitle"),
-//   loading: Spinner,
-//   delay: 400
-// });
-
-// const AsyncAssignment = Loadable({
-//   loader: () =>
-//     import(/*webpackChunkName: "AsyncAssignment"*/ "../../components/Assignment"),
-//   loading: Spinner,
-//   delay: 400
-// });
-
-// const AsyncStatistics = Loadable({
-//   loader: () =>
-//     import(/*webpackChunkName: "AsyncStatistics"*/ "../../components/Statistics"),
-//   loading: Spinner,
-//   delay: 700
-// });
-
-// const AsyncFeatured = Loadable({
-//   loader: () =>
-//     import(/*webpackChunkName: "AsyncFeatured"*/ "../../components/Featured"),
-//   loading: Spinner,
-//   delay: 700
-// });
-
-// const AsyncTimeLine = Loadable({
-//   loader: () =>
-//     import(/*webpackChunkName: "AsyncTimeLine"*/ "../../components/TimeLine"),
-//   loading: Spinner,
-//   delay: 700
-// });
 
 export const Landing = ({
   timeLine,
@@ -48,7 +14,21 @@ export const Landing = ({
   },
   desktop
 }) => {
-  return <div>Landing</div>;
+  return (
+    <div>
+      <Title>
+        <h1>Joseph</h1>
+      </Title>
+      <Statistics>
+        {languages.map(({ lang, bytes }) => (
+          <Stat key={lang} label={lang} end={bytes} />
+        ))}
+        <Stat label="Commits" end={commits} />
+        <Stat label="Public Repos" end={public_repos} />
+        <Stat label="Gists" end={public_gists} />
+      </Statistics>
+    </div>
+  );
 };
 
 // in the GUI seen as Home

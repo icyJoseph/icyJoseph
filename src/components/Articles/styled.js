@@ -17,13 +17,13 @@ const animScan = (delay = 2, duration = 4) => ({ words }) => css`
   animation: ${scan} 3s 4s infinite ease alternate-reverse;
 `;
 
-export const CardWrapper = styled.div`
+export const ArticlesWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 `;
 
-export const Card = styled.div`
+export const Article = styled.div`
   display: flex;
   flex-direction: column;
   margin: 1em;
@@ -88,30 +88,6 @@ export const Card = styled.div`
     > div > span:first-child {
       color: ${baseColors.info};
       font-size: 1.5rem;
-    }
-  }
-`;
-
-export const Author = styled.div`
-  display: flex;
-  margin: 1em;
-  border-radius: 5px;
-  justify-content: center;
-
-  > img {
-    border-radius: 50%;
-  }
-
-  > div {
-    margin: 1em;
-    display: flex;
-    flex-direction: column;
-
-    > span:first-child {
-      color: ${baseColors.heading};
-    }
-    > span:nth-child(2n) {
-      color: ${baseColors.info};
     }
   }
 `;

@@ -1,5 +1,5 @@
 export function saveState(state) {
-  localStorage.setItem("state", JSON.stringify(state));
+  localStorage.setItem("icyJoseph", JSON.stringify(state));
 }
 
 export const getStateAndSave = store => () => {

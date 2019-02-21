@@ -22,7 +22,7 @@ describe("localStorage mock", () => {
 
 describe("saveState", () => {
   afterAll(() => {
-    localStorage.removeItem("state");
+    localStorage.removeItem("icyJoseph");
   });
   const stateToSave = {
     counter: 1
@@ -30,14 +30,14 @@ describe("saveState", () => {
 
   it("saves to the localStorage", () => {
     saveState(stateToSave);
-    const savedState = JSON.parse(localStorage.getItem("state"));
+    const savedState = JSON.parse(localStorage.getItem("icyJoseph"));
     expect(savedState).toEqual(stateToSave);
   });
 });
 
 describe("getStateAndSave", () => {
   afterAll(() => {
-    localStorage.removeItem("state");
+    localStorage.removeItem("icyJoseph");
   });
 
   const state = { counter: 0 };
@@ -46,14 +46,14 @@ describe("getStateAndSave", () => {
 
   it("saves the given state as a side effect", () => {
     getStateAndSave(store)();
-    const savedState = JSON.parse(localStorage.getItem("state"));
+    const savedState = JSON.parse(localStorage.getItem("icyJoseph"));
     expect(savedState).toEqual(state);
   });
 });
 
 describe("saveStore", () => {
   afterAll(() => {
-    localStorage.removeItem("state");
+    localStorage.removeItem("icyJoseph");
   });
 
   const state = {
@@ -112,7 +112,7 @@ describe("saveStore", () => {
   });
   it("saves the state when the state changes", () => {
     store.dispatch({ type: OPEN, payload: null });
-    const savedState = JSON.parse(localStorage.getItem("state"));
+    const savedState = JSON.parse(localStorage.getItem("icyJoseph"));
     expect(savedState).toEqual(expectedState);
   });
 });

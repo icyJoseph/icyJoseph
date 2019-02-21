@@ -1,115 +1,65 @@
-import React, {Component} from 'react';
-import {compose} from 'redux';
-import {connect} from 'react-redux';
-import {withGitHub} from '../GitHubHoC';
-import {Card, CardWrapper, Author} from '../../components/Card';
-import {Title} from '../../components/Title';
-import {fetchFeed} from '../../ducks/medium';
-import {shouldFetch} from '../../helpers';
+import React, { useState, useEffect } from "react";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { withGitHub } from "../GitHubHoC";
+import Author from "../../components/Author";
+import Articles from "../../components/Articles";
+import { Title } from "../../components/Title";
+import { fetchFeed } from "../../ducks/medium";
+import { shouldFetch } from "../../helpers";
 
-import {imageSrc} from '../../constants';
+export function Blog({ medium, fetchFeed }) {
+  const [loadedImages, setLoadedImages] = useState([]);
+  const [errorImages, setErrorImages] = useState([]);
 
-export class Blog extends Component {
-  state = {shadow: false, loadedImages: [], errorImages: []};
+  const {
+    feed: { articles, user },
+    expiry
+  } = medium;
 
-  componentDidMount() {
-    document.title = 'Blog - icyJoseph';
+  useEffect(() => {
+    document.title = "Blog - icyJoseph";
+  }, []);
 
-    const {
-      medium: {expiry},
-    } = this.props;
-    return shouldFetch(expiry) && this.props.fetchFeed();
-  }
+  useEffect(() => {
+    shouldFetch(expiry) && fetchFeed();
+  }, []);
 
-  handleImageLoaded = id => () =>
-    this.setState(prev => ({
-      loadedImages: prev.loadedImages.concat(id),
-    }));
+  const handleImageLoaded = id => () => setLoadedImages([...loadedImages, id]);
 
-  handleImageError = id => () =>
-    this.setState(prev => ({
-      errorImages: prev.errorImages.concat(id),
-    }));
+  const handleImageError = id => () => setErrorImages([...errorImages, id]);
 
-  render() {
-    const {loadedImages} = this.state;
-    const {medium} = this.props;
-    const {
-      feed: {articles, user},
-    } = medium;
-
-    return (
-      <div>
-        <Title>
-          <h1>Blog</h1>
-        </Title>
-        {!!user.username && (
-          <div>
-            <Author>
-              <img src={`${imageSrc()}/${user.imageId}`} alt="user" />
-              <div>
-                <span>{user.name}</span>
-                <span>
-                  <code>@{user.username}</code>
-                </span>
-                <span>{user.bio}</span>
-              </div>
-            </Author>
-            <CardWrapper>
-              {Object.keys(articles).map(id => {
-                const article = articles[id];
-                const {
-                  title,
-                  virtuals: {
-                    subtitle,
-                    previewImage: {imageId},
-                    wordCount,
-                  },
-                } = article;
-                return (
-                  <Card key={id} words={wordCount}>
-                    <img
-                      src={`${imageSrc(512)}/${imageId}`}
-                      alt="user"
-                      onLoad={this.handleImageLoaded(id)}
-                      onError={this.handleImageError(id)}
-                    />
-                    {loadedImages.includes(id) && (
-                      <div>
-                        <div>
-                          <span content={title}>{title}</span>
-                          <span content={subtitle}>{subtitle}</span>
-                          <span>
-                            <span content={`${wordCount} words`}>
-                              {wordCount}
-                            </span>{' '}
-                            words
-                          </span>
-                        </div>
-                      </div>
-                    )}
-                  </Card>
-                );
-              })}
-            </CardWrapper>
-          </div>
-        )}
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Title>
+        <h1>Blog</h1>
+      </Title>
+      {!!user.username && (
+        <div>
+          <Author {...user} />
+          <Articles
+            articles={articles}
+            handleImageLoaded={handleImageLoaded}
+            handleImageError={handleImageError}
+            loadedImages={loadedImages}
+          />
+        </div>
+      )}
+    </div>
+  );
 }
 
-const mapStateToProps = ({medium}) => ({medium});
+const mapStateToProps = ({ medium }) => ({ medium });
 const mapDispatchToProps = {
-  fetchFeed,
+  fetchFeed
 };
 
 const withConnect = connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 );
 
 export default compose(
   withConnect,
-  withGitHub,
+  withGitHub
 )(Blog);

@@ -23,6 +23,6 @@ export default function(initialState) {
       const nextRootReducer = require("../rootReducer");
       store.replaceReducer(nextRootReducer);
     });
-    return store;
   }
+  return store;
 }

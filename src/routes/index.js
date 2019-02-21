@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Loadable from "react-loadable";
 
+// TODO: USE LAZY!
 import { Container } from "../components/Container";
 import GlobalStyle from "../theme/globalStyle";
 
@@ -9,6 +10,12 @@ import GlobalStyle from "../theme/globalStyle";
 
 const Spinner = () => null;
 const delay = 600;
+
+export const AsyncTopMenu = Loadable({
+  loader: () =>
+    import(/*webpackChunkName: "AsyncTopMenu"*/ "../containers/TopMenu"),
+  loading: Spinner
+});
 
 export const AsyncLanding = Loadable({
   loader: () =>
@@ -34,13 +41,6 @@ export const AsyncNoMatch = Loadable({
   loader: () =>
     import(/*webpackChunkName: "AsyncNoMatch"*/ "../containers/NoMatch"),
   loading: Spinner
-});
-
-export const AsyncTopMenu = Loadable({
-  loader: () =>
-    import(/*webpackChunkName: "AsyncTopMenu"*/ "../containers/TopMenu"),
-  loading: Spinner,
-  delay
 });
 
 export const Routes = () => (

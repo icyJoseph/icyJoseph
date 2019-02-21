@@ -1,7 +1,7 @@
 import React from "react";
 import ArticleContent from "../ArticleContent";
 import { ArticlesWrapper, Article } from "./styled";
-import { imageSrc } from "../../constants";
+import { imageSrc } from "../../helpers";
 
 export function Articles({
   articles,

@@ -1,6 +1,6 @@
 import React from "react";
 import { AuthorCard } from "./styled";
-import { imageSrc } from "../../constants";
+import { imageSrc } from "../../helpers";
 
 export function Author({ imageId, name, username, bio }) {
   return (

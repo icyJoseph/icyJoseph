@@ -27,3 +27,5 @@ export function onScrollThreshold(key, { threshold = 100 }) {
   }
   return stateKey && this.setState({ [key]: false });
 }
+
+export const imageSrc = (w = 120) => `https://miro.medium.com/fit/c/${w}/${w}`;

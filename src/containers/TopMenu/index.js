@@ -11,7 +11,7 @@ import Brand from "../../components/Brand";
 import { curryRight } from "../../functional";
 import { softTopScroll, onScrollThreshold } from "../../helpers";
 
-import brand from "../../assets/featured/web.png";
+import brand from "../../assets/web.png";
 
 export function TopMenu({ match, history, repos = [], links = {} }) {
   const [scrolled, setScrolled] = useState(false);
@@ -77,7 +77,7 @@ export const mapStateToProps = ({ github: { repos } }) => {
         links: { ...prevLinks, [name]: html_url }
       };
     },
-    { repos: [], links: {} }
+    { repos: ["icyJoseph"], links: { icyJoseph: "/" } }
   );
 };
 

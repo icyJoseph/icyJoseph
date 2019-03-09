@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { withGitHub } from "../GitHubHoC";
 import Author from "../../components/Author";
 import Articles from "../../components/Articles";
 import { Title } from "../../components/Title";
@@ -59,7 +58,4 @@ const withConnect = connect(
   mapDispatchToProps
 );
 
-export default compose(
-  withConnect,
-  withGitHub
-)(Blog);
+export default compose(withConnect)(Blog);

@@ -1,4 +1,14 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+import { baseColors } from "../../theme";
+
+const fadeIn = keyframes`
+from {
+  opacity: 0;
+}
+to {
+  opacity: 1;
+}
+`;
 
 export const Statistics = styled.div`
   display: flex;
@@ -9,9 +19,17 @@ export const Statistics = styled.div`
 export const StatWrap = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin: 2em;
+  animation: ${fadeIn} 2s;
 `;
 
-export const StatLabel = styled.span``;
+export const StatLabel = styled.span`
+  color: ${baseColors.info};
+`;
 
-export const StatCount = styled.span``;
+export const StatCount = styled.span`
+  color: ${baseColors.light};
+  font-size: 24pt;
+`;

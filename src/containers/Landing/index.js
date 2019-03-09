@@ -20,8 +20,8 @@ export function Landing({
         <h1>Joseph</h1>
       </Title>
       <Statistics>
+        <Stat label="Repos" end={public_repos} />
         <Stat label="Commits" end={commits} onEnd={onEnd} />
-        <Stat label="Public Repos" end={public_repos} />
         <Stat label="Gists" end={public_gists} />
       </Statistics>
       {show && (

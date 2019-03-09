@@ -22,8 +22,8 @@ export function StatCountUp({
 export function Stat({ label = "", end, ...rest }) {
   return (
     <StatWrap>
-      <StatLabel>{label}</StatLabel>
       {end && <StatCountUp end={end} {...rest} />}
+      <StatLabel>{label}</StatLabel>
     </StatWrap>
   );
 }

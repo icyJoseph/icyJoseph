@@ -61,7 +61,7 @@ export const split = (string, pattern) => string.split(pattern);
 
 // capitalizer
 export const capitalize = string =>
-  string.charAt(0).toUpperCase() + string.slice(1);
+  `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
 
 // length
 export const len = (arr, fail = 0) => (arr ? arr.length : fail);

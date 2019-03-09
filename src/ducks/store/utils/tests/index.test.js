@@ -1,12 +1,9 @@
 import { createStore } from "redux";
-import saveStore, {
-  saveState,
-  getStateAndSave
-} from "../saveStateToLocalStorage";
+import saveStore, { saveState, getStateAndSave } from "../";
 
-import { OPEN } from "../../ducks/drawer";
+import { OPEN } from "../../../drawer";
 
-import rootReducer from "../../../src/ducks/rootReducer/";
+import rootReducer from "../../../rootReducer";
 
 describe("localStorage mock", () => {
   it("reads from empty local storage", () => {

@@ -1,7 +1,9 @@
 import React, { Fragment } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+// TODO: REMOVE react-loadable!
 import Loadable from "react-loadable";
 
+import Online from "../containers/Online";
 // TODO: USE LAZY!
 import { Container } from "../components/Container";
 import GlobalStyle from "../theme/globalStyle";
@@ -44,21 +46,27 @@ export const AsyncNoMatch = Loadable({
 });
 
 export const Routes = () => (
+  <Online>
+    <Route path="/:activeItem?" component={AsyncTopMenu} />
+    <Container>
+      <Switch>
+        <Route path="/hacks" exact component={AsyncHacks} />
+        <Route path="/blog" exact component={AsyncBlog} />
+        <Route path="/" exact component={AsyncLanding} />
+        <Route component={AsyncNoMatch} />
+      </Switch>
+    </Container>
+  </Online>
+);
+
+export const App = () => (
   <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Fragment>
       <GlobalStyle />
-      <Route path="/:activeItem?" component={AsyncTopMenu} />
-      <Container>
-        <Switch>
-          <Route path="/hacks" exact component={AsyncHacks} />
-          <Route path="/blog" exact component={AsyncBlog} />
-          <Route path="/" exact component={AsyncLanding} />
-          <Route component={AsyncNoMatch} />
-        </Switch>
-      </Container>
+      <Routes />
       {/* <ServiceWorkerMessage /> */}
     </Fragment>
   </BrowserRouter>
 );
 
-export default Routes;
+export default App;

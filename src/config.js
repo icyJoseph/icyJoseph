@@ -1,5 +1,4 @@
-import "./index.css";
-import Routes from "./routes";
+import App from "./routes";
 import BSOD from "./containers/BSOD";
 
 export function browserIE() {
@@ -7,11 +6,11 @@ export function browserIE() {
   return /MSIE|Trident/.test(userAgent);
 }
 
-export function browserRender() {
+export function renderRoutes() {
   const userHasIE = browserIE();
   if (userHasIE) {
     return BSOD;
   }
 
-  return Routes;
+  return App;
 }

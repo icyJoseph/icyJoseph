@@ -5,7 +5,7 @@ import "react-app-polyfill/ie9";
 import "react-app-polyfill/ie11";
 import registerServiceWorker from "./registerServiceWorker";
 import configureStore from "./ducks/store/";
-import { browserRender } from "./config";
+import { renderRoutes } from "./config";
 
 import "./index.css";
 
@@ -13,7 +13,7 @@ const storedState = localStorage.getItem("icyJoseph");
 const store = configureStore(storedState ? JSON.parse(storedState) : undefined);
 // if the browser is IE it returns blue screen of death
 // otherwise return the routes for the app
-const App = browserRender();
+const App = renderRoutes();
 
 ReactDOM.render(
   <Provider store={store}>

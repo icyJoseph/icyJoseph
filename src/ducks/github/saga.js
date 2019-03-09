@@ -115,6 +115,7 @@ export function* loadLanguages() {
   )(aggregate);
 
   yield put({ type: LOAD_LANGUAGES, payload });
+  yield put({ type: FETCH_REPOS_TOPICS });
 }
 
 export function* loadTopics() {
@@ -124,9 +125,21 @@ export function* loadTopics() {
   const ownedByUser = repos
     .filter(({ owner }) => owner.login === login)
     .map(({ name }) => name);
-  const payload = yield call(getRepoTopics, ownedByUser);
+  const arrTopics = yield call(getRepoTopics, ownedByUser);
+  const allTopics = arrTopics.reduce((prev, obj) => {
+    const repoTopics = Object.values(obj);
+    return [
+      ...prev,
+      ...repoTopics.reduce(
+        (acc, curr) => (prev.includes(curr) ? acc : acc.concat(curr)),
+        []
+      )
+    ];
+  }, []);
 
-  yield put({ type: SUCCESS_REPOS_TOPICS, payload });
+  const topics = arrTopics.reduce((prev, curr) => ({ ...prev, ...curr }), {});
+
+  yield put({ type: SUCCESS_REPOS_TOPICS, payload: { topics, allTopics } });
 }
 
 export function* gitHubSaga() {

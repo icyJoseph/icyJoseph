@@ -35,10 +35,11 @@ export class TextCycle extends Component {
     const { titles, links } = this.props;
     const current = titles[index];
     const href = links[current];
+    const target = href === "/" ? "" : "_blank";
 
     return (
       <Fader time={time}>
-        <a href={href} target="_blank" rel="noopener noreferrer">
+        <a href={href} target={target} rel="noopener noreferrer">
           {current}
         </a>
       </Fader>

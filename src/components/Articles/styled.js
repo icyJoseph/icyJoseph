@@ -1,5 +1,6 @@
 import styled, { css, keyframes } from "styled-components";
 import { baseColors } from "../../theme";
+import { shadow, transitionAll } from "../Nav";
 
 const scan = keyframes`
   0% {
@@ -31,6 +32,8 @@ export const Article = styled.div`
   border-radius: 5px;
   max-width: 300px;
   position: relative;
+  ${shadow}
+  ${transitionAll}
 
   > img {
     width: 100%;

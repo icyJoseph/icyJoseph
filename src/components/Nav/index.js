@@ -7,10 +7,13 @@ import { baseColors } from "../../theme";
 
 const ImageLength = "50px";
 
-const shadow = css`
+export const transitionAll = css`
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+`;
+
+export const shadow = css`
   box-shadow: 0 1px 7px rgba(255, 255, 255, 0.12),
     0 1px 6px rgba(255, 255, 255, 0.24);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   &.active,
   &:hover {
     box-shadow: 0 14px 28px rgba(255, 255, 255, 0.25),
@@ -62,6 +65,7 @@ export const NavBar = styled.nav`
       width: auto;
       height: 100%;
       ${shadow}
+      ${transitionAll}
       border-radius: 50%;
       margin: 0 0.5em;
     }

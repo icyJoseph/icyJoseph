@@ -22,12 +22,12 @@ export function Repository({
         <code>{language}</code>
       </div>
       <div>{description}</div>
-      <div>{html_url}</div>
-      <div>{homepage}</div>
-      <div>{login}</div>
-      <div>{created_at}</div>
-      <div>{pushed_at}</div>
-      <div>{size} Kb</div>
+      <div>Repo url: {html_url}</div>
+      <div>Demo: {homepage}</div>
+      <div>Owner: {login}</div>
+      <div>Last pushed: {pushed_at}</div>
+      <div>Created: {created_at}</div>
+      <div>Size: {size} Kb</div>
       <TagWrap>
         {topics.map(topic => (
           <Tag key={topic}>{topic}</Tag>

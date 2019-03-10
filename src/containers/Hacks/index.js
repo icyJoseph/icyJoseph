@@ -32,7 +32,11 @@ export function Hacks({ github: { allTopics, topics, repos, languages } }) {
   const [keyword, setKeyword] = useState("");
   const inputRef = useRef("");
 
-  const langOptions = languages.map(({ lang }) => lang);
+  const langOptions = repos.reduce(
+    (prev, { language }) =>
+      prev.includes(language) ? prev : prev.concat(language),
+    []
+  );
 
   const updateTopicFilter = e => setTopicFilter(e.target.value);
   const updateLangFilter = e => setLangFilter(e.target.value);

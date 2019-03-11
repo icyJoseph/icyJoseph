@@ -14,6 +14,8 @@ export const Statistics = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  width: 80%;
+  align-self: center;
 `;
 
 export const StatWrap = styled.div`
@@ -21,11 +23,14 @@ export const StatWrap = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 2em;
+  margin: 1.5em;
   animation: ${fadeIn} 2s;
 `;
 
 export const StatLabel = styled.span`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: ${baseColors.info};
 `;
 

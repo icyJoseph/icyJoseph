@@ -1,4 +1,6 @@
-import React, { memo } from "react";
+import React, { Fragment, memo } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHdd } from "@fortawesome/free-solid-svg-icons";
 import { useCountUp } from "react-countup";
 import { StatWrap, StatLabel, StatCount } from "./styled";
 
@@ -19,11 +21,19 @@ export function StatCountUp({
   return <StatCount>{countUp}</StatCount>;
 }
 
-export function Stat({ label = "", end, ...rest }) {
+export function Stat({ withIcon, label = "", end, ...rest }) {
   return (
     <StatWrap>
       {end && <StatCountUp end={end} {...rest} />}
-      <StatLabel>{label}</StatLabel>
+      <StatLabel>
+        {withIcon && (
+          <Fragment>
+            <FontAwesomeIcon icon={faHdd} />
+            <div>bytes in </div>
+          </Fragment>
+        )}
+        {label}
+      </StatLabel>
     </StatWrap>
   );
 }

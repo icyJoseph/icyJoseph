@@ -27,7 +27,7 @@ export function Landing({
       {show && (
         <Statistics>
           {languages.map(({ lang, bytes }) => (
-            <Stat key={lang} label={lang} end={bytes} />
+            <Stat key={lang} label={lang} end={bytes} withIcon />
           ))}
         </Statistics>
       )}

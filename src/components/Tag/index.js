@@ -18,7 +18,10 @@ export const TagWrap = styled.div`
   }
 `;
 
-export const Tag = styled.span`
+export const Tag = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: ${baseColors.foreground};
   border-radius: 0.5em;
   padding: 0.15em 0.25em;

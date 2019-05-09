@@ -2,9 +2,23 @@ import { createGlobalStyle } from "styled-components";
 import { baseColors } from ".";
 
 export default createGlobalStyle`
+  html {
+    height: 100%;
+  }
+
   body {
-    color: ${baseColors.primary};
-    background: ${baseColors.background};
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+    top: 0;
+    bottom: 0;
+     color: ${baseColors.primary};
+      background: ${baseColors.background};
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
   }
 
   #root {

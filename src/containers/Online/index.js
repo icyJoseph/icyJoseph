@@ -1,5 +1,5 @@
-import React, { useLayoutEffect, useState } from "react";
-import Fallback from "../Fallback";
+import React, { useEffect, useState } from "react";
+import Placeholder from "../Placeholder";
 
 export function Online({ children }) {
   const { onLine } = window.navigator;
@@ -8,7 +8,7 @@ export function Online({ children }) {
   const isOnline = () => setOnline(true);
   const isOffline = () => setOnline(false);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     window.addEventListener("online", isOnline);
     window.addEventListener("offline", isOffline);
     return () => {
@@ -17,7 +17,7 @@ export function Online({ children }) {
     };
   }, []);
 
-  return online ? children : <Fallback />;
+  return online ? children : <Placeholder situation="Offline" />;
 }
 
 export default Online;

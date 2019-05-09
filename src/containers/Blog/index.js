@@ -22,7 +22,7 @@ export function Blog({ medium, fetchFeed }) {
 
   useEffect(() => {
     shouldFetch(expiry) && fetchFeed();
-  }, []);
+  }, [fetchFeed, expiry]);
 
   const handleImageLoaded = id => () => setLoadedImages([...loadedImages, id]);
 

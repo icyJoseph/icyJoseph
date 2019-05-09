@@ -1,4 +1,4 @@
-import App from "./routes";
+import Root from "./routes";
 import BSOD from "./containers/BSOD";
 
 export function browserIE() {
@@ -6,11 +6,11 @@ export function browserIE() {
   return /MSIE|Trident/.test(userAgent);
 }
 
-export function renderRoutes() {
+export function run() {
   const userHasIE = browserIE();
   if (userHasIE) {
     return BSOD;
   }
 
-  return App;
+  return Root;
 }

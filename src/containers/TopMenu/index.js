@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -23,18 +23,18 @@ export function TopMenu({ match, history, repos = [], links = {} }) {
 
   const toggleScrolled = () => onScrollThreshold(scrolled, setScrolled);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     window.addEventListener("scroll", toggleScrolled);
     return () => window.removeEventListener("scroll", toggleScrolled);
   });
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setActiveItem(routeActiveItem);
-  }, []);
+  }, [routeActiveItem]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     history.push(`/${activeItem}`);
-  }, [activeItem]);
+  }, [history, activeItem]);
 
   function handleClick(_, path) {
     return setActiveItem(path);

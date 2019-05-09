@@ -1,10 +1,8 @@
 import rootReducer from "../";
-import { OPEN } from "../../drawer";
 
 describe("rootReducer", () => {
   const expectedState = {
     auth: { failed: false, token: "" },
-    drawer: { id: undefined, open: true },
     github: {
       commits: 0,
       expiry: "",
@@ -27,11 +25,7 @@ describe("rootReducer", () => {
     }
   };
 
-  const action = {
-    type: OPEN
-  };
-
-  const state = rootReducer(undefined, action);
+  const state = rootReducer(undefined, undefined);
 
   it("contains all the reducers", () => {
     expect(state).toEqual(expectedState);

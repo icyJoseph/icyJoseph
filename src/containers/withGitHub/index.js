@@ -13,18 +13,23 @@ export function withGitHub(Render) {
     fetchUserRepo: PropTypes.func
   };
 
-  function GitHubHoC({ github, dispatch: omit, ...props }) {
+  function GitHubHoC({
+    fetchUserRepos,
+    fetchUserData,
+    github,
+    dispatch: omit,
+    ...props
+  }) {
     const { expiry, commits, languages = [] } = github;
+    const langs = languages.length;
 
     useEffect(() => {
       const noDataOrExpired =
-        languages.length === 0 || commits === 0 || shouldFetch(expiry);
+        langs === 0 || commits === 0 || shouldFetch(expiry);
 
       noDataOrExpired &&
-        mapValueToFunctions(props.fetchUserRepos, props.fetchUserData)(
-          icyJoseph
-        );
-    }, []);
+        mapValueToFunctions(fetchUserRepos, fetchUserData)(icyJoseph);
+    }, [commits, expiry, langs, fetchUserRepos, fetchUserData]);
 
     return <Render github={github} {...props} />;
   }

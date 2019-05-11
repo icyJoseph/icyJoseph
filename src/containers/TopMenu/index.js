@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -15,30 +15,22 @@ import brand from "../../assets/web.png";
 
 export function TopMenu({ match, history, repos = [], links = {} }) {
   const [scrolled, setScrolled] = useState(false);
-  const [activeItem, setActiveItem] = useState("");
 
   const {
-    params: { activeItem: routeActiveItem = "" }
+    params: { activeItem = "" }
   } = match;
 
-  const toggleScrolled = () => onScrollThreshold(scrolled, setScrolled);
+  const toggleScrolled = useCallback(
+    () => onScrollThreshold(scrolled, setScrolled),
+    [scrolled]
+  );
 
   useEffect(() => {
     window.addEventListener("scroll", toggleScrolled);
     return () => window.removeEventListener("scroll", toggleScrolled);
   });
 
-  useEffect(() => {
-    setActiveItem(routeActiveItem);
-  }, [routeActiveItem]);
-
-  useEffect(() => {
-    history.push(`/${activeItem}`);
-  }, [history, activeItem]);
-
-  function handleClick(_, path) {
-    return setActiveItem(path);
-  }
+  const handleClick = useCallback((_, path) => history.push(path), [history]);
 
   return (
     <NavBar scrolled={scrolled}>

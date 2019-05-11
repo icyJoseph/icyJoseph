@@ -43,7 +43,7 @@ export const shadow = css`
 
 export const NavBar = styled.nav`
   display: flex;
-  padding: 0.5em 0;
+  padding: 1em 0.25em 0.5em;
   position: sticky;
   top: 0;
   bottom: auto;

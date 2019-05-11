@@ -10,12 +10,22 @@ to {
 }
 `;
 
+const heightAnim = keyframes`
+from {
+  max-height: 0;
+}
+to {
+  max-height: 1000px;
+}
+`;
+
 export const Statistics = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   width: 80%;
   align-self: center;
+  animation: ${heightAnim} 2s ease;
 `;
 
 export const StatWrap = styled.div`

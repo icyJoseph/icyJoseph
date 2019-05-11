@@ -10,7 +10,6 @@ import {
 } from "./lazyRoutes";
 
 import Online from "../containers/Online";
-import { Container } from "../components/Container";
 import GlobalStyle from "../theme/globalStyle";
 // import ServiceWorkerMessage from "./components/ServiceWorkerMessage";
 
@@ -20,14 +19,12 @@ export const Routes = () => (
       <GlobalStyle />
       <Online>
         <Route path="/:activeItem?" component={SuspenseTopMenu} />
-        <Container>
-          <Switch>
-            <Route path="/hacks" exact component={SuspenseHacks} />
-            <Route path="/blog" exact component={SuspenseBlog} />
-            <Route path="/" exact component={SuspenseLanding} />
-            <Route component={SuspenseNoMatch} />
-          </Switch>
-        </Container>
+        <Switch>
+          <Route path="/hacks" exact component={SuspenseHacks} />
+          <Route path="/blog" exact component={SuspenseBlog} />
+          <Route path="/" exact component={SuspenseLanding} />
+          <Route component={SuspenseNoMatch} />
+        </Switch>
       </Online>
     </>
   </BrowserRouter>

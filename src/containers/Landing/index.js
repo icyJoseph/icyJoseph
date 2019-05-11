@@ -1,9 +1,22 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 import Stat from "../../components/Stat";
 import Title from "../../components/Title";
 import { Statistics } from "../../components/Stat/styled";
 import withGitHub from "../withGitHub";
+
+const LandingWrap = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  @media (max-width: 599px) {
+    margin-bottom: 4em;
+  }
+`;
 
 export function Landing({
   github: {
@@ -15,7 +28,7 @@ export function Landing({
   const [show, setShow] = useState(false);
   const onEnd = () => setShow(true);
   return (
-    <div>
+    <LandingWrap>
       <Title>
         <h1>Joseph</h1>
       </Title>
@@ -31,7 +44,7 @@ export function Landing({
           ))}
         </Statistics>
       )}
-    </div>
+    </LandingWrap>
   );
 }
 

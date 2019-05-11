@@ -7,7 +7,7 @@ import { StatWrap, StatLabel, StatCount } from "./styled";
 export function StatCountUp({
   end = 0,
   duration = 5,
-  delay = 1,
+  delay = 0,
   onEnd = () => {}
 }) {
   const { countUp } = useCountUp({
@@ -24,7 +24,7 @@ export function StatCountUp({
 export function Stat({ withIcon, label = "", end, ...rest }) {
   return (
     <StatWrap>
-      {end && <StatCountUp end={end} {...rest} />}
+      <StatCountUp end={end} {...rest} />
       <StatLabel>
         {withIcon && (
           <Fragment>

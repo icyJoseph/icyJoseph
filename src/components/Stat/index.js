@@ -23,18 +23,20 @@ export function StatCountUp({
 
 export function Stat({ withIcon, label = "", end, ...rest }) {
   return (
-    <StatWrap>
-      <StatCountUp end={end} {...rest} />
-      <StatLabel>
-        {withIcon && (
-          <Fragment>
-            <FontAwesomeIcon icon={faHdd} />
-            <div>bytes in </div>
-          </Fragment>
-        )}
-        {label}
-      </StatLabel>
-    </StatWrap>
+    !!end && (
+      <StatWrap>
+        <StatCountUp end={end} {...rest} />
+        <StatLabel>
+          {withIcon && (
+            <Fragment>
+              <FontAwesomeIcon icon={faHdd} />
+              <div>bytes in </div>
+            </Fragment>
+          )}
+          {label}
+        </StatLabel>
+      </StatWrap>
+    )
   );
 }
 

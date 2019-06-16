@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Stat from "../../components/Stat";
@@ -27,6 +27,11 @@ export function Landing({
 }) {
   const [show, setShow] = useState(false);
   const onEnd = () => setShow(true);
+
+  useEffect(() => {
+    document.title = "icyJoseph";
+  }, []);
+
   return (
     <LandingWrap>
       <Title>
@@ -35,7 +40,6 @@ export function Landing({
       <Statistics>
         <Stat label="Repos" end={public_repos} />
         <Stat label="Commits" end={commits} onEnd={onEnd} />
-        <Stat label="Gists" end={public_gists} />
       </Statistics>
       {show && (
         <Statistics>

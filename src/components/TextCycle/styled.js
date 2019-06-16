@@ -1,34 +1,11 @@
-import styled, { css, keyframes } from "styled-components";
+import styled from "styled-components";
 
 import { baseColors } from "../../theme";
 
-const breath = keyframes`
-0%{
-    opacity:0
-}
-
-40% {
-    opacity: 1
-}
-
-80%{
-    opacity: 1
-}
-
-100%{
-    opacity:0
-}
-`;
-
-const fadeInOut = ({ time }) =>
-  css`
-    ${breath} ${time}s ease infinite
-  `;
-
 export const Fader = styled.span`
-  animation: ${fadeInOut};
-
-  > a {
+  > * {
+    opacity: ${({ opaque }) => (opaque ? 0 : 1)};
+    transition: opacity 1s ease;
     text-decoration: none;
     color: ${baseColors.heading};
   }

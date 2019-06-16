@@ -2,7 +2,6 @@ import {
   pipe,
   curry,
   curryRight,
-  mapValueToFunctions,
   flatten,
   sort,
   mapf,
@@ -73,14 +72,6 @@ describe("curryRight", () => {
   it("allows to pass arguments separately", () => {
     expect(curriedAdd(2)(3)).toEqual(5);
     expect(curriedMult(2)(3)).toEqual(6);
-  });
-});
-
-describe("mapValueToFunctions", () => {
-  const add = (a, b) => a + b;
-  const mult = (a, b) => a * b;
-  it("maps the values", () => {
-    expect(mapValueToFunctions(add, mult)(2, 3)).toEqual([5, 6]);
   });
 });
 
@@ -165,6 +156,9 @@ describe("get", () => {
   });
   it("fail safes undefined object", () => {
     expect(get(undefined, "a")).toEqual(null);
+  });
+  it("returns for a key with dots", () => {
+    expect(get({ "a.b.c": 1 }, "a.b.c")).toEqual(1);
   });
 });
 

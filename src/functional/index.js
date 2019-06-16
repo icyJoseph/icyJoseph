@@ -11,10 +11,6 @@ export const curryRight = f => (...b) => a => f(a, ...b);
 // Take the first n elements of an array, starting at m
 export const take = (n, m = 0) => array => array.slice(m, n + m);
 
-// Apply the same argument against many functions
-export const mapValueToFunctions = (...funcs) => (...args) =>
-  funcs.map(func => func(...args));
-
 // Flatten
 export const flatten = arr => [].concat(...arr);
 
@@ -45,8 +41,12 @@ export const getByFileName = (obj, filename, fail = null) =>
 
 // get
 export const get = (obj, key, fail = null) => {
-  const path = key.split(".");
   if (!obj) return fail;
+  const dotted = obj[key];
+  if (dotted) {
+    return dotted;
+  }
+  const path = key.split(".");
   return path.reduce((acc, val) => {
     const next = acc ? acc[val] : obj[val];
     return next ? next : fail;

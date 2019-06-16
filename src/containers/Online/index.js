@@ -1,5 +1,11 @@
-import React, { useEffect, useState } from "react";
-import Placeholder from "../Placeholder";
+import React, { createContext, useContext, useEffect, useState } from "react";
+
+const OnlineCtx = createContext();
+
+export function useOnline() {
+  const value = useContext(OnlineCtx);
+  return value;
+}
 
 export function Online({ children }) {
   const { onLine } = window.navigator;
@@ -11,13 +17,15 @@ export function Online({ children }) {
   useEffect(() => {
     window.addEventListener("online", isOnline);
     window.addEventListener("offline", isOffline);
+
     return () => {
       window.removeEventListener("online", isOnline);
       window.removeEventListener("offline", isOffline);
     };
   }, []);
 
-  return online ? children : <Placeholder situation="Offline" />;
+  // TODO: remove placeholder to inject context instead
+  return <OnlineCtx.Provider value={online}>{children}</OnlineCtx.Provider>;
 }
 
 export default Online;

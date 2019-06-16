@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import arrow from "../../assets/black-arrow.png";
 
 export const FilterWrapper = styled.div`
   display: flex;
@@ -19,7 +18,6 @@ export const FilterWrapper = styled.div`
     line-height: 1.5;
     color: #495057;
     vertical-align: middle;
-    background: url(${arrow}) no-repeat right 0.15rem center/25px;
     background-color: #a9bdbd;
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 0.25rem;

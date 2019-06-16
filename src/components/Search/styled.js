@@ -15,5 +15,9 @@ export const SearchWrap = styled.div`
     &:focus {
       outline: none;
     }
+
+    &:focus::-webkit-input-placeholder {
+      opacity: 0;
+    }
   }
 `;

@@ -110,7 +110,7 @@ export function* loadLanguages() {
   const payload = pipe(
     keys,
     curry(mapf)(aggregator),
-    curry(filterf)(({ bytes }) => bytes >= 10000),
+    curry(filterf)(({ bytes }) => bytes >= 20000),
     curry(sort)("bytes")
   )(aggregate);
 
@@ -125,21 +125,12 @@ export function* loadTopics() {
   const ownedByUser = repos
     .filter(({ owner }) => owner.login === login)
     .map(({ name }) => name);
+
   const arrTopics = yield call(getRepoTopics, ownedByUser);
-  const allTopics = arrTopics.reduce((prev, obj) => {
-    const repoTopics = Object.values(obj);
-    return [
-      ...prev,
-      ...repoTopics.reduce(
-        (acc, curr) => (prev.includes(curr) ? acc : acc.concat(curr)),
-        []
-      )
-    ];
-  }, []);
 
   const topics = arrTopics.reduce((prev, curr) => ({ ...prev, ...curr }), {});
 
-  yield put({ type: SUCCESS_REPOS_TOPICS, payload: { topics, allTopics } });
+  yield put({ type: SUCCESS_REPOS_TOPICS, payload: { topics } });
 }
 
 export function* gitHubSaga() {

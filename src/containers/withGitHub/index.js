@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchUserData, fetchUserRepos } from "../../ducks/github";
-import { mapValueToFunctions } from "../../functional";
 import { shouldFetch } from "../../helpers";
 import { icyJoseph } from "../../constants";
 
@@ -20,16 +19,13 @@ export function withGitHub(Render) {
     dispatch: omit,
     ...props
   }) {
-    const { expiry, commits, languages = [] } = github;
-    const langs = languages.length;
+    const { expiry } = github;
 
     useEffect(() => {
-      const noDataOrExpired =
-        langs === 0 || commits === 0 || shouldFetch(expiry);
-
-      noDataOrExpired &&
-        mapValueToFunctions(fetchUserRepos, fetchUserData)(icyJoseph);
-    }, [commits, expiry, langs, fetchUserRepos, fetchUserData]);
+      shouldFetch(expiry) &&
+        fetchUserRepos(icyJoseph) &&
+        fetchUserData(icyJoseph);
+    }, [expiry, fetchUserRepos, fetchUserData]);
 
     return <Render github={github} {...props} />;
   }

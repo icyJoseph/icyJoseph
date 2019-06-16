@@ -21,21 +21,27 @@ export function Articles({
             wordCount
           }
         } = article;
+        const isLoaded = loadedImages.includes(id);
         return (
-          <Article key={id} words={wordCount}>
+          <Article
+            key={id}
+            words={wordCount}
+            hidden={!isLoaded}
+            className={isLoaded ? "fade-in" : ""}
+          >
             <img
               src={`${imageSrc(512)}/${imageId}`}
-              alt="user"
-              onLoad={handleImageLoaded(id)}
-              onError={handleImageError(id)}
+              alt={title}
+              onLoad={() => handleImageLoaded(prev => [...prev, id])}
+              onError={() => handleImageError(prev => [...prev, id])}
             />
-            {loadedImages.includes(id) && (
+            {
               <ArticleContent
                 title={title}
                 subtitle={subtitle}
                 wordCount={wordCount}
               />
-            )}
+            }
           </Article>
         );
       })}

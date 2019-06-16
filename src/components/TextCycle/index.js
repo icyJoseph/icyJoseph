@@ -1,6 +1,5 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Fader } from "./styled";
-import { curry } from "../../functional";
 
 const safeInc = (max, curr) => {
   const next = curr + 1;
@@ -10,41 +9,36 @@ const safeInc = (max, curr) => {
   return next;
 };
 
-export class TextCycle extends Component {
-  state = {
-    index: 0,
-    time: 4
-  };
+export function TextCycle({ titles, links }) {
+  const [index, setIndex] = useState(0);
+  const [opaque, setOpaque] = useState(false);
 
-  interval = null;
+  useEffect(() => {
+    const indexTimer = setInterval(() => {
+      setIndex(prev => safeInc(titles.length, prev));
+    }, 4000);
 
-  componentDidMount() {
-    this.interval = setInterval(() => {
-      const { titles } = this.props;
-      const safeTitlesInc = curry(safeInc)(titles.length);
-      return this.setState(prev => ({ index: safeTitlesInc(prev.index) }));
-    }, this.state.time * 1000);
-  }
+    const opaqueTimer = setInterval(() => {
+      setOpaque(prev => !prev);
+    }, 2000);
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
+    return () => {
+      clearInterval(opaqueTimer);
+      clearInterval(indexTimer);
+    };
+  }, [titles.length]);
 
-  render() {
-    const { index, time } = this.state;
-    const { titles, links } = this.props;
-    const current = titles[index];
-    const href = links[current];
-    const target = href === "/" ? "" : "_blank";
+  const current = titles[index];
+  const href = links[current];
+  const target = href === "/" ? "" : "_blank";
 
-    return (
-      <Fader time={time}>
-        <a href={href} target={target} rel="noopener noreferrer">
-          {current}
-        </a>
-      </Fader>
-    );
-  }
+  return (
+    <Fader opaque={opaque}>
+      <a href={href} target={target} rel="noopener noreferrer">
+        {current}
+      </a>
+    </Fader>
+  );
 }
 
 export default TextCycle;

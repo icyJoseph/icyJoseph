@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
+import { BlogWrap } from "./styled";
 import Author from "../../components/Author";
 import Articles from "../../components/Articles";
 import { Title } from "../../components/Title";
@@ -24,12 +25,12 @@ export function Blog({ medium, fetchFeed }) {
     shouldFetch(expiry) && fetchFeed();
   }, [fetchFeed, expiry]);
 
-  const handleImageLoaded = id => () => setLoadedImages([...loadedImages, id]);
-
-  const handleImageError = id => () => setErrorImages([...errorImages, id]);
+  const show =
+    articles.length > 0 &&
+    loadedImages.length + errorImages.length !== articles.length;
 
   return (
-    <div>
+    <BlogWrap>
       <Title>
         <h1>Blog</h1>
       </Title>
@@ -37,14 +38,15 @@ export function Blog({ medium, fetchFeed }) {
         <div>
           <Author {...user} />
           <Articles
+            show={show}
             articles={articles}
-            handleImageLoaded={handleImageLoaded}
-            handleImageError={handleImageError}
+            handleImageLoaded={setLoadedImages}
+            handleImageError={setErrorImages}
             loadedImages={loadedImages}
           />
         </div>
       )}
-    </div>
+    </BlogWrap>
   );
 }
 

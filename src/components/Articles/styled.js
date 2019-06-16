@@ -1,6 +1,10 @@
 import styled, { css, keyframes } from "styled-components";
 import { baseColors } from "../../theme";
-import { shadow, transitionAll } from "../Nav";
+import { shadow } from "../Nav";
+
+export const transitionArticle = css`
+  transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+`;
 
 const scan = keyframes`
   0% {
@@ -22,49 +26,53 @@ export const ArticlesWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
+  .fade-in {
+    opacity: 1;
+  }
 `;
 
 export const Article = styled.div`
+opacity:0;
   display: flex;
   flex-direction: column;
-  margin: 1em;
+  margin: 2em;
   background: ${baseColors.foreground};
-  border-radius: 5px;
-  max-width: 300px;
+  max-width: 275px;
   position: relative;
   ${shadow}
-  ${transitionAll}
+  ${transitionArticle}
 
   > img {
     width: 100%;
     height: auto;
-    border-radius: 5px;
   }
 
   > div {
-    position: absolute;
-    border-radius: 5px;
-    width: 100%;
     height: 100%;
     background-image: radial-gradient(rgba(0, 0, 0, 0.5), black 120%);
+    height: 100%;
+    flex-direction: column;
+    display: flex;
+    padding: 0.5em 1em;
+    justify-content: space-evenly;
 
-    > * > span {
+    > span {
       position: relative;
     }
 
-    > * > span:first-child:after {
+    >  span:first-child:after {
       ${animScan()}
       text-shadow: -2px 0 ${baseColors.notice};
     }
 
-    > * > span:nth-child(2n):after {
+    >  span:nth-child(2n):after {
       ${animScan()}
       text-shadow: -2px 0 ${baseColors.secondary};
     }
 
-    > * > span:after {
+    >  span:after {
       content: attr(content);
-      border-radius: 5px;
       clip: rect(0, 0, 0, 0);
       position: absolute;
       top: 0;
@@ -80,17 +88,16 @@ export const Article = styled.div`
       );
     }
 
-    > * {
-      height: 100%;
-      flex-direction: column;
-      display: flex;
-      padding: 0 1em;
-      justify-content: space-evenly;
+    > span:first-child {
+      text-align: right;
+      font-style: italic;
     }
 
-    > div > span:first-child {
+    > span:nth-child(2) {
       color: ${baseColors.info};
       font-size: 1.5rem;
     }
+    
+   
   }
 `;

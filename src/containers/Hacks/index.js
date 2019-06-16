@@ -1,82 +1,69 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
-import { HackWrap, FilterWrap } from "./styled";
+import { HacksWrap, RepoWrap } from "./styled";
 import withGitHub from "../withGitHub";
 import Title from "../../components/Title";
-import Filter from "../../components/Filter";
 import Search from "../../components/Search";
 import Repository from "../../components/Repository";
 import { get } from "../../functional";
 
-const filterRepos = (repos, topics) => (filterTopic, filterLang, keyword) =>
-  repos
-    .filter(
-      ({ name }) =>
-        !filterTopic || get(topics, name, [filterTopic]).includes(filterTopic)
-    )
-    .filter(({ language }) => !filterLang || language === filterLang)
-    .filter(
-      ({ name, description }) =>
-        !keyword ||
-        name.toLowerCase().includes(keyword) ||
-        description.toLowerCase().includes(keyword)
-    )
-    .map(({ id, name, ...repo }) => (
-      <Repository key={id} name={name} {...repo} topics={get(topics, name)} />
-    ));
+function useDebounce(query, delay) {
+  const [state, setState] = useState(query);
 
-export function Hacks({ github: { allTopics, topics, repos, languages } }) {
-  const [topicFilter, setTopicFilter] = useState("");
-  const [langFilter, setLangFilter] = useState("");
+  useEffect(() => {
+    const timer = setTimeout(() => setState(query), delay);
+    return () => clearTimeout(timer);
+  }, [query, delay]);
 
-  const [keyword, setKeyword] = useState("");
-  const inputRef = useRef("");
+  return state;
+}
 
-  const langOptions = repos.reduce(
-    (prev, { language }) =>
-      prev.includes(language) ? prev : prev.concat(language),
-    []
+function Repos({ repos, keyword, topics }) {
+  const filtered = useMemo(
+    () =>
+      repos.filter(({ name }) => {
+        const repoTopics = get(topics, name, []);
+        return (
+          !keyword ||
+          name.toLowerCase().includes(keyword) ||
+          repoTopics.some(topic => topic.toLowerCase().includes(keyword))
+        );
+      }),
+    [keyword, repos, topics]
   );
 
-  const updateTopicFilter = e => setTopicFilter(e.target.value);
-  const updateLangFilter = e => setLangFilter(e.target.value);
+  return filtered.map(({ id, name, ...repo }) => (
+    <Repository key={id} name={name} topics={get(topics, name, [])} {...repo} />
+  ));
+}
+
+export function Hacks({ github: { topics, repos } }) {
+  const [keyword, setKeyword] = useState("");
+  const inputRef = useRef("");
+  const debounced = useDebounce(keyword, 500);
+
+  useEffect(() => {
+    document.title = "Hacks - icyJoseph";
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   const onChange = () => {
     const { value } = inputRef.current;
-    const sanitized = value.trim().toLowerCase();
-    return setKeyword(sanitized);
+    return setKeyword(value.trim().toLowerCase());
   };
 
-  const filters = [
-    {
-      title: "topic",
-      options: allTopics,
-      value: topicFilter,
-      onChange: updateTopicFilter
-    },
-    {
-      title: "language",
-      options: langOptions,
-      value: langFilter,
-      onChange: updateLangFilter
-    }
-  ];
-
-  const repoWithTopics = filterRepos(repos, topics);
-
   return (
-    <div>
+    <HacksWrap>
       <Title>
         <h1>Hacks!</h1>
       </Title>
       <Search onChange={onChange} ref={inputRef} />
-      <FilterWrap>
-        {filters.map(({ title, ...props }) => (
-          <Filter key={title} title={title} {...props} />
-        ))}
-      </FilterWrap>
-      <HackWrap>{repoWithTopics(topicFilter, langFilter, keyword)}</HackWrap>
-    </div>
+      <RepoWrap>
+        <Repos repos={repos} keyword={debounced} topics={topics} />
+      </RepoWrap>
+    </HacksWrap>
   );
 }
 

@@ -49,6 +49,13 @@ export const NavBar = styled.nav`
   bottom: auto;
   z-index: 10;
 
+  .offline-msg {
+    justify-content: center;
+    color: ${baseColors.primary};
+    font-size: 1em;
+    margin: 0.25em;
+  }
+
   > div {
     flex: 1;
     transform: ${({ scrolled }) =>

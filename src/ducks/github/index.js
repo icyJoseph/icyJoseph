@@ -40,8 +40,7 @@ export default function reducer(
     loadingRepos: false,
     loadingUser: false,
     expiry: "",
-    topics: {},
-    allTopics: []
+    topics: {}
   },
   { type, payload, ...rest }
 ) {
@@ -64,8 +63,8 @@ export default function reducer(
     case LOAD_LANGUAGES:
       return { ...github, languages: payload };
     case SUCCESS_REPOS_TOPICS:
-      const { topics, allTopics } = payload;
-      return { ...github, topics, allTopics };
+      const { topics } = payload;
+      return { ...github, topics };
     default:
       return { ...github };
   }

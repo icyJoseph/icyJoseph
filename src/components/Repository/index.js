@@ -1,27 +1,22 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHdd } from "@fortawesome/free-solid-svg-icons";
-import { faJs } from "@fortawesome/free-brands-svg-icons";
-import { faPython } from "@fortawesome/free-brands-svg-icons";
-import { faNodeJs } from "@fortawesome/free-brands-svg-icons";
-import { faReact } from "@fortawesome/free-brands-svg-icons";
-import { faVuejs } from "@fortawesome/free-brands-svg-icons";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { faLaptopCode } from "@fortawesome/free-solid-svg-icons";
-import { faUserCheck } from "@fortawesome/free-solid-svg-icons";
-import { faUserTimes } from "@fortawesome/free-solid-svg-icons";
-import { faCodeBranch } from "@fortawesome/free-solid-svg-icons";
-import { faDesktop } from "@fortawesome/free-solid-svg-icons";
-import { faClock } from "@fortawesome/free-solid-svg-icons";
+import {
+  faJs,
+  faPython,
+  faNodeJs,
+  faReact,
+  faVuejs,
+  faGithub
+} from "@fortawesome/free-brands-svg-icons";
+import {
+  faLaptopCode,
+  faCodeBranch,
+  faDesktop,
+  faClock,
+  faHdd
+} from "@fortawesome/free-solid-svg-icons";
 import { RepoWrap } from "./styled";
 import { Tag, TagWrap } from "../Tag";
-
-function ownership(login) {
-  if (login === "icyJoseph") {
-    return faUserCheck;
-  }
-  return faUserTimes;
-}
 
 function languageIcon(lang = "") {
   const language = lang.toLowerCase();
@@ -63,25 +58,6 @@ function Language({ language }) {
   );
 }
 
-const truncateTxt = str => (str.length > 100 ? `${str.slice(0, 100)}...` : str);
-
-function Description({ description }) {
-  return (
-    <div>
-      <div className="description-field">{truncateTxt(description)}</div>
-    </div>
-  );
-}
-
-function Ownership({ login }) {
-  return (
-    <div className="ownership-field">
-      <span>Owner</span>
-      <FontAwesomeIcon icon={ownership(login)} />
-    </div>
-  );
-}
-
 function RefLinks({ html_url, homepage }) {
   return (
     <div className="refs-field">
@@ -108,11 +84,11 @@ function Dates({ created_at, pushed_at }) {
     <div className="dates-field">
       <div>
         <FontAwesomeIcon icon={faCodeBranch} />
-        <div>created {daysSince(created_at)} days ago</div>
+        <div>Created {daysSince(created_at)} days ago</div>
       </div>
       <div>
         <FontAwesomeIcon icon={faClock} />
-        <div>pushed {daysSince(pushed_at)} days ago</div>
+        <div>Last push {daysSince(pushed_at)} days ago</div>
       </div>
     </div>
   );
@@ -120,28 +96,23 @@ function Dates({ created_at, pushed_at }) {
 
 export function Repository({
   name,
-  description,
+  description = "",
   language,
-  topics,
+  topics = [],
   homepage,
   html_url,
   created_at,
   pushed_at,
-  size,
-  owner: { login },
-  ...repo
+  size
 }) {
   return (
     <RepoWrap>
-      <div>
-        <div>{name}</div>
-        <Ownership login={login} />
-      </div>
+      <div>{name}</div>
       <div>
         <Language language={language} />
         <Size size={size} />
       </div>
-      <Description description={description} />
+      <div className="description-field">{description}</div>
       <RefLinks html_url={html_url} homepage={homepage} />
       <Dates created_at={created_at} pushed_at={pushed_at} />
       <TagWrap>
@@ -153,4 +124,4 @@ export function Repository({
   );
 }
 
-export default Repository;
+export default React.memo(Repository);

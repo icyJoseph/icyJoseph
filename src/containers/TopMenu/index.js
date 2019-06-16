@@ -7,7 +7,7 @@ import { faMediumM } from "@fortawesome/free-brands-svg-icons";
 
 import { NavBar, NavItems, NavItem } from "../../components/Nav";
 import Brand from "../../components/Brand";
-
+import { useOnline } from "../Online";
 import { curryRight } from "../../functional";
 import { softTopScroll, onScrollThreshold } from "../../helpers";
 
@@ -15,6 +15,8 @@ import brand from "../../assets/web.png";
 
 export function TopMenu({ match, history, repos = [], links = {} }) {
   const [scrolled, setScrolled] = useState(false);
+
+  const online = useOnline();
 
   const {
     params: { activeItem = "" }
@@ -40,6 +42,7 @@ export function TopMenu({ match, history, repos = [], links = {} }) {
         links={links}
         clickHandler={curryRight(handleClick)("")}
       />
+      {!online && <span className="offline-msg">You are offline</span>}
       <NavItems>
         {[
           { name: "", icon: faHome },

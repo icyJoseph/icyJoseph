@@ -20,11 +20,11 @@ export const softTopScroll = () => {
 };
 
 // toggles the key on threshold pass
-export function onScrollThreshold(value, setter, threshold = 100) {
+export function onScrollThreshold(setter, threshold = 100) {
   if (window.scrollY > threshold) {
-    return !value && setter(true);
+    return setter(true);
   }
-  return value && setter(false);
+  return setter(false);
 }
 
 export const imageSrc = (w = 120) => `https://miro.medium.com/fit/c/${w}/${w}`;

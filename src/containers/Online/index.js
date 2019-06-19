@@ -11,10 +11,9 @@ export function Online({ children }) {
   const { onLine } = window.navigator;
   const [online, setOnline] = useState(onLine);
 
-  const isOnline = () => setOnline(true);
-  const isOffline = () => setOnline(false);
-
   useEffect(() => {
+    const isOnline = () => setOnline(true);
+    const isOffline = () => setOnline(false);
     window.addEventListener("online", isOnline);
     window.addEventListener("offline", isOffline);
 

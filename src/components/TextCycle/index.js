@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Fader } from "./styled";
 
 const safeInc = (max, curr) => {
@@ -13,17 +13,20 @@ export function TextCycle({ titles, links }) {
   const [index, setIndex] = useState(0);
   const [opaque, setOpaque] = useState(false);
 
+  const cycleRef = useRef();
+  cycleRef.current = opaque;
+
   useEffect(() => {
     const indexTimer = setInterval(() => {
-      setIndex(prev => safeInc(titles.length, prev));
-    }, 4000);
-
-    const opaqueTimer = setInterval(() => {
-      setOpaque(prev => !prev);
+      if (cycleRef.current) {
+        setIndex(prev => safeInc(titles.length, prev));
+        setOpaque(false);
+      } else if (!cycleRef.current) {
+        setOpaque(true);
+      }
     }, 2000);
 
     return () => {
-      clearInterval(opaqueTimer);
       clearInterval(indexTimer);
     };
   }, [titles.length]);

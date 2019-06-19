@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { baseColors } from "../../theme";
 
-export const TagWrap = styled.div`
+export const Tags = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
@@ -18,7 +18,7 @@ export const TagWrap = styled.div`
   }
 `;
 
-export const Tag = styled.div`
+Tags.Entry = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

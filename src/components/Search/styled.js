@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const SearchWrap = styled.div`
   margin: 1em auto;
+  z-index: 2;
 
   > input {
     background: transparent;

@@ -1,11 +1,25 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { curryRight } from "../../functional";
 import { baseColors } from "../../theme";
 
 const ImageLength = "50px";
+
+const fade = keyframes`
+0% {
+  opacity: 0.2;
+}
+
+50% {
+  opacity: 1;
+}
+
+100% {
+  opacity: 0.2;
+}
+`;
 
 export const transitionAll = css`
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -47,17 +61,9 @@ export const NavBar = styled.nav`
   position: sticky;
   top: 0;
   bottom: auto;
-  z-index: 10;
+  z-index: 1;
 
-  .offline-msg {
-    justify-content: center;
-    color: ${baseColors.primary};
-    font-size: 1em;
-    margin: 0.25em;
-  }
-
-  > div {
-    flex: 1;
+  > div:first-child {
     transform: ${({ scrolled }) =>
       !scrolled ? "translateX(0%)" : "translateX(-100%)"};
     transition: transform 1s ease;
@@ -132,6 +138,11 @@ export const NavItems = styled.ul`
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent;
 
+  .network-fade {
+    color: ${baseColors.danger};
+    animation: ${fade} 2s ease-in infinite;
+  }
+
   > li {
     position: relative;
     perspective: 1000px;
@@ -162,8 +173,8 @@ export const NavItems = styled.ul`
     width: 35px;
 
     @media (max-width: 599px) {
-      height: 50px;
-      width: 50px;
+      height: 45px;
+      width: 45px;
 
       > button {
         font-size: 1.5em;
@@ -221,6 +232,7 @@ export const NavItems = styled.ul`
 
 export function NavItem({
   name,
+  title,
   mainHandler,
   subHandler,
   activeItem,
@@ -229,16 +241,18 @@ export function NavItem({
 }) {
   const isActive = activeItem === name;
   const shouldFlip = scrolled && isActive ? "flipped" : "";
+  const buttonClassName = isActive ? "active" : "";
+  const addedClassName = ["network"].includes(name) ? "network-fade" : "";
   return (
-    <li className={shouldFlip}>
+    <li title={title} className={shouldFlip} aria-label={name}>
       <button
-        className={isActive ? "active" : ""}
+        className={`${buttonClassName} ${addedClassName}`}
         onClick={curryRight(mainHandler)(name)}
       >
         <FontAwesomeIcon icon={icon} />
       </button>
       {isActive && (
-        <button className={isActive ? "active" : ""} onClick={subHandler}>
+        <button className={buttonClassName} onClick={subHandler}>
           <FontAwesomeIcon icon={faChevronUp} />
         </button>
       )}

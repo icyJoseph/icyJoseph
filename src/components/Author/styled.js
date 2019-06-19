@@ -8,7 +8,12 @@ export const AuthorCard = styled.div`
   justify-content: center;
 
   > img {
+    display: none;
     border-radius: 50%;
+
+    @media (min-width: 322px) {
+      display: block;
+    }
   }
 
   > div {

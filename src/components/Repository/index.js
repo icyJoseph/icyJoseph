@@ -15,8 +15,7 @@ import {
   faClock,
   faHdd
 } from "@fortawesome/free-solid-svg-icons";
-import { RepoWrap } from "./styled";
-import { Tag, TagWrap } from "../Tag";
+import { Repo, Tags, RepoItem } from "./styled";
 
 function languageIcon(lang = "") {
   const language = lang.toLowerCase();
@@ -40,9 +39,9 @@ function Size({ size }) {
   return (
     <div>
       <FontAwesomeIcon icon={faHdd} />
-      <span className="data-field">
+      <Repo.DataField>
         <code>{size}kb</code>
-      </span>
+      </Repo.DataField>
     </div>
   );
 }
@@ -51,16 +50,16 @@ function Language({ language }) {
   return (
     <div>
       <FontAwesomeIcon icon={languageIcon(language)} />
-      <span className="data-field">
+      <Repo.DataField>
         <code>{language}</code>
-      </span>
+      </Repo.DataField>
     </div>
   );
 }
 
 function RefLinks({ html_url, homepage }) {
   return (
-    <div className="refs-field">
+    <Repo.RefsField>
       <a href={html_url} target="_blank" rel="noopener noreferrer">
         <FontAwesomeIcon icon={faGithub} />
       </a>
@@ -69,7 +68,7 @@ function RefLinks({ html_url, homepage }) {
           <FontAwesomeIcon icon={faDesktop} />
         </a>
       )}
-    </div>
+    </Repo.RefsField>
   );
 }
 
@@ -81,7 +80,7 @@ function daysSince(created_at) {
 
 function Dates({ created_at, pushed_at }) {
   return (
-    <div className="dates-field">
+    <Repo.DatesField>
       <div>
         <FontAwesomeIcon icon={faCodeBranch} />
         <div>Created {daysSince(created_at)} days ago</div>
@@ -90,11 +89,16 @@ function Dates({ created_at, pushed_at }) {
         <FontAwesomeIcon icon={faClock} />
         <div>Last push {daysSince(pushed_at)} days ago</div>
       </div>
-    </div>
+    </Repo.DatesField>
   );
 }
 
+const MemoDates = React.memo(Dates);
+const MemoLanguage = React.memo(Language);
+const MemoRefLinks = React.memo(RefLinks);
+
 export function Repository({
+  id,
   name,
   description = "",
   language,
@@ -105,23 +109,33 @@ export function Repository({
   pushed_at,
   size
 }) {
+  const [selected, setSelected] = React.useState(false);
+
+  React.useEffect(() => {
+    setSelected(false);
+  }, [name]);
   return (
-    <RepoWrap>
-      <div>{name}</div>
-      <div>
-        <Language language={language} />
-        <Size size={size} />
-      </div>
-      <div className="description-field">{description}</div>
-      <RefLinks html_url={html_url} homepage={homepage} />
-      <Dates created_at={created_at} pushed_at={pushed_at} />
-      <TagWrap>
-        {topics.map(topic => (
-          <Tag key={topic}>{topic}</Tag>
-        ))}
-      </TagWrap>
-    </RepoWrap>
+    <RepoItem selected={selected} onClick={() => setSelected(prev => !prev)}>
+      {name}
+    </RepoItem>
   );
+  // return (
+  //   <Repo>
+  //     <Repo.Title>{name}</Repo.Title>
+  //     <Repo.Subtitle>
+  //       <MemoLanguage language={language} />
+  //       <Size size={size} />
+  //     </Repo.Subtitle>
+  //     <Repo.Description>{description}</Repo.Description>
+  //     <MemoRefLinks html_url={html_url} homepage={homepage} />
+  //     <MemoDates created_at={created_at} pushed_at={pushed_at} />
+  //     <Tags>
+  //       {topics.map(topic => (
+  //         <Tags.Entry key={`${name}-${topic}`}>{topic}</Tags.Entry>
+  //       ))}
+  //     </Tags>
+  //   </Repo>
+  // );
 }
 
 export default React.memo(Repository);

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { faHome, faCode } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faCode, faWifi } from "@fortawesome/free-solid-svg-icons";
 import { faMediumM } from "@fortawesome/free-brands-svg-icons";
 
 import { NavBar, NavItems, NavItem } from "../../components/Nav";
@@ -22,15 +22,11 @@ export function TopMenu({ match, history, repos = [], links = {} }) {
     params: { activeItem = "" }
   } = match;
 
-  const toggleScrolled = useCallback(
-    () => onScrollThreshold(scrolled, setScrolled),
-    [scrolled]
-  );
-
   useEffect(() => {
+    const toggleScrolled = () => onScrollThreshold(setScrolled);
     window.addEventListener("scroll", toggleScrolled);
     return () => window.removeEventListener("scroll", toggleScrolled);
-  });
+  }, []);
 
   const handleClick = useCallback((_, path) => history.push(path), [history]);
 
@@ -42,23 +38,26 @@ export function TopMenu({ match, history, repos = [], links = {} }) {
         links={links}
         clickHandler={curryRight(handleClick)("")}
       />
-      {!online && <span className="offline-msg">You are offline</span>}
       <NavItems>
         {[
-          { name: "", icon: faHome },
-          { name: "blog", icon: faMediumM },
-          { name: "hacks", icon: faCode }
-        ].map(({ name, icon }) => (
-          <NavItem
-            key={name}
-            name={name}
-            mainHandler={handleClick}
-            subHandler={softTopScroll}
-            icon={icon}
-            activeItem={activeItem}
-            scrolled={scrolled}
-          />
-        ))}
+          { title: "Home", name: "", icon: faHome },
+          { title: "Blog", name: "blog", icon: faMediumM },
+          { title: "Code", name: "hacks", icon: faCode },
+          { title: "offline", name: "network", icon: faWifi, display: !online }
+        ]
+          .filter(({ display = true }) => display)
+          .map(({ name, icon, title }) => (
+            <NavItem
+              key={name}
+              title={title}
+              name={name}
+              mainHandler={handleClick}
+              subHandler={softTopScroll}
+              icon={icon}
+              activeItem={activeItem}
+              scrolled={scrolled}
+            />
+          ))}
       </NavItems>
     </NavBar>
   );

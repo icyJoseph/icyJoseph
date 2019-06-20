@@ -15,7 +15,7 @@ import {
   faClock,
   faHdd
 } from "@fortawesome/free-solid-svg-icons";
-import { Repo, Tags, RepoItem } from "./styled";
+import { Repo, Tags } from "./styled";
 
 function languageIcon(lang = "") {
   const language = lang.toLowerCase();
@@ -97,18 +97,7 @@ function Dates({ created_at, pushed_at }) {
   );
 }
 
-export function Repository({ id, name, selected, handler }) {
-  const onClickHandler = () => handler(prev => (prev === id ? null : id));
-  return (
-    <>
-      <RepoItem selected={selected} onClick={onClickHandler}>
-        <span>{name}</span>
-      </RepoItem>
-    </>
-  );
-}
-
-export function ReposCard({
+export function RepositoryCard({
   id,
   name,
   description = "",
@@ -141,4 +130,4 @@ export function ReposCard({
   );
 }
 
-export default React.memo(Repository);
+export default React.memo(RepositoryCard);

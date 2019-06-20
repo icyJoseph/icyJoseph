@@ -4,8 +4,7 @@ import { HacksWrap } from "./styled";
 import withGitHub from "../withGitHub";
 import Title from "../../components/Title";
 import Search from "../../components/Search";
-
-import Repos from "./Repos";
+import RepositoryPages from "../../components/RepositoryPages";
 
 export function Hacks({ github: { topics, repos } }) {
   const [keyword, setKeyword] = useState("");
@@ -25,7 +24,7 @@ export function Hacks({ github: { topics, repos } }) {
         <h1>Code!</h1>
       </Title>
       <Search value={keyword} onChange={setKeyword} ref={inputRef} />
-      <Repos repos={repos} keyword={keyword} topics={topics} />
+      <RepositoryPages repos={repos} keyword={keyword} topics={topics} />
     </HacksWrap>
   );
 }

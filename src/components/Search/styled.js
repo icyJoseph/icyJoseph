@@ -10,7 +10,6 @@ export const SearchWrap = styled.div`
     border: none;
     border-bottom: 2px solid #f8f8f8;
     font-size: 16pt;
-    text-align: center;
     max-width: 200px;
 
     &:focus {

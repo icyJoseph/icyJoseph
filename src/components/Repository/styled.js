@@ -3,12 +3,30 @@ import { baseColors } from "../../theme";
 import { shadow } from "../Nav";
 
 export const RepoItem = styled.li`
-  width: ${({ selected }) => (selected ? "100%" : "0")};
-  transition: width 1s ease;
-  text-align: right;
+  color: ${({ selected }) => (selected ? `${baseColors.warning}` : "inherit")};
+  font-weight: ${({ selected }) => (selected ? "700" : "unset")};
+  cursor: ${({ selected }) => (selected ? "pointer" : "unset")};
+  transition: all 1s ease;
   white-space: nowrap;
+  text-align: right;
   margin: 0.25em;
-  cursor: pointer;
+  position: relative;
+
+  @media (min-width: 820px) {
+    width: ${({ selected }) => (selected ? "100%" : "0")};
+    &:before {
+      content: "close";
+      opacity: ${({ selected }) => (selected ? 1 : 0)};
+      position: absolute;
+      left: 0;
+      transition: opacity 1s ease;
+      z-index: -1;
+    }
+  }
+
+  > span {
+    cursor: pointer;
+  }
 `;
 
 export const Repo = styled.div`
@@ -17,27 +35,30 @@ export const Repo = styled.div`
   flex-direction: column;
   justify-content: space-around;
   margin: 1em 1.5em;
-  background: rgba(0, 0, 0, 0.1);
   padding: 0.5em;
-  height: 350px;
+  min-height: 350px;
 
-  ${shadow}
   font-size: 1em;
-  max-width: 300px;
-  min-width: 200px;
 
   > div {
     display: flex;
+    justify-content: center;
     margin: 0.25em 0;
+  }
+
+  .centered {
+    text-align: center;
   }
 `;
 
 Repo.Title = styled.div`
+  flex: 1;
   font-size: 1.5em;
   color: ${baseColors.heading};
 `;
 
 Repo.Subtitle = styled.div`
+  flex: 2;
   display: flex;
   font-size: 1.25em;
   flex-direction: column;
@@ -46,6 +67,7 @@ Repo.Subtitle = styled.div`
 `;
 
 Repo.Description = styled.div`
+  flex: 3;
   margin: 0.5em 0;
   font-size: 0.9em;
   color: ${baseColors.light};
@@ -54,11 +76,12 @@ Repo.Description = styled.div`
 
 Repo.DataField = styled.span`
   margin: 0 0.25em;
+  justify-content: center;
 `;
 
 Repo.DatesField = styled.div`
-  justify-content: space-between;
-  flex-wrap: wrap;
+  flex-direction: column;
+  min-height: 20px;
 
   > * {
     display: flex;
@@ -67,6 +90,7 @@ Repo.DatesField = styled.div`
     font-style: italic;
     color: ${baseColors.default};
     margin-right: 0.25em;
+    justify-content: center;
   }
 
   > * > * {
@@ -88,12 +112,14 @@ Repo.RefsField = styled.div`
 
 export const Tags = styled.div`
   display: flex;
+  flex: 2;
   flex-wrap: wrap;
   justify-content: start;
   justify-self: flex-end;
   font-size: 0.65em;
 
   > * {
+    height: 20px;
     &:first-child {
       margin-top: 0.2em;
       margin-right: 0.5em;

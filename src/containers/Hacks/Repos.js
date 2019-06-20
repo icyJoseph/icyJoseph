@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { ReposWrap, PageSelectors } from "./styled";
+import { ReposWrap, PageSelectors, RepoContainer } from "./styled";
 import { get } from "../../functional";
-import Repository from "../../components/Repository";
+import Repository, { ReposCard } from "../../components/Repository";
 
 const MAX_PER_PAGE = 6;
 
@@ -16,6 +16,34 @@ function useDebounce(query, delay) {
   }, [query, delay]);
 
   return state;
+}
+
+function RepositoryList({ list }) {
+  const [showing, setShowing] = useState(null);
+
+  useEffect(() => {
+    // if the list changes, show nothing
+    setShowing(null);
+  }, [list]);
+
+  const [repo] = list.filter(({ id }) => id === showing);
+  // return a list of repositories
+  return (
+    <RepoContainer>
+      <ReposWrap>
+        {list.map(({ id, position, ...repo }) => (
+          <Repository
+            id={id}
+            selected={id === showing}
+            key={`repository-${position}`}
+            {...repo}
+            handler={setShowing}
+          />
+        ))}
+      </ReposWrap>
+      <ReposCard {...repo} />
+    </RepoContainer>
+  );
 }
 
 function Controls({ length, handler, page, currentTotal }) {
@@ -108,11 +136,7 @@ function RepoPages({ repos, keyword, topics }) {
           page={page}
         />
       </PageSelectors>
-      <ReposWrap>
-        {pageSlice.map(({ id, position, ...repo }) => (
-          <Repository id={id} key={`repository-${position}`} {...repo} />
-        ))}
-      </ReposWrap>
+      <RepositoryList list={pageSlice} />
     </>
   );
 }

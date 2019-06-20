@@ -35,9 +35,9 @@ function languageIcon(lang = "") {
   }
 }
 
-function Size({ size }) {
+function Size({ size = 0 }) {
   return (
-    <div>
+    <div className="centered">
       <FontAwesomeIcon icon={faHdd} />
       <Repo.DataField>
         <code>{size}kb</code>
@@ -46,9 +46,9 @@ function Size({ size }) {
   );
 }
 
-function Language({ language }) {
+function Language({ language = "Language" }) {
   return (
-    <div>
+    <div className="centered">
       <FontAwesomeIcon icon={languageIcon(language)} />
       <Repo.DataField>
         <code>{language}</code>
@@ -57,7 +57,10 @@ function Language({ language }) {
   );
 }
 
-function RefLinks({ html_url, homepage }) {
+function RefLinks({
+  html_url = "https://github.com/icyJoseph",
+  homepage = "https://icyjoseph.github.io"
+}) {
   return (
     <Repo.RefsField>
       <a href={html_url} target="_blank" rel="noopener noreferrer">
@@ -73,6 +76,7 @@ function RefLinks({ html_url, homepage }) {
 }
 
 function daysSince(created_at) {
+  if (!created_at) return "??";
   const today = new Date().getTime();
   const asMs = (today - new Date(created_at).getTime()) / (24 * 60 * 60 * 1000);
   return Math.floor(asMs);
@@ -93,11 +97,18 @@ function Dates({ created_at, pushed_at }) {
   );
 }
 
-const MemoDates = React.memo(Dates);
-const MemoLanguage = React.memo(Language);
-const MemoRefLinks = React.memo(RefLinks);
+export function Repository({ id, name, selected, handler }) {
+  const onClickHandler = () => handler(prev => (prev === id ? null : id));
+  return (
+    <>
+      <RepoItem selected={selected} onClick={onClickHandler}>
+        <span>{name}</span>
+      </RepoItem>
+    </>
+  );
+}
 
-export function Repository({
+export function ReposCard({
   id,
   name,
   description = "",
@@ -109,33 +120,25 @@ export function Repository({
   pushed_at,
   size
 }) {
-  const [selected, setSelected] = React.useState(false);
-
-  React.useEffect(() => {
-    setSelected(false);
-  }, [name]);
   return (
-    <RepoItem selected={selected} onClick={() => setSelected(prev => !prev)}>
-      {name}
-    </RepoItem>
+    <Repo>
+      <Repo.Title>{!!name ? name : "Choose a repository"}</Repo.Title>
+      <Repo.Subtitle>
+        <Language language={language} />
+        <Size size={size} />
+      </Repo.Subtitle>
+      <Repo.Description>
+        {!!description ? description : "Repository description"}
+      </Repo.Description>
+      <RefLinks html_url={html_url} homepage={homepage} />
+      <Dates created_at={created_at} pushed_at={pushed_at} />
+      <Tags>
+        {topics.map(topic => (
+          <Tags.Entry key={`${name}-${topic}`}>{topic}</Tags.Entry>
+        ))}
+      </Tags>
+    </Repo>
   );
-  // return (
-  //   <Repo>
-  //     <Repo.Title>{name}</Repo.Title>
-  //     <Repo.Subtitle>
-  //       <MemoLanguage language={language} />
-  //       <Size size={size} />
-  //     </Repo.Subtitle>
-  //     <Repo.Description>{description}</Repo.Description>
-  //     <MemoRefLinks html_url={html_url} homepage={homepage} />
-  //     <MemoDates created_at={created_at} pushed_at={pushed_at} />
-  //     <Tags>
-  //       {topics.map(topic => (
-  //         <Tags.Entry key={`${name}-${topic}`}>{topic}</Tags.Entry>
-  //       ))}
-  //     </Tags>
-  //   </Repo>
-  // );
 }
 
 export default React.memo(Repository);

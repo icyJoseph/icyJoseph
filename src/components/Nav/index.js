@@ -7,20 +7,6 @@ import { baseColors } from "../../theme";
 
 const ImageLength = "50px";
 
-const fade = keyframes`
-0% {
-  opacity: 0.2;
-}
-
-50% {
-  opacity: 1;
-}
-
-100% {
-  opacity: 0.2;
-}
-`;
-
 export const transitionAll = css`
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 `;
@@ -138,11 +124,6 @@ export const NavItems = styled.ul`
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent;
 
-  .network-fade {
-    color: ${baseColors.danger};
-    animation: ${fade} 2s ease-in infinite;
-  }
-
   > li {
     position: relative;
     perspective: 1000px;
@@ -242,11 +223,10 @@ export function NavItem({
   const isActive = activeItem === name;
   const shouldFlip = scrolled && isActive ? "flipped" : "";
   const buttonClassName = isActive ? "active" : "";
-  const addedClassName = ["network"].includes(name) ? "network-fade" : "";
   return (
     <li title={title} className={shouldFlip} aria-label={name}>
       <button
-        className={`${buttonClassName} ${addedClassName}`}
+        className={buttonClassName}
         onClick={curryRight(mainHandler)(name)}
       >
         <FontAwesomeIcon icon={icon} />

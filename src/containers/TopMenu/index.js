@@ -2,12 +2,11 @@ import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { faHome, faCode, faWifi } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faCode } from "@fortawesome/free-solid-svg-icons";
 import { faMediumM } from "@fortawesome/free-brands-svg-icons";
 
 import { NavBar, NavItems, NavItem } from "../../components/Nav";
 import Brand from "../../components/Brand";
-import { useOnline } from "../Online";
 import { curryRight } from "../../functional";
 import { softTopScroll, onScrollThreshold } from "../../helpers";
 
@@ -15,8 +14,6 @@ import brand from "../../assets/web.png";
 
 export function TopMenu({ match, history, repos = [], links = {} }) {
   const [scrolled, setScrolled] = useState(false);
-
-  const online = useOnline();
 
   const {
     params: { activeItem = "" }
@@ -42,22 +39,19 @@ export function TopMenu({ match, history, repos = [], links = {} }) {
         {[
           { title: "Home", name: "", icon: faHome },
           { title: "Blog", name: "blog", icon: faMediumM },
-          { title: "Code", name: "hacks", icon: faCode },
-          { title: "offline", name: "network", icon: faWifi, display: !online }
-        ]
-          .filter(({ display = true }) => display)
-          .map(({ name, icon, title }) => (
-            <NavItem
-              key={name}
-              title={title}
-              name={name}
-              mainHandler={handleClick}
-              subHandler={softTopScroll}
-              icon={icon}
-              activeItem={activeItem}
-              scrolled={scrolled}
-            />
-          ))}
+          { title: "Code", name: "hacks", icon: faCode }
+        ].map(({ name, icon, title }) => (
+          <NavItem
+            key={name}
+            title={title}
+            name={name}
+            mainHandler={handleClick}
+            subHandler={softTopScroll}
+            icon={icon}
+            activeItem={activeItem}
+            scrolled={scrolled}
+          />
+        ))}
       </NavItems>
     </NavBar>
   );

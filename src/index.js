@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import registerServiceWorker from "./registerServiceWorker";
 import configureStore from "./ducks/store/";
-import { run } from "./App";
+import run from "./App";
 
 import "./index.css";
 
@@ -21,4 +21,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById("root")
 );
+
 registerServiceWorker();

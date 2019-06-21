@@ -12,13 +12,11 @@ export const transitionAll = css`
 `;
 
 export const shadow = css`
-  box-shadow: 0 1px 7px rgba(255, 255, 255, 0.12),
-    0 1px 6px rgba(255, 255, 255, 0.24);
+  box-shadow: 0 1px 7px rgba(0, 0, 0, 0.22), 0 1px 6px rgba(0, 0, 0, 0.34);
   &.active,
   &:hover {
-    box-shadow: 0 14px 28px rgba(255, 255, 255, 0.25),
-      0 7px 15px rgba(255, 255, 255, 0.22),
-      0 -3px 15px rgba(255, 255, 255, 0.22);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.35), 0 7px 15px rgba(0, 0, 0, 0.32),
+      0 -3px 15px rgba(0, 0, 0, 0.32);
   }
 
   @media (max-width: 599px) {

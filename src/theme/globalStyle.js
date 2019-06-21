@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-import { baseColors } from ".";
 
 export default createGlobalStyle`
   html {
@@ -13,8 +12,8 @@ export default createGlobalStyle`
     font-family: "Roboto", sans-serif;
     top: 0;
     bottom: 0;
-     color: ${baseColors.primary};
-      background: ${baseColors.background};
+     color: ${({ theme }) => theme.primary};
+      background: ${({ theme }) => theme.background};
   }
 
   ::-webkit-scrollbar {

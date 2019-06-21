@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { baseColors } from "../../theme";
 
 const Button = styled.button`
-  color: ${({ selected }) => (selected ? baseColors.warning : baseColors.info)};
+  color: ${({ selected, theme }) => (selected ? theme.warning : theme.info)};
   opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
   font-weight: ${({ selected }) => (selected ? "bold" : "unset")};
   background: transparent;

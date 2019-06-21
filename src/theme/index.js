@@ -1,4 +1,4 @@
-export const baseColors = {
+export default {
   background: "#1B2B34",
   foreground: "#343D46",
   heading: "#EC5f67",

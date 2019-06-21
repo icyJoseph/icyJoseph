@@ -2,7 +2,6 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWifi } from "@fortawesome/free-solid-svg-icons";
-import { baseColors } from "../../theme";
 import { useOnline } from "../../containers/Online";
 
 const fade = keyframes`
@@ -20,7 +19,7 @@ const fade = keyframes`
 `;
 
 const StyledTitle = styled.div`
-  background: ${baseColors.background};
+  background: ${({ theme }) => theme.background};
   min-width: ${({ shadow }) => (shadow ? "150px" : "100px")};
   border-radius: 0 0 5px 5px;
   align-self: center;
@@ -56,12 +55,12 @@ const StyledTitle = styled.div`
     margin: 0;
     padding: 0.2em;
     font-size: 1.5em;
-    color: ${baseColors.heading};
+    color: ${({ theme }) => theme.heading};
     text-align: center;
   }
 
   .network-fade {
-    color: ${baseColors.heading};
+    color: ${({ theme }) => theme.heading};
     animation: ${fade} 2s ease-in infinite;
   }
 `;

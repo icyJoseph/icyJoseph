@@ -1,5 +1,4 @@
 import styled, { css, keyframes } from "styled-components";
-import { baseColors } from "../../theme";
 import { shadow } from "../Nav";
 
 export const transitionArticle = css`
@@ -37,7 +36,7 @@ opacity:0;
   display: flex;
   flex-direction: column;
   margin: 2em;
-  background: ${baseColors.foreground};
+  background: ${({ theme }) => theme.foreground};
   max-width: 275px;
   position: relative;
   ${shadow}
@@ -63,12 +62,12 @@ opacity:0;
 
     >  span:first-child:after {
       ${animScan()}
-      text-shadow: -2px 0 ${baseColors.notice};
+      text-shadow: -2px 0 ${({ theme }) => theme.notice};
     }
 
     >  span:nth-child(2n):after {
       ${animScan()}
-      text-shadow: -2px 0 ${baseColors.secondary};
+      text-shadow: -2px 0 ${({ theme }) => theme.secondary};
     }
 
     >  span:after {
@@ -94,7 +93,7 @@ opacity:0;
     }
 
     > span:nth-child(2) {
-      color: ${baseColors.info};
+      color: ${({ theme }) => theme.info};
       font-size: 1.5rem;
     }
     

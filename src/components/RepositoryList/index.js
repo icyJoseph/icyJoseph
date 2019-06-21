@@ -21,8 +21,8 @@ function RepositoryList({ list }) {
             id={id}
             selected={id === showing}
             key={`repository-${position}`}
-            {...repo}
             handler={setShowing}
+            {...repo}
           />
         ))}
       </StyledRepositoryList>

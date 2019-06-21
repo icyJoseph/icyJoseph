@@ -3,7 +3,6 @@ import styled, { css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { curryRight } from "../../functional";
-import { baseColors } from "../../theme";
 
 const ImageLength = "50px";
 
@@ -28,7 +27,7 @@ export const shadow = css`
       left: 0;
       background-image: radial-gradient(
         circle at 50% 87%,
-        ${baseColors.info} 2px,
+        ${({ theme }) => theme.info} 2px,
         transparent 0.1%
       );
     }
@@ -163,7 +162,7 @@ export const NavItems = styled.ul`
 
   > * > button {
     position: relative;
-    background: ${baseColors.background};
+    background: ${({ theme }) => theme.background};
     height: 100%;
     width: 100%;
     color: inherit;
@@ -185,7 +184,7 @@ export const NavItems = styled.ul`
   @media (max-width: 599px) {
     &:before {
       content: "";
-      background: ${baseColors.dark};
+      background: ${({ theme }) => theme.dark};
       position: absolute;
       height: 30px;
       width: 100%;

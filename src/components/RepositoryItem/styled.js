@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { baseColors } from "../../theme";
 
 export const RepoItem = styled.li`
-  color: ${({ selected }) => (selected ? `${baseColors.warning}` : "inherit")};
+  color: ${({ selected, theme }) =>
+    selected ? `${theme.warning}` : "inherit"};
   font-weight: ${({ selected }) => (selected ? "700" : "unset")};
   cursor: ${({ selected }) => (selected ? "pointer" : "unset")};
   transition: all 1s ease;

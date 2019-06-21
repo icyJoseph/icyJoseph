@@ -1,5 +1,4 @@
 import styled, { keyframes } from "styled-components";
-import { baseColors } from "../../theme";
 
 const fadeIn = keyframes`
 from {
@@ -41,10 +40,10 @@ export const StatLabel = styled.span`
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: ${baseColors.info};
+  color: ${({ theme }) => theme.info};
 `;
 
 export const StatCount = styled.span`
-  color: ${baseColors.light};
+  color: ${({ theme }) => theme.light};
   font-size: 24pt;
 `;

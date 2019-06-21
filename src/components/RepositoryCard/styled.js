@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { baseColors } from "../../theme";
 
 export const Repo = styled.div`
   display: flex;
@@ -26,7 +25,7 @@ export const Repo = styled.div`
 Repo.Title = styled.div`
   flex: 1;
   font-size: 1.5em;
-  color: ${baseColors.heading};
+  color: ${({ theme }) => theme.heading};
 `;
 
 Repo.Subtitle = styled.div`
@@ -34,7 +33,7 @@ Repo.Subtitle = styled.div`
   display: flex;
   font-size: 1.25em;
   flex-direction: column;
-  color: ${baseColors.subheading};
+  color: ${({ theme }) => theme.subheading};
   flex-wrap: wrap;
 `;
 
@@ -42,7 +41,7 @@ Repo.Description = styled.div`
   flex: 3;
   margin: 0.5em 0;
   font-size: 0.9em;
-  color: ${baseColors.light};
+  color: ${({ theme }) => theme.light};
   word-break: break-word;
 `;
 
@@ -60,7 +59,7 @@ Repo.DatesField = styled.div`
     align-items: center;
     font-size: 0.8em;
     font-style: italic;
-    color: ${baseColors.default};
+    color: ${({ theme }) => theme.default};
     margin-right: 0.25em;
     justify-content: center;
   }
@@ -76,7 +75,7 @@ Repo.RefsField = styled.div`
 
   > * {
     height: 100%;
-    color: ${baseColors.success};
+    color: ${({ theme }) => theme.success};
     display: flex;
     margin-right: 1em;
   }
@@ -107,7 +106,7 @@ Tags.Entry = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${baseColors.foreground};
+  background: ${({ theme }) => theme.foreground};
   border-radius: 0.5em;
   padding: 0.15em 0.25em;
 `;

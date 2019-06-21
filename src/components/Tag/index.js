@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { baseColors } from "../../theme";
 
 export const Tags = styled.div`
   display: flex;
@@ -22,7 +21,7 @@ Tags.Entry = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${baseColors.foreground};
+  background: ${({ theme }) => theme.foreground};
   border-radius: 0.5em;
   padding: 0.15em 0.25em;
 `;

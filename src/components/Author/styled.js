@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { baseColors } from "../../theme";
 
 export const AuthorCard = styled.div`
   display: flex;
@@ -22,10 +21,10 @@ export const AuthorCard = styled.div`
     flex-direction: column;
 
     > span:first-child {
-      color: ${baseColors.heading};
+      color: ${({ theme }) => theme.heading};
     }
     > span:nth-child(2n) {
-      color: ${baseColors.info};
+      color: ${({ theme }) => theme.info};
     }
   }
 `;

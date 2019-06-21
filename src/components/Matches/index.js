@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { baseColors } from "../../theme";
 
 const Message = styled.span`
   display: block;
-  color: ${baseColors.warning};
+  color: ${({ theme }) => theme.warning};
   font-weight: bold;
   text-align: center;
   margin: 1em;

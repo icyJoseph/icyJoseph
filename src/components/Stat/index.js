@@ -1,6 +1,6 @@
 import React, { Fragment, memo } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHdd } from "@fortawesome/free-solid-svg-icons";
+import { faHdd } from "@fortawesome/free-solid-svg-icons/faHdd";
 import { useCountUp } from "react-countup";
 import { StatWrap, StatLabel, StatCount } from "./styled";
 

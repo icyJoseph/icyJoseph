@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWifi } from "@fortawesome/free-solid-svg-icons";
+import { faWifi } from "@fortawesome/free-solid-svg-icons/faWifi";
 import { useOnline } from "../../containers/Online";
 
 const fade = keyframes`

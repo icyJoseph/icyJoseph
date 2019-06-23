@@ -1,20 +1,17 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faJs,
-  faPython,
-  faNodeJs,
-  faReact,
-  faVuejs,
-  faGithub
-} from "@fortawesome/free-brands-svg-icons";
-import {
-  faLaptopCode,
-  faCodeBranch,
-  faDesktop,
-  faClock,
-  faHdd
-} from "@fortawesome/free-solid-svg-icons";
+import { faJs } from "@fortawesome/free-brands-svg-icons/faJs";
+import { faPython } from "@fortawesome/free-brands-svg-icons/faPython";
+import { faNodeJs } from "@fortawesome/free-brands-svg-icons/faNodeJs";
+import { faReact } from "@fortawesome/free-brands-svg-icons/faReact";
+import { faVuejs } from "@fortawesome/free-brands-svg-icons/faVuejs";
+import { faGithub } from "@fortawesome/free-brands-svg-icons/faGithub";
+import { faCodeBranch } from "@fortawesome/free-solid-svg-icons/faCodeBranch";
+import { faLaptopCode } from "@fortawesome/free-solid-svg-icons/faLaptopCode";
+import { faDesktop } from "@fortawesome/free-solid-svg-icons/faDesktop";
+import { faClock } from "@fortawesome/free-solid-svg-icons/faClock";
+import { faHdd } from "@fortawesome/free-solid-svg-icons/faHdd";
+
 import { Repo, Tags } from "./styled";
 
 function languageIcon(lang = "") {

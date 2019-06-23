@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { faChevronUp } from "@fortawesome/free-solid-svg-icons/faChevronUp";
 import { curryRight } from "../../functional";
 
 const ImageLength = "50px";

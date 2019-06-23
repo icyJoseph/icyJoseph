@@ -1,7 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense, memo } from "react";
 import { StyledRepositoryList, RepoContainer } from "./styled";
 import RepositoryItem from "../RepositoryItem";
-import RepositoryCard from "../RepositoryCard";
+
+const LazyRepositoryCard = lazy(() =>
+  import(/*webpackChunkName: "AsyncRepoCard"*/ "../RepositoryCard")
+);
+
+function SuspenseRepositoryCard({ ...props }) {
+  return (
+    <Suspense fallback={null}>
+      <LazyRepositoryCard {...props} />
+    </Suspense>
+  );
+}
 
 function RepositoryList({ list }) {
   const [showing, setShowing] = useState(null);
@@ -26,9 +37,9 @@ function RepositoryList({ list }) {
           />
         ))}
       </StyledRepositoryList>
-      <RepositoryCard {...repo} />
+      <SuspenseRepositoryCard {...repo} />
     </RepoContainer>
   );
 }
 
-export default React.memo(RepositoryList);
+export default memo(RepositoryList);

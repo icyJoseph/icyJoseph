@@ -6,19 +6,19 @@ import {
   SuspenseLanding,
   SuspenseBlog,
   SuspenseHacks,
+  SuspenseSnackbar,
   SuspenseNoMatch
 } from "./lazyRoutes";
 
 import Online from "../containers/Online";
 import GlobalStyle from "../theme/globalStyle";
-import Snackbar from "../containers/Snackbar";
 
 export const Routes = () => (
   <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Online>
       <GlobalStyle />
       <Route path="/:activeItem?" component={SuspenseTopMenu} />
-      <Route path="/*" component={Snackbar} />
+      <Route path="/*" component={SuspenseSnackbar} />
       <Switch>
         <Route path="/hacks" exact component={SuspenseHacks} />
         <Route path="/blog" exact component={SuspenseBlog} />

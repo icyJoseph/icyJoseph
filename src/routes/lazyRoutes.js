@@ -4,6 +4,10 @@ import React, { lazy, Suspense } from "react";
 
 const Spinner = () => null;
 
+const AsyncSnackbar = lazy(() =>
+  import(/*webpackChunkName: "AsyncSnackBar"*/ "../containers/Snackbar")
+);
+
 const AsyncTopMenu = lazy(() =>
   import(/*webpackChunkName: "AsyncTopMenu"*/ "../containers/TopMenu")
 );
@@ -60,6 +64,14 @@ export function SuspenseNoMatch({ ...props }) {
   return (
     <Suspense fallback={<Spinner />}>
       <AsyncNoMatch {...props} situation="404" />
+    </Suspense>
+  );
+}
+
+export function SuspenseSnackbar({ ...props }) {
+  return (
+    <Suspense fallback={<Spinner />}>
+      <AsyncSnackbar {...props} />
     </Suspense>
   );
 }

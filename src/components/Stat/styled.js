@@ -1,20 +1,13 @@
 import styled, { keyframes } from "styled-components";
 
 const fadeIn = keyframes`
-from {
+0% {
   opacity: 0;
-}
-to {
-  opacity: 1;
-}
-`;
-
-const heightAnim = keyframes`
-from {
   max-height: 0;
 }
-to {
-  max-height: 1000px;
+100% {
+  opacity: 1;
+  max-height: 500px;
 }
 `;
 
@@ -24,7 +17,7 @@ export const Statistics = styled.div`
   flex-wrap: wrap;
   width: 80%;
   align-self: center;
-  animation: ${heightAnim} 2s ease;
+  animation: ${fadeIn} 1s ease;
 `;
 
 export const StatWrap = styled.div`
@@ -33,7 +26,6 @@ export const StatWrap = styled.div`
   justify-content: center;
   align-items: center;
   margin: 1.5em;
-  animation: ${fadeIn} 2s;
 `;
 
 export const StatLabel = styled.span`

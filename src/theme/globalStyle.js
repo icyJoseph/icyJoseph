@@ -12,8 +12,8 @@ export default createGlobalStyle`
     font-family: "Roboto", sans-serif;
     top: 0;
     bottom: 0;
-     color: ${({ theme }) => theme.primary};
-      background: ${({ theme }) => theme.background};
+    color: ${({ theme }) => theme.primary};
+    background: ${({ theme }) => theme.background};
   }
 
   ::-webkit-scrollbar {

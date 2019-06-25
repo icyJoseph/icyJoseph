@@ -2,8 +2,9 @@ import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { faHome, faCode } from "@fortawesome/free-solid-svg-icons";
-import { faMediumM } from "@fortawesome/free-brands-svg-icons";
+import { faHome } from "@fortawesome/free-solid-svg-icons/faHome";
+import { faCode } from "@fortawesome/free-solid-svg-icons/faCode";
+import { faMediumM } from "@fortawesome/free-brands-svg-icons/faMediumM";
 
 import { NavBar, NavItems, NavItem } from "../../components/Nav";
 import Brand from "../../components/Brand";

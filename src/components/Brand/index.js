@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import PropTypes from "prop-types";
 
 import TextCycle from "../TextCycle";
@@ -12,7 +12,7 @@ export function Brand({ brand, titles, links, clickHandler }) {
   );
 }
 
-export default React.memo(Brand);
+export default memo(Brand);
 
 Brand.propTypes = {
   brand: PropTypes.string,

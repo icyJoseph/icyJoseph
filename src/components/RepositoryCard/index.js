@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faJs } from "@fortawesome/free-brands-svg-icons/faJs";
 import { faPython } from "@fortawesome/free-brands-svg-icons/faPython";
@@ -127,4 +127,4 @@ export function RepositoryCard({
   );
 }
 
-export default React.memo(RepositoryCard);
+export default memo(RepositoryCard);

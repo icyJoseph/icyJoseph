@@ -38,7 +38,7 @@ Repo.Subtitle = styled.div`
 `;
 
 Repo.Description = styled.div`
-  flex: 3;
+  flex: 2;
   margin: 0.5em 0;
   font-size: 0.9em;
   color: ${({ theme }) => theme.light};

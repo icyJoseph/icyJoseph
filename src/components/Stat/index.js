@@ -6,7 +6,7 @@ import { StatWrap, StatLabel, StatCount } from "./styled";
 
 export function StatCountUp({
   end = 0,
-  duration = 5,
+  duration = 1,
   delay = 0,
   onEnd = () => {}
 }) {

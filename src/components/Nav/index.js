@@ -224,12 +224,17 @@ export function NavItem({
     <li title={title} className={shouldFlip} aria-label={name}>
       <button
         className={buttonClassName}
+        aria-label={name || "home"}
         onClick={curryRight(mainHandler)(name)}
       >
         <FontAwesomeIcon icon={icon} />
       </button>
       {isActive && (
-        <button className={buttonClassName} onClick={subHandler}>
+        <button
+          className={buttonClassName}
+          aria-label="scroll-up"
+          onClick={subHandler}
+        >
           <FontAwesomeIcon icon={faChevronUp} />
         </button>
       )}

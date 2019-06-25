@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Stat from "../../components/Stat";
@@ -26,7 +26,7 @@ export function Landing({
   }
 }) {
   const [show, setShow] = useState(false);
-  const onEnd = () => setShow(true);
+  const onEnd = useCallback(() => setShow(true), []);
 
   useEffect(() => {
     document.title = "icyJoseph";

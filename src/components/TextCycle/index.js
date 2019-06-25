@@ -24,7 +24,7 @@ export function TextCycle({ titles, links }) {
       } else if (!cycleRef.current) {
         setOpaque(true);
       }
-    }, 2000);
+    }, 3000);
 
     return () => {
       clearInterval(indexTimer);

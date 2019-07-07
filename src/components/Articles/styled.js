@@ -32,7 +32,7 @@ export const ArticlesWrapper = styled.div`
 `;
 
 export const Article = styled.div`
-opacity:0;
+  opacity:0;
   display: flex;
   flex-direction: column;
   margin: 2em;

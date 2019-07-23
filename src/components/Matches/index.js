@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
+import useEasing from "use-easing";
 
 const Message = styled.span`
   display: block;
@@ -10,20 +11,13 @@ const Message = styled.span`
 `;
 
 function Matches({ count }) {
-  const [value, setValue] = useState(0);
-
-  useEffect(() => {
-    let timer;
-    if (value !== count) {
-      timer = setTimeout(
-        () => setValue(prev => prev + (count - prev) / Math.abs(prev - count)),
-        7
-      );
-    }
-    return () => clearTimeout(timer);
-  }, [count, value]);
+  const { value } = useEasing({
+    end: count,
+    duration: 1,
+    formatFn: x => Math.floor(x)
+  });
 
   return <Message>{value} matches</Message>;
 }
 
-export default React.memo(Matches);
+export default memo(Matches);

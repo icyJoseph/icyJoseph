@@ -1,7 +1,7 @@
 import React, { Fragment, memo } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHdd } from "@fortawesome/free-solid-svg-icons/faHdd";
-import { useCountUp } from "react-countup";
+import useEasing from "use-easing";
 import { StatWrap, StatLabel, StatCount } from "./styled";
 
 export function StatCountUp({
@@ -10,15 +10,15 @@ export function StatCountUp({
   delay = 0,
   onEnd = () => {}
 }) {
-  const { countUp } = useCountUp({
+  const { value } = useEasing({
     start: 0,
     end,
     duration,
-    delay,
+    formatFn: x => Math.floor(x),
     onEnd
   });
 
-  return <StatCount>{countUp}</StatCount>;
+  return <StatCount>{value}</StatCount>;
 }
 
 export function Stat({ withIcon, label = "", end, ...rest }) {

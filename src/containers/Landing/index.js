@@ -20,7 +20,7 @@ const LandingWrap = styled.div`
 
 export function Landing({
   github: {
-    user: { public_gists = 0, public_repos = 0 },
+    user: { public_repos = 0 },
     commits = 0,
     languages
   }

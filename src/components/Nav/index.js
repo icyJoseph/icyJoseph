@@ -126,6 +126,7 @@ export const NavItems = styled.ul`
     perspective: 1000px;
     transform-style: preserve-3d;
     transition: transform 1s ease;
+    pointer-events: none;
   }
 
   > li > button {
@@ -173,6 +174,7 @@ export const NavItems = styled.ul`
     text-decoration: none;
     border-radius: 50%;
     outline-color: gray;
+    pointer-events: auto;
     ${shadow}
 
     &:focus {

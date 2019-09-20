@@ -10,3 +10,4 @@ export const extras = [
 
 // Medium
 export const medium = "https://medium.com/@icjoseph";
+export const mediumProfile = "https://medium.com/@icjoseph/latest";

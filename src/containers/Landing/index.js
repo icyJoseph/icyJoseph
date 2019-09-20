@@ -13,7 +13,10 @@ const LandingWrap = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
+
   @media (max-width: 599px) {
+    justify-content: flex-start;
+    margin-top: 1em;
     margin-bottom: 4em;
   }
 `;

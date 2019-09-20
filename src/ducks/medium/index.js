@@ -22,7 +22,7 @@ export const fetchPost = id => {
 
 export default function reducer(
   medium = {
-    feed: { user: {}, articles: {} },
+    feed: { user: {}, articles: [] },
     post: [],
     loadingFeed: false,
     loadingPost: false
@@ -31,18 +31,9 @@ export default function reducer(
 ) {
   switch (type) {
     case FETCH_FEED:
-      return { ...medium, loadingFeed: true };
     case FETCH_POST:
-      return { ...medium, loadingPost: true };
     case SUCCESS_FEED:
-      return {
-        ...medium,
-        loadingFeed: false,
-        feed: payload,
-        expiry: rest.expiry
-      };
     case SUCCESS_POST:
-      return { ...medium, loadingPost: false, post: payload };
     default:
       return medium;
   }

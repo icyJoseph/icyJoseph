@@ -62,16 +62,20 @@ export function* loadRepos() {
 }
 
 export function* loadContributions() {
-  yield all([take(SUCCESS_USER_REPOS), take(SUCCESS_USER_DATA)]);
+  try {
+    yield all([take(SUCCESS_USER_REPOS), take(SUCCESS_USER_DATA)]);
 
-  const userContributions = yield call(getRepoContributors);
+    const userContributions = yield call(getRepoContributors);
 
-  const totalContributions = flatten(userContributions).reduce(
-    (acc, { contributions }) => acc + contributions,
-    0
-  );
+    const totalContributions = flatten(userContributions).reduce(
+      (acc, { contributions }) => acc + contributions,
+      0
+    );
 
-  yield put({ type: LOAD_TOTAL_CONTRIBUTIONS, payload: totalContributions });
+    yield put({ type: LOAD_TOTAL_CONTRIBUTIONS, payload: totalContributions });
+  } catch (e) {
+    console.debug("Failed to load contributions");
+  }
 }
 
 export function* loadLanguages() {

@@ -64,14 +64,7 @@ export function* loadRepos() {
 export function* loadContributions() {
   yield all([take(SUCCESS_USER_REPOS), take(SUCCESS_USER_DATA)]);
 
-  const repos = yield select(selectRepos);
-  const { login } = yield select(selectUser);
-
-  const ownedByUser = repos
-    .filter(({ owner, fork }) => owner.login === login && !fork)
-    .map(({ name, contributors_url }) => ({ name, contributors_url }));
-
-  const userContributions = yield call(getRepoContributors, ownedByUser);
+  const userContributions = yield call(getRepoContributors);
 
   const totalContributions = flatten(userContributions).reduce(
     (acc, { contributions }) => acc + contributions,

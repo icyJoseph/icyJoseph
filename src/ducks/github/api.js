@@ -22,9 +22,9 @@ export const getUserRepos = () => {
     .then(({ data }) => [...data]);
 };
 
-export const getRepoContributors = repos => {
+export const getRepoContributors = () => {
   return github()
-    .post(`/contributions`, { repos })
+    .post(`/contributions`)
     .then(({ data }) => data);
 };
 

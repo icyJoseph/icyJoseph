@@ -81,8 +81,11 @@ export function* loadLanguages() {
   const { login } = yield select(selectUser);
 
   const ownedByUser = repos
-    .filter(({ owner, fork }) => owner.login === login && !fork)
+    .filter(
+      ({ owner, fork, archived }) => owner.login === login && !fork && !archived
+    )
     .map(({ name }) => name);
+
   const languages = yield call(getRepoLanguages, ownedByUser);
 
   const aggregate = languages.reduce((acc, val) => {

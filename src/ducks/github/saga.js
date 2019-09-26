@@ -69,7 +69,7 @@ export function* loadContributions() {
 
   const ownedByUser = repos
     .filter(({ owner, fork }) => owner.login === login && !fork)
-    .map(({ name }) => name);
+    .map(({ name, contributors_url }) => ({ name, contributors_url }));
 
   const userContributions = yield call(getRepoContributors, ownedByUser);
 

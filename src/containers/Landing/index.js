@@ -35,6 +35,11 @@ export function Landing({
     document.title = "icyJoseph";
   }, []);
 
+  useEffect(() => {
+    const timer = setTimeout(() => setShow(true), 3500);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <LandingWrap>
       <Title>

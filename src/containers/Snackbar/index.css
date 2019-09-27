@@ -68,6 +68,11 @@
   }
 }
 
+.snackbar--container {
+  display: flex;
+  width: 100%;
+}
+
 .snackbar--text {
   flex: 1 1 auto;
   padding: 16px;
@@ -114,6 +119,7 @@
   animation: focus-ring 300ms ease-out forwards 1;
   pointer-events: none;
 }
+
 @keyframes focus-ring {
   from {
     transform: scale(0.01);

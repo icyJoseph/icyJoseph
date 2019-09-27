@@ -1,0 +1,35 @@
+.centered {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.error-title {
+  font-size: 2em;
+  margin: 1em;
+}
+
+.error-button {
+  font-size: 1.5em;
+  background: transparent;
+  border: none;
+  color: #fac863;
+  padding: 0.25em 1em;
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+}

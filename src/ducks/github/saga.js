@@ -23,15 +23,7 @@ import {
   getRepoTopics
 } from "./api";
 
-import {
-  curry,
-  flatten,
-  filterf,
-  mapf,
-  pipe,
-  sort,
-  keys
-} from "../../functional";
+import { curry, filterf, mapf, pipe, sort, keys } from "../../functional";
 
 const buildLang = (aggregate, lang) => ({
   lang,
@@ -62,20 +54,16 @@ export function* loadRepos() {
 }
 
 export function* loadContributions() {
-  try {
-    yield all([take(SUCCESS_USER_REPOS), take(SUCCESS_USER_DATA)]);
+  yield all([take(SUCCESS_USER_REPOS), take(SUCCESS_USER_DATA)]);
 
-    const userContributions = yield call(getRepoContributors);
+  const userContributions = yield call(getRepoContributors);
 
-    const totalContributions = flatten(userContributions).reduce(
-      (acc, { contributions }) => acc + contributions,
-      0
-    );
+  const totalContributions = userContributions.reduce(
+    (acc, { contributions }) => acc + contributions,
+    0
+  );
 
-    yield put({ type: LOAD_TOTAL_CONTRIBUTIONS, payload: totalContributions });
-  } catch (e) {
-    console.debug("Failed to load contributions");
-  }
+  yield put({ type: LOAD_TOTAL_CONTRIBUTIONS, payload: totalContributions });
 }
 
 export function* loadLanguages() {

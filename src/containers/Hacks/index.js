@@ -9,6 +9,8 @@ import RepositoryPages from "../../components/RepositoryPages";
 export function Hacks({ github: { topics, repos } }) {
   const [keyword, setKeyword] = useState("");
 
+  const public_repos = repos.filter(repo => !repo.private);
+
   const inputRef = useRef("");
 
   useEffect(() => {
@@ -24,7 +26,7 @@ export function Hacks({ github: { topics, repos } }) {
         <h1>Code!</h1>
       </Title>
       <Search value={keyword} onChange={setKeyword} ref={inputRef} />
-      <RepositoryPages repos={repos} keyword={keyword} topics={topics} />
+      <RepositoryPages repos={public_repos} keyword={keyword} topics={topics} />
     </HacksWrap>
   );
 }

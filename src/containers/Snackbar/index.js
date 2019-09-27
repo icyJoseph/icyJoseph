@@ -4,8 +4,12 @@ function Snackbar() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    const handler = e =>
-      e.data.type === "WORKER_UPDATE" ? setShow(true) : () => {};
+    const handler = e => {
+      if (e.data.type === "WORKER_UPDATE") {
+        localStorage.clear();
+        setShow(true);
+      }
+    };
 
     window.addEventListener("message", handler, false);
     return () => window.removeEventListener("message", handler, false);

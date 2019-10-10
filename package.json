@@ -24,7 +24,8 @@
     "use-easing": "^0.0.2"
   },
   "scripts": {
-    "analyze": "yarn build && source-map-explorer 'build/static/js/*.js'",
+    "analyze": "node analyze.js",
+    "source-map-explore": "yarn build && source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
     "build": "react-scripts build && cp build/index.html build/404.html",
     "test": "react-scripts test --env=jsdom",
@@ -38,9 +39,11 @@
   "devDependencies": {
     "axios-mock-adapter": "^1.15.0",
     "gh-pages": "^1.1.0",
+    "progress-bar-webpack-plugin": "^1.12.1",
     "react-testing-library": "^7.0.0",
     "redux-mock-store": "^1.5.1",
-    "source-map-explorer": "^2.0.1"
+    "source-map-explorer": "^2.0.1",
+    "webpack-bundle-analyzer": "^3.5.2"
   },
   "eslintConfig": {
     "extends": "react-app",

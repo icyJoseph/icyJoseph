@@ -14,6 +14,19 @@ Only Rust 🦀
 
 ![Code Wars Badge](https://www.codewars.com/users/icyJoseph/badges/large)
 
+## NPM Packages
+
+### `use-easing`
+
+[Repository](https://github.com/icyJoseph/use-easing)
+
+[![npm](https://img.shields.io/npm/dm/use-easing.svg)]()
+
+### `use-element-resize`
+
+[Repository](https://github.com/icyJoseph/useElementResize)
+
+[![npm](https://img.shields.io/npm/dm/use-element-resize.svg)]()
 
 ## Activity
 

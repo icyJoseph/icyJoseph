@@ -17,7 +17,7 @@ import {
   capitalize,
   len,
   getByFileName
-} from "../";
+} from "functional";
 
 describe("take", () => {
   const target = [1, 2, 3, 4, 5];

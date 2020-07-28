@@ -44,28 +44,6 @@
       ]
     }
   },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.js",
-      "!src/registerServiceWorker.js",
-      "!src/index.js",
-      "!src/ducks/store/**.js",
-      "!src/setupTests.js",
-      "!src/data/*.js"
-    ],
-    "coverageReporters": [
-      "text",
-      "lcov"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 75,
-        "functions": 75,
-        "lines": 75,
-        "statements": 75
-      }
-    }
-  },
   "browserslist": [
     ">0.2%",
     "not dead",

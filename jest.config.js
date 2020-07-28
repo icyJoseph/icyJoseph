@@ -1,6 +1,6 @@
 module.exports = {
   collectCoverageFrom: [
-    "**/*.{js,jsx,ts,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}",
     "!**/*.d.ts",
     "!**/node_modules/**"
   ],
@@ -16,5 +16,15 @@ module.exports = {
   ],
   moduleNameMapper: {
     "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
+  },
+  modulePaths: ["<rootDir>/src"],
+  coverageReporters: ["text", "lcov"],
+  coverageThreshold: {
+    global: {
+      branches: 75,
+      functions: 75,
+      lines: 75,
+      statements: 75
+    }
   }
 };

@@ -1,12 +1,3 @@
-// figure out if expiry date is past
-export const shouldFetch = expiry => {
-  if (!expiry) return true;
-  const now = new Date();
-  const lastSave = new Date(expiry);
-
-  return now >= lastSave;
-};
-
 // softly scroll to top
 export const softTopScroll = () => {
   const { documentElement, body } = document;
@@ -26,5 +17,3 @@ export function onScrollThreshold(setter, threshold = 100) {
   }
   return setter(false);
 }
-
-export const imageSrc = (w = 120) => `https://miro.medium.com/fit/c/${w}/${w}`;

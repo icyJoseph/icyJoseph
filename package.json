@@ -19,14 +19,18 @@
     "build": "next build",
     "start": "next start",
     "test": "jest --watch",
-    "test:ci": "jest --ci"
+    "test:ci": "jest --ci",
+    "playroom:start": "playroom start",
+    "playroom:build": "playroom build"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.1.0",
     "@testing-library/react": "^9.4.0",
     "babel-jest": "^25.1.0",
+    "babel-loader": "^8.1.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^25.1.0",
+    "playroom": "^0.21.2",
     "progress-bar-webpack-plugin": "^1.12.1",
     "react-test-renderer": "^16.12.0",
     "react-testing-library": "^7.0.0",

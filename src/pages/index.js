@@ -1,4 +1,6 @@
 import Head from "next/head";
+
+import { Navigation } from "composition/Navigation";
 import { useCodeWars } from "hooks/useCodeWars";
 
 const RenderWithCodeWars = ({ children }) => {
@@ -11,6 +13,7 @@ export default function Home() {
       <Head>
         <title>icyJoseph</title>
       </Head>
+      <Navigation />
       <RenderWithCodeWars>
         {({ data, error, loading }) => {
           if (error) return <span>Something went wrong</span>;

@@ -8,12 +8,29 @@ module.exports = {
   title: "icyJoseph Library",
   themes: "./src/styles/theme",
   frameComponent: "./playroom/FrameComponent.js",
-  widths: [320, 375, 768, 1024],
+  widths: [320, 375, 768, 1024, 1280, 1336],
   port: 9000,
   paramType: "search", // default is 'hash'
   openBrowser: false,
   exampleCode: `
-     Start to code!
+  <NavBar>
+    <NavBar.Brand>icyJoseph</NavBar.Brand>
+    <NavBar.Spacer />
+    <NavBar.LinkList>
+        <NavBar.LinkItem>
+            <span>Home</span>
+            <Emoji title="Home" symbol="🏠" ariaLabel="Home" ml={1} />          
+        </NavBar.LinkItem>
+        <NavBar.LinkItem>
+            <span>Posts</span>
+            <Emoji title="Posts" symbol="📰" ariaLabel="Post" ml={1} />    
+        </NavBar.LinkItem>
+        <NavBar.LinkItem>
+            <span>Contact</span>
+            <Emoji title="Contact" symbol="👨🏽‍💻" ariaLabel="Contact" ml={1} />    
+        </NavBar.LinkItem>
+    </NavBar.LinkList>
+  </NavBar>
     `,
   baseUrl: "/playroom/",
   webpackConfig: () => {

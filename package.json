@@ -8,6 +8,7 @@
     "next": "^9.5.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "styled-components": "^5.1.1",
     "swr": "^0.2.3",
     "use-easing": "^0.0.2"
   },

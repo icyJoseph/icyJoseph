@@ -5,8 +5,8 @@ export const NavBar = styled.nav`
   ${space({ py: 2, px: 3 })}
   display: flex;
   flex-direction: column;
-  background: var(--white);
-  color: var(--lightDark);
+  background: transparent;
+  color: var(--thinDark);
 
   @media (min-width: 768px) {
     flex-direction: row;
@@ -17,7 +17,10 @@ NavBar.Brand = styled.span`
   font-weight: bold;
   font-size: 2rem;
   text-transform: uppercase;
-  flex: 1;
+
+  & h6 {
+    font-size: 1.4rem;
+  }
 `;
 
 NavBar.Spacer = styled.div`
@@ -35,6 +38,7 @@ NavBar.LinkList = styled.ul`
   display: flex;
   flex: auto;
   justify-content: space-around;
+  align-items: center;
   max-width: unset;
 
   @media (min-width: 768px) {

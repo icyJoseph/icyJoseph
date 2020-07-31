@@ -1,27 +1,27 @@
 import Head from "next/head";
+import axios from "axios";
 
 import { Navigation } from "composition/Navigation";
-import { useCodeWars } from "hooks/useCodeWars";
+import { CodeWars } from "composition/CodeWars";
 
-const RenderWithCodeWars = ({ children }) => {
-  return children(useCodeWars());
-};
-
-export default function Home() {
+export function Home({ codewars }) {
   return (
     <>
       <Head>
         <title>icyJoseph</title>
       </Head>
       <Navigation />
-      <RenderWithCodeWars>
-        {({ data, error, loading }) => {
-          if (error) return <span>Something went wrong</span>;
-          if (loading) return <span>Loading</span>;
-
-          return <span>{JSON.stringify(data)}</span>;
-        }}
-      </RenderWithCodeWars>
+      <CodeWars initial={codewars} />
     </>
   );
 }
+
+export async function getStaticProps() {
+  const { data: codewars } = await axios.get(
+    "https://www.codewars.com/api/v1/users/icyJoseph"
+  );
+
+  return { props: { codewars } };
+}
+
+export default Home;

@@ -2,8 +2,9 @@ import { css } from "styled-components";
 
 export const root = css`
   :root {
-    --dark: ${({ theme }) => theme.dark ?? "#000000"};
-    --lightDark: ${({ theme }) => theme.lightDark ?? "#171219"};
+    --dark: ${({ theme }) => theme.dark ?? "#171219"};
+    --softDark: ${({ theme }) => theme.softDark ?? "#212738"};
+    --smokeyWhite:${({ theme }) => theme.smokeyWhite ?? "#fbf9ff"};
     --white: ${({ theme }) => theme.white ?? "#ffffff"};
     --blue: ${({ theme }) => theme.blue ?? "#225560"};
     --lightBlue: ${({ theme }) => theme.lightBlue ?? "#5db7de"};

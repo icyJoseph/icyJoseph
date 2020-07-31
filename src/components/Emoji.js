@@ -13,3 +13,11 @@ export const Emoji = styled(Base)`
     android emoji, emojisymbols, emojione mozilla, twemoji mozilla,
     segoe ui symbol;
 `;
+
+export const RoundEmoji = styled(Emoji)`
+  background: ${({ color = "blue", theme }) => `var(${color}, ${theme.blue})`};
+  border-radius: 50%;
+  padding: 4px;
+  box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 1),
+    0px 0px 4px 1px rgba(255, 255, 255, 1);
+`;

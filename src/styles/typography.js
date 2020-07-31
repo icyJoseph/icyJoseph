@@ -14,7 +14,5 @@ export const typography = css`
   body {
     font-size: 1.6rem;
     font-family: Recursive, sans-serif;
-    background-color: var(--white);
-    color: var(--dark);
   }
 `;

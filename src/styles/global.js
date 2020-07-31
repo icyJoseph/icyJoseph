@@ -10,4 +10,9 @@ export const GlobalStyle = createGlobalStyle`
     ${normalize};
     ${reset};
     ${typography};
+    
+    body {
+        background-color: var(--smokeyWhite);
+        color: var(--softDark);
+    }
 `;

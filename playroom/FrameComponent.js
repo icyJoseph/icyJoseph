@@ -1,15 +1,10 @@
+import { useLayoutEffect } from "react";
 import { ThemeProvider, createGlobalStyle, css } from "styled-components";
 import { normalize } from "styles/normalize";
 import { reset } from "styles/reset";
 import { root } from "styles/root";
 
 const typography = css`
-  @font-face {
-    font-family: "Recursive";
-    font-display: swap;
-    src: url(/public/fonts/recursive.ttf) format("truetype");
-  }
-
   html {
     font-size: 0.625rem;
   }
@@ -29,9 +24,19 @@ const GlobalStyle = createGlobalStyle`
   ${typography};
 `;
 
-export default ({ theme, children }) => (
-  <ThemeProvider theme={theme}>
-    <GlobalStyle />
-    {children}
-  </ThemeProvider>
-);
+export default ({ theme, children }) => {
+  useLayoutEffect(() => {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href =
+      "https://fonts.googleapis.com/css2?family=Recursive:wght@300;400;500;600;677;700;800;900&display=swap";
+    document.head.appendChild(link);
+  }, []);
+
+  return (
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      {children}
+    </ThemeProvider>
+  );
+};

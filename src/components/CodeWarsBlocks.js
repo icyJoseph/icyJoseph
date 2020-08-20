@@ -1,5 +1,5 @@
 import { DataEntry } from "components/DataEntry";
-import { RoundEmoji } from "components/Emoji";
+import { Emoji } from "components/Emoji";
 import { Text } from "components/Text";
 import { capitalize } from "functional";
 
@@ -7,7 +7,7 @@ const Summary = ({ title = "overall", name, score, color }) => (
   <DataEntry>
     <Text color="--lightBlue">{title}</Text>
     <p>
-      <RoundEmoji symbol="🦀" ariaLabel={`${name} language`} />
+      <Emoji symbol="🦀" ariaLabel={`${name} language`} />
     </p>
     <Text color={`--light${capitalize(color)}`}>
       <span>
@@ -21,7 +21,7 @@ export const Clan = ({ clan }) => (
   <DataEntry>
     <Text color="--lightGreen">clan</Text>
     <p>
-      <RoundEmoji symbol="🛡️" ariaLabel={`My clan: ${clan}`} />
+      <Emoji symbol="🛡️" ariaLabel={`My clan: ${clan}`} />
     </p>
     <Text color="--smokeyWhite">{clan}</Text>
   </DataEntry>
@@ -31,7 +31,7 @@ export const Leaderboard = ({ position }) => (
   <DataEntry>
     <Text color="--lightYellow">Rank</Text>
     <p>
-      <RoundEmoji symbol="👨🏽‍💻" ariaLabel={`Leaderboard position: ${position}`} />
+      <Emoji symbol="👨🏽‍💻" ariaLabel={`Leaderboard position: ${position}`} />
     </p>
     <Text>{position}</Text>
   </DataEntry>
@@ -41,7 +41,7 @@ export const Honor = ({ honor }) => (
   <DataEntry>
     <Text color="--lightRed">honor</Text>
     <p>
-      <RoundEmoji symbol="✨" ariaLabel={`Honor: ${honor}`} />
+      <Emoji symbol="✨" ariaLabel={`Honor: ${honor}`} />
     </p>
     <Text>{honor}</Text>
   </DataEntry>

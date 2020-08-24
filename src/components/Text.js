@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import { space } from "@styled-system/space";
 
-export const Text = styled(({ as: Element = "p", ...props }) => (
-  <Element {...props} />
-))`
+export const Text = styled.p`
   ${space};
-  text-align: ${(align = "unset") => align};
-  color: ${({ color, theme }) => `var(${color}, ${theme.white})`};
+  font-size: ${({ fontSize = "1.6rem" }) => fontSize};
+  text-align: ${(textAlign = "unset") => textAlign};
+  color: ${({ color = "--black", theme }) => `var(${color}, ${theme.white})`};
 `;

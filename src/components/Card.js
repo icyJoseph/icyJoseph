@@ -3,6 +3,7 @@ import { space } from "@styled-system/space";
 
 export const Card = styled.div`
   ${space({ py: 3, px: 2 })}
+  ${space}
   background:var(--softDark);
   color: var(--white);
   border-radius: 6px;

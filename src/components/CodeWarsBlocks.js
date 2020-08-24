@@ -10,9 +10,10 @@ const Summary = ({ title = "overall", name, score, color }) => (
       <Emoji symbol="🦀" ariaLabel={`${name} language`} />
     </p>
     <Text color={`--light${capitalize(color)}`}>
-      <span>
-        {name} / {score} exp
-      </span>
+      <span>{name}</span>
+    </Text>
+    <Text color="--white" fontSize="1.4rem">
+      {score} exp
     </Text>
   </DataEntry>
 );
@@ -33,7 +34,7 @@ export const Leaderboard = ({ position }) => (
     <p>
       <Emoji symbol="👨🏽‍💻" ariaLabel={`Leaderboard position: ${position}`} />
     </p>
-    <Text>{position}</Text>
+    <Text color="--smokeyWhite">{position}</Text>
   </DataEntry>
 );
 
@@ -43,7 +44,7 @@ export const Honor = ({ honor }) => (
     <p>
       <Emoji symbol="✨" ariaLabel={`Honor: ${honor}`} />
     </p>
-    <Text>{honor}</Text>
+    <Text color="--smokeyWhite">{honor}</Text>
   </DataEntry>
 );
 

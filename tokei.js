@@ -21,9 +21,11 @@ ls.stderr.on("data", (data) => {
 ls.on("close", (code) => {
   const parsed = JSON.parse(chunks.join(""));
 
-  const filtered = Object.entries(
-    parsed
-  ).map(([language, { reports: _, ...rest }]) => ({ language, ...rest }));
+  const filtered = Object.entries(parsed)
+    .map(([language, { reports: _, ...rest }]) => ({ language, ...rest }))
+    .map(({ language, ...rest }) =>
+      language === "Css" ? { language: "CSS", ...rest } : { language, ...rest }
+    );
 
   fs.writeFile(
     path.resolve(__dirname, "tokei.json"),

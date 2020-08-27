@@ -3,7 +3,6 @@ import fs from "fs";
 import { promisify } from "util";
 
 import Head from "next/head";
-import axios from "axios";
 
 import { CodeWars } from "composition/CodeWars";
 import { Container } from "components/Container";
@@ -11,7 +10,10 @@ import { Dev } from "composition/Dev";
 import { GitHub } from "composition/GitHub";
 import { Navigation } from "composition/Navigation";
 
-export function Home({ codewars, tokei }) {
+import { getCodeWarsUser } from "pages/api/codewars";
+import { getGitHubUser } from "pages/api/github";
+
+export function Home({ codewars, github, tokei }) {
   return (
     <>
       <Head>
@@ -20,7 +22,7 @@ export function Home({ codewars, tokei }) {
       <Navigation />
       <Container>
         <Dev tokei={tokei} />
-        <GitHub />
+        <GitHub initial={github} />
         <CodeWars initial={codewars} />
       </Container>
     </>
@@ -28,16 +30,16 @@ export function Home({ codewars, tokei }) {
 }
 
 export async function getStaticProps() {
-  const { data: codewars } = await axios.get(
-    "https://www.codewars.com/api/v1/users/icyJoseph"
-  );
+  const codewars = await getCodeWarsUser();
+
+  const github = await getGitHubUser();
 
   const tokei = await promisify(fs.readFile)(
     path.resolve(process.cwd(), "tokei.json"),
     "utf-8"
   ).then(JSON.parse);
 
-  return { props: { codewars, tokei } };
+  return { props: { codewars, github, tokei } };
 }
 
 export default Home;

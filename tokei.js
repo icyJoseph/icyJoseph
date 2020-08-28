@@ -25,7 +25,8 @@ ls.on("close", (code) => {
     .map(([language, { reports: _, ...rest }]) => ({ language, ...rest }))
     .map(({ language, ...rest }) =>
       language === "Css" ? { language: "CSS", ...rest } : { language, ...rest }
-    );
+    )
+    .sort((a, b) => b.code - a.code);
 
   fs.writeFile(
     path.resolve(__dirname, "tokei.json"),

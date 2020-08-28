@@ -1,4 +1,3 @@
-import { useEasing } from "use-easing";
 import { Button } from "components/Button";
 import { Card } from "components/Card";
 import { Emoji } from "components/Emoji";
@@ -37,7 +36,8 @@ const Language = ({ language, code, blanks, comments }) => {
   );
 };
 
-export const Dev = ({ tokei }) => {
+export const Tokei = ({ tokei }) => {
+  console.log({ tokei });
   return (
     <Section my={3} px={2}>
       <header>
@@ -46,12 +46,14 @@ export const Dev = ({ tokei }) => {
         </Text>
       </header>
       <Flex as="main" justifyContent="center">
-        {tokei
-          .sort((a, b) => b.code - a.code)
-          .map(({ language, ...rest }) => (
-            <Language key={language} language={language} {...rest} />
-          ))}
+        {tokei.map(({ language, ...rest }) => (
+          <Language key={language} language={language} {...rest} />
+        ))}
       </Flex>
+      <Text>
+        The indicators above show the ratio of actual lines of code to total
+        number of lines, including blanks and comments.
+      </Text>
     </Section>
   );
 };

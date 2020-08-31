@@ -6,7 +6,7 @@ import Head from "next/head";
 
 import { CodeWars } from "composition/CodeWars";
 import { Container } from "components/Container";
-import { Dev } from "composition/Dev";
+import { Tokei } from "composition/Tokei";
 import { GitHub } from "composition/GitHub";
 import { Navigation } from "composition/Navigation";
 
@@ -21,7 +21,7 @@ export function Home({ codewars, github, tokei }) {
       </Head>
       <Navigation />
       <Container>
-        <Dev tokei={tokei} />
+        <Tokei tokei={tokei} />
         <GitHub initial={github} />
         <CodeWars initial={codewars} />
       </Container>

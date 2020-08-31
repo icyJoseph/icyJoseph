@@ -15,9 +15,11 @@ import { Text } from "components/Text";
 export const CodeWars = ({ initial }) => {
   return (
     <Section my={3} px={2}>
-      <Text as="h2" color="--blue" fontSize="2rem">
-        On CodeWars
-      </Text>
+      <header>
+        <Text as="h2" color="--blue" fontSize="2rem">
+          On CodeWars
+        </Text>
+      </header>
       <Flex as="main">
         <RenderWithCodeWars initial={initial}>
           {({ data, error, loading }) => {

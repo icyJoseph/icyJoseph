@@ -1,12 +1,20 @@
+import { print } from "graphql";
 import gql from "graphql-tag";
 
-export const GET_USER = gql`
+const GET_USER_DOC = gql`
   query getUser($login: String!) {
+    rateLimit {
+      cost
+      limit
+      remaining
+    }
     user(login: $login) {
       bio
       company
       location
+      login
       name
+      avatarUrl
       organization(login: "EvolveTechnology") {
         id
         name
@@ -47,3 +55,5 @@ export const GET_USER = gql`
     }
   }
 `;
+
+export const GET_USER = print(GET_USER_DOC);

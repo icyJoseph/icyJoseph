@@ -34,15 +34,10 @@ Card.Header = styled.header`
   font-weight: 300;
 `;
 
-const Base = ({ as = "span", className, children }) => {
-  const Element = as;
-  return <Element className={className}>{children}</Element>;
-};
-
-Card.SubHeader = styled(Base)`
+Card.SubHeader = styled.span`
   ${space({ mt: 2 })};
   font-size: 1.8rem;
-  text-transform: lowercase;
+  text-transform: ${({ textTransform = "lowercase" }) => textTransform};
   text-align: center;
 `;
 

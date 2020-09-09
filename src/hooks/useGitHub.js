@@ -16,6 +16,7 @@ export const useGitHub = ({
     {
       shouldRetryOnError: false,
       revalidateOnFocus: false,
+      dedupingInterval: 60 * 60 * 1000,
       initialData
     }
   );

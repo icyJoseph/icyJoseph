@@ -18,11 +18,12 @@
   "scripts": {
     "analyze": "node analyze.js",
     "source-map-explore": "yarn build && source-map-explorer 'build/static/js/*.js'",
-    "dev": "next dev",
+    "dev": "yarn tokei && next dev",
     "build": "next build",
     "start": "next start",
     "test": "jest --watch",
     "test:ci": "jest --ci",
+    "tokei": "node tokei.js",
     "playroom:start": "playroom start",
     "playroom:build": "playroom build"
   },

@@ -38,9 +38,11 @@ const Language = ({ language, code, blanks, comments }) => {
 export const Tokei = ({ tokei }) => {
   return (
     <Section my={3} px={2}>
-      <header>
+      <header id="tokei">
         <Text as="h2" color="--blue" fontSize="2rem">
-          <code>tokei ~/dev</code>
+          <a href="#tokei">
+            <code>tokei ~/dev</code>
+          </a>
         </Text>
       </header>
       <Flex as="main" justifyContent="center">

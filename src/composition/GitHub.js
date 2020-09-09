@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { Button } from "components/Button";
@@ -57,14 +57,16 @@ export const GitHub = ({ initial }) => {
   } = data;
 
   const { contributionYears } = contributionsCollection;
-  const [last] = contributionYears;
-  const [selectedYear, setSelectedYear] = useState(last || 2020);
+  const [last = 2020] = contributionYears;
+  const [selectedYear, setSelectedYear] = useState(last);
 
   return (
     <Section my={3} px={2}>
-      <header>
+      <header id="github">
         <Text as="h2" color="--blue" fontSize="2rem">
-          <code>GitHub</code>
+          <a href="#github">
+            <code>GitHub</code>
+          </a>
         </Text>
       </header>
       <GHGrid as="main">
@@ -89,7 +91,7 @@ export const GitHub = ({ initial }) => {
                 key={year}
                 variant={year !== selectedYear ? "outlined" : null}
                 text={year}
-                mx={2}
+                m={2}
                 onClick={() => setSelectedYear(year)}
               />
             ))}

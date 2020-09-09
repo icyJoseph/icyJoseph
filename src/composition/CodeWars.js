@@ -1,7 +1,6 @@
 import { Card } from "components/Card";
 import { Flex } from "components/Flex";
 import { Section } from "components/Section";
-import { RenderWithCodeWars } from "hooks/useCodeWars";
 
 import {
   Clan,
@@ -10,7 +9,10 @@ import {
   Challenges,
   Languages
 } from "components/CodeWarsBlocks";
+
 import { Text } from "components/Text";
+
+import { RenderWithCodeWars } from "hooks/useCodeWars";
 
 export const CodeWars = ({ initial }) => {
   return (
@@ -22,10 +24,7 @@ export const CodeWars = ({ initial }) => {
       </header>
       <Flex as="main">
         <RenderWithCodeWars initial={initial}>
-          {({ data, error, loading }) => {
-            if (error) return <span>Something went wrong</span>;
-            if (loading) return <span>Loading</span>;
-
+          {({ data }) => {
             const {
               username,
               honor,

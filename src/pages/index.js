@@ -23,8 +23,8 @@ export function Home({ codewars, github, tokei }) {
       <Navigation />
       <Container>
         <Tokei tokei={tokei} />
-        <GitHub initial={github} />
         <CodeWars initial={codewars} />
+        <GitHub initial={github} />
       </Container>
     </>
   );

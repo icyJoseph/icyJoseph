@@ -19,7 +19,7 @@ export const CodeWars = ({ initial }) => {
     <Section my={3} px={2}>
       <header>
         <Text as="h2" color="--blue" fontSize="2rem">
-          On CodeWars
+          <code>CodeWars</code>
         </Text>
       </header>
       <Flex as="main">

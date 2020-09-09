@@ -8,4 +8,5 @@ export const Flex = styled.div`
   flex-direction: ${({ flexDirection = "unset" }) => flexDirection};
   justify-content: ${({ justifyContent = "unset" }) => justifyContent};
   align-items: ${({ alignItems = "unset" }) => alignItems};
+  flex: ${({ flex = "unset" }) => flex};
 `;

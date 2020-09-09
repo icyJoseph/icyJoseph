@@ -7,7 +7,6 @@ const StyledButton = styled.button`
   font-size: ${({ fontSize = "1.6rem" }) => fontSize};
   font-weight: 400;
 
-  width: 100%;
   position: relative;
   display: block;
 

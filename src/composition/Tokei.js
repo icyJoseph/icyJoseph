@@ -1,4 +1,3 @@
-import { Button } from "components/Button";
 import { Card } from "components/Card";
 import { Emoji } from "components/Emoji";
 import { CircularProgress } from "components/CircularProgress";
@@ -37,7 +36,6 @@ const Language = ({ language, code, blanks, comments }) => {
 };
 
 export const Tokei = ({ tokei }) => {
-  console.log({ tokei });
   return (
     <Section my={3} px={2}>
       <header>
@@ -50,7 +48,7 @@ export const Tokei = ({ tokei }) => {
           <Language key={language} language={language} {...rest} />
         ))}
       </Flex>
-      <Text>
+      <Text mt={3}>
         The indicators above show the ratio of actual lines of code to total
         number of lines, including blanks and comments.
       </Text>

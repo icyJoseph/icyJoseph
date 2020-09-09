@@ -1,9 +1,15 @@
+import { useState } from "react";
 import styled from "styled-components";
+
+import { Button } from "components/Button";
 import { Flex } from "components/Flex";
 import { Section } from "components/Section";
 import { Text } from "components/Text";
+import { YearlyContribution } from "components/YearlyContribution";
 import { useGitHub } from "hooks/useGitHub";
+
 import { GET_USER } from "queries";
+import { yearStart, yearEnd } from "helpers";
 
 const Img = styled.img`
   align-self: center;
@@ -32,7 +38,10 @@ const Contributions = styled(Flex)`
 export const GitHub = ({ initial }) => {
   const { data } = useGitHub({
     query: GET_USER,
-    variables: { login: "icyJoseph" },
+    variables: {
+      login: "icyJoseph",
+      ...yearStart()
+    },
     initialData: initial,
     selector: ({ user }) => user
   });
@@ -48,6 +57,9 @@ export const GitHub = ({ initial }) => {
   } = data;
 
   const { contributionYears } = contributionsCollection;
+  const [last] = contributionYears;
+  const [selectedYear, setSelectedYear] = useState(last || 2020);
+
   return (
     <Section my={3} px={2}>
       <header>
@@ -68,13 +80,27 @@ export const GitHub = ({ initial }) => {
 
           <Text>{location}</Text>
         </Flex>
-        <Contributions justifyContent="center">
-          {contributionYears.map((year) => (
-            <Text key={year} as="span" mx={2}>
-              {year}
-            </Text>
-          ))}
+        <Contributions justifyContent="center" my={3}>
+          {contributionYears
+            .slice(0)
+            .sort((a, b) => a - b)
+            .map((year) => (
+              <Button
+                key={year}
+                variant={year !== selectedYear ? "outlined" : null}
+                text={year}
+                mx={2}
+                onClick={() => setSelectedYear(year)}
+              />
+            ))}
         </Contributions>
+        <YearlyContribution
+          year={selectedYear}
+          initial={selectedYear === last ? contributionsCollection : null}
+          {...(last === selectedYear
+            ? yearStart(selectedYear)
+            : yearEnd(selectedYear))}
+        />
       </GHGrid>
     </Section>
   );

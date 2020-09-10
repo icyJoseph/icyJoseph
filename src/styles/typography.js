@@ -5,6 +5,7 @@ export const typography = css`
   @font-face {
     font-family: "Recursive";
     font-style: normal;
+    display: swap;
     font-weight: 300;
     src: local(""), url("/fonts/recursive-v21-latin-300.woff2") format("woff2"),
       /* Chrome 26+, Opera 23+, Firefox 39+ */
@@ -14,6 +15,7 @@ export const typography = css`
   @font-face {
     font-family: "Recursive";
     font-style: normal;
+    display: swap;
     font-weight: 400;
     src: local(""),
       url("/fonts/recursive-v21-latin-regular.woff2") format("woff2"),
@@ -24,6 +26,7 @@ export const typography = css`
   @font-face {
     font-family: "Recursive";
     font-style: normal;
+    display: swap;
     font-weight: 500;
     src: local(""), url("/fonts/recursive-v21-latin-500.woff2") format("woff2"),
       /* Chrome 26+, Opera 23+, Firefox 39+ */
@@ -33,6 +36,7 @@ export const typography = css`
   @font-face {
     font-family: "Recursive";
     font-style: normal;
+    display: swap;
     font-weight: 600;
     src: local(""), url("/fonts/recursive-v21-latin-600.woff2") format("woff2"),
       /* Chrome 26+, Opera 23+, Firefox 39+ */
@@ -42,6 +46,7 @@ export const typography = css`
   @font-face {
     font-family: "Recursive";
     font-style: normal;
+    display: swap;
     font-weight: 700;
     src: local(""), url("/fonts/recursive-v21-latin-700.woff2") format("woff2"),
       /* Chrome 26+, Opera 23+, Firefox 39+ */
@@ -51,6 +56,7 @@ export const typography = css`
   @font-face {
     font-family: "Recursive";
     font-style: normal;
+    display: swap;
     font-weight: 800;
     src: local(""), url("/fonts/recursive-v21-latin-800.woff2") format("woff2"),
       /* Chrome 26+, Opera 23+, Firefox 39+ */
@@ -60,6 +66,7 @@ export const typography = css`
   @font-face {
     font-family: "Recursive";
     font-style: normal;
+    display: swap;
     font-weight: 900;
     src: local(""), url("/fonts/recursive-v21-latin-900.woff2") format("woff2"),
       /* Chrome 26+, Opera 23+, Firefox 39+ */

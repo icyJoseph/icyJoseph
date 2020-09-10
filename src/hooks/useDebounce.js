@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function useDebounce(query, delay) {
+export function useDebounce(query, delay) {
   const [state, setState] = useState(query);
 
   useEffect(() => {

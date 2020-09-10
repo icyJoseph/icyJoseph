@@ -3,7 +3,6 @@ import { css } from "styled-components";
 export const typography = css`
   @font-face {
     font-family: "Recursive";
-    font-display: swap;
     src: url(/fonts/recursive.ttf) format("truetype");
   }
 

@@ -34,3 +34,5 @@ export const yearEnd = (year) => {
   from.setUTCHours(0, 0, 0, 0);
   return { from: from.toISOString(), to: to.toISOString() };
 };
+
+export const createClamp = (min, max) => (val) => Math.min(Math.max(val, min), max);

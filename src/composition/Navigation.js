@@ -29,15 +29,13 @@ export const Navigation = () => {
     <header>
       <NavBar>
         <NavBar.Brand>
-          <hgroup>
-            <h1>icyJoseph</h1>
-            <h6>Señor Developer</h6>
-          </hgroup>
+          <h1>icyJoseph</h1>
+          <span>Señor Developer</span>
         </NavBar.Brand>
         <NavBar.Spacer />
         <NavBar.LinkList>
           {entries.map(({ title, symbol, ariaLabel, href }) => (
-            <NavBar.LinkItem key={title} tabIndex="1">
+            <NavBar.LinkItem key={title}>
               <Link href={href}>
                 <a>
                   <span>{title}</span>

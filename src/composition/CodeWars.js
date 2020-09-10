@@ -17,9 +17,11 @@ import { RenderWithCodeWars } from "hooks/useCodeWars";
 export const CodeWars = ({ initial }) => {
   return (
     <Section my={3} px={2}>
-      <header>
+      <header id="codewars">
         <Text as="h2" color="--blue" fontSize="2rem">
-          <code>CodeWars</code>
+          <a href="#codewars">
+            <code>CodeWars</code>
+          </a>
         </Text>
       </header>
       <Flex as="main">

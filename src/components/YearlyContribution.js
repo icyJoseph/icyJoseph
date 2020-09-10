@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 import { Button } from "components/Button";
@@ -13,11 +13,48 @@ import { Box } from "components/Box";
 
 const ContributionsSummary = styled(Flex)`
   grid-column: span 2;
+  opacity: ${({ stale = false }) => (stale ? 0.5 : 1)};
+  transition: opacity 0.5s ease-in-out;
+`;
+
+const RepositoriesGrid = styled.div`
+  display: flex;
+  flex-direction: column;
+  grid-column: span 2;
+
+  @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-rows: auto;
+    grid-gap: 8px 8px;
+  }
 `;
 
 const LanguageName = styled(Text)`
-  color: ${({ color = "var(--black)" }) => color};
+  display: block;
 `;
+
+const Indicator = styled.div`
+  height: 8px;
+  width: ${({ percentage }) => `${percentage}%`};
+  background: ${({ color }) => color};
+`;
+
+const ShowMore = styled(Button)`
+  grid-column: span 2;
+`;
+
+const useLastNonNullableValue = (value) => {
+  const ref = useRef(value);
+
+  useEffect(() => {
+    if (value) {
+      ref.current = value;
+    }
+  }, [value]);
+
+  return ref.current;
+};
 
 export const YearlyContribution = ({ initial, year, from, to }) => {
   const { data, error } = useGitHub({
@@ -37,7 +74,10 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
     setWindowSize(10);
   }, [year]);
 
-  const loading = !error && !data;
+  const prev = useLastNonNullableValue(data);
+
+  const stale = !error && !data;
+  const loading = !error && !prev;
 
   if (loading) return <div>Loading</div>;
 
@@ -49,7 +89,7 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
     commitContributionsByRepository,
     startedAt,
     endedAt
-  } = data;
+  } = data ?? prev;
 
   const curateEndDate =
     new Date(endedAt) > new Date() ? new Date().toISOString() : endedAt;
@@ -62,43 +102,72 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
   );
 
   return (
-    <ContributionsSummary flexDirection="column">
-      <Text as="h4">
-        Contributions from: {startDay} to: {endDay}
-      </Text>
-      {joinedGitHubContribution && (
-        <Box m={2}>
-          <Text>Joined GitHub</Text>
-          <Emoji symbol="🎉" title="Joined Github" ariaLabel="Tada" />
-        </Box>
-      )}
-      <Box m={2}>
-        <Text>totalRepositoryContributions:{totalRepositoryContributions}</Text>
-        <Text>totalCommitContributions:{totalCommitContributions}</Text>
-        <Text>restrictedContributionsCount:{restrictedContributionsCount}</Text>
-        <Text>
-          Contributed to {commitContributionsByRepository.length} repositories
+    <>
+      <ContributionsSummary
+        flexDirection="column"
+        stale={stale}
+        alignItems="center"
+      >
+        <Text as="h4">
+          Contributions from: {startDay} to: {endDay}
         </Text>
-      </Box>
-      <Flex m={2}>
+        {joinedGitHubContribution && (
+          <Box m={2}>
+            <Text>Joined GitHub</Text>
+            <Emoji symbol="🎉" title="Joined Github" ariaLabel="Tada" />
+          </Box>
+        )}
+        <Box m={2}>
+          <Text>
+            Total Repository Contributions: {totalRepositoryContributions}
+          </Text>
+          <Text>Total Commit Contributions: {totalCommitContributions}</Text>
+          <Text>
+            Restricted Contributions Count: {restrictedContributionsCount}
+          </Text>
+          <Text>
+            Contributed to {commitContributionsByRepository.length} repositories
+          </Text>
+        </Box>
+      </ContributionsSummary>
+      <RepositoriesGrid m={2}>
         {commitContributionsByRepository
           .slice(0, windowSize)
           .map(({ contributions, repository }) => (
-            <Flex key={repository.id} flexDirection="column" flex={1}>
-              <Text>{repository.name}</Text>
-              <Text>Contributions:{contributions.totalCount}</Text>
-              <Text>Size: {repository.languages.totalSize} bytes</Text>
-              {repository?.languages?.edges?.map(
-                ({ node: { color, name }, size }) => (
-                  <LanguageName key={name} color={color}>
-                    {name}: {size} bytes
-                  </LanguageName>
-                )
-              )}
-            </Flex>
+            <Box key={repository.id} p={2}>
+              <Flex flexDirection="column">
+                <Text>{repository.name}</Text>
+                <Text>Owner: {repository.owner.login}</Text>
+                <Text>Contributions: {contributions.totalCount}</Text>
+                <Text>Size: {repository.languages.totalSize} bytes</Text>
+                {repository?.languages?.edges
+                  ?.slice(0)
+                  .sort((a, b) => b.size - a.size)
+                  .map(({ node: { color, name }, size }) => (
+                    <React.Fragment key={name}>
+                      <LanguageName>
+                        {name}: {size} bytes
+                      </LanguageName>
+                      <Indicator
+                        color={color}
+                        percentage={
+                          (100 * size) / repository.languages.totalSize
+                        }
+                      />
+                    </React.Fragment>
+                  ))}
+              </Flex>
+            </Box>
           ))}
-      </Flex>
-      <Button text="Show more" onClick={() => setWindowSize((x) => x + 10)} />
-    </ContributionsSummary>
+      </RepositoriesGrid>
+      {!!commitContributionsByRepository.length && (
+        <ShowMore
+          text="Show more"
+          onClick={() => setWindowSize((x) => x + 10)}
+          my={2}
+          mx="auto"
+        />
+      )}
+    </>
   );
 };

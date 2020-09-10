@@ -12,7 +12,10 @@ import { Navigation } from "composition/Navigation";
 
 import { getCodeWarsUser } from "pages/api/codewars";
 import { queryGitHub } from "pages/api/github";
+
 import { GET_USER } from "queries";
+
+import { yearStart } from "helpers";
 
 export function Home({ codewars, github, tokei }) {
   return (
@@ -34,7 +37,8 @@ export async function getStaticProps() {
   const codewars = await getCodeWarsUser();
 
   const github = await queryGitHub(GET_USER, {
-    login: "icyJoseph"
+    login: "icyJoseph",
+    ...yearStart()
   }).then(({ data }) => data.user);
 
   const tokei = await promisify(fs.readFile)(

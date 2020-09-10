@@ -19,6 +19,10 @@ const ContributionsFragment = gql`
       repository {
         id
         name
+        description
+        owner {
+          login
+        }
         isArchived
         isDisabled
         isFork

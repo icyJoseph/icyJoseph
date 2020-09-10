@@ -1,15 +1,19 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
+import { Box } from "components/Box";
 import { Button } from "components/Button";
 import { Emoji } from "components/Emoji";
 import { Flex } from "components/Flex";
 import { Text } from "components/Text";
 
 import { useGitHub } from "hooks/useGitHub";
+import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
 
 import { GET_YEAR_CONTRIBUTIONS } from "queries";
-import { Box } from "components/Box";
+import { createClamp } from "helpers";
+
+const clamp = createClamp(1, 10);
 
 const ContributionsSummary = styled(Flex)`
   grid-column: span 2;
@@ -38,23 +42,12 @@ const Indicator = styled.div`
   height: 8px;
   width: ${({ percentage }) => `${percentage}%`};
   background: ${({ color }) => color};
+  border-radius: 6px;
 `;
 
 const ShowMore = styled(Button)`
   grid-column: span 2;
 `;
-
-const useLastNonNullableValue = (value) => {
-  const ref = useRef(value);
-
-  useEffect(() => {
-    if (value) {
-      ref.current = value;
-    }
-  }, [value]);
-
-  return ref.current;
-};
 
 export const YearlyContribution = ({ initial, year, from, to }) => {
   const { data, error } = useGitHub({
@@ -160,10 +153,17 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
             </Box>
           ))}
       </RepositoriesGrid>
-      {!!commitContributionsByRepository.length && (
+      {windowSize !== commitContributionsByRepository.length && (
         <ShowMore
-          text="Show more"
-          onClick={() => setWindowSize((x) => x + 10)}
+          text={`Show ${clamp(
+            commitContributionsByRepository.length - windowSize
+          )} more`}
+          onClick={() =>
+            setWindowSize(
+              (x) =>
+                x + clamp(commitContributionsByRepository.length - windowSize)
+            )
+          }
           my={2}
           mx="auto"
         />

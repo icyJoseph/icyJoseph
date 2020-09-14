@@ -8,7 +8,6 @@ import { CodeWars } from "composition/CodeWars";
 import { Container } from "components/Container";
 import { Tokei } from "composition/Tokei";
 import { GitHub } from "composition/GitHub";
-import { Navigation } from "composition/Navigation";
 
 import { getCodeWarsUser } from "pages/api/codewars";
 import { queryGitHub } from "pages/api/github";
@@ -23,7 +22,7 @@ export function Home({ codewars, github, tokei }) {
       <Head>
         <title>icyJoseph</title>
       </Head>
-      <Navigation />
+
       <Container>
         <Tokei tokei={tokei} />
         <CodeWars initial={codewars} />

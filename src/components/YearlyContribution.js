@@ -133,10 +133,8 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
                 <Text>Owner: {repository.owner.login}</Text>
                 <Text>Contributions: {contributions.totalCount}</Text>
                 <Text>Size: {repository.languages.totalSize} bytes</Text>
-                {repository?.languages?.edges
-                  ?.slice(0)
-                  .sort((a, b) => b.size - a.size)
-                  .map(({ node: { color, name }, size }) => (
+                {repository?.languages?.edges.map(
+                  ({ node: { color, name }, size }) => (
                     <React.Fragment key={name}>
                       <LanguageName>
                         {name}: {size} bytes
@@ -148,26 +146,28 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
                         }
                       />
                     </React.Fragment>
-                  ))}
+                  )
+                )}
               </Flex>
             </Box>
           ))}
       </RepositoriesGrid>
-      {windowSize !== commitContributionsByRepository.length && (
-        <ShowMore
-          text={`Show ${clamp(
-            commitContributionsByRepository.length - windowSize
-          )} more`}
-          onClick={() =>
-            setWindowSize(
-              (x) =>
-                x + clamp(commitContributionsByRepository.length - windowSize)
-            )
-          }
-          my={2}
-          mx="auto"
-        />
-      )}
+      {!!commitContributionsByRepository.length &&
+        windowSize !== commitContributionsByRepository.length && (
+          <ShowMore
+            text={`Show ${clamp(
+              commitContributionsByRepository.length - windowSize
+            )} more`}
+            onClick={() =>
+              setWindowSize(
+                (x) =>
+                  x + clamp(commitContributionsByRepository.length - windowSize)
+              )
+            }
+            my={2}
+            mx="auto"
+          />
+        )}
     </>
   );
 };

@@ -48,7 +48,7 @@ const LanguageName = styled(Text)`
   display: block;
 `;
 
-const Indicator = styled.div`
+const Indicator = styled.span`
   height: 8px;
   width: ${({ percentage }) => `${percentage}%`};
   background: ${({ color }) => color};

@@ -1,6 +1,20 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
+import { motion, AnimatePresence } from "framer-motion";
+
+// export const MyComponent = ({ isVisible }) => (
+//   <AnimatePresence>
+//     {isVisible && (
+//       <motion.div
+// initial={{ opacity: 0 }}
+// animate={{ opacity: 1 }}
+// exit={{ opacity: 0 }}
+//       />
+//     )}
+//   </AnimatePresence>
+// )
+
 import { Box } from "components/Box";
 import { Button } from "components/Button";
 import { Emoji } from "components/Emoji";
@@ -24,15 +38,10 @@ const ContributionsSummary = styled(Flex)`
 
 const RepositoriesGrid = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   grid-column: span 2;
-
-  @media (min-width: 768px) {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    grid-template-rows: auto;
-    grid-gap: 8px 8px;
-  }
+  grid-template-columns: repeat(auto-fit, 1fr);
+  grid-template-rows: auto;
 `;
 
 const LanguageName = styled(Text)`
@@ -153,33 +162,50 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
         />
       </Options>
       <RepositoriesGrid m={2}>
-        {commitContributionsByRepository
-          .slice(pointer, pointer + windowSize)
-          .map(({ contributions, repository }) => (
-            <Box key={repository.id} p={2}>
-              <Flex flexDirection="column">
-                <Text>{repository.name}</Text>
-                <Text>Owner: {repository.owner.login}</Text>
-                <Text>Contributions: {contributions.totalCount}</Text>
-                <Text>Size: {repository.languages.totalSize} bytes</Text>
-                {repository?.languages?.edges.map(
-                  ({ node: { color, name }, size }) => (
-                    <React.Fragment key={name}>
-                      <LanguageName>
-                        {name}: {size} bytes
-                      </LanguageName>
-                      <Indicator
-                        color={color}
-                        percentage={
-                          (100 * size) / repository.languages.totalSize
-                        }
-                      />
-                    </React.Fragment>
-                  )
-                )}
-              </Flex>
-            </Box>
-          ))}
+        <AnimatePresence>
+          {commitContributionsByRepository
+            .slice(pointer, pointer + windowSize)
+            .map(({ contributions, repository }) => (
+              <motion.div
+                key={repository.id}
+                initial={{
+                  opacity: 0,
+                  display: "none",
+                  margin: "0 16px",
+                  height: 250,
+                  justifyContent: "center",
+                  flexDirection: "column"
+                }}
+                animate={{ opacity: 1, display: "flex" }}
+                transition={{ duration: 1 }}
+                exit={{ opacity: 0, display: "none" }}
+              >
+                <Box key={repository.id} p={2}>
+                  <Flex flexDirection="column">
+                    <Text>{repository.name}</Text>
+                    <Text>Owner: {repository.owner.login}</Text>
+                    <Text>Contributions: {contributions.totalCount}</Text>
+                    <Text>Size: {repository.languages.totalSize} bytes</Text>
+                    {repository?.languages?.edges.map(
+                      ({ node: { color, name }, size }) => (
+                        <React.Fragment key={name}>
+                          <LanguageName>
+                            {name}: {size} bytes
+                          </LanguageName>
+                          <Indicator
+                            color={color}
+                            percentage={
+                              (100 * size) / repository.languages.totalSize
+                            }
+                          />
+                        </React.Fragment>
+                      )
+                    )}
+                  </Flex>
+                </Box>
+              </motion.div>
+            ))}
+        </AnimatePresence>
       </RepositoriesGrid>
     </>
   );

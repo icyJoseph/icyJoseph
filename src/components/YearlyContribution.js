@@ -13,7 +13,8 @@ import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
 import { GET_YEAR_CONTRIBUTIONS } from "queries";
 import { createClamp } from "helpers";
 
-const clamp = createClamp(1, 10);
+const windowSize = 3;
+const clamp = createClamp(0, windowSize);
 
 const ContributionsSummary = styled(Flex)`
   grid-column: span 2;
@@ -45,8 +46,9 @@ const Indicator = styled.div`
   border-radius: 6px;
 `;
 
-const ShowMore = styled(Button)`
-  grid-column: span 2;
+const Options = styled.div`
+  display: flex;
+  grid-column: span 3;
 `;
 
 export const YearlyContribution = ({ initial, year, from, to }) => {
@@ -61,10 +63,10 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
     selector: ({ user: { contributionsCollection } }) => contributionsCollection
   });
 
-  const [windowSize, setWindowSize] = useState(10);
+  const [pointer, setPointer] = useState(0);
 
   useEffect(() => {
-    setWindowSize(10);
+    setPointer(0);
   }, [year]);
 
   const prev = useLastNonNullableValue(data);
@@ -123,9 +125,36 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
           </Text>
         </Box>
       </ContributionsSummary>
+      <Options>
+        <Button
+          text={`Prev ${windowSize} repos`}
+          onClick={() => {
+            setPointer((x) => clamp(x - windowSize));
+          }}
+          disabled={pointer === 0}
+          my={2}
+          mx="auto"
+        />
+        <span>
+          {pointer + windowSize} / {commitContributionsByRepository.length}
+        </span>
+        <Button
+          text={`Next ${clamp(
+            commitContributionsByRepository.length - (pointer + windowSize)
+          )} repos`}
+          onClick={() => {
+            setPointer((x) => x + windowSize);
+          }}
+          disabled={
+            pointer + windowSize >= commitContributionsByRepository.length
+          }
+          my={2}
+          mx="auto"
+        />
+      </Options>
       <RepositoriesGrid m={2}>
         {commitContributionsByRepository
-          .slice(0, windowSize)
+          .slice(pointer, pointer + windowSize)
           .map(({ contributions, repository }) => (
             <Box key={repository.id} p={2}>
               <Flex flexDirection="column">
@@ -152,22 +181,6 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
             </Box>
           ))}
       </RepositoriesGrid>
-      {!!commitContributionsByRepository.length &&
-        windowSize !== commitContributionsByRepository.length && (
-          <ShowMore
-            text={`Show ${clamp(
-              commitContributionsByRepository.length - windowSize
-            )} more`}
-            onClick={() =>
-              setWindowSize(
-                (x) =>
-                  x + clamp(commitContributionsByRepository.length - windowSize)
-              )
-            }
-            my={2}
-            mx="auto"
-          />
-        )}
     </>
   );
 };

@@ -1,1 +1,91 @@
-[{"language":"JavaScript","blanks":47790,"code":383629,"comments":40087,"children":{},"inaccurate":false},{"language":"CSS","blanks":2492,"code":24209,"comments":284,"children":{},"inaccurate":false},{"language":"TypeScript","blanks":1582,"code":13153,"comments":813,"children":{},"inaccurate":false},{"language":"Rust","blanks":662,"code":4142,"comments":228,"children":{"Markdown":[{"stats":{"blanks":2,"code":0,"comments":13,"blobs":{}},"name":"/home/joseph/dev/exercism/rust/react/src/lib.rs"},{"stats":{"blanks":0,"code":0,"comments":1,"blobs":{}},"name":"/home/joseph/dev/web/yew-wasm-pack-template/tests/web.rs"},{"stats":{"blanks":0,"code":0,"comments":1,"blobs":{}},"name":"/home/joseph/dev/web/yew-clean-wasm-starter/tests/web.rs"},{"stats":{"blanks":0,"code":0,"comments":6,"blobs":{}},"name":"/home/joseph/dev/code_wars/integers-recreation-one/src/main.rs"},{"stats":{"blanks":3,"code":0,"comments":15,"blobs":{}},"name":"/home/joseph/dev/code_wars/collatz/src/main.rs"},{"stats":{"blanks":0,"code":0,"comments":1,"blobs":{}},"name":"/home/joseph/dev/rust/wasm-aes-soft/tests/web.rs"}]},"inaccurate":false}]
+[
+  {
+    "language": "JavaScript",
+    "blanks": 47795,
+    "code": 383668,
+    "comments": 40094,
+    "children": {},
+    "inaccurate": false
+  },
+  {
+    "language": "CSS",
+    "blanks": 2492,
+    "code": 24209,
+    "comments": 284,
+    "children": {},
+    "inaccurate": false
+  },
+  {
+    "language": "TypeScript",
+    "blanks": 1576,
+    "code": 13210,
+    "comments": 765,
+    "children": {},
+    "inaccurate": false
+  },
+  {
+    "language": "Rust",
+    "blanks": 662,
+    "code": 4142,
+    "comments": 228,
+    "children": {
+      "Markdown": [
+        {
+          "stats": {
+            "blanks": 2,
+            "code": 0,
+            "comments": 13,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/exercism/rust/react/src/lib.rs"
+        },
+        {
+          "stats": {
+            "blanks": 0,
+            "code": 0,
+            "comments": 1,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/web/yew-clean-wasm-starter/tests/web.rs"
+        },
+        {
+          "stats": {
+            "blanks": 0,
+            "code": 0,
+            "comments": 1,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/web/yew-wasm-pack-template/tests/web.rs"
+        },
+        {
+          "stats": {
+            "blanks": 0,
+            "code": 0,
+            "comments": 6,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/code_wars/integers-recreation-one/src/main.rs"
+        },
+        {
+          "stats": {
+            "blanks": 3,
+            "code": 0,
+            "comments": 15,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/code_wars/collatz/src/main.rs"
+        },
+        {
+          "stats": {
+            "blanks": 0,
+            "code": 0,
+            "comments": 1,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/rust/wasm-aes-soft/tests/web.rs"
+        }
+      ]
+    },
+    "inaccurate": false
+  }
+]

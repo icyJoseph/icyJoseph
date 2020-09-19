@@ -4,7 +4,15 @@ const path = require("path");
 
 const devPath = "/home/joseph/dev";
 
-const args = ["-t", "JavaScript,TypeScript,CSS,Rust", "-o", "json", "--"];
+const args = [
+  "-t",
+  "JavaScript,TypeScript,CSS,Rust",
+  "-o",
+  "json",
+  "--exclude",
+  "**/temp/",
+  "--"
+];
 
 const ls = spawn("tokei", [...args, devPath]);
 
@@ -30,7 +38,7 @@ ls.on("close", (code) => {
 
   fs.writeFile(
     path.resolve(__dirname, "tokei.json"),
-    JSON.stringify(filtered),
+    JSON.stringify(filtered, undefined, 2),
     (err) => {
       if (err) return console.log("Error while writing tokei.json", err);
       console.log(

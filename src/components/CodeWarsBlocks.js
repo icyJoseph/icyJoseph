@@ -40,7 +40,7 @@ export const Leaderboard = ({ position }) => (
 
 export const Honor = ({ honor }) => (
   <DataEntry>
-    <Text color="--lightRed">honor</Text>
+    <Text color="--yellow">honor</Text>
     <p>
       <Emoji symbol="✨" ariaLabel={`Honor: ${honor}`} />
     </p>

@@ -18,8 +18,10 @@ NavBar.Brand = styled.span`
   font-size: 2rem;
   text-transform: uppercase;
 
-  & h6 {
+  & span {
+    display: block;
     font-size: 1.4rem;
+    font-weight: 600;
   }
 `;
 

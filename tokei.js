@@ -10,7 +10,7 @@ const args = [
   "-o",
   "json",
   "--exclude",
-  "**/temp/",
+  "/home/joseph/dev/temp/",
   "--"
 ];
 

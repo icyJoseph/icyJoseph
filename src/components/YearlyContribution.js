@@ -1,22 +1,13 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { space } from "@styled-system/space";
 
-import { motion, AnimatePresence } from "framer-motion";
-
-// export const MyComponent = ({ isVisible }) => (
-//   <AnimatePresence>
-//     {isVisible && (
-//       <motion.div
-// initial={{ opacity: 0 }}
-// animate={{ opacity: 1 }}
-// exit={{ opacity: 0 }}
-//       />
-//     )}
-//   </AnimatePresence>
-// )
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
 
 import { Box } from "components/Box";
 import { Button } from "components/Button";
+import { Card } from "components/Card";
+import { DevIcon } from "components/DevIcon";
 import { Emoji } from "components/Emoji";
 import { Flex } from "components/Flex";
 import { Text } from "components/Text";
@@ -36,19 +27,33 @@ const ContributionsSummary = styled(Flex)`
   transition: opacity 0.5s ease-in-out;
 `;
 
+const RepoProgress = styled(Box)`
+  grid-column: span 2;
+  text-align: center;
+`;
+
 const RepositoriesGrid = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
+
   grid-column: span 2;
   grid-template-columns: repeat(auto-fit, 1fr);
   grid-template-rows: auto;
+  min-height: 500px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    min-height: 375px;
+  }
 `;
 
 const LanguageName = styled(Text)`
   display: block;
+  color: inherit;
 `;
 
-const Indicator = styled.span`
+const Indicator = styled.div`
   height: 8px;
   width: ${({ percentage }) => `${percentage}%`};
   background: ${({ color }) => color};
@@ -58,6 +63,20 @@ const Indicator = styled.span`
 const Options = styled.div`
   display: flex;
   grid-column: span 3;
+`;
+
+const StyledCard = styled(Card)`
+  ${space({ mx: "auto" })};
+  width: 100%;
+
+  @media (min-width: 768px) {
+    width: unset;
+    min-width: 256px;
+  }
+
+  > section {
+    flex-direction: column;
+  }
 `;
 
 export const YearlyContribution = ({ initial, year, from, to }) => {
@@ -105,6 +124,16 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
     new Intl.DateTimeFormat("default", { timeZone: "UTC" }).format(date)
   );
 
+  const controls = useAnimation();
+  const [exit, setExit] = useState(null);
+
+  useEffect(() => {
+    controls.start({
+      display: "inline-flex",
+      opacity: 1
+    });
+  }, [exit]);
+
   return (
     <>
       <ContributionsSummary
@@ -144,9 +173,6 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
           my={2}
           mx="auto"
         />
-        <span>
-          {pointer + windowSize} / {commitContributionsByRepository.length}
-        </span>
         <Button
           text={`Next ${clamp(
             commitContributionsByRepository.length - (pointer + windowSize)
@@ -161,48 +187,81 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
           mx="auto"
         />
       </Options>
+      <RepoProgress>
+        <span>
+          {pointer + windowSize} / {commitContributionsByRepository.length}
+        </span>
+      </RepoProgress>
       <RepositoriesGrid m={2}>
-        <AnimatePresence>
+        <AnimatePresence
+          onExitComplete={() => {
+            console.log("exit complete");
+            setExit(() => Date.now());
+          }}
+        >
           {commitContributionsByRepository
             .slice(pointer, pointer + windowSize)
             .map(({ contributions, repository }) => (
               <motion.div
-                key={repository.id}
+                key={`${repository.id}-${year}`}
                 initial={{
-                  opacity: 0,
                   display: "none",
-                  margin: "0 16px",
-                  height: 250,
-                  justifyContent: "center",
-                  flexDirection: "column"
+                  opacity: 0,
+                  flex: 1,
+                  padding: 8
                 }}
-                animate={{ opacity: 1, display: "flex" }}
+                animate={controls}
                 transition={{ duration: 1 }}
-                exit={{ opacity: 0, display: "none" }}
+                exit={{
+                  opacity: 0
+                }}
               >
-                <Box key={repository.id} p={2}>
-                  <Flex flexDirection="column">
-                    <Text>{repository.name}</Text>
-                    <Text>Owner: {repository.owner.login}</Text>
-                    <Text>Contributions: {contributions.totalCount}</Text>
-                    <Text>Size: {repository.languages.totalSize} bytes</Text>
+                <StyledCard key={repository.id} p={2}>
+                  <Card.Header>
+                    <Text
+                      as="h4"
+                      color="--smokeyWhite"
+                      fontSize="2rem"
+                      fontWeight={600}
+                      mb={2}
+                    >
+                      {repository.name}
+                    </Text>
+                    <Text color="--smokeyWhite">Owner:</Text>
+                    <Text color="--smokeyWhite">{repository.owner.login}</Text>
+                  </Card.Header>
+                  <Card.Section>
+                    <Text color="--smokeyWhite">
+                      Contributions: {contributions.totalCount}
+                    </Text>
+                    <Text color="--smokeyWhite">
+                      Size: {repository.languages.totalSize} bytes
+                    </Text>
+                  </Card.Section>
+                  <Card.Section>
                     {repository?.languages?.edges.map(
                       ({ node: { color, name }, size }) => (
-                        <React.Fragment key={name}>
-                          <LanguageName>
+                        <Box key={name} mt={2}>
+                          <LanguageName mb={1}>
                             {name}: {size} bytes
                           </LanguageName>
+                          <DevIcon
+                            colored
+                            language={name}
+                            mb={2}
+                            fontSize="1.75rem"
+                          />
                           <Indicator
                             color={color}
                             percentage={
                               (100 * size) / repository.languages.totalSize
                             }
                           />
-                        </React.Fragment>
+                        </Box>
                       )
                     )}
-                  </Flex>
-                </Box>
+                  </Card.Section>
+                </StyledCard>
               </motion.div>
             ))}
         </AnimatePresence>

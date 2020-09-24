@@ -17,7 +17,7 @@ const CopyrightNotice = styled.span`
   text-align: center;
 `;
 
-const List = styled.ul`
+const Stack = styled.div`
   ${space};
 
   grid-column: span 2;
@@ -26,6 +26,8 @@ const List = styled.ul`
     grid-column: span 1;
   }
 `;
+
+const List = styled.ul``;
 
 const FooterNav = styled.nav`
   ${space};
@@ -49,16 +51,18 @@ const Notice = styled.span`
 export const Footer = () => {
   return (
     <StyledFooter px={2} py={3} mt={2}>
-      <List my={2} px={3}>
+      <Stack my={2} px={3}>
         Tech Stack
-        <li>GitHub's GraphQL.</li>
-        <li>CodeWars REST API.</li>
-        <li>Tokei. Count your code, quickly.</li>
-        <li>Recursive Font Face, from Google Fonts.</li>
-        <li>React</li>
-        <li>NodeJS</li>
-        <li>Next.js</li>
-      </List>
+        <ul>
+          <li>GitHub's GraphQL.</li>
+          <li>CodeWars REST API.</li>
+          <li>Tokei. Count your code, quickly.</li>
+          <li>Recursive Font Face, from Google Fonts.</li>
+          <li>React</li>
+          <li>NodeJS</li>
+          <li>Next.js</li>
+        </ul>
+      </Stack>
       <Notice>
         <p>
           I am a software developer at{" "}
@@ -70,51 +74,53 @@ export const Footer = () => {
         </p>
       </Notice>
       <FooterNav my={2} px={3}>
-        <List>
-          {entries.map(({ href, title }) => (
-            <li key={href}>
-              <Link href={href}>
-                <a>{title}</a>
-              </Link>
+        <Stack>
+          <List>
+            {entries.map(({ href, title }) => (
+              <li key={href}>
+                <Link href={href}>
+                  <a>{title}</a>
+                </Link>
+              </li>
+            ))}
+            <li>
+              <a
+                href="https://github.com/icyJoseph"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                GitHub
+              </a>
             </li>
-          ))}
-          <li>
-            <a
-              href="https://github.com/icyJoseph"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              GitHub
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.linkedin.com/in/icyjoseph"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              LinkedIn
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://dev.to/icyjoseph"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              dev.to
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://medium.com/@icjoseph"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              Medium
-            </a>
-          </li>
-        </List>
+            <li>
+              <a
+                href="https://www.linkedin.com/in/icyjoseph"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                LinkedIn
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://dev.to/icyjoseph"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                dev.to
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://medium.com/@icjoseph"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                Medium
+              </a>
+            </li>
+          </List>
+        </Stack>
       </FooterNav>
       <CopyrightNotice>
         &#169; {new Date().getFullYear()} Joseph Chamochumbi - Gothenburg,

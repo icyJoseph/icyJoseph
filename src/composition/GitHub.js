@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 import { Button } from "components/Button";
@@ -71,6 +71,7 @@ export const GitHub = ({ initial }) => {
       </header>
       <GHGrid as="main">
         <Img src={avatarUrl} alt={`${name} github profile picture`} />
+
         <Flex flexDirection="column" py={3} px={2}>
           <h2>{name}</h2>
 
@@ -82,6 +83,7 @@ export const GitHub = ({ initial }) => {
 
           <Text>{location}</Text>
         </Flex>
+
         <Contributions justifyContent="center" my={3}>
           {contributionYears
             .slice(0)
@@ -96,6 +98,7 @@ export const GitHub = ({ initial }) => {
               />
             ))}
         </Contributions>
+
         <YearlyContribution
           year={selectedYear}
           initial={selectedYear === last ? contributionsCollection : null}

@@ -29,8 +29,8 @@ export function Home({ codewars, github, tokei, fitbit }) {
       <Container>
         <Tokei tokei={tokei} />
         <CodeWars initial={codewars} />
-        <GitHub initial={github} />
         <Fitbit profile={fitbit} />
+        <GitHub initial={github} />
       </Container>
     </>
   );

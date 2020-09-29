@@ -24,7 +24,7 @@ export function Contact() {
       <FullPage>
         <Container p={3}>
           <header>
-            <Text as="h2" fontSize="2rem">
+            <Text as="h2" fontSize="3rem">
               Let's play a game
             </Text>
             <Text my={2}>If you win, you get to contact me</Text>

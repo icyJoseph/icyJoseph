@@ -17,7 +17,7 @@ export const Fitbit = ({ profile }) => {
   return (
     <Section my={3} px={2}>
       <header id="activity">
-        <Text as="h2" color="--blue" fontSize="2rem">
+        <Text as="h2" color="--blue" fontSize="3rem">
           <a href="#activity">
             <code>Activity</code>
           </a>

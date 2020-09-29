@@ -15,6 +15,7 @@ import { useGitHub } from "hooks/useGitHub";
 import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
 
 import { GET_YEAR_CONTRIBUTIONS } from "queries";
+import { clamp } from "helpers";
 
 const cardWidth = 250;
 
@@ -148,7 +149,12 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
   useLayoutEffect(() => {
     const handler = () => {
       let element = ref.current;
-      setWindowSize(Math.floor(element.offsetWidth / cardWidth));
+      const nextWindowSize = clamp(
+        Math.floor(element.offsetWidth / cardWidth),
+        1,
+        20
+      );
+      setWindowSize(nextWindowSize);
     };
 
     window.addEventListener("resize", handler);
@@ -271,23 +277,32 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
               </RepositoriesGrid>
               <Options>
                 <OptionButton
-                  text={`- ${windowSize} repos`}
+                  text={`Less`}
                   onClick={() => {
-                    setPointer((x) => x - windowSize);
+                    setPointer((x) =>
+                      clamp(
+                        x - windowSize,
+                        0,
+                        commitContributionsByRepository.length
+                      )
+                    );
                   }}
-                  disabled={pointer === windowSize}
+                  disabled={pointer <= windowSize}
                   my={2}
                   mx="auto"
                 />
                 <OptionButton
-                  text={`+ ${windowSize} repos`}
+                  text={`More`}
                   onClick={() => {
-                    setPointer((x) => x + windowSize);
+                    setPointer((x) =>
+                      clamp(
+                        x + windowSize,
+                        0,
+                        commitContributionsByRepository.length
+                      )
+                    );
                   }}
-                  disabled={
-                    pointer + windowSize >=
-                    commitContributionsByRepository.length
-                  }
+                  disabled={pointer >= commitContributionsByRepository.length}
                   my={2}
                   mx="auto"
                 />

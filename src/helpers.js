@@ -35,4 +35,8 @@ export const yearEnd = (year) => {
   return { from: from.toISOString(), to: to.toISOString() };
 };
 
-export const createClamp = (min, max) => (val) => Math.min(Math.max(val, min), max);
+export function createClamp(min, max) {
+  return (val) => Math.min(Math.max(val, min), max);
+}
+
+export const clamp = (val, min, max) => createClamp(min, max)(val);

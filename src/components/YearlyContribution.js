@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { space } from "@styled-system/space";
 
-import { motion, AnimatePresence, useAnimation } from "framer-motion";
+import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
 
 import { Box } from "components/Box";
 import { Button } from "components/Button";
@@ -16,10 +15,8 @@ import { useGitHub } from "hooks/useGitHub";
 import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
 
 import { GET_YEAR_CONTRIBUTIONS } from "queries";
-import { createClamp } from "helpers";
 
-const windowSize = 3;
-const clamp = createClamp(0, windowSize);
+const cardWidth = 250;
 
 const ContributionsSummary = styled(Flex)`
   grid-column: span 2;
@@ -32,19 +29,27 @@ const RepoProgress = styled(Box)`
   text-align: center;
 `;
 
-const RepositoriesGrid = styled.div`
+const RepositoriesWithOptions = styled(Box)`
+  grid-column: span 2;
+`;
+
+const RepositoriesGrid = styled(motion.div)`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
+  justify-content: unset;
+  align-items: center;
+
+  flex-wrap: wrap;
 
   grid-column: span 2;
   grid-template-columns: repeat(auto-fit, 1fr);
   grid-template-rows: auto;
-  min-height: 500px;
 
   @media (min-width: 768px) {
     flex-direction: row;
-    min-height: 375px;
+    justify-content: center;
+    align-items: unset;
   }
 `;
 
@@ -58,21 +63,29 @@ const Indicator = styled.div`
   width: ${({ percentage }) => `${percentage}%`};
   background: ${({ color }) => color};
   border-radius: 6px;
+  display: none;
+
+  @media (min-width: 768px) {
+    display: block;
+  }
 `;
 
 const Options = styled.div`
   display: flex;
   grid-column: span 3;
+  position: sticky;
+  bottom: 5px;
+  z-index: 10;
+`;
+
+const OptionButton = styled(Button)`
+  &[disabled] {
+    visibility: hidden;
+  }
 `;
 
 const StyledCard = styled(Card)`
-  ${space({ mx: "auto" })};
-  width: 100%;
-
-  @media (min-width: 768px) {
-    width: unset;
-    min-width: 256px;
-  }
+  width: ${cardWidth}px;
 
   > section {
     flex-direction: column;
@@ -91,18 +104,17 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
     selector: ({ user: { contributionsCollection } }) => contributionsCollection
   });
 
-  const [pointer, setPointer] = useState(0);
+  const [windowSize, setWindowSize] = useState(1);
+
+  const [pointer, setPointer] = useState(windowSize);
 
   useEffect(() => {
-    setPointer(0);
+    setPointer(windowSize);
   }, [year]);
 
   const prev = useLastNonNullableValue(data);
 
   const stale = !error && !data;
-  const loading = !error && !prev;
-
-  if (loading) return <div>Loading</div>;
 
   const {
     joinedGitHubContribution,
@@ -124,15 +136,27 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
     new Intl.DateTimeFormat("default", { timeZone: "UTC" }).format(date)
   );
 
-  const controls = useAnimation();
-  const [exit, setExit] = useState(null);
+  const ref = useRef(null);
 
   useEffect(() => {
-    controls.start({
-      display: "inline-flex",
-      opacity: 1
+    setPointer((prev) => {
+      const coef = Math.ceil(prev / windowSize);
+      return coef * windowSize;
     });
-  }, [exit]);
+  }, [windowSize]);
+
+  useLayoutEffect(() => {
+    const handler = () => {
+      let element = ref.current;
+      setWindowSize(Math.floor(element.offsetWidth / cardWidth));
+    };
+
+    window.addEventListener("resize", handler);
+
+    handler();
+
+    return () => window.removeEventListener("resize", handler);
+  }, []);
 
   return (
     <>
@@ -144,12 +168,6 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
         <Text as="h4">
           Contributions from: {startDay} to: {endDay}
         </Text>
-        {joinedGitHubContribution && (
-          <Box m={2}>
-            <Text>Joined GitHub</Text>
-            <Emoji symbol="🎉" title="Joined Github" ariaLabel="Tada" />
-          </Box>
-        )}
         <Box m={2}>
           <Text>
             Total Repository Contributions: {totalRepositoryContributions}
@@ -163,109 +181,132 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
           </Text>
         </Box>
       </ContributionsSummary>
-      <Options>
-        <Button
-          text={`Prev ${windowSize} repos`}
-          onClick={() => {
-            setPointer((x) => clamp(x - windowSize));
-          }}
-          disabled={pointer === 0}
-          my={2}
-          mx="auto"
-        />
-        <Button
-          text={`Next ${clamp(
-            commitContributionsByRepository.length - (pointer + windowSize)
-          )} repos`}
-          onClick={() => {
-            setPointer((x) => x + windowSize);
-          }}
-          disabled={
-            pointer + windowSize >= commitContributionsByRepository.length
-          }
-          my={2}
-          mx="auto"
-        />
-      </Options>
-      <RepoProgress>
-        <span>
-          {pointer + windowSize} / {commitContributionsByRepository.length}
-        </span>
-      </RepoProgress>
-      <RepositoriesGrid m={2}>
-        <AnimatePresence
-          onExitComplete={() => {
-            console.log("exit complete");
-            setExit(() => Date.now());
-          }}
-        >
-          {commitContributionsByRepository
-            .slice(pointer, pointer + windowSize)
-            .map(({ contributions, repository }) => (
-              <motion.div
-                key={`${repository.id}-${year}`}
-                initial={{
-                  display: "none",
-                  opacity: 0,
-                  flex: 1,
-                  padding: 8
-                }}
-                animate={controls}
-                transition={{ duration: 1 }}
-                exit={{
-                  opacity: 0
-                }}
-              >
-                <StyledCard key={repository.id} p={2}>
-                  <Card.Header>
-                    <Text
-                      as="h4"
-                      color="--smokeyWhite"
-                      fontSize="2rem"
-                      fontWeight={600}
-                      mb={2}
-                    >
-                      {repository.name}
-                    </Text>
-                    <Text color="--smokeyWhite">Owner:</Text>
-                    <Text color="--smokeyWhite">{repository.owner.login}</Text>
-                  </Card.Header>
-                  <Card.Section>
-                    <Text color="--smokeyWhite">
-                      Contributions: {contributions.totalCount}
-                    </Text>
-                    <Text color="--smokeyWhite">
-                      Size: {repository.languages.totalSize} bytes
-                    </Text>
-                  </Card.Section>
-                  <Card.Section>
-                    {repository?.languages?.edges.map(
-                      ({ node: { color, name }, size }) => (
-                        <Box key={name} mt={2}>
-                          <LanguageName mb={1}>
-                            {name}: {size} bytes
-                          </LanguageName>
-                          <DevIcon
-                            colored
-                            language={name}
-                            mb={2}
-                            fontSize="1.75rem"
-                          />
-                          <Indicator
-                            color={color}
-                            percentage={
-                              (100 * size) / repository.languages.totalSize
-                            }
-                          />
-                        </Box>
-                      )
-                    )}
-                  </Card.Section>
-                </StyledCard>
-              </motion.div>
-            ))}
-        </AnimatePresence>
-      </RepositoriesGrid>
+      <AnimateSharedLayout>
+        {!stale && (
+          <React.Fragment>
+            <RepoProgress>
+              {!!commitContributionsByRepository.length && (
+                <span>
+                  {pointer} / {commitContributionsByRepository.length}
+                </span>
+              )}
+            </RepoProgress>
+            <RepositoriesWithOptions>
+              <RepositoriesGrid layout m={2} ref={ref}>
+                <AnimatePresence initial={false}>
+                  {commitContributionsByRepository
+                    .slice(0, pointer)
+                    .reverse()
+                    .map(({ contributions, repository }) => (
+                      <motion.div
+                        key={`${repository.id}-${year}`}
+                        initial={{
+                          height: 0,
+                          opacity: 0
+                        }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 400,
+                          damping: 20
+                        }}
+                        exit={{
+                          height: 0,
+                          opacity: 0
+                        }}
+                      >
+                        <StyledCard p={2} m={2}>
+                          <Card.Header>
+                            <Text
+                              as="h4"
+                              color="--smokeyWhite"
+                              fontSize="2rem"
+                              fontWeight={600}
+                              mb={2}
+                            >
+                              {repository.name}
+                            </Text>
+                            <Text color="--smokeyWhite">Owner:</Text>
+                            <Text color="--smokeyWhite">
+                              {repository.owner.login}
+                            </Text>
+                          </Card.Header>
+                          <Card.Section>
+                            <Text color="--smokeyWhite">
+                              Contributions: {contributions.totalCount}
+                            </Text>
+                            <Text color="--smokeyWhite">
+                              Size: {repository.languages.totalSize} bytes
+                            </Text>
+                          </Card.Section>
+                          <Card.Section>
+                            {!repository.isArchived &&
+                              repository?.languages?.edges.map(
+                                ({ node: { color, name }, size }) => (
+                                  <Box key={name} mt={2}>
+                                    <LanguageName mb={1}>
+                                      {name}: {size} bytes
+                                    </LanguageName>
+                                    <DevIcon
+                                      colored
+                                      language={name}
+                                      mb={2}
+                                      fontSize="1.75rem"
+                                    />
+                                    <Indicator
+                                      color={color}
+                                      percentage={
+                                        (100 * size) /
+                                        repository.languages.totalSize
+                                      }
+                                    />
+                                  </Box>
+                                )
+                              )}
+                          </Card.Section>
+                        </StyledCard>
+                      </motion.div>
+                    ))}
+                </AnimatePresence>
+              </RepositoriesGrid>
+              <Options>
+                <OptionButton
+                  text={`- ${windowSize} repos`}
+                  onClick={() => {
+                    setPointer((x) => x - windowSize);
+                  }}
+                  disabled={pointer === windowSize}
+                  my={2}
+                  mx="auto"
+                />
+                <OptionButton
+                  text={`+ ${windowSize} repos`}
+                  onClick={() => {
+                    setPointer((x) => x + windowSize);
+                  }}
+                  disabled={
+                    pointer + windowSize >=
+                    commitContributionsByRepository.length
+                  }
+                  my={2}
+                  mx="auto"
+                />
+              </Options>
+            </RepositoriesWithOptions>
+            {joinedGitHubContribution && (
+              <ContributionsSummary my={2} mx="auto">
+                <Text>Joined GitHub</Text>
+                <Emoji
+                  symbol="🎉"
+                  title="Joined Github"
+                  ariaLabel="Tada"
+                  mx={2}
+                />
+              </ContributionsSummary>
+            )}
+          </React.Fragment>
+        )}
+      </AnimateSharedLayout>
     </>
   );
 };

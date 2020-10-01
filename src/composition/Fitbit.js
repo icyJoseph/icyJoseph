@@ -6,14 +6,17 @@ import { Flex } from "components/Flex";
 import { Section } from "components/Section";
 import { Text } from "components/Text";
 
+import { TopBadges } from "components/Fitbit/TopBadges";
+import { ActivityLog } from "components/Fitbit/ActivityLog";
+
 import { useFitbitHR } from "hooks/useFitbit";
 
-export const Fitbit = ({ profile }) => {
+export const Fitbit = ({ profile, activityLog }) => {
   const { data } = useFitbitHR({ date: "today", period: "1m" });
 
   const heartData = data?.["activities-heart"] ?? [];
-
   const [lastDay = null] = heartData.slice(-1);
+
   return (
     <Section my={3} px={2}>
       <header id="activity">
@@ -27,7 +30,7 @@ export const Fitbit = ({ profile }) => {
         <Box my={2}>
           <Text>Joined Fitbit in {profile.memberSince}</Text>
         </Box>
-        <Flex>
+        <Flex flexDirection="column">
           <Card my={2} mx="auto">
             <Card.Header>
               <h2>Steps</h2>
@@ -43,20 +46,9 @@ export const Fitbit = ({ profile }) => {
               </DataEntry>
             </Card.Section>
           </Card>
-          {profile.topBadges.map((badge) => (
-            <Card my={2} mx="auto" key={badge.encodedId}>
-              <Card.Header>{badge.shortName}</Card.Header>
-              <Card.Section>
-                <DataEntry>
-                  <Text color="--smokeyWhite">{badge.description}</Text>
-                  <Text color="--smokeyWhite">
-                    Achived: {badge.timesAchieved} times
-                  </Text>
-                </DataEntry>
-              </Card.Section>
-            </Card>
-          ))}
+          <TopBadges profile={profile} />
         </Flex>
+        <ActivityLog initial={activityLog} />
       </Box>
     </Section>
   );

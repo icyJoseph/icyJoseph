@@ -65,6 +65,7 @@ export const useFitbitActivityLog = (year, initialData = null) => {
     shouldRetryOnError: false,
     revalidateOnFocus: false,
     dedupingInterval: 24 * 60 * 60 * 1000,
+    revalidateOnMount: false,
     initialData
   });
 };

@@ -28,7 +28,7 @@ export const Fitbit = ({ profile, activityLog }) => {
       </header>
       <Box as="main">
         <Box my={2}>
-          <Text>Joined Fitbit in {profile.memberSince}</Text>
+          <Text as="h6" fontSize="1.8rem">Joined Fitbit in {profile.memberSince}</Text>
         </Box>
         <Flex flexDirection="column">
           <Card my={2} mx="auto">

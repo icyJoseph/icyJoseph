@@ -7,7 +7,9 @@ import { Flex } from "components/Flex";
 export const TopBadges = ({ profile }) => {
   return (
     <>
-      <Text as="h6">Top Badges</Text>
+      <Text as="h6" fontSize="1.8rem">
+        Top Badges
+      </Text>
       <Flex>
         {profile.topBadges.map((badge) => (
           <Card my={2} mx="auto" key={badge.encodedId}>

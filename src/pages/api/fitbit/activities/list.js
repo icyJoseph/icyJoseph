@@ -1,6 +1,21 @@
 import { fitbitAuth } from "pages/api/fitbit/profile";
+import fs from "fs";
+import path from "path";
+import { promisify } from "util";
 
 export const getActivityLog = async (params) => {
+  try {
+    const cachePath = path.resolve(
+      path.join(process.cwd(), ".fitbit", "list.json")
+    );
+    const early = await promisify(fs.readFile)(cachePath, "utf-8").then(
+      JSON.parse
+    );
+    return early.activities;
+  } catch (e) {
+    console.warn(e);
+  }
+
   const query = encodeURI(
     Object.entries({ ...params, sort: "asc", offset: 0, limit: 20 })
       .map(([key, value]) => `${key}=${value}`)

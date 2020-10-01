@@ -14,12 +14,13 @@ import { GitHub } from "composition/GitHub";
 import { getCodeWarsUser } from "pages/api/codewars";
 import { queryGitHub } from "pages/api/github";
 import { fitbitAuth } from "pages/api/fitbit/profile";
+import { getActivityLog } from "pages/api/fitbit/activities/list";
 
 import { GET_USER } from "queries";
 
 import { yearStart } from "helpers";
 
-export function Home({ codewars, github, tokei, fitbit }) {
+export function Home({ codewars, github, tokei, fitbit, activityLog }) {
   return (
     <>
       <Head>
@@ -29,7 +30,7 @@ export function Home({ codewars, github, tokei, fitbit }) {
       <Container>
         <Tokei tokei={tokei} />
         <CodeWars initial={codewars} />
-        <Fitbit profile={fitbit} />
+        <Fitbit profile={fitbit} activityLog={activityLog} />
         <GitHub initial={github} />
       </Container>
     </>
@@ -53,7 +54,11 @@ export async function getStaticProps() {
     .get("/profile.json")
     .then(({ data }) => data.user);
 
-  return { props: { codewars, github, tokei, fitbit } };
+  const activityLog = await getActivityLog({
+    afterDate: `${new Date().getFullYear()}-01-01`
+  });
+
+  return { props: { codewars, github, tokei, fitbit, activityLog } };
 }
 
 export default Home;

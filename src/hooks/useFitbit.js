@@ -28,7 +28,7 @@ const activityFetcher = (type) => {
 const activityLogFetcher = (year) => {
   return axios
     .get(`/api/fitbit/activities/list`, {
-      params: { offset: 0, afterDate: `${year}-01-01`, limit: 20, sort: "asc" },
+      params: { afterDate: `${year}-01-01` },
       paramsSerializer: (params) => {
         return encodeURI(
           Object.entries(params)
@@ -60,9 +60,11 @@ export const useFitbitActivity = (type = "lifeTime") => {
   });
 };
 
-export const useFitbitActivityLog = (year) => {
+export const useFitbitActivityLog = (year, initialData = null) => {
   return useSWR(["activity-log", year], (_, year) => activityLogFetcher(year), {
     shouldRetryOnError: false,
-    revalidateOnFocus: false
+    revalidateOnFocus: false,
+    dedupingInterval: 24 * 60 * 60 * 1000,
+    initialData
   });
 };

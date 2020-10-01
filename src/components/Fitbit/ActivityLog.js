@@ -245,15 +245,24 @@ const EmojiLegend = () => (
 export const ActivityLog = ({ initial }) => {
   const { data, error } = useFitbitActivityLog(YEAR, initial);
 
-  const [selected, setSelected] = useState("");
-
   const activityLog = data ?? [];
+
+  const isLoading = !data && !error;
 
   const activityNames = [
     ...new Set(activityLog.map(({ activityName }) => activityName))
   ];
 
-  const isLoading = !data && !error;
+  const [selected, setSelected] = useState(() => {
+    const favorite = activityNames.find((activity) => activity === "Swim");
+    return favorite ?? "";
+  });
+
+  const [pagination, setPagination] = useState(0);
+
+  const page = activityLog
+    .filter(({ activityName }) => activityName === selected)
+    .slice(pagination * 10, (pagination + 1) * 10);
 
   return (
     <>
@@ -262,6 +271,9 @@ export const ActivityLog = ({ initial }) => {
           <span>Loading...</span>
         ) : (
           <>
+            <Text as="h6" fontSize="1.8rem" textAlign="start">
+              Browse through activities done this year
+            </Text>
             <Select
               id="activity-selector"
               name="activities"
@@ -315,24 +327,20 @@ export const ActivityLog = ({ initial }) => {
               </Tr>
             </thead>
             <tbody>
-              {activityLog
-                .filter(({ activityName }) => activityName === selected)
-                .slice(0, 20)
-                .map((activity) => (
-                  <Tr key={activity.logId}>
-                    <Td desktop></Td>
-                    <Td>
-                      {(activity.activeDuration / (60 * 1000)).toFixed(1)}
-                    </Td>
-                    <Td>{activity.calories}</Td>
-                    <Body activityType={selected} activity={activity} />
-                    <Td desktop>
-                      {activity.logType === "auto_detected" ? "Auto" : "Manual"}
-                    </Td>
-                    <Td desktop></Td>
-                  </Tr>
-                ))}
+              {page.map((activity) => (
+                <Tr key={activity.logId}>
+                  <Td desktop></Td>
+                  <Td>{(activity.activeDuration / (60 * 1000)).toFixed(1)}</Td>
+                  <Td>{activity.calories}</Td>
+                  <Body activityType={selected} activity={activity} />
+                  <Td desktop>
+                    {activity.logType === "auto_detected" ? "Auto" : "Manual"}
+                  </Td>
+                  <Td desktop></Td>
+                </Tr>
+              ))}
             </tbody>
+            {/* <caption>{}</caption> */}
           </Table>
         </>
       )}

@@ -3,6 +3,8 @@ import fs from "fs";
 import path from "path";
 import { promisify } from "util";
 
+const compareFn = (a, b) => new Date(b.startTime) - new Date(a.startTime);
+
 export const getActivityLog = async (params) => {
   try {
     const cachePath = path.resolve(
@@ -11,7 +13,7 @@ export const getActivityLog = async (params) => {
     const early = await promisify(fs.readFile)(cachePath, "utf-8").then(
       JSON.parse
     );
-    return early.activities;
+    return early.activities.sort(compareFn);
   } catch (e) {
     console.warn(e);
   }
@@ -25,7 +27,7 @@ export const getActivityLog = async (params) => {
   const { data } = await fitbitAuth.get(`/activities/list.json?${query}`);
   const aggregate = await paginate(data);
 
-  return aggregate;
+  return aggregate.sort(compareFn);
 };
 
 const paginate = async ({ activities, pagination }) => {

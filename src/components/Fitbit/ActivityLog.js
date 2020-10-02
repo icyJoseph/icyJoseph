@@ -396,7 +396,7 @@ export const ActivityLog = ({ initial }) => {
               fontSize="1rem"
               textAlign="start"
               color="var(--green)"
-              mt={2}
+              my={2}
             >
               Only shows, those automatically logged by Tracker
             </Text>
@@ -406,8 +406,10 @@ export const ActivityLog = ({ initial }) => {
                 name="activities"
                 value={selected}
                 onChange={(e) => {
-                  setSelected(e.target.value);
-                  setPagination(0);
+                  if (e.target.value) {
+                    setSelected(e.target.value);
+                    setPagination(0);
+                  }
                 }}
                 mt={2}
               >

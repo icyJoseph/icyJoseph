@@ -398,7 +398,7 @@ export const ActivityLog = ({ initial }) => {
               color="var(--green)"
               my={2}
             >
-              Only shows, those automatically logged by Tracker
+              Automatically logged by Tracker
             </Text>
             <fieldset>
               <Select

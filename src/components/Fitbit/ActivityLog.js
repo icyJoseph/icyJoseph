@@ -317,26 +317,30 @@ const EmojiLegend = () => (
 );
 
 const Pagination = styled.caption`
+  ${space({ mt: 2, mx: "auto" })};
+  max-width: 300px;
+  overflow-wrap: break-word;
+
   caption-side: top;
-  ${space({ mt: 2 })};
 
   @media (min-width: 375px) {
     caption-side: bottom;
+  }
+
+  @media (min-width: 768px) {
+    max-width: 500px;
   }
 `;
 
 Pagination.Control = styled(({ active: _omit, disabled: __omit, ...rest }) => (
   <span {...rest} />
 ))`
-  ${space({ mx: 2 })};
+  ${space({ mx: 2, mt: 2 })};
+  display: inline-block;
   cursor: pointer;
   text-decoration: underline;
   color: ${(props) => (props.active ? "var(--blue)" : "inherit")};
   visibility: ${(props) => (props.disabled ? "hidden" : "unset")};
-
-  &:first-child {
-    ${space({ ml: 0 })};
-  }
 `;
 
 const pageSize = 7;

@@ -86,7 +86,11 @@ const OptionButton = styled(Button)`
 `;
 
 const StyledCard = styled(Card)`
-  width: ${cardWidth}px;
+  width: 200px;
+  
+  @media (min-width: 320px) {
+    width: ${cardWidth}px;
+  }
 
   > section {
     flex-direction: column;

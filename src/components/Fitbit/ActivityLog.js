@@ -17,19 +17,27 @@ const SelectBox = styled(Box)`
 
 const Label = styled.label`
   ${space};
-  display: block;
   font-size: 2rem;
 `;
 
 const Select = styled.select`
   ${space};
-  font-size: 1.8rem;
+  ${space({ pr: 3 })};
+  font-size: 2rem;
   background: transparent;
   border: none;
   border-bottom: 1px solid var(--dark);
   color: var(--softDark);
-  outline-offset: 4px;
+  outline-offset: 8px;
   outline-color: var(--softDark);
+  text-align: center;
+  text-align-last: center;
+  background-image: url("data:image/svg+xml,<svg width='24' height='24' xmlns='http://www.w3.org/2000/svg'><path d='m0,6l12,12l12,-12l-24,0z'/><path fill='none' d='m0,0l24,0l0,24l-24,0l0,-24z'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 12px;
+  background-position-x: 100%;
+  background-position-y: 50%;
+  appearance: none;
 
   > option {
     background: var(--smokeyWhite);
@@ -59,12 +67,13 @@ const Table = styled.table`
 
 const cellMixin = css`
   overflow: visible;
-  padding: 1em 0.5em 1em 0;
+
+  ${space({ p: "1.5rem 0.75rem 1.5rem 0" })};
   border-bottom: 1px solid var(--softDark);
 
   &:empty:first-child,
   &:empty:last-child {
-    padding: 1em 0.5em;
+    ${space({ p: "1.5rem 0.75rem" })};
     border-bottom: none;
   }
 
@@ -87,6 +96,16 @@ const Td = styled.td`
   ${cellMixin};
 `;
 
+const Tdate = styled(Td)`
+  font-size: 1.15rem;
+  width: 120px;
+
+  @media (min-width: 768px) {
+    font-size: inherit;
+    width: 200px;
+  }
+`;
+
 const Tr = styled.tr`
   &:last-child > td {
     border-bottom: none;
@@ -95,15 +114,50 @@ const Tr = styled.tr`
 
 const Details = styled.details`
   display: inline-block;
-  outline-offset: 4px;
-  outline-color: var(--softDark);
+
+  color: white;
+
+  width: 33%;
+  min-width: 225px;
+  max-width: 300px;
+
+  position: relative;
+  background: var(--softDark);
+  line-height: 1.5;
 
   > summary {
     cursor: pointer;
+    outline-offset: 4px;
+    outline-color: var(--softDark);
+  }
+
+  > ul {
+    position: absolute;
   }
 
   > * {
     cursor: default;
+  }
+`;
+
+const LegendList = styled.ul`
+  ${space};
+  background: var(--softDark);
+  width: 100%;
+  opacity: 0.9;
+`;
+
+const LegendItem = styled.li`
+  display: grid;
+  grid-template-columns: 33.33% 1fr;
+  grid-column-gap: 8px;
+
+  & > span:first-child {
+    text-align: end;
+  }
+
+  & > span:last-child {
+    text-align: start;
   }
 `;
 
@@ -131,14 +185,14 @@ const Headers = ({ activityType }) => {
     case "Swim":
       return (
         <>
-          <Th>
+          <Th desktop>
             <Emoji symbol="💨" title="Speed" ariaLabel="Speed" /> (km/h)
           </Th>
           <Th>
             <Emoji symbol="📏" title="Distance" ariaLabel="Distance" /> (km)
           </Th>
           <Th desktop>Swim Lengths</Th>
-          <Th desktop>Pool Length (m)</Th>
+          <Th desktop>Pool Size (m)</Th>
           <Th>
             <Emoji symbol="⏱️" title="Pace" ariaLabel="Pace" /> (min/km)
           </Th>
@@ -179,16 +233,27 @@ const Headers = ({ activityType }) => {
   }
 };
 
-const Body = ({ activity, activityType }) => {
+const exists = (val) => val === (val ?? !val);
+const formatter = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  hour: "numeric",
+  minute: "numeric",
+  hour12: false
+});
+
+const Body = ({ activity = {}, activityType }) => {
   switch (activityType) {
     case "Swim":
       return (
         <>
-          <Td>{activity.speed.toFixed(2)}</Td>
-          <Td>{activity.distance}</Td>
-          <Td desktop>{activity.swimLengths ?? "N/A"}</Td>
-          <Td desktop>{activity.poolLength ?? "N/A"}</Td>
-          <Td>{(activity.pace / 60).toFixed(1)}</Td>
+          <Td desktop>{activity?.speed?.toFixed(2) ?? "-"}</Td>
+          <Td>{activity?.distance ?? "-"}</Td>
+          <Td desktop>{activity?.swimLengths ?? "-"}</Td>
+          <Td desktop>{activity?.poolLength ?? "-"}</Td>
+          <Td>
+            {exists(activity?.pace) ? (activity.pace / 60).toFixed(1) : "-"}
+          </Td>
         </>
       );
     case "Walk":
@@ -197,15 +262,15 @@ const Body = ({ activity, activityType }) => {
     case "Aerobic Workout":
       return (
         <>
-          <Td>{activity.steps}</Td>
-          <Td>{activity.averageHeartRate}</Td>
+          <Td>{activity?.steps ?? "-"}</Td>
+          <Td>{activity?.averageHeartRate ?? "-"}</Td>
         </>
       );
     case "Outdoor Bike":
     default:
       return (
         <>
-          <Td>{activity.averageHeartRate ?? "N/A"}</Td>
+          <Td>{activity?.averageHeartRate ?? "-"}</Td>
         </>
       );
   }
@@ -214,33 +279,67 @@ const Body = ({ activity, activityType }) => {
 const EmojiLegend = () => (
   <Details>
     <summary>Legend</summary>
-    <ul>
-      <li>
-        Duration: <Emoji symbol="⌚" title="Duration" ariaLabel="Duration" />
-      </li>
-      <li>
-        Calories: <Emoji symbol="🔥" title="Calories" ariaLabel="Calories" />
-      </li>
-      <li>
-        Speed: <Emoji symbol="💨" title="Speed" ariaLabel="Speed" />
-      </li>
-      <li>
-        Distance: <Emoji symbol="📏" title="Distance" ariaLabel="Distance" />
-      </li>
-      <li>
-        Pace: <Emoji symbol="⏱️" title="Pace" ariaLabel="Pace" />
-      </li>
-      <li>
-        Average Heart Rate:{" "}
+    <LegendList px={2} py={3}>
+      <LegendItem>
+        <Emoji symbol="⌚" title="Duration" ariaLabel="Duration" />
+        <span>Duration</span>
+      </LegendItem>
+      <LegendItem>
+        <Emoji symbol="🔥" title="Calories" ariaLabel="Calories" />
+        <span>Calories</span>
+      </LegendItem>
+      <LegendItem>
+        <Emoji symbol="💨" title="Speed" ariaLabel="Speed" />
+        <span>Speed</span>
+      </LegendItem>
+      <LegendItem>
+        <Emoji symbol="📏" title="Distance" ariaLabel="Distance" />
+        <span>Distance</span>
+      </LegendItem>
+      <LegendItem>
+        <Emoji symbol="⏱️" title="Pace" ariaLabel="Pace" />
+        <span>Pace</span>
+      </LegendItem>
+      <LegendItem>
         <Emoji
           symbol="💓"
           title="Average Heart Rate"
           ariaLabel="Average Heart Rate"
         />
-      </li>
-    </ul>
+        <span>Average Heart Rate</span>
+      </LegendItem>
+      <LegendItem>
+        <Emoji symbol="📆" title="Event Date" ariaLabel="Event Date" />
+        <span>Event Date</span>
+      </LegendItem>
+    </LegendList>
   </Details>
 );
+
+const Pagination = styled.caption`
+  caption-side: top;
+  ${space({ mt: 2 })};
+
+  @media (min-width: 375px) {
+    caption-side: bottom;
+  }
+`;
+
+Pagination.Control = styled(({ active: _omit, disabled: __omit, ...rest }) => (
+  <span {...rest} />
+))`
+  ${space({ mx: 2 })};
+  cursor: pointer;
+  text-decoration: underline;
+  color: ${(props) => (props.active ? "var(--blue)" : "inherit")};
+  visibility: ${(props) => (props.disabled ? "hidden" : "unset")};
+
+  &:first-child {
+    ${space({ ml: 0 })};
+  }
+`;
+
+const pageSize = 7;
 
 export const ActivityLog = ({ initial }) => {
   const { data, error } = useFitbitActivityLog(YEAR, initial);
@@ -260,9 +359,23 @@ export const ActivityLog = ({ initial }) => {
 
   const [pagination, setPagination] = useState(0);
 
-  const page = activityLog
-    .filter(({ activityName }) => activityName === selected)
-    .slice(pagination * 10, (pagination + 1) * 10);
+  const selectedActivities = activityLog.filter(
+    ({ activityName }) => activityName === selected
+  );
+
+  const numberOfPages = Math.ceil(selectedActivities.length / pageSize);
+
+  const tableSize = pageSize; //numberOfPages > 1 ? pageSize : selectedActivities.length;
+
+  const currentTable = selectedActivities.slice(
+    pagination * pageSize,
+    (pagination + 1) * pageSize
+  );
+
+  const padding = Array.from(
+    { length: tableSize - currentTable.length },
+    (_, pad) => pad
+  );
 
   return (
     <>
@@ -272,34 +385,41 @@ export const ActivityLog = ({ initial }) => {
         ) : (
           <>
             <Text as="h6" fontSize="1.8rem" textAlign="start">
-              Browse through activities done this year
+              Activities done in {YEAR}
             </Text>
-            <Select
-              id="activity-selector"
-              name="activities"
-              value={selected}
-              onChange={(e) => setSelected(e.target.value)}
+            <Text
+              as="p"
+              fontSize="1rem"
+              textAlign="start"
+              color="var(--green)"
               mt={2}
             >
-              <option value="" disabled>
-                Choose one
-              </option>
-              {activityNames.map((name) => (
-                <option key={name} value={name}>
-                  {name}
+              Only shows automatically logged by Tracker
+            </Text>
+            <fieldset>
+              <Select
+                id="activity-selector"
+                name="activities"
+                value={selected}
+                onChange={(e) => {
+                  setSelected(e.target.value);
+                  setPagination(0);
+                }}
+                mt={2}
+              >
+                <option value="" disabled>
+                  Choose one
                 </option>
-              ))}
-            </Select>
-            <Label htmlFor="activity-selector" mt={4}>
-              {selected ? (
-                <Text fontSize="inherit">
-                  <span>{selected}</span>
-                  <EmojiMap activity={selected} />
-                </Text>
-              ) : (
-                "Select an activity"
-              )}
-            </Label>
+                {activityNames.map((name) => (
+                  <option key={name} value={name}>
+                    {name}
+                  </option>
+                ))}
+              </Select>
+              <Label htmlFor="activity-selector" ml={2}>
+                {selected && <EmojiMap activity={selected} />}
+              </Label>
+            </fieldset>
           </>
         )}
       </SelectBox>
@@ -322,25 +442,57 @@ export const ActivityLog = ({ initial }) => {
                   (Cal)
                 </Th>
                 <Headers activityType={selected} />
-                <Th desktop>Log type</Th>
+                <Th>
+                  <Emoji
+                    symbol="📆"
+                    title="Event Date"
+                    ariaLabel="Event Date"
+                  />
+                </Th>
                 <Th desktop></Th>
               </Tr>
             </thead>
+
             <tbody>
-              {page.map((activity) => (
+              {currentTable.map((activity) => (
                 <Tr key={activity.logId}>
                   <Td desktop></Td>
                   <Td>{(activity.activeDuration / (60 * 1000)).toFixed(1)}</Td>
                   <Td>{activity.calories}</Td>
                   <Body activityType={selected} activity={activity} />
-                  <Td desktop>
-                    {activity.logType === "auto_detected" ? "Auto" : "Manual"}
-                  </Td>
+                  <Tdate>
+                    {formatter.format(new Date(activity.startTime))}
+                  </Tdate>
+                  <Td desktop></Td>
+                </Tr>
+              ))}
+              {padding.map((pad) => (
+                <Tr key={pad}>
+                  <Td desktop></Td>
+                  <Td>-</Td>
+                  <Td>-</Td>
+                  <Body activityType={selected} />
+                  <Td>-</Td>
                   <Td desktop></Td>
                 </Tr>
               ))}
             </tbody>
-            {/* <caption>{}</caption> */}
+
+            <Pagination>
+              {Array.from(
+                { length: Math.ceil(selectedActivities.length / pageSize) },
+                (_, num) => (
+                  <Pagination.Control
+                    key={num}
+                    active={pagination === num}
+                    disabled={numberOfPages === 1}
+                    onClick={() => setPagination(num)}
+                  >
+                    {num}
+                  </Pagination.Control>
+                )
+              )}
+            </Pagination>
           </Table>
         </>
       )}

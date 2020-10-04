@@ -316,18 +316,25 @@ const EmojiLegend = () => (
   </Details>
 );
 
-const Pagination = styled.caption`
-  ${space({ mt: 2, mx: "auto" })};
+const TableWithControls = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  > table {
+    order: 1;
+  }
+`;
+
+const Pagination = styled.div`
+  ${space({ my: 2, mx: "auto" })};
+  text-align: center;
+
   max-width: 300px;
   overflow-wrap: break-word;
-
-  caption-side: top;
-
-  @media (min-width: 375px) {
-    caption-side: bottom;
-  }
+  order: 0;
 
   @media (min-width: 768px) {
+    order: 2;
     max-width: 500px;
   }
 `;
@@ -339,7 +346,7 @@ Pagination.Control = styled(({ active: _omit, disabled: __omit, ...rest }) => (
   display: inline-block;
   cursor: pointer;
   text-decoration: underline;
-  color: ${(props) => (props.active ? "var(--blue)" : "inherit")};
+  color: ${(props) => (props.active ? "var(--green)" : "var(--dark)")};
   visibility: ${(props) => (props.disabled ? "hidden" : "unset")};
 `;
 
@@ -369,7 +376,7 @@ export const ActivityLog = ({ initial }) => {
 
   const numberOfPages = Math.ceil(selectedActivities.length / pageSize);
 
-  const tableSize = pageSize; //numberOfPages > 1 ? pageSize : selectedActivities.length;
+  const tableSize = pageSize;
 
   const currentTable = selectedActivities.slice(
     pagination * pageSize,
@@ -383,7 +390,7 @@ export const ActivityLog = ({ initial }) => {
 
   return (
     <>
-      <SelectBox mx="auto" my={4}>
+      <SelectBox mx="auto" mt={4} mb={2}>
         {isLoading ? (
           <span>Loading...</span>
         ) : (
@@ -391,15 +398,7 @@ export const ActivityLog = ({ initial }) => {
             <Text as="h6" fontSize="1.8rem" textAlign="start">
               Activities done in {YEAR}
             </Text>
-            <Text
-              as="p"
-              fontSize="1rem"
-              textAlign="start"
-              color="var(--green)"
-              my={2}
-            >
-              Automatically logged by Tracker
-            </Text>
+
             <fieldset>
               <Select
                 id="activity-selector"
@@ -430,9 +429,18 @@ export const ActivityLog = ({ initial }) => {
         )}
       </SelectBox>
       {selected && (
-        <>
+        <TableWithControls>
           <Table mx="auto">
             <caption>
+              <Text
+                as="p"
+                fontSize="1rem"
+                textAlign="start"
+                color="var(--green)"
+                my={2}
+              >
+                Automatically logged by Tracker
+              </Text>
               <EmojiLegend />
             </caption>
 
@@ -483,24 +491,24 @@ export const ActivityLog = ({ initial }) => {
                 </Tr>
               ))}
             </tbody>
-
-            <Pagination>
-              {Array.from(
-                { length: Math.ceil(selectedActivities.length / pageSize) },
-                (_, num) => (
-                  <Pagination.Control
-                    key={num}
-                    active={pagination === num}
-                    disabled={numberOfPages === 1}
-                    onClick={() => setPagination(num)}
-                  >
-                    {num}
-                  </Pagination.Control>
-                )
-              )}
-            </Pagination>
           </Table>
-        </>
+
+          <Pagination aria-label="Table Pagination">
+            {Array.from(
+              { length: Math.ceil(selectedActivities.length / pageSize) },
+              (_, num) => (
+                <Pagination.Control
+                  key={num}
+                  active={pagination === num}
+                  disabled={numberOfPages === 1}
+                  onClick={() => setPagination(num)}
+                >
+                  {num}
+                </Pagination.Control>
+              )
+            )}
+          </Pagination>
+        </TableWithControls>
       )}
     </>
   );

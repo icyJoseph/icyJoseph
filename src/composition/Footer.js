@@ -27,7 +27,11 @@ const Stack = styled.div`
   }
 `;
 
-const List = styled.ul``;
+const List = styled.ul`
+  > li {
+    ${space({ my: 1, py: 1 })};
+  }
+`;
 
 const FooterNav = styled.nav`
   ${space};
@@ -48,29 +52,49 @@ const Notice = styled.span`
   }
 `;
 
+const EvolveLink = styled.a`
+  color: var(--yellow);
+  text-decoration: underline;
+`;
+
 export const Footer = () => {
   return (
     <StyledFooter px={2} py={3} mt={2}>
       <Stack my={2} px={3}>
         Tech Stack
-        <ul>
-          <li>GitHub's GraphQL.</li>
-          <li>CodeWars REST API.</li>
-          <li>Tokei. Count your code, quickly.</li>
-          <li>Recursive Font Face, from Google Fonts.</li>
+        <List>
+          <li>GitHub's GraphQL</li>
+          <li>CodeWars REST API</li>
+          <li>Tokei. Count your code, quickly</li>
+          <li>Recursive Font Face, from Google Fonts</li>
           <li>React</li>
           <li>NodeJS</li>
           <li>Next.js</li>
-        </ul>
+        </List>
       </Stack>
       <Notice>
         <p>
           I am a software developer at{" "}
-          <strong>Evolve Technology Sweden AB</strong>.
+          <strong>
+            <EvolveLink
+              href="https://evolvetechnology.se"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              Evolve Technology Sweden AB
+            </EvolveLink>
+          </strong>
+          .
         </p>
         <p>
-          We believe great software will actually change the world! Come join
-          us!
+          We believe great software will actually change the world!{" "}
+          <EvolveLink
+            href="https://evolvetechnology.se/en/contact"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            Contact us!
+          </EvolveLink>
         </p>
       </Notice>
       <FooterNav my={2} px={3}>

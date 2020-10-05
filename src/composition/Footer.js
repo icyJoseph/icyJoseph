@@ -25,11 +25,15 @@ const Stack = styled.div`
   @media (min-width: 768px) {
     grid-column: span 1;
   }
+
+  > span {
+    text-decoration: underline;
+  }
 `;
 
 const List = styled.ul`
   > li {
-    ${space({ my: 1, py: 1 })};
+    ${space({ my: 2 })};
   }
 `;
 
@@ -46,6 +50,11 @@ const FooterNav = styled.nav`
 
 const Notice = styled.span`
   grid-column: span 2;
+  text-align: start;
+
+  @media (min-width: 768px) {
+    text-align: center;
+  }
 
   > p {
     ${space({ mt: 2 })};
@@ -61,7 +70,7 @@ export const Footer = () => {
   return (
     <StyledFooter px={2} py={3} mt={2}>
       <Stack my={2} px={3}>
-        Tech Stack
+        <span>Tech Stack</span>
         <List>
           <li>GitHub's GraphQL</li>
           <li>CodeWars REST API</li>
@@ -88,13 +97,15 @@ export const Footer = () => {
         </p>
         <p>
           We believe great software will actually change the world!{" "}
-          <EvolveLink
-            href="https://evolvetechnology.se/en/contact"
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            Contact us!
-          </EvolveLink>
+          <strong>
+            <EvolveLink
+              href="https://evolvetechnology.se/en/contact"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              Contact us!
+            </EvolveLink>
+          </strong>
         </p>
       </Notice>
       <FooterNav my={2} px={3}>

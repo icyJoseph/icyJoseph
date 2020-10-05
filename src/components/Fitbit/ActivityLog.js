@@ -79,6 +79,16 @@ const cellMixin = css`
 
   display: ${(props) => (props.desktop ? "none" : "table-cell")};
 
+  font-size: 1.15rem;
+
+  @media (min-width: 514px) {
+    font-size: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    font-size: inherit;
+  }
+
   @media (min-width: 1024px) {
     display: table-cell;
   }
@@ -88,6 +98,16 @@ const Th = styled.th`
   text-align: center;
 
   ${cellMixin};
+
+  > span:nth-child(2) {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    > span:nth-child(2) {
+      display: inline;
+    }
+  }
 `;
 
 const Td = styled.td`
@@ -182,19 +202,49 @@ const EmojiMap = ({ activity }) => {
 
 const Headers = ({ activityType }) => {
   switch (activityType) {
+    case "All":
+      return (
+        <>
+          <Th>
+            <Emoji symbol="📏" title="Distance" ariaLabel="Distance" />{" "}
+            <span>(km)</span>
+          </Th>
+          <Th>
+            <Emoji symbol="⏱️" title="Pace" ariaLabel="Pace" />{" "}
+            <span>(min/km)</span>
+          </Th>
+          <Th>
+            <Emoji symbol="🥾" title="Steps" ariaLabel="Steps" />{" "}
+            <span>steps</span>
+          </Th>
+          <Th>
+            <Emoji
+              symbol="💓"
+              title="Average Heart Rate"
+              ariaLabel="Average Heart Rate"
+            />{" "}
+            <span>(bpm)</span>
+          </Th>
+        </>
+      );
     case "Swim":
       return (
         <>
           <Th desktop>
-            <Emoji symbol="💨" title="Speed" ariaLabel="Speed" /> (km/h)
+            <Emoji symbol="💨" title="Speed" ariaLabel="Speed" />{" "}
+            <span>(km/h)</span>
           </Th>
           <Th>
-            <Emoji symbol="📏" title="Distance" ariaLabel="Distance" /> (km)
+            <Emoji symbol="📏" title="Distance" ariaLabel="Distance" />{" "}
+            <span>(km)</span>
           </Th>
           <Th desktop>Swim Lengths</Th>
-          <Th desktop>Pool Size (m)</Th>
+          <Th desktop>
+            Pool Size <span>(m)</span>
+          </Th>
           <Th>
-            <Emoji symbol="⏱️" title="Pace" ariaLabel="Pace" /> (min/km)
+            <Emoji symbol="⏱️" title="Pace" ariaLabel="Pace" />{" "}
+            <span>(min/km)</span>
           </Th>
         </>
       );
@@ -204,14 +254,17 @@ const Headers = ({ activityType }) => {
     case "Aerobic Workout":
       return (
         <>
-          <Th>Steps</Th>
+          <Th>
+            <Emoji symbol="🥾" title="Steps" ariaLabel="Steps" />{" "}
+            <span>steps</span>
+          </Th>
           <Th>
             <Emoji
               symbol="💓"
               title="Average Heart Rate"
               ariaLabel="Average Heart Rate"
             />{" "}
-            (bpm)
+            <span>(bpm)</span>
           </Th>
         </>
       );
@@ -226,7 +279,7 @@ const Headers = ({ activityType }) => {
               title="Average Heart Rate"
               ariaLabel="Average Heart Rate"
             />{" "}
-            (bpm)
+            <span>(bpm)</span>
           </Th>
         </>
       );
@@ -237,13 +290,25 @@ const exists = (val) => val === (val ?? !val);
 const formatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
   day: "numeric",
-  hour: "numeric",
-  minute: "numeric",
-  hour12: false
+  // hour: "numeric",
+  // minute: "numeric",
+  // hour12: false
 });
 
 const Body = ({ activity = {}, activityType }) => {
   switch (activityType) {
+    case "All":
+      return (
+        <>
+          <Td>{activity?.distance ?? "-"}</Td>
+          <Td>
+            {exists(activity?.pace) ? (activity.pace / 60).toFixed(1) : "-"}
+          </Td>
+          <Td>{activity?.steps ?? "-"}</Td>
+          <Td>{activity?.averageHeartRate ?? "-"}</Td>
+        </>
+      );
+
     case "Swim":
       return (
         <>
@@ -312,14 +377,15 @@ const EmojiLegend = () => (
         <Emoji symbol="📆" title="Event Date" ariaLabel="Event Date" />
         <span>Event Date</span>
       </LegendItem>
+      <LegendItem>
+        <Emoji symbol="🥾" title="Steps" ariaLabel="Steps" />
+        <span>Steps</span>
+      </LegendItem>
     </LegendList>
   </Details>
 );
 
-const TableWithControls = styled.div`
-  display: flex;
-  flex-direction: column;
-
+const TableWithControls = styled(Flex)`
   > table {
     order: 1;
   }
@@ -370,9 +436,10 @@ export const ActivityLog = ({ initial }) => {
 
   const [pagination, setPagination] = useState(0);
 
-  const selectedActivities = activityLog.filter(
-    ({ activityName }) => activityName === selected
-  );
+  const selectedActivities = activityLog.filter(({ activityName }) => {
+    if (selected === "All") return true;
+    return activityName === selected;
+  });
 
   const numberOfPages = Math.ceil(selectedActivities.length / pageSize);
 
@@ -412,9 +479,7 @@ export const ActivityLog = ({ initial }) => {
                 }}
                 mt={2}
               >
-                <option value="" disabled>
-                  Choose one
-                </option>
+                <option value="All">All</option>
                 {activityNames.map((name) => (
                   <option key={name} value={name}>
                     {name}
@@ -429,7 +494,7 @@ export const ActivityLog = ({ initial }) => {
         )}
       </SelectBox>
       {selected && (
-        <TableWithControls>
+        <TableWithControls flexDirection="column">
           <Table mx="auto">
             <caption>
               <Text as="p" fontSize="1rem" textAlign="center" my={2}>
@@ -441,13 +506,14 @@ export const ActivityLog = ({ initial }) => {
             <thead>
               <Tr>
                 <Th desktop></Th>
+                {selected === "All" && <Th></Th>}
                 <Th>
                   <Emoji symbol="⌚" title="Duration" ariaLabel="Duration" />{" "}
-                  (min)
+                  <span>(min)</span>
                 </Th>
                 <Th>
                   <Emoji symbol="🔥" title="Calories" ariaLabel="Calories" />{" "}
-                  (Cal)
+                  <span>(Cal)</span>
                 </Th>
                 <Headers activityType={selected} />
                 <Th>
@@ -465,6 +531,11 @@ export const ActivityLog = ({ initial }) => {
               {currentTable.map((activity) => (
                 <Tr key={activity.logId}>
                   <Td desktop></Td>
+                  {selected === "All" && (
+                    <Td>
+                      <EmojiMap activity={activity.activityName} />
+                    </Td>
+                  )}
                   <Td>{(activity.activeDuration / (60 * 1000)).toFixed(1)}</Td>
                   <Td>{activity.calories}</Td>
                   <Body activityType={selected} activity={activity} />

@@ -8,6 +8,7 @@ import { Flex } from "components/Flex";
 import { Text } from "components/Text";
 
 import { useFitbitActivityLog } from "hooks/useFitbit";
+import { exists } from "functional";
 
 const YEAR = new Date().getFullYear();
 
@@ -286,13 +287,9 @@ const Headers = ({ activityType }) => {
   }
 };
 
-const exists = (val) => val === (val ?? !val);
 const formatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
-  day: "numeric",
-  // hour: "numeric",
-  // minute: "numeric",
-  // hour12: false
+  day: "numeric"
 });
 
 const Body = ({ activity = {}, activityType }) => {

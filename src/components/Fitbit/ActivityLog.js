@@ -326,7 +326,7 @@ const TableWithControls = styled.div`
 `;
 
 const Pagination = styled.div`
-  ${space({ my: 2, mx: "auto" })};
+  ${space({ mx: "auto" })};
   text-align: center;
 
   max-width: 300px;
@@ -335,14 +335,14 @@ const Pagination = styled.div`
 
   @media (min-width: 768px) {
     order: 2;
-    max-width: 500px;
+    max-width: 528px;
   }
 `;
 
 Pagination.Control = styled(({ active: _omit, disabled: __omit, ...rest }) => (
   <span {...rest} />
 ))`
-  ${space({ mx: 2, mt: 2 })};
+  ${space({ m: 2 })};
   display: inline-block;
   cursor: pointer;
   text-decoration: underline;
@@ -432,13 +432,7 @@ export const ActivityLog = ({ initial }) => {
         <TableWithControls>
           <Table mx="auto">
             <caption>
-              <Text
-                as="p"
-                fontSize="1rem"
-                textAlign="start"
-                color="var(--green)"
-                my={2}
-              >
+              <Text as="p" fontSize="1rem" textAlign="center" my={2}>
                 Automatically logged by Tracker
               </Text>
               <EmojiLegend />

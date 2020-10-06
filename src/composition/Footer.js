@@ -25,15 +25,12 @@ const Stack = styled.div`
   @media (min-width: 768px) {
     grid-column: span 1;
   }
-
-  > span {
-    text-decoration: underline;
-  }
 `;
 
 const List = styled.ul`
   > li {
     ${space({ my: 2 })};
+    font-weight: 300;
   }
 `;
 
@@ -58,19 +55,21 @@ const Notice = styled.span`
 
   > p {
     ${space({ mt: 2 })};
+    font-weight: 300;
   }
 `;
 
 const EvolveLink = styled.a`
   color: var(--yellow);
   text-decoration: underline;
+  font-weight: 500;
 `;
 
 export const Footer = () => {
   return (
     <StyledFooter px={2} py={3} mt={2}>
       <Stack my={2} px={3}>
-        <span>Tech Stack</span>
+        Tech Stack
         <List>
           <li>GitHub's GraphQL</li>
           <li>CodeWars REST API</li>
@@ -84,32 +83,29 @@ export const Footer = () => {
       <Notice>
         <p>
           I am a software developer at{" "}
-          <strong>
-            <EvolveLink
-              href="https://evolvetechnology.se"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              Evolve Technology Sweden AB
-            </EvolveLink>
-          </strong>
+          <EvolveLink
+            href="https://evolvetechnology.se"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            Evolve Technology Sweden AB
+          </EvolveLink>
           .
         </p>
         <p>
           We believe great software will actually change the world!{" "}
-          <strong>
-            <EvolveLink
-              href="https://evolvetechnology.se/en/contact"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              Contact us!
-            </EvolveLink>
-          </strong>
+          <EvolveLink
+            href="https://evolvetechnology.se/en/contact"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            Contact us!
+          </EvolveLink>
         </p>
       </Notice>
       <FooterNav my={2} px={3}>
         <Stack>
+          Hot Links
           <List>
             {entries.map(({ href, title }) => (
               <li key={href}>

@@ -28,7 +28,8 @@ const ContributionsFragment = gql`
         isFork
         isPrivate
         diskUsage
-        languages(first: 3) {
+        homepageUrl
+        languages(first: 3, orderBy: { field: SIZE, direction: DESC }) {
           edges {
             node {
               id

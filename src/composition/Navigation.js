@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Emoji } from "components/Emoji";
 import { NavBar } from "components/NavBar";
 
-const entries = [
+export const entries = [
   {
     symbol: "🏠",
     href: "/",

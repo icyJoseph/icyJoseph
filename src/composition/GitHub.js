@@ -11,7 +11,7 @@ import { useGitHub } from "hooks/useGitHub";
 import { GET_USER } from "queries";
 import { yearStart, yearEnd } from "helpers";
 
-const Img = styled.img`
+const GitHubImg = styled.img`
   align-self: center;
   justify-self: center;
   border-radius: 50%;
@@ -20,7 +20,7 @@ const Img = styled.img`
   width: 66.66%;
 `;
 
-const GHGrid = styled.div`
+const GitHubGrid = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -60,17 +60,24 @@ export const GitHub = ({ initial }) => {
   const [last = 2020] = contributionYears;
   const [selectedYear, setSelectedYear] = useState(last);
 
+  const [showContributions, setShowContributions] = useState(false);
+
+  useEffect(() => {
+    setShowContributions(true);
+  }, []);
+
   return (
     <Section my={3} px={2}>
       <header id="github">
-        <Text as="h2" color="--blue" fontSize="2rem">
+        <Text as="h2" color="--blue" fontSize="3rem">
           <a href="#github">
             <code>GitHub</code>
           </a>
         </Text>
       </header>
-      <GHGrid as="main">
-        <Img src={avatarUrl} alt={`${name} github profile picture`} />
+      <GitHubGrid as="main">
+        <GitHubImg src={avatarUrl} alt={`${name} github profile picture`} />
+
         <Flex flexDirection="column" py={3} px={2}>
           <h2>{name}</h2>
 
@@ -82,6 +89,7 @@ export const GitHub = ({ initial }) => {
 
           <Text>{location}</Text>
         </Flex>
+
         <Contributions justifyContent="center" my={3}>
           {contributionYears
             .slice(0)
@@ -96,14 +104,17 @@ export const GitHub = ({ initial }) => {
               />
             ))}
         </Contributions>
-        <YearlyContribution
-          year={selectedYear}
-          initial={selectedYear === last ? contributionsCollection : null}
-          {...(last === selectedYear
-            ? yearStart(selectedYear)
-            : yearEnd(selectedYear))}
-        />
-      </GHGrid>
+
+        {showContributions && (
+          <YearlyContribution
+            year={selectedYear}
+            initial={selectedYear === last ? contributionsCollection : null}
+            {...(last === selectedYear
+              ? yearStart(selectedYear)
+              : yearEnd(selectedYear))}
+          />
+        )}
+      </GitHubGrid>
     </Section>
   );
 };

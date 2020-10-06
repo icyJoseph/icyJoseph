@@ -6,4 +6,5 @@ export const Text = styled.p`
   font-size: ${({ fontSize = "1.6rem" }) => fontSize};
   text-align: ${({ textAlign = "unset" }) => textAlign};
   color: ${({ color = "--black", theme }) => `var(${color}, ${theme.white})`};
+  font-weight: ${({ fontWeight = 400 }) => fontWeight ?? 400};
 `;

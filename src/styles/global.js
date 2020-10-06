@@ -4,9 +4,10 @@ import { normalize } from "styles/normalize";
 import { reset } from "styles/reset";
 import { root } from "styles/root";
 import { typography } from "styles/typography";
+import { overrides } from "styles/overrides";
 
 export const GlobalStyle = createGlobalStyle`
-    ${root}
+    ${root};
     ${normalize};
     ${reset};
     ${typography};
@@ -15,4 +16,6 @@ export const GlobalStyle = createGlobalStyle`
         background-color: var(--smokeyWhite);
         color: var(--softDark);
     }
+
+   ${overrides};
 `;

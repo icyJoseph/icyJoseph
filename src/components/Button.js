@@ -36,6 +36,14 @@ const StyledButton = styled.button`
     border-top: 0;
     bottom: 0;
   }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &:disabled:active {
+    pointer-events: none;
+  }
 `;
 
 StyledButton.Label = styled.div`
@@ -101,7 +109,7 @@ StyledButton.Text = styled.span`
     transition: background-color 0.2s ease-in;
   }
 
-  ${StyledButton}:hover & {
+  ${StyledButton}:hover &, &[disabled] {
     color: ${({ variant, theme }) =>
       variant === "outlined" ? theme.smokeyWhite : theme.softDark};
   }
@@ -111,11 +119,13 @@ StyledButton.Text = styled.span`
   }
 `;
 
-export const Button = ({ variant, text, ...rest }) => (
-  <StyledButton variant={variant} {...rest}>
+export const Button = ({ variant, text, disabled = false, ...rest }) => (
+  <StyledButton variant={variant} disabled={disabled} {...rest}>
     <StyledButton.Label variant={variant}>
-      <StyledButton.HoverEffect />
-      <StyledButton.Text variant={variant}>{text}</StyledButton.Text>
+      {!disabled && <StyledButton.HoverEffect />}
+      <StyledButton.Text variant={variant} disabled={disabled}>
+        {text}
+      </StyledButton.Text>
     </StyledButton.Label>
   </StyledButton>
 );

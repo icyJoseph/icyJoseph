@@ -18,7 +18,7 @@ export const CodeWars = ({ initial }) => {
   return (
     <Section my={3} px={2}>
       <header id="codewars">
-        <Text as="h2" color="--blue" fontSize="2rem">
+        <Text as="h2" color="--blue" fontSize="3rem">
           <a href="#codewars">
             <code>CodeWars</code>
           </a>

@@ -16,7 +16,7 @@ import { yearStart, yearEnd } from "helpers";
 const GitHubImg = styled.img`
   ${space({ m: "0 auto" })};
   display: block;
-
+  border: 1px solid var(--smokeyWhite);
   border-radius: 50%;
   max-width: 192px;
   min-width: 96px;

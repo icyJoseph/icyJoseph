@@ -1,4 +1,4 @@
-import { useEasing, easeOutQuad } from "use-easing";
+import { useEasing, easeInQuad } from "use-easing";
 
 export function useLanguageEasing({ code, blanks, comments, duration = 3 }) {
   const totalCode = code + blanks + comments;
@@ -6,11 +6,11 @@ export function useLanguageEasing({ code, blanks, comments, duration = 3 }) {
   const { value } = useEasing({
     end: code,
     duration,
-    easingFn: easeOutQuad,
+    easingFn: easeInQuad,
     formatFn: (e) => parseInt(e)
   });
 
-  const percentage = Math.floor((value / totalCode) * 100);
+  const percentage = (value / totalCode) * 100;
 
   return { value, percentage };
 }

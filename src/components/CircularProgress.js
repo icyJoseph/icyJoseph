@@ -14,11 +14,11 @@ Progress.Svg = styled.svg`
 `;
 
 Progress.Circle = styled.circle`
-  stroke: #e6e6e6;
+  stroke: var(--dark);
 `;
 
 Progress.CircleFill = styled.circle`
-  stroke: #65c3de;
+  stroke: var(--smokeyWhite);
 `;
 
 Progress.Overlay = styled.div`
@@ -38,9 +38,9 @@ Progress.Content = styled.div`
   height: 100%;
 `;
 
-export const CircularProgress = ({ percentage, size = 120, children }) => {
+export const CircularProgress = ({ percentage, size = 150, children }) => {
   const center = size / 2;
-  const strokeWidth = size * 0.1;
+  const strokeWidth = size * 0.05;
   const radius = size / 2 - strokeWidth / 2;
   const circumference = 2 * Math.PI * radius;
   const offset = ((100 - percentage) / 100) * circumference;

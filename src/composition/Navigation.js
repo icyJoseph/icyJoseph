@@ -29,8 +29,12 @@ export const Navigation = () => {
     <header>
       <NavBar>
         <NavBar.Brand>
-          <h1>icyJoseph</h1>
-          <span>Señor Developer</span>
+          <Link href="/">
+            <a>
+              <h1>icyJoseph</h1>
+              <span>Señor Developer</span>
+            </a>
+          </Link>
         </NavBar.Brand>
         <NavBar.Spacer />
         <NavBar.LinkList>

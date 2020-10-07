@@ -28,7 +28,7 @@ const Language = ({ language, code, blanks, comments }) => {
             title={`Lines of ${language} code`}
           />
           <code>{value}</code>
-          <p>lines</p>
+          <p>LoC</p>
         </CircularProgress>
       </Card.Section>
     </Card>
@@ -51,8 +51,23 @@ export const Tokei = ({ tokei }) => {
         ))}
       </Flex>
       <Text mt={3}>
-        The indicators above show the ratio of actual lines of code to total
-        number of lines, including blanks and comments.
+        Actual{" "}
+        <Text as="span" color="--red">
+          LoC
+        </Text>{" "}
+        (Lines of Code), without counting blanks and comments, taken from my{" "}
+        <code>dev</code> folder, using{" "}
+        <Text
+          as="a"
+          href="https://github.com/XAMPPRocky/tokei"
+          target="_blank"
+          rel="noreferrer noopener"
+          color="--blue"
+        >
+          tokei
+        </Text>
+        . A full circle would mean that, for that language, I would have written
+        zero blank lines and zero comments, only code.
       </Text>
     </Section>
   );

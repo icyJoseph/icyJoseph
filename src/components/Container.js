@@ -10,7 +10,7 @@ export const Container = styled.main`
     width: 90%;
   }
 
-  & section:last-child {
+  & > section:last-child {
     ${space({ mb: 4 })};
   }
 `;

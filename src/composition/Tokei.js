@@ -6,11 +6,12 @@ import { Section } from "components/Section";
 import { Text } from "components/Text";
 import { useLanguageEasing } from "hooks/useLanguageEasing";
 
-const Language = ({ language, code, blanks, comments }) => {
+const Language = ({ language, code, blanks, comments, order }) => {
   const { value, percentage } = useLanguageEasing({
     code,
     blanks,
-    comments
+    comments,
+    order
   });
 
   return (
@@ -46,8 +47,13 @@ export const Tokei = ({ tokei }) => {
         </Text>
       </header>
       <Flex as="main" justifyContent="center">
-        {tokei.map(({ language, ...rest }) => (
-          <Language key={language} language={language} {...rest} />
+        {tokei.map(({ language, ...rest }, index) => (
+          <Language
+            key={language}
+            language={language}
+            {...rest}
+            order={index}
+          />
         ))}
       </Flex>
       <Text mt={3}>

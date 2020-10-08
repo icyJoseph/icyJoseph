@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 
 import { Box } from "components/Box";
 import { Button } from "components/Button";
-import { Card } from "components/Card";
+import { Card, InfoCard } from "components/Card";
 import { DevIcon } from "components/DevIcon";
 import { Emoji } from "components/Emoji";
 import { Flex } from "components/Flex";
@@ -15,7 +15,7 @@ import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
 import { GET_YEAR_CONTRIBUTIONS } from "queries";
 import { clamp } from "helpers";
 
-const cardWidth = 250;
+const cardWidth = 328;
 
 const staleMixin = css`
   opacity: ${({ stale = false }) => (stale ? 0.5 : 1)};
@@ -66,13 +66,9 @@ const OptionButton = styled(Button)`
   }
 `;
 
-const StyledCard = styled(Card)`
-  width: 200px;
+const StyledCard = styled(InfoCard)`
+  max-width: ${cardWidth}px;
   min-height: 375px;
-
-  @media (min-width: 320px) {
-    width: ${cardWidth}px;
-  }
 
   > section {
     flex-direction: column;
@@ -110,19 +106,7 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
     totalCommitContributions,
     restrictedContributionsCount,
     commitContributionsByRepository
-    // startedAt,
-    // endedAt
   } = data ?? prev;
-
-  // const curateEndDate =
-  //   new Date(endedAt) > new Date() ? new Date().toISOString() : endedAt;
-
-  // const [startDay, endDay] = [
-  //   new Date(startedAt),
-  //   new Date(curateEndDate)
-  // ].map((date) =>
-  //   new Intl.DateTimeFormat("default", { timeZone: "UTC" }).format(date)
-  // );
 
   const ref = useRef(null);
 
@@ -151,7 +135,7 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
         stale={stale}
         alignItems="center"
       >
-        <Card>
+        <InfoCard>
           <Card.Header>
             <h4>In {year}</h4>
           </Card.Header>
@@ -183,7 +167,7 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
               </Text>
             </Flex>
           </Card.Section>
-        </Card>
+        </InfoCard>
       </ContributionsSummary>
 
       <RepositoriesWithOptions stale={stale}>

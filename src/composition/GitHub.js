@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { space } from "@styled-system/space";
 
 import { Button } from "components/Button";
-import { Card } from "components/Card";
+import { Card, InfoCard } from "components/Card";
 import { Flex } from "components/Flex";
 import { Section } from "components/Section";
 import { Text } from "components/Text";
@@ -41,10 +41,6 @@ const Contributions = styled(Flex)`
 const Profile = styled(Flex)`
   grid-column: span 2;
   justify-content: center;
-`;
-
-const StyledCard = styled(Card)`
-  max-width: 328px;
 `;
 
 export const GitHub = ({ initial }) => {
@@ -89,7 +85,7 @@ export const GitHub = ({ initial }) => {
       </header>
       <GitHubGrid as="main">
         <Profile>
-          <StyledCard m={3}>
+          <InfoCard m={3}>
             <Card.Header>
               <h3>{login}</h3>
               <Text color="--smokeyWhite" my={2} fontWeight={300}>
@@ -121,7 +117,7 @@ export const GitHub = ({ initial }) => {
                 </Text>
               </Flex>
             </Card.Section>
-          </StyledCard>
+          </InfoCard>
         </Profile>
 
         <Contributions justifyContent="center" my={3}>

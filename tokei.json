@@ -1,9 +1,9 @@
 [
   {
     "language": "JavaScript",
-    "blanks": 47220,
-    "code": 379263,
-    "comments": 39761,
+    "blanks": 47219,
+    "code": 379360,
+    "comments": 39771,
     "children": {},
     "inaccurate": false
   },
@@ -17,9 +17,9 @@
   },
   {
     "language": "TypeScript",
-    "blanks": 2166,
-    "code": 17913,
-    "comments": 1076,
+    "blanks": 2210,
+    "code": 18028,
+    "comments": 1117,
     "children": {},
     "inaccurate": false
   },

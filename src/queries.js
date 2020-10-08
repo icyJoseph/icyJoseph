@@ -1,6 +1,27 @@
 import { print } from "graphql";
 import gql from "graphql-tag";
 
+const ItemShowcaseFragment = gql`
+  fragment showcaseItem on Repository {
+    name
+    nameWithOwner
+    description
+    isMirror
+    stargazerCount
+    primaryLanguage {
+      name
+      color
+    }
+    repositoryTopics(first: 10) {
+      nodes {
+        topic {
+          name
+        }
+      }
+    }
+  }
+`;
+
 const ContributionsFragment = gql`
   fragment contributions on ContributionsCollection {
     startedAt
@@ -60,15 +81,35 @@ const GET_USER_DOC = gql`
       login
       name
       avatarUrl
+      itemShowcase {
+        items(first: 10) {
+          edges {
+            node {
+              ...showcaseItem
+            }
+          }
+        }
+      }
+      status {
+        emoji
+        message
+      }
+      isHireable
+      followers {
+        totalCount
+      }
       organization(login: "EvolveTechnology") {
         id
         name
+        avatarUrl
+        websiteUrl
       }
       contributionsCollection(from: $from, to: $to) {
         ...contributions
       }
     }
   }
+  ${ItemShowcaseFragment}
   ${ContributionsFragment}
 `;
 

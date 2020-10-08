@@ -4,24 +4,24 @@ import { Emoji } from "components/Emoji";
 import { NavBar } from "components/NavBar";
 
 export const entries = [
-  {
-    symbol: "🏠",
-    href: "/",
-    ariaLabel: "Navigate Home",
-    title: "Home"
-  },
-  {
-    symbol: "📰",
-    href: "/posts",
-    ariaLabel: "Navigate to Posts",
-    title: "Posts"
-  },
-  {
-    symbol: "👨🏽‍💻",
-    href: "/contact",
-    ariaLabel: "Navigate to contact info",
-    title: "Contact"
-  }
+  // {
+  //   symbol: "🏠",
+  //   href: "/",
+  //   ariaLabel: "Navigate Home",
+  //   title: "Home"
+  // },
+  // {
+  //   symbol: "📰",
+  //   href: "/posts",
+  //   ariaLabel: "Navigate to Posts",
+  //   title: "Posts"
+  // },
+  // {
+  //   symbol: "👨🏽‍💻",
+  //   href: "/contact",
+  //   ariaLabel: "Navigate to contact info",
+  //   title: "Contact"
+  // }
 ];
 
 export const Navigation = () => {
@@ -29,8 +29,12 @@ export const Navigation = () => {
     <header>
       <NavBar>
         <NavBar.Brand>
-          <h1>icyJoseph</h1>
-          <span>Señor Developer</span>
+          <Link href="/">
+            <a>
+              <h1>icyJoseph</h1>
+              <span>Señor Developer</span>
+            </a>
+          </Link>
         </NavBar.Brand>
         <NavBar.Spacer />
         <NavBar.LinkList>

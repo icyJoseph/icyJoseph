@@ -55,3 +55,17 @@ Card.Section = styled.section`
 Card.Footer = styled.footer`
   ${space({ mt: 3 })}
 `;
+
+export const InfoCard = styled(Card)`
+  width: 33.33%;
+  max-width: 328px;
+  min-width: 250px;
+
+  @media (min-width: 320px) {
+    min-width: 280px;
+  }
+
+  @media (min-width: 375px) {
+    min-width: 300px;
+  }
+`;

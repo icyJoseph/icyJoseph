@@ -1,16 +1,32 @@
-import { useEasing, easeOutQuad } from "use-easing";
+import { useEffect } from "react";
+import { useEasing, easeInQuad } from "use-easing";
 
-export function useLanguageEasing({ code, blanks, comments, duration = 3 }) {
+const timeBase = 400;
+
+export function useLanguageEasing({
+  code,
+  blanks,
+  comments,
+  duration = 3,
+  order
+}) {
   const totalCode = code + blanks + comments;
+  const timeFactor = (order + 1) * timeBase;
 
-  const { value } = useEasing({
+  const { value, setTrigger } = useEasing({
     end: code,
     duration,
-    easingFn: easeOutQuad,
-    formatFn: (e) => parseInt(e)
+    easingFn: easeInQuad,
+    formatFn: (e) => parseInt(e),
+    autoStart: false
   });
 
-  const percentage = Math.floor((value / totalCode) * 100);
+  useEffect(() => {
+    let timer = setTimeout(() => setTrigger(true), timeFactor);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const percentage = (value / totalCode) * 100;
 
   return { value, percentage };
 }

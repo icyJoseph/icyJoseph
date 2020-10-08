@@ -545,6 +545,7 @@ export const ActivityLog = ({ initial }) => {
               {padding.map((pad) => (
                 <Tr key={pad}>
                   <Td desktop></Td>
+                  {selected === "All" && <Td>-</Td>}
                   <Td>-</Td>
                   <Td>-</Td>
                   <Body activityType={selected} />

@@ -9,4 +9,8 @@ export const Container = styled.main`
   @media (min-width: 320px) {
     width: 90%;
   }
+
+  & > section:last-child {
+    ${space({ mb: 4 })};
+  }
 `;

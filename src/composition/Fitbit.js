@@ -1,6 +1,6 @@
+import styled from "styled-components";
 import { Box } from "components/Box";
-import { Card } from "components/Card";
-import { Emoji } from "components/Emoji";
+import { Card, InfoCard } from "components/Card";
 import { DataEntry } from "components/DataEntry";
 import { Flex } from "components/Flex";
 import { Section } from "components/Section";
@@ -27,11 +27,11 @@ export const Fitbit = ({ profile, activityLog }) => {
         </Text>
       </header>
       <Box as="main">
-        <Box my={2}>
-          <Text as="h6" fontSize="1.8rem">Joined Fitbit in {profile.memberSince}</Text>
-        </Box>
-        <Flex flexDirection="column">
-          <Card my={2} mx="auto">
+        <Text as="h6" fontSize="1.8rem" my={2}>
+          Joined Fitbit in {profile.memberSince}
+        </Text>
+        <Flex flexDirection="column" my={2}>
+          <InfoCard mx="auto">
             <Card.Header>
               <h2>Steps</h2>
             </Card.Header>
@@ -45,7 +45,7 @@ export const Fitbit = ({ profile, activityLog }) => {
                 </Text>
               </DataEntry>
             </Card.Section>
-          </Card>
+          </InfoCard>
           <TopBadges profile={profile} />
         </Flex>
         <ActivityLog initial={activityLog} />

@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 
 import { Box } from "components/Box";
 import { Button } from "components/Button";
-import { Card } from "components/Card";
+import { Card, InfoCard } from "components/Card";
 import { DevIcon } from "components/DevIcon";
 import { Emoji } from "components/Emoji";
 import { Flex } from "components/Flex";
@@ -15,7 +15,7 @@ import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
 import { GET_YEAR_CONTRIBUTIONS } from "queries";
 import { clamp } from "helpers";
 
-const cardWidth = 250;
+const cardWidth = 328;
 
 const staleMixin = css`
   opacity: ${({ stale = false }) => (stale ? 0.5 : 1)};
@@ -66,12 +66,9 @@ const OptionButton = styled(Button)`
   }
 `;
 
-const StyledCard = styled(Card)`
-  width: 200px;
-
-  @media (min-width: 320px) {
-    width: ${cardWidth}px;
-  }
+const StyledCard = styled(InfoCard)`
+  max-width: ${cardWidth}px;
+  min-height: 375px;
 
   > section {
     flex-direction: column;
@@ -94,33 +91,22 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
 
   const [pointer, setPointer] = useState(0);
 
-  useEffect(() => {
-    setPointer(0);
-  }, [year]);
-
   const prev = useLastNonNullableValue(data);
 
   const stale = !error && !data;
+  useEffect(() => {
+    if (!stale) {
+      setPointer(0);
+    }
+  }, [year, stale]);
 
   const {
     joinedGitHubContribution,
     totalRepositoryContributions,
     totalCommitContributions,
     restrictedContributionsCount,
-    commitContributionsByRepository,
-    startedAt,
-    endedAt
+    commitContributionsByRepository
   } = data ?? prev;
-
-  const curateEndDate =
-    new Date(endedAt) > new Date() ? new Date().toISOString() : endedAt;
-
-  const [startDay, endDay] = [
-    new Date(startedAt),
-    new Date(curateEndDate)
-  ].map((date) =>
-    new Intl.DateTimeFormat("default", { timeZone: "UTC" }).format(date)
-  );
 
   const ref = useRef(null);
 
@@ -149,21 +135,39 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
         stale={stale}
         alignItems="center"
       >
-        <Text as="h4">
-          Contributions from: {startDay} to: {endDay}
-        </Text>
-        <Box m={2}>
-          <Text>
-            Total Repository Contributions: {totalRepositoryContributions}
-          </Text>
-          <Text>Total Commit Contributions: {totalCommitContributions}</Text>
-          <Text>
-            Restricted Contributions Count: {restrictedContributionsCount}
-          </Text>
-          <Text>
-            Contributed to {commitContributionsByRepository.length} repositories
-          </Text>
-        </Box>
+        <InfoCard>
+          <Card.Header>
+            <h4>In {year}</h4>
+          </Card.Header>
+          <Card.Section>
+            <Flex flexDirection="column" alignItems="center" m="0 auto">
+              <Text color="--smokeyWhite" mb={2}>
+                <Text as="span" color="--yellow">
+                  {totalRepositoryContributions}
+                </Text>{" "}
+                newly created repositories
+              </Text>
+              <Text color="--smokeyWhite" mb={2}>
+                <Text as="span" color="--yellow">
+                  {totalCommitContributions}
+                </Text>{" "}
+                commit contributions
+              </Text>
+              <Text color="--smokeyWhite" mb={2}>
+                <Text as="span" color="--yellow">
+                  {restrictedContributionsCount}
+                </Text>{" "}
+                super secret contributions
+              </Text>
+              <Text color="--smokeyWhite" mb={2}>
+                <Text as="span" color="--yellow">
+                  {commitContributionsByRepository.length}
+                </Text>{" "}
+                repos received commits from me
+              </Text>
+            </Flex>
+          </Card.Section>
+        </InfoCard>
       </ContributionsSummary>
 
       <RepositoriesWithOptions stale={stale}>

@@ -71,13 +71,14 @@ export const Footer = () => {
       <Stack my={2} px={3}>
         Tech Stack
         <List>
-          <li>GitHub's GraphQL</li>
-          <li>CodeWars REST API</li>
-          <li>Tokei. Count your code, quickly</li>
-          <li>Recursive Font Face, from Google Fonts</li>
+          <li>GitHub's GraphQL API</li>
+          <li>CodeWars' REST API</li>
+          <li>Fitbit's API</li>
+          <li>Tokei</li>
           <li>React</li>
           <li>NodeJS</li>
           <li>Next.js</li>
+          <li>Recursive Font Face</li>
         </List>
       </Stack>
       <Notice>

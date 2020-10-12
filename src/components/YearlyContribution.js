@@ -75,7 +75,7 @@ const StyledCard = styled(InfoCard)`
   }
 `;
 
-const ContributionsCard = React.memo(
+const ContributionsSummaryCard = React.memo(
   ({
     year,
     stale,
@@ -124,6 +124,50 @@ const ContributionsCard = React.memo(
       </InfoCard>
     </ContributionsSummary>
   )
+);
+
+const ContributionCard = ({ repository, pointer, index, contributions }) => (
+  <StyledCard p={2} m={2}>
+    <Card.Header>
+      <Text as="p" color="--yellow" textAlign="end">
+        #{pointer + index + 1}
+      </Text>
+      <Text
+        as="h4"
+        color="--smokeyWhite"
+        fontSize="2rem"
+        fontWeight={600}
+        mb={2}
+      >
+        {repository.name}
+      </Text>
+      <Text color="--smokeyWhite">Owner:</Text>
+      <Text color="--smokeyWhite">{repository.owner.login}</Text>
+    </Card.Header>
+    <Card.Section>
+      <Text color="--smokeyWhite">
+        Contributions: {contributions.totalCount}
+      </Text>
+      <Text color="--smokeyWhite">
+        Size: {repository.languages.totalSize} bytes
+      </Text>
+    </Card.Section>
+    <Card.Section>
+      {!repository.isArchived &&
+        repository?.languages?.edges.map(({ node: { color, name }, size }) => (
+          <Box key={name} mt={2}>
+            <LanguageName mb={1}>
+              {name}: {size} bytes
+            </LanguageName>
+            <DevIcon color={color} language={name} mb={2} fontSize="1.75rem" />
+            <Indicator
+              color={color}
+              percentage={(100 * size) / repository.languages.totalSize}
+            />
+          </Box>
+        ))}
+    </Card.Section>
+  </StyledCard>
 );
 
 export const YearlyContribution = ({ initial, year, from, to }) => {
@@ -182,7 +226,7 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
 
   return (
     <>
-      <ContributionsCard
+      <ContributionsSummaryCard
         year={year}
         stale={stale}
         totalRepositoryContributions={totalRepositoryContributions}
@@ -224,58 +268,13 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
           {commitContributionsByRepository
             .slice(pointer, pointer + windowSize)
             .map(({ contributions, repository }, index) => (
-              <StyledCard key={repository.id} p={2} m={2}>
-                <Card.Header>
-                  <Flex justifyContent="space-between" flexWrap="nowrap">
-                    <Text
-                      as="h4"
-                      color="--smokeyWhite"
-                      fontSize="2rem"
-                      fontWeight={600}
-                      mb={2}
-                    >
-                      {repository.name}
-                    </Text>
-                    <Text as="span" color="--yellow">
-                      #{pointer + index + 1}
-                    </Text>
-                  </Flex>
-                  <Text color="--smokeyWhite">Owner:</Text>
-                  <Text color="--smokeyWhite">{repository.owner.login}</Text>
-                </Card.Header>
-                <Card.Section>
-                  <Text color="--smokeyWhite">
-                    Contributions: {contributions.totalCount}
-                  </Text>
-                  <Text color="--smokeyWhite">
-                    Size: {repository.languages.totalSize} bytes
-                  </Text>
-                </Card.Section>
-                <Card.Section>
-                  {!repository.isArchived &&
-                    repository?.languages?.edges.map(
-                      ({ node: { color, name }, size }) => (
-                        <Box key={name} mt={2}>
-                          <LanguageName mb={1}>
-                            {name}: {size} bytes
-                          </LanguageName>
-                          <DevIcon
-                            color={color}
-                            language={name}
-                            mb={2}
-                            fontSize="1.75rem"
-                          />
-                          <Indicator
-                            color={color}
-                            percentage={
-                              (100 * size) / repository.languages.totalSize
-                            }
-                          />
-                        </Box>
-                      )
-                    )}
-                </Card.Section>
-              </StyledCard>
+              <ContributionCard
+                key={repository.id}
+                index={index}
+                repository={repository}
+                pointer={pointer}
+                contributions={contributions}
+              />
             ))}
         </RepositoriesGrid>
       </RepositoriesWithOptions>

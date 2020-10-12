@@ -46,10 +46,15 @@ const activityLogFetcher = (year) => {
 // end-date	The end date of the range.
 // date	The end date of the period specified in the format yyyy-MM-dd or today.
 // period	The range for which data will be returned. Options are 1d, 7d, 30d, 1w, 1m.
-export const useFitbitHR = ({ date, period }) => {
+export const useFitbitHR = (
+  { date, period, revalidateOnMount = false },
+  initialData = null
+) => {
   return useSWR([date, period], (...args) => heartRateFetcher(...args), {
     shouldRetryOnError: false,
-    revalidateOnFocus: false
+    revalidateOnFocus: false,
+    revalidateOnMount,
+    initialData
   });
 };
 

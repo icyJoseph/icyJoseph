@@ -13,21 +13,17 @@ const normalize = (language) => {
   }
 };
 
-const BaseDevIcon = ({
-  className,
-  language,
-  wordmark = false,
-  colored = false
-}) => (
+const BaseDevIcon = ({ className, language }) => (
   <i
-    className={`devicon-${normalize(language)}-plain${
-      wordmark ? "-wordmark" : ""
-    }${colored ? " colored" : ""} ${className}`}
+    className={`devicon-${normalize(language)}-plain ${className} ${
+      language === "CSS" ? "colored" : ""
+    }`}
   ></i>
 );
 
 export const DevIcon = styled(BaseDevIcon)`
   ${space};
+  color: ${({ color }) => color};
   display: inline-block;
   font-size: ${({ fontSize = "1.6rem" }) => fontSize};
 `;

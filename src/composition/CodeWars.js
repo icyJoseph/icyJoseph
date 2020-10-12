@@ -12,9 +12,20 @@ import {
 
 import { Text } from "components/Text";
 
-import { RenderWithCodeWars } from "hooks/useCodeWars";
+import { useCodeWars } from "hooks/useCodeWars";
 
 export const CodeWars = ({ initial }) => {
+  const { data } = useCodeWars(initial);
+
+  const {
+    username,
+    honor,
+    clan,
+    leaderboardPosition,
+    ranks,
+    codeChallenges
+  } = data;
+
   return (
     <Section my={3} px={2}>
       <header id="codewars">
@@ -25,48 +36,33 @@ export const CodeWars = ({ initial }) => {
         </Text>
       </header>
       <Flex as="main">
-        <RenderWithCodeWars initial={initial}>
-          {({ data }) => {
-            const {
-              username,
-              honor,
-              clan,
-              leaderboardPosition,
-              ranks,
-              codeChallenges
-            } = data;
+        <Card my={2} mx="auto">
+          <Card.Header>
+            <h2>
+              <a
+                href="https://www.codewars.com/users/icyJoseph"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                {username}
+              </a>
+            </h2>
+          </Card.Header>
 
-            return (
-              <Card my={2} mx="auto">
-                <Card.Header>
-                  <h2>
-                    <a
-                      href="https://www.codewars.com/users/icyJoseph"
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      {username}
-                    </a>
-                  </h2>
-                </Card.Header>
+          <Card.Section>
+            <Clan clan={clan} />
+            <Languages {...ranks} />
+          </Card.Section>
 
-                <Card.Section>
-                  <Clan clan={clan} />
-                  <Languages {...ranks} />
-                </Card.Section>
+          <Card.Section>
+            <Honor honor={honor} />
+            <Leaderboard position={leaderboardPosition} />
+          </Card.Section>
 
-                <Card.Section>
-                  <Honor honor={honor} />
-                  <Leaderboard position={leaderboardPosition} />
-                </Card.Section>
-
-                <Card.Section>
-                  <Challenges completed={codeChallenges.totalCompleted} />
-                </Card.Section>
-              </Card>
-            );
-          }}
-        </RenderWithCodeWars>
+          <Card.Section>
+            <Challenges completed={codeChallenges.totalCompleted} />
+          </Card.Section>
+        </Card>
       </Flex>
     </Section>
   );

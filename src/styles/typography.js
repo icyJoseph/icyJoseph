@@ -72,6 +72,7 @@ export const typography = css`
       /* Chrome 26+, Opera 23+, Firefox 39+ */
         url("/fonts/recursive-v21-latin-900.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
   }
+
   html {
     font-size: 0.625rem;
   }

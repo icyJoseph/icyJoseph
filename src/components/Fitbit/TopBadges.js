@@ -1,7 +1,17 @@
+import styled from "styled-components";
+import { space } from "@styled-system/space";
 import { Card, InfoCard } from "components/Card";
 import { DataEntry } from "components/DataEntry";
 import { Text } from "components/Text";
 import { Flex } from "components/Flex";
+
+const BadgeImg = styled.img`
+  ${space({ my: 2, mx: "auto" })};
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  border: 1px solid var(--smokeyWhite);
+`;
 
 export const TopBadges = ({ profile }) => {
   return (
@@ -18,6 +28,14 @@ export const TopBadges = ({ profile }) => {
                 <Text color="--smokeyWhite">{badge.description}</Text>
                 <Text color="--smokeyWhite">
                   Achived: {badge.timesAchieved} times
+                </Text>
+                <BadgeImg
+                  src={badge.image75px}
+                  alt={badge.shortName}
+                  loading="lazy"
+                />
+                <Text color="--smokeyWhite" fontWeight={300}>
+                  {badge.shareText}
                 </Text>
               </DataEntry>
             </Card.Section>

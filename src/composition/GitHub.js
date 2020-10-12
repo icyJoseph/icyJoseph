@@ -43,6 +43,12 @@ const Profile = styled(Flex)`
   justify-content: center;
 `;
 
+const RenderWithSelectedYear = ({ last, children }) => {
+  const [selectedYear, setSelectedYear] = useState(last);
+
+  return children({ selectedYear, setSelectedYear });
+};
+
 export const GitHub = ({ initial }) => {
   const { data } = useGitHub({
     query: GET_USER,
@@ -66,7 +72,6 @@ export const GitHub = ({ initial }) => {
 
   const { contributionYears } = contributionsCollection;
   const [last = 2020] = contributionYears;
-  const [selectedYear, setSelectedYear] = useState(last);
 
   const [showContributions, setShowContributions] = useState(false);
 
@@ -120,30 +125,38 @@ export const GitHub = ({ initial }) => {
           </InfoCard>
         </Profile>
 
-        <Contributions justifyContent="center" my={3}>
-          {contributionYears
-            .slice(0)
-            .sort((a, b) => a - b)
-            .map((year) => (
-              <Button
-                key={year}
-                variant={year !== selectedYear ? "outlined" : null}
-                text={year}
-                m={2}
-                onClick={() => setSelectedYear(year)}
-              />
-            ))}
-        </Contributions>
+        <RenderWithSelectedYear last={last}>
+          {({ selectedYear, setSelectedYear }) => (
+            <React.Fragment>
+              <Contributions justifyContent="center" my={3}>
+                {contributionYears
+                  .slice(0)
+                  .sort((a, b) => a - b)
+                  .map((year) => (
+                    <Button
+                      key={year}
+                      variant={year !== selectedYear ? "outlined" : null}
+                      text={year}
+                      m={2}
+                      onClick={() => setSelectedYear(year)}
+                    />
+                  ))}
+              </Contributions>
 
-        {showContributions && (
-          <YearlyContribution
-            year={selectedYear}
-            initial={selectedYear === last ? contributionsCollection : null}
-            {...(last === selectedYear
-              ? yearStart(selectedYear)
-              : yearEnd(selectedYear))}
-          />
-        )}
+              {showContributions && (
+                <YearlyContribution
+                  year={selectedYear}
+                  initial={
+                    selectedYear === last ? contributionsCollection : null
+                  }
+                  {...(last === selectedYear
+                    ? yearStart(selectedYear)
+                    : yearEnd(selectedYear))}
+                />
+              )}
+            </React.Fragment>
+          )}
+        </RenderWithSelectedYear>
       </GitHubGrid>
     </Section>
   );

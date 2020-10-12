@@ -75,6 +75,57 @@ const StyledCard = styled(InfoCard)`
   }
 `;
 
+const ContributionsCard = React.memo(
+  ({
+    year,
+    stale,
+    totalRepositoryContributions,
+    totalCommitContributions,
+    restrictedContributionsCount,
+    totalRepositoriesContributedTo
+  }) => (
+    <ContributionsSummary
+      flexDirection="column"
+      stale={stale}
+      alignItems="center"
+    >
+      <InfoCard>
+        <Card.Header>
+          <h4>In {year}</h4>
+        </Card.Header>
+        <Card.Section>
+          <Flex flexDirection="column" alignItems="center" m="0 auto">
+            <Text color="--smokeyWhite" mb={2}>
+              <Text as="span" color="--yellow">
+                {totalRepositoryContributions}
+              </Text>{" "}
+              newly created repositories
+            </Text>
+            <Text color="--smokeyWhite" mb={2}>
+              <Text as="span" color="--yellow">
+                {totalCommitContributions}
+              </Text>{" "}
+              commit contributions
+            </Text>
+            <Text color="--smokeyWhite" mb={2}>
+              <Text as="span" color="--yellow">
+                {restrictedContributionsCount}
+              </Text>{" "}
+              super secret contributions
+            </Text>
+            <Text color="--smokeyWhite" mb={2}>
+              <Text as="span" color="--yellow">
+                {totalRepositoriesContributedTo}
+              </Text>{" "}
+              repos received commits from me
+            </Text>
+          </Flex>
+        </Card.Section>
+      </InfoCard>
+    </ContributionsSummary>
+  )
+);
+
 export const YearlyContribution = ({ initial, year, from, to }) => {
   const { data, error } = useGitHub({
     query: GET_YEAR_CONTRIBUTIONS,
@@ -94,6 +145,7 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
   const prev = useLastNonNullableValue(data);
 
   const stale = !error && !data;
+
   useEffect(() => {
     if (!stale) {
       setPointer(0);
@@ -130,49 +182,19 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
 
   return (
     <>
-      <ContributionsSummary
-        flexDirection="column"
+      <ContributionsCard
+        year={year}
         stale={stale}
-        alignItems="center"
-      >
-        <InfoCard>
-          <Card.Header>
-            <h4>In {year}</h4>
-          </Card.Header>
-          <Card.Section>
-            <Flex flexDirection="column" alignItems="center" m="0 auto">
-              <Text color="--smokeyWhite" mb={2}>
-                <Text as="span" color="--yellow">
-                  {totalRepositoryContributions}
-                </Text>{" "}
-                newly created repositories
-              </Text>
-              <Text color="--smokeyWhite" mb={2}>
-                <Text as="span" color="--yellow">
-                  {totalCommitContributions}
-                </Text>{" "}
-                commit contributions
-              </Text>
-              <Text color="--smokeyWhite" mb={2}>
-                <Text as="span" color="--yellow">
-                  {restrictedContributionsCount}
-                </Text>{" "}
-                super secret contributions
-              </Text>
-              <Text color="--smokeyWhite" mb={2}>
-                <Text as="span" color="--yellow">
-                  {commitContributionsByRepository.length}
-                </Text>{" "}
-                repos received commits from me
-              </Text>
-            </Flex>
-          </Card.Section>
-        </InfoCard>
-      </ContributionsSummary>
+        totalRepositoryContributions={totalRepositoryContributions}
+        totalCommitContributions={totalCommitContributions}
+        restrictedContributionsCount={restrictedContributionsCount}
+        totalRepositoriesContributedTo={commitContributionsByRepository.length}
+      />
 
       <RepositoriesWithOptions stale={stale}>
         <Options>
           <OptionButton
+            type="button"
             text={`Prev`}
             onClick={() => {
               setPointer((x) =>
@@ -184,6 +206,7 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
             mx="auto"
           />
           <OptionButton
+            type="button"
             text={`Next`}
             onClick={() => {
               setPointer((x) =>
@@ -237,7 +260,7 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
                             {name}: {size} bytes
                           </LanguageName>
                           <DevIcon
-                            colored
+                            color={color}
                             language={name}
                             mb={2}
                             fontSize="1.75rem"

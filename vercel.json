@@ -1,9 +1,30 @@
 {
-  "routes": [
+  "headers": [
     {
-      "src": "/fonts/(.*)",
-      "headers": { "cache-control": "s-maxage=604800" },
-      "dest": "/fonts/$1"
+      "source": "/fonts/(.*)",
+      "headers": [
+        {
+          "key": "cache-control",
+          "value": "s-maxage=31536000"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
     }
   ]
 }

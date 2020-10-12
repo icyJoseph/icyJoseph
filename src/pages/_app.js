@@ -6,7 +6,6 @@ import { GlobalStyle } from "styles/global";
 
 import { Footer } from "composition/Footer";
 import { Navigation } from "composition/Navigation";
-import { pageview } from "ga";
 
 function App({ Component, pageProps }) {
   const router = useRouter();

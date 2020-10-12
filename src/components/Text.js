@@ -7,4 +7,5 @@ export const Text = styled.p`
   text-align: ${({ textAlign = "unset" }) => textAlign};
   color: ${({ color = "--black", theme }) => `var(${color}, ${theme.white})`};
   font-weight: ${({ fontWeight = 400 }) => fontWeight ?? 400};
+  text-transform: ${({ textTransform = "unset" }) => textTransform};
 `;

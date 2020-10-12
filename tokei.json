@@ -1,9 +1,9 @@
 [
   {
     "language": "JavaScript",
-    "blanks": 47225,
-    "code": 379410,
-    "comments": 39781,
+    "blanks": 47268,
+    "code": 379737,
+    "comments": 39793,
     "children": {},
     "inaccurate": false
   },
@@ -17,17 +17,17 @@
   },
   {
     "language": "TypeScript",
-    "blanks": 2208,
-    "code": 18074,
-    "comments": 1103,
+    "blanks": 2170,
+    "code": 17716,
+    "comments": 1097,
     "children": {},
     "inaccurate": false
   },
   {
     "language": "Rust",
-    "blanks": 662,
-    "code": 4142,
-    "comments": 228,
+    "blanks": 645,
+    "code": 3776,
+    "comments": 218,
     "children": {
       "Markdown": [
         {

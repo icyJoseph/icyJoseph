@@ -6,7 +6,7 @@ import { Flex } from "components/Flex";
 import { FormButton, Input, TextArea, Fieldset, Label } from "components/Form";
 import { Text } from "components/Text";
 
-const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const emailRegExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 const Options = styled(Flex)`
   max-width: 512px;
@@ -14,6 +14,7 @@ const Options = styled(Flex)`
 
 export function ContactForm({ token }) {
   const { register, handleSubmit, errors, reset, formState } = useForm();
+  console.log({ errors, formState });
 
   return (
     <>

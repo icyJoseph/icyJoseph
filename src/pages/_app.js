@@ -12,7 +12,7 @@ function App({ Component, pageProps }) {
 
   useEffect(() => {
     const handler = (url) => {
-      gtag.pageview(url);
+      globalThis.gtag.pageview(url);
     };
 
     router.events.on("routerChangeComplete", handler);

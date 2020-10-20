@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, memo } from "react";
 import styled, { css } from "styled-components";
 
 import { Box } from "components/Box";
@@ -75,56 +75,56 @@ const StyledCard = styled(InfoCard)`
   }
 `;
 
-const ContributionsSummaryCard = React.memo(
-  ({
-    year,
-    stale,
-    totalRepositoryContributions,
-    totalCommitContributions,
-    restrictedContributionsCount,
-    totalRepositoriesContributedTo
-  }) => (
-    <ContributionsSummary
-      flexDirection="column"
-      stale={stale}
-      alignItems="center"
-    >
-      <InfoCard>
-        <Card.Header>
-          <h4>In {year}</h4>
-        </Card.Header>
-        <Card.Section>
-          <Flex flexDirection="column" alignItems="center" m="0 auto">
-            <Text color="--smokeyWhite" mb={2}>
-              <Text as="span" color="--yellow">
-                {totalRepositoryContributions}
-              </Text>{" "}
-              newly created repositories
-            </Text>
-            <Text color="--smokeyWhite" mb={2}>
-              <Text as="span" color="--yellow">
-                {totalCommitContributions}
-              </Text>{" "}
-              commit contributions
-            </Text>
-            <Text color="--smokeyWhite" mb={2}>
-              <Text as="span" color="--yellow">
-                {restrictedContributionsCount}
-              </Text>{" "}
-              super secret contributions
-            </Text>
-            <Text color="--smokeyWhite" mb={2}>
-              <Text as="span" color="--yellow">
-                {totalRepositoriesContributedTo}
-              </Text>{" "}
-              repos received commits from me
-            </Text>
-          </Flex>
-        </Card.Section>
-      </InfoCard>
-    </ContributionsSummary>
-  )
+const BaseContributionsSummaryCard = ({
+  year,
+  stale,
+  totalRepositoryContributions,
+  totalCommitContributions,
+  restrictedContributionsCount,
+  totalRepositoriesContributedTo
+}) => (
+  <ContributionsSummary
+    flexDirection="column"
+    stale={stale}
+    alignItems="center"
+  >
+    <InfoCard>
+      <Card.Header>
+        <h4>In {year}</h4>
+      </Card.Header>
+      <Card.Section>
+        <Flex flexDirection="column" alignItems="center" m="0 auto">
+          <Text color="--smokeyWhite" mb={2}>
+            <Text as="span" color="--yellow">
+              {totalRepositoryContributions}
+            </Text>{" "}
+            newly created repositories
+          </Text>
+          <Text color="--smokeyWhite" mb={2}>
+            <Text as="span" color="--yellow">
+              {totalCommitContributions}
+            </Text>{" "}
+            commit contributions
+          </Text>
+          <Text color="--smokeyWhite" mb={2}>
+            <Text as="span" color="--yellow">
+              {restrictedContributionsCount}
+            </Text>{" "}
+            super secret contributions
+          </Text>
+          <Text color="--smokeyWhite" mb={2}>
+            <Text as="span" color="--yellow">
+              {totalRepositoriesContributedTo}
+            </Text>{" "}
+            repos received commits from me
+          </Text>
+        </Flex>
+      </Card.Section>
+    </InfoCard>
+  </ContributionsSummary>
 );
+
+const ContributionsSummaryCard = memo(BaseContributionsSummaryCard);
 
 const ContributionCard = ({ repository, pointer, index, contributions }) => (
   <StyledCard p={2} m={2}>
@@ -208,7 +208,7 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
 
   useLayoutEffect(() => {
     const handler = () => {
-      let element = ref.current;
+      const element = ref.current;
       const nextWindowSize = clamp(
         Math.floor(element.offsetWidth / cardWidth),
         1,

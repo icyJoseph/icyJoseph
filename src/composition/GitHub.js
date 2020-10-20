@@ -127,7 +127,7 @@ export const GitHub = ({ initial }) => {
 
         <RenderWithSelectedYear last={last}>
           {({ selectedYear, setSelectedYear }) => (
-            <React.Fragment>
+            <>
               <Contributions justifyContent="center" my={3}>
                 {contributionYears
                   .slice(0)
@@ -154,7 +154,7 @@ export const GitHub = ({ initial }) => {
                     : yearEnd(selectedYear))}
                 />
               )}
-            </React.Fragment>
+            </>
           )}
         </RenderWithSelectedYear>
       </GitHubGrid>

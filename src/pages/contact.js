@@ -25,10 +25,6 @@ export function Contact({ token, initialHR }) {
 
   const heartData = data?.["activities-heart"] ?? [];
 
-  const [lastDay = null] = heartData.slice(-1);
-
-  const restingPulse = lastDay?.value?.restingHeartRate ?? 0;
-
   return (
     <>
       <Head>

@@ -24,7 +24,7 @@ export const get = (obj, key, fail = null) => {
   const path = key.split(".");
   return path.reduce((acc, val) => {
     const next = acc ? acc[val] : obj[val];
-    return next ? next : fail;
+    return next || fail;
   }, null);
 };
 

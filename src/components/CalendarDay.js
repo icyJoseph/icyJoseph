@@ -12,62 +12,62 @@
 import { memo, useCallback, useMemo } from "react";
 import { useTooltip } from "@nivo/tooltip";
 
-export const CalendarDay = memo(
-  ({
-    data,
-    x,
-    y,
-    size,
-    color,
-    borderWidth,
-    borderColor,
-    Tooltip,
-    formatValue
-  }) => {
-    const { showTooltipFromEvent, hideTooltip } = useTooltip();
+const BaseCalendarDay = ({
+  data,
+  x,
+  y,
+  size,
+  color,
+  borderWidth,
+  borderColor,
+  Tooltip,
+  formatValue
+}) => {
+  const { showTooltipFromEvent, hideTooltip } = useTooltip();
 
-    const handleMouseEnter = useCallback(
-      (event) => {
-        const formatedData = {
-          ...data,
-          value: formatValue(data.value),
-          data: { ...data.data },
-          color
-        };
-        showTooltipFromEvent(<Tooltip {...formatedData} />, event);
-      },
-      [showTooltipFromEvent, Tooltip, data, formatValue]
-    );
+  const handleMouseEnter = useCallback(
+    (event) => {
+      const formatedData = {
+        ...data,
+        value: formatValue(data.value),
+        data: { ...data.data },
+        color
+      };
+      showTooltipFromEvent(<Tooltip {...formatedData} />, event);
+    },
+    [showTooltipFromEvent, Tooltip, data, formatValue]
+  );
 
-    const handleMouseMove = useCallback(
-      (event) => {
-        const formatedData = {
-          ...data,
-          value: formatValue(data.value),
-          data: { ...data.data },
-          color
-        };
-        showTooltipFromEvent(<Tooltip {...formatedData} />, event);
-      },
-      [showTooltipFromEvent, Tooltip, data, formatValue]
-    );
+  const handleMouseMove = useCallback(
+    (event) => {
+      const formatedData = {
+        ...data,
+        value: formatValue(data.value),
+        data: { ...data.data },
+        color
+      };
+      showTooltipFromEvent(<Tooltip {...formatedData} />, event);
+    },
+    [showTooltipFromEvent, Tooltip, data, formatValue]
+  );
 
-    const style = useMemo(
-      () => ({ fill: color, strokeWidth: borderWidth, stroke: borderColor }),
-      [color, borderWidth, borderColor]
-    );
+  const style = useMemo(
+    () => ({ fill: color, strokeWidth: borderWidth, stroke: borderColor }),
+    [color, borderWidth, borderColor]
+  );
 
-    return (
-      <rect
-        x={x}
-        y={y}
-        width={size}
-        height={size}
-        onMouseEnter={handleMouseEnter}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={hideTooltip}
-        style={style}
-      />
-    );
-  }
-);
+  return (
+    <rect
+      x={x}
+      y={y}
+      width={size}
+      height={size}
+      onMouseEnter={handleMouseEnter}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={hideTooltip}
+      style={style}
+    />
+  );
+};
+
+export const Calendar = memo(BaseCalendarDay);

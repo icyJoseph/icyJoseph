@@ -66,7 +66,7 @@ const useCalendarLayout = ({ width, height, from, to, align }) =>
     [width, height, from, to, align]
   );
 
-const CalendarMonthLegends = memo(({ from, to, x, y, rotation = 0, theme }) => {
+const BaseCalendarMonthLegends = ({ from, to, x, y, rotation = 0, theme }) => {
   const fmt = new Intl.DateTimeFormat("sv-SE");
 
   return (
@@ -78,7 +78,9 @@ const CalendarMonthLegends = memo(({ from, to, x, y, rotation = 0, theme }) => {
       {fmt.format(new Date(from))} - {fmt.format(new Date(to))}
     </text>
   );
-});
+};
+
+const CalendarMonthLegends = memo(BaseCalendarMonthLegends);
 
 const BaseCalendar = ({
   margin: partialMargin,

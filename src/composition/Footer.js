@@ -71,9 +71,9 @@ export const Footer = () => {
       <Stack my={2} px={3}>
         Tech Stack
         <List>
-          <li>GitHub's GraphQL API</li>
-          <li>CodeWars' REST API</li>
-          <li>Fitbit's API</li>
+          <li>GitHub&apos;s GraphQL API</li>
+          <li>CodeWars&apos; REST API</li>
+          <li>Fitbit&apos;s API</li>
           <li>Tokei</li>
           <li>React</li>
           <li>NodeJS</li>

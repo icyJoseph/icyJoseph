@@ -45,7 +45,7 @@ export function Intention({ callback }) {
             })}
           />
 
-          <ErrorMessage error={errors["claim"]} />
+          <ErrorMessage error={errors.claim} />
 
           <datalist id="contacting-reasons">
             <option value="Hackathons">Be part of a hackathon team</option>

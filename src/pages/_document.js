@@ -1,7 +1,7 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 
-const GA_TRACKING_ID = "UA-84677777-1";
+const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_TRACKING_ID;
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {

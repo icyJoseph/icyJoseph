@@ -70,4 +70,4 @@ const BaseCalendarDay = ({
   );
 };
 
-export const Calendar = memo(BaseCalendarDay);
+export const CalendarDay = memo(BaseCalendarDay);

@@ -44,13 +44,13 @@ export function Contact({ token, initialHR }) {
 
             <Calendar data={heartData} />
           </header>
-          <main>
+          <section>
             {isHuman ? (
               <ContactForm token={token} />
             ) : (
               <Intention callback={setIsHuman} />
             )}
-          </main>
+          </section>
         </Container>
       </FullPage>
     </>

@@ -2,6 +2,11 @@ import styled from "styled-components";
 import { space } from "@styled-system/space";
 import { Button } from "components/Button";
 
+export const Form = styled.form`
+  ${space({ m: "0 auto" })};
+  max-width: 65ch;
+`;
+
 export const FormButton = styled(Button)`
   width: 33%;
   max-width: 512px;
@@ -17,7 +22,6 @@ export const Input = styled.input`
   ${space({ mr: 2, mb: 2 })};
   ${space};
   width: 100%;
-  max-width: 512px;
   background: transparent;
   border: none;
   border-bottom: 1px solid var(--softDark);
@@ -31,11 +35,8 @@ export const Label = styled.label`
 
 export const TextArea = styled.textarea`
   resize: none;
-
   width: 100%;
-  max-width: 512px;
   min-height: 128px;
-
   background: transparent;
   border: 1px solid var(--softDark);
 `;

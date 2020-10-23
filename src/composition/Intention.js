@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import styled from "styled-components";
 
 import { Text } from "components/Text";
 
@@ -7,23 +8,31 @@ import {
   Fieldset,
   FormButton,
   Input,
-  Label
+  Label,
+  Form
 } from "components/Form";
+import { Flex } from "components/Flex";
+
+const FormHeader = styled(Flex)`
+  max-width: 65ch;
+`;
 
 export function Intention({ callback }) {
   const { register, handleSubmit, errors } = useForm();
 
   return (
     <>
-      <Label htmlFor="claim">
-        <Text my={4}>
-          I am happily employed, but I am otherwise open for collaborations,
-          hackathons or contributing to packages.
-        </Text>
-        <Text>Type your reason, or choose one from the dropdown:</Text>
-      </Label>
+      <FormHeader m="0 auto">
+        <Label htmlFor="claim">
+          <Text my={4}>
+            I am <strong>happily employed</strong>, but I am otherwise open for
+            collaborations, hackathons or contributing to packages.
+          </Text>
+          <Text>Type your reason, or choose one from the dropdown:</Text>
+        </Label>
+      </FormHeader>
 
-      <form
+      <Form
         onSubmit={handleSubmit((values) => callback(values))}
         autoComplete="off"
       >
@@ -59,8 +68,8 @@ export function Intention({ callback }) {
           </datalist>
         </Fieldset>
 
-        <FormButton type="submit" text="Proceed" />
-      </form>
+        <FormButton type="submit" text="Proceed" m="0 auto" />
+      </Form>
     </>
   );
 }

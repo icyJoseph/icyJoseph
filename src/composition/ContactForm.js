@@ -1,16 +1,18 @@
 import axios from "axios";
-import styled from "styled-components";
 import { useForm } from "react-hook-form";
 
 import { Flex } from "components/Flex";
-import { FormButton, Input, TextArea, Fieldset, Label } from "components/Form";
+import {
+  FormButton,
+  Input,
+  TextArea,
+  Fieldset,
+  Label,
+  Form
+} from "components/Form";
 import { Text } from "components/Text";
 
 const emailRegExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-const Options = styled(Flex)`
-  max-width: 512px;
-`;
 
 export function ContactForm({ token }) {
   const { register, handleSubmit, errors, reset, formState } = useForm();
@@ -20,7 +22,7 @@ export function ContactForm({ token }) {
     <>
       <Text my={2}>Please copy this text into the last field:</Text>
       <Text color="--red">{token}</Text>
-      <form
+      <Form
         onSubmit={handleSubmit((values) =>
           axios
             .post("/api/submit", values, { withCredentials: true })
@@ -93,11 +95,11 @@ export function ContactForm({ token }) {
             })}
           />
         </Fieldset>
-        <Options flexWrap="wrap" justifyContent="space-around" mt={4}>
+        <Flex flexWrap="wrap" justifyContent="space-around" mt={4}>
           <FormButton type="submit" text="Send" />
           <FormButton type="reset" variant="outlined" text="Reset" />
-        </Options>
-      </form>
+        </Flex>
+      </Form>
     </>
   );
 }

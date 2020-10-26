@@ -9,7 +9,10 @@ export default async (req, res) => {
     return res.end("No");
   }
 
-  const cookies = new Cookies(req, res, { keys: [process.env.CRYPTO_KEY] });
+  const cookies = new Cookies(req, res, {
+    keys: [process.env.CRYPTO_KEY],
+    secure: true
+  });
 
   const session = cookies.get("session", { signed: true });
 

@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState, memo } from "react";
 import styled, { css } from "styled-components";
+import { space } from "@styled-system/space";
 
 import { Box } from "components/Box";
 import { Button } from "components/Button";
@@ -56,6 +57,7 @@ const Indicator = styled.div`
 `;
 
 const Options = styled.div`
+  ${space};
   display: flex;
   grid-column: span 3;
 `;
@@ -236,7 +238,7 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
       />
 
       <RepositoriesWithOptions stale={stale}>
-        <Options>
+        <Options mt={2}>
           <OptionButton
             type="button"
             text={`Prev`}

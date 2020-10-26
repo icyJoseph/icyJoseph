@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 
 import { Flex } from "components/Flex";
 import {
@@ -15,8 +15,28 @@ import { Text } from "components/Text";
 
 const emailRegExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+const CharCount = ({ control, max, min }) => {
+  const message = useWatch({ control, name: "Message", defaultValue: "" });
+  const length = message.length;
+  return (
+    <Text
+      as="span"
+      color={length > max || length < min ? "--red" : "--softDark"}
+    >
+      {length} / {length < min ? min : max}
+    </Text>
+  );
+};
+
 export function ContactForm({ cloaked, done, reason }) {
-  const { register, handleSubmit, errors, reset, formState } = useForm();
+  const {
+    register,
+    handleSubmit,
+    control,
+    errors,
+    reset,
+    formState
+  } = useForm();
   const { isSubmitting } = formState;
 
   return (
@@ -56,6 +76,15 @@ export function ContactForm({ cloaked, done, reason }) {
           placeholder="Who are you?"
           ref={register({
             required: "Please identify yourself",
+            validate: {
+              whiteSpace: (value) => {
+                const val = value ?? "";
+                return (
+                  val.trim().length !== val.length &&
+                  "No surrouding white spaces."
+                );
+              }
+            },
             minLength: { value: 3, message: "That's a very short name" }
           })}
         />
@@ -92,11 +121,23 @@ export function ContactForm({ cloaked, done, reason }) {
           placeholder="What have you got to say?"
           ref={register({
             required: "You ought to write a message",
+            validate: {
+              whiteSpace: (value) => {
+                const val = value ?? "";
+                return (
+                  val.trim().length !== val.length &&
+                  "No surrouding white spaces."
+                );
+              }
+            },
             minLength: { value: 64, message: "Message is too short" },
             maxLength: { value: 1024, message: "Message is too long" }
           })}
         />
-        <ErrorMessage error={errors.Message} />
+        <Flex justifyContent="space-between">
+          <ErrorMessage error={errors.Message} />
+          <CharCount control={control} max={1024} min={64} />
+        </Flex>
       </Fieldset>
 
       <Fieldset hidden>

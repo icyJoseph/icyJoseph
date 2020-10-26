@@ -46,6 +46,13 @@ export function Intention({ callback }) {
             mt={3}
             ref={register({
               required: "A reason is required.",
+              validate: {
+                whiteSpace: (value) => {
+                  const val = value ?? "";
+                  if (val.trim().length === val.length) return true;
+                  return "No surrouding white spaces.";
+                }
+              },
               minLength: {
                 value: 4,
                 message: "Must have at least 4 characters."

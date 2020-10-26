@@ -8,8 +8,13 @@ const StyledFooter = styled.footer`
   ${space};
   background: var(--softDark);
   color: var(--smokeyWhite);
+`;
+const StyledSection = styled.section`
+  ${space({ m: "0 auto" })};
   display: grid;
   grid-template-columns: repeat(4, minmax(min-content, 1fr));
+  grid-column-gap: 2rem;
+  max-width: 85ch;
 `;
 
 const CopyrightNotice = styled.span`
@@ -68,96 +73,98 @@ const EvolveLink = styled.a`
 export const Footer = () => {
   return (
     <StyledFooter px={2} py={3} mt={2}>
-      <Stack my={2} px={3}>
-        Tech Stack
-        <List>
-          <li>GitHub&apos;s GraphQL API</li>
-          <li>CodeWars&apos; REST API</li>
-          <li>Fitbit&apos;s API</li>
-          <li>Tokei</li>
-          <li>React</li>
-          <li>NodeJS</li>
-          <li>Next.js</li>
-          <li>Recursive Font Face</li>
-        </List>
-      </Stack>
-      <Notice>
-        <p>
-          I am a software developer at{" "}
-          <EvolveLink
-            href="https://evolvetechnology.se"
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            Evolve Technology Sweden AB
-          </EvolveLink>
-          .
-        </p>
-        <p>
-          We believe great software will actually change the world!{" "}
-          <EvolveLink
-            href="https://evolvetechnology.se/en/contact"
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            Contact us!
-          </EvolveLink>
-        </p>
-      </Notice>
-      <FooterNav my={2} px={3}>
+      <StyledSection>
         <Stack>
-          Hot Links
+          Tech Stack
           <List>
-            {entries.map(({ href, title }) => (
-              <li key={href}>
-                <Link href={href}>
-                  <a>{title}</a>
-                </Link>
-              </li>
-            ))}
-            <li>
-              <a
-                href="https://github.com/icyJoseph"
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.linkedin.com/in/icyjoseph"
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                LinkedIn
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://dev.to/icyjoseph"
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                dev.to
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://medium.com/@icjoseph"
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                Medium
-              </a>
-            </li>
+            <li>GitHub&apos;s GraphQL API</li>
+            <li>CodeWars&apos; REST API</li>
+            <li>Fitbit&apos;s API</li>
+            <li>Tokei</li>
+            <li>React</li>
+            <li>NodeJS</li>
+            <li>Next.js</li>
+            <li>Recursive Font Face</li>
           </List>
         </Stack>
-      </FooterNav>
-      <CopyrightNotice>
-        &#169; {new Date().getFullYear()} Joseph Chamochumbi - Gothenburg,
-        Sweden
-      </CopyrightNotice>
+        <Notice>
+          <p>
+            I am a software developer at{" "}
+            <EvolveLink
+              href="https://evolvetechnology.se"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              Evolve Technology Sweden AB
+            </EvolveLink>
+            .
+          </p>
+          <p>
+            We believe great software will actually change the world!{" "}
+            <EvolveLink
+              href="https://evolvetechnology.se/en/contact"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              Contact us!
+            </EvolveLink>
+          </p>
+        </Notice>
+        <FooterNav>
+          <Stack>
+            Hot Links
+            <List>
+              {entries.map(({ href, title }) => (
+                <li key={href}>
+                  <Link href={href}>
+                    <a>{title}</a>
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <a
+                  href="https://github.com/icyJoseph"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/icyjoseph"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  LinkedIn
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://dev.to/icyjoseph"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  dev.to
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://medium.com/@icjoseph"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  Medium
+                </a>
+              </li>
+            </List>
+          </Stack>
+        </FooterNav>
+        <CopyrightNotice>
+          &#169; {new Date().getFullYear()} Joseph Chamochumbi - Gothenburg,
+          Sweden
+        </CopyrightNotice>
+      </StyledSection>
     </StyledFooter>
   );
 };

@@ -38,7 +38,7 @@ const Language = ({ language, code, blanks, comments, order }) => {
 
 export const Tokei = ({ tokei }) => {
   return (
-    <Section my={3} px={2}>
+    <Section>
       <header id="tokei">
         <Text as="h2" color="--blue" fontSize="3rem">
           <a href="#tokei">

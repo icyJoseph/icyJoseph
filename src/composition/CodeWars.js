@@ -27,7 +27,7 @@ export const CodeWars = ({ initial }) => {
   } = data;
 
   return (
-    <Section my={3} px={2}>
+    <Section>
       <header id="codewars">
         <Text as="h2" color="--blue" fontSize="3rem">
           <a href="#codewars">

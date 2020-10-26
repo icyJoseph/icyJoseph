@@ -53,7 +53,7 @@ export const Fitbit = ({ profile, activityLog, initialHR }) => {
   const summary = heartRateMonthSummary(heartData);
 
   return (
-    <Section my={3} px={2}>
+    <Section>
       <header id="fitbit">
         <Text as="h2" color="--blue" fontSize="3rem">
           <a href="#fitbit">

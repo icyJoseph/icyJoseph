@@ -56,14 +56,6 @@ const Table = styled.table`
   border-collapse: collapse;
   border-spacing: 0;
   empty-cells: show;
-
-  @media (min-width: 768px) {
-    max-width: 90%;
-  }
-
-  @media (min-width: 1280px) {
-    max-width: 80%;
-  }
 `;
 
 const cellMixin = css`
@@ -492,7 +484,7 @@ export const ActivityLog = ({ initial }) => {
       </SelectBox>
       {selected && (
         <TableWithControls flexDirection="column">
-          <Table mx="auto">
+          <Table>
             <caption>
               <Text as="p" fontSize="1rem" textAlign="center" my={2}>
                 Automatically logged by Tracker

@@ -72,7 +72,10 @@ export function Contact({ submitted, cloaked, initialHR }) {
 
 export async function getServerSideProps(context) {
   const { req, res } = context;
-  const cookies = new Cookies(req, res, { keys: [process.env.CRYPTO_KEY] });
+  const cookies = new Cookies(req, res, {
+    keys: [process.env.CRYPTO_KEY],
+    secure: true
+  });
 
   let session = cookies.get("session", { signed: true });
 
@@ -86,7 +89,7 @@ export async function getServerSideProps(context) {
 
     cookies.set("session", cookie, {
       httpOnly: true,
-      secure: process.env.NODE_ENV !== "development",
+      secure: true,
       sameSite: "strict",
       signed: true
     });

@@ -44,9 +44,9 @@ export const TextArea = styled.textarea`
 const ErrorBase = styled.span`
   white-space: nowrap;
   color: var(--red);
+  visibility: ${({ visible }) => (visible ? "visible" : "hidden")};
 `;
 
 export const ErrorMessage = ({ error }) => {
-  if (!error) return null;
-  return <ErrorBase>{error.message}</ErrorBase>;
+  return <ErrorBase visible={!!error}>{error?.message ?? "&nbsp;"}</ErrorBase>;
 };

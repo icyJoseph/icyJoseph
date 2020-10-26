@@ -56,7 +56,10 @@ export default async (req, res) => {
       )
       .then(({ data: { records } }) => records);
 
-    if (records.length === 0) {
+    if (records.length !== 0) {
+      const [{ fields }] = records;
+      submitted = fields.Submitted ?? submitted;
+    } else {
       await axios.post(
         "https://api.airtable.com/v0/appXoTkMgNAIp7f2O/Contact",
         {
@@ -71,9 +74,6 @@ export default async (req, res) => {
           }
         }
       );
-    } else {
-      const [{ fields }] = records;
-      submitted = fields.Submitted ?? submitted;
     }
   } catch (e) {
     res.writeHead(502);

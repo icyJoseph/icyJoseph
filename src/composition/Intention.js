@@ -23,7 +23,7 @@ export function Intention({ callback }) {
   return (
     <>
       <FormHeader m="0 auto">
-        <Label htmlFor="claim">
+        <Label htmlFor="reason">
           <Text my={4}>
             I am <strong>happily employed</strong>, but I am otherwise open for
             collaborations, hackathons or contributing to packages.
@@ -33,14 +33,14 @@ export function Intention({ callback }) {
       </FormHeader>
 
       <Form
-        onSubmit={handleSubmit((values) => callback(values))}
+        onSubmit={handleSubmit(({ reason }) => callback(reason))}
         autoComplete="off"
       >
         <Fieldset>
           <Input
-            id="claim"
+            id="reason"
             type="text"
-            name="claim"
+            name="reason"
             placeholder="Contact reason?"
             list="contacting-reasons"
             mt={3}
@@ -54,7 +54,7 @@ export function Intention({ callback }) {
             })}
           />
 
-          <ErrorMessage error={errors.claim} />
+          <ErrorMessage error={errors.reason} />
 
           <datalist id="contacting-reasons">
             <option value="Hackathons">Be part of a hackathon team</option>

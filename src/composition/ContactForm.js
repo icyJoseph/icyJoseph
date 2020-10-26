@@ -12,6 +12,7 @@ import {
   ErrorMessage
 } from "components/Form";
 import { Text } from "components/Text";
+import { whiteSpaceValidator } from "utils/whiteSpace";
 
 const emailRegExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -77,13 +78,7 @@ export function ContactForm({ cloaked, done, reason }) {
           ref={register({
             required: "Please identify yourself",
             validate: {
-              whiteSpace: (value) => {
-                const val = value ?? "";
-                return (
-                  val.trim().length !== val.length &&
-                  "No surrouding white spaces."
-                );
-              }
+              whiteSpaceValidator
             },
             minLength: { value: 3, message: "That's a very short name" }
           })}
@@ -122,13 +117,7 @@ export function ContactForm({ cloaked, done, reason }) {
           ref={register({
             required: "You ought to write a message",
             validate: {
-              whiteSpace: (value) => {
-                const val = value ?? "";
-                return (
-                  val.trim().length !== val.length &&
-                  "No surrouding white spaces."
-                );
-              }
+              whiteSpaceValidator
             },
             minLength: { value: 64, message: "Message is too short" },
             maxLength: { value: 1024, message: "Message is too long" }

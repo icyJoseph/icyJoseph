@@ -12,6 +12,7 @@ import {
   Form
 } from "components/Form";
 import { Flex } from "components/Flex";
+import { whiteSpaceValidator } from "utils/whiteSpace";
 
 const FormHeader = styled(Flex)`
   max-width: 65ch;
@@ -47,11 +48,7 @@ export function Intention({ callback }) {
             ref={register({
               required: "A reason is required.",
               validate: {
-                whiteSpace: (value) => {
-                  const val = value ?? "";
-                  if (val.trim().length === val.length) return true;
-                  return "No surrouding white spaces.";
-                }
+                whiteSpaceValidator
               },
               minLength: {
                 value: 4,

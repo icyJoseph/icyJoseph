@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { useState } from "react";
-import axios from "axios";
 
 import Stegcloak from "stegcloak";
 import Cookies from "cookies";
@@ -15,8 +14,7 @@ import { Text } from "components/Text";
 
 import { useFitbitHR } from "hooks/useFitbit";
 
-import { fitbitAuth } from "pages/api/fitbit/profile";
-import { buildMissionName } from "utils/missionName";
+import { randomSequence } from "utils/randomSequence";
 
 const Forms = ({ cloaked, done }) => {
   const [reason, setReason] = useState(false);
@@ -28,15 +26,16 @@ const Forms = ({ cloaked, done }) => {
   );
 };
 
-export function Contact({ submitted, cloaked, initialHR }) {
-  const { data } = useFitbitHR(
-    { date: "today", period: "1m", revalidateOnMount: true },
-    initialHR
-  );
+export function Contact({ cloaked }) {
+  const { data } = useFitbitHR({
+    date: "today",
+    period: "1m",
+    revalidateOnMount: true
+  });
 
   const heartData = data?.["activities-heart"] ?? [];
 
-  const [hasSubmitted, setHasSubmitted] = useState(!!submitted);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   return (
     <>
@@ -56,7 +55,7 @@ export function Contact({ submitted, cloaked, initialHR }) {
               days.
             </Text>
 
-            <Calendar data={heartData} />
+            {data && <Calendar data={heartData} />}
 
             {hasSubmitted ? (
               <div>Thanks for reaching out!</div>
@@ -72,6 +71,7 @@ export function Contact({ submitted, cloaked, initialHR }) {
 
 export async function getServerSideProps(context) {
   const { req, res } = context;
+
   const cookies = new Cookies(req, res, {
     keys: [process.env.CRYPTO_KEY],
     secure: true
@@ -80,11 +80,9 @@ export async function getServerSideProps(context) {
   let session = cookies.get("session", { signed: true });
 
   if (!session) {
-    const latest = await axios(
-      "https://api.spacexdata.com/v3/launches/latest"
-    ).then(({ data }) => data);
+    const sequence = await randomSequence();
 
-    const payload = { ...latest, submitted: null };
+    const payload = { sequence, submitted: null };
     const cookie = JSON.stringify(payload);
 
     cookies.set("session", cookie, {
@@ -101,16 +99,12 @@ export async function getServerSideProps(context) {
 
   const parsed = JSON.parse(session);
 
-  const visible = buildMissionName(parsed);
+  const visible = parsed.sequence;
 
   const cloaked = stegcloak.hide(session, process.env.CLOAK_PASSWORD, visible);
 
-  const initialHR = await fitbitAuth
-    .get("/activities/heart/date/today/1m.json")
-    .then(({ data }) => data);
-
   return {
-    props: { cloaked, initialHR, submitted: parsed.submitted }
+    props: { cloaked }
   };
 }
 

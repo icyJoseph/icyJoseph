@@ -418,10 +418,7 @@ export const ActivityLog = ({ initial }) => {
     ...new Set(activityLog.map(({ activityName }) => activityName))
   ];
 
-  const [selected, setSelected] = useState(() => {
-    const favorite = activityNames.find((activity) => activity === "Swim");
-    return favorite ?? "";
-  });
+  const [selected, setSelected] = useState("All");
 
   const [pagination, setPagination] = useState(0);
 

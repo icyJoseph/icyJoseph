@@ -45,17 +45,22 @@ NavBar.LinkList = styled.ul`
   ${space({ mt: 2 })};
   display: flex;
   flex: auto;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   max-width: unset;
 
   @media (min-width: 768px) {
     ${space({ mt: 0 })};
-    max-width: 45ch;
+    max-width: 30ch;
   }
 `;
 
 NavBar.LinkItem = styled.li`
   display: inline-flex;
+  flex: 1;
   justify-content: center;
+
+  @media (min-width: 768px) {
+    justify-content: flex-end;
+  }
 `;

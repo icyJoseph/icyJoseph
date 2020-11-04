@@ -10,12 +10,12 @@ export const entries = [
     ariaLabel: "Navigate Home",
     title: "Home"
   },
-  {
-    symbol: "📰",
-    href: "/posts",
-    ariaLabel: "Navigate to Posts",
-    title: "Posts"
-  },
+  // {
+  //   symbol: "📰",
+  //   href: "/posts",
+  //   ariaLabel: "Navigate to Posts",
+  //   title: "Posts"
+  // },
   {
     symbol: "👨🏽‍💻",
     href: "/contact",

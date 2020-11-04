@@ -232,7 +232,7 @@ const pipeData = (raw) => {
 
 const ChartContainer = styled.div`
   ${space({ my: 3, mx: "auto" })};
-  height: 33.33vh;
+  height: 256px;
   width: 66.66%;
   text-align: center;
 `;

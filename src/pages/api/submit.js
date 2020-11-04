@@ -1,7 +1,50 @@
 import axios from "axios";
 import Cookies from "cookies";
 
-import { buildMissionName } from "utils/missionName";
+const submit2AirTable = async (form) => {
+  const { empty: _omit, secret: __omit, ...rest } = form;
+
+  const fields = {
+    ...rest,
+    Email: rest.Email.toLowerCase()
+  };
+
+  // get submissions done with the same email
+  const records = await axios
+    .get(
+      `https://api.airtable.com/v0/appXoTkMgNAIp7f2O/Contact?filterByFormula=${encodeURI(
+        `({Email}='${fields.Email}')`
+      )}`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.AIRTABLE_KEY}`
+        }
+      }
+    )
+    .then(({ data: { records } }) => records);
+
+  if (records.length !== 0) {
+    const [{ fields }] = records;
+    return fields.Submitted;
+  }
+
+  const submitted = new Date().getTime();
+
+  await axios.post(
+    "https://api.airtable.com/v0/appXoTkMgNAIp7f2O/Contact",
+    {
+      records: [{ fields: { ...fields, Submitted: submitted, Status: "Todo" } }]
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.AIRTABLE_KEY}`,
+        "Content-Type": "application/json"
+      }
+    }
+  );
+
+  return submitted;
+};
 
 export default async (req, res) => {
   if (req.method !== "POST") {
@@ -22,7 +65,8 @@ export default async (req, res) => {
   }
 
   const form = req.body;
-  const { empty, secret, ...rest } = form;
+  const { empty, secret } = form;
+
   // empty field was filled
   if (empty) {
     res.writeHead(401);
@@ -30,66 +74,27 @@ export default async (req, res) => {
   }
 
   const parsed = JSON.parse(session);
-  const visible = buildMissionName(parsed);
+  const visible = parsed.sequence;
 
   // secret was copy pasted
   if (secret !== visible) {
     return res.send({ error: "secret" });
   }
 
-  // save to airtable
-  let submitted = new Date().getTime();
-
   try {
-    const fields = {
-      ...rest,
-      Email: rest.Email.toLowerCase()
-    };
+    const submitted = await submit2AirTable(form);
 
-    const records = await axios
-      .get(
-        `https://api.airtable.com/v0/appXoTkMgNAIp7f2O/Contact?filterByFormula=${encodeURI(
-          `({Email}='${fields.Email}')`
-        )}`,
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.AIRTABLE_KEY}`
-          }
-        }
-      )
-      .then(({ data: { records } }) => records);
+    cookies.set("session", JSON.stringify({ ...parsed, submitted }), {
+      httpOnly: true,
+      secure: process.env.NODE_ENV !== "development",
+      sameSite: "strict",
+      signed: true
+    });
 
-    if (records.length !== 0) {
-      const [{ fields }] = records;
-      submitted = fields.Submitted ?? submitted;
-    } else {
-      await axios.post(
-        "https://api.airtable.com/v0/appXoTkMgNAIp7f2O/Contact",
-        {
-          records: [
-            { fields: { ...fields, Submitted: submitted, Status: "Todo" } }
-          ]
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.AIRTABLE_KEY}`,
-            "Content-Type": "application/json"
-          }
-        }
-      );
-    }
+    res.writeHead(200);
+    return res.end();
   } catch (e) {
     res.writeHead(502);
     return res.end();
   }
-
-  cookies.set("session", JSON.stringify({ ...parsed, submitted }), {
-    httpOnly: true,
-    secure: process.env.NODE_ENV !== "development",
-    sameSite: "strict",
-    signed: true
-  });
-
-  res.writeHead(200);
-  return res.end();
 };

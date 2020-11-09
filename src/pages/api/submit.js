@@ -1,39 +1,43 @@
 import axios from "axios";
 import Cookies from "cookies";
 
-const submit2AirTable = async (form) => {
+const submit2AirTable = async (form, timestamp) => {
   const { empty: _omit, secret: __omit, ...rest } = form;
 
-  const fields = {
+  const submitFields = {
     ...rest,
     Email: rest.Email.toLowerCase()
   };
 
   // get submissions done with the same email
-  const records = await axios
-    .get(
-      `https://api.airtable.com/v0/appXoTkMgNAIp7f2O/Contact?filterByFormula=${encodeURI(
-        `({Email}='${fields.Email}')`
-      )}`,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.AIRTABLE_KEY}`
-        }
+  const data = await axios.get(
+    `https://api.airtable.com/v0/appXoTkMgNAIp7f2O/Contact?filterByFormula=${encodeURI(
+      `({Email}='${submitFields.Email}')`
+    )}`,
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.AIRTABLE_KEY}`
       }
-    )
-    .then(({ data: { records } }) => records);
+    }
+  );
 
-  if (records.length !== 0) {
-    const [{ fields }] = records;
-    return fields.Submitted;
+  const unanswered = data.records.find(
+    ({ fields }) => fields.Status !== "Todo"
+  );
+
+  if (unanswered) {
+    return {
+      submitted: unanswered.fields.Submitted,
+      email: unanswered.fields.Email
+    };
   }
-
-  const submitted = new Date().getTime();
 
   await axios.post(
     "https://api.airtable.com/v0/appXoTkMgNAIp7f2O/Contact",
     {
-      records: [{ fields: { ...fields, Submitted: submitted, Status: "Todo" } }]
+      records: [
+        { fields: { ...submitFields, Submitted: timestamp, Status: "Todo" } }
+      ]
     },
     {
       headers: {
@@ -43,7 +47,7 @@ const submit2AirTable = async (form) => {
     }
   );
 
-  return submitted;
+  return { submitted: timestamp, email: submitFields.email };
 };
 
 export default async (req, res) => {
@@ -82,11 +86,16 @@ export default async (req, res) => {
   }
 
   try {
-    const submitted = await submit2AirTable(form);
+    const timestamp = new Date().getTime();
+    const { submitted, email } = await submit2AirTable(form.timestamp);
 
-    cookies.set("session", JSON.stringify({ ...parsed, submitted }), {
+    if (timestamp !== submitted) {
+      return res.send({ error: "Give me some time to respond to your previous message." });
+    }
+
+    cookies.set("session", JSON.stringify({ ...parsed, email, submitted }), {
       httpOnly: true,
-      secure: process.env.NODE_ENV !== "development",
+      secure: true,
       sameSite: "strict",
       signed: true
     });

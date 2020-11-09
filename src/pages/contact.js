@@ -82,7 +82,7 @@ export async function getServerSideProps(context) {
   if (!session) {
     const sequence = await randomSequence();
 
-    const payload = { sequence, submitted: null };
+    const payload = { sequence, submitted: null, email: null };
     const cookie = JSON.stringify(payload);
 
     cookies.set("session", cookie, {

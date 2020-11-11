@@ -22,7 +22,7 @@ const submit2AirTable = async (form, timestamp) => {
   );
 
   const unanswered = data.records.find(
-    ({ fields }) => fields.Status !== "Todo"
+    ({ fields }) => fields.Status === "Todo"
   );
 
   if (unanswered) {

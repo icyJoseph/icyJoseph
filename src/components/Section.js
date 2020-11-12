@@ -7,6 +7,11 @@ export const Section = styled.section`
   max-width: ${({ maxWidth }) => maxWidth ?? "85ch"};
 `;
 
+Section.Header = styled.header`
+  ${space({ pt: 4 })};
+  ${space}
+`;
+
 export const FullPage = styled(Section)`
   min-height: 100vh;
 `;

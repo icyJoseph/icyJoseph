@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { Container } from "components/Container";
 import { Emoji } from "components/Emoji";
 import { NavBar } from "components/NavBar";
 
@@ -26,7 +27,7 @@ export const entries = [
 
 export const Navigation = () => {
   return (
-    <header>
+    <Container as="header">
       <NavBar>
         <NavBar.Brand>
           <Link href="/">
@@ -55,6 +56,6 @@ export const Navigation = () => {
           ))}
         </NavBar.LinkList>
       </NavBar>
-    </header>
+    </Container>
   );
 };

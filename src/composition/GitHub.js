@@ -12,6 +12,7 @@ import { useGitHub } from "hooks/useGitHub";
 
 import { GET_USER } from "queries";
 import { yearStart, yearEnd } from "helpers";
+import { BackToTop } from "components/BackToTop";
 
 const GitHubImg = styled.img`
   ${space({ m: "0 auto" })};
@@ -49,7 +50,7 @@ const RenderWithSelectedYear = ({ last, children }) => {
   return children({ selectedYear, setSelectedYear });
 };
 
-export const GitHub = ({ initial }) => {
+export const GitHub = ({ initial, name: pageName }) => {
   const { data } = useGitHub({
     query: GET_USER,
     variables: {
@@ -81,13 +82,13 @@ export const GitHub = ({ initial }) => {
 
   return (
     <Section>
-      <header id="github">
+      <Section.Header id={pageName}>
         <Text as="h2" color="--blue" fontSize="3rem">
-          <a href="#github">
+          <a href={`#${pageName}`}>
             <code>GitHub</code>
           </a>
         </Text>
-      </header>
+      </Section.Header>
       <GitHubGrid as="main">
         <Profile>
           <InfoCard m={3}>
@@ -158,6 +159,7 @@ export const GitHub = ({ initial }) => {
           )}
         </RenderWithSelectedYear>
       </GitHubGrid>
+      <BackToTop />
     </Section>
   );
 };

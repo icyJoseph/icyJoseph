@@ -36,16 +36,16 @@ const Language = ({ language, code, blanks, comments, order }) => {
   );
 };
 
-export const Tokei = ({ tokei }) => {
+export const Tokei = ({ tokei, name }) => {
   return (
     <Section>
-      <header id="tokei">
+      <Section.Header id={name} pt={2}>
         <Text as="h2" color="--blue" fontSize="3rem">
-          <a href="#tokei">
+          <a href={`#${name}`}>
             <code>tokei ~/dev</code>
           </a>
         </Text>
-      </header>
+      </Section.Header>
       <Flex as="main" justifyContent="center">
         {tokei.map(({ language, ...rest }, index) => (
           <Language

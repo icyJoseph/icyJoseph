@@ -69,8 +69,13 @@ const OptionButton = styled(Button)`
 `;
 
 const StyledCard = styled(InfoCard)`
-  max-width: ${cardWidth}px;
+  width: 80%;
+  max-width: unset;
   min-height: 375px;
+
+  @media (min-width: ${cardWidth + 10}px) {
+    max-width: ${cardWidth}px;
+  }
 
   > section {
     flex-direction: column;

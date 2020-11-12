@@ -57,12 +57,14 @@ Card.Footer = styled.footer`
 `;
 
 export const InfoCard = styled(Card)`
-  width: 33.33%;
-  max-width: 328px;
-  min-width: 250px;
+  width: 80%;
+  max-width: unset;
+  min-width: unset;
 
   @media (min-width: 320px) {
+    max-width: 328px;
     min-width: 280px;
+    width: 33.33.%;
   }
 
   @media (min-width: 375px) {

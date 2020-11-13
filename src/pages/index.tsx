@@ -21,6 +21,15 @@ import { GET_USER } from "queries";
 
 import { yearStart } from "helpers";
 
+type HomeProps = {
+  codewars: IcyJoseph.CodeWars;
+  github: IcyJoseph.GitHub;
+  tokei: IcyJoseph.Tokei;
+  fitbit: IcyJoseph.Fitbit;
+  activityLog: IcyJoseph.ActivityLog;
+  initialHR: IcyJoseph.HeartRate;
+};
+
 export function Home({
   codewars,
   github,
@@ -28,7 +37,7 @@ export function Home({
   fitbit,
   activityLog,
   initialHR
-}) {
+}: HomeProps) {
   return (
     <>
       <Head>

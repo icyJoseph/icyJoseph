@@ -5,10 +5,7 @@ import { space } from "@styled-system/space";
 
 const StyledNav = styled.nav`
   ${space({ mt: 3, p: 2 })};
-  position: sticky;
-  top: 0;
   background: var(--smokeyWhite);
-  z-index: 1000;
 `;
 
 const PageLinks = styled.ul`

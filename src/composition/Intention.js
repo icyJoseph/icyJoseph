@@ -72,7 +72,7 @@ export function Intention({ callback }) {
           </datalist>
         </Fieldset>
 
-        <FormButton type="submit" text="Proceed" m="0 auto" />
+        <FormButton type="submit" text="Next" m="0 auto" />
       </Form>
     </>
   );

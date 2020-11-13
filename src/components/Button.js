@@ -15,6 +15,8 @@ const StyledButton = styled.button`
   background-color: var(--smokeyWhite);
   cursor: pointer;
 
+  outline-offset: 8px;
+
   &::before,
   &::after {
     background-color: transparent;
@@ -95,7 +97,8 @@ StyledButton.Text = styled.span`
   z-index: 1;
   color: ${({ variant, theme }) =>
     variant === "outlined" ? theme.softDark : theme.smokeyWhite};
-  transition: color 0.2s ease-in;
+  opacity: 1;
+  transition: color 0.2s ease-in, opacity 0.2s ease-in;
 
   &:after {
     content: "";
@@ -110,8 +113,7 @@ StyledButton.Text = styled.span`
   }
 
   ${StyledButton}:hover &, &[disabled] {
-    color: ${({ variant, theme }) =>
-      variant === "outlined" ? theme.smokeyWhite : theme.softDark};
+    opacity: 0.5;
   }
 
   ${StyledButton}:hover &:after {

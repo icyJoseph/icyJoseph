@@ -15,4 +15,8 @@ export const GlobalStyle = createGlobalStyle`
         background-color: var(--smokeyWhite);
         color: var(--softDark);
     }
+
+    * {
+        scroll-behavior:smooth;
+    }
 `;

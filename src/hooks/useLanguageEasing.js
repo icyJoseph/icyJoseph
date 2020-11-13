@@ -22,7 +22,7 @@ export function useLanguageEasing({
   });
 
   useEffect(() => {
-    let timer = setTimeout(() => setTrigger(true), timeFactor);
+    const timer = setTimeout(() => setTrigger(true), timeFactor);
     return () => clearTimeout(timer);
   }, []);
 

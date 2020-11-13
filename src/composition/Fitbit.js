@@ -1,4 +1,6 @@
 import styled from "styled-components";
+
+import { BackToTop } from "components/BackToTop";
 import { Box } from "components/Box";
 import { Card, InfoCard } from "components/Card";
 import { DataEntry } from "components/DataEntry";
@@ -42,7 +44,7 @@ const heartRateMonthSummary = (points) =>
     return prev;
   }, new Map());
 
-export const Fitbit = ({ profile, activityLog, initialHR }) => {
+export const Fitbit = ({ profile, activityLog, initialHR, name }) => {
   const { data } = useFitbitHR(
     { date: "today", period: "1m", revalidateOnMount: true },
     initialHR
@@ -53,14 +55,14 @@ export const Fitbit = ({ profile, activityLog, initialHR }) => {
   const summary = heartRateMonthSummary(heartData);
 
   return (
-    <Section my={3} px={2}>
-      <header id="fitbit">
+    <Section>
+      <Section.Header id={name}>
         <Text as="h2" color="--blue" fontSize="3rem">
-          <a href="#fitbit">
+          <a href={`#${name}`}>
             <code>Fitbit</code>
           </a>
         </Text>
-      </header>
+      </Section.Header>
       <Box as="main">
         <Flex flexDirection="column" my={2}>
           <InfoCard mx="auto">
@@ -142,6 +144,7 @@ export const Fitbit = ({ profile, activityLog, initialHR }) => {
         </Flex>
         <ActivityLog initial={activityLog} />
       </Box>
+      <BackToTop />
     </Section>
   );
 };

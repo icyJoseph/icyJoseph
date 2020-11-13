@@ -7,8 +7,10 @@ export const fitbitAuth = axios.create({
   }
 });
 
-export default async (_, res) => {
+const profile = async (_, res) => {
   const { data } = await fitbitAuth.get("/profile.json");
 
   return res.send(data);
 };
+
+export default profile;

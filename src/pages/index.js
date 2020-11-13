@@ -5,6 +5,7 @@ import { promisify } from "util";
 import Head from "next/head";
 
 import { Container } from "components/Container";
+import { PageNav } from "components/PageNav";
 
 import { CodeWars } from "composition/CodeWars";
 import { Fitbit } from "composition/Fitbit";
@@ -35,14 +36,20 @@ export function Home({
       </Head>
 
       <Container>
-        <Tokei tokei={tokei} />
-        <CodeWars initial={codewars} />
-        <Fitbit
-          profile={fitbit}
-          activityLog={activityLog}
-          initialHR={initialHR}
-        />
-        <GitHub initial={github} />
+        <PageNav>
+          <Tokei tokei={tokei} name="tokei" />
+
+          <CodeWars initial={codewars} name="codewars" />
+
+          <Fitbit
+            profile={fitbit}
+            activityLog={activityLog}
+            initialHR={initialHR}
+            name="fitbit"
+          />
+
+          <GitHub initial={github} name="github" />
+        </PageNav>
       </Container>
     </>
   );

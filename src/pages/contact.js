@@ -1,45 +1,113 @@
 import Head from "next/head";
+import { useState } from "react";
 
-import { Button } from "components/Button";
-import { Flex } from "components/Flex";
-import { FullPage } from "components/Section";
+import Stegcloak from "stegcloak";
+import Cookies from "cookies";
+
+import { ContactForm } from "composition/ContactForm";
+import { Intention } from "composition/Intention";
+
+import { Calendar } from "components/Calendar";
 import { Container } from "components/Container";
+import { FullPage, Section } from "components/Section";
 import { Text } from "components/Text";
+
 import { useFitbitHR } from "hooks/useFitbit";
 
-export function Contact() {
-  const { data } = useFitbitHR({ date: "today", period: "1m" });
+import { randomSequence } from "utils/randomSequence";
+
+const Forms = ({ cloaked, done }) => {
+  const [reason, setReason] = useState(false);
+
+  return reason ? (
+    <ContactForm cloaked={cloaked} done={done} reason={reason} />
+  ) : (
+    <Intention callback={setReason} />
+  );
+};
+
+export function Contact({ cloaked }) {
+  const { data } = useFitbitHR({
+    date: "today",
+    period: "1m",
+    revalidateOnMount: true
+  });
 
   const heartData = data?.["activities-heart"] ?? [];
 
-  const [lastDay = null] = heartData.slice(-1);
-
-  const restingPulse = lastDay?.value?.restingHeartRate ?? 0;
+  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   return (
     <>
       <Head>
-        <title>icyJoseph</title>
+        <title>Contact - icyJoseph</title>
       </Head>
-      <FullPage>
-        <Container p={3}>
+      <Container>
+        <FullPage>
           <header>
-            <Text as="h2" fontSize="3rem">
-              Let's play a game
-            </Text>
-            <Text my={2}>If you win, you get to contact me</Text>
-            <Text my={2}>
-              Before contacting me, please consider my stress level:{" "}
-              {restingPulse > 60 ? "Little high" : "It's all cool"}
+            <Text as="h2" color="--blue" fontSize="3rem">
+              Hello!
             </Text>
           </header>
-          <Flex as="main" justifyContent="center" py={2} px={3} mt={3}>
-            <Button text="Technology or Pokemon?" />
-          </Flex>
-        </Container>
-      </FullPage>
+          <Section as="main" maxWidth="65ch">
+            <Text my={2}>
+              Before contacting me, please consider my stress levels the last 31
+              days.
+            </Text>
+
+            {data && <Calendar data={heartData} />}
+
+            {hasSubmitted ? (
+              <div>Thanks for reaching out!</div>
+            ) : (
+              <Forms cloaked={cloaked} done={() => setHasSubmitted(true)} />
+            )}
+          </Section>
+        </FullPage>
+      </Container>
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { req, res } = context;
+
+  const cookies = new Cookies(req, res, {
+    keys: [process.env.CRYPTO_KEY],
+    secure: true
+  });
+
+  const sessionCookie = cookies.get("session", { signed: true });
+
+  let session;
+
+  try {
+    session = JSON.parse(sessionCookie);
+  } catch (e) {
+    session = {
+      submitted: null,
+      email: null
+    };
+  }
+
+  const sequence = await randomSequence();
+
+  const cookie = JSON.stringify({ ...session, sequence });
+
+  cookies.set("session", cookie, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "strict",
+    signed: true
+  });
+
+  const stegcloak = new Stegcloak(true, true);
+
+  const cloaked = stegcloak.hide(cookie, process.env.CLOAK_PASSWORD, sequence);
+
+  return {
+    props: { cloaked }
+  };
 }
 
 export default Contact;

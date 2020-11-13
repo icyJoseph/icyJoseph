@@ -15,8 +15,14 @@ import { Text } from "components/Text";
 
 import { useCodeWars } from "hooks/useCodeWars";
 
-export const CodeWars = ({ initial, name }) => {
-  const { data } = useCodeWars(initial);
+export const CodeWars = ({
+  initial,
+  name
+}: {
+  initial: IcyJoseph.CodeWars;
+  name: "codewars";
+}) => {
+  const { data = initial } = useCodeWars(initial);
 
   const {
     username,

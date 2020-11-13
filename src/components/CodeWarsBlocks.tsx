@@ -3,7 +3,14 @@ import { Emoji } from "components/Emoji";
 import { Text } from "components/Text";
 import { capitalize } from "functional";
 
-const Summary = ({ title = "overall", name, score, color }) => (
+const Summary = ({
+  title = "overall",
+  name,
+  score,
+  color
+}: {
+  title: string;
+} & IcyJoseph.Rank) => (
   <DataEntry>
     <Text color="--lightBlue">{title}</Text>
     <p>
@@ -18,7 +25,7 @@ const Summary = ({ title = "overall", name, score, color }) => (
   </DataEntry>
 );
 
-export const Clan = ({ clan }) => (
+export const Clan = ({ clan }: { clan: IcyJoseph.CodeWars["clan"] }) => (
   <DataEntry>
     <Text color="--lightGreen">clan</Text>
     <p>
@@ -28,7 +35,11 @@ export const Clan = ({ clan }) => (
   </DataEntry>
 );
 
-export const Leaderboard = ({ position }) => (
+export const Leaderboard = ({
+  position
+}: {
+  position: IcyJoseph.CodeWars["leaderboardPosition"];
+}) => (
   <DataEntry>
     <Text color="--lightYellow">Rank</Text>
     <p>
@@ -38,7 +49,7 @@ export const Leaderboard = ({ position }) => (
   </DataEntry>
 );
 
-export const Honor = ({ honor }) => (
+export const Honor = ({ honor }: { honor: IcyJoseph.CodeWars["honor"] }) => (
   <DataEntry>
     <Text color="--yellow">honor</Text>
     <p>
@@ -48,7 +59,11 @@ export const Honor = ({ honor }) => (
   </DataEntry>
 );
 
-export const Challenges = ({ completed }) => (
+export const Challenges = ({
+  completed
+}: {
+  completed: IcyJoseph.CodeWars["codeChallenges"]["totalCompleted"];
+}) => (
   <Text color="--smokeyWhite" m="0 auto" align="center">
     <Text as="span" color="--yellow">
       {completed}
@@ -57,7 +72,11 @@ export const Challenges = ({ completed }) => (
   </Text>
 );
 
-export const Languages = ({ languages }) => {
+export const Languages = ({
+  languages
+}: {
+  languages: IcyJoseph.CodeWars["ranks"]["languages"];
+}) => {
   return (
     <>
       {Object.entries(languages).map(([name, lang]) => (

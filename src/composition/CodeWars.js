@@ -1,3 +1,4 @@
+import { BackToTop } from "components/BackToTop";
 import { Card } from "components/Card";
 import { Flex } from "components/Flex";
 import { Section } from "components/Section";
@@ -14,7 +15,7 @@ import { Text } from "components/Text";
 
 import { useCodeWars } from "hooks/useCodeWars";
 
-export const CodeWars = ({ initial }) => {
+export const CodeWars = ({ initial, name }) => {
   const { data } = useCodeWars(initial);
 
   const {
@@ -27,14 +28,14 @@ export const CodeWars = ({ initial }) => {
   } = data;
 
   return (
-    <Section my={3} px={2}>
-      <header id="codewars">
+    <Section>
+      <Section.Header id={name}>
         <Text as="h2" color="--blue" fontSize="3rem">
-          <a href="#codewars">
+          <a href={`#${name}`}>
             <code>CodeWars</code>
           </a>
         </Text>
-      </header>
+      </Section.Header>
       <Flex as="main">
         <Card my={2} mx="auto">
           <Card.Header>
@@ -64,6 +65,7 @@ export const CodeWars = ({ initial }) => {
           </Card.Section>
         </Card>
       </Flex>
+      <BackToTop />
     </Section>
   );
 };

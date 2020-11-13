@@ -56,14 +56,6 @@ const Table = styled.table`
   border-collapse: collapse;
   border-spacing: 0;
   empty-cells: show;
-
-  @media (min-width: 768px) {
-    max-width: 90%;
-  }
-
-  @media (min-width: 1280px) {
-    max-width: 80%;
-  }
 `;
 
 const cellMixin = css`
@@ -391,13 +383,11 @@ const TableWithControls = styled(Flex)`
 const Pagination = styled.div`
   ${space({ mx: "auto" })};
   text-align: center;
-
+  order: 2;
   max-width: 300px;
   overflow-wrap: break-word;
-  order: 0;
 
   @media (min-width: 768px) {
-    order: 2;
     max-width: 528px;
   }
 `;
@@ -426,10 +416,7 @@ export const ActivityLog = ({ initial }) => {
     ...new Set(activityLog.map(({ activityName }) => activityName))
   ];
 
-  const [selected, setSelected] = useState(() => {
-    const favorite = activityNames.find((activity) => activity === "Swim");
-    return favorite ?? "";
-  });
+  const [selected, setSelected] = useState("All");
 
   const [pagination, setPagination] = useState(0);
 
@@ -492,7 +479,7 @@ export const ActivityLog = ({ initial }) => {
       </SelectBox>
       {selected && (
         <TableWithControls flexDirection="column">
-          <Table mx="auto">
+          <Table>
             <caption>
               <Text as="p" fontSize="1rem" textAlign="center" my={2}>
                 Automatically logged by Tracker

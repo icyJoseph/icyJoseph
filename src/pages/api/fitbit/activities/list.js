@@ -41,8 +41,10 @@ const paginate = async ({ activities, pagination }) => {
   return aggregate;
 };
 
-export default async (req, res) => {
+const activityList = async (req, res) => {
   const activityLog = await getActivityLog(req.query);
 
   return res.send(activityLog);
 };
+
+export default activityList;

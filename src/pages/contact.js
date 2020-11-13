@@ -77,31 +77,33 @@ export async function getServerSideProps(context) {
     secure: true
   });
 
-  let session = cookies.get("session", { signed: true });
+  const sessionCookie = cookies.get("session", { signed: true });
 
-  if (!session) {
-    const sequence = await randomSequence();
+  let session;
 
-    const payload = { sequence, submitted: null, email: null };
-    const cookie = JSON.stringify(payload);
-
-    cookies.set("session", cookie, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "strict",
-      signed: true
-    });
-
-    session = cookie;
+  try {
+    session = JSON.parse(sessionCookie);
+  } catch (e) {
+    session = {
+      submitted: null,
+      email: null
+    };
   }
+
+  const sequence = await randomSequence();
+
+  const cookie = JSON.stringify({ ...session, sequence });
+
+  cookies.set("session", cookie, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "strict",
+    signed: true
+  });
 
   const stegcloak = new Stegcloak(true, true);
 
-  const parsed = JSON.parse(session);
-
-  const visible = parsed.sequence;
-
-  const cloaked = stegcloak.hide(session, process.env.CLOAK_PASSWORD, visible);
+  const cloaked = stegcloak.hide(cookie, process.env.CLOAK_PASSWORD, sequence);
 
   return {
     props: { cloaked }

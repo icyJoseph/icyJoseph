@@ -10,7 +10,7 @@ const submit2AirTable = async (form, timestamp) => {
   };
 
   // get submissions done with the same email
-  const data = await axios.get(
+  const { data } = await axios.get(
     `https://api.airtable.com/v0/appXoTkMgNAIp7f2O/Contact?filterByFormula=${encodeURI(
       `({Email}='${submitFields.Email}')`
     )}`,
@@ -87,10 +87,12 @@ export default async (req, res) => {
 
   try {
     const timestamp = new Date().getTime();
-    const { submitted, email } = await submit2AirTable(form.timestamp);
+    const { submitted, email } = await submit2AirTable(form, timestamp);
 
     if (timestamp !== submitted) {
-      return res.send({ error: "Give me some time to respond to your previous message." });
+      return res.send({
+        error: "Give me some time to respond to your previous message."
+      });
     }
 
     cookies.set("session", JSON.stringify({ ...parsed, email, submitted }), {

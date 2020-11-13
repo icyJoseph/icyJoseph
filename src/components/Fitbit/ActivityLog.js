@@ -383,13 +383,11 @@ const TableWithControls = styled(Flex)`
 const Pagination = styled.div`
   ${space({ mx: "auto" })};
   text-align: center;
-
+  order: 2;
   max-width: 300px;
   overflow-wrap: break-word;
-  order: 0;
 
   @media (min-width: 768px) {
-    order: 2;
     max-width: 528px;
   }
 `;

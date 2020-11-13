@@ -11,7 +11,10 @@ export const softTopScroll = () => {
 };
 
 // toggles the key on threshold pass
-export function onScrollThreshold(setter, threshold = 100) {
+export function onScrollThreshold(
+  setter: (state: boolean) => void,
+  threshold = 100
+) {
   if (window.scrollY > threshold) {
     return setter(true);
   }
@@ -27,7 +30,7 @@ export const yearStart = (year = new Date().getFullYear()) => {
 };
 
 // a whole year span
-export const yearEnd = (year) => {
+export const yearEnd = (year: string) => {
   const to = new Date(`${year}-12-31`);
   to.setUTCHours(23, 59, 59, 999);
   const from = new Date(`${year}-01-01`);
@@ -35,8 +38,9 @@ export const yearEnd = (year) => {
   return { from: from.toISOString(), to: to.toISOString() };
 };
 
-export function createClamp(min, max) {
-  return (val) => Math.min(Math.max(val, min), max);
+export function createClamp(min: number, max: number) {
+  return (val: number) => Math.min(Math.max(val, min), max);
 }
 
-export const clamp = (val, min, max) => createClamp(min, max)(val);
+export const clamp = (val: number, min: number, max: number) =>
+  createClamp(min, max)(val);

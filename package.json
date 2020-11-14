@@ -6,8 +6,11 @@
   "dependencies": {
     "@nivo/calendar": "^0.63.0",
     "@styled-system/space": "^5.1.2",
+    "@types/styled-components": "^5.1.4",
+    "@types/styled-system": "^5.1.10",
     "axios": "^0.19.2",
     "cookies": "^0.8.0",
+    "csstype": "^3.0.5",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.11.0",
     "gray-matter": "^4.0.2",

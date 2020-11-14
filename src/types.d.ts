@@ -1,5 +1,16 @@
+declare namespace NodeJS {
+  interface ProcessEnv {
+    NEXT_PUBLIC_GA_TRACKING_ID: string;
+  }
+}
+
 declare namespace IcyJoseph {
-  export type Rank = { rank: number; name: string; color: string; score: number };
+  export type Rank = {
+    rank: number;
+    name: string;
+    color: string;
+    score: number;
+  };
 
   type Ranks = {
     overall: Rank;

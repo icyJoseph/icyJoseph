@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 
-export function useDebounce(query, delay) {
-  const [state, setState] = useState(query);
+export function useDebounce<Value>(value: Value, delay = 500) {
+  const [state, setState] = useState<Value>(value);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      return setState(query);
+      return setState(value);
     }, delay);
     return () => clearTimeout(timer);
-  }, [query, delay]);
+  }, [value, delay]);
 
   return state;
 }

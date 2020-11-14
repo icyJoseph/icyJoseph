@@ -1,8 +1,12 @@
 import axios from "axios";
 import useSWR from "swr";
 
+type Period = "1d" | "7d" | "30d" | "1w" | "1m";
+
 const profileFetcher = () =>
-  axios.get("/api/fitbit/profile").then(({ data }) => data.user);
+  axios
+    .get<IcyJoseph.FitbitUser>("/api/fitbit/profile")
+    .then(({ data }) => data.user);
 
 export const useFitbitProfile = (initialData = null) => {
   return useSWR("fitbit/profile", profileFetcher, {
@@ -11,7 +15,7 @@ export const useFitbitProfile = (initialData = null) => {
   });
 };
 
-const heartRateFetcher = (date, period) => {
+const heartRateFetcher = (date: string, period: Period) => {
   return axios
     .get(`/api/fitbit/activities/heart/date/${date}/${period}`)
     .then(({ data }) => data);
@@ -19,15 +23,15 @@ const heartRateFetcher = (date, period) => {
 
 // type could be date/YYYY-MM-DD
 // or frequent, recent
-const activityFetcher = (type) => {
+const activityFetcher = (type: string) => {
   if (type === "lifeTime")
     return axios.get(`/api/fitbit/activities`).then(({ data }) => data);
   return axios.get(`/api/fitbit/activities/${type}`).then(({ data }) => data);
 };
 
-const activityLogFetcher = (year) => {
+const activityLogFetcher = (year: number) => {
   return axios
-    .get(`/api/fitbit/activities/list`, {
+    .get<IcyJoseph.ActivityLog>(`/api/fitbit/activities/list`, {
       params: { afterDate: `${year}-01-01` },
       paramsSerializer: (params) => {
         return encodeURI(
@@ -46,16 +50,27 @@ const activityLogFetcher = (year) => {
 // end-date	The end date of the range.
 // date	The end date of the period specified in the format yyyy-MM-dd or today.
 // period	The range for which data will be returned. Options are 1d, 7d, 30d, 1w, 1m.
+
+type UseFitbitHRProps = {
+  date: string;
+  period: Period;
+  revalidateOnMount: boolean;
+};
+
 export const useFitbitHR = (
-  { date, period, revalidateOnMount = false },
+  { date, period, revalidateOnMount = false }: UseFitbitHRProps,
   initialData = null
 ) => {
-  return useSWR([date, period], (...args) => heartRateFetcher(...args), {
-    shouldRetryOnError: false,
-    revalidateOnFocus: false,
-    revalidateOnMount,
-    initialData
-  });
+  return useSWR(
+    [date, period],
+    (...args: [date: string, period: Period]) => heartRateFetcher(...args),
+    {
+      shouldRetryOnError: false,
+      revalidateOnFocus: false,
+      revalidateOnMount,
+      initialData
+    }
+  );
 };
 
 export const useFitbitActivity = (type = "lifeTime") => {
@@ -65,12 +80,19 @@ export const useFitbitActivity = (type = "lifeTime") => {
   });
 };
 
-export const useFitbitActivityLog = (year, initialData = null) => {
-  return useSWR(["activity-log", year], (_, year) => activityLogFetcher(year), {
-    shouldRetryOnError: false,
-    revalidateOnFocus: false,
-    dedupingInterval: 24 * 60 * 60 * 1000,
-    revalidateOnMount: false,
-    initialData
-  });
+export const useFitbitActivityLog = (
+  year: number,
+  initialData: IcyJoseph.ActivityLog | null = null
+) => {
+  return useSWR<IcyJoseph.ActivityLog>(
+    ["activity-log", year],
+    (_: "activity-log", year: number) => activityLogFetcher(year),
+    {
+      shouldRetryOnError: false,
+      revalidateOnFocus: false,
+      dedupingInterval: 24 * 60 * 60 * 1000,
+      revalidateOnMount: false,
+      initialData
+    }
+  );
 };

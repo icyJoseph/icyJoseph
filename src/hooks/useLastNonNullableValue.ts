@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export const useLastNonNullableValue = (value) => {
+export const useLastNonNullableValue = <T>(value: T): T => {
   const ref = useRef(value);
 
   useEffect(() => {

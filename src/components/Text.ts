@@ -1,7 +1,15 @@
 import styled from "styled-components";
-import { space } from "@styled-system/space";
+import { Property } from "csstype";
+import { space, SpaceProps } from "@styled-system/space";
 
-export const Text = styled.p`
+type TextProps = {
+  fontSize?: Property.FontSize;
+  fontWeight?: Property.FontWeight;
+  textAlign?: Property.TextAlign;
+  textTransform?: Property.TextTransform;
+};
+
+export const Text = styled.p<SpaceProps & TextProps>`
   ${space};
   font-size: ${({ fontSize = "1.6rem" }) => fontSize};
   text-align: ${({ textAlign = "unset" }) => textAlign};

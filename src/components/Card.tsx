@@ -1,7 +1,9 @@
+import { PropsWithChildren } from "react";
 import styled from "styled-components";
-import { space } from "@styled-system/space";
+import { Property } from "csstype";
+import { space, SpaceProps } from "@styled-system/space";
 
-export const Card = styled.div`
+const StyledCard = styled.div<SpaceProps>`
   ${space({ py: 3, px: 2 })}
   ${space}
   background:var(--softDark);
@@ -29,12 +31,16 @@ export const Card = styled.div`
   }
 `;
 
+export const Card = (props: PropsWithChildren<SpaceProps>) => (
+  <StyledCard {...props} />
+);
+
 Card.Header = styled.header`
   font-size: 2rem;
   font-weight: 300;
 `;
 
-Card.SubHeader = styled.span`
+Card.SubHeader = styled.span<{ textTransform?: Property.TextTransform }>`
   ${space({ mt: 2 })};
   font-size: 1.8rem;
   text-transform: ${({ textTransform = "lowercase" }) => textTransform};

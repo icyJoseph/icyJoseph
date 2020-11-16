@@ -1,7 +1,16 @@
 import { useEffect } from "react";
-import { useEasing, easeInQuad } from "use-easing";
+import { useEasing } from "use-easing";
+import { easeInQuad } from "use-easing/lib/easings";
 
 const timeBase = 400;
+
+type LanguageEasingProps = {
+  code: number;
+  blanks: number;
+  comments: number;
+  duration: number;
+  order: number;
+};
 
 export function useLanguageEasing({
   code,
@@ -9,15 +18,14 @@ export function useLanguageEasing({
   comments,
   duration = 3,
   order
-}) {
+}: LanguageEasingProps) {
   const totalCode = code + blanks + comments;
   const timeFactor = (order + 1) * timeBase;
 
-  const { value, setTrigger } = useEasing({
+  const { value, setTrigger } = useEasing<number>({
     end: code,
     duration,
     easingFn: easeInQuad,
-    formatFn: (e) => parseInt(e),
     autoStart: false
   });
 

@@ -33,6 +33,8 @@ declare namespace IcyJoseph {
 
   export type Fitbit = any;
 
+  export type FitbitUser = any;
+
   export type ActivityLog = any;
 
   export type HeartRate = any;

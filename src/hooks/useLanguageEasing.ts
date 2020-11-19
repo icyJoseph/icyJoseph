@@ -25,6 +25,7 @@ export function useLanguageEasing({
   const { value, setTrigger } = useEasing<number>({
     end: code,
     duration,
+    formatFn: (e) => Math.trunc(e),
     easingFn: easeInQuad,
     autoStart: false
   });

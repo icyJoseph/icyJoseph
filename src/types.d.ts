@@ -29,7 +29,13 @@ declare namespace IcyJoseph {
 
   export type GitHub = any;
 
-  export type Tokei = any;
+  export type Tokei = {
+    language: string;
+    blanks: number;
+    code: number;
+    comments: number;
+    inaccurate: boolean;
+  };
 
   export type Fitbit = any;
 

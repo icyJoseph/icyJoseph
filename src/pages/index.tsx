@@ -24,7 +24,7 @@ import { yearStart } from "helpers";
 type HomeProps = {
   codewars: IcyJoseph.CodeWars;
   github: IcyJoseph.GitHub;
-  tokei: IcyJoseph.Tokei;
+  tokei: IcyJoseph.Tokei[];
   fitbit: IcyJoseph.Fitbit;
   activityLog: IcyJoseph.ActivityLog;
   initialHR: IcyJoseph.HeartRate;
@@ -75,7 +75,7 @@ export async function getStaticProps() {
   const tokei = await promisify(fs.readFile)(
     path.resolve(process.cwd(), "tokei.json"),
     "utf-8"
-  ).then(JSON.parse);
+  ).then<IcyJoseph.Tokei[]>(JSON.parse);
 
   const fitbit = await fitbitAuth
     .get("/profile.json")

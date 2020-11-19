@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import { FC } from "react";
+import styled, { StyledComponent } from "styled-components";
 
 const Progress = styled.div`
   position: relative;
@@ -7,21 +8,21 @@ const Progress = styled.div`
   flex-direction: column;
 `;
 
-Progress.Svg = styled.svg`
+const Svg = styled.svg`
   transform: rotate(-90deg);
   fill: none;
   stroke-linecap: round;
 `;
 
-Progress.Circle = styled.circle`
+const Circle = styled.circle`
   stroke: var(--dark);
 `;
 
-Progress.CircleFill = styled.circle`
+const CircleFill = styled.circle`
   stroke: var(--smokeyWhite);
 `;
 
-Progress.Overlay = styled.div`
+const Overlay = styled.div`
   margin: auto;
   position: absolute;
   top: 0;
@@ -30,7 +31,7 @@ Progress.Overlay = styled.div`
   left: 0;
 `;
 
-Progress.Content = styled.div`
+const Content = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -38,7 +39,16 @@ Progress.Content = styled.div`
   height: 100%;
 `;
 
-export const CircularProgress = ({ percentage, size = 150, children }) => {
+type CircularProgressProps = {
+  percentage: number;
+  size?: number;
+};
+
+export const CircularProgress: FC<CircularProgressProps> = ({
+  percentage,
+  size = 150,
+  children
+}) => {
   const center = size / 2;
   const strokeWidth = size * 0.05;
   const radius = size / 2 - strokeWidth / 2;
@@ -51,15 +61,15 @@ export const CircularProgress = ({ percentage, size = 150, children }) => {
 
   return (
     <Progress>
-      <Progress.Svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-        <Progress.Circle
+      <Svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+        <Circle
           className="circle-background"
           cx={center}
           cy={center}
           r={radius}
           strokeWidth={strokeWidth}
         />
-        <Progress.CircleFill
+        <CircleFill
           style={style}
           cx={center}
           cy={center}
@@ -67,12 +77,12 @@ export const CircularProgress = ({ percentage, size = 150, children }) => {
           strokeWidth={strokeWidth}
           strokeDasharray={circumference}
         />
-      </Progress.Svg>
-      <Progress.Overlay>
-        <Progress.Content>
+      </Svg>
+      <Overlay>
+        <Content>
           <>{children}</>
-        </Progress.Content>
-      </Progress.Overlay>
+        </Content>
+      </Overlay>
     </Progress>
   );
 };

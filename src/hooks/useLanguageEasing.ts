@@ -4,11 +4,8 @@ import { easeInQuad } from "use-easing/lib/easings";
 
 const timeBase = 400;
 
-type LanguageEasingProps = {
-  code: number;
-  blanks: number;
-  comments: number;
-  duration: number;
+type LanguageEasingProps = Omit<IcyJoseph.Tokei, "language" | "inaccurate"> & {
+  duration?: number;
   order: number;
 };
 

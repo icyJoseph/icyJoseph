@@ -4,7 +4,6 @@ import { space } from "@styled-system/space";
 
 import { Box } from "components/Box";
 import { Emoji } from "components/Emoji";
-import { Flex } from "components/Flex";
 import { Text } from "components/Text";
 import {
   Table,
@@ -16,11 +15,17 @@ import {
   LegendItem,
   Details
 } from "components/Table";
+import { Select } from "components/Select";
 
 import { useFitbitActivityLog } from "hooks/useFitbit";
 import { exists } from "functional";
 
 const YEAR = new Date().getFullYear();
+
+const formatter = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric"
+});
 
 const SelectBox = styled(Box)`
   text-align: center;
@@ -29,35 +34,6 @@ const SelectBox = styled(Box)`
 const Label = styled.label`
   ${space};
   font-size: 2rem;
-`;
-
-const Select = styled.select`
-  ${space};
-  ${space({ pr: 3 })};
-  font-size: 2rem;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid var(--dark);
-  color: var(--softDark);
-  outline-offset: 8px;
-  outline-color: var(--softDark);
-  text-align: center;
-  text-align-last: center;
-  background-image: url("data:image/svg+xml,<svg width='24' height='24' xmlns='http://www.w3.org/2000/svg'><path d='m0,6l12,12l12,-12l-24,0z'/><path fill='none' d='m0,0l24,0l0,24l-24,0l0,-24z'/></svg>");
-  background-repeat: no-repeat;
-  background-size: 12px;
-  background-position-x: 100%;
-  background-position-y: 50%;
-  appearance: none;
-
-  > option {
-    background: var(--smokeyWhite);
-  }
-
-  > option:checked {
-    background: var(--softDark);
-    color: var(--smokeyWhite);
-  }
 `;
 
 const EmojiMap = ({ activity }) => {
@@ -165,11 +141,6 @@ const Headers = ({ activityType }) => {
   }
 };
 
-const formatter = new Intl.DateTimeFormat("en-US", {
-  month: "short",
-  day: "numeric"
-});
-
 const Body = ({ activity = {}, activityType }) => {
   switch (activityType) {
     case "All":
@@ -260,37 +231,6 @@ const EmojiLegend = () => (
   </Details>
 );
 
-const TableWithControls = styled(Flex)`
-  > table {
-    order: 1;
-  }
-`;
-
-const Pagination = styled.div`
-  ${space({ mx: "auto" })};
-  text-align: center;
-  order: 2;
-  max-width: 300px;
-  overflow-wrap: break-word;
-
-  @media (min-width: 768px) {
-    max-width: 528px;
-  }
-`;
-
-Pagination.Control = styled(({ active: _omit, disabled: __omit, ...rest }) => (
-  <span {...rest} />
-))`
-  ${space({ m: 2 })};
-  display: inline-block;
-  cursor: pointer;
-  text-decoration: underline;
-  color: ${(props) => (props.active ? "var(--green)" : "var(--dark)")};
-  visibility: ${(props) => (props.disabled ? "hidden" : "unset")};
-`;
-
-const pageSize = 7;
-
 export const ActivityLog = ({ initial }) => {
   const { data, error } = useFitbitActivityLog(YEAR, initial);
 
@@ -304,26 +244,10 @@ export const ActivityLog = ({ initial }) => {
 
   const [selected, setSelected] = useState("All");
 
-  const [pagination, setPagination] = useState(0);
-
   const selectedActivities = activityLog.filter(({ activityName }) => {
     if (selected === "All") return true;
     return activityName === selected;
   });
-
-  const numberOfPages = Math.ceil(selectedActivities.length / pageSize);
-
-  const tableSize = pageSize;
-
-  const currentTable = selectedActivities.slice(
-    pagination * pageSize,
-    (pagination + 1) * pageSize
-  );
-
-  const padding = Array.from(
-    { length: tableSize - currentTable.length },
-    (_, pad) => pad
-  );
 
   return (
     <>
@@ -344,7 +268,6 @@ export const ActivityLog = ({ initial }) => {
                 onChange={(e) => {
                   if (e.target.value) {
                     setSelected(e.target.value);
-                    setPagination(0);
                   }
                 }}
                 mt={2}
@@ -364,87 +287,52 @@ export const ActivityLog = ({ initial }) => {
         )}
       </SelectBox>
       {selected && (
-        <TableWithControls flexDirection="column">
-          <Table>
-            <caption>
-              <Text as="p" fontSize="1rem" textAlign="center" my={2}>
-                Automatically logged by Tracker
-              </Text>
-              <EmojiLegend />
-            </caption>
+        <Table>
+          <caption>
+            <Text as="p" fontSize="1rem" textAlign="center" my={2}>
+              Automatically logged by Tracker
+            </Text>
+            <EmojiLegend />
+          </caption>
 
-            <thead>
-              <Tr>
-                <Th desktop></Th>
-                {selected === "All" && <Th></Th>}
-                <Th>
-                  <Emoji symbol="⌚" title="Duration" ariaLabel="Duration" />{" "}
-                  <span>(min)</span>
-                </Th>
-                <Th>
-                  <Emoji symbol="🔥" title="Calories" ariaLabel="Calories" />{" "}
-                  <span>(Cal)</span>
-                </Th>
-                <Headers activityType={selected} />
-                <Th>
-                  <Emoji
-                    symbol="📆"
-                    title="Event Date"
-                    ariaLabel="Event Date"
-                  />
-                </Th>
-                <Th desktop></Th>
+          <thead>
+            <Tr>
+              <Th desktop></Th>
+              {selected === "All" && <Th></Th>}
+              <Th>
+                <Emoji symbol="⌚" title="Duration" ariaLabel="Duration" />{" "}
+                <span>(min)</span>
+              </Th>
+              <Th>
+                <Emoji symbol="🔥" title="Calories" ariaLabel="Calories" />{" "}
+                <span>(Cal)</span>
+              </Th>
+              <Headers activityType={selected} />
+              <Th>
+                <Emoji symbol="📆" title="Event Date" ariaLabel="Event Date" />
+              </Th>
+              <Th desktop></Th>
+            </Tr>
+          </thead>
+
+          <tbody>
+            {selectedActivities.map((activity) => (
+              <Tr key={activity.logId}>
+                <Td desktop></Td>
+                {selected === "All" && (
+                  <Td>
+                    <EmojiMap activity={activity.activityName} />
+                  </Td>
+                )}
+                <Td>{(activity.activeDuration / (60 * 1000)).toFixed(1)}</Td>
+                <Td>{activity.calories}</Td>
+                <Body activityType={selected} activity={activity} />
+                <Tdate>{formatter.format(new Date(activity.startTime))}</Tdate>
+                <Td desktop></Td>
               </Tr>
-            </thead>
-
-            <tbody>
-              {currentTable.map((activity) => (
-                <Tr key={activity.logId}>
-                  <Td desktop></Td>
-                  {selected === "All" && (
-                    <Td>
-                      <EmojiMap activity={activity.activityName} />
-                    </Td>
-                  )}
-                  <Td>{(activity.activeDuration / (60 * 1000)).toFixed(1)}</Td>
-                  <Td>{activity.calories}</Td>
-                  <Body activityType={selected} activity={activity} />
-                  <Tdate>
-                    {formatter.format(new Date(activity.startTime))}
-                  </Tdate>
-                  <Td desktop></Td>
-                </Tr>
-              ))}
-              {padding.map((pad) => (
-                <Tr key={pad}>
-                  <Td desktop></Td>
-                  {selected === "All" && <Td>-</Td>}
-                  <Td>-</Td>
-                  <Td>-</Td>
-                  <Body activityType={selected} />
-                  <Td>-</Td>
-                  <Td desktop></Td>
-                </Tr>
-              ))}
-            </tbody>
-          </Table>
-
-          <Pagination aria-label="Table Pagination">
-            {Array.from(
-              { length: Math.ceil(selectedActivities.length / pageSize) },
-              (_, num) => (
-                <Pagination.Control
-                  key={num}
-                  active={pagination === num}
-                  disabled={numberOfPages === 1}
-                  onClick={() => setPagination(num)}
-                >
-                  {num}
-                </Pagination.Control>
-              )
-            )}
-          </Pagination>
-        </TableWithControls>
+            ))}
+          </tbody>
+        </Table>
       )}
     </>
   );

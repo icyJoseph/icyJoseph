@@ -1,11 +1,21 @@
 import { useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { space } from "@styled-system/space";
 
 import { Box } from "components/Box";
 import { Emoji } from "components/Emoji";
 import { Flex } from "components/Flex";
 import { Text } from "components/Text";
+import {
+  Table,
+  Th,
+  Td,
+  Tr,
+  Tdate,
+  LegendList,
+  LegendItem,
+  Details
+} from "components/Table";
 
 import { useFitbitActivityLog } from "hooks/useFitbit";
 import { exists } from "functional";
@@ -47,130 +57,6 @@ const Select = styled.select`
   > option:checked {
     background: var(--softDark);
     color: var(--smokeyWhite);
-  }
-`;
-
-const Table = styled.table`
-  ${space};
-  width: 100%;
-  border-collapse: collapse;
-  border-spacing: 0;
-  empty-cells: show;
-`;
-
-const cellMixin = css`
-  overflow: visible;
-
-  ${space({ p: "1.5rem 0.75rem 1.5rem 0" })};
-  border-bottom: 1px solid var(--softDark);
-
-  &:empty:first-child,
-  &:empty:last-child {
-    ${space({ p: "1.5rem 0.75rem" })};
-    border-bottom: none;
-  }
-
-  display: ${(props) => (props.desktop ? "none" : "table-cell")};
-
-  font-size: 1.15rem;
-
-  @media (min-width: 514px) {
-    font-size: 1.25rem;
-  }
-
-  @media (min-width: 768px) {
-    font-size: inherit;
-  }
-
-  @media (min-width: 1024px) {
-    display: table-cell;
-  }
-`;
-
-const Th = styled.th`
-  text-align: center;
-
-  ${cellMixin};
-
-  > span:nth-child(2) {
-    display: none;
-  }
-
-  @media (min-width: 768px) {
-    > span:nth-child(2) {
-      display: inline;
-    }
-  }
-`;
-
-const Td = styled.td`
-  text-align: center;
-
-  ${cellMixin};
-`;
-
-const Tdate = styled(Td)`
-  font-size: 1.15rem;
-  width: 120px;
-
-  @media (min-width: 768px) {
-    font-size: inherit;
-    width: 200px;
-  }
-`;
-
-const Tr = styled.tr`
-  &:last-child > td {
-    border-bottom: none;
-  }
-`;
-
-const Details = styled.details`
-  display: inline-block;
-
-  color: white;
-
-  width: 33%;
-  min-width: 225px;
-  max-width: 300px;
-
-  position: relative;
-  background: var(--softDark);
-  line-height: 1.5;
-
-  > summary {
-    cursor: pointer;
-    outline-offset: 4px;
-    outline-color: var(--softDark);
-  }
-
-  > ul {
-    position: absolute;
-  }
-
-  > * {
-    cursor: default;
-  }
-`;
-
-const LegendList = styled.ul`
-  ${space};
-  background: var(--softDark);
-  width: 100%;
-  opacity: 0.9;
-`;
-
-const LegendItem = styled.li`
-  display: grid;
-  grid-template-columns: 33.33% 1fr;
-  grid-column-gap: 8px;
-
-  & > span:first-child {
-    text-align: end;
-  }
-
-  & > span:last-child {
-    text-align: start;
   }
 `;
 

@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 import { BackToTop } from "components/BackToTop";
 import { Box } from "components/Box";
-import { Card, InfoCard } from "components/Card";
 import { DataEntry } from "components/DataEntry";
 import { Flex } from "components/Flex";
 import { Section } from "components/Section";
@@ -14,8 +13,16 @@ import { ActivityLog } from "components/Fitbit/ActivityLog";
 
 import { useFitbitHR } from "hooks/useFitbit";
 
-const StyledFlex = styled(Flex)`
+const Cardio = styled(Flex)`
   width: 100%;
+`;
+
+const DataSegment = styled(Flex)`
+  min-width: 80%;
+
+  @media (min-width: 414px) {
+    min-width: 328px;
+  }
 `;
 
 const StyledDataEntry = styled(DataEntry)`
@@ -79,78 +86,67 @@ export const Fitbit: FC<FitbitProps> = ({
         </Text>
       </Section.Header>
       <Box as="main" mb={2}>
-        <Flex flexDirection="column" mt={2} pb={3}>
-          <InfoCard mx="auto">
-            <Card.Header>
-              <h2>Summary</h2>
-            </Card.Header>
-            <Card.Section>
-              <Flex flex={1} flexDirection="column" alignItems="center">
-                <Text color="--smokeyWhite">Avg Daily Steps:</Text>
+        <Flex mt={2} pb={3}>
+          <DataSegment
+            flex={1}
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Text fontSize="2rem" fontWeight="lighter">
+              Average Daily Steps
+            </Text>
 
-                <Text color="--yellow" fontWeight="bold" m={3} fontSize="2rem">
-                  {profile.averageDailySteps}
-                </Text>
+            <Text color="--blue" m={3} fontSize="5rem">
+              {profile.averageDailySteps}
+            </Text>
+          </DataSegment>
+          <DataSegment
+            flex={1}
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Text fontSize="2rem" fontWeight="lighter">
+              Resting pulse
+            </Text>
+            <Text color="--blue" m={3} fontSize="5rem">
+              {today?.value?.restingHeartRate ??
+                prevDay?.value?.restingHeartRate}{" "}
+              <Text as="span" fontWeight="lighter">
+                bpm
+              </Text>
+            </Text>
 
-                <Text color="--smokeyWhite">
-                  Resting pulse{" "}
-                  <Text
-                    as="span"
-                    textTransform="lowercase"
-                    color="--smokeyWhite"
-                  >
-                    (bpm)
-                  </Text>
-                  :
-                </Text>
-                <Text color="--yellow" fontWeight="bold" m={3} fontSize="2rem">
-                  {today?.value?.restingHeartRate ??
-                    prevDay?.value?.restingHeartRate}
-                </Text>
+            <Text fontWeight="lighter">
+              Heart activity last {heartData.length} days
+            </Text>
 
-                <Text color="--smokeyWhite">
-                  Heart activity last {heartData.length} days
-                </Text>
-
-                <StyledFlex>
-                  {Array.from(summary.values())
-                    .slice(1)
-                    .filter(
-                      ({ minutes, caloriesOut }) => minutes * caloriesOut > 0
-                    )
-                    .map(({ name, minutes, caloriesOut }) => {
-                      return (
-                        <StyledDataEntry key={name}>
-                          <Text color="--smokeyWhite" fontWeight={300}>
-                            {name}
-                          </Text>
-                          <Text color="--yellow" fontWeight="bold" mt={2}>
-                            {minutes}{" "}
-                            <Text
-                              as="span"
-                              color="--smokeyWhite"
-                              fontWeight={300}
-                            >
-                              min
-                            </Text>
-                          </Text>
-                          <Text color="--yellow" fontWeight="bold" mt={2}>
-                            {Math.floor(caloriesOut)}{" "}
-                            <Text
-                              as="span"
-                              color="--smokeyWhite"
-                              fontWeight={300}
-                            >
-                              Cal
-                            </Text>
-                          </Text>
-                        </StyledDataEntry>
-                      );
-                    })}
-                </StyledFlex>
-              </Flex>
-            </Card.Section>
-          </InfoCard>
+            <Cardio>
+              {Array.from(summary.values())
+                .slice(1)
+                .filter(({ minutes, caloriesOut }) => minutes * caloriesOut > 0)
+                .map(({ name, minutes, caloriesOut }) => {
+                  return (
+                    <StyledDataEntry key={name}>
+                      <Text fontWeight={300}>{name}</Text>
+                      <Text fontSize="2.5rem" color="--yellow" mt={2}>
+                        {minutes}{" "}
+                        <Text as="span" fontWeight={300}>
+                          min
+                        </Text>
+                      </Text>
+                      <Text fontSize="2.5rem" color="--yellow" mt={2}>
+                        {Math.floor(caloriesOut)}{" "}
+                        <Text as="span" fontWeight={300}>
+                          Cal
+                        </Text>
+                      </Text>
+                    </StyledDataEntry>
+                  );
+                })}
+            </Cardio>
+          </DataSegment>
         </Flex>
         <TopBadges profile={profile} />
         <ActivityLog initial={activityLog} />

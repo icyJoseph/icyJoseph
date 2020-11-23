@@ -16,6 +16,8 @@ const formatter = new Intl.DateTimeFormat("en-US", {
 
 const BaseEntry = styled(Text)`
   white-space: nowrap;
+  color: var(--blue);
+
   &:not(:last-child):after {
     content: "\\A";
     white-space: pre-wrap;
@@ -25,6 +27,7 @@ const BaseEntry = styled(Text)`
     &:not(:last-child):after {
       content: " / ";
       font-weight: bolder;
+      font-size: 3rem;
     }
   }
 `;
@@ -39,6 +42,10 @@ const BaseUnit = styled(Text)`
   }
 `;
 
+const BaseValue = styled(Text)`
+  font-variant-numeric: oldstyle-nums;
+`;
+
 const Unit: FC<{ unit: string }> = ({ unit }) => (
   <BaseUnit as="span" fontWeight="lighter">
     {unit}
@@ -46,9 +53,9 @@ const Unit: FC<{ unit: string }> = ({ unit }) => (
 );
 
 const Value: FC<{ value: number | string }> = ({ value }) => (
-  <Text as="span" fontWeight="lighter" fontSize="2rem">
+  <BaseValue as="span" fontWeight="lighter" fontSize="3rem">
     {value ?? "-"}
-  </Text>
+  </BaseValue>
 );
 
 const Entry: FC<{ value: number | string; unit: string }> = ({
@@ -59,7 +66,8 @@ const Entry: FC<{ value: number | string; unit: string }> = ({
     <Value value={value} /> <Unit unit={unit} />
   </BaseEntry>
 );
-const isBaseActivity = <T extends IcyJoseph.Activities>(
+
+const isBaseActivity = (
   activity: IcyJoseph.Activities
 ): activity is IcyJoseph.BaseActivity => {
   switch (activity.activityName) {
@@ -124,8 +132,6 @@ export const ActivityLog: FC<ActivityLogProps> = ({ initial }) => {
                 Activity during {YEAR}
               </Text>
             </Th>
-
-            <Th></Th>
           </Tr>
         </thead>
 
@@ -158,7 +164,6 @@ export const ActivityLog: FC<ActivityLogProps> = ({ initial }) => {
 
                 <Body activity={activity} />
               </Td>
-              <Td></Td>
             </Tr>
           ))}
         </tbody>

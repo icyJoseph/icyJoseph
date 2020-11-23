@@ -13,9 +13,11 @@ import { ActivityLog } from "components/Fitbit/ActivityLog";
 
 import { useFitbitHR } from "hooks/useFitbit";
 
-const StyledDataEntry = styled(DataEntry)`
-  flex-basis: 33.33%;
+const StyledFlex = styled(Flex)`
+  width: 100%;
+`;
 
+const StyledDataEntry = styled(DataEntry)`
   & > p:not(:first-child) {
     text-transform: inherit;
   }
@@ -63,20 +65,11 @@ export const Fitbit = ({ profile, activityLog, initialHR, name }) => {
           </a>
         </Text>
       </Section.Header>
-      <Box as="main">
-        <Flex flexDirection="column" my={2}>
+      <Box as="main" mb={2}>
+        <Flex flexDirection="column" mt={2} pb={3}>
           <InfoCard mx="auto">
             <Card.Header>
               <h2>Summary</h2>
-              <Text
-                as="h6"
-                fontSize="1.5rem"
-                my={2}
-                color="--smokeyWhite"
-                fontWeight={300}
-              >
-                Joined Fitbit in {profile.memberSince}
-              </Text>
             </Card.Header>
             <Card.Section>
               <Flex flex={1} flexDirection="column" alignItems="center">
@@ -102,11 +95,17 @@ export const Fitbit = ({ profile, activityLog, initialHR, name }) => {
                     prevDay?.value?.restingHeartRate}
                 </Text>
 
-                <Text color="--smokeyWhite">Last {heartData.length} days</Text>
+                <Text color="--smokeyWhite">
+                  Heart activity last {heartData.length} days
+                </Text>
 
-                <Flex>
-                  {Array.from(summary.values()).map(
-                    ({ name, minutes, caloriesOut }) => {
+                <StyledFlex>
+                  {Array.from(summary.values())
+                    .slice(1)
+                    .filter(
+                      ({ minutes, caloriesOut }) => minutes * caloriesOut > 0
+                    )
+                    .map(({ name, minutes, caloriesOut }) => {
                       return (
                         <StyledDataEntry key={name}>
                           <Text color="--smokeyWhite" fontWeight={300}>
@@ -134,14 +133,13 @@ export const Fitbit = ({ profile, activityLog, initialHR, name }) => {
                           </Text>
                         </StyledDataEntry>
                       );
-                    }
-                  )}
-                </Flex>
+                    })}
+                </StyledFlex>
               </Flex>
             </Card.Section>
           </InfoCard>
-          <TopBadges profile={profile} />
         </Flex>
+        <TopBadges profile={profile} />
         <ActivityLog initial={activityLog} />
       </Box>
       <BackToTop />

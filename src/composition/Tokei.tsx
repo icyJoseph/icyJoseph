@@ -64,9 +64,9 @@ export const Tokei: FC<TokeiProps> = ({ tokei, name }) => (
     </Flex>
     <Text mt={3} fontWeight="lighter">
       <Text as="span" color="--red">
-        Lines of Code,
+        Lines of Code
       </Text>
-      , without <strong>blanks</strong> or <strong>comments</strong>, taken from
+      , without counting <strong>blanks</strong> or <strong>comments</strong>, taken from
       my <strong>dev</strong> folder, using{" "}
       <Text
         as="a"
@@ -78,9 +78,9 @@ export const Tokei: FC<TokeiProps> = ({ tokei, name }) => (
         tokei
       </Text>
       .
-      <Text mt={2} fontWeight="lighter">
-        <i>A full circle means 0 blanks and 0 comments.</i>
-      </Text>
+    </Text>
+    <Text mt={2} fontWeight="lighter">
+      <i>A full circle means 0 blanks and 0 comments.</i>
     </Text>
   </Section>
 );

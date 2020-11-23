@@ -14,17 +14,35 @@ const formatter = new Intl.DateTimeFormat("en-US", {
   day: "numeric"
 });
 
-const StyledUnit = styled(Text)`
+const BaseEntry = styled(Text)`
+  white-space: nowrap;
   &:not(:last-child):after {
-    content: " / ";
-    font-weight: bolder;
+    content: "\\A";
+    white-space: pre-wrap;
+  }
+
+  @media (min-width: 768px) {
+    &:not(:last-child):after {
+      content: " / ";
+      font-weight: bolder;
+    }
+  }
+`;
+
+const BaseUnit = styled(Text)`
+  display: inline-block;
+  min-width: 6ch;
+  text-align: left;
+
+  @media (min-width: 768px) {
+    display: inline;
   }
 `;
 
 const Unit: FC<{ unit: string }> = ({ unit }) => (
-  <StyledUnit as="span" fontWeight="lighter">
+  <BaseUnit as="span" fontWeight="lighter">
     {unit}
-  </StyledUnit>
+  </BaseUnit>
 );
 
 const Value: FC<{ value: number | string }> = ({ value }) => (
@@ -33,6 +51,14 @@ const Value: FC<{ value: number | string }> = ({ value }) => (
   </Text>
 );
 
+const Entry: FC<{ value: number | string; unit: string }> = ({
+  value,
+  unit
+}) => (
+  <BaseEntry as="span">
+    <Value value={value} /> <Unit unit={unit} />
+  </BaseEntry>
+);
 const isBaseActivity = <T extends IcyJoseph.Activities>(
   activity: IcyJoseph.Activities
 ): activity is IcyJoseph.BaseActivity => {
@@ -55,11 +81,12 @@ const Body: FC<{ activity: IcyJoseph.Activities }> = ({ activity }) => {
   if (isSwimming(activity)) {
     return (
       <>
-        <Value value={activity.distance} /> <Unit unit="km" />
-        <Value
+        <Entry value={activity.distance} unit="km" />
+
+        <Entry
           value={exists(activity.pace) ? (activity.pace / 60).toFixed(1) : "-"}
-        />{" "}
-        <Unit unit="min/km" />
+          unit="min/km"
+        />
       </>
     );
   }
@@ -67,17 +94,13 @@ const Body: FC<{ activity: IcyJoseph.Activities }> = ({ activity }) => {
   if (isBaseActivity(activity)) {
     return (
       <>
-        <Value value={activity.steps} /> <Unit unit="steps" />
-        <Value value={activity.averageHeartRate} /> <Unit unit="bpm" />
+        <Entry value={activity.steps} unit="steps" />
+        <Entry value={activity.averageHeartRate} unit="bpm" />
       </>
     );
   }
 
-  return (
-    <>
-      <Value value={activity.averageHeartRate} /> <Unit unit="bpm" />
-    </>
-  );
+  return <Entry value={activity.averageHeartRate} unit="bpm" />;
 };
 
 type ActivityLogProps = {
@@ -96,13 +119,12 @@ export const ActivityLog: FC<ActivityLogProps> = ({ initial }) => {
           <Tr>
             <Th></Th>
 
-            <Th>
+            <Th colSpan={2}>
               <Text textAlign="left" fontSize="2rem" fontWeight={100}>
                 Activity during {YEAR}
               </Text>
             </Th>
 
-            <Th></Th>
             <Th></Th>
           </Tr>
         </thead>
@@ -127,11 +149,13 @@ export const ActivityLog: FC<ActivityLogProps> = ({ initial }) => {
               </Td>
 
               <Td>
-                <Value
+                <Entry
                   value={(activity.activeDuration / (60 * 1000)).toFixed(1)}
-                />{" "}
-                <Unit unit="min" />
-                <Value value={activity.calories} /> <Unit unit="Cals" />
+                  unit="min"
+                />
+
+                <Entry value={activity.calories} unit="Cals" />
+
                 <Body activity={activity} />
               </Td>
               <Td></Td>

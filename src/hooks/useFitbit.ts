@@ -82,7 +82,7 @@ export const useFitbitActivity = (type = "lifeTime") => {
 
 export const useFitbitActivityLog = (
   year: number,
-  initialData: IcyJoseph.ActivityLog | null = null
+  initialData?: IcyJoseph.ActivityLog
 ) => {
   return useSWR<IcyJoseph.ActivityLog>(
     ["activity-log", year],

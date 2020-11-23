@@ -51,37 +51,48 @@ declare namespace IcyJoseph {
     min: number;
     minutes: number;
     name: "Peak" | "Cardio" | "Fat Burn" | "Out of Range";
+    caloriesOut: number;
   };
 
-  export type Swim = {
+  type BaseActivity = {
+    activeDuration: number;
+    activityLevel: ActivityLevel[];
+    activityName: string;
+    activityTypeId: number;
+    logId: number;
+    calories: number;
+    duration: number;
+    startTime: string;
+    steps: number;
+    heartRateZones: HeartRateZones;
+    averageHeartRate: number;
+  };
+
+  export interface SwimActivity
+    extends Omit<BaseActivity, "steps" | "heartRateZones"> {
     pace: number;
     poolLength: number;
     poolLengthUnit: string;
     speed: number;
     swimLenghts: number;
+    distance: number;
+  }
+
+  export interface ActivityWithoutSteps extends Omit<BaseActivity, "steps"> {}
+
+  export type Activities = BaseActivity | ActivityWithoutSteps | SwimActivity;
+
+  export type ActivityLog = Activities[];
+
+  export type HeartRatePoint = {
+    dateTime: string;
+    value: {
+      heartRateZones: HeartRateZones[];
+      restingHeartRate: number;
+    };
   };
 
-  export type LandActivity = {
-    steps: number;
-    averageHeartRate: number;
-    heartRateZones: HeartRateZones;
+  export type HeartRateActivity = {
+    "activities-heart": Array<HeartRatePoint>;
   };
-
-  export type Activity<A extends "Swim" | "Land" = "Land"> = {
-    activeDuration: number;
-    activityLevel: ActivityLevel[];
-    activityName: string;
-    activityTypeId: number;
-    calories: number;
-    duration: number;
-    startTime: string;
-  } & A extends "Swim"
-    ? Swim
-    : LandActivity;
-
-  export type ActivityLog = {
-    activities: (Activity<"Land"> | Activity<"Swim">)[];
-  };
-
-  export type HeartRate = any;
 }

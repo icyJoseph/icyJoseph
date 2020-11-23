@@ -1,3 +1,4 @@
+import { FC } from "react";
 import styled from "styled-components";
 
 import { BackToTop } from "components/BackToTop";
@@ -23,7 +24,7 @@ const StyledDataEntry = styled(DataEntry)`
   }
 `;
 
-const heartRateMonthSummary = (points) =>
+const heartRateMonthSummary = (points: IcyJoseph.HeartRatePoint[]) =>
   points.reduce((prev, { value }) => {
     const { heartRateZones } = value;
 
@@ -46,7 +47,19 @@ const heartRateMonthSummary = (points) =>
     return prev;
   }, new Map());
 
-export const Fitbit = ({ profile, activityLog, initialHR, name }) => {
+type FitbitProps = {
+  profile: IcyJoseph.FitbitUser;
+  activityLog: IcyJoseph.ActivityLog;
+  initialHR: IcyJoseph.HeartRateActivity;
+  name: string;
+};
+
+export const Fitbit: FC<FitbitProps> = ({
+  profile,
+  activityLog,
+  initialHR,
+  name
+}) => {
   const { data } = useFitbitHR(
     { date: "today", period: "1m", revalidateOnMount: true },
     initialHR

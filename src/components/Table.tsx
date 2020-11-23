@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { space, SpaceProps } from "@styled-system/space";
 
-const cellMixin = css<{ desktop: boolean }>`
+const cellMixin = css`
   overflow: visible;
 
   ${space({ p: "1.5rem 0.75rem 1.5rem 0" })};

@@ -27,7 +27,7 @@ type HomeProps = {
   tokei: IcyJoseph.Tokei[];
   fitbit: IcyJoseph.Fitbit;
   activityLog: IcyJoseph.ActivityLog;
-  initialHR: IcyJoseph.HeartRate;
+  initialHR: IcyJoseph.HeartRateActivity;
 };
 
 export function Home({
@@ -64,7 +64,7 @@ export function Home({
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(): Promise<{ props: HomeProps }> {
   const codewars = await getCodeWarsUser();
 
   const github = await queryGitHub(GET_USER, {
@@ -82,7 +82,7 @@ export async function getStaticProps() {
     .then(({ data }) => data.user);
 
   const initialHR = await fitbitAuth
-    .get("/activities/heart/date/today/1m.json")
+    .get<IcyJoseph.HeartRateActivity>("/activities/heart/date/today/1m.json")
     .then(({ data }) => data);
 
   const activityLog = await getActivityLog({

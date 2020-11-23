@@ -59,9 +59,9 @@ type UseFitbitHRProps = {
 
 export const useFitbitHR = (
   { date, period, revalidateOnMount = false }: UseFitbitHRProps,
-  initialData = null
+  initialData: IcyJoseph.HeartRateActivity
 ) => {
-  return useSWR(
+  return useSWR<IcyJoseph.HeartRateActivity>(
     [date, period],
     (...args: [date: string, period: Period]) => heartRateFetcher(...args),
     {
@@ -82,7 +82,7 @@ export const useFitbitActivity = (type = "lifeTime") => {
 
 export const useFitbitActivityLog = (
   year: number,
-  initialData?: IcyJoseph.ActivityLog
+  initialData: IcyJoseph.ActivityLog
 ) => {
   return useSWR<IcyJoseph.ActivityLog>(
     ["activity-log", year],

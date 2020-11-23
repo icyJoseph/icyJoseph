@@ -1,4 +1,6 @@
+import { FC } from "react";
 import styled from "styled-components";
+
 import { Text } from "components/Text";
 import { Table, Th, Td, Tr } from "components/Table";
 
@@ -19,54 +21,70 @@ const StyledUnit = styled(Text)`
   }
 `;
 
-const Unit = ({ unit }) => (
+const Unit: FC<{ unit: string }> = ({ unit }) => (
   <StyledUnit as="span" fontWeight="lighter">
     {unit}
   </StyledUnit>
 );
 
-const Value = ({ value }) => (
+const Value: FC<{ value: number | string }> = ({ value }) => (
   <Text as="span" fontWeight="lighter" fontSize="2rem">
     {value ?? "-"}
   </Text>
 );
 
-const Body = ({ activity }) => {
-  const { activityName } = activity;
-  switch (activityName) {
-    case "Swim":
-      return (
-        <>
-          <Value value={activity.distance} /> <Unit unit="km" />
-          <Value
-            value={
-              exists(activity?.pace) ? (activity.pace / 60).toFixed(1) : "-"
-            }
-          />{" "}
-          <Unit unit="min/km" />
-        </>
-      );
+const isBaseActivity = <T extends IcyJoseph.Activities>(
+  activity: IcyJoseph.Activities
+): activity is IcyJoseph.BaseActivity => {
+  switch (activity.activityName) {
     case "Walk":
     case "Sport":
     case "Run":
     case "Aerobic Workout":
-      return (
-        <>
-          <Value value={activity.steps} /> <Unit unit="steps" />
-          <Value value={activity.averageHeartRate} /> <Unit unit="bpm" />
-        </>
-      );
-    case "Outdoor Bike":
+      return true;
+
     default:
-      return (
-        <>
-          <Value value={activity.averageHeartRate} /> <Unit unit="bpm" />
-        </>
-      );
+      return false;
   }
 };
 
-export const ActivityLog = ({ initial }) => {
+const isSwimming = (act: IcyJoseph.Activities): act is IcyJoseph.SwimActivity =>
+  act.activityName === "Swim";
+
+const Body: FC<{ activity: IcyJoseph.Activities }> = ({ activity }) => {
+  if (isSwimming(activity)) {
+    return (
+      <>
+        <Value value={activity.distance} /> <Unit unit="km" />
+        <Value
+          value={exists(activity.pace) ? (activity.pace / 60).toFixed(1) : "-"}
+        />{" "}
+        <Unit unit="min/km" />
+      </>
+    );
+  }
+
+  if (isBaseActivity(activity)) {
+    return (
+      <>
+        <Value value={activity.steps} /> <Unit unit="steps" />
+        <Value value={activity.averageHeartRate} /> <Unit unit="bpm" />
+      </>
+    );
+  }
+
+  return (
+    <>
+      <Value value={activity.averageHeartRate} /> <Unit unit="bpm" />
+    </>
+  );
+};
+
+type ActivityLogProps = {
+  initial: IcyJoseph.ActivityLog;
+};
+
+export const ActivityLog: FC<ActivityLogProps> = ({ initial }) => {
   const { data } = useFitbitActivityLog(YEAR, initial);
 
   const activityLog = data ?? [];
@@ -79,7 +97,7 @@ export const ActivityLog = ({ initial }) => {
             <Th></Th>
 
             <Th>
-              <Text textAlign="left" fontSize="2rem" fontWeight="100">
+              <Text textAlign="left" fontSize="2rem" fontWeight={100}>
                 Activity during {YEAR}
               </Text>
             </Th>

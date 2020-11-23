@@ -24,7 +24,7 @@
     "remark-parse": "^8.0.3",
     "stegcloak": "^1.1.1",
     "styled-components": "^5.1.1",
-    "swr": "^0.2.3",
+    "swr": "^0.3.9",
     "unified": "^9.2.0",
     "use-easing": "^0.0.2"
   },

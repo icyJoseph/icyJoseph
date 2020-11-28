@@ -9,12 +9,22 @@ const StyledFooter = styled.footer`
   background: var(--softDark);
   color: var(--smokeyWhite);
 `;
+
 const StyledSection = styled.section`
   ${space({ m: "0 auto" })};
   display: grid;
   grid-template-columns: repeat(4, minmax(min-content, 1fr));
   grid-column-gap: 2rem;
   max-width: 85ch;
+
+  @supports not (display: grid) {
+    display: flex;
+    flex-wrap: wrap;
+
+    & > * {
+      flex: 1;
+    }
+  }
 `;
 
 const CopyrightNotice = styled.span`

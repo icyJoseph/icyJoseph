@@ -19,7 +19,7 @@ import { getActivityLog } from "pages/api/fitbit/activities/list";
 
 import { GET_USER } from "queries";
 
-import { yearStart } from "helpers";
+import { yearStart, isoStringWithoutMs } from "helpers";
 
 type HomeProps = {
   codewars: IcyJoseph.CodeWars;
@@ -86,7 +86,7 @@ export async function getStaticProps(): Promise<{ props: HomeProps }> {
     .then(({ data }) => data);
 
   const activityLog = await getActivityLog({
-    afterDate: `${new Date().getFullYear()}-01-01`
+    beforeDate: isoStringWithoutMs(new Date().toISOString())
   });
 
   return { props: { codewars, github, tokei, fitbit, activityLog, initialHR } };

@@ -1,25 +1,25 @@
 [
   {
     "language": "JavaScript",
-    "blanks": 48104,
-    "code": 387703,
-    "comments": 41207,
-    "children": {},
-    "inaccurate": false
-  },
-  {
-    "language": "CSS",
-    "blanks": 2686,
-    "code": 26787,
-    "comments": 336,
+    "blanks": 48101,
+    "code": 387683,
+    "comments": 41216,
     "children": {},
     "inaccurate": false
   },
   {
     "language": "TypeScript",
-    "blanks": 3200,
-    "code": 26093,
-    "comments": 2063,
+    "blanks": 3410,
+    "code": 27506,
+    "comments": 2073,
+    "children": {},
+    "inaccurate": false
+  },
+  {
+    "language": "CSS",
+    "blanks": 2693,
+    "code": 26814,
+    "comments": 336,
     "children": {},
     "inaccurate": false
   },
@@ -59,21 +59,21 @@
         },
         {
           "stats": {
-            "blanks": 0,
-            "code": 0,
-            "comments": 6,
-            "blobs": {}
-          },
-          "name": "/home/joseph/dev/code_wars/integers-recreation-one/src/main.rs"
-        },
-        {
-          "stats": {
             "blanks": 3,
             "code": 0,
             "comments": 15,
             "blobs": {}
           },
           "name": "/home/joseph/dev/code_wars/collatz/src/main.rs"
+        },
+        {
+          "stats": {
+            "blanks": 0,
+            "code": 0,
+            "comments": 6,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/code_wars/integers-recreation-one/src/main.rs"
         },
         {
           "stats": {

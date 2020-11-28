@@ -1,13 +1,16 @@
-import { FC } from "react";
+import { FC, useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 
+import { Button } from "components/Button";
+import { Flex } from "components/Flex";
 import { Text } from "components/Text";
 import { Table, Th, Td, Tr } from "components/Table";
 
 import { useFitbitActivityLog } from "hooks/useFitbit";
-import { exists } from "functional";
+import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
 
-const YEAR = new Date().getFullYear();
+import { head, exists } from "functional";
+import { isoStringWithoutMs } from "helpers";
 
 const formatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
@@ -115,21 +118,62 @@ type ActivityLogProps = {
   initial: IcyJoseph.ActivityLog;
 };
 
-export const ActivityLog: FC<ActivityLogProps> = ({ initial }) => {
-  const { data } = useFitbitActivityLog(YEAR, initial);
+const beforeDateQueue = (initial: string) => {
+  const set = new Set(initial);
+  const arr = [initial];
 
-  const activityLog = data ?? [];
+  return {
+    add: (date: string) => {
+      if (set.has(date)) {
+        return;
+      }
+      set.add(date);
+      arr.push(date);
+    },
+    get: (index: number) => arr[index]
+  };
+};
+
+const useDateQueue = (seed: string) => {
+  const [cursor, setCursor] = useState(0);
+
+  const queue = useRef(beforeDateQueue(isoStringWithoutMs(seed)));
+
+  const currentDate = queue.current.get(cursor);
+
+  const prevAction = () => {
+    setCursor((prev) => (prev === 0 ? prev : prev - 1));
+  };
+
+  const nextAction = (next: string) => {
+    queue.current.add(next);
+    setCursor((prev) => prev + 1);
+  };
+
+  return [currentDate, prevAction, nextAction] as const;
+};
+
+export const ActivityLog: FC<ActivityLogProps> = ({ initial }) => {
+  const { startTime: initialStartTime } = head(initial);
+  const [currentDate, prevAction, nextAction] = useDateQueue(initialStartTime);
+
+  const { data, error } = useFitbitActivityLog(currentDate, initial);
+  const prev = useLastNonNullableValue(data) ?? [];
+  const activityLog = data ?? prev;
+  const stale = !error && !data;
+
+  const [last] = activityLog.slice(-1);
 
   return (
     <>
-      <Table my={3}>
+      <Table my={3} stale={stale}>
         <thead>
           <Tr>
             <Th></Th>
 
             <Th colSpan={2}>
               <Text textAlign="left" fontSize="2rem" fontWeight={100}>
-                Activity during {YEAR}
+                Activities
               </Text>
             </Th>
           </Tr>
@@ -168,6 +212,22 @@ export const ActivityLog: FC<ActivityLogProps> = ({ initial }) => {
           ))}
         </tbody>
       </Table>
+      <Flex justifyContent="space-around">
+        <Button
+          variant="primary"
+          disabled={currentDate === isoStringWithoutMs(initialStartTime)}
+          onClick={prevAction}
+        >
+          Prev
+        </Button>
+
+        <Button
+          variant="primary"
+          onClick={() => nextAction(isoStringWithoutMs(last?.startTime))}
+        >
+          Next
+        </Button>
+      </Flex>
     </>
   );
 };

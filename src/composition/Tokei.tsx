@@ -66,8 +66,8 @@ export const Tokei: FC<TokeiProps> = ({ tokei, name }) => (
       <Text as="span" color="--red">
         Lines of Code
       </Text>
-      , without counting <strong>blanks</strong> or <strong>comments</strong>, taken from
-      my <strong>dev</strong> folder, using{" "}
+      , without counting <strong>blanks</strong> or <strong>comments</strong>,
+      taken from my <strong>dev</strong> folder, using{" "}
       <Text
         as="a"
         href="https://github.com/XAMPPRocky/tokei"

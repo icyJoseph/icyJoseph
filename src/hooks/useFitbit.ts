@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import axios from "axios";
 import useSWR from "swr";
 
@@ -29,10 +30,12 @@ const activityFetcher = (type: string) => {
   return axios.get(`/api/fitbit/activities/${type}`).then(({ data }) => data);
 };
 
-const activityLogFetcher = (year: number) => {
-  return axios
+const activityLogFetcher = async (beforeDate: string) => {
+  await new Promise((resolve) => setTimeout(resolve, 750));
+
+  return await axios
     .get<IcyJoseph.ActivityLog>(`/api/fitbit/activities/list`, {
-      params: { afterDate: `${year}-01-01` },
+      params: { beforeDate },
       paramsSerializer: (params) => {
         return encodeURI(
           Object.entries(params)
@@ -81,18 +84,18 @@ export const useFitbitActivity = (type = "lifeTime") => {
 };
 
 export const useFitbitActivityLog = (
-  year: number,
-  initialData: IcyJoseph.ActivityLog
+  beforeDate: string,
+  initial: IcyJoseph.ActivityLog | null
 ) => {
-  return useSWR<IcyJoseph.ActivityLog>(
-    ["activity-log", year],
-    (_: "activity-log", year: number) => activityLogFetcher(year),
-    {
-      shouldRetryOnError: false,
-      revalidateOnFocus: false,
-      dedupingInterval: 24 * 60 * 60 * 1000,
-      revalidateOnMount: false,
-      initialData
-    }
-  );
+  const mounted = useRef(false);
+
+  useEffect(() => {
+    mounted.current = true;
+  }, []);
+
+  return useSWR<IcyJoseph.ActivityLog | null>(beforeDate, activityLogFetcher, {
+    shouldRetryOnError: false,
+    revalidateOnFocus: false,
+    initialData: mounted.current ? null : initial
+  });
 };

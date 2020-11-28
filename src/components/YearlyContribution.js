@@ -18,9 +18,9 @@ import { clamp } from "helpers";
 
 const cardWidth = 328;
 
-const staleMixin = css`
+export const staleMixin = css`
   opacity: ${({ stale = false }) => (stale ? 0.5 : 1)};
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 1s ease-in-out;
 `;
 
 const ContributionsSummary = styled(Flex)`
@@ -246,7 +246,6 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
         <Options mt={2}>
           <OptionButton
             type="button"
-            text={`Prev`}
             onClick={() => {
               setPointer((x) =>
                 clamp(x - windowSize, 0, commitContributionsByRepository.length)
@@ -255,10 +254,11 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
             disabled={pointer === 0}
             my={2}
             mx="auto"
-          />
+          >
+            Prev
+          </OptionButton>
           <OptionButton
             type="button"
-            text={`Next`}
             onClick={() => {
               setPointer((x) =>
                 clamp(x + windowSize, 0, commitContributionsByRepository.length)
@@ -269,7 +269,9 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
             }
             my={2}
             mx="auto"
-          />
+          >
+            Next
+          </OptionButton>
         </Options>
         <RepositoriesGrid m={2} ref={ref}>
           {commitContributionsByRepository

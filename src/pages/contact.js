@@ -51,8 +51,7 @@ export function Contact({ cloaked }) {
           </header>
           <Section as="main" maxWidth="65ch">
             <Text my={2}>
-              Before contacting me, please consider my stress levels the last 31
-              days.
+              Before contacting me, please consider my stress level.
             </Text>
 
             {data && <Calendar data={heartData} />}

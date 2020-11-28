@@ -15,8 +15,6 @@ const StyledButton = styled.button`
   background-color: var(--smokeyWhite);
   cursor: pointer;
 
-  outline-offset: 8px;
-
   &::before,
   &::after {
     background-color: transparent;
@@ -45,6 +43,18 @@ const StyledButton = styled.button`
 
   &:disabled:active {
     pointer-events: none;
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline-color: var(--blue);
+    outline-offset: 4px;
+    outline-width: 2px;
+    outline-style: solid;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
   }
 `;
 
@@ -121,12 +131,12 @@ StyledButton.Text = styled.span`
   }
 `;
 
-export const Button = ({ variant, text, disabled = false, ...rest }) => (
+export const Button = ({ variant, disabled = false, children, ...rest }) => (
   <StyledButton variant={variant} disabled={disabled} {...rest}>
     <StyledButton.Label variant={variant}>
       {!disabled && <StyledButton.HoverEffect />}
       <StyledButton.Text variant={variant} disabled={disabled}>
-        {text}
+        {children}
       </StyledButton.Text>
     </StyledButton.Label>
   </StyledButton>

@@ -4,11 +4,8 @@ import { easeInQuad } from "use-easing/lib/easings";
 
 const timeBase = 400;
 
-type LanguageEasingProps = {
-  code: number;
-  blanks: number;
-  comments: number;
-  duration: number;
+type LanguageEasingProps = Omit<IcyJoseph.Tokei, "language" | "inaccurate"> & {
+  duration?: number;
   order: number;
 };
 
@@ -25,6 +22,7 @@ export function useLanguageEasing({
   const { value, setTrigger } = useEasing<number>({
     end: code,
     duration,
+    formatFn: (e) => Math.trunc(e),
     easingFn: easeInQuad,
     autoStart: false
   });

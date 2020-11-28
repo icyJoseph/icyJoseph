@@ -19,15 +19,15 @@ import { getActivityLog } from "pages/api/fitbit/activities/list";
 
 import { GET_USER } from "queries";
 
-import { yearStart } from "helpers";
+import { yearStart, isoStringWithoutMs } from "helpers";
 
 type HomeProps = {
   codewars: IcyJoseph.CodeWars;
   github: IcyJoseph.GitHub;
-  tokei: IcyJoseph.Tokei;
+  tokei: IcyJoseph.Tokei[];
   fitbit: IcyJoseph.Fitbit;
   activityLog: IcyJoseph.ActivityLog;
-  initialHR: IcyJoseph.HeartRate;
+  initialHR: IcyJoseph.HeartRateActivity;
 };
 
 export function Home({
@@ -64,7 +64,7 @@ export function Home({
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(): Promise<{ props: HomeProps }> {
   const codewars = await getCodeWarsUser();
 
   const github = await queryGitHub(GET_USER, {
@@ -75,18 +75,18 @@ export async function getStaticProps() {
   const tokei = await promisify(fs.readFile)(
     path.resolve(process.cwd(), "tokei.json"),
     "utf-8"
-  ).then(JSON.parse);
+  ).then<IcyJoseph.Tokei[]>(JSON.parse);
 
   const fitbit = await fitbitAuth
     .get("/profile.json")
     .then(({ data }) => data.user);
 
   const initialHR = await fitbitAuth
-    .get("/activities/heart/date/today/1m.json")
+    .get<IcyJoseph.HeartRateActivity>("/activities/heart/date/today/1m.json")
     .then(({ data }) => data);
 
   const activityLog = await getActivityLog({
-    afterDate: `${new Date().getFullYear()}-01-01`
+    beforeDate: isoStringWithoutMs(new Date().toISOString())
   });
 
   return { props: { codewars, github, tokei, fitbit, activityLog, initialHR } };

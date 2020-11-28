@@ -16,7 +16,14 @@ const BadgeImg = styled.img`
 export const TopBadges = ({ profile }) => {
   return (
     <>
-      <Text as="h6" fontSize="1.8rem" mt={3}>
+      <Text
+        as="h6"
+        fontSize="2rem"
+        fontWeight="lighter"
+        mt={3}
+        mb={2}
+        pl="1.5rem"
+      >
         Top Badges
       </Text>
       <Flex>

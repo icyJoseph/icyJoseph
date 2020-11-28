@@ -137,10 +137,11 @@ export const GitHub = ({ initial, name: pageName }) => {
                     <Button
                       key={year}
                       variant={year !== selectedYear ? "outlined" : null}
-                      text={year}
                       m={2}
                       onClick={() => setSelectedYear(year)}
-                    />
+                    >
+                      {year}
+                    </Button>
                   ))}
               </Contributions>
 

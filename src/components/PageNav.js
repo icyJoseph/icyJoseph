@@ -30,7 +30,7 @@ export const PageNav = ({ children }) => {
             if (!name) return null;
             return (
               <PageLink>
-                <Link href={`#${name}`}>
+                <Link href={`/#${name}`}>
                   <a>{name}</a>
                 </Link>
               </PageLink>

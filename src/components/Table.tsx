@@ -6,16 +6,10 @@ import { staleMixin } from "components/YearlyContribution";
 const cellMixin = css`
   overflow: visible;
 
-  ${space({ p: "1.5rem 0.75rem 1.5rem 0" })};
-
-  font-size: 1.15rem;
-
-  @media (min-width: 514px) {
-    font-size: 1.25rem;
-  }
+  ${space({ p: "0.75rem 0.375rem 0.75rem 0" })};
 
   @media (min-width: 768px) {
-    font-size: inherit;
+    ${space({ p: "1.5rem 0.75rem 1.5rem 0" })};
   }
 
   &:empty:first-child,

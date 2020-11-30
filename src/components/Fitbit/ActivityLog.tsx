@@ -11,6 +11,7 @@ import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
 
 import { head, exists } from "functional";
 import { isoStringWithoutMs } from "helpers";
+import { useMediaQuery } from "hooks/useMediaQuery";
 
 const formatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
@@ -47,6 +48,11 @@ const BaseUnit = styled(Text)`
 
 const BaseValue = styled(Text)`
   font-variant-numeric: oldstyle-nums;
+  font-size: 2rem;
+
+  @media (min-width: 768px) {
+    font-size: 3rem;
+  }
 `;
 
 const Unit: FC<{ unit: string }> = ({ unit }) => (
@@ -56,7 +62,7 @@ const Unit: FC<{ unit: string }> = ({ unit }) => (
 );
 
 const Value: FC<{ value: number | string }> = ({ value }) => (
-  <BaseValue as="span" fontWeight="lighter" fontSize="3rem">
+  <BaseValue as="span" fontWeight="lighter">
     {value ?? "-"}
   </BaseValue>
 );

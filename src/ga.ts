@@ -1,10 +1,10 @@
+interface Gtag {
+  (event: string, action: string, payload: Record<string, string>): void;
+  pageview: (url: string) => void;
+}
 declare global {
   interface Window {
-    gtag: (
-      event: string,
-      action: string,
-      payload: Record<string, string>
-    ) => void;
+    gtag: Gtag;
   }
 }
 

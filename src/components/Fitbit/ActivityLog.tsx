@@ -11,7 +11,6 @@ import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
 
 import { head, exists } from "functional";
 import { isoStringWithoutMs } from "helpers";
-import { useMediaQuery } from "hooks/useMediaQuery";
 
 const formatter = new Intl.DateTimeFormat("en-US", {
   month: "short",

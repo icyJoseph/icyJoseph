@@ -1,6 +1,10 @@
 import { useEffect } from "react";
+
+import { AppProps } from "next/app";
 import Router, { useRouter } from "next/router";
+
 import { ThemeProvider } from "styled-components";
+
 import { theme } from "styles/theme";
 import { GlobalStyle } from "styles/global";
 
@@ -14,12 +18,12 @@ Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
-function App({ Component, pageProps }) {
+function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
   useEffect(() => {
-    const handler = (url) => {
-      globalThis.gtag.pageview(url);
+    const handler = (url: string) => {
+      window.gtag?.pageview(url);
     };
 
     router.events.on("routerChangeComplete", handler);

@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+
+import { trunc } from "helpers";
 import { useEasing } from "use-easing";
 import { easeInQuad } from "use-easing/lib/easings";
 
@@ -22,7 +24,7 @@ export function useLanguageEasing({
   const { value, setTrigger } = useEasing<number>({
     end: code,
     duration,
-    formatFn: (e) => Math.trunc(e),
+    formatFn: (e) => trunc(e),
     easingFn: easeInQuad,
     autoStart: false
   });

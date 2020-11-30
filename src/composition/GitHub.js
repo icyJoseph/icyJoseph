@@ -44,6 +44,10 @@ const Profile = styled(Flex)`
   justify-content: center;
 `;
 
+const Bio = styled(Flex)`
+  overflow: hidden;
+`;
+
 const RenderWithSelectedYear = ({ last, children }) => {
   const [selectedYear, setSelectedYear] = useState(last);
 
@@ -113,7 +117,7 @@ export const GitHub = ({ initial, name: pageName }) => {
               </Text>
             </Card.Header>
             <Card.Section>
-              <Flex flexDirection="column" py={3} px={2}>
+              <Bio flexDirection="column" py={3} px={2}>
                 <Text color="--yellow" mb={2}>
                   {company}
                 </Text>
@@ -121,7 +125,7 @@ export const GitHub = ({ initial, name: pageName }) => {
                 <Text color="--smokeyWhite" mb={2} fontWeight={300}>
                   {bio}
                 </Text>
-              </Flex>
+              </Bio>
             </Card.Section>
           </InfoCard>
         </Profile>

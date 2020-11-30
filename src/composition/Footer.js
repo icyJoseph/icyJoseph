@@ -9,8 +9,15 @@ const StyledFooter = styled.footer`
   background: var(--softDark);
   color: var(--smokeyWhite);
 `;
+
 const StyledSection = styled.section`
   ${space({ m: "0 auto" })};
+
+  /* IE11 fallback */
+  display: -ms-grid;
+  -ms-grid-columns: 1fr 1fr 1fr 1fr;
+  column-gap: 2rem;
+
   display: grid;
   grid-template-columns: repeat(4, minmax(min-content, 1fr));
   grid-column-gap: 2rem;
@@ -18,6 +25,11 @@ const StyledSection = styled.section`
 `;
 
 const CopyrightNotice = styled.span`
+  /* IE11 fallback */
+  display: block;
+  -ms-grid-column-span: 4;
+  -ms-grid-row: 2;
+
   grid-column: span 4;
   text-align: center;
 `;
@@ -25,9 +37,13 @@ const CopyrightNotice = styled.span`
 const Stack = styled.div`
   ${space};
 
+  /* IE11 fallback */
+  -ms-grid-column-span: 2;
   grid-column: span 2;
 
   @media (min-width: 768px) {
+    /* IE11 fallback */
+    -ms-grid-column-span: 1;
     grid-column: span 1;
   }
 `;
@@ -41,16 +57,28 @@ const List = styled.ul`
 
 const FooterNav = styled.nav`
   ${space};
+
+  /* IE11 fallback */
+  -ms-grid-column: 4;
+
   grid-column: 2 / 4;
   text-align: center;
 
   @media (min-width: 768px) {
+    /* IE11 fallback */
+    -ms-grid-column-span: 1;
+
     grid-column: span 1;
     text-align: end;
   }
 `;
 
 const Notice = styled.span`
+  /* IE11 fallback */
+  display: block;
+  -ms-grid-column-span: 2;
+  -ms-grid-column: 2;
+
   grid-column: span 2;
   text-align: start;
 

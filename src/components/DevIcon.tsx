@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import { space } from "@styled-system/space";
+import { space, SpaceProps } from "@styled-system/space";
 
-const normalize = (language) => {
+type NormalizeIcon = (language: string) => string;
+
+const normalize: NormalizeIcon = (language) => {
   const icon = language.toLowerCase();
   switch (icon) {
     case "html":
@@ -13,7 +15,13 @@ const normalize = (language) => {
   }
 };
 
-const BaseDevIcon = ({ className, language }) => (
+const BaseDevIcon = ({
+  className,
+  language
+}: {
+  className: string;
+  language: string;
+}) => (
   <i
     className={`devicon-${normalize(language)}-plain ${className} ${
       language === "CSS" ? "colored" : ""
@@ -21,9 +29,11 @@ const BaseDevIcon = ({ className, language }) => (
   ></i>
 );
 
-export const DevIcon = styled(BaseDevIcon)`
+export const DevIcon = styled(BaseDevIcon)<
+  SpaceProps & { color: string; fontSize: string }
+>`
   ${space};
-  color: ${({ color }) => color};
   display: inline-block;
+  color: ${({ color }) => color};
   font-size: ${({ fontSize = "1.6rem" }) => fontSize};
 `;

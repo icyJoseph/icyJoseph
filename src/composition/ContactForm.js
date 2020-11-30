@@ -163,17 +163,12 @@ export function ContactForm({ cloaked, done, reason }) {
       </Fieldset>
 
       <Flex flexWrap="wrap" justifyContent="space-around" mt={4}>
-        <FormButton
-          type="submit"
-          text={isSubmitting ? "Sending" : "Send"}
-          disabled={isSubmitting}
-        />
-        <FormButton
-          type="reset"
-          variant="outlined"
-          text="Reset"
-          disabled={isSubmitting}
-        />
+        <FormButton type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Sending" : "Send"}
+        </FormButton>
+        <FormButton type="reset" variant="outlined" disabled={isSubmitting}>
+          Reset
+        </FormButton>
       </Flex>
     </Form>
   );

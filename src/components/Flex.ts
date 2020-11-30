@@ -1,7 +1,16 @@
 import styled from "styled-components";
-import { space } from "@styled-system/space";
+import { Property } from "csstype";
+import { space, SpaceProps } from "@styled-system/space";
 
-export const Flex = styled.div`
+export type FlexProps = {
+  flexWrap?: Property.FlexWrap;
+  flexDirection?: Property.FlexDirection;
+  justifyContent?: Property.JustifyContent;
+  alignItems?: Property.AlignItems;
+  flex?: Property.Flex;
+};
+
+export const Flex = styled.div<SpaceProps & FlexProps>`
   ${space};
   display: flex;
   flex-wrap: ${({ flexWrap = "wrap" }) => flexWrap};

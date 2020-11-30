@@ -1,25 +1,25 @@
 [
   {
     "language": "JavaScript",
-    "blanks": 52699,
-    "code": 417515,
-    "comments": 41500,
+    "blanks": 48092,
+    "code": 387693,
+    "comments": 41203,
     "children": {},
     "inaccurate": false
   },
   {
     "language": "TypeScript",
-    "blanks": 6091,
-    "code": 41362,
-    "comments": 2516,
+    "blanks": 3440,
+    "code": 27601,
+    "comments": 2086,
     "children": {},
     "inaccurate": false
   },
   {
     "language": "CSS",
-    "blanks": 2703,
-    "code": 26991,
-    "comments": 347,
+    "blanks": 2693,
+    "code": 26814,
+    "comments": 336,
     "children": {},
     "inaccurate": false
   },

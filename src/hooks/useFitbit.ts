@@ -1,8 +1,13 @@
+import { useEffect, useRef } from "react";
 import axios from "axios";
 import useSWR from "swr";
 
+type Period = "1d" | "7d" | "30d" | "1w" | "1m";
+
 const profileFetcher = () =>
-  axios.get("/api/fitbit/profile").then(({ data }) => data.user);
+  axios
+    .get<IcyJoseph.FitbitUser>("/api/fitbit/profile")
+    .then(({ data }) => data.user);
 
 export const useFitbitProfile = (initialData = null) => {
   return useSWR("fitbit/profile", profileFetcher, {
@@ -11,7 +16,7 @@ export const useFitbitProfile = (initialData = null) => {
   });
 };
 
-const heartRateFetcher = (date, period) => {
+const heartRateFetcher = (date: string, period: Period) => {
   return axios
     .get(`/api/fitbit/activities/heart/date/${date}/${period}`)
     .then(({ data }) => data);
@@ -19,16 +24,18 @@ const heartRateFetcher = (date, period) => {
 
 // type could be date/YYYY-MM-DD
 // or frequent, recent
-const activityFetcher = (type) => {
+const activityFetcher = (type: string) => {
   if (type === "lifeTime")
     return axios.get(`/api/fitbit/activities`).then(({ data }) => data);
   return axios.get(`/api/fitbit/activities/${type}`).then(({ data }) => data);
 };
 
-const activityLogFetcher = (year) => {
-  return axios
-    .get(`/api/fitbit/activities/list`, {
-      params: { afterDate: `${year}-01-01` },
+const activityLogFetcher = async (beforeDate: string) => {
+  await new Promise((resolve) => setTimeout(resolve, 750));
+
+  return await axios
+    .get<IcyJoseph.ActivityLog>(`/api/fitbit/activities/list`, {
+      params: { beforeDate },
       paramsSerializer: (params) => {
         return encodeURI(
           Object.entries(params)
@@ -46,16 +53,27 @@ const activityLogFetcher = (year) => {
 // end-date	The end date of the range.
 // date	The end date of the period specified in the format yyyy-MM-dd or today.
 // period	The range for which data will be returned. Options are 1d, 7d, 30d, 1w, 1m.
+
+type UseFitbitHRProps = {
+  date: string;
+  period: Period;
+  revalidateOnMount: boolean;
+};
+
 export const useFitbitHR = (
-  { date, period, revalidateOnMount = false },
-  initialData = null
+  { date, period, revalidateOnMount = false }: UseFitbitHRProps,
+  initialData: IcyJoseph.HeartRateActivity
 ) => {
-  return useSWR([date, period], (...args) => heartRateFetcher(...args), {
-    shouldRetryOnError: false,
-    revalidateOnFocus: false,
-    revalidateOnMount,
-    initialData
-  });
+  return useSWR<IcyJoseph.HeartRateActivity>(
+    [date, period],
+    (...args: [date: string, period: Period]) => heartRateFetcher(...args),
+    {
+      shouldRetryOnError: false,
+      revalidateOnFocus: false,
+      revalidateOnMount,
+      initialData
+    }
+  );
 };
 
 export const useFitbitActivity = (type = "lifeTime") => {
@@ -65,12 +83,19 @@ export const useFitbitActivity = (type = "lifeTime") => {
   });
 };
 
-export const useFitbitActivityLog = (year, initialData = null) => {
-  return useSWR(["activity-log", year], (_, year) => activityLogFetcher(year), {
+export const useFitbitActivityLog = (
+  beforeDate: string,
+  initial: IcyJoseph.ActivityLog | null
+) => {
+  const mounted = useRef(false);
+
+  useEffect(() => {
+    mounted.current = true;
+  }, []);
+
+  return useSWR<IcyJoseph.ActivityLog | null>(beforeDate, activityLogFetcher, {
     shouldRetryOnError: false,
     revalidateOnFocus: false,
-    dedupingInterval: 24 * 60 * 60 * 1000,
-    revalidateOnMount: false,
-    initialData
+    initialData: mounted.current ? null : initial
   });
 };

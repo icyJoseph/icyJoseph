@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { space } from "@styled-system/space";
+import { space, SpaceProps } from "@styled-system/space";
 
-export const Container = styled.main`
+export const Container = styled.main<SpaceProps>`
   ${space({ mx: "auto" })};
   ${space};
   width: 95%;

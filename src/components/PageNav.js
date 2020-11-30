@@ -4,13 +4,15 @@ import styled from "styled-components";
 import { space } from "@styled-system/space";
 
 const StyledNav = styled.nav`
-  ${space({ mt: 3, p: 2 })};
+  ${space({ mt: 3, p: 2, mx: "auto" })};
   background: var(--smokeyWhite);
+  max-width: 85ch;
 `;
 
 const PageLinks = styled.ul`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
+  flex-wrap: wrap;
 `;
 
 const PageLink = styled.li`
@@ -28,7 +30,7 @@ export const PageNav = ({ children }) => {
             if (!name) return null;
             return (
               <PageLink>
-                <Link href={`#${name}`}>
+                <Link href={`/#${name}`}>
                   <a>{name}</a>
                 </Link>
               </PageLink>

@@ -1,3 +1,5 @@
+import { head } from "functional";
+
 // softly scroll to top
 export const softTopScroll = () => {
   const { documentElement, body } = document;
@@ -44,3 +46,10 @@ export function createClamp(min: number, max: number) {
 
 export const clamp = (val: number, min: number, max: number) =>
   createClamp(min, max)(val);
+
+export const isoStringWithoutMs = (iso: string) => head(iso.split("."));
+
+export const trunc = (num: number) => {
+  if (Math.trunc) return Math.trunc(num);
+  return num < 0 ? Math.ceil(num) : Math.floor(num);
+};

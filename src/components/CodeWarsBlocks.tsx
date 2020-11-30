@@ -64,7 +64,7 @@ export const Challenges = ({
 }: {
   completed: IcyJoseph.CodeWars["codeChallenges"]["totalCompleted"];
 }) => (
-  <Text color="--smokeyWhite" m="0 auto" align="center">
+  <Text color="--smokeyWhite" m="0 auto">
     <Text as="span" color="--yellow">
       {completed}
     </Text>{" "}

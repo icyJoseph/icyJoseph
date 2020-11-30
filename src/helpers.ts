@@ -48,3 +48,8 @@ export const clamp = (val: number, min: number, max: number) =>
   createClamp(min, max)(val);
 
 export const isoStringWithoutMs = (iso: string) => head(iso.split("."));
+
+export const trunc = (num: number) => {
+  if (Math.trunc) return Math.trunc(num);
+  return num < 0 ? Math.ceil(num) : Math.floor(num);
+};

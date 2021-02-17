@@ -1,33 +1,33 @@
 [
   {
     "language": "JavaScript",
-    "blanks": 48092,
-    "code": 387693,
-    "comments": 41203,
+    "blanks": 46788,
+    "code": 374591,
+    "comments": 39218,
     "children": {},
     "inaccurate": false
   },
   {
     "language": "TypeScript",
-    "blanks": 3440,
-    "code": 27601,
-    "comments": 2086,
+    "blanks": 4485,
+    "code": 36303,
+    "comments": 1906,
     "children": {},
     "inaccurate": false
   },
   {
     "language": "CSS",
-    "blanks": 2693,
-    "code": 26814,
-    "comments": 336,
+    "blanks": 2683,
+    "code": 25403,
+    "comments": 333,
     "children": {},
     "inaccurate": false
   },
   {
     "language": "Rust",
-    "blanks": 645,
-    "code": 3776,
-    "comments": 218,
+    "blanks": 1108,
+    "code": 6148,
+    "comments": 220,
     "children": {
       "Markdown": [
         {

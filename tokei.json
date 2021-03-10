@@ -1,33 +1,33 @@
 [
   {
     "language": "JavaScript",
-    "blanks": 46788,
-    "code": 374591,
-    "comments": 39218,
+    "blanks": 47156,
+    "code": 377070,
+    "comments": 39287,
     "children": {},
     "inaccurate": false
   },
   {
     "language": "TypeScript",
-    "blanks": 4485,
-    "code": 36303,
-    "comments": 1906,
+    "blanks": 4992,
+    "code": 40800,
+    "comments": 2094,
     "children": {},
     "inaccurate": false
   },
   {
     "language": "CSS",
-    "blanks": 2683,
-    "code": 25403,
+    "blanks": 2708,
+    "code": 25567,
     "comments": 333,
     "children": {},
     "inaccurate": false
   },
   {
     "language": "Rust",
-    "blanks": 1108,
-    "code": 6148,
-    "comments": 220,
+    "blanks": 1221,
+    "code": 6667,
+    "comments": 223,
     "children": {
       "Markdown": [
         {
@@ -59,21 +59,21 @@
         },
         {
           "stats": {
-            "blanks": 0,
-            "code": 0,
-            "comments": 6,
-            "blobs": {}
-          },
-          "name": "/home/joseph/dev/code_wars/integers-recreation-one/src/main.rs"
-        },
-        {
-          "stats": {
             "blanks": 3,
             "code": 0,
             "comments": 15,
             "blobs": {}
           },
           "name": "/home/joseph/dev/code_wars/collatz/src/main.rs"
+        },
+        {
+          "stats": {
+            "blanks": 0,
+            "code": 0,
+            "comments": 6,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/code_wars/integers-recreation-one/src/main.rs"
         },
         {
           "stats": {

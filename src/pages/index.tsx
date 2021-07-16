@@ -3,6 +3,7 @@ import fs from "fs";
 import { promisify } from "util";
 
 import Head from "next/head";
+import type { GetStaticPropsResult } from "next";
 
 import { Container } from "components/Container";
 import { PageNav } from "components/PageNav";
@@ -64,7 +65,9 @@ export function Home({
   );
 }
 
-export async function getStaticProps(): Promise<{ props: HomeProps }> {
+export async function getStaticProps(): Promise<
+  GetStaticPropsResult<HomeProps>
+> {
   const codewars = await getCodeWarsUser();
 
   const github = await queryGitHub(GET_USER, {
@@ -89,7 +92,10 @@ export async function getStaticProps(): Promise<{ props: HomeProps }> {
     beforeDate: isoStringWithoutMs(new Date().toISOString())
   });
 
-  return { props: { codewars, github, tokei, fitbit, activityLog, initialHR } };
+  return {
+    props: { codewars, github, tokei, fitbit, activityLog, initialHR },
+    revalidate: 10
+  };
 }
 
 export default Home;

@@ -1,33 +1,33 @@
 [
   {
     "language": "JavaScript",
-    "blanks": 47156,
-    "code": 377070,
-    "comments": 39287,
+    "blanks": 244512,
+    "code": 3251898,
+    "comments": 468447,
     "children": {},
     "inaccurate": false
   },
   {
     "language": "TypeScript",
-    "blanks": 4992,
-    "code": 40800,
-    "comments": 2094,
+    "blanks": 26170,
+    "code": 248280,
+    "comments": 104062,
     "children": {},
     "inaccurate": false
   },
   {
     "language": "CSS",
-    "blanks": 2708,
-    "code": 25567,
-    "comments": 333,
+    "blanks": 4471,
+    "code": 46590,
+    "comments": 461,
     "children": {},
     "inaccurate": false
   },
   {
     "language": "Rust",
-    "blanks": 1221,
-    "code": 6667,
-    "comments": 223,
+    "blanks": 2163,
+    "code": 11933,
+    "comments": 291,
     "children": {
       "Markdown": [
         {
@@ -59,6 +59,15 @@
         },
         {
           "stats": {
+            "blanks": 0,
+            "code": 0,
+            "comments": 6,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/code_wars/integers-recreation-one/src/main.rs"
+        },
+        {
+          "stats": {
             "blanks": 3,
             "code": 0,
             "comments": 15,
@@ -70,10 +79,19 @@
           "stats": {
             "blanks": 0,
             "code": 0,
-            "comments": 6,
+            "comments": 1,
             "blobs": {}
           },
-          "name": "/home/joseph/dev/code_wars/integers-recreation-one/src/main.rs"
+          "name": "/home/joseph/dev/daybook/search-server/src/helpers.rs"
+        },
+        {
+          "stats": {
+            "blanks": 0,
+            "code": 0,
+            "comments": 4,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/daybook/search-server/src/start.rs"
         },
         {
           "stats": {
@@ -83,6 +101,127 @@
             "blobs": {}
           },
           "name": "/home/joseph/dev/rust/wasm-aes-soft/tests/web.rs"
+        },
+        {
+          "stats": {
+            "blanks": 0,
+            "code": 0,
+            "comments": 1,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/codejam-js/src/gleb_pizza.rs"
+        },
+        {
+          "stats": {
+            "blanks": 0,
+            "code": 0,
+            "comments": 1,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/temp/meilisearch-rust/examples/web_app/src/document.rs"
+        },
+        {
+          "stats": {
+            "blanks": 0,
+            "code": 0,
+            "comments": 2,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/temp/meilisearch-rust/examples/web_app/src/lib.rs"
+        },
+        {
+          "stats": {
+            "blanks": 85,
+            "code": 0,
+            "comments": 459,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/temp/meilisearch-rust/src/indexes.rs"
+        },
+        {
+          "stats": {
+            "blanks": 13,
+            "code": 0,
+            "comments": 69,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/temp/meilisearch-rust/src/dumps.rs"
+        },
+        {
+          "stats": {
+            "blanks": 8,
+            "code": 0,
+            "comments": 26,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/temp/meilisearch-rust/src/document.rs"
+        },
+        {
+          "stats": {
+            "blanks": 24,
+            "code": 0,
+            "comments": 124,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/temp/meilisearch-rust/src/client.rs"
+        },
+        {
+          "stats": {
+            "blanks": 64,
+            "code": 0,
+            "comments": 312,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/temp/meilisearch-rust/src/settings.rs"
+        },
+        {
+          "stats": {
+            "blanks": 11,
+            "code": 0,
+            "comments": 74,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/temp/meilisearch-rust/src/search.rs"
+        },
+        {
+          "stats": {
+            "blanks": 9,
+            "code": 0,
+            "comments": 59,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/temp/meilisearch-rust/src/progress.rs"
+        },
+        {
+          "stats": {
+            "blanks": 1,
+            "code": 0,
+            "comments": 69,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/temp/meilisearch-rust/src/errors.rs"
+        },
+        {
+          "stats": {
+            "blanks": 27,
+            "code": 0,
+            "comments": 67,
+            "blobs": {
+              "Bash": {
+                "blanks": 0,
+                "code": 2,
+                "comments": 0,
+                "blobs": {}
+              },
+              "Toml": {
+                "blanks": 0,
+                "code": 4,
+                "comments": 0,
+                "blobs": {}
+              }
+            }
+          },
+          "name": "/home/joseph/dev/temp/meilisearch-rust/src/lib.rs"
         }
       ]
     },

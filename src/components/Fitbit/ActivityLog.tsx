@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useRef } from "react";
+import { FC, useState, useRef } from "react";
 import styled from "styled-components";
 
 import { Button } from "components/Button";
@@ -11,8 +11,9 @@ import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
 
 import { head, exists } from "functional";
 import { isoStringWithoutMs } from "helpers";
+import { useEffect } from "react";
 
-const formatter = new Intl.DateTimeFormat("en-US", {
+export const formatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
   day: "numeric"
 });
@@ -121,6 +122,7 @@ const Body: FC<{ activity: IcyJoseph.Activities }> = ({ activity }) => {
 
 type ActivityLogProps = {
   initial: IcyJoseph.ActivityLog;
+  onDateChange?: (data: string) => void;
 };
 
 const beforeDateQueue = (initial: string) => {
@@ -139,12 +141,13 @@ const beforeDateQueue = (initial: string) => {
   };
 };
 
-const useDateQueue = (seed: string) => {
+const useDateQueue = (seed: string, onChange?: (date: string) => void) => {
   const [cursor, setCursor] = useState(0);
 
   const queue = useRef(beforeDateQueue(isoStringWithoutMs(seed)));
 
   const currentDate = queue.current.get(cursor);
+  const prevCurrentDate = useRef(currentDate);
 
   const prevAction = () => {
     setCursor((prev) => (prev === 0 ? prev : prev - 1));
@@ -155,12 +158,25 @@ const useDateQueue = (seed: string) => {
     setCursor((prev) => prev + 1);
   };
 
+  useEffect(() => {
+    if (prevCurrentDate.current !== currentDate) {
+      onChange?.(currentDate);
+    }
+    prevCurrentDate.current = currentDate;
+  }, [currentDate]);
+
   return [currentDate, prevAction, nextAction] as const;
 };
 
-export const ActivityLog: FC<ActivityLogProps> = ({ initial }) => {
+export const ActivityLog: FC<ActivityLogProps> = ({
+  initial,
+  onDateChange = () => {}
+}) => {
   const { startTime: initialStartTime } = head(initial);
-  const [currentDate, prevAction, nextAction] = useDateQueue(initialStartTime);
+  const [currentDate, prevAction, nextAction] = useDateQueue(
+    initialStartTime,
+    onDateChange
+  );
 
   const { data, error } = useFitbitActivityLog(currentDate, initial);
   const prev = useLastNonNullableValue(data) ?? [];
@@ -223,14 +239,14 @@ export const ActivityLog: FC<ActivityLogProps> = ({ initial }) => {
           disabled={currentDate === isoStringWithoutMs(initialStartTime)}
           onClick={prevAction}
         >
-          Prev
+          Back
         </Button>
 
         <Button
           variant="primary"
           onClick={() => nextAction(isoStringWithoutMs(last?.startTime))}
         >
-          Next
+          More
         </Button>
       </Flex>
     </>

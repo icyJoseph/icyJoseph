@@ -7,12 +7,9 @@ import Cookies from "cookies";
 import { ContactForm } from "composition/ContactForm";
 import { Intention } from "composition/Intention";
 
-import { Calendar } from "components/Calendar";
 import { Container } from "components/Container";
 import { FullPage, Section } from "components/Section";
 import { Text } from "components/Text";
-
-import { useFitbitHR } from "hooks/useFitbit";
 
 import { randomSequence } from "utils/randomSequence";
 
@@ -27,14 +24,6 @@ const Forms = ({ cloaked, done }) => {
 };
 
 export function Contact({ cloaked }) {
-  const { data } = useFitbitHR({
-    date: "today",
-    period: "1m",
-    revalidateOnMount: true
-  });
-
-  const heartData = data?.["activities-heart"] ?? [];
-
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   return (
@@ -49,13 +38,8 @@ export function Contact({ cloaked }) {
               Hello!
             </Text>
           </header>
+
           <Section as="main" maxWidth="65ch">
-            <Text my={2}>
-              Before contacting me, please consider my stress level.
-            </Text>
-
-            {data && <Calendar data={heartData} />}
-
             {hasSubmitted ? (
               <div>Thanks for reaching out!</div>
             ) : (

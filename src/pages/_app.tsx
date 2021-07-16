@@ -26,7 +26,7 @@ function App({ Component, pageProps }: AppProps) {
       window.gtag?.pageview(url);
     };
 
-    router.events.on("routerChangeComplete", handler);
+    router.events.on("routeChangeComplete", handler);
 
     return () => {
       router.events.off("routeChangeComplete", handler);

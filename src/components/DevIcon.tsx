@@ -26,7 +26,7 @@ const BaseDevIcon = ({
     className={`devicon-${normalize(language)}-plain ${className} ${
       language === "CSS" ? "colored" : ""
     }`}
-  ></i>
+  />
 );
 
 export const DevIcon = styled(BaseDevIcon)<

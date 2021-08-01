@@ -1,5 +1,5 @@
 import { FC } from "react";
-import styled, { StyledComponent } from "styled-components";
+import styled from "styled-components";
 
 const Progress = styled.div`
   position: relative;

@@ -78,7 +78,7 @@ declare namespace IcyJoseph {
     distance: number;
   }
 
-  export interface ActivityWithoutSteps extends Omit<BaseActivity, "steps"> {}
+  export type ActivityWithoutSteps = Omit<BaseActivity, "steps">;
 
   export type Activities = BaseActivity | ActivityWithoutSteps | SwimActivity;
 

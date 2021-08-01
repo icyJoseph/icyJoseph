@@ -163,14 +163,16 @@ const useDateQueue = (seed: string, onChange?: (date: string) => void) => {
       onChange?.(currentDate);
     }
     prevCurrentDate.current = currentDate;
-  }, [currentDate]);
+  }, [currentDate, onChange]);
 
   return [currentDate, prevAction, nextAction] as const;
 };
 
+const noop = () => void 0;
+
 export const ActivityLog: FC<ActivityLogProps> = ({
   initial,
-  onDateChange = () => {}
+  onDateChange = noop
 }) => {
   const { startTime: initialStartTime } = head(initial);
   const [currentDate, prevAction, nextAction] = useDateQueue(
@@ -190,7 +192,7 @@ export const ActivityLog: FC<ActivityLogProps> = ({
       <Table my={3} stale={stale}>
         <thead>
           <Tr>
-            <Th></Th>
+            <Th />
 
             <Th colSpan={2}>
               <Text textAlign="left" fontSize="2rem" fontWeight={100}>
@@ -203,7 +205,7 @@ export const ActivityLog: FC<ActivityLogProps> = ({
         <tbody>
           {activityLog.map((activity) => (
             <Tr key={activity.logId}>
-              <Td></Td>
+              <Td />
               <Td>
                 <Text textAlign="left" fontSize="2rem" fontWeight="lighter">
                   {activity.activityName}

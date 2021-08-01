@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
@@ -27,25 +27,30 @@ export const formatter = new Intl.DateTimeFormat("sv-SE", {
   day: "numeric"
 });
 
+const withLeadingZero = (num: number) => (num > 9 ? num : `0${num}`);
+
 export function Activities({ activityLog, year, month, day }: ActivitiesProps) {
   const [date, setDate] = useState(() => new Date(`${year}/${month}/${day}`));
   const router = useRouter();
 
-  const handleDateChange = (str: string) => {
-    const nextDate = new Date(str);
+  const handleDateChange = useCallback(
+    (str: string) => {
+      const nextDate = new Date(str);
 
-    setDate(nextDate);
+      setDate(nextDate);
 
-    const nextYear = nextDate.getFullYear();
-    const nextMonth = nextDate.getMonth() + 1;
-    const nextDay = nextDate.getDate();
+      const nextYear = nextDate.getFullYear();
+      const nextMonth = nextDate.getMonth() + 1;
+      const nextDay = nextDate.getDate();
 
-    router.push(
-      "/activities/[...date]",
-      `${nextYear}/${nextMonth}/${nextDay}`,
-      { shallow: true }
-    );
-  };
+      router.push(
+        "/activities/[...date]",
+        `${nextYear}/${withLeadingZero(nextMonth)}/${withLeadingZero(nextDay)}`,
+        { shallow: true }
+      );
+    },
+    [router]
+  );
 
   return (
     <>

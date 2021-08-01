@@ -28,7 +28,7 @@ export const formatter = new Intl.DateTimeFormat("sv-SE", {
 });
 
 export function Activities({ activityLog, year, month, day }: ActivitiesProps) {
-  const [date, setDate] = useState(new Date(`${year}-${month}-${day}`));
+  const [date, setDate] = useState(() => new Date(`${year}/${month}/${day}`));
   const router = useRouter();
 
   const handleDateChange = (str: string) => {
@@ -36,9 +36,13 @@ export function Activities({ activityLog, year, month, day }: ActivitiesProps) {
 
     setDate(nextDate);
 
+    const nextYear = nextDate.getFullYear();
+    const nextMonth = nextDate.getMonth() + 1;
+    const nextDay = nextDate.getDate();
+
     router.push(
       "/activities/[...date]",
-      `${formatter.format(nextDate).replaceAll("-", "/")}`,
+      `${nextYear}/${nextMonth}/${nextDay}`,
       { shallow: true }
     );
   };
@@ -52,7 +56,7 @@ export function Activities({ activityLog, year, month, day }: ActivitiesProps) {
         <FullPage>
           <header>
             <Text as="h2" color="--blue" fontSize="3rem">
-              Activities for: {formatter.format(date).replaceAll("-", "/")}
+              Activities for: {formatter.format(date)}
             </Text>
           </header>
 
@@ -80,7 +84,7 @@ export async function getServerSideProps(
   const [year, month, day] = date;
 
   try {
-    const dateObj = new Date(`${year}-${month}-${day}`);
+    const dateObj = new Date(`${year}/${month}/${day}`);
 
     dateObj.setHours(23);
     dateObj.setMinutes(59);

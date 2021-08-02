@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import { AppProps } from "next/app";
-import Router, { useRouter } from "next/router";
+import Router from "next/router";
 
 import { ThemeProvider } from "styled-components";
 
@@ -10,6 +10,7 @@ import { GlobalStyle } from "styles/global";
 
 import { Footer } from "composition/Footer";
 import { Navigation } from "composition/Navigation";
+import { pageview } from "ga";
 
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
@@ -19,19 +20,13 @@ Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
 function App({ Component, pageProps }: AppProps) {
-  const router = useRouter();
-
   useEffect(() => {
-    const handler = (url: string) => {
-      window.gtag?.pageview(url);
-    };
+    const handler = (url: string) => pageview(url);
 
-    router.events.on("routeChangeComplete", handler);
+    Router.events.on("routeChangeComplete", handler);
 
-    return () => {
-      router.events.off("routeChangeComplete", handler);
-    };
-  }, [router.events]);
+    return () => Router.events.off("routeChangeComplete", handler);
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>

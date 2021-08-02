@@ -1,16 +1,16 @@
 [
   {
     "language": "JavaScript",
-    "blanks": 244445,
-    "code": 3251498,
+    "blanks": 244434,
+    "code": 3251447,
     "comments": 468431,
     "children": {},
     "inaccurate": false
   },
   {
     "language": "TypeScript",
-    "blanks": 26361,
-    "code": 249041,
+    "blanks": 26362,
+    "code": 249044,
     "comments": 104375,
     "children": {},
     "inaccurate": false
@@ -79,19 +79,19 @@
           "stats": {
             "blanks": 0,
             "code": 0,
-            "comments": 1,
+            "comments": 4,
             "blobs": {}
           },
-          "name": "/home/joseph/dev/daybook/search-server/src/helpers.rs"
+          "name": "/home/joseph/dev/daybook/search-server/src/start.rs"
         },
         {
           "stats": {
             "blanks": 0,
             "code": 0,
-            "comments": 4,
+            "comments": 1,
             "blobs": {}
           },
-          "name": "/home/joseph/dev/daybook/search-server/src/start.rs"
+          "name": "/home/joseph/dev/daybook/search-server/src/helpers.rs"
         },
         {
           "stats": {
@@ -176,6 +176,15 @@
         },
         {
           "stats": {
+            "blanks": 11,
+            "code": 0,
+            "comments": 74,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/temp/meilisearch-rust/src/search.rs"
+        },
+        {
+          "stats": {
             "blanks": 9,
             "code": 0,
             "comments": 59,
@@ -185,12 +194,12 @@
         },
         {
           "stats": {
-            "blanks": 11,
+            "blanks": 1,
             "code": 0,
-            "comments": 74,
+            "comments": 69,
             "blobs": {}
           },
-          "name": "/home/joseph/dev/temp/meilisearch-rust/src/search.rs"
+          "name": "/home/joseph/dev/temp/meilisearch-rust/src/errors.rs"
         },
         {
           "stats": {
@@ -213,15 +222,6 @@
             }
           },
           "name": "/home/joseph/dev/temp/meilisearch-rust/src/lib.rs"
-        },
-        {
-          "stats": {
-            "blanks": 1,
-            "code": 0,
-            "comments": 69,
-            "blobs": {}
-          },
-          "name": "/home/joseph/dev/temp/meilisearch-rust/src/errors.rs"
         }
       ]
     },

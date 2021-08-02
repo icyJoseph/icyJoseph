@@ -1,6 +1,8 @@
 declare namespace NodeJS {
   interface ProcessEnv {
     NEXT_PUBLIC_GA_TRACKING_ID: string;
+    CRYPTO_KEY: string;
+    CLOAK_PASSWORD: string;
   }
 }
 

@@ -1,17 +1,17 @@
 [
   {
     "language": "JavaScript",
-    "blanks": 244512,
-    "code": 3251898,
-    "comments": 468447,
+    "blanks": 244445,
+    "code": 3251498,
+    "comments": 468431,
     "children": {},
     "inaccurate": false
   },
   {
     "language": "TypeScript",
-    "blanks": 26170,
-    "code": 248280,
-    "comments": 104062,
+    "blanks": 26361,
+    "code": 249041,
+    "comments": 104375,
     "children": {},
     "inaccurate": false
   },
@@ -176,15 +176,6 @@
         },
         {
           "stats": {
-            "blanks": 11,
-            "code": 0,
-            "comments": 74,
-            "blobs": {}
-          },
-          "name": "/home/joseph/dev/temp/meilisearch-rust/src/search.rs"
-        },
-        {
-          "stats": {
             "blanks": 9,
             "code": 0,
             "comments": 59,
@@ -194,12 +185,12 @@
         },
         {
           "stats": {
-            "blanks": 1,
+            "blanks": 11,
             "code": 0,
-            "comments": 69,
+            "comments": 74,
             "blobs": {}
           },
-          "name": "/home/joseph/dev/temp/meilisearch-rust/src/errors.rs"
+          "name": "/home/joseph/dev/temp/meilisearch-rust/src/search.rs"
         },
         {
           "stats": {
@@ -222,6 +213,15 @@
             }
           },
           "name": "/home/joseph/dev/temp/meilisearch-rust/src/lib.rs"
+        },
+        {
+          "stats": {
+            "blanks": 1,
+            "code": 0,
+            "comments": 69,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/temp/meilisearch-rust/src/errors.rs"
         }
       ]
     },

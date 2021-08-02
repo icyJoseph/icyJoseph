@@ -50,7 +50,7 @@ const submit2AirTable = async (form, timestamp) => {
   return { submitted: timestamp, email: submitFields.email };
 };
 
-export default async (req, res) => {
+export const submit = async (req, res) => {
   if (req.method !== "POST") {
     res.writeHead(401);
     return res.end("No");
@@ -109,3 +109,5 @@ export default async (req, res) => {
     return res.end();
   }
 };
+
+export default submit;

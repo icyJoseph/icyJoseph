@@ -4,7 +4,6 @@ module.exports = {
     jest: true,
     es2021: true
   },
-  extends: ["plugin:react/recommended", "standard", "prettier"],
   parserOptions: {
     ecmaFeatures: {
       jsx: true
@@ -12,14 +11,30 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: "module"
   },
-  plugins: ["react"],
+  globals: { IcyJoseph: true },
+  plugins: ["@typescript-eslint"],
+  extends: [
+    "next",
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
   rules: {
+    "react/self-closing-comp": [
+      "error",
+      {
+        component: true,
+        html: true
+      }
+    ],
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
-    "no-unused-vars": [
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
       "error",
       { argsIgnorePattern: "^_", ignoreRestSiblings: true }
-    ]
+    ],
+    "@typescript-eslint/explicit-module-boundary-types": "off"
   },
   settings: {
     react: { version: "detect" }

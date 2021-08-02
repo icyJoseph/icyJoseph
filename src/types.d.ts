@@ -1,6 +1,8 @@
 declare namespace NodeJS {
   interface ProcessEnv {
     NEXT_PUBLIC_GA_TRACKING_ID: string;
+    CRYPTO_KEY: string;
+    CLOAK_PASSWORD: string;
   }
 }
 
@@ -78,7 +80,7 @@ declare namespace IcyJoseph {
     distance: number;
   }
 
-  export interface ActivityWithoutSteps extends Omit<BaseActivity, "steps"> {}
+  export type ActivityWithoutSteps = Omit<BaseActivity, "steps">;
 
   export type Activities = BaseActivity | ActivityWithoutSteps | SwimActivity;
 

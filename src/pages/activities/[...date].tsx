@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
@@ -31,13 +31,29 @@ const withLeadingZero = (num: number) => (num > 9 ? num : `0${num}`);
 
 export function Activities({ activityLog, year, month, day }: ActivitiesProps) {
   const [date, setDate] = useState(() => new Date(`${year}/${month}/${day}`));
+
   const router = useRouter();
+
+  useEffect(() => {
+    const { query } = router;
+
+    const { date } = query;
+
+    if (!Array.isArray(date)) return;
+
+    const [year, month, day] = date;
+
+    try {
+      const nextDate = new Date(`${year}/${month}/${day}`);
+      setDate(() => nextDate);
+    } catch (e) {
+      return;
+    }
+  }, [router]);
 
   const handleDateChange = useCallback(
     (str: string) => {
       const nextDate = new Date(str);
-
-      setDate(nextDate);
 
       const nextYear = nextDate.getFullYear();
       const nextMonth = nextDate.getMonth() + 1;

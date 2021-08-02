@@ -245,6 +245,7 @@ export const ActivityLog: FC<ActivityLogProps> = ({
         </Button>
 
         <Button
+          disabled={stale}
           variant="primary"
           onClick={() => nextAction(isoStringWithoutMs(last?.startTime))}
         >

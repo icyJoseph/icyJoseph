@@ -58,7 +58,7 @@ const StyledButton = styled.button`
   }
 `;
 
-StyledButton.Label = styled.label`
+StyledButton.Label = styled.span`
   /* LABEL  */
   display: block;
   position: relative;

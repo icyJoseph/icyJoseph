@@ -58,8 +58,9 @@ const StyledButton = styled.button`
   }
 `;
 
-StyledButton.Label = styled.div`
+StyledButton.Label = styled.span`
   /* LABEL  */
+  display: block;
   position: relative;
   overflow: hidden;
   margin: 0;
@@ -122,7 +123,7 @@ StyledButton.Text = styled.span`
     transition: background-color 0.2s ease-in;
   }
 
-  ${StyledButton}:hover &, &[disabled] {
+  ${StyledButton}:hover &, &[data-disabled='true'] {
     opacity: 0.5;
   }
 
@@ -135,7 +136,7 @@ export const Button = ({ variant, disabled = false, children, ...rest }) => (
   <StyledButton variant={variant} disabled={disabled} {...rest}>
     <StyledButton.Label variant={variant}>
       {!disabled && <StyledButton.HoverEffect />}
-      <StyledButton.Text variant={variant} disabled={disabled}>
+      <StyledButton.Text variant={variant} data-disabled={disabled}>
         {children}
       </StyledButton.Text>
     </StyledButton.Label>

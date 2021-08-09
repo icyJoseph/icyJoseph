@@ -76,12 +76,12 @@ export function Activities({ activityLog, year, month, day }: ActivitiesProps) {
       <Container>
         <FullPage>
           <header>
-            <Text as="h2" color="--blue" fontSize="3rem">
+            <Text as="h2" $textColor="--blue" $fontSize="3rem">
               Activities for: {formatter.format(date)}
             </Text>
           </header>
 
-          <Box as="main" mb={2}>
+          <Box mb={2}>
             <ActivityLog
               initial={activityLog}
               onDateChange={handleDateChange}

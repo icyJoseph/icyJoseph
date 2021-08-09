@@ -32,6 +32,8 @@ const CopyrightNotice = styled.span`
 
   grid-column: span 4;
   text-align: center;
+
+  margin-top: 16px;
 `;
 
 const Stack = styled.div`
@@ -73,7 +75,7 @@ const FooterNav = styled.nav`
   }
 `;
 
-const Notice = styled.span`
+const Notice = styled.section`
   /* IE11 fallback */
   display: block;
   -ms-grid-column-span: 2;

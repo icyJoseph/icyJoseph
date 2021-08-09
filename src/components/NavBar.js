@@ -14,7 +14,7 @@ export const NavBar = styled.nav`
   }
 `;
 
-NavBar.Brand = styled.span`
+NavBar.Brand = styled.div`
   font-weight: bold;
   font-size: 2rem;
   text-transform: uppercase;

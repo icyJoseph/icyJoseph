@@ -7,15 +7,15 @@ type SectionOwnProps = { maxWidth?: Property.MaxWidth };
 
 type SectionProps = PropsWithChildren<SpaceProps & SectionOwnProps>;
 
-const BaseSection = styled.section<SectionProps>`
+const BaseSection = (props: SectionProps) => <section {...props} />;
+
+export const Section = styled(BaseSection)`
   ${space({ mx: "auto", my: 3 })};
   ${space};
   max-width: ${({ maxWidth }) => maxWidth ?? "85ch"};
 `;
 
-export const Section = (props: SectionProps) => <BaseSection {...props} />;
-
-Section.Header = styled.header<SpaceProps>`
+export const SectionHeader = styled.header<SpaceProps>`
   ${space({ pt: 4 })};
   ${space}
 `;

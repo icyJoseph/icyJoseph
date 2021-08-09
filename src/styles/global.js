@@ -6,10 +6,11 @@ import { root } from "styles/root";
 import { typography } from "styles/typography";
 
 export const GlobalStyle = createGlobalStyle`
-    ${root};
     ${normalize};
     ${reset};
     ${typography};
+    
+    ${root};
     
     body {
         background-color: var(--smokeyWhite);

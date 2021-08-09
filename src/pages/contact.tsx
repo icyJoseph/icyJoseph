@@ -51,7 +51,7 @@ export function Contact() {
       <Container as="section">
         <FullPage>
           <header>
-            <Text as="h2" textColor="--blue" fontSize="3rem">
+            <Text as="h2" $textColor="--blue" $fontSize="3rem">
               Hello!
             </Text>
           </header>

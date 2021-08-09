@@ -101,26 +101,26 @@ const BaseContributionsSummaryCard = ({
       </Card.Header>
       <Card.Section>
         <Flex flexDirection="column" alignItems="center" m="0 auto">
-          <Text textColor="--smokeyWhite" mb={2}>
-            <Text as="span" textColor="--yellow">
+          <Text $textColor="--smokeyWhite" mb={2}>
+            <Text as="span" $textColor="--yellow">
               {totalRepositoryContributions}
             </Text>{" "}
             newly created repositories
           </Text>
-          <Text textColor="--smokeyWhite" mb={2}>
-            <Text as="span" textColor="--yellow">
+          <Text $textColor="--smokeyWhite" mb={2}>
+            <Text as="span" $textColor="--yellow">
               {totalCommitContributions}
             </Text>{" "}
             commit contributions
           </Text>
-          <Text textColor="--smokeyWhite" mb={2}>
-            <Text as="span" textColor="--yellow">
+          <Text $textColor="--smokeyWhite" mb={2}>
+            <Text as="span" $textColor="--yellow">
               {restrictedContributionsCount}
             </Text>{" "}
             super secret contributions
           </Text>
-          <Text textColor="--smokeyWhite" mb={2}>
-            <Text as="span" textColor="--yellow">
+          <Text $textColor="--smokeyWhite" mb={2}>
+            <Text as="span" $textColor="--yellow">
               {totalRepositoriesContributedTo}
             </Text>{" "}
             repos received commits from me
@@ -136,26 +136,26 @@ const ContributionsSummaryCard = memo(BaseContributionsSummaryCard);
 const ContributionCard = ({ repository, pointer, index, contributions }) => (
   <StyledCard p={2} m={2}>
     <Card.Header>
-      <Text as="p" textColor="--yellow" textAlign="end">
+      <Text as="p" $textColor="--yellow" $textAlign="end">
         #{pointer + index + 1}
       </Text>
       <Text
         as="h4"
-        textColor="--smokeyWhite"
-        fontSize="2rem"
-        fontWeight={600}
+        $textColor="--smokeyWhite"
+        $fontSize="2rem"
+        $fontWeight={600}
         mb={2}
       >
         {repository.name}
       </Text>
-      <Text textColor="--smokeyWhite">Owner:</Text>
-      <Text textColor="--smokeyWhite">{repository.owner.login}</Text>
+      <Text $textColor="--smokeyWhite">Owner:</Text>
+      <Text $textColor="--smokeyWhite">{repository.owner.login}</Text>
     </Card.Header>
     <Card.Section>
-      <Text textColor="--smokeyWhite">
+      <Text $textColor="--smokeyWhite">
         Contributions: {contributions.totalCount}
       </Text>
-      <Text textColor="--smokeyWhite">
+      <Text $textColor="--smokeyWhite">
         Size: {repository.languages.totalSize} bytes
       </Text>
     </Card.Section>
@@ -166,7 +166,7 @@ const ContributionCard = ({ repository, pointer, index, contributions }) => (
             <LanguageName mb={1}>
               {name}: {size} bytes
             </LanguageName>
-            <DevIcon color={color} language={name} mb={2} fontSize="1.75rem" />
+            <DevIcon color={color} language={name} mb={2} $fontSize="1.75rem" />
             <Indicator
               color={color}
               percentage={(100 * size) / repository.languages.totalSize}
@@ -289,7 +289,7 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
       </RepositoriesWithOptions>
       {joinedGitHubContribution && (
         <ContributionsSummary my={2} mx="auto">
-          <Text fontSize="2rem">Joined GitHub</Text>
+          <Text $fontSize="2rem">Joined GitHub</Text>
           <Emoji symbol="🎉" title="Joined Github" ariaLabel="Tada" mx={2} />
         </ContributionsSummary>
       )}

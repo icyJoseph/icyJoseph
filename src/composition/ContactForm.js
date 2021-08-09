@@ -23,7 +23,7 @@ const CharCount = ({ control, max, min }) => {
   return (
     <Text
       as="span"
-      textColor={length > max || length < min ? "--red" : "--softDark"}
+      $textColor={length > max || length < min ? "--red" : "--softDark"}
     >
       {length} / {length < min ? min : max}
     </Text>
@@ -141,7 +141,7 @@ export function ContactForm({ cloaked, done, reason }) {
         <Label htmlFor="secret">
           <Text>
             Secret:{" "}
-            <Text as="span" textColor="--blue">
+            <Text as="span" $textColor="--blue">
               {cloaked}
             </Text>
           </Text>

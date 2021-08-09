@@ -51,7 +51,7 @@ type TokeiProps = {
 export const Tokei: FC<TokeiProps> = ({ tokei, name }) => (
   <Section>
     <SectionHeader id={name} pt={2}>
-      <Text as="h2" textColor="--blue" fontSize="3rem">
+      <Text as="h2" $textColor="--blue" $fontSize="3rem">
         <a href={`#${name}`}>
           <code>tokei ~/dev</code>
         </a>
@@ -62,8 +62,8 @@ export const Tokei: FC<TokeiProps> = ({ tokei, name }) => (
         <Language key={language} language={language} {...rest} order={index} />
       ))}
     </Flex>
-    <Text mt={3} fontWeight="lighter">
-      <Text as="span" textColor="--red">
+    <Text mt={3} $fontWeight="lighter">
+      <Text as="span" $textColor="--red">
         Lines of Code
       </Text>
       , without counting <strong>blanks</strong> or <strong>comments</strong>,
@@ -73,13 +73,13 @@ export const Tokei: FC<TokeiProps> = ({ tokei, name }) => (
         href="https://github.com/XAMPPRocky/tokei"
         target="_blank"
         rel="noreferrer noopener"
-        textColor="--blue"
+        $textColor="--blue"
       >
         tokei
       </Text>
       .
     </Text>
-    <Text mt={2} fontWeight="lighter">
+    <Text mt={2} $fontWeight="lighter">
       <i>A full circle means 0 blanks and 0 comments.</i>
     </Text>
   </Section>

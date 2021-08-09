@@ -79,7 +79,7 @@ export const Fitbit: FC<FitbitProps> = ({
   return (
     <Section>
       <SectionHeader id={name}>
-        <Text as="h2" textColor="--blue" fontSize="3rem">
+        <Text as="h2" $textColor="--blue" $fontSize="3rem">
           <a href={`#${name}`}>
             <code>Fitbit</code>
           </a>
@@ -93,11 +93,11 @@ export const Fitbit: FC<FitbitProps> = ({
             justifyContent="center"
             alignItems="center"
           >
-            <Text fontSize="2rem" fontWeight="lighter">
+            <Text $fontSize="2rem" $fontWeight="lighter">
               Average Daily Steps
             </Text>
 
-            <Text textColor="--blue" m={3} fontSize="5rem">
+            <Text $textColor="--blue" m={3} $fontSize="5rem">
               {profile.averageDailySteps}
             </Text>
           </DataSegment>
@@ -107,18 +107,18 @@ export const Fitbit: FC<FitbitProps> = ({
             justifyContent="center"
             alignItems="center"
           >
-            <Text fontSize="2rem" fontWeight="lighter">
+            <Text $fontSize="2rem" $fontWeight="lighter">
               Resting pulse
             </Text>
-            <Text textColor="--blue" m={3} fontSize="5rem">
+            <Text $textColor="--blue" m={3} $fontSize="5rem">
               {today?.value?.restingHeartRate ??
                 prevDay?.value?.restingHeartRate}{" "}
-              <Text as="span" fontWeight="lighter">
+              <Text as="span" $fontWeight="lighter">
                 bpm
               </Text>
             </Text>
 
-            <Text fontWeight="lighter">
+            <Text $fontWeight="lighter">
               Heart activity last {heartData.length} days
             </Text>
 
@@ -129,16 +129,16 @@ export const Fitbit: FC<FitbitProps> = ({
                 .map(({ name, minutes, caloriesOut }) => {
                   return (
                     <StyledDataEntry key={name}>
-                      <Text fontWeight={300}>{name}</Text>
-                      <Text fontSize="2.5rem" textColor="--yellow" mt={2}>
+                      <Text $fontWeight={300}>{name}</Text>
+                      <Text $fontSize="2.5rem" $textColor="--yellow" mt={2}>
                         {minutes}{" "}
-                        <Text as="span" fontWeight={300}>
+                        <Text as="span" $fontWeight={300}>
                           min
                         </Text>
                       </Text>
-                      <Text fontSize="2.5rem" textColor="--yellow" mt={2}>
+                      <Text $fontSize="2.5rem" $textColor="--yellow" mt={2}>
                         {Math.floor(caloriesOut)}{" "}
-                        <Text as="span" fontWeight={300}>
+                        <Text as="span" $fontWeight={300}>
                           Cal
                         </Text>
                       </Text>

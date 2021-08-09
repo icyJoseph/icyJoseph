@@ -4,19 +4,19 @@ import { space, SpaceProps } from "@styled-system/space";
 import { ComponentPropsWithoutRef } from "react";
 
 type TextProps = {
-  fontSize?: Property.FontSize;
-  fontWeight?: Property.FontWeight;
-  textAlign?: Property.TextAlign;
-  textTransform?: Property.TextTransform;
-  textColor?: string;
+  $fontSize?: Property.FontSize;
+  $fontWeight?: Property.FontWeight;
+  $textAlign?: Property.TextAlign;
+  $textTransform?: Property.TextTransform;
+  $textColor?: string;
 };
 
 const BaseText = ({
-  fontSize,
-  textAlign,
-  textColor,
-  fontWeight,
-  textTransform,
+  $fontSize,
+  $textAlign,
+  $textColor,
+  $fontWeight,
+  $textTransform,
   mx,
   my,
   mr,
@@ -50,10 +50,10 @@ const BaseText = ({
 
 export const Text = styled(BaseText)`
   ${space};
-  font-size: ${({ fontSize = "1.6rem" }) => fontSize};
-  text-align: ${({ textAlign = "unset" }) => textAlign};
-  color: ${({ textColor = "--black", theme }) =>
-    `var(${textColor}, ${theme.white})`};
-  font-weight: ${({ fontWeight = 400 }) => fontWeight ?? 400};
-  text-transform: ${({ textTransform = "unset" }) => textTransform};
+  font-size: ${({ $fontSize = "1.6rem" }) => $fontSize};
+  text-align: ${({ $textAlign = "unset" }) => $textAlign};
+  color: ${({ $textColor = "--black", theme }) =>
+    `var(${$textColor}, ${theme.white})`};
+  font-weight: ${({ $fontWeight = 400 }) => $fontWeight ?? 400};
+  text-transform: ${({ $textTransform = "unset" }) => $textTransform};
 `;

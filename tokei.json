@@ -113,6 +113,24 @@
         },
         {
           "stats": {
+            "blanks": 0,
+            "code": 0,
+            "comments": 1,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/temp/meilisearch-rust/examples/web_app/src/document.rs"
+        },
+        {
+          "stats": {
+            "blanks": 0,
+            "code": 0,
+            "comments": 2,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/temp/meilisearch-rust/examples/web_app/src/lib.rs"
+        },
+        {
+          "stats": {
             "blanks": 8,
             "code": 0,
             "comments": 26,
@@ -128,6 +146,24 @@
             "blobs": {}
           },
           "name": "/home/joseph/dev/temp/meilisearch-rust/src/dumps.rs"
+        },
+        {
+          "stats": {
+            "blanks": 85,
+            "code": 0,
+            "comments": 459,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/temp/meilisearch-rust/src/indexes.rs"
+        },
+        {
+          "stats": {
+            "blanks": 24,
+            "code": 0,
+            "comments": 124,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/temp/meilisearch-rust/src/client.rs"
         },
         {
           "stats": {
@@ -153,15 +189,6 @@
         },
         {
           "stats": {
-            "blanks": 24,
-            "code": 0,
-            "comments": 124,
-            "blobs": {}
-          },
-          "name": "/home/joseph/dev/temp/meilisearch-rust/src/client.rs"
-        },
-        {
-          "stats": {
             "blanks": 9,
             "code": 0,
             "comments": 59,
@@ -171,39 +198,12 @@
         },
         {
           "stats": {
-            "blanks": 0,
-            "code": 0,
-            "comments": 1,
-            "blobs": {}
-          },
-          "name": "/home/joseph/dev/temp/meilisearch-rust/examples/web_app/src/document.rs"
-        },
-        {
-          "stats": {
-            "blanks": 85,
-            "code": 0,
-            "comments": 459,
-            "blobs": {}
-          },
-          "name": "/home/joseph/dev/temp/meilisearch-rust/src/indexes.rs"
-        },
-        {
-          "stats": {
             "blanks": 64,
             "code": 0,
             "comments": 312,
             "blobs": {}
           },
           "name": "/home/joseph/dev/temp/meilisearch-rust/src/settings.rs"
-        },
-        {
-          "stats": {
-            "blanks": 0,
-            "code": 0,
-            "comments": 2,
-            "blobs": {}
-          },
-          "name": "/home/joseph/dev/temp/meilisearch-rust/examples/web_app/src/lib.rs"
         },
         {
           "stats": {

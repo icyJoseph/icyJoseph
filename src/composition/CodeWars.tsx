@@ -30,7 +30,7 @@ export const CodeWars = ({
   return (
     <Section>
       <SectionHeader id={name}>
-        <Text as="h2" textColor="--blue" fontSize="3rem">
+        <Text as="h2" $textColor="--blue" $fontSize="3rem">
           <a href={`#${name}`}>
             <code>CodeWars</code>
           </a>

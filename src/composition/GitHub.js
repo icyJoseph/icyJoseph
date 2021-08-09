@@ -87,7 +87,7 @@ export const GitHub = ({ initial, name: pageName }) => {
   return (
     <Section>
       <SectionHeader id={pageName}>
-        <Text as="h2" textColor="--blue" fontSize="3rem">
+        <Text as="h2" $textColor="--blue" $fontSize="3rem">
           <a href={`#${pageName}`}>
             <code>GitHub</code>
           </a>
@@ -98,7 +98,7 @@ export const GitHub = ({ initial, name: pageName }) => {
           <InfoCard m={3}>
             <Card.Header>
               <h3>{login}</h3>
-              <Text textColor="--smokeyWhite" my={2} fontWeight={300}>
+              <Text $textColor="--smokeyWhite" my={2} $fontWeight={300}>
                 {location}
               </Text>
               <GitHubImg
@@ -108,21 +108,21 @@ export const GitHub = ({ initial, name: pageName }) => {
               />
               <Text
                 as="h2"
-                textColor="--yellow"
-                textAlign="center"
+                $textColor="--yellow"
+                $textAlign="center"
                 mt={2}
-                fontWeight={500}
+                $fontWeight={500}
               >
                 {name}
               </Text>
             </Card.Header>
             <Card.Section>
               <Bio flexDirection="column" py={3} px={2}>
-                <Text textColor="--yellow" mb={2}>
+                <Text $textColor="--yellow" mb={2}>
                   {company}
                 </Text>
 
-                <Text textColor="--smokeyWhite" mb={2} fontWeight={300}>
+                <Text $textColor="--smokeyWhite" mb={2} $fontWeight={300}>
                   {bio}
                 </Text>
               </Bio>

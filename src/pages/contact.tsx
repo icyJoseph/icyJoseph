@@ -48,16 +48,15 @@ export function Contact() {
       <Head>
         <title>Contact - icyJoseph</title>
       </Head>
-      <Container>
+      <Container as="section">
         <FullPage>
           <header>
-            <Text as="h2" color="--blue" fontSize="3rem">
+            <Text as="h2" $textColor="--blue" $fontSize="3rem">
               Hello!
             </Text>
           </header>
 
-          {/* @ts-expect-error  'as' is a comment Styled Components pattern*/}
-          <Section as="main" maxWidth="65ch">
+          <Section maxWidth="65ch">
             {hasSubmitted ? (
               <div>Thanks for reaching out!</div>
             ) : (

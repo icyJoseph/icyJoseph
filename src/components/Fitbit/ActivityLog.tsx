@@ -56,13 +56,13 @@ const BaseValue = styled(Text)`
 `;
 
 const Unit: FC<{ unit: string }> = ({ unit }) => (
-  <BaseUnit as="span" fontWeight="lighter">
+  <BaseUnit as="span" $fontWeight="lighter">
     {unit}
   </BaseUnit>
 );
 
 const Value: FC<{ value: number | string }> = ({ value }) => (
-  <BaseValue as="span" fontWeight="lighter">
+  <BaseValue as="span" $fontWeight="lighter">
     {value ?? "-"}
   </BaseValue>
 );
@@ -195,7 +195,7 @@ export const ActivityLog: FC<ActivityLogProps> = ({
             <Th />
 
             <Th colSpan={2}>
-              <Text textAlign="left" fontSize="2rem" fontWeight={100}>
+              <Text $textAlign="left" $fontSize="2rem" $fontWeight={100}>
                 Activities
               </Text>
             </Th>
@@ -207,14 +207,14 @@ export const ActivityLog: FC<ActivityLogProps> = ({
             <Tr key={activity.logId}>
               <Td />
               <Td>
-                <Text textAlign="left" fontSize="2rem" fontWeight="lighter">
+                <Text $textAlign="left" $fontSize="2rem" $fontWeight="lighter">
                   {activity.activityName}
                 </Text>
-                <Text textAlign="left" fontWeight="lighter">
+                <Text $textAlign="left" $fontWeight="lighter">
                   <Text
                     as="time"
                     dateTime={activity.startTime}
-                    fontWeight="lighter"
+                    $fontWeight="lighter"
                   >
                     {formatter.format(new Date(activity.startTime))}
                   </Text>

@@ -16,9 +16,13 @@ const normalize: NormalizeIcon = (language) => {
 };
 
 const BaseDevIcon = ({
+  color: _,
+  fontSize: __,
   className,
   language
 }: {
+  color: string;
+  fontSize: string;
   className: string;
   language: string;
 }) => (

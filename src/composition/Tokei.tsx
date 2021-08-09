@@ -3,7 +3,7 @@ import { Card } from "components/Card";
 import { Emoji } from "components/Emoji";
 import { CircularProgress } from "components/CircularProgress";
 import { Flex } from "components/Flex";
-import { Section } from "components/Section";
+import { Section, SectionHeader } from "components/Section";
 import { Text } from "components/Text";
 import { useLanguageEasing } from "hooks/useLanguageEasing";
 
@@ -50,20 +50,20 @@ type TokeiProps = {
 
 export const Tokei: FC<TokeiProps> = ({ tokei, name }) => (
   <Section>
-    <Section.Header id={name} pt={2}>
-      <Text as="h2" color="--blue" fontSize="3rem">
+    <SectionHeader id={name} pt={2}>
+      <Text as="h2" textColor="--blue" fontSize="3rem">
         <a href={`#${name}`}>
           <code>tokei ~/dev</code>
         </a>
       </Text>
-    </Section.Header>
+    </SectionHeader>
     <Flex as="main" justifyContent="center">
       {tokei.map(({ language, ...rest }, index) => (
         <Language key={language} language={language} {...rest} order={index} />
       ))}
     </Flex>
     <Text mt={3} fontWeight="lighter">
-      <Text as="span" color="--red">
+      <Text as="span" textColor="--red">
         Lines of Code
       </Text>
       , without counting <strong>blanks</strong> or <strong>comments</strong>,
@@ -73,7 +73,7 @@ export const Tokei: FC<TokeiProps> = ({ tokei, name }) => (
         href="https://github.com/XAMPPRocky/tokei"
         target="_blank"
         rel="noreferrer noopener"
-        color="--blue"
+        textColor="--blue"
       >
         tokei
       </Text>

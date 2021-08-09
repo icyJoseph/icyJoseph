@@ -32,8 +32,8 @@ export const TopBadges = ({ profile }) => {
             <Card.Header>{badge.shortName}</Card.Header>
             <Card.Section>
               <DataEntry>
-                <Text color="--smokeyWhite">{badge.description}</Text>
-                <Text color="--smokeyWhite">
+                <Text textColor="--smokeyWhite">{badge.description}</Text>
+                <Text textColor="--smokeyWhite">
                   Achived: {badge.timesAchieved} times
                 </Text>
                 <BadgeImg
@@ -41,7 +41,7 @@ export const TopBadges = ({ profile }) => {
                   alt={badge.shortName}
                   loading="lazy"
                 />
-                <Text color="--smokeyWhite" fontWeight={300}>
+                <Text textColor="--smokeyWhite" fontWeight={300}>
                   {badge.shareText}
                 </Text>
               </DataEntry>

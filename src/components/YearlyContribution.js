@@ -101,26 +101,26 @@ const BaseContributionsSummaryCard = ({
       </Card.Header>
       <Card.Section>
         <Flex flexDirection="column" alignItems="center" m="0 auto">
-          <Text color="--smokeyWhite" mb={2}>
-            <Text as="span" color="--yellow">
+          <Text textColor="--smokeyWhite" mb={2}>
+            <Text as="span" textColor="--yellow">
               {totalRepositoryContributions}
             </Text>{" "}
             newly created repositories
           </Text>
-          <Text color="--smokeyWhite" mb={2}>
-            <Text as="span" color="--yellow">
+          <Text textColor="--smokeyWhite" mb={2}>
+            <Text as="span" textColor="--yellow">
               {totalCommitContributions}
             </Text>{" "}
             commit contributions
           </Text>
-          <Text color="--smokeyWhite" mb={2}>
-            <Text as="span" color="--yellow">
+          <Text textColor="--smokeyWhite" mb={2}>
+            <Text as="span" textColor="--yellow">
               {restrictedContributionsCount}
             </Text>{" "}
             super secret contributions
           </Text>
-          <Text color="--smokeyWhite" mb={2}>
-            <Text as="span" color="--yellow">
+          <Text textColor="--smokeyWhite" mb={2}>
+            <Text as="span" textColor="--yellow">
               {totalRepositoriesContributedTo}
             </Text>{" "}
             repos received commits from me
@@ -136,26 +136,26 @@ const ContributionsSummaryCard = memo(BaseContributionsSummaryCard);
 const ContributionCard = ({ repository, pointer, index, contributions }) => (
   <StyledCard p={2} m={2}>
     <Card.Header>
-      <Text as="p" color="--yellow" textAlign="end">
+      <Text as="p" textColor="--yellow" textAlign="end">
         #{pointer + index + 1}
       </Text>
       <Text
         as="h4"
-        color="--smokeyWhite"
+        textColor="--smokeyWhite"
         fontSize="2rem"
         fontWeight={600}
         mb={2}
       >
         {repository.name}
       </Text>
-      <Text color="--smokeyWhite">Owner:</Text>
-      <Text color="--smokeyWhite">{repository.owner.login}</Text>
+      <Text textColor="--smokeyWhite">Owner:</Text>
+      <Text textColor="--smokeyWhite">{repository.owner.login}</Text>
     </Card.Header>
     <Card.Section>
-      <Text color="--smokeyWhite">
+      <Text textColor="--smokeyWhite">
         Contributions: {contributions.totalCount}
       </Text>
-      <Text color="--smokeyWhite">
+      <Text textColor="--smokeyWhite">
         Size: {repository.languages.totalSize} bytes
       </Text>
     </Card.Section>

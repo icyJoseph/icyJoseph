@@ -70,7 +70,7 @@ export const InfoCard = styled(Card)`
   @media (min-width: 320px) {
     max-width: 328px;
     min-width: 280px;
-    width: 33.33.%;
+    width: 33.33%;
   }
 
   @media (min-width: 375px) {

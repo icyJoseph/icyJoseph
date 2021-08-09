@@ -12,14 +12,14 @@ const Summary = ({
   title: string;
 } & IcyJoseph.Rank) => (
   <DataEntry>
-    <Text color="--lightBlue">{title}</Text>
+    <Text textColor="--lightBlue">{title}</Text>
     <p>
       <Emoji symbol="🦀" ariaLabel={`${name} language`} />
     </p>
-    <Text color={`--light${capitalize(color)}`}>
+    <Text textColor={`--light${capitalize(color)}`}>
       <span>{name}</span>
     </Text>
-    <Text color="--white" fontSize="1.4rem">
+    <Text textColor="--white" fontSize="1.4rem">
       {score} exp
     </Text>
   </DataEntry>
@@ -27,11 +27,11 @@ const Summary = ({
 
 export const Clan = ({ clan }: { clan: IcyJoseph.CodeWars["clan"] }) => (
   <DataEntry>
-    <Text color="--lightGreen">clan</Text>
+    <Text textColor="--lightGreen">clan</Text>
     <p>
       <Emoji symbol="🛡️" ariaLabel={`My clan: ${clan}`} />
     </p>
-    <Text color="--smokeyWhite">{clan}</Text>
+    <Text textColor="--smokeyWhite">{clan}</Text>
   </DataEntry>
 );
 
@@ -41,21 +41,21 @@ export const Leaderboard = ({
   position: IcyJoseph.CodeWars["leaderboardPosition"];
 }) => (
   <DataEntry>
-    <Text color="--lightYellow">Rank</Text>
+    <Text textColor="--lightYellow">Rank</Text>
     <p>
       <Emoji symbol="👨🏽‍💻" ariaLabel={`Leaderboard position: ${position}`} />
     </p>
-    <Text color="--smokeyWhite">{position}</Text>
+    <Text textColor="--smokeyWhite">{position}</Text>
   </DataEntry>
 );
 
 export const Honor = ({ honor }: { honor: IcyJoseph.CodeWars["honor"] }) => (
   <DataEntry>
-    <Text color="--yellow">honor</Text>
+    <Text textColor="--yellow">honor</Text>
     <p>
       <Emoji symbol="✨" ariaLabel={`Honor: ${honor}`} />
     </p>
-    <Text color="--smokeyWhite">{honor}</Text>
+    <Text textColor="--smokeyWhite">{honor}</Text>
   </DataEntry>
 );
 
@@ -64,8 +64,8 @@ export const Challenges = ({
 }: {
   completed: IcyJoseph.CodeWars["codeChallenges"]["totalCompleted"];
 }) => (
-  <Text color="--smokeyWhite" m="0 auto">
-    <Text as="span" color="--yellow">
+  <Text textColor="--smokeyWhite" m="0 auto">
+    <Text as="span" textColor="--yellow">
       {completed}
     </Text>{" "}
     challenges completed

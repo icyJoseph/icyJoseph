@@ -5,7 +5,7 @@ import { space } from "@styled-system/space";
 import { Button } from "components/Button";
 import { Card, InfoCard } from "components/Card";
 import { Flex } from "components/Flex";
-import { Section } from "components/Section";
+import { Section, SectionHeader } from "components/Section";
 import { Text } from "components/Text";
 import { YearlyContribution } from "components/YearlyContribution";
 import { useGitHub } from "hooks/useGitHub";
@@ -86,19 +86,19 @@ export const GitHub = ({ initial, name: pageName }) => {
 
   return (
     <Section>
-      <Section.Header id={pageName}>
-        <Text as="h2" color="--blue" fontSize="3rem">
+      <SectionHeader id={pageName}>
+        <Text as="h2" textColor="--blue" fontSize="3rem">
           <a href={`#${pageName}`}>
             <code>GitHub</code>
           </a>
         </Text>
-      </Section.Header>
+      </SectionHeader>
       <GitHubGrid as="main">
         <Profile>
           <InfoCard m={3}>
             <Card.Header>
               <h3>{login}</h3>
-              <Text color="--smokeyWhite" my={2} fontWeight={300}>
+              <Text textColor="--smokeyWhite" my={2} fontWeight={300}>
                 {location}
               </Text>
               <GitHubImg
@@ -108,7 +108,7 @@ export const GitHub = ({ initial, name: pageName }) => {
               />
               <Text
                 as="h2"
-                color="--yellow"
+                textColor="--yellow"
                 textAlign="center"
                 mt={2}
                 fontWeight={500}
@@ -118,11 +118,11 @@ export const GitHub = ({ initial, name: pageName }) => {
             </Card.Header>
             <Card.Section>
               <Bio flexDirection="column" py={3} px={2}>
-                <Text color="--yellow" mb={2}>
+                <Text textColor="--yellow" mb={2}>
                   {company}
                 </Text>
 
-                <Text color="--smokeyWhite" mb={2} fontWeight={300}>
+                <Text textColor="--smokeyWhite" mb={2} fontWeight={300}>
                   {bio}
                 </Text>
               </Bio>

@@ -14,7 +14,8 @@ import {
 import { Text } from "components/Text";
 import { whiteSpaceValidator } from "utils/whiteSpace";
 
-const emailRegExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const emailRegExp =
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 const CharCount = ({ control, max, min }) => {
   const message = useWatch({ control, name: "Message", defaultValue: "" });
@@ -22,7 +23,7 @@ const CharCount = ({ control, max, min }) => {
   return (
     <Text
       as="span"
-      color={length > max || length < min ? "--red" : "--softDark"}
+      textColor={length > max || length < min ? "--red" : "--softDark"}
     >
       {length} / {length < min ? min : max}
     </Text>
@@ -30,14 +31,8 @@ const CharCount = ({ control, max, min }) => {
 };
 
 export function ContactForm({ cloaked, done, reason }) {
-  const {
-    register,
-    handleSubmit,
-    control,
-    errors,
-    reset,
-    formState
-  } = useForm();
+  const { register, handleSubmit, control, errors, reset, formState } =
+    useForm();
   const { isSubmitting } = formState;
 
   return (
@@ -146,7 +141,7 @@ export function ContactForm({ cloaked, done, reason }) {
         <Label htmlFor="secret">
           <Text>
             Secret:{" "}
-            <Text as="span" color="--blue">
+            <Text as="span" textColor="--blue">
               {cloaked}
             </Text>
           </Text>

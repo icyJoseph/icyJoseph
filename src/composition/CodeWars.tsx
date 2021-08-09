@@ -1,7 +1,7 @@
 import { BackToTop } from "components/BackToTop";
 import { Card } from "components/Card";
 import { Flex } from "components/Flex";
-import { Section } from "components/Section";
+import { Section, SectionHeader } from "components/Section";
 
 import {
   Clan,
@@ -24,24 +24,18 @@ export const CodeWars = ({
 }) => {
   const { data = initial } = useCodeWars(initial);
 
-  const {
-    username,
-    honor,
-    clan,
-    leaderboardPosition,
-    ranks,
-    codeChallenges
-  } = data;
+  const { username, honor, clan, leaderboardPosition, ranks, codeChallenges } =
+    data;
 
   return (
     <Section>
-      <Section.Header id={name}>
-        <Text as="h2" color="--blue" fontSize="3rem">
+      <SectionHeader id={name}>
+        <Text as="h2" textColor="--blue" fontSize="3rem">
           <a href={`#${name}`}>
             <code>CodeWars</code>
           </a>
         </Text>
-      </Section.Header>
+      </SectionHeader>
       <Flex as="main">
         <Card my={2} mx="auto">
           <Card.Header>

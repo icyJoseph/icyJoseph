@@ -5,7 +5,7 @@ import { BackToTop } from "components/BackToTop";
 import { Box } from "components/Box";
 import { DataEntry } from "components/DataEntry";
 import { Flex } from "components/Flex";
-import { Section } from "components/Section";
+import { Section, SectionHeader } from "components/Section";
 import { Text } from "components/Text";
 
 import { TopBadges } from "components/Fitbit/TopBadges";
@@ -78,13 +78,13 @@ export const Fitbit: FC<FitbitProps> = ({
 
   return (
     <Section>
-      <Section.Header id={name}>
-        <Text as="h2" color="--blue" fontSize="3rem">
+      <SectionHeader id={name}>
+        <Text as="h2" textColor="--blue" fontSize="3rem">
           <a href={`#${name}`}>
             <code>Fitbit</code>
           </a>
         </Text>
-      </Section.Header>
+      </SectionHeader>
       <Box as="main" mb={2}>
         <Flex mt={2} pb={3}>
           <DataSegment
@@ -97,7 +97,7 @@ export const Fitbit: FC<FitbitProps> = ({
               Average Daily Steps
             </Text>
 
-            <Text color="--blue" m={3} fontSize="5rem">
+            <Text textColor="--blue" m={3} fontSize="5rem">
               {profile.averageDailySteps}
             </Text>
           </DataSegment>
@@ -110,7 +110,7 @@ export const Fitbit: FC<FitbitProps> = ({
             <Text fontSize="2rem" fontWeight="lighter">
               Resting pulse
             </Text>
-            <Text color="--blue" m={3} fontSize="5rem">
+            <Text textColor="--blue" m={3} fontSize="5rem">
               {today?.value?.restingHeartRate ??
                 prevDay?.value?.restingHeartRate}{" "}
               <Text as="span" fontWeight="lighter">
@@ -130,13 +130,13 @@ export const Fitbit: FC<FitbitProps> = ({
                   return (
                     <StyledDataEntry key={name}>
                       <Text fontWeight={300}>{name}</Text>
-                      <Text fontSize="2.5rem" color="--yellow" mt={2}>
+                      <Text fontSize="2.5rem" textColor="--yellow" mt={2}>
                         {minutes}{" "}
                         <Text as="span" fontWeight={300}>
                           min
                         </Text>
                       </Text>
-                      <Text fontSize="2.5rem" color="--yellow" mt={2}>
+                      <Text fontSize="2.5rem" textColor="--yellow" mt={2}>
                         {Math.floor(caloriesOut)}{" "}
                         <Text as="span" fontWeight={300}>
                           Cal

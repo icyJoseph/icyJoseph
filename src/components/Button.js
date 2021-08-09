@@ -58,8 +58,9 @@ const StyledButton = styled.button`
   }
 `;
 
-StyledButton.Label = styled.div`
+StyledButton.Label = styled.label`
   /* LABEL  */
+  display: block;
   position: relative;
   overflow: hidden;
   margin: 0;

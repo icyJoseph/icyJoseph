@@ -56,7 +56,7 @@ export function Contact() {
             </Text>
           </header>
 
-          <Section as="main" maxWidth="65ch">
+          <Section maxWidth="65ch">
             {hasSubmitted ? (
               <div>Thanks for reaching out!</div>
             ) : (

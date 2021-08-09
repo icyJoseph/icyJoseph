@@ -36,7 +36,7 @@ export const CodeWars = ({
           </a>
         </Text>
       </SectionHeader>
-      <Flex as="main">
+      <Flex>
         <Card my={2} mx="auto">
           <Card.Header>
             <h2>

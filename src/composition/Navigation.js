@@ -30,12 +30,11 @@ export const Navigation = () => {
     <Container as="header">
       <NavBar>
         <NavBar.Brand>
-          <h1>
-            <Link href="/">
-              <a>icyJoseph</a>
-            </Link>
-          </h1>
-
+          <Link href="/">
+            <a>
+              <h1>icyJoseph</h1>
+            </a>
+          </Link>
           <span>Señor Developer</span>
         </NavBar.Brand>
         <NavBar.Spacer />

@@ -81,7 +81,7 @@ export function Activities({ activityLog, year, month, day }: ActivitiesProps) {
             </Text>
           </header>
 
-          <Box as="main" mb={2}>
+          <Box mb={2}>
             <ActivityLog
               initial={activityLog}
               onDateChange={handleDateChange}

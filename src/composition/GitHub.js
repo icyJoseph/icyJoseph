@@ -93,7 +93,7 @@ export const GitHub = ({ initial, name: pageName }) => {
           </a>
         </Text>
       </SectionHeader>
-      <GitHubGrid as="main">
+      <GitHubGrid>
         <Profile>
           <InfoCard m={3}>
             <Card.Header>

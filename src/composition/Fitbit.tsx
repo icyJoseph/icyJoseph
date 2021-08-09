@@ -85,7 +85,7 @@ export const Fitbit: FC<FitbitProps> = ({
           </a>
         </Text>
       </SectionHeader>
-      <Box as="main" mb={2}>
+      <Box mb={2}>
         <Flex mt={2} pb={3}>
           <DataSegment
             flex={1}

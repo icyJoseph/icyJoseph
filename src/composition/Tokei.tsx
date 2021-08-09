@@ -57,7 +57,7 @@ export const Tokei: FC<TokeiProps> = ({ tokei, name }) => (
         </a>
       </Text>
     </SectionHeader>
-    <Flex as="main" justifyContent="center">
+    <Flex justifyContent="center">
       {tokei.map(({ language, ...rest }, index) => (
         <Language key={language} language={language} {...rest} order={index} />
       ))}

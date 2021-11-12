@@ -4,10 +4,20 @@ module.exports = {
     "!**/*.d.ts",
     "!**/node_modules/**"
   ],
-  setupFilesAfterEnv: ["<rootDir>/setupTests.js"],
+  setupFilesAfterEnv: ["<rootDir>/setupTests.ts"],
   testPathIgnorePatterns: ["/node_modules/", "/.next/"],
   transform: {
-    "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+    "^.+\\.(js|jsx|ts|tsx)$": [
+      "<rootDir>/node_modules/babel-jest",
+      {
+        presets: [
+          "next/babel",
+          {
+            plugins: [["styled-components", { ssr: true, displayName: true }]]
+          }
+        ]
+      }
+    ],
     "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js"
   },
   transformIgnorePatterns: [

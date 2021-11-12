@@ -127,6 +127,7 @@ function App({ Component, pageProps }: AppProps) {
           async
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
         />
+
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -140,10 +141,14 @@ function App({ Component, pageProps }: AppProps) {
           }}
         />
       </Head>
+
       <ThemeProvider theme={theme}>
         <GlobalStyle />
+
         <Navigation />
+
         <Component {...pageProps} />
+
         <Footer />
       </ThemeProvider>
     </React.Fragment>

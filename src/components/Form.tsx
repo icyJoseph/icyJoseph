@@ -41,12 +41,12 @@ export const TextArea = styled.textarea`
   border: 1px solid var(--softDark);
 `;
 
-const ErrorBase = styled.span`
+const ErrorBase = styled.span<{ visible: boolean }>`
   white-space: nowrap;
   color: var(--red);
   visibility: ${({ visible }) => (visible ? "visible" : "hidden")};
 `;
 
-export const ErrorMessage = ({ error }) => {
+export const ErrorMessage = ({ error }: { error: Error }) => {
   return <ErrorBase visible={!!error}>{error?.message ?? "&nbsp;"}</ErrorBase>;
 };

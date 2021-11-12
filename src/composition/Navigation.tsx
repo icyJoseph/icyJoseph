@@ -10,19 +10,19 @@ export const entries = [
     href: "/",
     ariaLabel: "Navigate Home",
     title: "Home"
-  },
+  }
   // {
   //   symbol: "📰",
   //   href: "/posts",
   //   ariaLabel: "Navigate to Posts",
   //   title: "Posts"
   // },
-  {
-    symbol: "👨🏽‍💻",
-    href: "/contact",
-    ariaLabel: "Navigate to contact info",
-    title: "Contact"
-  }
+  // {
+  //   symbol: "👨🏽‍💻",
+  //   href: "/contact",
+  //   ariaLabel: "Navigate to contact info",
+  //   title: "Contact"
+  // }
 ];
 
 export const Navigation = () => {
@@ -37,7 +37,9 @@ export const Navigation = () => {
           </Link>
           <span>Señor Developer</span>
         </NavBar.Brand>
+
         <NavBar.Spacer />
+
         <NavBar.LinkList>
           {entries.map(({ title, symbol, ariaLabel, href }) => (
             <NavBar.LinkItem key={title}>

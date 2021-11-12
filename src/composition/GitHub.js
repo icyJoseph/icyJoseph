@@ -140,7 +140,7 @@ export const GitHub = ({ initial, name: pageName }) => {
                   .map((year) => (
                     <Button
                       key={year}
-                      variant={year !== selectedYear ? "outlined" : null}
+                      variant={year !== selectedYear ? "outlined" : "primary"}
                       m={2}
                       onClick={() => setSelectedYear(year)}
                     >

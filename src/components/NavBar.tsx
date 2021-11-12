@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { space } from "@styled-system/space";
+import { ComponentPropsWithoutRef } from "react";
 
-export const NavBar = styled.nav`
+const Nav = styled.nav`
   ${space({ py: 2, m: "0 auto" })};
   display: flex;
   flex-direction: column;
@@ -13,6 +14,8 @@ export const NavBar = styled.nav`
     flex-direction: row;
   }
 `;
+
+const NavBar = (props: ComponentPropsWithoutRef<"nav">) => <Nav {...props} />;
 
 NavBar.Brand = styled.div`
   font-weight: bold;
@@ -64,3 +67,5 @@ NavBar.LinkItem = styled.li`
     justify-content: flex-end;
   }
 `;
+
+export { NavBar };

@@ -11,6 +11,9 @@ module.exports = withSourceMaps(
     reactStrictMode: true,
     webpack(config) {
       return config;
-    }
+    },
+	experimental: {
+	 styledComponents: true,
+	}
   })
 );

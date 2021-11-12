@@ -1,17 +1,25 @@
 // Pipe
-export const pipe = (...funcs: any[]) => (...args: any[]) =>
-  funcs.reduce((val, func, i) => (i === 0 ? func(...val) : func(val)), args);
+export const pipe =
+  (...funcs: any[]) =>
+  (...args: any[]) =>
+    funcs.reduce((val, func, i) => (i === 0 ? func(...val) : func(val)), args);
 
-export const curry = <A, B extends [], C>(f: (a: A, ...b: B) => C) => (
-  a: A
-) => (...b: B) => f(a, ...b);
+export const curry =
+  <A, B, C>(f: (a: A, ...b: Array<B>) => C) =>
+  (a: A) =>
+  (...b: Array<B>) =>
+    f(a, ...b);
 
-export const curryRight = <A, B extends [], C>(f: (a: A, ...b: B) => C) => (
-  ...b: B
-) => (a: A) => f(a, ...b);
+export const curryRight =
+  <A, B, C>(f: (a: A, ...b: Array<B>) => C) =>
+  (...b: Array<B>) =>
+  (a: A) =>
+    f(a, ...b);
 
-export const take = (n: number, m = 0) => <T extends [] = []>(array: T) =>
-  array.slice(m, n + m);
+export const take =
+  (n: number, m = 0) =>
+  <T>(array: Array<T>) =>
+    array.slice(m, n + m);
 
 export const head = <T>([head]: T[]) => head;
 

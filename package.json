@@ -10,7 +10,7 @@
     "graphql": "^15.3.0",
     "graphql-tag": "^2.11.0",
     "gray-matter": "^4.0.2",
-    "next": "^12.0.3",
+    "next": "^12.0.4-canary.9",
     "nprogress": "^0.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -38,7 +38,7 @@
   "devDependencies": {
     "@next/bundle-analyzer": "^11.0.1",
     "@testing-library/jest-dom": "^5.1.0",
-    "@testing-library/react": "^9.4.0",
+    "@testing-library/react": "^12.1.2",
     "@types/cookies": "^0.7.7",
     "@types/node": "^14.14.7",
     "@types/nprogress": "^0.2.0",

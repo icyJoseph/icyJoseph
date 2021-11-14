@@ -1,11 +1,11 @@
 import Link from "next/link";
 import styled from "styled-components";
-import { space } from "@styled-system/space";
+import { space, SpaceProps } from "@styled-system/space";
 
 import { entries } from "composition/Navigation";
 import { maxWidthUtility } from "styles/mixins";
 
-const StyledFooter = styled.footer`
+const StyledFooter = styled.footer<SpaceProps>`
   ${space};
   background: var(--softDark);
   color: var(--smokeyWhite);

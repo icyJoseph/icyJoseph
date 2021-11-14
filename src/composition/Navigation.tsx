@@ -5,12 +5,12 @@ import { Emoji } from "components/Emoji";
 import { NavBar } from "components/NavBar";
 
 export const entries = [
-  {
-    symbol: "🏠",
-    href: "/",
-    ariaLabel: "Navigate Home",
-    title: "Home"
-  }
+  // {
+  //   symbol: "🏠",
+  //   href: "/",
+  //   ariaLabel: "Navigate Home",
+  //   title: "Home"
+  // }
   // {
   //   symbol: "📰",
   //   href: "/posts",

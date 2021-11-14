@@ -2,11 +2,12 @@ import { Children, Fragment, isValidElement, ReactNode } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import { space } from "@styled-system/space";
+import { maxWidthUtility } from "styles/mixins";
 
 const StyledNav = styled.nav`
-  ${space({ mt: 3, p: 2, mx: "auto" })};
+  ${maxWidthUtility};
+  ${space({ mt: 3, py: 2 })};
   background: var(--smokeyWhite);
-  max-width: 85ch;
 `;
 
 const PageLinks = styled.ul`

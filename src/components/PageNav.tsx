@@ -1,12 +1,13 @@
-import { Children, Fragment } from "react";
+import { Children, Fragment, isValidElement, ReactNode } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import { space } from "@styled-system/space";
+import { maxWidthUtility } from "styles/mixins";
 
 const StyledNav = styled.nav`
-  ${space({ mt: 3, p: 2, mx: "auto" })};
+  ${maxWidthUtility};
+  ${space({ mt: 3, py: 2 })};
   background: var(--smokeyWhite);
-  max-width: 85ch;
 `;
 
 const PageLinks = styled.ul`
@@ -21,13 +22,17 @@ const PageLink = styled.li`
   color: var(--blue);
 `;
 
-export const PageNav = ({ children }) => {
+export const PageNav = ({ children }: { children: ReactNode }) => {
   return (
     <Fragment>
       <StyledNav>
         <PageLinks>
-          {Children.map(children, ({ props: { name } }) => {
+          {Children.map(children, (child) => {
+            if (!isValidElement(child)) return child;
+
+            const { name } = child.props;
             if (!name) return null;
+
             return (
               <PageLink>
                 <Link href={`/#${name}`}>
@@ -38,6 +43,7 @@ export const PageNav = ({ children }) => {
           })}
         </PageLinks>
       </StyledNav>
+
       {children}
     </Fragment>
   );

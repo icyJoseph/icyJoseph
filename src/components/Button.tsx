@@ -1,7 +1,22 @@
 import styled from "styled-components";
 import { space } from "@styled-system/space";
+import { ComponentPropsWithoutRef } from "react";
 
-const StyledButton = styled.button`
+type BaseButtonProps = {
+  fontSize?: string;
+};
+
+type ButtonVariants = "primary" | "outlined";
+
+type ButtonLabelProps = {
+  variant: ButtonVariants;
+};
+
+type ButtonTextProps = {
+  variant: ButtonVariants;
+};
+
+const BaseButton = styled.button<BaseButtonProps>`
   ${space};
   ${space({ p: 2 })};
   font-size: ${({ fontSize = "1.6rem" }) => fontSize};
@@ -58,7 +73,7 @@ const StyledButton = styled.button`
   }
 `;
 
-StyledButton.Label = styled.span`
+const Label = styled.span<ButtonLabelProps>`
   /* LABEL  */
   display: block;
   position: relative;
@@ -80,7 +95,7 @@ StyledButton.Label = styled.span`
   }
 `;
 
-StyledButton.HoverEffect = styled.span`
+const HoverEffect = styled.span`
   /* Hover Effect */
   content: "";
   display: block;
@@ -94,12 +109,12 @@ StyledButton.HoverEffect = styled.span`
   transform: translateX(-100%) skew(-10deg);
   transition: transform 0.3s ease-out;
 
-  ${StyledButton}:hover & {
+  ${BaseButton}:hover & {
     transform: translateX(0) skew(-10deg);
   }
 `;
 
-StyledButton.Text = styled.span`
+const Text = styled.span<ButtonTextProps>`
   /* Label Text */
   position: relative;
   display: block;
@@ -123,22 +138,31 @@ StyledButton.Text = styled.span`
     transition: background-color 0.2s ease-in;
   }
 
-  ${StyledButton}:hover &, &[data-disabled='true'] {
+  ${BaseButton}:hover &, &[data-disabled='true'] {
     opacity: 0.5;
   }
 
-  ${StyledButton}:hover &:after {
+  ${BaseButton}:hover &:after {
     background-color: var(--softDark);
   }
 `;
 
-export const Button = ({ variant, disabled = false, children, ...rest }) => (
-  <StyledButton variant={variant} disabled={disabled} {...rest}>
-    <StyledButton.Label variant={variant}>
-      {!disabled && <StyledButton.HoverEffect />}
-      <StyledButton.Text variant={variant} data-disabled={disabled}>
+type ButtonOwnProps = { variant: ButtonVariants } & BaseButtonProps;
+
+export type ButtonProps = ButtonOwnProps & ComponentPropsWithoutRef<"button">;
+
+export const Button = ({
+  variant,
+  disabled = false,
+  children,
+  ...rest
+}: ButtonProps) => (
+  <BaseButton disabled={disabled} {...rest}>
+    <Label variant={variant}>
+      {!disabled && <HoverEffect />}
+      <Text variant={variant} data-disabled={disabled}>
         {children}
-      </StyledButton.Text>
-    </StyledButton.Label>
-  </StyledButton>
+      </Text>
+    </Label>
+  </BaseButton>
 );

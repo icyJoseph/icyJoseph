@@ -38,95 +38,13 @@ function App({ Component, pageProps }: AppProps) {
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/devicons/devicon@master/devicon.min.css"
         />
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-              @font-face {
-                font-family: "Recursive";
-                font-style: normal;
-                font-display: block;
-                font-weight: 300;
-                src: local(""),
-                  url("/fonts/recursive-v21-latin-300.woff2") format("woff2"),
-                  /* Chrome 26+, Opera 23+, Firefox 39+ */
-                    url("/fonts/recursive-v21-latin-300.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-              }
-
-              @font-face {
-                font-family: "Recursive";
-                font-style: normal;
-                font-display: block;
-                font-weight: 400;
-                src: local(""),
-                  url("/fonts/recursive-v21-latin-regular.woff2")
-                    format("woff2"),
-                  /* Chrome 26+, Opera 23+, Firefox 39+ */
-                    url("/fonts/recursive-v21-latin-regular.woff")
-                    format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-              }
-
-              @font-face {
-                font-family: "Recursive";
-                font-style: normal;
-                font-display: block;
-                font-weight: 500;
-                src: local(""),
-                  url("/fonts/recursive-v21-latin-500.woff2") format("woff2"),
-                  /* Chrome 26+, Opera 23+, Firefox 39+ */
-                    url("/fonts/recursive-v21-latin-500.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-              }
-
-              @font-face {
-                font-family: "Recursive";
-                font-style: normal;
-                font-display: block;
-                font-weight: 600;
-                src: local(""),
-                  url("/fonts/recursive-v21-latin-600.woff2") format("woff2"),
-                  /* Chrome 26+, Opera 23+, Firefox 39+ */
-                    url("/fonts/recursive-v21-latin-600.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-              }
-
-              @font-face {
-                font-family: "Recursive";
-                font-style: normal;
-                font-display: block;
-                font-weight: 700;
-                src: local(""),
-                  url("/fonts/recursive-v21-latin-700.woff2") format("woff2"),
-                  /* Chrome 26+, Opera 23+, Firefox 39+ */
-                    url("/fonts/recursive-v21-latin-700.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-              }
-
-              @font-face {
-                font-family: "Recursive";
-                font-style: normal;
-                font-display: block;
-                font-weight: 800;
-                src: local(""),
-                  url("/fonts/recursive-v21-latin-800.woff2") format("woff2"),
-                  /* Chrome 26+, Opera 23+, Firefox 39+ */
-                    url("/fonts/recursive-v21-latin-800.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-              }
-
-              @font-face {
-                font-family: "Recursive";
-                font-style: normal;
-                font-display: block;
-                font-weight: 900;
-                src: local(""),
-                  url("/fonts/recursive-v21-latin-900.woff2") format("woff2"),
-                  /* Chrome 26+, Opera 23+, Firefox 39+ */
-                    url("/fonts/recursive-v21-latin-900.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-              }`
-          }}
-        />
 
         {/* Global Site Tag (gtag.js) - Google Analytics */}
         <script
           async
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
         />
+
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -140,10 +58,14 @@ function App({ Component, pageProps }: AppProps) {
           }}
         />
       </Head>
+
       <ThemeProvider theme={theme}>
         <GlobalStyle />
+
         <Navigation />
+
         <Component {...pageProps} />
+
         <Footer />
       </ThemeProvider>
     </React.Fragment>

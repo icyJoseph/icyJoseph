@@ -36,7 +36,7 @@ const activityLogFetcher = async (beforeDate: string) => {
   return await axios
     .get<IcyJoseph.ActivityLog>(`/api/fitbit/activities/list`, {
       params: { beforeDate },
-      paramsSerializer: (params) => {
+      paramsSerializer: (params = {}) => {
         return encodeURI(
           Object.entries(params)
             .map(([key, value]) => `${key}=${value}`)

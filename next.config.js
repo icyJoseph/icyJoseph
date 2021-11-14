@@ -12,8 +12,9 @@ module.exports = withSourceMaps(
     webpack(config) {
       return config;
     },
-	experimental: {
-	 styledComponents: true,
-	}
+    experimental: {
+      styledComponents: true
+    },
+    productionBrowserSourceMaps: true
   })
 );

@@ -62,7 +62,7 @@ export const Tokei: FC<TokeiProps> = ({ tokei, name }) => (
         <Language key={language} language={language} {...rest} order={index} />
       ))}
     </Flex>
-    <Text mt={3} $fontWeight="lighter">
+    <Text mt={3} $fontWeight={300}>
       <Text as="span" $textColor="--red">
         Lines of Code
       </Text>
@@ -79,7 +79,7 @@ export const Tokei: FC<TokeiProps> = ({ tokei, name }) => (
       </Text>
       .
     </Text>
-    <Text mt={2} $fontWeight="lighter">
+    <Text mt={2} $fontWeight={300}>
       <i>A full circle means 0 blanks and 0 comments.</i>
     </Text>
   </Section>

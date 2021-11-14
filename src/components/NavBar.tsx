@@ -1,14 +1,15 @@
 import styled from "styled-components";
 import { space } from "@styled-system/space";
 import { ComponentPropsWithoutRef } from "react";
+import { maxWidthUtility } from "styles/mixins";
 
 const Nav = styled.nav`
-  ${space({ py: 2, m: "0 auto" })};
+  ${maxWidthUtility};
+  ${space({ py: 2, my: 0 })};
   display: flex;
   flex-direction: column;
   background: transparent;
   color: var(--thinDark);
-  max-width: 85ch;
 
   @media (min-width: 768px) {
     flex-direction: row;
@@ -50,11 +51,9 @@ NavBar.LinkList = styled.ul`
   flex: auto;
   justify-content: space-evenly;
   align-items: center;
-  max-width: unset;
 
   @media (min-width: 768px) {
     ${space({ mt: 0 })};
-    max-width: 30ch;
   }
 `;
 

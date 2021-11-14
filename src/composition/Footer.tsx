@@ -1,16 +1,18 @@
 import Link from "next/link";
 import styled from "styled-components";
-import { space } from "@styled-system/space";
+import { space, SpaceProps } from "@styled-system/space";
 
 import { entries } from "composition/Navigation";
+import { maxWidthUtility } from "styles/mixins";
 
-const StyledFooter = styled.footer`
+const StyledFooter = styled.footer<SpaceProps>`
   ${space};
   background: var(--softDark);
   color: var(--smokeyWhite);
 `;
 
 const StyledSection = styled.section`
+  ${maxWidthUtility};
   ${space({ m: "0 auto" })};
 
   /* IE11 fallback */
@@ -21,7 +23,6 @@ const StyledSection = styled.section`
   display: grid;
   grid-template-columns: repeat(4, minmax(min-content, 1fr));
   grid-column-gap: 2rem;
-  max-width: 85ch;
 `;
 
 const CopyrightNotice = styled.span`

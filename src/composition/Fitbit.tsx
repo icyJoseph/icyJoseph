@@ -93,7 +93,7 @@ export const Fitbit: FC<FitbitProps> = ({
             justifyContent="center"
             alignItems="center"
           >
-            <Text $fontSize="2rem" $fontWeight="lighter">
+            <Text $fontSize="2rem" $fontWeight={300}>
               Average Daily Steps
             </Text>
 
@@ -107,18 +107,18 @@ export const Fitbit: FC<FitbitProps> = ({
             justifyContent="center"
             alignItems="center"
           >
-            <Text $fontSize="2rem" $fontWeight="lighter">
+            <Text $fontSize="2rem" $fontWeight={300}>
               Resting pulse
             </Text>
             <Text $textColor="--blue" m={3} $fontSize="5rem">
               {today?.value?.restingHeartRate ??
                 prevDay?.value?.restingHeartRate}{" "}
-              <Text as="span" $fontWeight="lighter">
+              <Text as="span" $fontWeight={300}>
                 bpm
               </Text>
             </Text>
 
-            <Text $fontWeight="lighter">
+            <Text $fontWeight={300}>
               Heart activity last {heartData.length} days
             </Text>
 

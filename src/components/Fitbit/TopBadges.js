@@ -19,7 +19,7 @@ export const TopBadges = ({ profile }) => {
       <Text
         as="h6"
         $fontSize="2rem"
-        $fontWeight="lighter"
+        $fontWeight={300}
         mt={3}
         mb={2}
         pl="1.5rem"

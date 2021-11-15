@@ -9,9 +9,9 @@
   },
   {
     "language": "TypeScript",
-    "blanks": 26116,
-    "code": 235112,
-    "comments": 71170,
+    "blanks": 26156,
+    "code": 235196,
+    "comments": 71205,
     "children": {},
     "inaccurate": false
   },
@@ -88,19 +88,19 @@
           "stats": {
             "blanks": 0,
             "code": 0,
-            "comments": 1,
+            "comments": 3,
             "blobs": {}
           },
-          "name": "/home/joseph/dev/daybook/search-server/src/helpers.rs"
+          "name": "/home/joseph/dev/daybook/search-server/src/start.rs"
         },
         {
           "stats": {
             "blanks": 0,
             "code": 0,
-            "comments": 3,
+            "comments": 1,
             "blobs": {}
           },
-          "name": "/home/joseph/dev/daybook/search-server/src/start.rs"
+          "name": "/home/joseph/dev/daybook/search-server/src/helpers.rs"
         },
         {
           "stats": {
@@ -136,7 +136,7 @@
             "comments": 1,
             "blobs": {}
           },
-          "name": "/home/joseph/dev/temp/test-rust-vercel/api/target/release/build/lambda_runtime_core-38d87fcbd4469c41/out/metadata.rs"
+          "name": "/home/joseph/dev/temp/test-rust-vercel/api/target/rls/debug/build/lambda_runtime_core-3cac6e37e3e7c8dc/out/metadata.rs"
         },
         {
           "stats": {
@@ -145,16 +145,7 @@
             "comments": 1,
             "blobs": {}
           },
-          "name": "/home/joseph/dev/temp/test-rust-vercel/api/target/rls/debug/build/lambda_runtime_core-3cac6e37e3e7c8dc/out/metadata.rs"
-        },
-        {
-          "stats": {
-            "blanks": 8,
-            "code": 0,
-            "comments": 26,
-            "blobs": {}
-          },
-          "name": "/home/joseph/dev/temp/meilisearch-rust/src/document.rs"
+          "name": "/home/joseph/dev/temp/test-rust-vercel/api/target/release/build/lambda_runtime_core-38d87fcbd4469c41/out/metadata.rs"
         },
         {
           "stats": {
@@ -167,6 +158,15 @@
         },
         {
           "stats": {
+            "blanks": 8,
+            "code": 0,
+            "comments": 26,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/temp/meilisearch-rust/src/document.rs"
+        },
+        {
+          "stats": {
             "blanks": 24,
             "code": 0,
             "comments": 124,
@@ -176,21 +176,21 @@
         },
         {
           "stats": {
-            "blanks": 0,
-            "code": 0,
-            "comments": 2,
-            "blobs": {}
-          },
-          "name": "/home/joseph/dev/temp/meilisearch-rust/examples/web_app/src/lib.rs"
-        },
-        {
-          "stats": {
             "blanks": 13,
             "code": 0,
             "comments": 69,
             "blobs": {}
           },
           "name": "/home/joseph/dev/temp/meilisearch-rust/src/dumps.rs"
+        },
+        {
+          "stats": {
+            "blanks": 9,
+            "code": 0,
+            "comments": 59,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/temp/meilisearch-rust/src/progress.rs"
         },
         {
           "stats": {
@@ -225,12 +225,12 @@
         },
         {
           "stats": {
-            "blanks": 9,
+            "blanks": 1,
             "code": 0,
-            "comments": 59,
+            "comments": 69,
             "blobs": {}
           },
-          "name": "/home/joseph/dev/temp/meilisearch-rust/src/progress.rs"
+          "name": "/home/joseph/dev/temp/meilisearch-rust/src/errors.rs"
         },
         {
           "stats": {
@@ -240,15 +240,6 @@
             "blobs": {}
           },
           "name": "/home/joseph/dev/temp/meilisearch-rust/src/settings.rs"
-        },
-        {
-          "stats": {
-            "blanks": 1,
-            "code": 0,
-            "comments": 69,
-            "blobs": {}
-          },
-          "name": "/home/joseph/dev/temp/meilisearch-rust/src/errors.rs"
         },
         {
           "stats": {
@@ -263,19 +254,19 @@
           "stats": {
             "blanks": 0,
             "code": 0,
-            "comments": 5,
+            "comments": 2,
             "blobs": {}
           },
-          "name": "/home/joseph/dev/temp/rust/src/strmap.rs"
+          "name": "/home/joseph/dev/temp/meilisearch-rust/examples/web_app/src/lib.rs"
         },
         {
           "stats": {
             "blanks": 0,
             "code": 0,
-            "comments": 1,
+            "comments": 5,
             "blobs": {}
           },
-          "name": "/home/joseph/dev/temp/rust/src/request.rs"
+          "name": "/home/joseph/dev/temp/rust/src/strmap.rs"
         },
         {
           "stats": {
@@ -288,21 +279,12 @@
         },
         {
           "stats": {
-            "blanks": 14,
+            "blanks": 0,
             "code": 0,
-            "comments": 39,
+            "comments": 1,
             "blobs": {}
           },
-          "name": "/home/joseph/dev/temp/rust/src/body.rs"
-        },
-        {
-          "stats": {
-            "blanks": 3,
-            "code": 0,
-            "comments": 9,
-            "blobs": {}
-          },
-          "name": "/home/joseph/dev/temp/rust/src/lib.rs"
+          "name": "/home/joseph/dev/temp/rust/src/request.rs"
         },
         {
           "stats": {
@@ -319,6 +301,24 @@
             }
           },
           "name": "/home/joseph/dev/temp/rust/src/response.rs"
+        },
+        {
+          "stats": {
+            "blanks": 3,
+            "code": 0,
+            "comments": 9,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/temp/rust/src/lib.rs"
+        },
+        {
+          "stats": {
+            "blanks": 14,
+            "code": 0,
+            "comments": 39,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/temp/rust/src/body.rs"
         }
       ]
     },

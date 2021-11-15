@@ -1,6 +1,6 @@
 import { DataEntry } from "components/DataEntry";
-import { Emoji } from "components/Emoji";
-import { Text } from "components/Text";
+import { Emoji } from "design-system/Emoji";
+import { Text } from "design-system/Text";
 import { capitalize } from "functional";
 
 const Summary = ({

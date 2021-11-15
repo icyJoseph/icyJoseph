@@ -1,10 +1,10 @@
 import { FC, useState, useRef } from "react";
 import styled from "styled-components";
 
-import { Button } from "components/Button";
-import { Flex } from "components/Flex";
-import { Text } from "components/Text";
-import { Table, Th, Td, Tr } from "components/Table";
+import { Button } from "design-system/Button";
+import { Flex } from "design-system/Flex";
+import { Text } from "design-system/Text";
+import { Table, Th, Td, Tr } from "design-system/Table";
 
 import { useFitbitActivityLog } from "hooks/useFitbit";
 import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";

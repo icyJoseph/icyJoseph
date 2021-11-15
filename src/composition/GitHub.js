@@ -2,17 +2,17 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { space } from "@styled-system/space";
 
-import { Button } from "components/Button";
-import { Card, InfoCard } from "components/Card";
-import { Flex } from "components/Flex";
-import { Section, SectionHeader } from "components/Section";
-import { Text } from "components/Text";
+import { Button } from "design-system/Button";
+import { Card, InfoCard } from "design-system/Card";
+import { Flex } from "design-system/Flex";
+import { Section, SectionHeader } from "design-system/Section";
+import { Text } from "design-system/Text";
 import { YearlyContribution } from "components/YearlyContribution";
 import { useGitHub } from "hooks/useGitHub";
 
 import { GET_USER } from "queries";
 import { yearStart, yearEnd } from "helpers";
-import { BackToTop } from "components/BackToTop";
+import { BackToTop } from "design-system/BackToTop";
 
 const GitHubImg = styled.img`
   ${space({ m: "0 auto" })};

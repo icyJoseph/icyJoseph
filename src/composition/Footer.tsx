@@ -29,6 +29,7 @@ const CopyrightNotice = styled.span`
   /* IE11 fallback */
   display: block;
   -ms-grid-column-span: 4;
+  grid-row: 2;
   -ms-grid-row: 2;
 
   grid-column: span 4;

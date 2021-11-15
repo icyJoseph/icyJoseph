@@ -6,7 +6,8 @@ export const typography = css`
   }
 
   body {
-    font-size: 1.6rem;
     font-family: Recursive, sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.4;
   }
 `;

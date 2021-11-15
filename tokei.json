@@ -1,25 +1,25 @@
 [
   {
     "language": "JavaScript",
-    "blanks": 181746,
-    "code": 2169836,
-    "comments": 299681,
+    "blanks": 146383,
+    "code": 1886124,
+    "comments": 267162,
     "children": {},
     "inaccurate": false
   },
   {
     "language": "TypeScript",
-    "blanks": 26287,
-    "code": 236464,
-    "comments": 71273,
+    "blanks": 26116,
+    "code": 235112,
+    "comments": 71170,
     "children": {},
     "inaccurate": false
   },
   {
     "language": "CSS",
-    "blanks": 5551,
-    "code": 62402,
-    "comments": 446,
+    "blanks": 4994,
+    "code": 58296,
+    "comments": 350,
     "children": {},
     "inaccurate": false
   },
@@ -136,7 +136,7 @@
             "comments": 1,
             "blobs": {}
           },
-          "name": "/home/joseph/dev/temp/test-rust-vercel/api/target/rls/debug/build/lambda_runtime_core-3cac6e37e3e7c8dc/out/metadata.rs"
+          "name": "/home/joseph/dev/temp/test-rust-vercel/api/target/release/build/lambda_runtime_core-38d87fcbd4469c41/out/metadata.rs"
         },
         {
           "stats": {
@@ -145,7 +145,7 @@
             "comments": 1,
             "blobs": {}
           },
-          "name": "/home/joseph/dev/temp/test-rust-vercel/api/target/release/build/lambda_runtime_core-38d87fcbd4469c41/out/metadata.rs"
+          "name": "/home/joseph/dev/temp/test-rust-vercel/api/target/rls/debug/build/lambda_runtime_core-3cac6e37e3e7c8dc/out/metadata.rs"
         },
         {
           "stats": {
@@ -167,12 +167,12 @@
         },
         {
           "stats": {
-            "blanks": 13,
+            "blanks": 24,
             "code": 0,
-            "comments": 69,
+            "comments": 124,
             "blobs": {}
           },
-          "name": "/home/joseph/dev/temp/meilisearch-rust/src/dumps.rs"
+          "name": "/home/joseph/dev/temp/meilisearch-rust/src/client.rs"
         },
         {
           "stats": {
@@ -182,6 +182,24 @@
             "blobs": {}
           },
           "name": "/home/joseph/dev/temp/meilisearch-rust/examples/web_app/src/lib.rs"
+        },
+        {
+          "stats": {
+            "blanks": 13,
+            "code": 0,
+            "comments": 69,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/temp/meilisearch-rust/src/dumps.rs"
+        },
+        {
+          "stats": {
+            "blanks": 85,
+            "code": 0,
+            "comments": 459,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/temp/meilisearch-rust/src/indexes.rs"
         },
         {
           "stats": {
@@ -204,15 +222,6 @@
             }
           },
           "name": "/home/joseph/dev/temp/meilisearch-rust/src/lib.rs"
-        },
-        {
-          "stats": {
-            "blanks": 85,
-            "code": 0,
-            "comments": 459,
-            "blobs": {}
-          },
-          "name": "/home/joseph/dev/temp/meilisearch-rust/src/indexes.rs"
         },
         {
           "stats": {
@@ -252,15 +261,6 @@
         },
         {
           "stats": {
-            "blanks": 24,
-            "code": 0,
-            "comments": 124,
-            "blobs": {}
-          },
-          "name": "/home/joseph/dev/temp/meilisearch-rust/src/client.rs"
-        },
-        {
-          "stats": {
             "blanks": 0,
             "code": 0,
             "comments": 5,
@@ -288,21 +288,21 @@
         },
         {
           "stats": {
-            "blanks": 3,
-            "code": 0,
-            "comments": 9,
-            "blobs": {}
-          },
-          "name": "/home/joseph/dev/temp/rust/src/lib.rs"
-        },
-        {
-          "stats": {
             "blanks": 14,
             "code": 0,
             "comments": 39,
             "blobs": {}
           },
           "name": "/home/joseph/dev/temp/rust/src/body.rs"
+        },
+        {
+          "stats": {
+            "blanks": 3,
+            "code": 0,
+            "comments": 9,
+            "blobs": {}
+          },
+          "name": "/home/joseph/dev/temp/rust/src/lib.rs"
         },
         {
           "stats": {

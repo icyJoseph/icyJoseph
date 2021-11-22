@@ -44,8 +44,9 @@ export default class MyDocument extends Document {
             href="https://fonts.gstatic.com"
             crossOrigin="anonymous"
           />
+          {/* eslint-disable-next-line @next/next/google-font-display */}
           <link
-            href="https://fonts.googleapis.com/css2?family=Recursive:wght@300;400;500;600&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Recursive:wght@300;400;500;600&display=block"
             rel="stylesheet"
           />
         </Head>

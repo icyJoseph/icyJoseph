@@ -18,12 +18,13 @@ const cellMixin = css`
   }
 `;
 
-export const Table = styled.table<{ stale: boolean } & SpaceProps>`
+export const Table = styled.table<{ stale?: boolean } & SpaceProps>`
   ${space};
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
   empty-cells: show;
+
   ${staleMixin}
 `;
 

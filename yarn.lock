@@ -6836,10 +6836,10 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
-use-easing@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/use-easing/-/use-easing-0.0.2.tgz#bd1f371876f187bbc0275a139d990ba5a9aafad9"
-  integrity sha512-KorDFO5tOBNudpn4R/B9IWv1tu6pB12vhv/y+iIFtFCVBybS7Ns4XjGiLAdepp1gkKKmIvABxBNJ3usmb4f19w==
+use-easing@0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/use-easing/-/use-easing-0.0.9.tgz#22518919f79cddf268f985a9dee77d4a95b07de5"
+  integrity sha512-LyjRY8WAOXAqnpERhk1m0wv7i6WHo3dRCEdrfHpFxd4u0b8TgPCf9AWnUoBm5arVGAaiGGz4MH/bo68wyjsXwQ==
 
 use-subscription@1.5.1:
   version "1.5.1"

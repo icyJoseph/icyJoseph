@@ -4,10 +4,10 @@ import Head from "next/head";
 
 import type { GetServerSidePropsResult, GetServerSidePropsContext } from "next";
 
-import { Box } from "components/Box";
-import { Container } from "components/Container";
-import { FullPage } from "components/Section";
-import { Text } from "components/Text";
+import { Box } from "design-system/Box";
+import { Container } from "design-system/Container";
+import { FullPage } from "design-system/Section";
+import { Text } from "design-system/Text";
 import { ActivityLog } from "components/Fitbit/ActivityLog";
 
 import { getActivityLog } from "pages/api/fitbit/activities/list";

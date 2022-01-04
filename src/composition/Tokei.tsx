@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { Card } from "components/Card";
-import { Emoji } from "components/Emoji";
-import { CircularProgress } from "components/CircularProgress";
-import { Flex } from "components/Flex";
-import { Section, SectionHeader } from "components/Section";
-import { Text } from "components/Text";
+import { Card } from "design-system/Card";
+import { Emoji } from "design-system/Emoji";
+import { CircularProgress } from "design-system/CircularProgress";
+import { Flex } from "design-system/Flex";
+import { Section, SectionHeader } from "design-system/Section";
+import { Text } from "design-system/Text";
 import { useLanguageEasing } from "hooks/useLanguageEasing";
 
 const Language: FC<IcyJoseph.Tokei & { order: number }> = ({

@@ -1,7 +1,7 @@
-import { BackToTop } from "components/BackToTop";
-import { Card } from "components/Card";
-import { Flex } from "components/Flex";
-import { Section, SectionHeader } from "components/Section";
+import { BackToTop } from "design-system/BackToTop";
+import { Card } from "design-system/Card";
+import { Flex } from "design-system/Flex";
+import { Section, SectionHeader } from "design-system/Section";
 
 import {
   Clan,
@@ -11,7 +11,7 @@ import {
   Languages
 } from "components/CodeWarsBlocks";
 
-import { Text } from "components/Text";
+import { Text } from "design-system/Text";
 
 import { useCodeWars } from "hooks/useCodeWars";
 

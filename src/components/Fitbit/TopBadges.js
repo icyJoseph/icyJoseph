@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { space } from "@styled-system/space";
-import { Card, InfoCard } from "components/Card";
 import { DataEntry } from "components/DataEntry";
-import { Text } from "components/Text";
-import { Flex } from "components/Flex";
+import { Card, InfoCard } from "design-system/Card";
+import { Text } from "design-system/Text";
+import { Flex } from "design-system/Flex";
 
 const BadgeImg = styled.img`
   ${space({ my: 2, mx: "auto" })};

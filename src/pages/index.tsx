@@ -5,7 +5,7 @@ import { promisify } from "util";
 import Head from "next/head";
 import type { GetStaticPropsResult } from "next";
 
-import { Container } from "components/Container";
+import { Container } from "design-system/Container";
 import { PageNav } from "components/PageNav";
 
 import { CodeWars } from "composition/CodeWars";

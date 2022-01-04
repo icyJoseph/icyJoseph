@@ -1,0 +1,792 @@
+{
+  "activities": [
+    {
+      "activeDuration": 1330000,
+      "activityLevel": [
+        {
+          "minutes": 1,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 0,
+          "name": "lightly"
+        },
+        {
+          "minutes": 1,
+          "name": "fairly"
+        },
+        {
+          "minutes": 20,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "calories": 182,
+      "caloriesLink": "https://api.fitbit.com/1/user/-/activities/calories/date/2017-08-17/2017-08-17/1min/time/17:12/17:34.json",
+      "duration": 1330000,
+      "hasActiveZoneMinutes": false,
+      "lastModified": "2017-08-17T16:07:07.000Z",
+      "logId": 9408061724,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "originalDuration": 1330000,
+      "originalStartTime": "2017-08-17T17:12:44.000+02:00",
+      "startTime": "2017-08-17T17:12:44.000+02:00",
+      "steps": 2275
+    },
+    {
+      "activeDuration": 4659000,
+      "activityLevel": [
+        {
+          "minutes": 5,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 14,
+          "name": "lightly"
+        },
+        {
+          "minutes": 29,
+          "name": "fairly"
+        },
+        {
+          "minutes": 29,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "calories": 483,
+      "caloriesLink": "https://api.fitbit.com/1/user/-/activities/calories/date/2017-08-18/2017-08-18/1min/time/10:19/11:36.json",
+      "duration": 4659000,
+      "hasActiveZoneMinutes": false,
+      "lastModified": "2017-08-18T09:44:37.000Z",
+      "logId": 9419720860,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "originalDuration": 4659000,
+      "originalStartTime": "2017-08-18T10:19:17.000+02:00",
+      "startTime": "2017-08-18T10:19:17.000+02:00",
+      "steps": 5551
+    },
+    {
+      "activeDuration": 1382000,
+      "activityLevel": [
+        {
+          "minutes": 5,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 9,
+          "name": "lightly"
+        },
+        {
+          "minutes": 7,
+          "name": "fairly"
+        },
+        {
+          "minutes": 2,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "calories": 113,
+      "caloriesLink": "https://api.fitbit.com/1/user/-/activities/calories/date/2017-08-18/2017-08-18/1min/time/12:00/12:23.json",
+      "duration": 1382000,
+      "hasActiveZoneMinutes": false,
+      "lastModified": "2017-08-18T10:30:25.000Z",
+      "logId": 9420453697,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "originalDuration": 1382000,
+      "originalStartTime": "2017-08-18T12:00:50.000+02:00",
+      "startTime": "2017-08-18T12:00:50.000+02:00",
+      "steps": 1198
+    },
+    {
+      "activeDuration": 1202000,
+      "activityLevel": [
+        {
+          "minutes": 0,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 7,
+          "name": "lightly"
+        },
+        {
+          "minutes": 10,
+          "name": "fairly"
+        },
+        {
+          "minutes": 3,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "calories": 104,
+      "caloriesLink": "https://api.fitbit.com/1/user/-/activities/calories/date/2017-08-18/2017-08-18/1min/time/13:51/14:11.json",
+      "duration": 1202000,
+      "hasActiveZoneMinutes": false,
+      "lastModified": "2017-08-18T12:29:10.000Z",
+      "logId": 9421653732,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "originalDuration": 1202000,
+      "originalStartTime": "2017-08-18T13:51:46.000+02:00",
+      "startTime": "2017-08-18T13:51:46.000+02:00",
+      "steps": 1098
+    },
+    {
+      "activeDuration": 1741000,
+      "activityLevel": [
+        {
+          "minutes": 3,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 12,
+          "name": "lightly"
+        },
+        {
+          "minutes": 3,
+          "name": "fairly"
+        },
+        {
+          "minutes": 11,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "calories": 180,
+      "caloriesLink": "https://api.fitbit.com/1/user/-/activities/calories/date/2017-08-18/2017-08-18/1min/time/15:06/15:35.json",
+      "duration": 1741000,
+      "hasActiveZoneMinutes": false,
+      "lastModified": "2017-08-18T13:45:28.000Z",
+      "logId": 9422778071,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "originalDuration": 1741000,
+      "originalStartTime": "2017-08-18T15:06:00.000+02:00",
+      "startTime": "2017-08-18T15:06:00.000+02:00",
+      "steps": 2033
+    },
+    {
+      "activeDuration": 1229000,
+      "activityLevel": [
+        {
+          "minutes": 0,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 3,
+          "name": "lightly"
+        },
+        {
+          "minutes": 5,
+          "name": "fairly"
+        },
+        {
+          "minutes": 12,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "calories": 129,
+      "caloriesLink": "https://api.fitbit.com/1/user/-/activities/calories/date/2017-08-18/2017-08-18/1min/time/17:58/18:18.json",
+      "duration": 1229000,
+      "hasActiveZoneMinutes": false,
+      "lastModified": "2017-08-18T16:25:12.000Z",
+      "logId": 9424725201,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "originalDuration": 1229000,
+      "originalStartTime": "2017-08-18T17:58:23.000+02:00",
+      "startTime": "2017-08-18T17:58:23.000+02:00",
+      "steps": 1518
+    },
+    {
+      "activeDuration": 1331000,
+      "activityLevel": [
+        {
+          "minutes": 3,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 10,
+          "name": "lightly"
+        },
+        {
+          "minutes": 3,
+          "name": "fairly"
+        },
+        {
+          "minutes": 6,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "calories": 130,
+      "caloriesLink": "https://api.fitbit.com/1/user/-/activities/calories/date/2017-08-18/2017-08-18/1min/time/20:08/20:31.json",
+      "duration": 1331000,
+      "hasActiveZoneMinutes": false,
+      "lastModified": "2017-08-18T18:46:09.000Z",
+      "logId": 9426493527,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "originalDuration": 1331000,
+      "originalStartTime": "2017-08-18T20:08:56.000+02:00",
+      "startTime": "2017-08-18T20:08:56.000+02:00",
+      "steps": 1463
+    },
+    {
+      "activeDuration": 1024000,
+      "activityLevel": [
+        {
+          "minutes": 2,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 3,
+          "name": "lightly"
+        },
+        {
+          "minutes": 3,
+          "name": "fairly"
+        },
+        {
+          "minutes": 9,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "calories": 105,
+      "caloriesLink": "https://api.fitbit.com/1/user/-/activities/calories/date/2017-08-19/2017-08-19/1min/time/9:41/9:58.json",
+      "duration": 1024000,
+      "hasActiveZoneMinutes": false,
+      "lastModified": "2017-08-19T08:09:18.000Z",
+      "logId": 9434678490,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "originalDuration": 1024000,
+      "originalStartTime": "2017-08-19T09:41:19.000+02:00",
+      "startTime": "2017-08-19T09:41:19.000+02:00",
+      "steps": 1211
+    },
+    {
+      "activeDuration": 1126000,
+      "activityLevel": [
+        {
+          "minutes": 0,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 3,
+          "name": "lightly"
+        },
+        {
+          "minutes": 3,
+          "name": "fairly"
+        },
+        {
+          "minutes": 12,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "calories": 127,
+      "caloriesLink": "https://api.fitbit.com/1/user/-/activities/calories/date/2017-08-20/2017-08-20/1min/time/14:59/15:17.json",
+      "duration": 1126000,
+      "hasActiveZoneMinutes": false,
+      "lastModified": "2017-08-20T13:24:12.000Z",
+      "logId": 9452974515,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "originalDuration": 1126000,
+      "originalStartTime": "2017-08-20T14:59:12.000+02:00",
+      "startTime": "2017-08-20T14:59:12.000+02:00",
+      "steps": 1509
+    },
+    {
+      "activeDuration": 974000,
+      "activityLevel": [
+        {
+          "minutes": 1,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 3,
+          "name": "lightly"
+        },
+        {
+          "minutes": 3,
+          "name": "fairly"
+        },
+        {
+          "minutes": 9,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "calories": 107,
+      "caloriesLink": "https://api.fitbit.com/1/user/-/activities/calories/date/2017-08-21/2017-08-21/1min/time/18:11/18:27.json",
+      "duration": 974000,
+      "hasActiveZoneMinutes": false,
+      "lastModified": "2017-08-21T16:35:14.000Z",
+      "logId": 9471590962,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "originalDuration": 974000,
+      "originalStartTime": "2017-08-21T18:11:37.000+02:00",
+      "startTime": "2017-08-21T18:11:37.000+02:00",
+      "steps": 1238
+    },
+    {
+      "activeDuration": 2304000,
+      "activityLevel": [
+        {
+          "minutes": 0,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 5,
+          "name": "lightly"
+        },
+        {
+          "minutes": 9,
+          "name": "fairly"
+        },
+        {
+          "minutes": 25,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "calories": 280,
+      "caloriesLink": "https://api.fitbit.com/1/user/-/activities/calories/date/2017-08-21/2017-08-21/1min/time/19:44/20:23.json",
+      "duration": 2304000,
+      "hasActiveZoneMinutes": false,
+      "lastModified": "2017-08-21T18:37:09.000Z",
+      "logId": 9473357669,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "originalDuration": 2304000,
+      "originalStartTime": "2017-08-21T19:44:38.000+02:00",
+      "startTime": "2017-08-21T19:44:38.000+02:00",
+      "steps": 3345
+    },
+    {
+      "activeDuration": 1485000,
+      "activityLevel": [
+        {
+          "minutes": 6,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 6,
+          "name": "lightly"
+        },
+        {
+          "minutes": 3,
+          "name": "fairly"
+        },
+        {
+          "minutes": 9,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "calories": 149,
+      "caloriesLink": "https://api.fitbit.com/1/user/-/activities/calories/date/2017-08-22/2017-08-22/1min/time/10:39/11:04.json",
+      "duration": 1485000,
+      "hasActiveZoneMinutes": false,
+      "lastModified": "2017-08-22T09:12:34.000Z",
+      "logId": 9484178135,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "originalDuration": 1485000,
+      "originalStartTime": "2017-08-22T10:39:44.000+02:00",
+      "startTime": "2017-08-22T10:39:44.000+02:00",
+      "steps": 1740
+    },
+    {
+      "activeDuration": 1024000,
+      "activityLevel": [
+        {
+          "minutes": 0,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 1,
+          "name": "lightly"
+        },
+        {
+          "minutes": 2,
+          "name": "fairly"
+        },
+        {
+          "minutes": 14,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "calories": 134,
+      "caloriesLink": "https://api.fitbit.com/1/user/-/activities/calories/date/2017-08-22/2017-08-22/1min/time/11:38/11:55.json",
+      "duration": 1024000,
+      "hasActiveZoneMinutes": false,
+      "lastModified": "2017-08-22T10:13:36.000Z",
+      "logId": 9484988588,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "originalDuration": 1024000,
+      "originalStartTime": "2017-08-22T11:38:40.000+02:00",
+      "startTime": "2017-08-22T11:38:40.000+02:00",
+      "steps": 1656
+    },
+    {
+      "activeDuration": 1434000,
+      "activityLevel": [
+        {
+          "minutes": 2,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 10,
+          "name": "lightly"
+        },
+        {
+          "minutes": 2,
+          "name": "fairly"
+        },
+        {
+          "minutes": 9,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "calories": 145,
+      "caloriesLink": "https://api.fitbit.com/1/user/-/activities/calories/date/2017-08-22/2017-08-22/1min/time/13:12/13:36.json",
+      "duration": 1434000,
+      "hasActiveZoneMinutes": false,
+      "lastModified": "2017-08-22T11:46:38.000Z",
+      "logId": 9486028584,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "originalDuration": 1434000,
+      "originalStartTime": "2017-08-22T13:12:32.000+02:00",
+      "startTime": "2017-08-22T13:12:32.000+02:00",
+      "steps": 1643
+    },
+    {
+      "activeDuration": 1331000,
+      "activityLevel": [
+        {
+          "minutes": 0,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 2,
+          "name": "lightly"
+        },
+        {
+          "minutes": 6,
+          "name": "fairly"
+        },
+        {
+          "minutes": 14,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "calories": 164,
+      "caloriesLink": "https://api.fitbit.com/1/user/-/activities/calories/date/2017-08-22/2017-08-22/1min/time/15:36/15:58.json",
+      "duration": 1331000,
+      "hasActiveZoneMinutes": false,
+      "lastModified": "2017-08-22T14:28:58.000Z",
+      "logId": 9488069643,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "originalDuration": 1331000,
+      "originalStartTime": "2017-08-22T15:36:45.000+02:00",
+      "startTime": "2017-08-22T15:36:45.000+02:00",
+      "steps": 1999
+    },
+    {
+      "activeDuration": 3072000,
+      "activityLevel": [
+        {
+          "minutes": 7,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 14,
+          "name": "lightly"
+        },
+        {
+          "minutes": 4,
+          "name": "fairly"
+        },
+        {
+          "minutes": 26,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "calories": 317,
+      "caloriesLink": "https://api.fitbit.com/1/user/-/activities/calories/date/2017-08-22/2017-08-22/1min/time/16:27/17:18.json",
+      "duration": 3072000,
+      "hasActiveZoneMinutes": false,
+      "lastModified": "2017-08-22T15:27:58.000Z",
+      "logId": 9488823745,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "originalDuration": 3072000,
+      "originalStartTime": "2017-08-22T16:27:05.000+02:00",
+      "startTime": "2017-08-22T16:27:05.000+02:00",
+      "steps": 3607
+    },
+    {
+      "activeDuration": 1076000,
+      "activityLevel": [
+        {
+          "minutes": 1,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 0,
+          "name": "lightly"
+        },
+        {
+          "minutes": 1,
+          "name": "fairly"
+        },
+        {
+          "minutes": 15,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "calories": 163,
+      "caloriesLink": "https://api.fitbit.com/1/user/-/activities/calories/date/2017-08-24/2017-08-24/1min/time/8:42/9:00.json",
+      "duration": 1076000,
+      "hasActiveZoneMinutes": false,
+      "lastModified": "2017-08-24T07:13:27.000Z",
+      "logId": 9522943175,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "originalDuration": 1076000,
+      "originalStartTime": "2017-08-24T08:42:53.000+02:00",
+      "startTime": "2017-08-24T08:42:53.000+02:00",
+      "steps": 1933
+    },
+    {
+      "activeDuration": 1022000,
+      "activityLevel": [
+        {
+          "minutes": 1,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 16,
+          "name": "lightly"
+        },
+        {
+          "minutes": 0,
+          "name": "fairly"
+        },
+        {
+          "minutes": 0,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "calories": 98,
+      "caloriesLink": "https://api.fitbit.com/1/user/-/activities/calories/date/2017-08-24/2017-08-24/1min/time/12:09/12:26.json",
+      "duration": 1022000,
+      "hasActiveZoneMinutes": false,
+      "lastModified": "2017-08-24T10:40:09.000Z",
+      "logId": 9524806932,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "originalDuration": 1022000,
+      "originalStartTime": "2017-08-24T12:09:24.000+02:00",
+      "startTime": "2017-08-24T12:09:24.000+02:00",
+      "steps": 1025
+    },
+    {
+      "activeDuration": 1536000,
+      "activityLevel": [
+        {
+          "minutes": 1,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 10,
+          "name": "lightly"
+        },
+        {
+          "minutes": 5,
+          "name": "fairly"
+        },
+        {
+          "minutes": 9,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "calories": 144,
+      "caloriesLink": "https://api.fitbit.com/1/user/-/activities/calories/date/2017-08-24/2017-08-24/1min/time/17:56/18:22.json",
+      "duration": 1536000,
+      "hasActiveZoneMinutes": false,
+      "lastModified": "2017-08-24T16:35:05.000Z",
+      "logId": 9529426106,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "originalDuration": 1536000,
+      "originalStartTime": "2017-08-24T17:56:42.000+02:00",
+      "startTime": "2017-08-24T17:56:42.000+02:00",
+      "steps": 1522
+    },
+    {
+      "activeDuration": 921000,
+      "activityLevel": [
+        {
+          "minutes": 1,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 0,
+          "name": "lightly"
+        },
+        {
+          "minutes": 2,
+          "name": "fairly"
+        },
+        {
+          "minutes": 12,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "calories": 113,
+      "caloriesLink": "https://api.fitbit.com/1/user/-/activities/calories/date/2017-08-25/2017-08-25/1min/time/21:59/22:14.json",
+      "duration": 921000,
+      "hasActiveZoneMinutes": false,
+      "lastModified": "2017-08-25T20:25:01.000Z",
+      "logId": 9553947162,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "originalDuration": 921000,
+      "originalStartTime": "2017-08-25T21:59:29.000+02:00",
+      "startTime": "2017-08-25T21:59:29.000+02:00",
+      "steps": 1401
+    }
+  ],
+  "pagination": {
+    "afterDate": "2016-01-12",
+    "limit": 20,
+    "next": "https://api.fitbit.com/1/user/-/activities/list.json?offset=40&limit=20&sort=asc&afterDate=2016-01-12",
+    "offset": 20,
+    "previous": "https://api.fitbit.com/1/user/-/activities/list.json?offset=0&limit=20&sort=asc&afterDate=2016-01-12",
+    "sort": "asc"
+  }
+}

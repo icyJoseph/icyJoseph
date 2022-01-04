@@ -1,12 +1,12 @@
 import { FC } from "react";
 import styled from "styled-components";
 
-import { BackToTop } from "components/BackToTop";
-import { Box } from "components/Box";
+import { BackToTop } from "design-system/BackToTop";
+import { Box } from "design-system/Box";
 import { DataEntry } from "components/DataEntry";
-import { Flex } from "components/Flex";
-import { Section, SectionHeader } from "components/Section";
-import { Text } from "components/Text";
+import { Flex } from "design-system/Flex";
+import { Section, SectionHeader } from "design-system/Section";
+import { Text } from "design-system/Text";
 
 import { TopBadges } from "components/Fitbit/TopBadges";
 import { ActivityLog } from "components/Fitbit/ActivityLog";

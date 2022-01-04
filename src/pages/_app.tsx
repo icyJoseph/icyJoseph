@@ -20,6 +20,18 @@ Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
+if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
+  if (typeof window === "undefined") {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const { server } = require("mocks/server");
+    server.listen();
+  } else {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const { worker } = require("mocks/browser");
+    worker.start();
+  }
+}
+
 const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_TRACKING_ID;
 
 function App({ Component, pageProps }: AppProps) {

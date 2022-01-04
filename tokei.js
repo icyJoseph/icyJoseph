@@ -8,10 +8,10 @@ const devPath = "/home/joseph/dev";
 const args = [
   "-t",
   "JavaScript,TypeScript,CSS,Rust",
-  "-o",
+  "--output",
   "json",
   "--exclude",
-  "/home/joseph/dev/temp/",
+  "temp",
   "--"
 ];
 
@@ -31,6 +31,7 @@ ls.on("close", (code) => {
   const parsed = JSON.parse(chunks.join(""));
 
   const filtered = Object.entries(parsed)
+    .filter(([language]) => language !== "Total")
     .map(([language, { reports: _, ...rest }]) => ({ language, ...rest }))
     .map(({ language, ...rest }) =>
       language === "Css" ? { language: "CSS", ...rest } : { language, ...rest }

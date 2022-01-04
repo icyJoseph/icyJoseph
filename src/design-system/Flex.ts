@@ -8,6 +8,7 @@ export type FlexProps = {
   justifyContent?: Property.JustifyContent;
   alignItems?: Property.AlignItems;
   flex?: Property.Flex;
+  gap?: Property.Gap;
 };
 
 export const Flex = styled.div<SpaceProps & FlexProps>`
@@ -18,4 +19,5 @@ export const Flex = styled.div<SpaceProps & FlexProps>`
   justify-content: ${({ justifyContent = "unset" }) => justifyContent};
   align-items: ${({ alignItems = "unset" }) => alignItems};
   flex: ${({ flex = "unset" }) => flex};
+  gap: ${({ gap = "unset" }) => gap};
 `;

@@ -35,4 +35,6 @@ yarn-error.log*
 .vercel
 .fitbit
 .es-check
-mockServiceWorker.js
+
+# msw
+public/mockServiceWorker.js

@@ -1,0 +1,15 @@
+{
+  "username": "icyJoseph",
+  "name": "Joseph",
+  "honor": 663,
+  "clan": "Evolve Technology Sweden",
+  "leaderboardPosition": 38381,
+  "skills": null,
+  "ranks": {
+    "overall": { "rank": -4, "name": "4 kyu", "color": "blue", "score": 1158 },
+    "languages": {
+      "rust": { "rank": -4, "name": "4 kyu", "color": "blue", "score": 1158 }
+    }
+  },
+  "codeChallenges": { "totalAuthored": 0, "totalCompleted": 28 }
+}

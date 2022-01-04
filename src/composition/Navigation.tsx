@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import { Container } from "components/Container";
-import { Emoji } from "components/Emoji";
+import { Container } from "design-system/Container";
+import { Emoji } from "design-system/Emoji";
 import { NavBar } from "components/NavBar";
 
 export const entries = [

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { space } from "@styled-system/space";
+import { space, SpaceProps } from "@styled-system/space";
 
 import { Button } from "design-system/Button";
 import { Card, InfoCard } from "design-system/Card";
@@ -14,7 +14,7 @@ import { GET_USER } from "queries";
 import { yearStart, yearEnd } from "helpers";
 import { BackToTop } from "design-system/BackToTop";
 
-const GitHubImg = styled.img`
+const GitHubImg = styled.img<SpaceProps>`
   ${space({ m: "0 auto" })};
   display: block;
   border: 1px solid var(--smokeyWhite);
@@ -48,21 +48,38 @@ const Bio = styled(Flex)`
   overflow: hidden;
 `;
 
-const RenderWithSelectedYear = ({ last, children }) => {
+type SelectYearProps = {
+  selectedYear: number;
+  setSelectedYear: (next: number) => void;
+};
+
+const RenderWithSelectedYear = ({
+  last,
+  children
+}: {
+  last: number;
+  children: (props: SelectYearProps) => JSX.Element;
+}) => {
   const [selectedYear, setSelectedYear] = useState(last);
 
   return children({ selectedYear, setSelectedYear });
 };
 
-export const GitHub = ({ initial, name: pageName }) => {
-  const { data } = useGitHub({
+type GitHubProps = { initial: IcyJoseph.GitHub; name: string };
+
+export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
+  const { data } = useGitHub<
+    { login: "icyJoseph"; from: string },
+    IcyJoseph.GitHub,
+    { user: IcyJoseph.GitHub }
+  >({
     query: GET_USER,
     variables: {
       login: "icyJoseph",
       ...yearStart()
     },
     initialData: initial,
-    selector: ({ user }) => user
+    selector: ({ user }: { user: IcyJoseph.GitHub }) => user
   });
 
   const {
@@ -73,7 +90,7 @@ export const GitHub = ({ initial, name: pageName }) => {
     login,
     avatarUrl,
     contributionsCollection
-  } = data;
+  } = data || initial;
 
   const { contributionYears } = contributionsCollection;
   const [last = 2020] = contributionYears;
@@ -101,11 +118,12 @@ export const GitHub = ({ initial, name: pageName }) => {
               <Text $textColor="--smokeyWhite" my={2} $fontWeight={300}>
                 {location}
               </Text>
+
               <GitHubImg
                 src={avatarUrl}
                 alt={`${name} github profile picture`}
-                m={3}
               />
+
               <Text
                 as="h2"
                 $textColor="--yellow"
@@ -116,6 +134,7 @@ export const GitHub = ({ initial, name: pageName }) => {
                 {name}
               </Text>
             </Card.Header>
+
             <Card.Section>
               <Bio flexDirection="column" py={3} px={2}>
                 <Text $textColor="--yellow" mb={2}>

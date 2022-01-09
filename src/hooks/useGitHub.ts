@@ -5,29 +5,32 @@ type UseGitHubProps<Variables, Data, Response> = {
   query: string;
   variables: Variables;
   initialData?: Data | null;
-  selector?: ((res: Response) => Data) | Identity;
+  selector?: (res: Response) => Data;
 };
 
-type Identity = <T>(res: T) => T;
-const mirror: Identity = <T>(res: T) => res;
+type Identity = <T, D>(res: T) => T extends D ? D : never;
+const mirror: Identity = <T, D>(res: T) => res as unknown as D;
 
-const fetcher = <Variables>(query: string, variables: Variables) =>
-  axios.post("/api/github", { query, variables }).then(({ data }) => data);
+const fetcher = <Variables, Response>(query: string, variables: Variables) =>
+  axios
+    .post<Response>("/api/github", { query, variables })
+    .then(({ data }) => data);
 
-export const useGitHub = <V, D, R>({
+export const useGitHub = <Variables, Data, Response = Data>({
   query,
   variables,
   initialData = null,
   selector = mirror
-}: UseGitHubProps<V, D, R>) => {
-  return useSWR(
+}: UseGitHubProps<Variables, Data, Response>) => {
+  return useSWR<Data | null>(
     [query, JSON.stringify(variables)],
-    (...args: [query: string, variables: V]) =>
-      fetcher<V>(...args).then(selector),
+    (...args: [query: string, variables: Variables]): Promise<Data> =>
+      fetcher<Variables, Response>(...args).then((response) =>
+        selector(response)
+      ),
     {
       shouldRetryOnError: false,
       revalidateOnFocus: false,
-      dedupingInterval: 60 * 60 * 1000,
       initialData
     }
   );

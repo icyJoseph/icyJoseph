@@ -1,10 +1,8 @@
 import styled from "styled-components";
 import { space } from "@styled-system/space";
 import { ComponentPropsWithoutRef } from "react";
-import { maxWidthUtility } from "styles/mixins";
 
 const Nav = styled.nav`
-  ${maxWidthUtility};
   ${space({ py: 2, my: 0 })};
   display: flex;
   flex-direction: column;

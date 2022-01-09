@@ -1,15 +1,13 @@
 import { PropsWithChildren } from "react";
 import styled from "styled-components";
 import { space, SpaceProps } from "@styled-system/space";
-import { maxWidthUtility } from "styles/mixins";
 
 type SectionProps = PropsWithChildren<SpaceProps>;
 
 const BaseSection = (props: SectionProps) => <section {...props} />;
 
 export const Section = styled(BaseSection)`
-  ${maxWidthUtility};
-  ${space({ mx: "auto", my: 3 })};
+  ${space({ my: 3 })};
   ${space};
 `;
 

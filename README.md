@@ -41,7 +41,7 @@ Only Rust 🦀
 - 1073 commit contributions
 - 59 repos received commits from me
 
-### 2021
+### In 2021
 
 - 26 newly created repositories
 - 723 commit contributions

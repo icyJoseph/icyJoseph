@@ -2,16 +2,18 @@ import { useEffect, useState, Fragment } from "react";
 import styled from "styled-components";
 import { space, SpaceProps } from "@styled-system/space";
 
+import { YearlyContribution } from "components/YearlyContribution";
+
 import { Button } from "design-system/Button";
 import { Flex } from "design-system/Flex";
 import { Section, SectionHeader } from "design-system/Section";
 import { Text } from "design-system/Text";
-import { YearlyContribution } from "components/YearlyContribution";
+import { BackToTop } from "design-system/BackToTop";
+
+import { yearStart, yearEnd } from "helpers";
 import { useGitHub } from "hooks/useGitHub";
 
 import { GET_USER } from "queries";
-import { yearStart, yearEnd } from "helpers";
-import { BackToTop } from "design-system/BackToTop";
 
 const GitHubImg = styled.img<SpaceProps>`
   ${space({ m: "0 auto", p: 1 })};
@@ -134,7 +136,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
 
   return (
     <Section>
-      <SectionHeader id={pageName}>
+      <SectionHeader id={pageName} mb={5}>
         <Text as="h2" $textColor="--blue" $fontSize="3rem">
           <a href={`#${pageName}`}>
             <code>GitHub</code>
@@ -142,7 +144,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
         </Text>
       </SectionHeader>
 
-      <GitHubContainer mt={5}>
+      <GitHubContainer>
         <Profile>
           <GitHubImg src={avatarUrl} alt={`${name} github profile picture`} />
 

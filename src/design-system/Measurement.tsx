@@ -40,14 +40,20 @@ const BaseValue = styled(Text)`
   }
 `;
 
-export const Unit: FC<{ unit: string }> = ({ unit }) => (
-  <BaseUnit as="span" $fontWeight={300}>
+export const Unit: FC<{ unit: string; className?: string }> = ({
+  unit,
+  className
+}) => (
+  <BaseUnit as="span" $fontWeight={300} className={className}>
     {unit}
   </BaseUnit>
 );
 
-export const Value: FC<{ value: number | string }> = ({ value }) => (
-  <BaseValue as="span" $fontWeight={300}>
+export const Value: FC<{ value: number | string; className?: string }> = ({
+  value,
+  className
+}) => (
+  <BaseValue as="span" $fontWeight={300} className={className}>
     {value ?? "-"}
   </BaseValue>
 );

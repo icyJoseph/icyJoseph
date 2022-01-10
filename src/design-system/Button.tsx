@@ -67,10 +67,6 @@ const BaseButton = styled.button<BaseButtonProps>`
     outline-width: 2px;
     outline-style: solid;
   }
-
-  &:focus:not(:focus-visible) {
-    outline: none;
-  }
 `;
 
 const Label = styled.span<ButtonLabelProps>`

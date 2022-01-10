@@ -15,6 +15,7 @@ import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
 
 import { GET_YEAR_CONTRIBUTIONS } from "queries";
 import { clamp } from "helpers";
+import { Value, Unit } from "design-system/Measurement";
 
 const cardWidth = 328;
 
@@ -24,11 +25,59 @@ export const staleMixin = css<{ stale?: boolean }>`
 `;
 
 const ContributionsSummary = styled(Flex)`
-  grid-column: span 2;
   ${staleMixin};
 `;
 
-const RepositoriesWithOptions = styled(Box)`
+const StatLabel = styled(Unit)<SpaceProps>``;
+
+const StatValue = styled(Value)`
+  display: block;
+  line-height: 1;
+
+  && {
+    font-size: 3rem;
+  }
+`;
+
+const StatUnit = styled(Unit)`
+  && {
+    text-align: end;
+  }
+`;
+
+const StatText = styled(Text)``;
+
+const Stat = styled(Flex)`
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  & > * {
+    flex: 1;
+  }
+
+  & ${StatLabel}, & ${StatText}, & ${StatValue}, & ${StatUnit} {
+    text-align: center;
+  }
+
+  @media (min-width: 514px) {
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-direction: row;
+
+    & ${StatLabel} {
+      text-align: start;
+    }
+
+    & ${StatText}, & ${StatValue}, & ${StatUnit} {
+      text-align: end;
+    }
+  }
+`;
+
+const RepositoriesWithOptions = styled(Box)<{ stale?: boolean }>`
+  ${space({ mt: 3 })};
   grid-column: span 2;
   scroll-behavior: smooth;
   ${staleMixin};
@@ -62,12 +111,6 @@ const Options = styled.div<SpaceProps>`
   grid-column: span 3;
 `;
 
-const OptionButton = styled(Button)`
-  &[disabled] {
-    visibility: hidden;
-  }
-`;
-
 const StyledCard = styled(InfoCard)`
   width: 80%;
   max-width: unset;
@@ -82,7 +125,7 @@ const StyledCard = styled(InfoCard)`
   }
 `;
 
-type BaseContributionsSummaryCardProps = {
+type BaseContributionsSummaryProps = {
   year: number;
   stale: boolean;
   totalRepositoryContributions: number;
@@ -91,56 +134,61 @@ type BaseContributionsSummaryCardProps = {
   totalRepositoriesContributedTo: number;
 };
 
-const BaseContributionsSummaryCard = ({
+const BaseContributionsSummary = ({
   year,
   stale,
   totalRepositoryContributions,
   totalCommitContributions,
   restrictedContributionsCount,
   totalRepositoriesContributedTo
-}: BaseContributionsSummaryCardProps) => (
+}: BaseContributionsSummaryProps) => (
   <ContributionsSummary
     flexDirection="column"
     stale={stale}
     alignItems="center"
+    my={4}
+    px={4}
   >
-    <InfoCard>
-      <Card.Header>
-        <h4>In {year}</h4>
-      </Card.Header>
-      <Card.Section>
-        <Flex flexDirection="column" alignItems="center" m="0 auto">
-          <Text $textColor="--smokeyWhite" mb={2}>
-            <Text as="span" $textColor="--yellow">
-              {totalRepositoryContributions}
-            </Text>{" "}
-            newly created repositories
-          </Text>
-          <Text $textColor="--smokeyWhite" mb={2}>
-            <Text as="span" $textColor="--yellow">
-              {totalCommitContributions}
-            </Text>{" "}
-            commit contributions
-          </Text>
-          <Text $textColor="--smokeyWhite" mb={2}>
-            <Text as="span" $textColor="--yellow">
-              {restrictedContributionsCount}
-            </Text>{" "}
-            super secret contributions
-          </Text>
-          <Text $textColor="--smokeyWhite" mb={2}>
-            <Text as="span" $textColor="--yellow">
-              {totalRepositoriesContributedTo}
-            </Text>{" "}
-            repos received commits from me
-          </Text>
-        </Flex>
-      </Card.Section>
-    </InfoCard>
+    <Text as="h4" $fontSize="2.5rem" $textColor="--blue">
+      In {year}
+    </Text>
+
+    <Flex flexDirection="column" alignItems="center" mt={2} mx="auto">
+      {[
+        {
+          value: totalRepositoryContributions,
+          label: "Newly created repositories",
+          unit: "repos"
+        },
+        {
+          value: totalRepositoriesContributedTo,
+          label: "Repositories contributed to",
+          unit: "repos"
+        },
+        {
+          value: restrictedContributionsCount,
+          label: "Private contributions",
+          unit: "commits"
+        },
+        {
+          value: totalCommitContributions,
+          label: "Total contributions",
+          unit: "commits"
+        }
+      ].map(({ value, label, unit }) => (
+        <Stat key={label} mb={3}>
+          <StatLabel unit={label} />
+
+          <StatText as="span">
+            <StatValue value={value} /> <StatUnit unit={unit} />
+          </StatText>
+        </Stat>
+      ))}
+    </Flex>
   </ContributionsSummary>
 );
 
-const ContributionsSummaryCard = memo(BaseContributionsSummaryCard);
+const MemoContributionsSummary = memo(BaseContributionsSummary);
 
 type ContributionCardProps = {
   repository: IcyJoseph.Repository;
@@ -207,12 +255,11 @@ type YearlyContributionProps = {
   to?: string;
 };
 
-export const YearlyContribution = ({
-  initial,
-  year,
-  from,
-  to
-}: YearlyContributionProps) => {
+const useContributionCollection = (
+  from: string,
+  to?: string,
+  initial: IcyJoseph.ContributionCollection | null = null
+) => {
   const { data, error } = useGitHub<
     {
       login: "icyJoseph";
@@ -235,6 +282,17 @@ export const YearlyContribution = ({
       user: { contributionsCollection: IcyJoseph.ContributionCollection };
     }) => contributionsCollection
   });
+
+  return { data, error };
+};
+
+export const YearlyContribution = ({
+  initial,
+  year,
+  from,
+  to
+}: YearlyContributionProps) => {
+  const { data, error } = useContributionCollection(from, to, initial);
 
   const [windowSize, setWindowSize] = useState(1);
 
@@ -282,9 +340,13 @@ export const YearlyContribution = ({
     commitContributionsByRepository
   } = data ?? prev;
 
+  const disabledPrev = pointer === 0;
+  const disabledNext =
+    pointer + windowSize >= commitContributionsByRepository.length;
+
   return (
     <>
-      <ContributionsSummaryCard
+      <MemoContributionsSummary
         year={year}
         stale={stale}
         totalRepositoryContributions={totalRepositoryContributions}
@@ -294,38 +356,6 @@ export const YearlyContribution = ({
       />
 
       <RepositoriesWithOptions stale={stale}>
-        <Options mt={2}>
-          <OptionButton
-            type="button"
-            onClick={() => {
-              setPointer((x) =>
-                clamp(x - windowSize, 0, commitContributionsByRepository.length)
-              );
-            }}
-            disabled={pointer === 0}
-            my={2}
-            mx="auto"
-          >
-            Prev
-          </OptionButton>
-
-          <OptionButton
-            type="button"
-            onClick={() => {
-              setPointer((x) =>
-                clamp(x + windowSize, 0, commitContributionsByRepository.length)
-              );
-            }}
-            disabled={
-              pointer + windowSize >= commitContributionsByRepository.length
-            }
-            my={2}
-            mx="auto"
-          >
-            Next
-          </OptionButton>
-        </Options>
-
         <RepositoriesGrid ref={ref}>
           {commitContributionsByRepository
             .slice(pointer, pointer + windowSize)
@@ -339,6 +369,40 @@ export const YearlyContribution = ({
               />
             ))}
         </RepositoriesGrid>
+
+        <Options mt={2}>
+          <Button
+            type="button"
+            onClick={() => {
+              if (disabledPrev) return;
+
+              setPointer((x) =>
+                clamp(x - windowSize, 0, commitContributionsByRepository.length)
+              );
+            }}
+            disabled={disabledPrev}
+            my={2}
+            mx="auto"
+          >
+            Prev
+          </Button>
+
+          <Button
+            type="button"
+            onClick={() => {
+              if (disabledNext) return;
+
+              setPointer((x) =>
+                clamp(x + windowSize, 0, commitContributionsByRepository.length)
+              );
+            }}
+            disabled={disabledNext}
+            my={2}
+            mx="auto"
+          >
+            Next
+          </Button>
+        </Options>
       </RepositoriesWithOptions>
 
       {joinedGitHubContribution && (

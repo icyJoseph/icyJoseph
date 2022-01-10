@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState, memo } from "react";
 import styled, { css } from "styled-components";
-import { space } from "@styled-system/space";
+import { space, SpaceProps } from "@styled-system/space";
 
 import { DevIcon } from "components/DevIcon";
 import { Box } from "design-system/Box";
@@ -18,7 +18,7 @@ import { clamp } from "helpers";
 
 const cardWidth = 328;
 
-export const staleMixin = css`
+export const staleMixin = css<{ stale?: boolean }>`
   opacity: ${({ stale = false }) => (stale ? 0.5 : 1)};
   transition: opacity 1s ease-in-out;
 `;
@@ -44,7 +44,7 @@ const LanguageName = styled(Text)`
   color: inherit;
 `;
 
-const Indicator = styled.div`
+const Indicator = styled.div<{ percentage: number }>`
   height: 8px;
   width: ${({ percentage }) => `${percentage}%`};
   background: ${({ color }) => color};
@@ -56,7 +56,7 @@ const Indicator = styled.div`
   }
 `;
 
-const Options = styled.div`
+const Options = styled.div<SpaceProps>`
   ${space};
   display: flex;
   grid-column: span 3;
@@ -82,6 +82,15 @@ const StyledCard = styled(InfoCard)`
   }
 `;
 
+type BaseContributionsSummaryCardProps = {
+  year: number;
+  stale: boolean;
+  totalRepositoryContributions: number;
+  totalCommitContributions: number;
+  restrictedContributionsCount: number;
+  totalRepositoriesContributedTo: number;
+};
+
 const BaseContributionsSummaryCard = ({
   year,
   stale,
@@ -89,7 +98,7 @@ const BaseContributionsSummaryCard = ({
   totalCommitContributions,
   restrictedContributionsCount,
   totalRepositoriesContributedTo
-}) => (
+}: BaseContributionsSummaryCardProps) => (
   <ContributionsSummary
     flexDirection="column"
     stale={stale}
@@ -133,7 +142,19 @@ const BaseContributionsSummaryCard = ({
 
 const ContributionsSummaryCard = memo(BaseContributionsSummaryCard);
 
-const ContributionCard = ({ repository, pointer, index, contributions }) => (
+type ContributionCardProps = {
+  repository: IcyJoseph.Repository;
+  pointer: number;
+  index: number;
+  contributions: { totalCount: number };
+};
+
+const ContributionCard = ({
+  repository,
+  pointer,
+  index,
+  contributions
+}: ContributionCardProps) => (
   <StyledCard p={2} m={2}>
     <Card.Header>
       <Text as="p" $textColor="--yellow" $textAlign="end">
@@ -161,12 +182,14 @@ const ContributionCard = ({ repository, pointer, index, contributions }) => (
     </Card.Section>
     <Card.Section>
       {!repository.isArchived &&
-        repository?.languages?.edges.map(({ node: { color, name }, size }) => (
+        repository.languages?.edges.map(({ node: { color, name }, size }) => (
           <Box key={name} mt={2}>
             <LanguageName mb={1}>
               {name}: {size} bytes
             </LanguageName>
+
             <DevIcon color={color} language={name} mb={2} $fontSize="1.75rem" />
+
             <Indicator
               color={color}
               percentage={(100 * size) / repository.languages.totalSize}
@@ -177,8 +200,28 @@ const ContributionCard = ({ repository, pointer, index, contributions }) => (
   </StyledCard>
 );
 
-export const YearlyContribution = ({ initial, year, from, to }) => {
-  const { data, error } = useGitHub({
+type YearlyContributionProps = {
+  initial: IcyJoseph.ContributionCollection | null;
+  year: number;
+  from: string;
+  to?: string;
+};
+
+export const YearlyContribution = ({
+  initial,
+  year,
+  from,
+  to
+}: YearlyContributionProps) => {
+  const { data, error } = useGitHub<
+    {
+      login: "icyJoseph";
+      from: string;
+      to?: string;
+    },
+    IcyJoseph.ContributionCollection,
+    { user: { contributionsCollection: IcyJoseph.ContributionCollection } }
+  >({
     query: GET_YEAR_CONTRIBUTIONS,
     variables: {
       login: "icyJoseph",
@@ -186,14 +229,18 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
       to
     },
     initialData: initial,
-    selector: ({ user: { contributionsCollection } }) => contributionsCollection
+    selector: ({
+      user: { contributionsCollection }
+    }: {
+      user: { contributionsCollection: IcyJoseph.ContributionCollection };
+    }) => contributionsCollection
   });
 
   const [windowSize, setWindowSize] = useState(1);
 
   const [pointer, setPointer] = useState(0);
 
-  const prev = useLastNonNullableValue(data);
+  const prev = useLastNonNullableValue(initial || data);
 
   const stale = !error && !data;
 
@@ -203,19 +250,13 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
     }
   }, [year, stale]);
 
-  const {
-    joinedGitHubContribution,
-    totalRepositoryContributions,
-    totalCommitContributions,
-    restrictedContributionsCount,
-    commitContributionsByRepository
-  } = data ?? prev;
-
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const handler = () => {
       const element = ref.current;
+      if (!element) return;
+
       const nextWindowSize = clamp(
         Math.floor(element.offsetWidth / cardWidth),
         1,
@@ -230,6 +271,16 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
 
     return () => window.removeEventListener("resize", handler);
   }, []);
+
+  if (!prev) return null;
+
+  const {
+    joinedGitHubContribution,
+    totalRepositoryContributions,
+    totalCommitContributions,
+    restrictedContributionsCount,
+    commitContributionsByRepository
+  } = data ?? prev;
 
   return (
     <>
@@ -257,6 +308,7 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
           >
             Prev
           </OptionButton>
+
           <OptionButton
             type="button"
             onClick={() => {
@@ -273,7 +325,8 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
             Next
           </OptionButton>
         </Options>
-        <RepositoriesGrid m={2} ref={ref}>
+
+        <RepositoriesGrid ref={ref}>
           {commitContributionsByRepository
             .slice(pointer, pointer + windowSize)
             .map(({ contributions, repository }, index) => (
@@ -287,6 +340,7 @@ export const YearlyContribution = ({ initial, year, from, to }) => {
             ))}
         </RepositoriesGrid>
       </RepositoriesWithOptions>
+
       {joinedGitHubContribution && (
         <ContributionsSummary my={2} mx="auto">
           <Text $fontSize="2rem">Joined GitHub</Text>

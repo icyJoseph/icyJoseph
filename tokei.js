@@ -5,15 +5,7 @@ const path = require("path");
 
 const devPath = "/home/joseph/dev";
 
-const args = [
-  "-t",
-  "JavaScript,TypeScript,CSS,Rust",
-  "--output",
-  "json",
-  "--exclude",
-  "temp",
-  "--"
-];
+const args = ["-t", "JavaScript,TypeScript,CSS,Rust", "--output", "json"];
 
 const ls = spawn("tokei", [...args, devPath]);
 

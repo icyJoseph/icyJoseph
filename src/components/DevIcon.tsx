@@ -15,17 +15,19 @@ const normalize: NormalizeIcon = (language) => {
   }
 };
 
+type BaseDevIconOwnProps = {
+  color: string;
+  $fontSize: string;
+  className?: string;
+  language: string;
+};
+
 const BaseDevIcon = ({
   color: _,
-  fontSize: __,
+  $fontSize: __,
   className,
   language
-}: {
-  color: string;
-  fontSize: string;
-  className: string;
-  language: string;
-}) => (
+}: BaseDevIconOwnProps) => (
   <i
     className={`devicon-${normalize(language)}-plain ${className} ${
       language === "CSS" ? "colored" : ""
@@ -33,11 +35,9 @@ const BaseDevIcon = ({
   />
 );
 
-export const DevIcon = styled(BaseDevIcon)<
-  SpaceProps & { color: string; fontSize: string }
->`
+export const DevIcon = styled(BaseDevIcon)<BaseDevIconOwnProps & SpaceProps>`
   ${space};
   display: inline-block;
   color: ${({ color }) => color};
-  font-size: ${({ fontSize = "1.6rem" }) => fontSize};
+  font-size: ${({ $fontSize = "1.6rem" }) => $fontSize};
 `;

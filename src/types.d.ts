@@ -29,7 +29,60 @@ declare namespace IcyJoseph {
     codeChallenges: { totalCompleted: number };
   };
 
-  export type GitHub = any;
+  export type Repository = {
+    id: string;
+    name: string;
+    description: string;
+    owner: {
+      login: string;
+    };
+    isArchived: boolean;
+    isDisabled: boolean;
+    isFork: boolean;
+    isPrivate: boolean;
+    diskUsage: number;
+    homepageUrl: string;
+    languages: {
+      edges: Array<{
+        node: {
+          id: string;
+          name: string;
+          color: string;
+        };
+        size: number;
+      }>;
+      totalSize: number;
+      totalCount: number;
+    };
+  };
+
+  type ContributionCollection = {
+    startedAt: string;
+    endedAt: string;
+    joinedGitHubContribution: {
+      occurredAt: string;
+    };
+    totalCommitContributions: number;
+    restrictedContributionsCount: number;
+    totalRepositoryContributions: number;
+    contributionYears: number[];
+    commitContributionsByRepository: Array<{
+      contributions: {
+        totalCount;
+      };
+      repository: Repository;
+    }>;
+  };
+
+  export type GitHub = {
+    bio: string;
+    name: string;
+    company: string;
+    location: string;
+    login: string;
+    avatarUrl: string;
+    contributionsCollection: ContributionCollection;
+  };
 
   export type Tokei = {
     language: string;

@@ -32,7 +32,7 @@ export const yearStart = (year = new Date().getFullYear()) => {
 };
 
 // a whole year span
-export const yearEnd = (year: string) => {
+export const yearEnd = (year: string | number) => {
   const to = new Date(`${year}-12-31`);
   to.setUTCHours(23, 59, 59, 999);
   const from = new Date(`${year}-01-01`);

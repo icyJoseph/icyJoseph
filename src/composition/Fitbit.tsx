@@ -78,14 +78,15 @@ export const Fitbit: FC<FitbitProps> = ({
 
   return (
     <Section>
-      <SectionHeader id={name}>
+      <SectionHeader id={name} mb={5}>
         <Text as="h2" $textColor="--blue" $fontSize="3rem">
           <a href={`#${name}`}>
             <code>Fitbit</code>
           </a>
         </Text>
       </SectionHeader>
-      <Box mb={2}>
+
+      <Box>
         <Flex mt={2} pb={3}>
           <DataSegment
             flex={1}
@@ -148,9 +149,12 @@ export const Fitbit: FC<FitbitProps> = ({
             </Cardio>
           </DataSegment>
         </Flex>
+
         <TopBadges profile={profile} />
+
         <ActivityLog initial={activityLog} />
       </Box>
+
       <BackToTop />
     </Section>
   );

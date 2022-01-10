@@ -29,17 +29,35 @@ Only Rust 🦀
 
 ## Repositories and Contributions
 
+### In 2019
+
+- 30 newly created repositories
+- 963 commit contributions
+- 40 repos received commits from me
+
 ### In 2020
 
 - 14 newly created repositories
-- 1323 commit contributions
-- 64 repos received commits from me
+- 1073 commit contributions
+- 59 repos received commits from me
 
 ### 2021
 
-- 15 newly created repositories
-- 505 commit contributions
-- 21 repos received commits from me
+- 26 newly created repositories
+- 723 commit contributions
+- 30 repos received commits from me
+
+## Open Source Contributions
+
+- [swr](https://github.com/vercel/swr)
+  - [PR 1698](https://github.com/vercel/swr/pull/1698)
+  - [PR 1697](https://github.com/vercel/swr/pull/1697)
+- [vercel-community/rust](https://github.com/vercel-community/rust)
+  - [PR 50](https://github.com/vercel-community/rust/pull/50)
+- [meilisearch-rust](https://github.com/meilisearch/meilisearch-rust)
+  - [PR 133](https://github.com/meilisearch/meilisearch-rust/pull/133)
+- [useStateMachine](https://github.com/cassiozen/useStateMachine)
+  - [PR 2](https://github.com/cassiozen/useStateMachine/pull/2)
 
 ## [`tokei`](https://github.com/XAMPPRocky/tokei) on my `dev` folder
 

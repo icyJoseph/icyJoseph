@@ -2,10 +2,8 @@ import { Children, Fragment, isValidElement, ReactNode } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import { space } from "@styled-system/space";
-import { maxWidthUtility } from "styles/mixins";
 
 const StyledNav = styled.nav`
-  ${maxWidthUtility};
   ${space({ mt: 3, py: 2 })};
   background: var(--smokeyWhite);
 `;

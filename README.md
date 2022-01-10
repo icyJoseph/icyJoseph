@@ -29,17 +29,35 @@ Only Rust 🦀
 
 ## Repositories and Contributions
 
+### In 2019
+
+- 30 newly created repositories
+- 963 commit contributions
+- 40 repos received commits from me
+
 ### In 2020
 
 - 14 newly created repositories
-- 1323 commit contributions
-- 64 repos received commits from me
+- 1073 commit contributions
+- 59 repos received commits from me
 
-### 2021
+### In 2021
 
-- 15 newly created repositories
-- 505 commit contributions
-- 21 repos received commits from me
+- 26 newly created repositories
+- 723 commit contributions
+- 30 repos received commits from me
+
+## Open Source Contributions
+
+- [swr](https://github.com/vercel/swr)
+  - [PR 1698](https://github.com/vercel/swr/pull/1698)
+  - [PR 1697](https://github.com/vercel/swr/pull/1697)
+- [vercel-community/rust](https://github.com/vercel-community/rust)
+  - [PR 50](https://github.com/vercel-community/rust/pull/50)
+- [meilisearch-rust](https://github.com/meilisearch/meilisearch-rust)
+  - [PR 133](https://github.com/meilisearch/meilisearch-rust/pull/133)
+- [useStateMachine](https://github.com/cassiozen/useStateMachine)
+  - [PR 2](https://github.com/cassiozen/useStateMachine/pull/2)
 
 ## [`tokei`](https://github.com/XAMPPRocky/tokei) on my `dev` folder
 
@@ -48,19 +66,19 @@ Only Rust 🦀
 ===============================================================================
  Language            Files        Lines         Code     Comments       Blanks
 ===============================================================================
- CSS                   282        51522        46590          461         4471
- JavaScript          17517      3964873      3251910       468447       244516
- TypeScript           2365       378511       248279       104062        26170
+ CSS                   185        44882        40835          341         3706
+ JavaScript           2080       136485       113500         8438        14547
+ TypeScript           1185       112375        98599         3539        10237
 -------------------------------------------------------------------------------
- HTML                  240        27509        23109         1300         3100
- |- CSS                 76         2555         1784          480          291
- |- JavaScript         100         1545         1353           67          125
- (Total)                          31609        26246         1847         3516
+ HTML                  115         4187         3033         1057           97
+ |- CSS                 14          192          176            0           16
+ |- JavaScript          20          544          468           10           66
+ (Total)                           4923         3677         1067          179
 -------------------------------------------------------------------------------
- Rust                  170        14387        11933          291         2163
- |- Markdown            20         1558            6         1305          247
- (Total)                          15945        11939         1596         2410
+ Rust                  206        17856        14498          375         2983
+ |- Markdown            10           55            0           47            8
+ (Total)                          17911        14498          422         2991
 ===============================================================================
- Total               20574      4442460      3584964       576413       281083
+ Total                3771       315785       270465        13750        31570
 ===============================================================================
 ```

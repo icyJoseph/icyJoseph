@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { space } from "@styled-system/space";
+import { space, SpaceProps } from "@styled-system/space";
 import { ComponentPropsWithoutRef } from "react";
 
 type BaseButtonProps = {
   fontSize?: string;
-};
+} & SpaceProps;
 
 type ButtonVariants = "primary" | "outlined";
 
@@ -66,10 +66,6 @@ const BaseButton = styled.button<BaseButtonProps>`
     outline-offset: 4px;
     outline-width: 2px;
     outline-style: solid;
-  }
-
-  &:focus:not(:focus-visible) {
-    outline: none;
   }
 `;
 
@@ -147,12 +143,12 @@ const Text = styled.span<ButtonTextProps>`
   }
 `;
 
-type ButtonOwnProps = { variant: ButtonVariants } & BaseButtonProps;
+type ButtonOwnProps = { variant?: ButtonVariants } & BaseButtonProps;
 
 export type ButtonProps = ButtonOwnProps & ComponentPropsWithoutRef<"button">;
 
 export const Button = ({
-  variant,
+  variant = "primary",
   disabled = false,
   children,
   ...rest

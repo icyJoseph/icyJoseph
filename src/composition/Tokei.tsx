@@ -50,18 +50,20 @@ type TokeiProps = {
 
 export const Tokei: FC<TokeiProps> = ({ tokei, name }) => (
   <Section>
-    <SectionHeader id={name} pt={2}>
+    <SectionHeader id={name} pt={2} mb={5}>
       <Text as="h2" $textColor="--blue" $fontSize="3rem">
         <a href={`#${name}`}>
           <code>tokei ~/dev</code>
         </a>
       </Text>
     </SectionHeader>
+
     <Flex justifyContent="center">
       {tokei.map(({ language, ...rest }, index) => (
         <Language key={language} language={language} {...rest} order={index} />
       ))}
     </Flex>
+
     <Text mt={3} $fontWeight={300}>
       <Text as="span" $textColor="--red">
         Lines of Code

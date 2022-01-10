@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 import styled from "styled-components";
 import { space, SpaceProps } from "@styled-system/space";
 
 import { Button } from "design-system/Button";
-import { Card, InfoCard } from "design-system/Card";
 import { Flex } from "design-system/Flex";
 import { Section, SectionHeader } from "design-system/Section";
 import { Text } from "design-system/Text";
@@ -15,33 +14,65 @@ import { yearStart, yearEnd } from "helpers";
 import { BackToTop } from "design-system/BackToTop";
 
 const GitHubImg = styled.img<SpaceProps>`
-  ${space({ m: "0 auto" })};
+  ${space({ m: "0 auto", p: 1 })};
   display: block;
-  border: 1px solid var(--smokeyWhite);
+
+  border: 2px solid var(--blue);
   border-radius: 50%;
+
   max-width: 192px;
   min-width: 96px;
   width: 66.66%;
 `;
 
-const GitHubGrid = styled.div`
-  display: flex;
-  flex-direction: column;
+const Contributions = styled(Flex)``;
+
+const Profile = styled.div`
+  grid-column: span 2;
+  justify-content: center;
+
+  display: grid;
+  grid-template-columns: 1fr;
+
+  & ${GitHubImg} {
+    justify-self: center;
+    align-self: center;
+  }
 
   @media (min-width: 768px) {
-    display: grid;
-    grid-template-columns: minmax(33%, 192px) 1fr;
-    grid-template-rows: auto;
+    grid-template-columns: minmax(250px, 33.33%) 1fr;
+  }
+
+  > section {
+    ${space({ mx: "auto", mt: 4, px: 2 })};
+
+    @media (min-width: 768px) {
+      ${space({ mt: 0, px: 0 })};
+    }
+  }
+  > section header {
+    text-align: center;
+
+    @media (min-width: 768px) {
+      text-align: left;
+    }
   }
 `;
 
-const Contributions = styled(Flex)`
-  grid-column: span 2;
-`;
+const GitHubContainer = styled.div<SpaceProps>`
+  ${space}
+  display: flex;
+  flex-direction: column;
 
-const Profile = styled(Flex)`
-  grid-column: span 2;
-  justify-content: center;
+  & ${Contributions}, & ${Profile} {
+    ${space({ mx: "auto" })};
+
+    max-width: unset;
+
+    @media (min-width: 768px) {
+      max-width: 75%;
+    }
+  }
 `;
 
 const Bio = styled(Flex)`
@@ -93,7 +124,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
   } = data || initial;
 
   const { contributionYears } = contributionsCollection;
-  const [last = 2020] = contributionYears;
+  const [last = new Date().getFullYear()] = contributionYears;
 
   const [showContributions, setShowContributions] = useState(false);
 
@@ -110,49 +141,38 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
           </a>
         </Text>
       </SectionHeader>
-      <GitHubGrid>
+
+      <GitHubContainer mt={5}>
         <Profile>
-          <InfoCard m={3}>
-            <Card.Header>
-              <h3>{login}</h3>
-              <Text $textColor="--smokeyWhite" my={2} $fontWeight={300}>
-                {location}
+          <GitHubImg src={avatarUrl} alt={`${name} github profile picture`} />
+
+          <section>
+            <header>
+              <Text as="h3" $textColor="--blue">
+                @{login}
               </Text>
 
-              <GitHubImg
-                src={avatarUrl}
-                alt={`${name} github profile picture`}
-              />
-
-              <Text
-                as="h2"
-                $textColor="--yellow"
-                $textAlign="center"
-                mt={2}
-                $fontWeight={500}
-              >
-                {name}
+              <Text my={2} $fontWeight={300}>
+                <i>{location}</i>
               </Text>
-            </Card.Header>
+            </header>
 
-            <Card.Section>
-              <Bio flexDirection="column" py={3} px={2}>
-                <Text $textColor="--yellow" mb={2}>
-                  {company}
-                </Text>
+            <Bio flexDirection="column" py={3}>
+              <Text mb={2} $fontWeight={300}>
+                {bio}
+              </Text>
 
-                <Text $textColor="--smokeyWhite" mb={2} $fontWeight={300}>
-                  {bio}
-                </Text>
-              </Bio>
-            </Card.Section>
-          </InfoCard>
+              <Text $textColor="--blue" mb={2}>
+                {company}
+              </Text>
+            </Bio>
+          </section>
         </Profile>
 
         <RenderWithSelectedYear last={last}>
           {({ selectedYear, setSelectedYear }) => (
-            <>
-              <Contributions justifyContent="center" my={3}>
+            <Fragment>
+              <Contributions justifyContent="center" my={3} mx="auto">
                 {contributionYears
                   .slice(0)
                   .sort((a, b) => a - b)
@@ -168,6 +188,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
                   ))}
               </Contributions>
 
+              {/* Don't render on SSR */}
               {showContributions && (
                 <YearlyContribution
                   year={selectedYear}
@@ -179,10 +200,11 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
                     : yearEnd(selectedYear))}
                 />
               )}
-            </>
+            </Fragment>
           )}
         </RenderWithSelectedYear>
-      </GitHubGrid>
+      </GitHubContainer>
+
       <BackToTop />
     </Section>
   );

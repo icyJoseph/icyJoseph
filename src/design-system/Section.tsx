@@ -7,7 +7,7 @@ type SectionProps = PropsWithChildren<SpaceProps>;
 const BaseSection = (props: SectionProps) => <section {...props} />;
 
 export const Section = styled(BaseSection)`
-  ${space({ my: 3 })};
+  ${space({ my: 3, px: 2 })};
   ${space};
 `;
 

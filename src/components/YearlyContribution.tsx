@@ -24,7 +24,7 @@ export const staleMixin = css<{ stale?: boolean }>`
   transition: opacity 1s ease-in-out;
 `;
 
-const ContributionsSummary = styled(Flex)`
+const Contributions = styled(Flex)`
   ${staleMixin};
 `;
 
@@ -126,7 +126,6 @@ const StyledCard = styled(InfoCard)`
 `;
 
 type BaseContributionsSummaryProps = {
-  year: number;
   stale: boolean;
   totalRepositoryContributions: number;
   totalCommitContributions: number;
@@ -134,26 +133,21 @@ type BaseContributionsSummaryProps = {
   totalRepositoriesContributedTo: number;
 };
 
-const BaseContributionsSummary = ({
-  year,
+const GitHubContributionsSummary = memo(function ContributionsSummary({
   stale,
   totalRepositoryContributions,
   totalCommitContributions,
   restrictedContributionsCount,
   totalRepositoriesContributedTo
-}: BaseContributionsSummaryProps) => (
-  <ContributionsSummary
-    flexDirection="column"
-    stale={stale}
-    alignItems="center"
-    my={4}
-    px={4}
-  >
-    <Text as="h4" $fontSize="2.5rem" $textColor="--blue">
-      In {year}
-    </Text>
-
-    <Flex flexDirection="column" alignItems="center" mt={2} mx="auto">
+}: BaseContributionsSummaryProps) {
+  return (
+    <Contributions
+      stale={stale}
+      flexDirection="column"
+      alignItems="center"
+      mt={3}
+      mx="auto"
+    >
       {[
         {
           value: totalRepositoryContributions,
@@ -184,11 +178,9 @@ const BaseContributionsSummary = ({
           </StatText>
         </Stat>
       ))}
-    </Flex>
-  </ContributionsSummary>
-);
-
-const MemoContributionsSummary = memo(BaseContributionsSummary);
+    </Contributions>
+  );
+});
 
 type ContributionCardProps = {
   repository: IcyJoseph.Repository;
@@ -208,6 +200,7 @@ const ContributionCard = ({
       <Text as="p" $textColor="--yellow" $textAlign="end">
         #{pointer + index + 1}
       </Text>
+
       <Text
         as="h4"
         $textColor="--smokeyWhite"
@@ -217,17 +210,22 @@ const ContributionCard = ({
       >
         {repository.name}
       </Text>
+
       <Text $textColor="--smokeyWhite">Owner:</Text>
+
       <Text $textColor="--smokeyWhite">{repository.owner.login}</Text>
     </Card.Header>
+
     <Card.Section>
       <Text $textColor="--smokeyWhite">
         Contributions: {contributions.totalCount}
       </Text>
+
       <Text $textColor="--smokeyWhite">
         Size: {repository.languages.totalSize} bytes
       </Text>
     </Card.Section>
+
     <Card.Section>
       {!repository.isArchived &&
         repository.languages?.edges.map(({ node: { color, name }, size }) => (
@@ -286,6 +284,10 @@ const useContributionCollection = (
   return { data, error };
 };
 
+function circular(index: number, step: number, limit: number) {
+  return (limit + ((index + step) % limit)) % limit;
+}
+
 export const YearlyContribution = ({
   initial,
   year,
@@ -340,20 +342,40 @@ export const YearlyContribution = ({
     commitContributionsByRepository
   } = data ?? prev;
 
-  const disabledPrev = pointer === 0;
-  const disabledNext =
-    pointer + windowSize >= commitContributionsByRepository.length;
+  const disabledPrev = windowSize === commitContributionsByRepository.length;
+  const disabledNext = windowSize === commitContributionsByRepository.length;
 
   return (
     <>
-      <MemoContributionsSummary
-        year={year}
-        stale={stale}
-        totalRepositoryContributions={totalRepositoryContributions}
-        totalCommitContributions={totalCommitContributions}
-        restrictedContributionsCount={restrictedContributionsCount}
-        totalRepositoriesContributedTo={commitContributionsByRepository.length}
-      />
+      <Flex flexDirection="column" alignItems="center" my={4} px={4}>
+        <Text as="h4" $fontSize="2.5rem" $textColor="--blue">
+          In {year}
+        </Text>
+
+        {joinedGitHubContribution ? (
+          <Flex mt={3}>
+            <Text $fontSize="2rem" $fontWeight={300}>
+              Joined GitHub
+              <Emoji
+                symbol="🎉"
+                title="Joined Github"
+                ariaLabel="Celebration"
+                mx={2}
+              />
+            </Text>
+          </Flex>
+        ) : (
+          <GitHubContributionsSummary
+            stale={stale}
+            totalRepositoryContributions={totalRepositoryContributions}
+            totalCommitContributions={totalCommitContributions}
+            restrictedContributionsCount={restrictedContributionsCount}
+            totalRepositoriesContributedTo={
+              commitContributionsByRepository.length
+            }
+          />
+        )}
+      </Flex>
 
       <RepositoriesWithOptions stale={stale}>
         <RepositoriesGrid ref={ref}>
@@ -376,8 +398,12 @@ export const YearlyContribution = ({
             onClick={() => {
               if (disabledPrev) return;
 
-              setPointer((x) =>
-                clamp(x - windowSize, 0, commitContributionsByRepository.length)
+              setPointer((index) =>
+                circular(
+                  index,
+                  -windowSize,
+                  commitContributionsByRepository.length
+                )
               );
             }}
             disabled={disabledPrev}
@@ -392,8 +418,12 @@ export const YearlyContribution = ({
             onClick={() => {
               if (disabledNext) return;
 
-              setPointer((x) =>
-                clamp(x + windowSize, 0, commitContributionsByRepository.length)
+              setPointer((index) =>
+                circular(
+                  index,
+                  windowSize,
+                  commitContributionsByRepository.length
+                )
               );
             }}
             disabled={disabledNext}
@@ -404,13 +434,6 @@ export const YearlyContribution = ({
           </Button>
         </Options>
       </RepositoriesWithOptions>
-
-      {joinedGitHubContribution && (
-        <ContributionsSummary my={2} mx="auto">
-          <Text $fontSize="2rem">Joined GitHub</Text>
-          <Emoji symbol="🎉" title="Joined Github" ariaLabel="Tada" mx={2} />
-        </ContributionsSummary>
-      )}
     </>
   );
 };

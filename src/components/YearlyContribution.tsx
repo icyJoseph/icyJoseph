@@ -1,11 +1,10 @@
-import { useEffect, useLayoutEffect, useRef, useState, memo } from "react";
+import { useEffect, useRef, useState, memo } from "react";
 import styled, { css } from "styled-components";
 import { space, SpaceProps } from "@styled-system/space";
 
 import { DevIcon } from "components/DevIcon";
 import { Box } from "design-system/Box";
 import { Button } from "design-system/Button";
-import { Card, InfoCard } from "design-system/Card";
 import { Emoji } from "design-system/Emoji";
 import { Flex } from "design-system/Flex";
 import { Text } from "design-system/Text";
@@ -14,17 +13,15 @@ import { useGitHub } from "hooks/useGitHub";
 import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
 
 import { GET_YEAR_CONTRIBUTIONS } from "queries";
-import { clamp } from "helpers";
-import { Value, Unit } from "design-system/Measurement";
 
-const cardWidth = 328;
+import { Value, Unit } from "design-system/Measurement";
 
 export const staleMixin = css<{ stale?: boolean }>`
   opacity: ${({ stale = false }) => (stale ? 0.5 : 1)};
   transition: opacity 1s ease-in-out;
 `;
 
-const ContributionsSummary = styled(Flex)`
+const Contributions = styled(Flex)`
   ${staleMixin};
 `;
 
@@ -76,57 +73,7 @@ const Stat = styled(Flex)`
   }
 `;
 
-const RepositoriesWithOptions = styled(Box)<{ stale?: boolean }>`
-  ${space({ mt: 3 })};
-  grid-column: span 2;
-  scroll-behavior: smooth;
-  ${staleMixin};
-`;
-
-const RepositoriesGrid = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const LanguageName = styled(Text)`
-  display: block;
-  color: inherit;
-`;
-
-const Indicator = styled.div<{ percentage: number }>`
-  height: 8px;
-  width: ${({ percentage }) => `${percentage}%`};
-  background: ${({ color }) => color};
-  border-radius: 6px;
-  display: none;
-
-  @media (min-width: 768px) {
-    display: block;
-  }
-`;
-
-const Options = styled.div<SpaceProps>`
-  ${space};
-  display: flex;
-  grid-column: span 3;
-`;
-
-const StyledCard = styled(InfoCard)`
-  width: 80%;
-  max-width: unset;
-  min-height: 375px;
-
-  @media (min-width: ${cardWidth + 10}px) {
-    max-width: ${cardWidth}px;
-  }
-
-  > section {
-    flex-direction: column;
-  }
-`;
-
 type BaseContributionsSummaryProps = {
-  year: number;
   stale: boolean;
   totalRepositoryContributions: number;
   totalCommitContributions: number;
@@ -134,26 +81,21 @@ type BaseContributionsSummaryProps = {
   totalRepositoriesContributedTo: number;
 };
 
-const BaseContributionsSummary = ({
-  year,
+const GitHubContributionsSummary = memo(function ContributionsSummary({
   stale,
   totalRepositoryContributions,
   totalCommitContributions,
   restrictedContributionsCount,
   totalRepositoriesContributedTo
-}: BaseContributionsSummaryProps) => (
-  <ContributionsSummary
-    flexDirection="column"
-    stale={stale}
-    alignItems="center"
-    my={4}
-    px={4}
-  >
-    <Text as="h4" $fontSize="2.5rem" $textColor="--blue">
-      In {year}
-    </Text>
-
-    <Flex flexDirection="column" alignItems="center" mt={2} mx="auto">
+}: BaseContributionsSummaryProps) {
+  return (
+    <Contributions
+      stale={stale}
+      flexDirection="column"
+      alignItems="center"
+      mt={3}
+      mx="auto"
+    >
       {[
         {
           value: totalRepositoryContributions,
@@ -184,11 +126,67 @@ const BaseContributionsSummary = ({
           </StatText>
         </Stat>
       ))}
-    </Flex>
-  </ContributionsSummary>
-);
+    </Contributions>
+  );
+});
 
-const MemoContributionsSummary = memo(BaseContributionsSummary);
+const RepositoriesWithOptions = styled(Box)<{ stale?: boolean }>`
+  ${space({ mt: 3 })};
+  grid-column: span 2;
+  scroll-behavior: smooth;
+  ${staleMixin};
+`;
+
+const Indicator = styled.div<{ percentage: number }>`
+  height: 8px;
+  width: ${({ percentage }) => `${percentage}%`};
+  background: ${({ color }) => color};
+  border-radius: 6px;
+`;
+
+const Options = styled.div<SpaceProps>`
+  ${space};
+  display: flex;
+  grid-column: span 3;
+
+  position: sticky;
+  bottom: 16px;
+`;
+
+const RepoEntry = styled(Flex)`
+  background-color: var(--smokeyWhite);
+  max-width: 80%;
+
+  gap: 1.5rem;
+
+  > * {
+    flex: 1;
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  }
+`;
+
+const RepoFooter = styled(Flex)`
+  & ${Box} {
+    ${space({ pb: 3 })}
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    & ${Box} {
+      ${space({ pb: 0, pr: 3 })};
+      width: 33.33%;
+    }
+  }
+
+  & ${Box}:last-child {
+    ${space({ pr: 0 })};
+  }
+`;
+
+const RE_EMOJI = /:\+1:|:-1:|:[\w-]+:/g;
 
 type ContributionCardProps = {
   repository: IcyJoseph.Repository;
@@ -203,40 +201,55 @@ const ContributionCard = ({
   index,
   contributions
 }: ContributionCardProps) => (
-  <StyledCard p={2} m={2}>
-    <Card.Header>
-      <Text as="p" $textColor="--yellow" $textAlign="end">
-        #{pointer + index + 1}
+  <RepoEntry py={2} mx="auto" as="article" flexDirection="column">
+    <header>
+      <Text as="h4">
+        <Text as="span" $textColor="--yellow">
+          #{pointer + index + 1}
+        </Text>{" "}
+        <Text as="span" $fontSize="2rem" $fontWeight={300}>
+          {repository.name}
+        </Text>
       </Text>
-      <Text
-        as="h4"
-        $textColor="--smokeyWhite"
-        $fontSize="2rem"
-        $fontWeight={600}
-        mb={2}
-      >
-        {repository.name}
+    </header>
+
+    <Flex as="section" flexDirection="column" gap="1.5rem">
+      <Flex gap="1.5rem">
+        <Text $fontWeight={300} mt={2} mr="auto">
+          Owner:{" "}
+          <Text as="i" $fontWeight={300}>
+            {repository.owner.login}
+          </Text>
+        </Text>
+
+        <Text $fontWeight={300} mt={2}>
+          Contributions:{" "}
+          <Text as="span" $fontWeight={300} $fontSize="2rem">
+            {contributions.totalCount}
+          </Text>
+        </Text>
+      </Flex>
+
+      <Text $fontWeight={300}>
+        {repository.description
+          ? repository.description.replace(RE_EMOJI, "")
+          : `${repository.name} has no description.`}
       </Text>
-      <Text $textColor="--smokeyWhite">Owner:</Text>
-      <Text $textColor="--smokeyWhite">{repository.owner.login}</Text>
-    </Card.Header>
-    <Card.Section>
-      <Text $textColor="--smokeyWhite">
-        Contributions: {contributions.totalCount}
-      </Text>
-      <Text $textColor="--smokeyWhite">
-        Size: {repository.languages.totalSize} bytes
-      </Text>
-    </Card.Section>
-    <Card.Section>
+    </Flex>
+
+    <RepoFooter as="footer">
       {!repository.isArchived &&
         repository.languages?.edges.map(({ node: { color, name }, size }) => (
-          <Box key={name} mt={2}>
-            <LanguageName mb={1}>
-              {name}: {size} bytes
-            </LanguageName>
+          <Box key={name}>
+            <Text $fontSize="2rem" $fontWeight={300} mb={1}>
+              <DevIcon color={color} language={name} mr={1} $fontSize="2rem" />
 
-            <DevIcon color={color} language={name} mb={2} $fontSize="1.75rem" />
+              <span>{name}</span>
+            </Text>
+
+            {/* <Text as="span" $fontWeight={300}>
+              {size} bytes
+            </Text> */}
 
             <Indicator
               color={color}
@@ -244,8 +257,8 @@ const ContributionCard = ({
             />
           </Box>
         ))}
-    </Card.Section>
-  </StyledCard>
+    </RepoFooter>
+  </RepoEntry>
 );
 
 type YearlyContributionProps = {
@@ -286,6 +299,10 @@ const useContributionCollection = (
   return { data, error };
 };
 
+function circular(index: number, step: number, limit: number) {
+  return (limit + ((index + step) % limit)) % limit;
+}
+
 export const YearlyContribution = ({
   initial,
   year,
@@ -293,8 +310,6 @@ export const YearlyContribution = ({
   to
 }: YearlyContributionProps) => {
   const { data, error } = useContributionCollection(from, to, initial);
-
-  const [windowSize, setWindowSize] = useState(1);
 
   const [pointer, setPointer] = useState(0);
 
@@ -310,26 +325,6 @@ export const YearlyContribution = ({
 
   const ref = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
-    const handler = () => {
-      const element = ref.current;
-      if (!element) return;
-
-      const nextWindowSize = clamp(
-        Math.floor(element.offsetWidth / cardWidth),
-        1,
-        20
-      );
-      setWindowSize(nextWindowSize);
-    };
-
-    window.addEventListener("resize", handler);
-
-    handler();
-
-    return () => window.removeEventListener("resize", handler);
-  }, []);
-
   if (!prev) return null;
 
   const {
@@ -340,23 +335,45 @@ export const YearlyContribution = ({
     commitContributionsByRepository
   } = data ?? prev;
 
-  const disabledPrev = pointer === 0;
-  const disabledNext =
-    pointer + windowSize >= commitContributionsByRepository.length;
+  const windowSize = Math.min(3, commitContributionsByRepository.length);
+
+  const disabledPrev = windowSize === commitContributionsByRepository.length;
+  const disabledNext = windowSize === commitContributionsByRepository.length;
 
   return (
     <>
-      <MemoContributionsSummary
-        year={year}
-        stale={stale}
-        totalRepositoryContributions={totalRepositoryContributions}
-        totalCommitContributions={totalCommitContributions}
-        restrictedContributionsCount={restrictedContributionsCount}
-        totalRepositoriesContributedTo={commitContributionsByRepository.length}
-      />
+      <Flex flexDirection="column" alignItems="center" my={4} px={4}>
+        <Text as="h4" $fontSize="2.5rem" $textColor="--blue">
+          In {year}
+        </Text>
+
+        {joinedGitHubContribution ? (
+          <Flex mt={3}>
+            <Text $fontSize="2rem" $fontWeight={300}>
+              Joined GitHub
+              <Emoji
+                symbol="🎉"
+                title="Joined Github"
+                ariaLabel="Celebration"
+                mx={2}
+              />
+            </Text>
+          </Flex>
+        ) : (
+          <GitHubContributionsSummary
+            stale={stale}
+            totalRepositoryContributions={totalRepositoryContributions}
+            totalCommitContributions={totalCommitContributions}
+            restrictedContributionsCount={restrictedContributionsCount}
+            totalRepositoriesContributedTo={
+              commitContributionsByRepository.length
+            }
+          />
+        )}
+      </Flex>
 
       <RepositoriesWithOptions stale={stale}>
-        <RepositoriesGrid ref={ref}>
+        <div ref={ref}>
           {commitContributionsByRepository
             .slice(pointer, pointer + windowSize)
             .map(({ contributions, repository }, index) => (
@@ -368,7 +385,7 @@ export const YearlyContribution = ({
                 contributions={contributions}
               />
             ))}
-        </RepositoriesGrid>
+        </div>
 
         <Options mt={2}>
           <Button
@@ -376,8 +393,12 @@ export const YearlyContribution = ({
             onClick={() => {
               if (disabledPrev) return;
 
-              setPointer((x) =>
-                clamp(x - windowSize, 0, commitContributionsByRepository.length)
+              setPointer((index) =>
+                circular(
+                  index,
+                  -windowSize,
+                  commitContributionsByRepository.length
+                )
               );
             }}
             disabled={disabledPrev}
@@ -392,8 +413,12 @@ export const YearlyContribution = ({
             onClick={() => {
               if (disabledNext) return;
 
-              setPointer((x) =>
-                clamp(x + windowSize, 0, commitContributionsByRepository.length)
+              setPointer((index) =>
+                circular(
+                  index,
+                  windowSize,
+                  commitContributionsByRepository.length
+                )
               );
             }}
             disabled={disabledNext}
@@ -404,13 +429,6 @@ export const YearlyContribution = ({
           </Button>
         </Options>
       </RepositoriesWithOptions>
-
-      {joinedGitHubContribution && (
-        <ContributionsSummary my={2} mx="auto">
-          <Text $fontSize="2rem">Joined GitHub</Text>
-          <Emoji symbol="🎉" title="Joined Github" ariaLabel="Tada" mx={2} />
-        </ContributionsSummary>
-      )}
     </>
   );
 };

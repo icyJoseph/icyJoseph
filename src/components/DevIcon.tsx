@@ -10,6 +10,8 @@ const normalize: NormalizeIcon = (language) => {
       return "html5";
     case "css":
       return "css3";
+    case "shell":
+      return "bash";
     default:
       return icon;
   }
@@ -40,4 +42,5 @@ export const DevIcon = styled(BaseDevIcon)<BaseDevIconOwnProps & SpaceProps>`
   display: inline-block;
   color: ${({ color }) => color};
   font-size: ${({ $fontSize = "1.6rem" }) => $fontSize};
+  vertical-align: middle;
 `;

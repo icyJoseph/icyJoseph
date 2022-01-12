@@ -32,7 +32,7 @@ declare namespace IcyJoseph {
   export type Repository = {
     id: string;
     name: string;
-    description: string;
+    description: string | undefined | null;
     owner: {
       login: string;
     };
@@ -43,6 +43,9 @@ declare namespace IcyJoseph {
     diskUsage: number;
     homepageUrl: string;
     languages: {
+      /**
+       * The query backing this type up, uses only up-to 3 languages
+       */
       edges: Array<{
         node: {
           id: string;

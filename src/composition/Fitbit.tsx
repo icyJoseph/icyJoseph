@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { BackToTop } from "design-system/BackToTop";
 import { Box } from "design-system/Box";
-import { DataEntry } from "components/DataEntry";
+// import { DataEntry } from "components/DataEntry";
 import { Flex } from "design-system/Flex";
 import { Section, SectionHeader } from "design-system/Section";
 import { Text } from "design-system/Text";
@@ -13,9 +13,9 @@ import { ActivityLog } from "components/Fitbit/ActivityLog";
 
 import { useFitbitHR } from "hooks/useFitbit";
 
-const Cardio = styled(Flex)`
-  width: 100%;
-`;
+// const Cardio = styled(Flex)`
+//   width: 100%;
+// `;
 
 const DataSegment = styled(Flex)`
   min-width: 80%;
@@ -25,34 +25,34 @@ const DataSegment = styled(Flex)`
   }
 `;
 
-const StyledDataEntry = styled(DataEntry)`
-  & > p:not(:first-child) {
-    text-transform: inherit;
-  }
-`;
+// const StyledDataEntry = styled(DataEntry)`
+//   & > p:not(:first-child) {
+//     text-transform: inherit;
+//   }
+// `;
 
-const heartRateMonthSummary = (points: IcyJoseph.HeartRatePoint[]) =>
-  points.reduce((prev, { value }) => {
-    const { heartRateZones } = value;
+// const heartRateMonthSummary = (points: IcyJoseph.HeartRatePoint[]) =>
+//   points.reduce((prev, { value }) => {
+//     const { heartRateZones } = value;
 
-    heartRateZones.forEach(({ name, ...rest }) => {
-      if (prev.has(name)) {
-        const current = prev.get(name);
+//     heartRateZones.forEach(({ name, ...rest }) => {
+//       if (prev.has(name)) {
+//         const current = prev.get(name);
 
-        const update = {
-          ...current,
-          ...rest,
-          caloriesOut: current.caloriesOut + (rest.caloriesOut ?? 0),
-          minutes: current.minutes + (rest.minutes ?? 0)
-        };
-        prev.set(name, update);
-      } else {
-        prev.set(name, { name, ...rest });
-      }
-    });
+//         const update = {
+//           ...current,
+//           ...rest,
+//           caloriesOut: current.caloriesOut + (rest.caloriesOut ?? 0),
+//           minutes: current.minutes + (rest.minutes ?? 0)
+//         };
+//         prev.set(name, update);
+//       } else {
+//         prev.set(name, { name, ...rest });
+//       }
+//     });
 
-    return prev;
-  }, new Map());
+//     return prev;
+//   }, new Map());
 
 type FitbitProps = {
   profile: IcyJoseph.FitbitUser;
@@ -74,7 +74,7 @@ export const Fitbit: FC<FitbitProps> = ({
 
   const heartData = data?.["activities-heart"] ?? [];
   const [prevDay = null, today = null] = heartData.slice(-2);
-  const summary = heartRateMonthSummary(heartData);
+  // const summary = heartRateMonthSummary(heartData);
 
   return (
     <Section>
@@ -91,7 +91,7 @@ export const Fitbit: FC<FitbitProps> = ({
           <DataSegment
             flex={1}
             flexDirection="column"
-            justifyContent="center"
+            justifyContent="flex-start"
             alignItems="center"
           >
             <Text $fontSize="2rem" $fontWeight={300}>
@@ -102,6 +102,7 @@ export const Fitbit: FC<FitbitProps> = ({
               {profile.averageDailySteps}
             </Text>
           </DataSegment>
+
           <DataSegment
             flex={1}
             flexDirection="column"
@@ -118,37 +119,38 @@ export const Fitbit: FC<FitbitProps> = ({
                 bpm
               </Text>
             </Text>
-
-            <Text $fontWeight={300}>
-              Heart activity last {heartData.length} days
-            </Text>
-
-            <Cardio>
-              {Array.from(summary.values())
-                .slice(1)
-                .filter(({ minutes, caloriesOut }) => minutes * caloriesOut > 0)
-                .map(({ name, minutes, caloriesOut }) => {
-                  return (
-                    <StyledDataEntry key={name}>
-                      <Text $fontWeight={300}>{name}</Text>
-                      <Text $fontSize="2.5rem" $textColor="--yellow" mt={2}>
-                        {minutes}{" "}
-                        <Text as="span" $fontWeight={300}>
-                          min
-                        </Text>
-                      </Text>
-                      <Text $fontSize="2.5rem" $textColor="--yellow" mt={2}>
-                        {Math.floor(caloriesOut)}{" "}
-                        <Text as="span" $fontWeight={300}>
-                          Cal
-                        </Text>
-                      </Text>
-                    </StyledDataEntry>
-                  );
-                })}
-            </Cardio>
           </DataSegment>
         </Flex>
+
+        {/* <Flex>
+          <Text $fontWeight={300}>
+            Heart activity last {heartData.length} days
+          </Text>
+          <Cardio>
+            {Array.from(summary.values())
+              .slice(1)
+              .filter(({ minutes, caloriesOut }) => minutes * caloriesOut > 0)
+              .map(({ name, minutes, caloriesOut }) => {
+                return (
+                  <StyledDataEntry key={name}>
+                    <Text $fontWeight={300}>{name}</Text>
+                    <Text $fontSize="2.5rem" $textColor="--yellow" mt={2}>
+                      {minutes}{" "}
+                      <Text as="span" $fontWeight={300}>
+                        min
+                      </Text>
+                    </Text>
+                    <Text $fontSize="2.5rem" $textColor="--yellow" mt={2}>
+                      {Math.floor(caloriesOut)}{" "}
+                      <Text as="span" $fontWeight={300}>
+                        Cal
+                      </Text>
+                    </Text>
+                  </StyledDataEntry>
+                );
+              })}
+          </Cardio>
+        </Flex> */}
 
         <TopBadges profile={profile} />
 

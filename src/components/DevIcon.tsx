@@ -19,7 +19,7 @@ const normalize: NormalizeIcon = (language) => {
 
 type BaseDevIconOwnProps = {
   color: string;
-  $fontSize: string;
+  $fontSize?: string;
   className?: string;
   language: string;
 };

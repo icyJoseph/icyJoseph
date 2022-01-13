@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, memo } from "react";
+import { useEffect, useState, memo } from "react";
 import styled, { css } from "styled-components";
 import { space, SpaceProps } from "@styled-system/space";
 
@@ -148,16 +148,12 @@ const Options = styled.div<SpaceProps>`
   ${space};
   display: flex;
   grid-column: span 3;
-
-  position: sticky;
-  bottom: 16px;
 `;
 
 const RepoEntry = styled(Flex)`
   background-color: var(--smokeyWhite);
   max-width: 80%;
-
-  gap: 1.5rem;
+  min-height: 220px;
 
   > * {
     flex: 1;
@@ -214,15 +210,12 @@ const ContributionCard = ({
     </header>
 
     <Flex as="section" flexDirection="column" gap="1.5rem">
-      <Flex gap="1.5rem">
-        <Text $fontWeight={300} mt={2} mr="auto">
-          Owner:{" "}
-          <Text as="i" $fontWeight={300}>
-            {repository.owner.login}
-          </Text>
+      <Flex gap="1.5rem" alignItems="flex-end">
+        <Text $fontWeight={300} mr="auto">
+          Owner: <Text as="span">{repository.owner.login}</Text>
         </Text>
 
-        <Text $fontWeight={300} mt={2}>
+        <Text $fontWeight={300}>
           Contributions:{" "}
           <Text as="span" $fontWeight={300} $fontSize="2rem">
             {contributions.totalCount}
@@ -230,18 +223,18 @@ const ContributionCard = ({
         </Text>
       </Flex>
 
-      <Text $fontWeight={300}>
+      <Text $fontWeight={300} $fontSize="1.8rem">
         {repository.description
           ? repository.description.replace(RE_EMOJI, "")
           : `${repository.name} has no description.`}
       </Text>
     </Flex>
 
-    <RepoFooter as="footer">
+    <RepoFooter as="footer" mt={3}>
       {!repository.isArchived &&
         repository.languages?.edges.map(({ node: { color, name }, size }) => (
           <Box key={name}>
-            <Text $fontSize="2rem" $fontWeight={300} mb={1}>
+            <Text $fontWeight={300} mb={1}>
               <DevIcon color={color} language={name} mr={1} $fontSize="2rem" />
 
               <span>{name}</span>
@@ -319,8 +312,6 @@ export const YearlyContribution = ({
     }
   }, [year, stale]);
 
-  const ref = useRef<HTMLDivElement>(null);
-
   if (!prev) return null;
 
   const {
@@ -369,7 +360,7 @@ export const YearlyContribution = ({
       </Flex>
 
       <RepositoriesWithOptions stale={stale}>
-        <div ref={ref}>
+        <div>
           {commitContributionsByRepository
             .slice(pointer, pointer + windowSize)
             .map(({ contributions, repository }, index) => (

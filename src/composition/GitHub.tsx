@@ -111,7 +111,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
       login: "icyJoseph",
       ...yearStart()
     },
-    initialData: initial,
+    fallbackData: initial,
     selector: ({ user }: { user: IcyJoseph.GitHub }) => user
   });
 

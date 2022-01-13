@@ -4,10 +4,10 @@ import useSWR from "swr";
 const fetcher = () =>
   axios.get<IcyJoseph.CodeWars>("/api/codewars").then(({ data }) => data);
 
-export const useCodeWars = (initialData?: IcyJoseph.CodeWars) => {
+export const useCodeWars = (fallbackData?: IcyJoseph.CodeWars) => {
   return useSWR<IcyJoseph.CodeWars>("code-wars", fetcher, {
     shouldRetryOnError: false,
-    initialData,
+    fallbackData: fallbackData,
     revalidateOnMount: true
   });
 };

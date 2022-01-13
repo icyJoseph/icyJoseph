@@ -9,10 +9,10 @@ const profileFetcher = () =>
     .get<IcyJoseph.FitbitUser>("/api/fitbit/profile")
     .then(({ data }) => data.user);
 
-export const useFitbitProfile = (initialData = null) => {
+export const useFitbitProfile = (fallbackData = null) => {
   return useSWR("fitbit/profile", profileFetcher, {
     shouldRetryOnError: false,
-    initialData
+    fallbackData: fallbackData
   });
 };
 
@@ -62,7 +62,7 @@ type UseFitbitHRProps = {
 
 export const useFitbitHR = (
   { date, period, revalidateOnMount = false }: UseFitbitHRProps,
-  initialData: IcyJoseph.HeartRateActivity
+  fallbackData: IcyJoseph.HeartRateActivity
 ) => {
   return useSWR<IcyJoseph.HeartRateActivity>(
     [date, period],
@@ -71,7 +71,7 @@ export const useFitbitHR = (
       shouldRetryOnError: false,
       revalidateOnFocus: false,
       revalidateOnMount,
-      initialData
+      fallbackData: fallbackData
     }
   );
 };
@@ -96,6 +96,6 @@ export const useFitbitActivityLog = (
   return useSWR<IcyJoseph.ActivityLog | null>(beforeDate, activityLogFetcher, {
     shouldRetryOnError: false,
     revalidateOnFocus: false,
-    initialData: mounted.current ? null : initial
+    fallbackData: mounted.current ? null : initial
   });
 };

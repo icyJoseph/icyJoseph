@@ -4,7 +4,7 @@ import useSWR from "swr";
 type UseGitHubProps<Variables, Data, Response> = {
   query: string;
   variables: Variables;
-  initialData?: Data | null;
+  fallbackData?: Data | null;
   selector?: (res: Response) => Data;
 };
 
@@ -19,7 +19,7 @@ const fetcher = <Variables, Response>(query: string, variables: Variables) =>
 export const useGitHub = <Variables, Data, Response = Data>({
   query,
   variables,
-  initialData = null,
+  fallbackData = null,
   selector = mirror
 }: UseGitHubProps<Variables, Data, Response>) => {
   return useSWR<Data | null>(
@@ -31,7 +31,7 @@ export const useGitHub = <Variables, Data, Response = Data>({
     {
       shouldRetryOnError: false,
       revalidateOnFocus: false,
-      initialData
+      fallbackData
     }
   );
 };

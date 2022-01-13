@@ -247,10 +247,6 @@ const ContributionCard = ({
               <span>{name}</span>
             </Text>
 
-            {/* <Text as="span" $fontWeight={300}>
-              {size} bytes
-            </Text> */}
-
             <Indicator
               color={color}
               percentage={(100 * size) / repository.languages.totalSize}
@@ -288,7 +284,7 @@ const useContributionCollection = (
       from,
       to
     },
-    initialData: initial,
+    fallbackData: initial,
     selector: ({
       user: { contributionsCollection }
     }: {

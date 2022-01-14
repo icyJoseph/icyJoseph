@@ -4,8 +4,12 @@ import { promisify } from "util";
 
 import Head from "next/head";
 import type { GetStaticPropsResult } from "next";
+import styled from "styled-components";
 
+import { Flex } from "design-system/Flex";
+import { Box } from "design-system/Box";
 import { Container } from "design-system/Container";
+import { Text } from "design-system/Text";
 import { PageNav } from "components/PageNav";
 
 import { CodeWars } from "composition/CodeWars";
@@ -21,6 +25,7 @@ import { getActivityLog } from "pages/api/fitbit/activities/list";
 import { GET_USER } from "queries";
 
 import { yearStart, isoStringWithoutMs } from "helpers";
+import { Section } from "design-system/Section";
 
 type HomeProps = {
   codewars: IcyJoseph.CodeWars;
@@ -30,6 +35,63 @@ type HomeProps = {
   activityLog: IcyJoseph.ActivityLog;
   initialHR: IcyJoseph.HeartRateActivity;
 };
+
+const IntroCopy = styled(Box)`
+  max-width: 55ch;
+`;
+
+const Introduction = ({ name: _ }: { name: string }) => (
+  <Section mb={4}>
+    <Flex flexDirection="column" justifyContent="center" alignItems="center">
+      <Text
+        as="h1"
+        $textAlign="center"
+        $fontSize="3rem"
+        $fontWeight={300}
+        my={4}
+      >
+        Joseph
+      </Text>
+
+      <Text $textAlign="center">
+        github: <i>@icyJoseph</i>
+      </Text>
+
+      <Text $textAlign="center">
+        medium: <i>@icJoseph</i>
+      </Text>
+
+      <IntroCopy>
+        <Text mt={4} mx="auto" $fontWeight={300} $fontSize="2rem">
+          Developer from <b>Peru</b>, living in <b>Sweden</b>. I have a
+          Bachelor&apos;s in Electronics Engineering, and a Master&apos;s degree
+          on business design.
+        </Text>
+
+        <Text mt={3} mx="auto" $fontWeight={300} $fontSize="2rem">
+          I have over <b>400 years</b> of experience working as a software
+          developer, in telecom, mining, freight, real state, news, transport
+          and automative industries.
+        </Text>
+
+        <Text mt={3} mx="auto" $fontWeight={300} $fontSize="2rem">
+          I write <b>JavaScript</b>, and <b>TypeScript</b>. I am comfortable
+          with any runtime, browser and <b>NodeJS</b>, even a little <b>Deno</b>
+          .
+        </Text>
+
+        <Text mt={3} mx="auto" $fontWeight={300} $fontSize="2rem">
+          Learning <b>Rust</b> on my free time, in fact it is my go to language
+          for codign challenges.
+        </Text>
+
+        <Text mt={3} mx="auto" $fontWeight={300} $fontSize="2rem">
+          I enjoy writing <b>CSS</b>, and keep my <b>HTML</b> semantic.
+        </Text>
+      </IntroCopy>
+    </Flex>
+  </Section>
+);
 
 export function Home({
   codewars,
@@ -45,8 +107,10 @@ export function Home({
         <title>icyJoseph</title>
       </Head>
 
-      <Container>
+      <Container as="main">
         <PageNav>
+          <Introduction name="me" />
+
           <Tokei tokei={tokei} name="tokei" />
 
           <Fitbit

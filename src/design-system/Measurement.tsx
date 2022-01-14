@@ -61,16 +61,16 @@ export const Value: FC<{ value: number | string; className?: string }> = ({
 export type MeasurementProps = {
   value: number | string;
   unit: string;
-  renderAs?: keyof JSX.IntrinsicElements;
+  renderAs?: Extract<keyof JSX.IntrinsicElements, "span" | "p">;
 };
 
-const defaultRenderAs: Extract<keyof JSX.IntrinsicElements, "span"> = "span";
+const defaultRenderAs = "span";
 
-export const Measurement: FC<MeasurementProps> = ({
+export const Measurement = ({
   value,
   unit,
   renderAs = defaultRenderAs
-}) => (
+}: MeasurementProps) => (
   <BaseEntry as={renderAs}>
     <Value value={value} /> <Unit unit={unit} />
   </BaseEntry>

@@ -135,6 +135,11 @@ const RepositoriesWithOptions = styled(Box)<{ stale?: boolean }>`
   grid-column: span 2;
   scroll-behavior: smooth;
   ${staleMixin};
+  display: none;
+
+  @media (min-width: 768px) {
+    display: block;
+  }
 `;
 
 const Indicator = styled.div<{ percentage: number }>`
@@ -151,7 +156,6 @@ const Options = styled.div<SpaceProps>`
 `;
 
 const RepoEntry = styled(Flex)`
-  background-color: var(--smokeyWhite);
   max-width: 80%;
   min-height: 220px;
 
@@ -197,38 +201,33 @@ const ContributionCard = ({
   index,
   contributions
 }: ContributionCardProps) => (
-  <RepoEntry py={2} mx="auto" as="article" flexDirection="column">
-    <header>
-      <Text as="h4">
+  <RepoEntry py={2} mx="auto" as="article" flexDirection="column" gap="1.5rem">
+    <Flex as="header" alignItems="center" justifyContent="space-between">
+      <Box mr={3}>
         <Text as="span" $textColor="--yellow">
           #{pointer + index + 1}
         </Text>{" "}
-        <Text as="span" $fontSize="2rem" $fontWeight={300}>
-          {repository.name}
+        <Text as="span">{repository.owner.login}</Text>
+        <Text as="h4" $fontWeight={300} $fontSize="2rem" $display="inline">
+          /{repository.name}
+        </Text>
+      </Box>
+
+      <Text as="span" $fontWeight={300} $fontSize="2rem">
+        +{contributions.totalCount}{" "}
+        <Text as="span" $fontWeight={300}>
+          commits
         </Text>
       </Text>
-    </header>
+    </Flex>
 
-    <Flex as="section" flexDirection="column" gap="1.5rem">
-      <Flex gap="1.5rem" alignItems="flex-end">
-        <Text $fontWeight={300} mr="auto">
-          Owner: <Text as="span">{repository.owner.login}</Text>
-        </Text>
-
-        <Text $fontWeight={300}>
-          Contributions:{" "}
-          <Text as="span" $fontWeight={300} $fontSize="2rem">
-            {contributions.totalCount}
-          </Text>
-        </Text>
-      </Flex>
-
-      <Text $fontWeight={300} $fontSize="1.8rem">
+    <Box>
+      <Text $fontWeight={300} $fontSize="2rem">
         {repository.description
           ? repository.description.replace(RE_EMOJI, "")
           : `${repository.name} has no description.`}
       </Text>
-    </Flex>
+    </Box>
 
     <RepoFooter as="footer" mt={3}>
       {!repository.isArchived &&

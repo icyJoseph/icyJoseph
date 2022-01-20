@@ -1,10 +1,10 @@
 [
   {
     "language": "JavaScript",
-    "blanks": 14516,
+    "blanks": 14517,
     "children": {},
-    "code": 113111,
-    "comments": 8443,
+    "code": 113107,
+    "comments": 8444,
     "inaccurate": false
   },
   {
@@ -17,9 +17,9 @@
   },
   {
     "language": "CSS",
-    "blanks": 3706,
+    "blanks": 3708,
     "children": {},
-    "code": 40835,
+    "code": 40841,
     "comments": 341,
     "inaccurate": false
   },

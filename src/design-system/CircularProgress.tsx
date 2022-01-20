@@ -42,11 +42,13 @@ const Content = styled.div`
 type CircularProgressProps = {
   percentage: number;
   size?: number;
+  className?: string;
 };
 
 export const CircularProgress: FC<CircularProgressProps> = ({
   percentage,
   size = 150,
+  className,
   children
 }) => {
   const center = size / 2;
@@ -60,16 +62,17 @@ export const CircularProgress: FC<CircularProgressProps> = ({
   };
 
   return (
-    <Progress>
+    <Progress className={className}>
       <Svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
         <Circle
-          className="circle-background"
+          className="progress-track"
           cx={center}
           cy={center}
           r={radius}
           strokeWidth={strokeWidth}
         />
         <CircleFill
+          className="progress-thumb"
           style={style}
           cx={center}
           cy={center}

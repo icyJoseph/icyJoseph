@@ -79,7 +79,7 @@ export const Fitbit: FC<FitbitProps> = ({
   return (
     <Section>
       <SectionHeader id={name} mb={5}>
-        <Text as="h2" $textColor="--blue" $fontSize="3rem">
+        <Text as="h2" $fontSize="3rem">
           <a href={`#${name}`}>
             <code>Fitbit</code>
           </a>
@@ -98,7 +98,7 @@ export const Fitbit: FC<FitbitProps> = ({
               Average Daily Steps
             </Text>
 
-            <Text $textColor="--blue" m={3} $fontSize="5rem">
+            <Text m={3} $fontSize="5rem">
               {profile.averageDailySteps}
             </Text>
           </DataSegment>
@@ -112,7 +112,8 @@ export const Fitbit: FC<FitbitProps> = ({
             <Text $fontSize="2rem" $fontWeight={300}>
               Resting pulse
             </Text>
-            <Text $textColor="--blue" m={3} $fontSize="5rem">
+
+            <Text m={3} $fontSize="5rem">
               {today?.value?.restingHeartRate ??
                 prevDay?.value?.restingHeartRate}{" "}
               <Text as="span" $fontWeight={300}>
@@ -121,36 +122,6 @@ export const Fitbit: FC<FitbitProps> = ({
             </Text>
           </DataSegment>
         </Flex>
-
-        {/* <Flex>
-          <Text $fontWeight={300}>
-            Heart activity last {heartData.length} days
-          </Text>
-          <Cardio>
-            {Array.from(summary.values())
-              .slice(1)
-              .filter(({ minutes, caloriesOut }) => minutes * caloriesOut > 0)
-              .map(({ name, minutes, caloriesOut }) => {
-                return (
-                  <StyledDataEntry key={name}>
-                    <Text $fontWeight={300}>{name}</Text>
-                    <Text $fontSize="2.5rem" $textColor="--yellow" mt={2}>
-                      {minutes}{" "}
-                      <Text as="span" $fontWeight={300}>
-                        min
-                      </Text>
-                    </Text>
-                    <Text $fontSize="2.5rem" $textColor="--yellow" mt={2}>
-                      {Math.floor(caloriesOut)}{" "}
-                      <Text as="span" $fontWeight={300}>
-                        Cal
-                      </Text>
-                    </Text>
-                  </StyledDataEntry>
-                );
-              })}
-          </Cardio>
-        </Flex> */}
 
         <TopBadges profile={profile} />
 

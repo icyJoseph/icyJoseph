@@ -4,6 +4,8 @@ import { space, SpaceProps } from "@styled-system/space";
 import { ComponentPropsWithoutRef } from "react";
 
 type TextProps = {
+  $verticalAlign?: Property.VerticalAlign;
+  $display?: Property.Display;
   $fontSize?: Property.FontSize;
   $fontWeight?: Property.FontWeight;
   $textAlign?: Property.TextAlign;
@@ -48,11 +50,15 @@ const BaseText = ({
   ...rest
 }: SpaceProps & TextProps & ComponentPropsWithoutRef<"p">) => <p {...rest} />;
 
-export const Text = styled(BaseText)`
+export const Text = styled(BaseText)<
+  SpaceProps & TextProps & ComponentPropsWithoutRef<"p">
+>`
   ${space};
+  display: ${({ $display }) => $display};
   font-size: ${({ $fontSize = "1.6rem" }) => $fontSize};
-  text-align: ${({ $textAlign = "unset" }) => $textAlign};
-  color: ${({ $textColor = "--black", theme }) =>
+  text-align: ${({ $textAlign }) => $textAlign};
+  vertical-align: ${({ $verticalAlign }) => $verticalAlign};
+  color: ${({ $textColor = "--smokeyWhite", theme }) =>
     `var(${$textColor}, ${theme.white})`};
   font-weight: ${({ $fontWeight = 400 }) => $fontWeight ?? 400};
   text-transform: ${({ $textTransform = "unset" }) => $textTransform};

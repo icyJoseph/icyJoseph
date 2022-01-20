@@ -27,7 +27,7 @@ const BaseButton = styled.button<BaseButtonProps>`
 
   border: 0;
   text-transform: uppercase;
-  background-color: var(--smokeyWhite);
+  background-color: transparent;
   cursor: pointer;
 
   &::before,
@@ -38,17 +38,17 @@ const BaseButton = styled.button<BaseButtonProps>`
     position: absolute;
     height: calc(50% - 0.4rem);
     width: 100%;
-    border: 1px solid var(--softDark);
+    border: 1px solid var(--smokeyWhite);
     left: 0;
   }
 
   &::before {
-    border-bottom: 0;
+    border-bottom: none;
     top: 0;
   }
 
   &::after {
-    border-top: 0;
+    border-top: none;
     bottom: 0;
   }
 
@@ -84,8 +84,7 @@ const Label = styled.span<ButtonLabelProps>`
     width: 100%;
     left: 0;
     bottom: 0;
-    border: ${({ variant }) =>
-      variant === "outlined" ? `1px solid var(--softDark)` : "none"};
+    border: 1px solid var(--smokeyWhite);
     background-color: ${({ variant, theme }) =>
       variant === "outlined" ? "transparent" : theme.softDark};
   }
@@ -101,7 +100,7 @@ const HoverEffect = styled.span`
   top: 0;
   left: -5%;
   z-index: 1;
-  background-color: var(--lightBlue);
+  background-color: rgba(0, 0, 0, 0.3);
   transform: translateX(-100%) skew(-10deg);
   transition: transform 0.3s ease-out;
 
@@ -117,8 +116,8 @@ const Text = styled.span<ButtonTextProps>`
   padding: 1.9rem 3rem;
   background-color: transparent;
   z-index: 1;
-  color: ${({ variant, theme }) =>
-    variant === "outlined" ? theme.softDark : theme.smokeyWhite};
+  color: ${({ variant }) =>
+    variant === "outlined" ? "var(--smokeyWhite)" : "var(--lightYellow)"};
   opacity: 1;
   transition: color 0.2s ease-in, opacity 0.2s ease-in;
 

@@ -30,12 +30,13 @@ export const CodeWars = ({
   return (
     <Section>
       <SectionHeader id={name}>
-        <Text as="h2" $textColor="--blue" $fontSize="3rem">
+        <Text as="h2" $fontSize="3rem" mb={5}>
           <a href={`#${name}`}>
             <code>CodeWars</code>
           </a>
         </Text>
       </SectionHeader>
+
       <Flex>
         <Card my={2} mx="auto">
           <Card.Header>

@@ -5,7 +5,6 @@ import { space } from "@styled-system/space";
 
 const StyledNav = styled.nav`
   ${space({ mt: 3, py: 2 })};
-  background: var(--smokeyWhite);
 `;
 
 const PageLinks = styled.ul`
@@ -17,7 +16,7 @@ const PageLinks = styled.ul`
 const PageLink = styled.li`
   ${space({ mr: 2 })};
   text-decoration: underline;
-  color: var(--blue);
+  color: var(--smokeyWhite);
 `;
 
 export const PageNav = ({ children }: { children: ReactNode }) => {

@@ -4,11 +4,10 @@ import { Property } from "csstype";
 import { space, SpaceProps } from "@styled-system/space";
 
 const StyledCard = styled.div<SpaceProps>`
-  ${space({ py: 3, px: 2 })}
+  ${space({ py: 3, px: 3 })};
   ${space}
   background:var(--softDark);
   color: var(--white);
-  border-radius: 6px;
   position: relative;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.16), 0 3px 12px rgba(0, 0, 0, 0.23);
 
@@ -48,7 +47,7 @@ Card.SubHeader = styled.span<{ textTransform?: Property.TextTransform }>`
 `;
 
 Card.Section = styled.section`
-  ${space({ mt: 3 })};
+  ${space({ mt: 4 })};
   display: flex;
   flex-wrap: wrap;
   flex-basis: 33%;

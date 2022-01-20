@@ -5,7 +5,7 @@ import { Text } from "design-system/Text";
 
 const BaseEntry = styled(Text)`
   white-space: nowrap;
-  color: var(--blue);
+  color: var(--lightBlue);
 
   &:not(:last-child):after {
     content: "\\A";
@@ -32,11 +32,13 @@ const BaseUnit = styled(Text)`
 `;
 
 const BaseValue = styled(Text)`
-  font-variant-numeric: oldstyle-nums;
-  font-size: 2rem;
+  && {
+    font-variant-numeric: oldstyle-nums;
+    font-size: 2rem;
 
-  @media (min-width: 768px) {
-    font-size: 3rem;
+    @media (min-width: 768px) {
+      font-size: 3rem;
+    }
   }
 `;
 
@@ -61,16 +63,16 @@ export const Value: FC<{ value: number | string; className?: string }> = ({
 export type MeasurementProps = {
   value: number | string;
   unit: string;
-  renderAs?: keyof JSX.IntrinsicElements;
+  renderAs?: Extract<keyof JSX.IntrinsicElements, "span" | "p">;
 };
 
-const defaultRenderAs: Extract<keyof JSX.IntrinsicElements, "span"> = "span";
+const defaultRenderAs = "span";
 
-export const Measurement: FC<MeasurementProps> = ({
+export const Measurement = ({
   value,
   unit,
   renderAs = defaultRenderAs
-}) => (
+}: MeasurementProps) => (
   <BaseEntry as={renderAs}>
     <Value value={value} /> <Unit unit={unit} />
   </BaseEntry>

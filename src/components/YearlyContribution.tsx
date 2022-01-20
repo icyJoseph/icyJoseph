@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, memo } from "react";
+import { useEffect, useState, memo } from "react";
 import styled, { css } from "styled-components";
 import { space, SpaceProps } from "@styled-system/space";
 
@@ -135,6 +135,11 @@ const RepositoriesWithOptions = styled(Box)<{ stale?: boolean }>`
   grid-column: span 2;
   scroll-behavior: smooth;
   ${staleMixin};
+  display: none;
+
+  @media (min-width: 768px) {
+    display: block;
+  }
 `;
 
 const Indicator = styled.div<{ percentage: number }>`
@@ -148,23 +153,18 @@ const Options = styled.div<SpaceProps>`
   ${space};
   display: flex;
   grid-column: span 3;
-
-  position: sticky;
-  bottom: 16px;
 `;
 
 const RepoEntry = styled(Flex)`
-  background-color: var(--smokeyWhite);
   max-width: 80%;
-
-  gap: 1.5rem;
+  min-height: 220px;
 
   > * {
     flex: 1;
   }
 
   &:not(:last-child) {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   }
 `;
 
@@ -201,47 +201,39 @@ const ContributionCard = ({
   index,
   contributions
 }: ContributionCardProps) => (
-  <RepoEntry py={2} mx="auto" as="article" flexDirection="column">
-    <header>
-      <Text as="h4">
+  <RepoEntry py={2} mx="auto" as="article" flexDirection="column" gap="1.5rem">
+    <Flex as="header" alignItems="center" justifyContent="space-between">
+      <Box mr={3}>
         <Text as="span" $textColor="--yellow">
           #{pointer + index + 1}
         </Text>{" "}
-        <Text as="span" $fontSize="2rem" $fontWeight={300}>
-          {repository.name}
+        <Text as="span">{repository.owner.login}</Text>
+        <Text as="h4" $fontWeight={300} $fontSize="2rem" $display="inline">
+          /{repository.name}
+        </Text>
+      </Box>
+
+      <Text as="span" $fontWeight={300} $fontSize="2rem">
+        +{contributions.totalCount}{" "}
+        <Text as="span" $fontWeight={300}>
+          commits
         </Text>
       </Text>
-    </header>
+    </Flex>
 
-    <Flex as="section" flexDirection="column" gap="1.5rem">
-      <Flex gap="1.5rem">
-        <Text $fontWeight={300} mt={2} mr="auto">
-          Owner:{" "}
-          <Text as="i" $fontWeight={300}>
-            {repository.owner.login}
-          </Text>
-        </Text>
-
-        <Text $fontWeight={300} mt={2}>
-          Contributions:{" "}
-          <Text as="span" $fontWeight={300} $fontSize="2rem">
-            {contributions.totalCount}
-          </Text>
-        </Text>
-      </Flex>
-
-      <Text $fontWeight={300}>
+    <Box>
+      <Text $fontWeight={300} $fontSize="2rem">
         {repository.description
           ? repository.description.replace(RE_EMOJI, "")
           : `${repository.name} has no description.`}
       </Text>
-    </Flex>
+    </Box>
 
-    <RepoFooter as="footer">
+    <RepoFooter as="footer" mt={3}>
       {!repository.isArchived &&
         repository.languages?.edges.map(({ node: { color, name }, size }) => (
           <Box key={name}>
-            <Text $fontSize="2rem" $fontWeight={300} mb={1}>
+            <Text $fontWeight={300} mb={1}>
               <DevIcon color={color} language={name} mr={1} $fontSize="2rem" />
 
               <span>{name}</span>
@@ -319,8 +311,6 @@ export const YearlyContribution = ({
     }
   }, [year, stale]);
 
-  const ref = useRef<HTMLDivElement>(null);
-
   if (!prev) return null;
 
   const {
@@ -339,7 +329,7 @@ export const YearlyContribution = ({
   return (
     <>
       <Flex flexDirection="column" alignItems="center" my={4} px={4}>
-        <Text as="h4" $fontSize="2.5rem" $textColor="--blue">
+        <Text as="h4" $fontSize="2.5rem">
           In {year}
         </Text>
 
@@ -369,7 +359,7 @@ export const YearlyContribution = ({
       </Flex>
 
       <RepositoriesWithOptions stale={stale}>
-        <div ref={ref}>
+        <div>
           {commitContributionsByRepository
             .slice(pointer, pointer + windowSize)
             .map(({ contributions, repository }, index) => (

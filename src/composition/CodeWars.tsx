@@ -37,7 +37,15 @@ export const CodeWars = ({
         </Text>
       </SectionHeader>
 
-      <Flex>
+      <Text mt={3} $fontWeight={300}>
+        I like to solve coding challenges. For now I am only showing my{" "}
+        <Text as="span" $textColor="--lightBlue">
+          Codewars
+        </Text>{" "}
+        profile, but I will eventually include more.
+      </Text>
+
+      <Flex mt={4}>
         <Card my={2} mx="auto">
           <Card.Header>
             <h2>

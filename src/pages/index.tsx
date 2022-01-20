@@ -48,6 +48,10 @@ const IntroCopy = styled(Box)`
   max-width: 55ch;
 `;
 
+const Experience = styled.b`
+  text-decoration: underline;
+`;
+
 const Introduction = () => (
   <StyledSection mt={0}>
     <Flex flexDirection="column" justifyContent="center" alignItems="center">
@@ -77,9 +81,12 @@ const Introduction = () => (
         </Text>
 
         <Text mt={3} mx="auto" $fontWeight={300} $fontSize="2rem">
-          I have over <b>400 years</b> of experience working as a software
-          developer, in telecom, mining, freight, real state, news, transport
-          and automotive industries.
+          I have over{" "}
+          <Experience title="Actually 6 years, but I do not believe in the value of this number.">
+            400 years
+          </Experience>{" "}
+          of experience working as a software developer, in telecom, mining,
+          freight, real state, news, transport and automotive industries.
         </Text>
 
         <Text mt={3} mx="auto" $fontWeight={300} $fontSize="2rem">

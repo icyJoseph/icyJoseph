@@ -58,12 +58,6 @@ export const Tokei: FC<TokeiProps> = ({ tokei, name }) => (
       </Text>
     </SectionHeader>
 
-    <Flex justifyContent="center">
-      {tokei.map(({ language, ...rest }, index) => (
-        <Language key={language} language={language} {...rest} order={index} />
-      ))}
-    </Flex>
-
     <Text mt={3} $fontWeight={300}>
       <Text as="span" $textColor="--lightYellow">
         Lines of Code
@@ -81,8 +75,19 @@ export const Tokei: FC<TokeiProps> = ({ tokei, name }) => (
       </Text>
       .
     </Text>
+
     <Text mt={2} $fontWeight={300}>
       <i>A full circle means 0 blanks and 0 comments.</i>
+    </Text>
+
+    <Flex justifyContent="center" mt={4}>
+      {tokei.map(({ language, ...rest }, index) => (
+        <Language key={language} language={language} {...rest} order={index} />
+      ))}
+    </Flex>
+
+    <Text mt={2} $fontWeight={300}>
+      <i>I update these numbers about once a month.</i>
     </Text>
   </Section>
 );

@@ -230,8 +230,9 @@ const ContributionCard = ({
     </Box>
 
     <RepoFooter as="footer" mt={3}>
-      {!repository.isArchived &&
-        repository.languages?.edges.map(({ node: { color, name }, size }) => (
+      {repository.languages.edges
+        .filter((edge): edge is IcyJoseph.LanguageEdge => Boolean(edge))
+        .map(({ node: { color, name }, size }) => (
           <Box key={name}>
             <Text $fontWeight={300} mb={1}>
               <DevIcon color={color} language={name} mr={1} $fontSize="2rem" />

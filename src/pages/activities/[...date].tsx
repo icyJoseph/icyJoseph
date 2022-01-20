@@ -76,7 +76,7 @@ export function Activities({ activityLog, year, month, day }: ActivitiesProps) {
       <Container>
         <FullPage>
           <header>
-            <Text as="h2" $textColor="--blue" $fontSize="3rem">
+            <Text as="h2" $fontSize="3rem">
               Activities for: {formatter.format(date)}
             </Text>
           </header>

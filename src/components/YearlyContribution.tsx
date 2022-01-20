@@ -190,14 +190,13 @@ const RE_EMOJI = /:\+1:|:-1:|:[\w-]+:/g;
 
 type ContributionCardProps = {
   repository: IcyJoseph.Repository;
-  pointer: number;
   index: number;
   contributions: { totalCount: number };
 };
 
 const ContributionCard = ({
   repository,
-  pointer,
+
   index,
   contributions
 }: ContributionCardProps) => (
@@ -205,7 +204,7 @@ const ContributionCard = ({
     <Flex as="header" alignItems="center" justifyContent="space-between">
       <Box mr={3}>
         <Text as="span" $textColor="--yellow">
-          #{pointer + index + 1}
+          #{index + 1}
         </Text>{" "}
         <Text as="span">{repository.owner.login}</Text>
         <Text as="h4" $fontWeight={300} $fontSize="2rem" $display="inline">
@@ -292,6 +291,14 @@ function circular(index: number, step: number, limit: number) {
   return (limit + ((index + step) % limit)) % limit;
 }
 
+function circularSlice<T>(arr: T[], from: number, to: number) {
+  const limit = arr.length;
+  return Array.from(
+    { length: to - from },
+    (_, index) => arr[(from + index) % limit]
+  );
+}
+
 export const YearlyContribution = ({
   initial,
   year,
@@ -322,10 +329,12 @@ export const YearlyContribution = ({
     commitContributionsByRepository
   } = data ?? prev;
 
-  const windowSize = Math.min(3, commitContributionsByRepository.length);
+  const contributionCardsLength = commitContributionsByRepository.length;
 
-  const disabledPrev = windowSize === commitContributionsByRepository.length;
-  const disabledNext = windowSize === commitContributionsByRepository.length;
+  const windowSize = Math.min(3, contributionCardsLength);
+
+  const disabledPrev = windowSize === contributionCardsLength;
+  const disabledNext = windowSize === contributionCardsLength;
 
   return (
     <>
@@ -361,17 +370,18 @@ export const YearlyContribution = ({
 
       <RepositoriesWithOptions stale={stale}>
         <div>
-          {commitContributionsByRepository
-            .slice(pointer, pointer + windowSize)
-            .map(({ contributions, repository }, index) => (
-              <ContributionCard
-                key={repository.id}
-                index={index}
-                repository={repository}
-                pointer={pointer}
-                contributions={contributions}
-              />
-            ))}
+          {circularSlice(
+            commitContributionsByRepository,
+            pointer,
+            pointer + windowSize
+          ).map(({ contributions, repository }, index) => (
+            <ContributionCard
+              key={repository.id}
+              index={(pointer + index) % contributionCardsLength}
+              repository={repository}
+              contributions={contributions}
+            />
+          ))}
         </div>
 
         <Options mt={2}>

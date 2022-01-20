@@ -164,7 +164,7 @@ const RepoEntry = styled(Flex)`
   }
 
   &:not(:last-child) {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   }
 `;
 

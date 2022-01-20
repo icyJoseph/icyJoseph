@@ -16,10 +16,10 @@ import { useGitHub } from "hooks/useGitHub";
 import { GET_USER } from "queries";
 
 const GitHubImg = styled.img<SpaceProps>`
-  ${space({ m: "0 auto", p: 1 })};
+  ${space({ m: "0 auto" })};
   display: block;
 
-  border: 2px solid var(--blue);
+  border: 2px solid var(--smokeyWhite);
   border-radius: 50%;
 
   max-width: 192px;

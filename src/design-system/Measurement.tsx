@@ -5,7 +5,7 @@ import { Text } from "design-system/Text";
 
 const BaseEntry = styled(Text)`
   white-space: nowrap;
-  color: var(--blue);
+  color: var(--lightBlue);
 
   &:not(:last-child):after {
     content: "\\A";

@@ -29,6 +29,15 @@ declare namespace IcyJoseph {
     codeChallenges: { totalCompleted: number };
   };
 
+  export type LanguageEdge = {
+    node: {
+      id: string;
+      name: string;
+      color: string;
+    };
+    size: number;
+  };
+
   export type Repository = {
     id: string;
     name: string;
@@ -46,14 +55,7 @@ declare namespace IcyJoseph {
       /**
        * The query backing this type up, uses only up-to 3 languages
        */
-      edges: Array<{
-        node: {
-          id: string;
-          name: string;
-          color: string;
-        };
-        size: number;
-      }>;
+      edges: Array<LanguageNode | null>;
       totalSize: number;
       totalCount: number;
     };

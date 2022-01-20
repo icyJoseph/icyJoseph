@@ -36,12 +36,20 @@ type HomeProps = {
   initialHR: IcyJoseph.HeartRateActivity;
 };
 
+const StyledSection = styled(Section)`
+  min-height: 100vh;
+
+  & ${Text} {
+    color: var(--smokeyWhite);
+  }
+`;
+
 const IntroCopy = styled(Box)`
   max-width: 55ch;
 `;
 
-const Introduction = ({ name: _ }: { name: string }) => (
-  <Section mb={4}>
+const Introduction = () => (
+  <StyledSection mt={0}>
     <Flex flexDirection="column" justifyContent="center" alignItems="center">
       <Text
         as="h1"
@@ -58,7 +66,7 @@ const Introduction = ({ name: _ }: { name: string }) => (
       </Text>
 
       <Text $textAlign="center">
-        medium: <i>@icJoseph</i>
+        medium: <i>@icjoseph</i>
       </Text>
 
       <IntroCopy>
@@ -71,7 +79,7 @@ const Introduction = ({ name: _ }: { name: string }) => (
         <Text mt={3} mx="auto" $fontWeight={300} $fontSize="2rem">
           I have over <b>400 years</b> of experience working as a software
           developer, in telecom, mining, freight, real state, news, transport
-          and automative industries.
+          and automotive industries.
         </Text>
 
         <Text mt={3} mx="auto" $fontWeight={300} $fontSize="2rem">
@@ -82,7 +90,7 @@ const Introduction = ({ name: _ }: { name: string }) => (
 
         <Text mt={3} mx="auto" $fontWeight={300} $fontSize="2rem">
           Learning <b>Rust</b> on my free time, in fact it is my go to language
-          for codign challenges.
+          for coding challenges.
         </Text>
 
         <Text mt={3} mx="auto" $fontWeight={300} $fontSize="2rem">
@@ -90,7 +98,7 @@ const Introduction = ({ name: _ }: { name: string }) => (
         </Text>
       </IntroCopy>
     </Flex>
-  </Section>
+  </StyledSection>
 );
 
 export function Home({
@@ -107,10 +115,10 @@ export function Home({
         <title>icyJoseph</title>
       </Head>
 
+      <Introduction />
+
       <Container as="main">
         <PageNav>
-          <Introduction name="me" />
-
           <Tokei tokei={tokei} name="tokei" />
 
           <Fitbit

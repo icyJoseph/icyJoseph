@@ -164,7 +164,7 @@ const RepoEntry = styled(Flex)`
   }
 
   &:not(:last-child) {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   }
 `;
 
@@ -329,7 +329,7 @@ export const YearlyContribution = ({
   return (
     <>
       <Flex flexDirection="column" alignItems="center" my={4} px={4}>
-        <Text as="h4" $fontSize="2.5rem" $textColor="--blue">
+        <Text as="h4" $fontSize="2.5rem">
           In {year}
         </Text>
 

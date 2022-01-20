@@ -32,11 +32,13 @@ const BaseUnit = styled(Text)`
 `;
 
 const BaseValue = styled(Text)`
-  font-variant-numeric: oldstyle-nums;
-  font-size: 2rem;
+  && {
+    font-variant-numeric: oldstyle-nums;
+    font-size: 2rem;
 
-  @media (min-width: 768px) {
-    font-size: 3rem;
+    @media (min-width: 768px) {
+      font-size: 3rem;
+    }
   }
 `;
 

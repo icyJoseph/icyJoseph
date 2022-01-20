@@ -3,16 +3,16 @@
     "language": "JavaScript",
     "blanks": 14516,
     "children": {},
-    "code": 113115,
+    "code": 113111,
     "comments": 8443,
     "inaccurate": false
   },
   {
     "language": "TypeScript",
-    "blanks": 10212,
+    "blanks": 10324,
     "children": {},
-    "code": 98425,
-    "comments": 3535,
+    "code": 99167,
+    "comments": 3556,
     "inaccurate": false
   },
   {
@@ -25,7 +25,7 @@
   },
   {
     "language": "Rust",
-    "blanks": 2983,
+    "blanks": 3002,
     "children": {
       "Markdown": [
         {
@@ -120,7 +120,7 @@
         }
       ]
     },
-    "code": 14498,
+    "code": 14578,
     "comments": 375,
     "inaccurate": false
   }

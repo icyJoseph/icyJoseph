@@ -8,6 +8,7 @@ export const Base = styled.div`
   & > a {
     text-decoration: underline;
     font-size: 1.4rem;
+    color: var(--smokeyWhite);
   }
 `;
 

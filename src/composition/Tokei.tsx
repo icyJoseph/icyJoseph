@@ -51,7 +51,7 @@ type TokeiProps = {
 export const Tokei: FC<TokeiProps> = ({ tokei, name }) => (
   <Section>
     <SectionHeader id={name} pt={2} mb={5}>
-      <Text as="h2" $textColor="--blue" $fontSize="3rem">
+      <Text as="h2" $fontSize="3rem">
         <a href={`#${name}`}>
           <code>tokei ~/dev</code>
         </a>
@@ -65,7 +65,7 @@ export const Tokei: FC<TokeiProps> = ({ tokei, name }) => (
     </Flex>
 
     <Text mt={3} $fontWeight={300}>
-      <Text as="span" $textColor="--red">
+      <Text as="span" $textColor="--lightYellow">
         Lines of Code
       </Text>
       , without counting <strong>blanks</strong> or <strong>comments</strong>,
@@ -75,7 +75,7 @@ export const Tokei: FC<TokeiProps> = ({ tokei, name }) => (
         href="https://github.com/XAMPPRocky/tokei"
         target="_blank"
         rel="noreferrer noopener"
-        $textColor="--blue"
+        $textColor="--lightBlue"
       >
         tokei
       </Text>

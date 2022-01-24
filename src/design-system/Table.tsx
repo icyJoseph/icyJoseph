@@ -25,7 +25,7 @@ export const Table = styled.table<{ stale?: boolean } & SpaceProps>`
   border-spacing: 0;
   empty-cells: show;
 
-  ${staleMixin}
+  ${staleMixin};
 `;
 
 export const Tr = styled.tr`

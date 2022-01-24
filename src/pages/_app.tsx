@@ -1,17 +1,14 @@
-import React, { useEffect } from "react";
-
 import type { AppProps } from "next/app";
 import Router from "next/router";
-import Head from "next/head";
 
-import styled, { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components";
 
 import { theme } from "styles/theme";
 import { GlobalStyle } from "styles/global";
 
+import { Background, Layout } from "components/Background";
 import { Footer } from "composition/Footer";
 import { Navigation } from "composition/Navigation";
-import { pageview } from "ga";
 
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
@@ -19,22 +16,6 @@ import "nprogress/nprogress.css";
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
-
-const Background = styled.div`
-  position: fixed;
-
-  width: 100vw;
-  height: 100vh;
-
-  background-attachment: scroll;
-  background-image: url("./waves.min.svg");
-  background-size: cover;
-  background-repeat: no-repeat;
-`;
-
-const Layout = styled.div`
-  isolation: isolate;
-`;
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   if (typeof window === "undefined") {
@@ -48,40 +29,9 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   }
 }
 
-const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_TRACKING_ID;
-
 function App({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    const handler = (url: string) => pageview(url);
-
-    Router.events.on("routeChangeComplete", handler);
-
-    return () => Router.events.off("routeChangeComplete", handler);
-  }, []);
-
   return (
-    <React.Fragment>
-      <Head>
-        {/* Global Site Tag (gtag.js) - Google Analytics */}
-        <script
-          async
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-        />
-
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA_TRACKING_ID}', {
-              page_path: window.location.pathname,
-            });
-          `
-          }}
-        />
-      </Head>
-
+    <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
 
@@ -95,7 +45,7 @@ function App({ Component, pageProps }: AppProps) {
           <Footer />
         </Layout>
       </ThemeProvider>
-    </React.Fragment>
+    </>
   );
 }
 

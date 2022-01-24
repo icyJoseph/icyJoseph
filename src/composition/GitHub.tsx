@@ -136,7 +136,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
 
   return (
     <Section>
-      <SectionHeader id={pageName} mb={5}>
+      <SectionHeader id={pageName} mb={3}>
         <Text as="h2" $fontSize="3rem">
           <a href={`#${pageName}`}>
             <code>GitHub</code>

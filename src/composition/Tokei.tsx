@@ -50,7 +50,7 @@ type TokeiProps = {
 
 export const Tokei: FC<TokeiProps> = ({ tokei, name }) => (
   <Section>
-    <SectionHeader id={name} pt={2} mb={5}>
+    <SectionHeader id={name} mb={3}>
       <Text as="h2" $fontSize="3rem">
         <a href={`#${name}`}>
           <code>tokei ~/dev</code>

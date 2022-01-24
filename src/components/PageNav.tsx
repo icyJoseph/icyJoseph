@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { space } from "@styled-system/space";
 
 const StyledNav = styled.nav`
-  ${space({ mt: [5, 4, 3], py: 2 })};
+  ${space({ py: [5, 4] })};
 `;
 
 const PageLinks = styled.ul`

@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 import { BackToTop } from "design-system/BackToTop";
 import { Box } from "design-system/Box";
-// import { DataEntry } from "components/DataEntry";
 import { Flex } from "design-system/Flex";
 import { Section, SectionHeader } from "design-system/Section";
 import { Text } from "design-system/Text";
@@ -13,10 +12,6 @@ import { ActivityLog } from "components/Fitbit/ActivityLog";
 
 import { useFitbitHR } from "hooks/useFitbit";
 
-// const Cardio = styled(Flex)`
-//   width: 100%;
-// `;
-
 const DataSegment = styled(Flex)`
   min-width: 80%;
 
@@ -24,35 +19,6 @@ const DataSegment = styled(Flex)`
     min-width: 328px;
   }
 `;
-
-// const StyledDataEntry = styled(DataEntry)`
-//   & > p:not(:first-child) {
-//     text-transform: inherit;
-//   }
-// `;
-
-// const heartRateMonthSummary = (points: IcyJoseph.HeartRatePoint[]) =>
-//   points.reduce((prev, { value }) => {
-//     const { heartRateZones } = value;
-
-//     heartRateZones.forEach(({ name, ...rest }) => {
-//       if (prev.has(name)) {
-//         const current = prev.get(name);
-
-//         const update = {
-//           ...current,
-//           ...rest,
-//           caloriesOut: current.caloriesOut + (rest.caloriesOut ?? 0),
-//           minutes: current.minutes + (rest.minutes ?? 0)
-//         };
-//         prev.set(name, update);
-//       } else {
-//         prev.set(name, { name, ...rest });
-//       }
-//     });
-
-//     return prev;
-//   }, new Map());
 
 type FitbitProps = {
   profile: IcyJoseph.FitbitUser;
@@ -74,11 +40,10 @@ export const Fitbit: FC<FitbitProps> = ({
 
   const heartData = data?.["activities-heart"] ?? [];
   const [prevDay = null, today = null] = heartData.slice(-2);
-  // const summary = heartRateMonthSummary(heartData);
 
   return (
     <Section>
-      <SectionHeader id={name} mb={5}>
+      <SectionHeader id={name} mb={3}>
         <Text as="h2" $fontSize="3rem">
           <a href={`#${name}`}>
             <code>Fitbit</code>

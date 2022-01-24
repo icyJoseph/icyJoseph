@@ -4,7 +4,7 @@ import { trunc } from "helpers";
 import { useEasing } from "use-easing";
 import { easeInQuad } from "use-easing/lib/easings";
 
-const timeBase = 400;
+const timeBase = 750;
 
 type LanguageEasingProps = Omit<IcyJoseph.Tokei, "language" | "inaccurate"> & {
   duration?: number;
@@ -19,7 +19,6 @@ export function useLanguageEasing({
   order
 }: LanguageEasingProps) {
   const totalCode = code + blanks + comments;
-  const timeFactor = (order + 1) * timeBase;
 
   const { value, setTrigger } = useEasing<number>({
     end: code,
@@ -30,9 +29,11 @@ export function useLanguageEasing({
   });
 
   useEffect(() => {
-    const timer = setTimeout(() => setTrigger(true), timeFactor);
-    return () => clearTimeout(timer);
-  }, []);
+    const timeFactor = (order + 1) * timeBase;
+    const timer = window.setTimeout(() => setTrigger(true), timeFactor);
+
+    return () => window.clearTimeout(timer);
+  }, [setTrigger, order]);
 
   const percentage = (value / totalCode) * 100;
 

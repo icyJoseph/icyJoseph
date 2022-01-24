@@ -114,7 +114,8 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
       ...yearStart()
     },
     fallbackData: initial,
-    selector: ({ user }: { user: IcyJoseph.GitHub }) => user
+    selector: ({ user }: { user: IcyJoseph.GitHub }) => user,
+    revalidateOnMount: false
   });
 
   const {

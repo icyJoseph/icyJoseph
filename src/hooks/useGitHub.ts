@@ -6,6 +6,7 @@ type UseGitHubProps<Variables, Data, Response> = {
   variables: Variables;
   fallbackData?: Data | null;
   selector?: (res: Response) => Data;
+  revalidateOnMount?: boolean;
 };
 
 type Identity = <T, D>(res: T) => T extends D ? D : never;
@@ -20,7 +21,8 @@ export const useGitHub = <Variables, Data, Response = Data>({
   query,
   variables,
   fallbackData = null,
-  selector = mirror
+  selector = mirror,
+  revalidateOnMount = true
 }: UseGitHubProps<Variables, Data, Response>) => {
   return useSWR<Data | null>(
     [query, JSON.stringify(variables)],
@@ -29,6 +31,7 @@ export const useGitHub = <Variables, Data, Response = Data>({
         selector(response)
       ),
     {
+      revalidateOnMount,
       shouldRetryOnError: false,
       revalidateOnFocus: false,
       fallbackData

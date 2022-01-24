@@ -29,10 +29,22 @@ export function useLanguageEasing({
   });
 
   useEffect(() => {
-    const timeFactor = (order + 1) * timeBase;
-    const timer = window.setTimeout(() => setTrigger(true), timeFactor);
+    let timer: number;
 
-    return () => window.clearTimeout(timer);
+    const handler = () => {
+      const timeFactor = (order + 1) * timeBase;
+      timer = window.setTimeout(() => setTrigger(true), timeFactor);
+
+      window.removeEventListener("scroll", handler);
+    };
+
+    window.addEventListener("scroll", handler, { once: true });
+
+    return () => {
+      window.removeEventListener("scroll", handler);
+
+      window.clearTimeout(timer);
+    };
   }, [setTrigger, order]);
 
   const percentage = (value / totalCode) * 100;

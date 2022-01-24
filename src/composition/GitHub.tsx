@@ -1,6 +1,7 @@
 import { useEffect, useState, Fragment } from "react";
 import styled from "styled-components";
 import { space, SpaceProps } from "@styled-system/space";
+import NextImage from "next/image";
 
 import { YearlyContribution } from "components/YearlyContribution";
 
@@ -15,16 +16,22 @@ import { useGitHub } from "hooks/useGitHub";
 
 import { GET_USER } from "queries";
 
-const GitHubImg = styled.img<SpaceProps>`
-  ${space({ m: "0 auto" })};
-  display: block;
+const GitHubImg = styled.span`
+  ${space({ m: "auto" })};
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  border: 2px solid var(--smokeyWhite);
-  border-radius: 50%;
+  width: 50%;
 
-  max-width: 192px;
-  min-width: 96px;
-  width: 66.66%;
+  @media (min-width: 540px) {
+    width: 75%;
+  }
+
+  & span {
+    box-shadow: 0 0 0 2px white;
+    border-radius: 50%;
+  }
 `;
 
 const Contributions = styled(Flex)``;
@@ -36,26 +43,21 @@ const Profile = styled.div`
   display: grid;
   grid-template-columns: 1fr;
 
-  & ${GitHubImg} {
-    justify-self: center;
-    align-self: center;
-  }
-
-  @media (min-width: 768px) {
+  @media (min-width: 540px) {
     grid-template-columns: minmax(250px, 33.33%) 1fr;
   }
 
   > section {
     ${space({ mx: "auto", mt: 4, px: 2 })};
 
-    @media (min-width: 768px) {
+    @media (min-width: 540px) {
       ${space({ mt: 0, px: 0 })};
     }
   }
   > section header {
     text-align: center;
 
-    @media (min-width: 768px) {
+    @media (min-width: 540px) {
       text-align: left;
     }
   }
@@ -146,7 +148,14 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
 
       <GitHubContainer>
         <Profile>
-          <GitHubImg src={avatarUrl} alt={`${name} github profile picture`} />
+          <GitHubImg>
+            <NextImage
+              src={avatarUrl}
+              alt={`${name} github profile picture`}
+              width="460"
+              height="460"
+            />
+          </GitHubImg>
 
           <section>
             <header>

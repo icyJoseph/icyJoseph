@@ -45,6 +45,7 @@ const StyledSection = styled(Section)`
 `;
 
 const IntroCopy = styled(Box)`
+  font-family: sans-serif;
   max-width: 55ch;
 `;
 

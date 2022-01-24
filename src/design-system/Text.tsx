@@ -54,6 +54,7 @@ export const Text = styled(BaseText)<
   SpaceProps & TextProps & ComponentPropsWithoutRef<"p">
 >`
   ${space};
+  font-family: Recursive, sans-serif;
   display: ${({ $display }) => $display};
   font-size: ${({ $fontSize = "1.6rem" }) => $fontSize};
   text-align: ${({ $textAlign }) => $textAlign};

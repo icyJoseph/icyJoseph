@@ -1,25 +1,14 @@
-import { FC } from "react";
 import { Card } from "design-system/Card";
 import { Emoji } from "design-system/Emoji";
 import { CircularProgress } from "design-system/CircularProgress";
 import { Flex } from "design-system/Flex";
 import { Section, SectionHeader } from "design-system/Section";
 import { Text } from "design-system/Text";
-import { useLanguageEasing } from "hooks/useLanguageEasing";
 
-const Language: FC<IcyJoseph.Tokei & { order: number }> = ({
-  language,
-  code,
-  blanks,
-  comments,
-  order
-}) => {
-  const { value, percentage } = useLanguageEasing({
-    code,
-    blanks,
-    comments,
-    order
-  });
+const Language = ({ language, code, blanks, comments }: IcyJoseph.Tokei) => {
+  const total = code + blanks + comments;
+
+  const percentage = (code / total) * 100;
 
   return (
     <Card m={2}>
@@ -35,7 +24,7 @@ const Language: FC<IcyJoseph.Tokei & { order: number }> = ({
             ariaLabel={`Lines of ${language} code`}
             title={`Lines of ${language} code`}
           />
-          <code>{value}</code>
+          <code>{code}</code>
           <p>LoC</p>
         </CircularProgress>
       </Card.Section>
@@ -48,9 +37,9 @@ type TokeiProps = {
   name: string;
 };
 
-export const Tokei: FC<TokeiProps> = ({ tokei, name }) => (
+export const Tokei = ({ tokei, name }: TokeiProps) => (
   <Section>
-    <SectionHeader id={name} pt={2} mb={5}>
+    <SectionHeader id={name} mb={3}>
       <Text as="h2" $fontSize="3rem">
         <a href={`#${name}`}>
           <code>tokei ~/dev</code>
@@ -81,8 +70,8 @@ export const Tokei: FC<TokeiProps> = ({ tokei, name }) => (
     </Text>
 
     <Flex justifyContent="center" mt={4}>
-      {tokei.map(({ language, ...rest }, index) => (
-        <Language key={language} language={language} {...rest} order={index} />
+      {tokei.map(({ language, ...rest }) => (
+        <Language key={language} language={language} {...rest} />
       ))}
     </Flex>
 

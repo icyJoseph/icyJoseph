@@ -22,14 +22,6 @@ const heartRateFetcher = (date: string, period: Period) => {
     .then(({ data }) => data);
 };
 
-// type could be date/YYYY-MM-DD
-// or frequent, recent
-const activityFetcher = (type: string) => {
-  if (type === "lifeTime")
-    return axios.get(`/api/fitbit/activities`).then(({ data }) => data);
-  return axios.get(`/api/fitbit/activities/${type}`).then(({ data }) => data);
-};
-
 const activityLogFetcher = async (beforeDate: string) => {
   await new Promise((resolve) => setTimeout(resolve, 750));
 
@@ -74,13 +66,6 @@ export const useFitbitHR = (
       fallbackData: fallbackData
     }
   );
-};
-
-export const useFitbitActivity = (type = "lifeTime") => {
-  return useSWR(["activity", type], (_, type) => activityFetcher(type), {
-    shouldRetryOnError: false,
-    revalidateOnFocus: false
-  });
 };
 
 export const useFitbitActivityLog = (

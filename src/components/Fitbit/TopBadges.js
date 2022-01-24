@@ -17,7 +17,7 @@ export const TopBadges = ({ profile }) => {
   return (
     <>
       <Text
-        as="h6"
+        as="h3"
         $fontSize="2rem"
         $fontWeight={300}
         mt={3}

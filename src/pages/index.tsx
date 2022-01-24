@@ -45,6 +45,7 @@ const StyledSection = styled(Section)`
 `;
 
 const IntroCopy = styled(Box)`
+  font-family: sans-serif;
   max-width: 55ch;
 `;
 
@@ -53,7 +54,7 @@ const Experience = styled.b`
 `;
 
 const Introduction = () => (
-  <StyledSection mt={0}>
+  <StyledSection my={0} pb={3}>
     <Flex flexDirection="column" justifyContent="center" alignItems="center">
       <Text
         as="h1"

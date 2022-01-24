@@ -6,6 +6,10 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 module.exports = withBundleAnalyzer({
   poweredByHeader: false,
   reactStrictMode: true,
+  productionBrowserSourceMaps: true,
+  images: {
+    domains: ["avatars.githubusercontent.com"]
+  },
   experimental: {
     styledComponents: true
   }

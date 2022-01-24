@@ -2,19 +2,16 @@ import styled from "styled-components";
 import { space, SpaceProps } from "@styled-system/space";
 import { ComponentPropsWithoutRef } from "react";
 
-type BaseButtonProps = {
-  fontSize?: string;
-} & SpaceProps;
-
 type ButtonVariants = "primary" | "outlined";
 
 type ButtonLabelProps = {
   variant: ButtonVariants;
 };
 
-type ButtonTextProps = {
-  variant: ButtonVariants;
-};
+type BaseButtonProps = {
+  variant?: ButtonVariants;
+  fontSize?: string;
+} & SpaceProps;
 
 const BaseButton = styled.button<BaseButtonProps>`
   ${space};
@@ -29,6 +26,14 @@ const BaseButton = styled.button<BaseButtonProps>`
   text-transform: uppercase;
   background-color: transparent;
   cursor: pointer;
+
+  color: ${({ variant }) =>
+    variant === "outlined" ? "var(--smokeyWhite)" : "var(--lightYellow)"};
+
+  &:hover {
+    color: ${({ variant }) =>
+      variant === "outlined" ? "var(--white)" : "var(--yellow)"};
+  }
 
   &::before,
   &::after {
@@ -100,7 +105,7 @@ const HoverEffect = styled.span`
   top: 0;
   left: -5%;
   z-index: 1;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.7);
   transform: translateX(-100%) skew(-10deg);
   transition: transform 0.3s ease-out;
 
@@ -109,15 +114,15 @@ const HoverEffect = styled.span`
   }
 `;
 
-const Text = styled.span<ButtonTextProps>`
+const Text = styled.span`
   /* Label Text */
   position: relative;
   display: block;
   padding: 1.9rem 3rem;
   background-color: transparent;
   z-index: 1;
-  color: ${({ variant }) =>
-    variant === "outlined" ? "var(--smokeyWhite)" : "var(--lightYellow)"};
+  color: inherit;
+
   opacity: 1;
   transition: color 0.2s ease-in, opacity 0.2s ease-in;
 
@@ -133,7 +138,7 @@ const Text = styled.span<ButtonTextProps>`
     transition: background-color 0.2s ease-in;
   }
 
-  ${BaseButton}:hover &, &[data-disabled='true'] {
+  &[data-disabled="true"] {
     opacity: 0.5;
   }
 
@@ -152,12 +157,10 @@ export const Button = ({
   children,
   ...rest
 }: ButtonProps) => (
-  <BaseButton disabled={disabled} {...rest}>
+  <BaseButton disabled={disabled} variant={variant} {...rest}>
     <Label variant={variant}>
       {!disabled && <HoverEffect />}
-      <Text variant={variant} data-disabled={disabled}>
-        {children}
-      </Text>
+      <Text data-disabled={disabled}>{children}</Text>
     </Label>
   </BaseButton>
 );

@@ -9,9 +9,9 @@ type ButtonLabelProps = {
 };
 
 type BaseButtonProps = {
+  variant?: ButtonVariants;
   fontSize?: string;
-} & SpaceProps &
-  ButtonLabelProps;
+} & SpaceProps;
 
 const BaseButton = styled.button<BaseButtonProps>`
   ${space};

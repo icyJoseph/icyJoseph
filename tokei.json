@@ -1,18 +1,18 @@
 [
   {
     "language": "JavaScript",
-    "blanks": 20312,
+    "blanks": 14518,
     "children": {},
-    "code": 156179,
-    "comments": 14980,
+    "code": 113102,
+    "comments": 8446,
     "inaccurate": false
   },
   {
     "language": "TypeScript",
-    "blanks": 10462,
+    "blanks": 10341,
     "children": {},
-    "code": 100128,
-    "comments": 4397,
+    "code": 99288,
+    "comments": 3554,
     "inaccurate": false
   },
   {
@@ -83,21 +83,21 @@
           }
         },
         {
-          "name": "/home/joseph/dev/daybook/search-server/src/helpers.rs",
-          "stats": {
-            "blanks": 0,
-            "blobs": {},
-            "code": 0,
-            "comments": 1
-          }
-        },
-        {
           "name": "/home/joseph/dev/daybook/search-server/src/start.rs",
           "stats": {
             "blanks": 0,
             "blobs": {},
             "code": 0,
             "comments": 3
+          }
+        },
+        {
+          "name": "/home/joseph/dev/daybook/search-server/src/helpers.rs",
+          "stats": {
+            "blanks": 0,
+            "blobs": {},
+            "code": 0,
+            "comments": 1
           }
         },
         {

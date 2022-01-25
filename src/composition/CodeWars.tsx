@@ -39,9 +39,15 @@ export const CodeWars = ({
 
       <Text mt={3} $fontWeight={300}>
         I like to solve coding challenges. For now I am only showing my{" "}
-        <Text as="span" $textColor="--lightBlue">
-          Codewars
-        </Text>{" "}
+        <a
+          href="https://www.codewars.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Text as="span" $textColor="--lightBlue">
+            Codewars
+          </Text>
+        </a>{" "}
         profile, but I will eventually include more.
       </Text>
 

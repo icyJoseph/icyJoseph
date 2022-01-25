@@ -83,8 +83,8 @@ const Introduction = () => (
 
         <Text mt={3} mx="auto" $fontWeight={300} $fontSize="2rem">
           I have over{" "}
-          <Experience title="Actually 6 years, but I do not believe in the value of this number.">
-            400 years
+          <Experience title="I do not believe in the value of this number.">
+            6 years
           </Experience>{" "}
           of experience working as a software developer, in telecom, mining,
           freight, real state, news, transport and automotive industries.

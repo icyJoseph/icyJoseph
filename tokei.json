@@ -1,31 +1,31 @@
 [
   {
     "language": "JavaScript",
-    "blanks": 14512,
+    "blanks": 20312,
     "children": {},
-    "code": 113123,
-    "comments": 8439,
+    "code": 156179,
+    "comments": 14980,
     "inaccurate": false
   },
   {
     "language": "TypeScript",
-    "blanks": 10223,
+    "blanks": 10462,
     "children": {},
-    "code": 98599,
-    "comments": 3536,
+    "code": 100128,
+    "comments": 4397,
     "inaccurate": false
   },
   {
     "language": "CSS",
-    "blanks": 3706,
+    "blanks": 3708,
     "children": {},
-    "code": 40835,
-    "comments": 341,
+    "code": 40825,
+    "comments": 340,
     "inaccurate": false
   },
   {
     "language": "Rust",
-    "blanks": 2983,
+    "blanks": 3002,
     "children": {
       "Markdown": [
         {
@@ -120,7 +120,7 @@
         }
       ]
     },
-    "code": 14498,
+    "code": 14578,
     "comments": 375,
     "inaccurate": false
   }

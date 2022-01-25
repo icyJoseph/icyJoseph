@@ -13,8 +13,8 @@ export const GlobalStyle = createGlobalStyle`
     ${root};
     
     body {
-        background-color: var(--smokeyWhite);
-        color: var(--softDark);
+        background-color: var(--background);
+        color: var(--smokeyWhite);
     }
 
     * {

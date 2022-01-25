@@ -29,10 +29,19 @@ declare namespace IcyJoseph {
     codeChallenges: { totalCompleted: number };
   };
 
+  export type LanguageEdge = {
+    node: {
+      id: string;
+      name: string;
+      color: string;
+    };
+    size: number;
+  };
+
   export type Repository = {
     id: string;
     name: string;
-    description: string;
+    description: string | undefined | null;
     owner: {
       login: string;
     };
@@ -43,14 +52,10 @@ declare namespace IcyJoseph {
     diskUsage: number;
     homepageUrl: string;
     languages: {
-      edges: Array<{
-        node: {
-          id: string;
-          name: string;
-          color: string;
-        };
-        size: number;
-      }>;
+      /**
+       * The query backing this type up, uses only up-to 3 languages
+       */
+      edges: Array<LanguageNode | null>;
       totalSize: number;
       totalCount: number;
     };

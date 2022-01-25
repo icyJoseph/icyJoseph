@@ -25,11 +25,11 @@ export const Table = styled.table<{ stale?: boolean } & SpaceProps>`
   border-spacing: 0;
   empty-cells: show;
 
-  ${staleMixin}
+  ${staleMixin};
 `;
 
 export const Tr = styled.tr`
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 
   &:last-child {
     border-bottom: none;

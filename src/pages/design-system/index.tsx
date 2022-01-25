@@ -1,5 +1,8 @@
 import Head from "next/head";
 
+import styled from "styled-components";
+import { space } from "@styled-system/space";
+
 import { Box } from "design-system/Box";
 import { Button } from "design-system/Button";
 import { CircularProgress } from "design-system/CircularProgress";
@@ -11,6 +14,22 @@ import { BackToTop } from "design-system/BackToTop";
 import { Table, Th, Tr, Td } from "design-system/Table";
 import { Measurement } from "design-system/Measurement";
 
+const StyledCircularProgress = styled(CircularProgress)`
+  .progress-track {
+    stroke: var(--smokeyWhite);
+  }
+
+  .progress-thumb {
+    stroke: var(--lightBlue);
+  }
+`;
+
+const DesignSystemContainer = styled(Container)`
+  & > ${Section} {
+    ${space({ mb: 5 })};
+  }
+`;
+
 export const DesignSystem = () => {
   return (
     <>
@@ -18,7 +37,7 @@ export const DesignSystem = () => {
         <title>icyJoseph - Design System</title>
       </Head>
 
-      <Container>
+      <DesignSystemContainer>
         <Section>
           <Text as="h1" $fontSize="3rem">
             Design System
@@ -48,9 +67,9 @@ export const DesignSystem = () => {
 
           <Flex gap="2rem" mt={3}>
             {[0, 25, 50, 75].map((percentage) => (
-              <CircularProgress key={percentage} percentage={percentage}>
-                {percentage} %
-              </CircularProgress>
+              <StyledCircularProgress key={percentage} percentage={percentage}>
+                <Text>{percentage} %</Text>
+              </StyledCircularProgress>
             ))}
           </Flex>
         </Section>
@@ -126,7 +145,7 @@ export const DesignSystem = () => {
             </Table>
           </Box>
         </Section>
-      </Container>
+      </DesignSystemContainer>
     </>
   );
 };

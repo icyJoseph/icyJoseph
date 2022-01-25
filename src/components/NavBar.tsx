@@ -7,7 +7,8 @@ const Nav = styled.nav`
   display: flex;
   flex-direction: column;
   background: transparent;
-  color: var(--thinDark);
+
+  color: var(--smokeyWhite);
 
   @media (min-width: 768px) {
     flex-direction: row;

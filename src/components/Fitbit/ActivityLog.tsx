@@ -1,4 +1,4 @@
-import { FC, useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import { Button } from "design-system/Button";
 import { Flex } from "design-system/Flex";
@@ -33,7 +33,7 @@ const isBaseActivity = (
 const isSwimming = (act: IcyJoseph.Activities): act is IcyJoseph.SwimActivity =>
   act.activityName === "Swim";
 
-const Body: FC<{ activity: IcyJoseph.Activities }> = ({ activity }) => {
+const Body = ({ activity }: { activity: IcyJoseph.Activities }) => {
   if (isSwimming(activity)) {
     return (
       <>
@@ -109,10 +109,10 @@ const useDateQueue = (seed: string, onChange?: (date: string) => void) => {
 
 const noop = () => void 0;
 
-export const ActivityLog: FC<ActivityLogProps> = ({
+export const ActivityLog = ({
   initial,
   onDateChange = noop
-}) => {
+}: ActivityLogProps) => {
   const { startTime: initialStartTime } = head(initial);
   const [currentDate, prevAction, nextAction] = useDateQueue(
     initialStartTime,
@@ -174,6 +174,7 @@ export const ActivityLog: FC<ActivityLogProps> = ({
           ))}
         </tbody>
       </Table>
+
       <Flex justifyContent="space-around">
         <Button
           variant="primary"

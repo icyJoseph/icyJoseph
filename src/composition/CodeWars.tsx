@@ -29,14 +29,23 @@ export const CodeWars = ({
 
   return (
     <Section>
-      <SectionHeader id={name}>
-        <Text as="h2" $textColor="--blue" $fontSize="3rem">
+      <SectionHeader id={name} mb={3}>
+        <Text as="h2" $fontSize="3rem">
           <a href={`#${name}`}>
             <code>CodeWars</code>
           </a>
         </Text>
       </SectionHeader>
-      <Flex>
+
+      <Text mt={3} $fontWeight={300}>
+        I like to solve coding challenges. For now I am only showing my{" "}
+        <Text as="span" $textColor="--lightBlue">
+          Codewars
+        </Text>{" "}
+        profile, but I will eventually include more.
+      </Text>
+
+      <Flex mt={4}>
         <Card my={2} mx="auto">
           <Card.Header>
             <h2>

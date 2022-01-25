@@ -1,17 +1,14 @@
-import React, { useEffect } from "react";
-
-import { AppProps } from "next/app";
+import type { AppProps } from "next/app";
 import Router from "next/router";
-import Head from "next/head";
 
 import { ThemeProvider } from "styled-components";
 
 import { theme } from "styles/theme";
 import { GlobalStyle } from "styles/global";
 
+import { Background, Layout } from "components/Background";
 import { Footer } from "composition/Footer";
 import { Navigation } from "composition/Navigation";
-import { pageview } from "ga";
 
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
@@ -32,55 +29,23 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   }
 }
 
-const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_TRACKING_ID;
-
 function App({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    const handler = (url: string) => pageview(url);
-
-    Router.events.on("routeChangeComplete", handler);
-
-    return () => Router.events.off("routeChangeComplete", handler);
-  }, []);
-
   return (
-    <React.Fragment>
-      <Head>
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/devicons/devicon@master/devicon.min.css"
-        />
-
-        {/* Global Site Tag (gtag.js) - Google Analytics */}
-        <script
-          async
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-        />
-
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA_TRACKING_ID}', {
-              page_path: window.location.pathname,
-            });
-          `
-          }}
-        />
-      </Head>
-
+    <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
 
-        <Navigation />
+        <Background />
 
-        <Component {...pageProps} />
+        <Layout>
+          <Navigation />
 
-        <Footer />
+          <Component {...pageProps} />
+
+          <Footer />
+        </Layout>
       </ThemeProvider>
-    </React.Fragment>
+    </>
   );
 }
 

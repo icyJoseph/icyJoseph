@@ -1,6 +1,7 @@
 import { useEffect, useState, Fragment } from "react";
 import styled from "styled-components";
 import { space, SpaceProps } from "@styled-system/space";
+import NextImage from "next/image";
 
 import { YearlyContribution } from "components/YearlyContribution";
 
@@ -15,16 +16,33 @@ import { useGitHub } from "hooks/useGitHub";
 
 import { GET_USER } from "queries";
 
-const GitHubImg = styled.img<SpaceProps>`
-  ${space({ m: "0 auto", p: 1 })};
-  display: block;
+const GitHubImg = styled.span`
+  ${space({ m: "auto" })};
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  border: 2px solid var(--blue);
-  border-radius: 50%;
+  width: 50%;
 
-  max-width: 192px;
-  min-width: 96px;
-  width: 66.66%;
+  @media (min-width: 540px) {
+    width: 75%;
+  }
+
+  & > span {
+    box-shadow: 0 0 0 2px white;
+    border-radius: 50%;
+  }
+
+  & > span:before {
+    position: absolute;
+    content: "";
+    background-color: var(--background);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
 `;
 
 const Contributions = styled(Flex)``;
@@ -36,26 +54,21 @@ const Profile = styled.div`
   display: grid;
   grid-template-columns: 1fr;
 
-  & ${GitHubImg} {
-    justify-self: center;
-    align-self: center;
-  }
-
-  @media (min-width: 768px) {
+  @media (min-width: 540px) {
     grid-template-columns: minmax(250px, 33.33%) 1fr;
   }
 
   > section {
     ${space({ mx: "auto", mt: 4, px: 2 })};
 
-    @media (min-width: 768px) {
+    @media (min-width: 540px) {
       ${space({ mt: 0, px: 0 })};
     }
   }
   > section header {
     text-align: center;
 
-    @media (min-width: 768px) {
+    @media (min-width: 540px) {
       text-align: left;
     }
   }
@@ -111,8 +124,9 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
       login: "icyJoseph",
       ...yearStart()
     },
-    initialData: initial,
-    selector: ({ user }: { user: IcyJoseph.GitHub }) => user
+    fallbackData: initial,
+    selector: ({ user }: { user: IcyJoseph.GitHub }) => user,
+    revalidateOnMount: false
   });
 
   const {
@@ -136,8 +150,8 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
 
   return (
     <Section>
-      <SectionHeader id={pageName} mb={5}>
-        <Text as="h2" $textColor="--blue" $fontSize="3rem">
+      <SectionHeader id={pageName} mb={3}>
+        <Text as="h2" $fontSize="3rem">
           <a href={`#${pageName}`}>
             <code>GitHub</code>
           </a>
@@ -146,11 +160,18 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
 
       <GitHubContainer>
         <Profile>
-          <GitHubImg src={avatarUrl} alt={`${name} github profile picture`} />
+          <GitHubImg>
+            <NextImage
+              src={avatarUrl}
+              alt={`${name} github profile picture`}
+              width="460"
+              height="460"
+            />
+          </GitHubImg>
 
           <section>
             <header>
-              <Text as="h3" $textColor="--blue">
+              <Text as="h3" $textColor="--yellow">
                 @{login}
               </Text>
 
@@ -164,7 +185,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
                 {bio}
               </Text>
 
-              <Text $textColor="--blue" mb={2}>
+              <Text $textColor="--yellow" mb={2}>
                 {company}
               </Text>
             </Bio>

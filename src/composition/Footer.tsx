@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { space, SpaceProps } from "@styled-system/space";
 
 import { entries } from "composition/Navigation";
-import { maxWidthUtility } from "styles/mixins";
 
 const StyledFooter = styled.footer<SpaceProps>`
   ${space};
@@ -12,7 +11,8 @@ const StyledFooter = styled.footer<SpaceProps>`
 `;
 
 const StyledSection = styled.section`
-  ${maxWidthUtility};
+  max-width: 90ch;
+
   ${space({ m: "0 auto" })};
 
   /* IE11 fallback */
@@ -91,7 +91,8 @@ const Notice = styled.section`
   }
 
   > p {
-    ${space({ mt: 2 })};
+    max-width: 30ch;
+    ${space({ mt: 3, mx: "auto" })};
     font-weight: 300;
   }
 `;
@@ -104,7 +105,7 @@ const EvolveLink = styled.a`
 
 export const Footer = () => {
   return (
-    <StyledFooter px={2} py={3} mt={2}>
+    <StyledFooter px={4} py={3} mt={2}>
       <StyledSection>
         <Stack>
           Tech Stack
@@ -119,6 +120,7 @@ export const Footer = () => {
             <li>Recursive Font Face</li>
           </List>
         </Stack>
+
         <Notice>
           <p>
             I am a software developer at{" "}
@@ -142,6 +144,7 @@ export const Footer = () => {
             </EvolveLink>
           </p>
         </Notice>
+
         <FooterNav>
           <Stack>
             Hot Links
@@ -192,11 +195,11 @@ export const Footer = () => {
             </List>
           </Stack>
         </FooterNav>
-        <CopyrightNotice>
-          &#169; {new Date().getFullYear()} Joseph Chamochumbi - Gothenburg,
-          Sweden
-        </CopyrightNotice>
       </StyledSection>
+
+      <CopyrightNotice>
+        &#169; {new Date().getFullYear()} icyJoseph AB - Gothenburg, Sweden
+      </CopyrightNotice>
     </StyledFooter>
   );
 };

@@ -22,6 +22,7 @@ import { getActivityLog } from "pages/api/fitbit/activities/list";
 import { GET_USER } from "queries";
 
 import { yearStart, isoStringWithoutMs } from "helpers";
+import { NextSeo } from "next-seo";
 
 type HomeProps = {
   codewars: IcyJoseph.CodeWars;
@@ -31,6 +32,8 @@ type HomeProps = {
   activityLog: IcyJoseph.ActivityLog;
   initialHR: IcyJoseph.HeartRateActivity;
 };
+
+const VERCEL_URL = `${process.env.VERCEL_URL}`;
 
 export function Home({
   codewars,
@@ -42,6 +45,25 @@ export function Home({
 }: HomeProps) {
   return (
     <>
+      <NextSeo
+        title="icyJoseph"
+        description="Señor Developer. JavaScript, TypeScript, Rust, CSS."
+        openGraph={{
+          url: `${VERCEL_URL}`,
+          title: "icyJoseph",
+          site_name: "icyJoseph | Señor Developer",
+          description: "Señor Developer. JavaScript, TypeScript, Rust, CSS.",
+          images: [
+            {
+              url: `${VERCEL_URL}/waves_background.png`,
+              width: 960,
+              height: 540,
+              alt: "icyJoseph wavy background",
+              type: "image/png"
+            }
+          ]
+        }}
+      />
       <Head>
         <title>icyJoseph</title>
       </Head>

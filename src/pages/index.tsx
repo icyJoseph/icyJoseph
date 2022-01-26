@@ -46,13 +46,14 @@ export function Home({
   return (
     <>
       <NextSeo
-        title="icyJoseph | Señor Developer. JS/TS/Rust/CSS."
+        title="icyJoseph | Señor Developer"
         description="Señor Developer. JavaScript, TypeScript, Rust, CSS. I work with fullstack. I enjoy coding challenges."
         openGraph={{
           url: `${VERCEL_URL}`,
-          title: "icyJoseph",
-          site_name: "icyJoseph | Señor Developer",
-          description: "Señor Developer. JavaScript, TypeScript, Rust, CSS.",
+          title: "icyJoseph | Señor Developer",
+          site_name: "icyJoseph",
+          description:
+            "Señor Developer. JavaScript, TypeScript, Rust, CSS. I work with fullstack. I enjoy coding challenges.",
           images: [
             {
               url: `${VERCEL_URL}/waves_background.png`,

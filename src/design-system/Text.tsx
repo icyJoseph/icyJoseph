@@ -59,8 +59,7 @@ export const Text = styled(BaseText)<
   font-size: ${({ $fontSize = "1.6rem" }) => $fontSize};
   text-align: ${({ $textAlign }) => $textAlign};
   vertical-align: ${({ $verticalAlign }) => $verticalAlign};
-  color: ${({ $textColor = "--smokeyWhite", theme }) =>
-    `var(${$textColor}, ${theme.white})`};
-  font-weight: ${({ $fontWeight = 400 }) => $fontWeight ?? 400};
+  color: ${({ $textColor = "--smokeyWhite" }) => `var(${$textColor})`};
+  font-weight: ${({ $fontWeight = 400 }) => $fontWeight};
   text-transform: ${({ $textTransform = "unset" }) => $textTransform};
 `;

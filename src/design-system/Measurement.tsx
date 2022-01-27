@@ -5,7 +5,6 @@ import { Text } from "design-system/Text";
 
 const BaseEntry = styled(Text)`
   white-space: nowrap;
-  color: var(--lightBlue);
 
   &:not(:last-child):after {
     content: "\\A";
@@ -73,7 +72,7 @@ export const Measurement = ({
   unit,
   renderAs = defaultRenderAs
 }: MeasurementProps) => (
-  <BaseEntry as={renderAs}>
+  <BaseEntry as={renderAs} $textColor="--lightBlue">
     <Value value={value} /> <Unit unit={unit} />
   </BaseEntry>
 );

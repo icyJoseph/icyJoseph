@@ -1,18 +1,18 @@
 [
   {
     "language": "JavaScript",
-    "blanks": 14518,
+    "blanks": 14520,
     "children": {},
-    "code": 113102,
-    "comments": 8446,
+    "code": 113104,
+    "comments": 8447,
     "inaccurate": false
   },
   {
     "language": "TypeScript",
-    "blanks": 10341,
+    "blanks": 10391,
     "children": {},
-    "code": 99288,
-    "comments": 3554,
+    "code": 99507,
+    "comments": 3561,
     "inaccurate": false
   },
   {

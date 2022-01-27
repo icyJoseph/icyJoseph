@@ -3,6 +3,9 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true"
 });
 
+/* eslint-disable-next-line*/
+const { createVanillaExtractPlugin } = require("@vanilla-extract/next-plugin");
+
 /** @type {import('next').NextConfig} */
 const config = {
   poweredByHeader: false,
@@ -16,4 +19,6 @@ const config = {
   }
 };
 
-module.exports = withBundleAnalyzer(config);
+const withVanillaExtract = createVanillaExtractPlugin();
+
+module.exports = withVanillaExtract(withBundleAnalyzer(config));

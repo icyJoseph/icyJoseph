@@ -38,6 +38,8 @@
     "@types/styled-components": "5.1.20",
     "@types/styled-system": "5.1.15",
     "@typescript-eslint/eslint-plugin": "5.10.0",
+    "@vanilla-extract/css": "^1.6.8",
+    "@vanilla-extract/next-plugin": "^2.0.1",
     "csstype": "3.0.10",
     "eslint": "8.7.0",
     "eslint-config-next": "12.0.8",

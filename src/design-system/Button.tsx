@@ -90,8 +90,8 @@ const Label = styled.span<ButtonLabelProps>`
     left: 0;
     bottom: 0;
     border: 1px solid var(--smokeyWhite);
-    background-color: ${({ variant, theme }) =>
-      variant === "outlined" ? "transparent" : theme.softDark};
+    background-color: ${({ variant }) =>
+      variant === "outlined" ? "transparent" : "var(--softDark)"};
   }
 `;
 

@@ -1,17 +1,18 @@
 import type { AppProps } from "next/app";
 import Router from "next/router";
 
-import { ThemeProvider } from "styled-components";
-
-import { theme } from "styles/theme";
-import { GlobalStyle } from "styles/global";
-
 import { Background, Layout } from "components/Background";
 import { Footer } from "composition/Footer";
 import { Navigation } from "composition/Navigation";
 
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+
+import "styles/normalize.css";
+import "styles/reset.css";
+import "styles/typography.css";
+import "styles/theme.css";
+import "styles/global.css";
 
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -32,19 +33,15 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
 function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
+      <Background />
 
-        <Background />
+      <Layout>
+        <Navigation />
 
-        <Layout>
-          <Navigation />
+        <Component {...pageProps} />
 
-          <Component {...pageProps} />
-
-          <Footer />
-        </Layout>
-      </ThemeProvider>
+        <Footer />
+      </Layout>
     </>
   );
 }

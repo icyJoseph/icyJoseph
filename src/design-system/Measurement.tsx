@@ -45,7 +45,7 @@ export const Unit: FC<{ unit: string; className?: string }> = ({
   unit,
   className
 }) => (
-  <BaseUnit as="span" $fontWeight={300} className={className}>
+  <BaseUnit renderAs="span" fontWeight={300} className={className}>
     {unit}
   </BaseUnit>
 );
@@ -54,7 +54,7 @@ export const Value: FC<{ value: number | string; className?: string }> = ({
   value,
   className
 }) => (
-  <BaseValue as="span" $fontWeight={300} className={className}>
+  <BaseValue renderAs="span" fontWeight={300} className={className}>
     {value ?? "-"}
   </BaseValue>
 );
@@ -72,7 +72,7 @@ export const Measurement = ({
   unit,
   renderAs = defaultRenderAs
 }: MeasurementProps) => (
-  <BaseEntry as={renderAs} $textColor="--lightBlue">
+  <BaseEntry renderAs={renderAs} textColor="--lightBlue">
     <Value value={value} /> <Unit unit={unit} />
   </BaseEntry>
 );

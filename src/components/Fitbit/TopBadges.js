@@ -17,9 +17,9 @@ export const TopBadges = ({ profile }) => {
   return (
     <>
       <Text
-        as="h3"
-        $fontSize="2rem"
-        $fontWeight={300}
+        renderAs="h3"
+        fontSize="2rem"
+        fontWeight={300}
         mt={3}
         mb={2}
         pl="1.5rem"
@@ -32,8 +32,8 @@ export const TopBadges = ({ profile }) => {
             <Card.Header>{badge.shortName}</Card.Header>
             <Card.Section>
               <DataEntry>
-                <Text $textColor="--smokeyWhite">{badge.description}</Text>
-                <Text $textColor="--smokeyWhite">
+                <Text textColor="--smokeyWhite">{badge.description}</Text>
+                <Text textColor="--smokeyWhite">
                   Achived: {badge.timesAchieved} times
                 </Text>
                 <BadgeImg
@@ -41,7 +41,7 @@ export const TopBadges = ({ profile }) => {
                   alt={badge.shortName}
                   loading="lazy"
                 />
-                <Text $textColor="--smokeyWhite" $fontWeight={300}>
+                <Text textColor="--smokeyWhite" fontWeight={300}>
                   {badge.shareText}
                 </Text>
               </DataEntry>

@@ -3,8 +3,8 @@ import {
   createGlobalTheme
 } from "@vanilla-extract/css";
 
-export const vars = createGlobalThemeContract({
-  color: {
+export const theme = createGlobalThemeContract({
+  colors: {
     background: "background",
     black: "black",
     dark: "dark",
@@ -22,8 +22,8 @@ export const vars = createGlobalThemeContract({
   }
 });
 
-createGlobalTheme(":root", vars, {
-  color: {
+createGlobalTheme(":root", theme, {
+  colors: {
     background: "#001220",
     black: "#000000",
     dark: "#171219",

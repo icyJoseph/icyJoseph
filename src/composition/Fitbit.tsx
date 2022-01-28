@@ -44,7 +44,7 @@ export const Fitbit: FC<FitbitProps> = ({
   return (
     <Section>
       <SectionHeader id={name} mb={3}>
-        <Text as="h2" $fontSize="3rem">
+        <Text renderAs="h2" fontSize="3rem">
           <a href={`#${name}`}>
             <code>Fitbit</code>
           </a>
@@ -59,11 +59,11 @@ export const Fitbit: FC<FitbitProps> = ({
             justifyContent="flex-start"
             alignItems="center"
           >
-            <Text $fontSize="2rem" $fontWeight={300}>
+            <Text fontSize="2rem" fontWeight={300}>
               Average Daily Steps
             </Text>
 
-            <Text m={3} $fontSize="5rem">
+            <Text m={3} fontSize="5rem">
               {profile.averageDailySteps}
             </Text>
           </DataSegment>
@@ -74,14 +74,14 @@ export const Fitbit: FC<FitbitProps> = ({
             justifyContent="center"
             alignItems="center"
           >
-            <Text $fontSize="2rem" $fontWeight={300}>
+            <Text fontSize="2rem" fontWeight={300}>
               Resting pulse
             </Text>
 
-            <Text m={3} $fontSize="5rem">
+            <Text m={3} fontSize="5rem">
               {today?.value?.restingHeartRate ??
                 prevDay?.value?.restingHeartRate}{" "}
-              <Text as="span" $fontWeight={300}>
+              <Text renderAs="span" fontWeight={300}>
                 bpm
               </Text>
             </Text>

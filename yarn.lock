@@ -1055,6 +1055,13 @@
     escape-string-regexp "^4.0.0"
     outdent "^0.8.0"
 
+"@vanilla-extract/dynamic@2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@vanilla-extract/dynamic/-/dynamic-2.0.2.tgz#13a3e461964c8029a52e6b6b631009ca6a8b27f5"
+  integrity sha512-U4nKaEQ8Kuz+exXEr51DUpyaOuzo24/S/k1YbDPQR06cYcNjQqvwFRnwWtZ+9ImocqM1wTKtzrdUgSTtLGIwAg==
+  dependencies:
+    "@vanilla-extract/private" "^1.0.3"
+
 "@vanilla-extract/integration@^2.0.1":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@vanilla-extract/integration/-/integration-2.0.1.tgz#042508b92388cb37cea17834eea1108abe4eca21"

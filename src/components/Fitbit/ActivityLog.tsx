@@ -134,7 +134,7 @@ export const ActivityLog = ({
             <Th />
 
             <Th colSpan={2}>
-              <Text $textAlign="left" $fontSize="2rem" $fontWeight={100}>
+              <Text $textAlign="left" fontSize="2rem" fontWeight={100}>
                 Activities
               </Text>
             </Th>
@@ -146,14 +146,14 @@ export const ActivityLog = ({
             <Tr key={activity.logId}>
               <Td />
               <Td>
-                <Text $textAlign="left" $fontSize="2rem" $fontWeight={300}>
+                <Text $textAlign="left" fontSize="2rem" fontWeight={300}>
                   {activity.activityName}
                 </Text>
-                <Text $textAlign="left" $fontWeight={300}>
+                <Text $textAlign="left" fontWeight={300}>
                   <Text
-                    as="time"
+                    renderAs="time"
                     dateTime={activity.startTime}
-                    $fontWeight={300}
+                    fontWeight={300}
                   >
                     {formatter.format(new Date(activity.startTime))}
                   </Text>

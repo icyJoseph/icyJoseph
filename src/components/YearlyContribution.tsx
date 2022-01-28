@@ -121,7 +121,7 @@ const GitHubContributionsSummary = memo(function ContributionsSummary({
         <Stat key={label} mb={3}>
           <StatLabel unit={label} />
 
-          <StatText as="span">
+          <StatText renderAs="span">
             <StatValue value={value} /> <StatUnit unit={unit} />
           </StatText>
         </Stat>
@@ -202,26 +202,26 @@ const ContributionCard = ({
 }: ContributionCardProps) => (
   <RepoEntry py={2} mx="auto" as="article" flexDirection="column" gap="1.5rem">
     <Flex as="header" alignItems="center" justifyContent="space-between">
-      <Box mr={3}>
-        <Text as="span" $textColor="--yellow">
+      <Text renderAs="h4" mr={3}>
+        <Text renderAs="span" textColor="--yellow">
           #{index + 1}
         </Text>{" "}
-        <Text as="span">{repository.owner.login}</Text>
-        <Text as="h4" $fontWeight={300} $fontSize="2rem" $display="inline">
+        <Text renderAs="span">{repository.owner.login}</Text>
+        <Text renderAs="span" fontWeight={300} fontSize="2rem">
           /{repository.name}
         </Text>
-      </Box>
+      </Text>
 
-      <Text as="span" $fontWeight={300} $fontSize="2rem">
+      <Text renderAs="span" fontWeight={300} fontSize="2rem">
         +{contributions.totalCount}{" "}
-        <Text as="span" $fontWeight={300}>
+        <Text renderAs="span" fontWeight={300}>
           commits
         </Text>
       </Text>
     </Flex>
 
     <Box>
-      <Text $fontWeight={300} $fontSize="2rem">
+      <Text fontWeight={300} fontSize="2rem">
         {repository.description
           ? repository.description.replace(RE_EMOJI, "")
           : `${repository.name} has no description.`}
@@ -233,7 +233,7 @@ const ContributionCard = ({
         .filter((edge): edge is IcyJoseph.LanguageEdge => Boolean(edge))
         .map(({ node: { color, name }, size }) => (
           <Box key={name}>
-            <Text $fontWeight={300} mb={1}>
+            <Text fontWeight={300} mb={1}>
               <DevIcon color={color} language={name} mr={1} $fontSize="2rem" />
 
               <span>{name}</span>
@@ -339,13 +339,13 @@ export const YearlyContribution = ({
   return (
     <>
       <Flex flexDirection="column" alignItems="center" my={4} px={4}>
-        <Text as="h4" $fontSize="2.5rem">
+        <Text renderAs="h4" fontSize="2.5rem">
           In {year}
         </Text>
 
         {joinedGitHubContribution ? (
           <Flex mt={3}>
-            <Text $fontSize="2rem" $fontWeight={300}>
+            <Text fontSize="2rem" fontWeight={300}>
               Joined GitHub
               <Emoji
                 symbol="🎉"

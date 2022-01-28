@@ -1,24 +1,41 @@
+import { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
 import type { Property } from "csstype";
 import { space, SpaceProps } from "@styled-system/space";
-import { ComponentPropsWithoutRef } from "react";
+import { assignInlineVars } from "@vanilla-extract/dynamic";
 
-type TextProps = {
+import { textClassName, textTheme } from "design-system/text.css";
+import { theme } from "styles/theme.css";
+
+type TextBaseProps = SpaceProps & {
   $verticalAlign?: Property.VerticalAlign;
-  $display?: Property.Display;
-  $fontSize?: Property.FontSize;
-  $fontWeight?: Property.FontWeight;
-  $textAlign?: Property.TextAlign;
   $textTransform?: Property.TextTransform;
-  $textColor?: string;
+  $textAlign?: Property.TextAlign;
+
+  fontSize?: Property.FontSize;
+  fontWeight?: Property.FontWeight;
+  textColor?: string;
 };
 
+type TextProps = TextBaseProps & {
+  renderAs?: "span" | "p" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+} & ComponentPropsWithoutRef<"p">;
+
+type TimeTextProps = TextBaseProps & {
+  renderAs: "time";
+} & ComponentPropsWithoutRef<"time">;
+
 const BaseText = ({
-  $fontSize,
+  $verticalAlign,
   $textAlign,
-  $textColor,
-  $fontWeight,
   $textTransform,
+
+  fontSize,
+  textColor,
+  fontWeight,
+
+  renderAs = "p",
+
   mx,
   my,
   mr,
@@ -47,19 +64,27 @@ const BaseText = ({
   paddingTop,
   paddingX,
   paddingY,
+  className,
   ...rest
-}: SpaceProps & TextProps & ComponentPropsWithoutRef<"p">) => <p {...rest} />;
+}: TextProps | TimeTextProps) => {
+  const Tag = renderAs;
 
-export const Text = styled(BaseText)<
-  SpaceProps & TextProps & ComponentPropsWithoutRef<"p">
->`
+  return (
+    <Tag
+      {...rest}
+      className={className + " " + textClassName}
+      style={assignInlineVars(textTheme, {
+        fontWeight: `${fontWeight || 400}`,
+        color: `var(${textColor})` || theme.colors.smokeyWhite,
+        fontSize: fontSize || "1.6rem"
+      })}
+    />
+  );
+};
+
+export const Text = styled(BaseText)<TextProps | TimeTextProps>`
   ${space};
-  font-family: Recursive, sans-serif;
-  display: ${({ $display }) => $display};
-  font-size: ${({ $fontSize = "1.6rem" }) => $fontSize};
   text-align: ${({ $textAlign }) => $textAlign};
   vertical-align: ${({ $verticalAlign }) => $verticalAlign};
-  color: ${({ $textColor = "--smokeyWhite" }) => `var(${$textColor})`};
-  font-weight: ${({ $fontWeight = 400 }) => $fontWeight};
   text-transform: ${({ $textTransform = "unset" }) => $textTransform};
 `;

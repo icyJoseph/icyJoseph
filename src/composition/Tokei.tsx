@@ -40,32 +40,32 @@ type TokeiProps = {
 export const Tokei = ({ tokei, name }: TokeiProps) => (
   <Section>
     <SectionHeader id={name} mb={3}>
-      <Text as="h2" $fontSize="3rem">
+      <Text renderAs="h2" fontSize="3rem">
         <a href={`#${name}`}>
           <code>tokei ~/dev</code>
         </a>
       </Text>
     </SectionHeader>
 
-    <Text mt={3} $fontWeight={300}>
-      <Text as="span" $textColor="--lightYellow">
+    <Text mt={3} fontWeight={300}>
+      <Text renderAs="span" textColor="--lightYellow">
         Lines of Code
       </Text>
       , without counting <strong>blanks</strong> or <strong>comments</strong>,
       taken from my <strong>dev</strong> folder, using{" "}
-      <Text
-        as="a"
+      <a
         href="https://github.com/XAMPPRocky/tokei"
         target="_blank"
         rel="noreferrer noopener"
-        $textColor="--lightBlue"
       >
-        tokei
-      </Text>
+        <Text renderAs="span" textColor="--lightBlue">
+          tokei
+        </Text>
+      </a>
       .
     </Text>
 
-    <Text mt={2} $fontWeight={300}>
+    <Text mt={2} fontWeight={300}>
       <i>A full circle means 0 blanks and 0 comments.</i>
     </Text>
 
@@ -75,7 +75,7 @@ export const Tokei = ({ tokei, name }: TokeiProps) => (
       ))}
     </Flex>
 
-    <Text mt={2} $fontWeight={300}>
+    <Text mt={2} fontWeight={300}>
       <i>I update these numbers about once a month.</i>
     </Text>
   </Section>

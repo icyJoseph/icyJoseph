@@ -1,7 +1,11 @@
 import { globalStyle } from "@vanilla-extract/css";
-import { vars } from "styles/theme.css";
+import { theme } from "styles/theme.css";
+
+globalStyle("*", {
+  scrollBehavior: "smooth"
+});
 
 globalStyle("body", {
-  background: vars.color.background,
-  color: vars.color.smokeyWhite
+  background: theme.colors.background,
+  color: theme.colors.smokeyWhite
 });

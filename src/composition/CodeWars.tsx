@@ -30,21 +30,21 @@ export const CodeWars = ({
   return (
     <Section>
       <SectionHeader id={name} mb={3}>
-        <Text as="h2" $fontSize="3rem">
+        <Text renderAs="h2" fontSize="3rem">
           <a href={`#${name}`}>
             <code>CodeWars</code>
           </a>
         </Text>
       </SectionHeader>
 
-      <Text mt={3} $fontWeight={300}>
+      <Text mt={3} fontWeight={300}>
         I like to solve coding challenges. For now I am only showing my{" "}
         <a
           href="https://www.codewars.com/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Text as="span" $textColor="--lightBlue">
+          <Text renderAs="span" textColor="--lightBlue">
             Codewars
           </Text>
         </a>{" "}

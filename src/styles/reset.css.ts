@@ -6,11 +6,6 @@ globalStyle("*, *::before, *::after", {
   boxSizing: "border-box"
 });
 
-// not part of the standard RESET
-globalStyle("*", {
-  scrollBehavior: "smooth"
-});
-
 globalStyle("a", {
   textDecoration: "none",
   color: "inherit",

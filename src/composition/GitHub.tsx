@@ -151,7 +151,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
   return (
     <Section>
       <SectionHeader id={pageName} mb={3}>
-        <Text as="h2" $fontSize="3rem">
+        <Text renderAs="h2" fontSize="3rem">
           <a href={`#${pageName}`}>
             <code>GitHub</code>
           </a>
@@ -171,21 +171,21 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
 
           <section>
             <header>
-              <Text as="h3" $textColor="--yellow">
+              <Text renderAs="h3" textColor="--yellow">
                 @{login}
               </Text>
 
-              <Text my={2} $fontWeight={300}>
+              <Text my={2} fontWeight={300}>
                 <i>{location}</i>
               </Text>
             </header>
 
             <Bio flexDirection="column" py={3}>
-              <Text mb={2} $fontWeight={300}>
+              <Text mb={2} fontWeight={300}>
                 {bio}
               </Text>
 
-              <Text $textColor="--yellow" mb={2}>
+              <Text textColor="--yellow" mb={2}>
                 {company}
               </Text>
             </Bio>

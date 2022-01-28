@@ -39,7 +39,7 @@ export const DesignSystem = () => {
 
       <DesignSystemContainer>
         <Section>
-          <Text as="h1" $fontSize="3rem">
+          <Text renderAs="h1" fontSize="3rem">
             Design System
           </Text>
 
@@ -49,7 +49,7 @@ export const DesignSystem = () => {
         </Section>
 
         <Section>
-          <Text as="h2" $fontSize="2.5rem">
+          <Text renderAs="h2" fontSize="2.5rem">
             Button
           </Text>
 
@@ -61,7 +61,7 @@ export const DesignSystem = () => {
         </Section>
 
         <Section>
-          <Text as="h2" $fontSize="2.5rem">
+          <Text renderAs="h2" fontSize="2.5rem">
             Circular Progress
           </Text>
 
@@ -75,7 +75,7 @@ export const DesignSystem = () => {
         </Section>
 
         <Section>
-          <Text as="h2" $fontSize="2.5rem">
+          <Text renderAs="h2" fontSize="2.5rem">
             Back to top
           </Text>
 
@@ -85,7 +85,7 @@ export const DesignSystem = () => {
         </Section>
 
         <Section>
-          <Text as="h2" $fontSize="2.5rem">
+          <Text renderAs="h2" fontSize="2.5rem">
             Table
           </Text>
 
@@ -95,7 +95,7 @@ export const DesignSystem = () => {
                 <Tr>
                   <Th />
                   <Th colSpan={2}>
-                    <Text $textAlign="left" $fontSize="2rem" $fontWeight={100}>
+                    <Text $textAlign="left" fontSize="2rem" fontWeight={100}>
                       Activities
                     </Text>
                   </Th>
@@ -124,11 +124,7 @@ export const DesignSystem = () => {
                     <Td />
 
                     <Td>
-                      <Text
-                        $textAlign="left"
-                        $fontSize="2rem"
-                        $fontWeight={300}
-                      >
+                      <Text $textAlign="left" fontSize="2rem" fontWeight={300}>
                         {entry.name}
                       </Text>
                     </Td>

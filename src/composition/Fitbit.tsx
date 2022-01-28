@@ -1,4 +1,3 @@
-import { FC } from "react";
 import styled from "styled-components";
 
 import { BackToTop } from "design-system/BackToTop";
@@ -21,18 +20,18 @@ const DataSegment = styled(Flex)`
 `;
 
 type FitbitProps = {
-  profile: IcyJoseph.FitbitUser;
+  profile: IcyJoseph.FitbitProfile;
   activityLog: IcyJoseph.ActivityLog;
   initialHR: IcyJoseph.HeartRateActivity;
   name: string;
 };
 
-export const Fitbit: FC<FitbitProps> = ({
+export const Fitbit = ({
   profile,
   activityLog,
   initialHR,
   name
-}) => {
+}: FitbitProps) => {
   const { data } = useFitbitHR(
     { date: "today", period: "1m", revalidateOnMount: true },
     initialHR

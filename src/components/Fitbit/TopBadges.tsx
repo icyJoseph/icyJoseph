@@ -13,7 +13,11 @@ const BadgeImg = styled.img`
   border: 1px solid var(--smokeyWhite);
 `;
 
-export const TopBadges = ({ profile }) => {
+export const TopBadges = ({
+  profile
+}: {
+  profile: IcyJoseph.FitbitProfile;
+}) => {
   return (
     <>
       <Text

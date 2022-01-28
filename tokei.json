@@ -3,16 +3,16 @@
     "language": "JavaScript",
     "blanks": 14520,
     "children": {},
-    "code": 113104,
+    "code": 113103,
     "comments": 8447,
     "inaccurate": false
   },
   {
     "language": "TypeScript",
-    "blanks": 10388,
+    "blanks": 10784,
     "children": {},
-    "code": 99230,
-    "comments": 3561,
+    "code": 105209,
+    "comments": 3687,
     "inaccurate": false
   },
   {
@@ -83,21 +83,21 @@
           }
         },
         {
-          "name": "/home/joseph/dev/daybook/search-server/src/start.rs",
-          "stats": {
-            "blanks": 0,
-            "blobs": {},
-            "code": 0,
-            "comments": 3
-          }
-        },
-        {
           "name": "/home/joseph/dev/daybook/search-server/src/helpers.rs",
           "stats": {
             "blanks": 0,
             "blobs": {},
             "code": 0,
             "comments": 1
+          }
+        },
+        {
+          "name": "/home/joseph/dev/daybook/search-server/src/start.rs",
+          "stats": {
+            "blanks": 0,
+            "blobs": {},
+            "code": 0,
+            "comments": 3
           }
         },
         {

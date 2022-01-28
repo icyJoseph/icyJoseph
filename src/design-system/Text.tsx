@@ -1,13 +1,14 @@
 import { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
 import type { Property } from "csstype";
-import { space, SpaceProps } from "@styled-system/space";
+import { space } from "@styled-system/space";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 
-import { textClassName, textTheme } from "design-system/text.css";
+import { textClassName, textTheme } from "design-system/styles/Text.css";
+import { sprinkles, Sprinkles } from "design-system/styles/sprinkles.css";
 import { theme } from "styles/theme.css";
 
-type TextBaseProps = SpaceProps & {
+type TextBaseProps = Sprinkles & {
   $verticalAlign?: Property.VerticalAlign;
   $textTransform?: Property.TextTransform;
   $textAlign?: Property.TextAlign;
@@ -50,29 +51,32 @@ const BaseText = ({
   py,
   pt,
   pb,
-  margin,
-  padding,
-  marginTop,
-  marginBottom,
-  marginLeft,
-  marginRight,
-  marginX,
-  marginY,
-  paddingBottom,
-  paddingLeft,
-  paddingRight,
-  paddingTop,
-  paddingX,
-  paddingY,
   className,
   ...rest
 }: TextProps | TimeTextProps) => {
   const Tag = renderAs;
 
+  const sprinkle = sprinkles({
+    mx,
+    my,
+    mr,
+    ml,
+    m,
+    mt,
+    mb,
+    p,
+    pr,
+    pl,
+    px,
+    py,
+    pt,
+    pb
+  });
+
   return (
     <Tag
       {...rest}
-      className={className + " " + textClassName}
+      className={`${className} ${textClassName} ${sprinkle}`}
       style={assignInlineVars(textTheme, {
         fontWeight: `${fontWeight || 400}`,
         color: `var(${textColor})` || theme.colors.smokeyWhite,

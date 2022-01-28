@@ -12,7 +12,7 @@ const config = {
   reactStrictMode: true,
   productionBrowserSourceMaps: true,
   images: {
-    domains: ["avatars.githubusercontent.com"]
+    domains: ["avatars.githubusercontent.com", "badges.fitbit.com"]
   },
   experimental: {
     styledComponents: true

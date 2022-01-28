@@ -130,7 +130,9 @@ const GitHubContributionsSummary = memo(function ContributionsSummary({
   );
 });
 
-const RepositoriesWithOptions = styled(Box)<{ stale?: boolean }>`
+const RepositoriesWithOptions = styled(({ stale, ...props }) => (
+  <Box {...props} />
+))<{ stale?: boolean }>`
   ${space({ mt: 3 })};
   grid-column: span 2;
   scroll-behavior: smooth;
@@ -234,7 +236,7 @@ const ContributionCard = ({
         .map(({ node: { color, name }, size }) => (
           <Box key={name}>
             <Text fontWeight={300} mb={1}>
-              <DevIcon color={color} language={name} mr={1} $fontSize="2rem" />
+              <DevIcon color={color} language={name} mr={1} fontSize="2rem" />
 
               <span>{name}</span>
             </Text>

@@ -1,17 +1,10 @@
-import styled from "styled-components";
-import { space } from "@styled-system/space";
+import NextImage from "next/image";
 import { DataEntry } from "components/DataEntry";
 import { Card, InfoCard } from "design-system/Card";
 import { Text } from "design-system/Text";
 import { Flex } from "design-system/Flex";
 
-const BadgeImg = styled.img`
-  ${space({ my: 2, mx: "auto" })};
-  width: 75px;
-  height: 75px;
-  border-radius: 50%;
-  border: 1px solid var(--smokeyWhite);
-`;
+import { topBadge } from "design-system/styles/Badge.css";
 
 export const TopBadges = ({
   profile
@@ -20,14 +13,7 @@ export const TopBadges = ({
 }) => {
   return (
     <>
-      <Text
-        renderAs="h3"
-        fontSize="2rem"
-        fontWeight={300}
-        mt={3}
-        mb={2}
-        pl="1.5rem"
-      >
+      <Text renderAs="h3" fontSize="2rem" fontWeight={300} mt={3} mb={2} pl={4}>
         Top Badges
       </Text>
       <Flex>
@@ -40,11 +26,16 @@ export const TopBadges = ({
                 <Text textColor="--smokeyWhite">
                   Achived: {badge.timesAchieved} times
                 </Text>
-                <BadgeImg
-                  src={badge.image75px}
-                  alt={badge.shortName}
-                  loading="lazy"
-                />
+                <div className={topBadge}>
+                  <NextImage
+                    className={topBadge}
+                    src={badge.image75px}
+                    width="75"
+                    height="75"
+                    alt={badge.shortName}
+                    loading="lazy"
+                  />
+                </div>
                 <Text textColor="--smokeyWhite" fontWeight={300}>
                   {badge.shareText}
                 </Text>

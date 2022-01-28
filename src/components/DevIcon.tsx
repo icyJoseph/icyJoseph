@@ -1,5 +1,6 @@
-import styled from "styled-components";
-import { space, SpaceProps } from "@styled-system/space";
+import { assignInlineVars } from "@vanilla-extract/dynamic";
+import { devIcon, devIconTheme } from "design-system/styles/DevIcon.css";
+import { Sprinkles, sprinkles } from "design-system/styles/sprinkles.css";
 
 type NormalizeIcon = (language: string) => string;
 
@@ -17,30 +18,33 @@ const normalize: NormalizeIcon = (language) => {
   }
 };
 
-type BaseDevIconOwnProps = {
+type BaseDevIconOwnProps = Sprinkles & {
   color: string;
-  $fontSize?: string;
+  fontSize?: string;
   className?: string;
   language: string;
 };
 
-const BaseDevIcon = ({
-  color: _,
-  $fontSize: __,
+export const DevIcon = ({
+  color,
+  fontSize,
   className,
-  language
-}: BaseDevIconOwnProps) => (
-  <i
-    className={`devicon-${normalize(language)}-plain ${className} ${
-      language === "CSS" ? "colored" : ""
-    }`}
-  />
-);
+  language,
+  ...rest
+}: BaseDevIconOwnProps) => {
+  const baseCn = `devicon-${normalize(language)}-plain`;
+  const coloredCn = `${language === "CSS" ? "colored" : ""}`;
+  const vanillaCn = `${devIcon} ${sprinkles(rest)}`;
 
-export const DevIcon = styled(BaseDevIcon)<BaseDevIconOwnProps & SpaceProps>`
-  ${space};
-  display: inline-block;
-  color: ${({ color }) => color};
-  font-size: ${({ $fontSize = "1.6rem" }) => $fontSize};
-  vertical-align: middle;
-`;
+  const cn = `${baseCn} ${className} ${vanillaCn} ${coloredCn}`;
+
+  return (
+    <i
+      className={cn}
+      style={assignInlineVars(devIconTheme, {
+        fontSize: fontSize || devIconTheme.fontSize,
+        color: color
+      })}
+    />
+  );
+};

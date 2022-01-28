@@ -1,24 +1,26 @@
-import styled from "styled-components";
-import { space, SpaceProps } from "@styled-system/space";
+import { Sprinkles, sprinkles } from "design-system/styles/sprinkles.css";
+import { emoji } from "design-system/styles/Emoji.css";
 
-type EmojiOwnProps = {
+type EmojiOwnProps = Sprinkles & {
   ariaLabel: string;
   symbol: string;
   title?: string;
   className?: string;
 };
 
-const Base = ({ className, ariaLabel, symbol, title }: EmojiOwnProps) => (
-  <span className={className} role="img" aria-label={ariaLabel} title={title}>
+export const Emoji = ({
+  className,
+  ariaLabel,
+  symbol,
+  title,
+  ...rest
+}: EmojiOwnProps) => (
+  <span
+    className={`${className} ${emoji} ${sprinkles(rest)}`}
+    role="img"
+    aria-label={ariaLabel}
+    title={title}
+  >
     {symbol}
   </span>
 );
-
-export const Emoji = styled(Base)<SpaceProps & EmojiOwnProps>`
-  ${space};
-  font-weight: 400;
-  font-family: apple color emoji, segoe ui emoji, noto color emoji,
-    android emoji, emojisymbols, emojione mozilla, twemoji mozilla,
-    segoe ui symbol;
-  cursor: default;
-`;

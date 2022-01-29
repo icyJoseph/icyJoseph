@@ -1,11 +1,3 @@
-import type { AppProps } from "next/app";
-import Router from "next/router";
-
-import { Background, Layout } from "components/Background";
-import { Footer } from "composition/Footer";
-import { Navigation } from "composition/Navigation";
-
-import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 
 import "styles/normalize.css";
@@ -13,6 +5,15 @@ import "styles/reset.css";
 import "styles/typography.css";
 import "styles/theme.css";
 import "styles/global.css";
+
+import type { AppProps } from "next/app";
+import Router from "next/router";
+
+import { Background, IsolatedLayout } from "components/Background";
+import { Footer } from "composition/Footer";
+import { Navigation } from "composition/Navigation";
+
+import NProgress from "nprogress";
 
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -35,13 +36,13 @@ function App({ Component, pageProps }: AppProps) {
     <>
       <Background />
 
-      <Layout>
+      <IsolatedLayout>
         <Navigation />
 
         <Component {...pageProps} />
 
         <Footer />
-      </Layout>
+      </IsolatedLayout>
     </>
   );
 }

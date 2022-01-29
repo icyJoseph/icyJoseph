@@ -2,7 +2,6 @@ import path from "path";
 import fs from "fs";
 import { promisify } from "util";
 
-import Head from "next/head";
 import type { GetStaticPropsResult } from "next";
 
 import { Container } from "design-system/Container";
@@ -35,6 +34,28 @@ type HomeProps = {
 
 const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
 
+const seoProps = {
+  title: "icyJoseph | Señor Developer",
+  description:
+    "Señor Developer. JavaScript, TypeScript, Rust, CSS. I work with fullstack. I enjoy coding challenges.",
+  openGraph: {
+    url: `${VERCEL_URL}`,
+    title: "icyJoseph | Señor Developer",
+    site_name: "icyJoseph",
+    description:
+      "Señor Developer. JavaScript, TypeScript, Rust, CSS. I work with fullstack. I enjoy coding challenges.",
+    images: [
+      {
+        url: `${VERCEL_URL}/waves_background.png`,
+        width: 960,
+        height: 540,
+        alt: "icyJoseph wavy background",
+        type: "image/png"
+      }
+    ]
+  }
+};
+
 export function Home({
   codewars,
   github,
@@ -45,29 +66,7 @@ export function Home({
 }: HomeProps) {
   return (
     <>
-      <NextSeo
-        title="icyJoseph | Señor Developer"
-        description="Señor Developer. JavaScript, TypeScript, Rust, CSS. I work with fullstack. I enjoy coding challenges."
-        openGraph={{
-          url: `${VERCEL_URL}`,
-          title: "icyJoseph | Señor Developer",
-          site_name: "icyJoseph",
-          description:
-            "Señor Developer. JavaScript, TypeScript, Rust, CSS. I work with fullstack. I enjoy coding challenges.",
-          images: [
-            {
-              url: `${VERCEL_URL}/waves_background.png`,
-              width: 960,
-              height: 540,
-              alt: "icyJoseph wavy background",
-              type: "image/png"
-            }
-          ]
-        }}
-      />
-      <Head>
-        <title>icyJoseph</title>
-      </Head>
+      <NextSeo {...seoProps} />
 
       <Introduction />
 

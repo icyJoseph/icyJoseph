@@ -48,7 +48,7 @@ type CircularProgressProps = {
 export const CircularProgress: FC<CircularProgressProps> = ({
   percentage,
   size = 150,
-  className,
+  className = "",
   children
 }) => {
   const center = size / 2;

@@ -1,5 +1,7 @@
-import { Sprinkles, sprinkles } from "design-system/styles/sprinkles.css";
+import classnames from "classnames";
+
 import { emoji } from "design-system/styles/Emoji.css";
+import { Sprinkles, sprinkles } from "design-system/styles/sprinkles.css";
 
 type EmojiOwnProps = Sprinkles & {
   ariaLabel: string;
@@ -16,7 +18,7 @@ export const Emoji = ({
   ...rest
 }: EmojiOwnProps) => (
   <span
-    className={`${className} ${emoji} ${sprinkles(rest)}`}
+    className={classnames(className, emoji, sprinkles(rest))}
     role="img"
     aria-label={ariaLabel}
     title={title}

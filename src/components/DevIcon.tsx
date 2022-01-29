@@ -1,4 +1,6 @@
 import { assignInlineVars } from "@vanilla-extract/dynamic";
+import classnames from "classnames";
+
 import { devIcon, devIconTheme } from "design-system/styles/DevIcon.css";
 import { Sprinkles, sprinkles } from "design-system/styles/sprinkles.css";
 
@@ -28,7 +30,7 @@ type BaseDevIconOwnProps = Sprinkles & {
 export const DevIcon = ({
   color,
   fontSize,
-  className,
+  className = "",
   language,
   ...rest
 }: BaseDevIconOwnProps) => {
@@ -36,7 +38,7 @@ export const DevIcon = ({
   const coloredCn = `${language === "CSS" ? "colored" : ""}`;
   const vanillaCn = `${devIcon} ${sprinkles(rest)}`;
 
-  const cn = `${baseCn} ${className} ${vanillaCn} ${coloredCn}`;
+  const cn = classnames(baseCn, className, vanillaCn, coloredCn);
 
   return (
     <i

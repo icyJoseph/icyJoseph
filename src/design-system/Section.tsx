@@ -1,21 +1,46 @@
-import { PropsWithChildren } from "react";
-import styled from "styled-components";
-import { space, SpaceProps } from "@styled-system/space";
+import type { ComponentPropsWithoutRef } from "react";
+import classnames from "classnames";
 
-type SectionProps = PropsWithChildren<SpaceProps>;
+import { sprinkles, Sprinkles } from "design-system/styles/sprinkles.css";
+import { fullPage } from "design-system/styles/utility.css";
+import { pickSprinkleProps } from "utils/sprinkleProps";
 
-const BaseSection = (props: SectionProps) => <section {...props} />;
+type SectionProps = ComponentPropsWithoutRef<"section"> & Sprinkles;
 
-export const Section = styled(BaseSection)`
-  ${space({ my: 3, px: 2 })};
-  ${space};
-`;
+type SectionHeaderProps = ComponentPropsWithoutRef<"header"> & Sprinkles;
 
-export const SectionHeader = styled.header<SpaceProps>`
-  ${space({ pt: 4 })};
-  ${space}
-`;
+export const Section = (props: SectionProps) => {
+  const { sprinklers, hostProps } = pickSprinkleProps(props);
 
-export const FullPage = styled(Section)`
-  min-height: 100vh;
-`;
+  return (
+    <section
+      {...hostProps}
+      className={classnames(
+        props.className,
+        sprinkles({
+          my: 3,
+          px: 2,
+          ...sprinklers
+        })
+      )}
+    />
+  );
+};
+
+export const SectionHeader = (props: SectionHeaderProps) => {
+  const { sprinklers, hostProps } = pickSprinkleProps(props);
+
+  return (
+    <header
+      {...hostProps}
+      className={classnames(
+        props.className,
+        sprinkles({ pt: 4, ...sprinklers })
+      )}
+    />
+  );
+};
+
+export const FullPage = (props: SectionProps) => (
+  <Section {...props} className={classnames(props.className, fullPage)} />
+);

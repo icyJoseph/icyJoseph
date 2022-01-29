@@ -1,30 +1,12 @@
-import styled from "styled-components";
+import { IntroCopy } from "components/Introduction/IntroCopy";
+import { Experience } from "components/Introduction/Experience";
 
 import { Flex } from "design-system/Flex";
-import { Box } from "design-system/Box";
+import { FullPage } from "design-system/Section";
 import { Text } from "design-system/Text";
 
-import { Section } from "design-system/Section";
-
-const StyledSection = styled(Section)`
-  min-height: 100vh;
-
-  & ${Text} {
-    color: var(--smokeyWhite);
-  }
-`;
-
-const IntroCopy = styled(Box)`
-  font-family: sans-serif;
-  max-width: 55ch;
-`;
-
-const Experience = styled.b`
-  text-decoration: underline;
-`;
-
 export const Introduction = () => (
-  <StyledSection my={0} pb={3}>
+  <FullPage my={0} pb={3}>
     <Flex flexDirection="column" justifyContent="center" alignItems="center">
       <Text
         renderAs="h1"
@@ -90,5 +72,5 @@ export const Introduction = () => (
         </Text>
       </IntroCopy>
     </Flex>
-  </StyledSection>
+  </FullPage>
 );

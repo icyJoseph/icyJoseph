@@ -1,8 +1,9 @@
-import { ComponentPropsWithoutRef } from "react";
-import styled from "styled-components";
+import type { ComponentPropsWithoutRef } from "react";
 import type { Property } from "csstype";
-import { space } from "@styled-system/space";
+
+import styled from "styled-components";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
+import classnames from "classnames";
 
 import { textClassName, textTheme } from "design-system/styles/Text.css";
 import { sprinkles, Sprinkles } from "design-system/styles/sprinkles.css";
@@ -76,7 +77,7 @@ const BaseText = ({
   return (
     <Tag
       {...rest}
-      className={`${className} ${textClassName} ${sprinkle}`}
+      className={classnames(className, textClassName, sprinkle)}
       style={assignInlineVars(textTheme, {
         fontWeight: `${fontWeight || 400}`,
         color: `var(${textColor})` || theme.colors.smokeyWhite,
@@ -87,7 +88,6 @@ const BaseText = ({
 };
 
 export const Text = styled(BaseText)<TextProps | TimeTextProps>`
-  ${space};
   text-align: ${({ $textAlign }) => $textAlign};
   vertical-align: ${({ $verticalAlign }) => $verticalAlign};
   text-transform: ${({ $textTransform = "unset" }) => $textTransform};

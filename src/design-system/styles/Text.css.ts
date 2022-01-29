@@ -2,9 +2,9 @@ import { style, createThemeContract, assignVars } from "@vanilla-extract/css";
 import { theme } from "styles/theme.css";
 
 export const textTheme = createThemeContract({
-  fontSize: "fontSize",
-  fontWeight: "fontWeight",
-  color: "color"
+  fontSize: null,
+  fontWeight: null,
+  color: null
 });
 
 export const textClassName = style({

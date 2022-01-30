@@ -69,11 +69,6 @@ const ContributionsFragment = gql`
 
 const GET_USER_DOC = gql`
   query getUser($login: String!, $from: DateTime, $to: DateTime) {
-    rateLimit {
-      cost
-      limit
-      remaining
-    }
     user(login: $login) {
       bio
       company
@@ -115,11 +110,6 @@ const GET_USER_DOC = gql`
 
 const GET_YEAR_CONTRIBUTIONS_DOC = gql`
   query getYearContributions($login: String!, $from: DateTime, $to: DateTime) {
-    rateLimit {
-      cost
-      limit
-      remaining
-    }
     user(login: $login) {
       contributionsCollection(from: $from, to: $to) {
         ...contributions

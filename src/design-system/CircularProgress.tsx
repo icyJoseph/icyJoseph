@@ -81,6 +81,7 @@ export const CircularProgress: FC<CircularProgressProps> = ({
           strokeDasharray={circumference}
         />
       </Svg>
+
       <Overlay>
         <Content>
           <>{children}</>

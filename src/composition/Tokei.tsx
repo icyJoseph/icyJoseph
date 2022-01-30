@@ -13,7 +13,9 @@ const Language = ({ language, code, blanks, comments }: IcyJoseph.Tokei) => {
   return (
     <Card m={2} px={2}>
       <Card.Header>
-        <h2>{language}</h2>
+        <Text renderAs="h2" fontWeight={300} fontSize="2rem">
+          {language}
+        </Text>
       </Card.Header>
 
       <Card.Section>

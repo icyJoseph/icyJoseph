@@ -16,7 +16,7 @@ type TextBaseProps = Sprinkles & {
 };
 
 type TextProps = TextBaseProps & {
-  renderAs?: "span" | "p" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  renderAs?: "span" | "p" | "code" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 } & ComponentPropsWithoutRef<"p">;
 
 type TimeTextProps = TextBaseProps & {
@@ -73,7 +73,7 @@ export const Text = ({
       className={classnames(className, textClassName, sprinkle)}
       style={assignInlineVars(textTheme, {
         fontWeight: `${fontWeight || 400}`,
-        color: `var(${textColor})` || theme.colors.smokeyWhite,
+        color: textColor ? `var(${textColor})` : theme.colors.smokeyWhite,
         fontSize: fontSize || "1.6rem",
         textAlign: textAlign || "left"
       })}

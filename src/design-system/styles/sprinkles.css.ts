@@ -11,8 +11,7 @@ const space = {
   7: "256px",
   8: "512px",
   // todo how to map to itself - if not found above
-  auto: "auto",
-  "0 auto": "0 auto"
+  auto: "auto"
 } as const;
 
 const responsiveProperties = defineProperties({
@@ -34,6 +33,7 @@ const responsiveProperties = defineProperties({
       "space-between"
     ],
     alignItems: ["stretch", "flex-start", "center", "flex-end"],
+    flexWrap: ["nowrap", "wrap", "wrap-reverse", "initial", "revert", "unset"],
 
     paddingTop: space,
     paddingBottom: space,

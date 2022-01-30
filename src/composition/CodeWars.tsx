@@ -54,7 +54,7 @@ export const CodeWars = ({
       <Flex mt={4}>
         <Card my={2} mx="auto">
           <Card.Header>
-            <h2>
+            <Text renderAs="h2" fontWeight={300} fontSize="2rem">
               <a
                 href="https://www.codewars.com/users/icyJoseph"
                 rel="noopener noreferrer"
@@ -62,7 +62,7 @@ export const CodeWars = ({
               >
                 {username}
               </a>
-            </h2>
+            </Text>
           </Card.Header>
 
           <Card.Section>

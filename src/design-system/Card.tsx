@@ -1,80 +1,48 @@
-import { PropsWithChildren } from "react";
-import styled from "styled-components";
-import { Property } from "csstype";
-import { space, SpaceProps } from "@styled-system/space";
+import type { ComponentPropsWithoutRef } from "react";
+import classnames from "classnames";
 
-const StyledCard = styled.div<SpaceProps>`
-  font-family: Recursive, sans-serif;
+import { pickSprinkleProps } from "utils/sprinkleProps";
+import { sprinkles, Sprinkles } from "design-system/styles/sprinkles.css";
+import { cardWrapper } from "design-system/styles/Card.css";
 
-  ${space({ py: 3, px: 3 })};
-  ${space}
-  background:var(--softDark);
-  color: var(--white);
-  position: relative;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.16), 0 3px 12px rgba(0, 0, 0, 0.23);
+type CardProps = ComponentPropsWithoutRef<"div"> & Sprinkles;
 
-  &::after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    border-radius: 6px;
-    box-shadow: 0 9px 18px rgba(0, 0, 0, 0.3), 0 9px 18px rgba(0, 0, 0, 0.22);
-    transition: opacity 0.3s ease-in-out;
-  }
+export const Card = (props: CardProps) => {
+  const { hostProps, sprinklers } = pickSprinkleProps(props);
+  return (
+    <div
+      {...hostProps}
+      className={classnames(
+        cardWrapper,
+        props.className,
+        sprinkles({ py: 3, px: 3, ...sprinklers })
+      )}
+    />
+  );
+};
 
-  &:hover::after {
-    opacity: 1;
-  }
-`;
+Card.Header = function CardHeader(props: ComponentPropsWithoutRef<"header">) {
+  return <header {...props} />;
+};
 
-export const Card = (props: PropsWithChildren<SpaceProps>) => (
-  <StyledCard {...props} />
-);
+Card.Section = function CardSection(
+  props: ComponentPropsWithoutRef<"section">
+) {
+  return (
+    <section
+      {...props}
+      className={classnames(
+        props.className,
+        sprinkles({
+          display: "flex",
+          mt: 4,
+          flexWrap: { mobile: "nowrap", tablet: "wrap" }
+        })
+      )}
+    />
+  );
+};
 
-Card.Header = styled.header`
-  font-size: 2rem;
-  font-weight: 300;
-`;
-
-Card.SubHeader = styled.span<{ textTransform?: Property.TextTransform }>`
-  ${space({ mt: 2 })};
-  font-size: 1.8rem;
-  text-transform: ${({ textTransform = "lowercase" }) => textTransform};
-  text-align: center;
-`;
-
-Card.Section = styled.section`
-  ${space({ mt: 4 })};
-  display: flex;
-  flex-wrap: wrap;
-  flex-basis: 33%;
-
-  @media (min-width: 375px) {
-    flex-wrap: nowrap;
-  }
-`;
-
-Card.Footer = styled.footer`
-  ${space({ mt: 3 })}
-`;
-
-export const InfoCard = styled(Card)`
-  width: 80%;
-  max-width: unset;
-  min-width: unset;
-
-  @media (min-width: 320px) {
-    max-width: 328px;
-    min-width: 280px;
-    width: 33.33%;
-  }
-
-  @media (min-width: 375px) {
-    min-width: 300px;
-  }
-`;
+Card.Footer = function CardFooter(props: ComponentPropsWithoutRef<"footer">) {
+  return <footer {...props} />;
+};

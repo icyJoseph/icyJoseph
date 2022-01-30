@@ -25,7 +25,7 @@ const StyledCircularProgress = styled(CircularProgress)`
 `;
 
 const DesignSystemContainer = styled(Container)`
-  & > ${Section} {
+  & > section {
     ${space({ mb: 5 })};
   }
 `;
@@ -95,7 +95,7 @@ export const DesignSystem = () => {
                 <Tr>
                   <Th />
                   <Th colSpan={2}>
-                    <Text $textAlign="left" fontSize="2rem" fontWeight={100}>
+                    <Text fontSize="2rem" fontWeight={100}>
                       Activities
                     </Text>
                   </Th>
@@ -124,7 +124,7 @@ export const DesignSystem = () => {
                     <Td />
 
                     <Td>
-                      <Text $textAlign="left" fontSize="2rem" fontWeight={300}>
+                      <Text fontSize="2rem" fontWeight={300}>
                         {entry.name}
                       </Text>
                     </Td>

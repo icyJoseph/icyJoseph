@@ -44,16 +44,29 @@ export default class MyDocument extends Document {
             href="https://fonts.gstatic.com"
             crossOrigin="anonymous"
           />
-          {/* eslint-disable-next-line @next/next/google-font-display */}
           <link
+            rel="preload"
+            as="style"
             href="https://fonts.googleapis.com/css2?family=Recursive:wght@300;400;500;600&display=swap"
+          />
+          <link
             rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Recursive:wght@300;400;500;600&display=swap"
+            media="print"
+            onLoad={(e) => (e.currentTarget.media = "all")}
           />
           <link
             rel="stylesheet"
             media="screen and (min-width: 768px)"
             href="https://cdn.jsdelivr.net/gh/devicons/devicon@master/devicon.min.css"
           />
+
+          <noscript>
+            <link
+              rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=Recursive:wght@300;400;500;600&display=swap"
+            />
+          </noscript>
         </Head>
         <body>
           <Main />

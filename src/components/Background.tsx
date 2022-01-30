@@ -10,6 +10,13 @@ export const Background = (props: ComponentPropsWithoutRef<"div">) => (
   <div {...props} className={classnames(props.className, backgroundWaves)} />
 );
 
-export const IsolatedLayout = (props: ComponentPropsWithoutRef<"div">) => (
-  <div {...props} className={classnames(props.className, isolatedLayout)} />
-);
+type LayoutTags = "main" | "div" | "section";
+
+export const IsolatedLayout = (
+  props: ComponentPropsWithoutRef<LayoutTags> & { renderAs?: LayoutTags }
+) => {
+  const Tag = props.renderAs || "div";
+  return (
+    <Tag {...props} className={classnames(props.className, isolatedLayout)} />
+  );
+};

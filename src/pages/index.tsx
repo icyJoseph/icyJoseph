@@ -70,7 +70,7 @@ export function Home({
 
       <Introduction />
 
-      <Container as="main">
+      <Container>
         <PageNav>
           <Tokei tokei={tokei} name="tokei" />
 

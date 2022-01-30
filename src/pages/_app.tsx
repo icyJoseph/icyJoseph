@@ -36,7 +36,7 @@ function App({ Component, pageProps }: AppProps) {
     <>
       <Background />
 
-      <IsolatedLayout>
+      <IsolatedLayout renderAs="main">
         <Navigation />
 
         <Component {...pageProps} />

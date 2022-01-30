@@ -11,7 +11,7 @@ const Language = ({ language, code, blanks, comments }: IcyJoseph.Tokei) => {
   const percentage = (code / total) * 100;
 
   return (
-    <Card m={2}>
+    <Card m={2} px={2}>
       <Card.Header>
         <h2>{language}</h2>
       </Card.Header>

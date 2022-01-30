@@ -58,6 +58,9 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Recursive:wght@300;400;500;600&display=swap"
             crossOrigin="anonymous"
+            onLoad={function (this: HTMLLinkElement) {
+              this.media = "all";
+            }}
           />
           <link
             rel="stylesheet"

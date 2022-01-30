@@ -83,15 +83,6 @@
           }
         },
         {
-          "name": "/home/joseph/dev/daybook/search-server/src/helpers.rs",
-          "stats": {
-            "blanks": 0,
-            "blobs": {},
-            "code": 0,
-            "comments": 1
-          }
-        },
-        {
           "name": "/home/joseph/dev/daybook/search-server/src/start.rs",
           "stats": {
             "blanks": 0,
@@ -102,6 +93,15 @@
         },
         {
           "name": "/home/joseph/dev/rust/wasm-aes-soft/tests/web.rs",
+          "stats": {
+            "blanks": 0,
+            "blobs": {},
+            "code": 0,
+            "comments": 1
+          }
+        },
+        {
+          "name": "/home/joseph/dev/daybook/search-server/src/helpers.rs",
           "stats": {
             "blanks": 0,
             "blobs": {},

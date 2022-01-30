@@ -35,7 +35,7 @@ type HomeProps = {
 const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
 
 const seoProps = {
-  title: "icyJoseph | Señor Developer",
+  title: "icyJoseph",
   description:
     "Señor Developer. JavaScript, TypeScript, Rust, CSS. I work with fullstack. I enjoy coding challenges.",
   openGraph: {

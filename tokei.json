@@ -9,10 +9,17 @@
   },
   {
     "language": "TypeScript",
+<<<<<<< HEAD
     "blanks": 10721,
     "children": {},
     "code": 105060,
     "comments": 3679,
+=======
+    "blanks": 10801,
+    "children": {},
+    "code": 105261,
+    "comments": 3687,
+>>>>>>> 34c29ca... feat: Move GitHub queries to lambdas
     "inaccurate": false
   },
   {

@@ -12,9 +12,7 @@ import { Text } from "design-system/Text";
 import { BackToTop } from "design-system/BackToTop";
 
 import { yearStart, yearEnd } from "helpers";
-import { useGitHub } from "hooks/useGitHub";
-
-import { GET_USER } from "queries";
+import { useGitHubProfile } from "hooks/useGitHub";
 
 const GitHubImg = styled.span`
   ${space({ m: "auto" })};
@@ -114,19 +112,9 @@ const RenderWithSelectedYear = ({
 type GitHubProps = { initial: IcyJoseph.GitHub; name: string };
 
 export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
-  const { data } = useGitHub<
-    { login: "icyJoseph"; from: string },
-    IcyJoseph.GitHub,
-    { user: IcyJoseph.GitHub }
-  >({
-    query: GET_USER,
-    variables: {
-      login: "icyJoseph",
-      ...yearStart()
-    },
-    fallbackData: initial,
-    selector: ({ user }: { user: IcyJoseph.GitHub }) => user,
-    revalidateOnMount: false
+  const { data } = useGitHubProfile({
+    ...yearStart(),
+    fallbackData: initial
   });
 
   const {

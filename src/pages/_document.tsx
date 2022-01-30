@@ -38,7 +38,11 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.googleapis.com"
+            crossOrigin="anonymous"
+          />
           <link
             rel="preconnect"
             href="https://fonts.gstatic.com"
@@ -50,8 +54,14 @@ export default class MyDocument extends Document {
             crossOrigin="anonymous"
           />
           <link
+            rel="preload"
+            as="style"
             href="https://fonts.googleapis.com/css2?family=Recursive:wght@300;400;500;600&display=swap"
-            rel="stylesheet"
+            crossOrigin="anonymous"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Recursive:wght@300;400;500;600&display=swap"
+            crossOrigin="anonymous"
           />
           <link
             rel="stylesheet"

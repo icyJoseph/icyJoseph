@@ -11,7 +11,7 @@ const StyledFooter = styled.footer<SpaceProps>`
 `;
 
 const StyledSection = styled.section`
-  font-family: sans-serif;
+  font-family: monospace;
   max-width: 90ch;
 
   ${space({ m: "0 auto" })};
@@ -40,7 +40,7 @@ const CopyrightNotice = styled.span`
 `;
 
 const Stack = styled.div`
-  font-family: Recursive, sans-serif;
+  font-family: "Fira Code", monospace;
   ${space};
 
   /* IE11 fallback */
@@ -99,7 +99,7 @@ const Notice = styled.section`
 
   & p {
     ${space({ mt: 3 })};
-    font-family: Recursive, sans-serif;
+    font-family: "Fira Code", monospace;
     font-weight: 300;
   }
 `;

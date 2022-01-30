@@ -15,7 +15,7 @@ export const textClassName = style({
     textAlign: "left",
     color: theme.colors.smokeyWhite
   }),
-  fontFamily: "Recursive, sans-serif",
+  fontFamily: "'Fira Code', monospace",
   fontSize: textTheme.fontSize,
   fontWeight: textTheme.fontWeight,
   textAlign: textTheme.textAlign,

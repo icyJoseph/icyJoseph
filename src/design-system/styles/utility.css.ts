@@ -7,7 +7,7 @@ export const underline = style({ textDecoration: "underline" });
 export const textContainerTheme = createThemeContract({ maxWidth: null });
 
 export const textContainer = style({
-  vars: assignVars(textContainerTheme, { maxWidth: "55ch" }),
-  fontFamily: "sans-serif",
+  vars: assignVars(textContainerTheme, { maxWidth: "60ch" }),
+  fontFamily: "monospace",
   maxWidth: textContainerTheme.maxWidth
 });

@@ -51,12 +51,12 @@ export default class MyDocument extends Document {
           <link
             rel="preload"
             as="style"
-            href="https://fonts.googleapis.com/css2?family=Recursive:wght@300;400;500;600&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&display=swap"
             crossOrigin="anonymous"
           />
           <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Recursive:wght@300;400;500;600&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&display=swap"
             crossOrigin="anonymous"
             onLoad={function (this: HTMLLinkElement) {
               this.media = "all";
@@ -71,7 +71,7 @@ export default class MyDocument extends Document {
           <noscript>
             <link
               rel="stylesheet"
-              href="https://fonts.googleapis.com/css2?family=Recursive:wght@300;400;500;600&display=swap"
+              href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&display=swap"
             />
           </noscript>
         </Head>

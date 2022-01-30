@@ -5,7 +5,7 @@ import { space } from "@styled-system/space";
 
 const StyledNav = styled.nav`
   ${space({ py: [5, 4] })};
-  font-family: Recursive, sans-serif;
+  font-family: "Fira Code", monospace;
 `;
 
 const PageLinks = styled.ul`

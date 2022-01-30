@@ -4,7 +4,7 @@ import { space, SpaceProps } from "@styled-system/space";
 export const Container = styled.section<SpaceProps>`
   ${space};
 
-  font-family: sans-serif;
+  font-family: monospace;
   display: grid;
   grid-template-columns:
     1fr

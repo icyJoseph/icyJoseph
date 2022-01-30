@@ -7,6 +7,6 @@ globalStyle("html", {
 
 globalStyle("body", {
   fontSize: "1.6rem",
-  fontFamily: "Recursive, sans-serif",
+  fontFamily: "'Fira Code', monospace",
   lineHeight: 1.4
 });

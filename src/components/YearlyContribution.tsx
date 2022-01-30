@@ -9,10 +9,8 @@ import { Emoji } from "design-system/Emoji";
 import { Flex } from "design-system/Flex";
 import { Text } from "design-system/Text";
 
-import { useGitHub } from "hooks/useGitHub";
+import { useGitHubContributions } from "hooks/useGitHub";
 import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
-
-import { GET_YEAR_CONTRIBUTIONS } from "queries";
 
 import { Value, Unit } from "design-system/Measurement";
 
@@ -258,37 +256,6 @@ type YearlyContributionProps = {
   to?: string;
 };
 
-const useContributionCollection = (
-  from: string,
-  to?: string,
-  initial: IcyJoseph.ContributionCollection | null = null
-) => {
-  const { data, error } = useGitHub<
-    {
-      login: "icyJoseph";
-      from: string;
-      to?: string;
-    },
-    IcyJoseph.ContributionCollection,
-    { user: { contributionsCollection: IcyJoseph.ContributionCollection } }
-  >({
-    query: GET_YEAR_CONTRIBUTIONS,
-    variables: {
-      login: "icyJoseph",
-      from,
-      to
-    },
-    fallbackData: initial,
-    selector: ({
-      user: { contributionsCollection }
-    }: {
-      user: { contributionsCollection: IcyJoseph.ContributionCollection };
-    }) => contributionsCollection
-  });
-
-  return { data, error };
-};
-
 function circular(index: number, step: number, limit: number) {
   return (limit + ((index + step) % limit)) % limit;
 }
@@ -307,7 +274,7 @@ export const YearlyContribution = ({
   from,
   to
 }: YearlyContributionProps) => {
-  const { data, error } = useContributionCollection(from, to, initial);
+  const { data, error } = useGitHubContributions(from, to, initial);
 
   const [pointer, setPointer] = useState(0);
 

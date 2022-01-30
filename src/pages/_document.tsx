@@ -38,7 +38,11 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.googleapis.com"
+            crossOrigin="anonymous"
+          />
           <link
             rel="preconnect"
             href="https://fonts.gstatic.com"
@@ -48,12 +52,12 @@ export default class MyDocument extends Document {
             rel="preload"
             as="style"
             href="https://fonts.googleapis.com/css2?family=Recursive:wght@300;400;500;600&display=swap"
+            crossOrigin="anonymous"
           />
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Recursive:wght@300;400;500;600&display=swap"
-            media="print"
-            onLoad={(e) => (e.currentTarget.media = "all")}
+            crossOrigin="anonymous"
           />
           <link
             rel="stylesheet"

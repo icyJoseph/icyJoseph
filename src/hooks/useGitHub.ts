@@ -1,40 +1,59 @@
 import axios from "axios";
 import useSWR from "swr";
+import useSWRImmutable from "swr/immutable";
 
-type UseGitHubProps<Variables, Data, Response> = {
-  query: string;
-  variables: Variables;
-  fallbackData?: Data | null;
-  selector?: (res: Response) => Data;
-  revalidateOnMount?: boolean;
-};
-
-type Identity = <T, D>(res: T) => T extends D ? D : never;
-const mirror: Identity = <T, D>(res: T) => res as unknown as D;
-
-const fetcher = <Variables, Response>(query: string, variables: Variables) =>
+const fetcher = <Response, Variables>(
+  query: "profile" | "contributions",
+  variables: Variables
+) =>
   axios
-    .post<Response>("/api/github", { query, variables })
+    .post<Response>(`/api/github/${query}`, { variables })
     .then(({ data }) => data);
 
-export const useGitHub = <Variables, Data, Response = Data>({
-  query,
-  variables,
-  fallbackData = null,
-  selector = mirror,
-  revalidateOnMount = true
-}: UseGitHubProps<Variables, Data, Response>) => {
-  return useSWR<Data | null>(
-    [query, JSON.stringify(variables)],
-    (...args: [query: string, variables: Variables]): Promise<Data> =>
-      fetcher<Variables, Response>(...args).then((response) =>
-        selector(response)
-      ),
+type ProfileVariables = { login: "icyJoseph"; from: string };
+
+export const useGitHubProfile = ({
+  from,
+  fallbackData = null
+}: {
+  from: string;
+  fallbackData: IcyJoseph.GitHub | null;
+}) => {
+  return useSWRImmutable<IcyJoseph.GitHub | null>(
+    `profile/${from}`,
+    async () =>
+      fetcher<{ user: IcyJoseph.GitHub }, ProfileVariables>("profile", {
+        login: "icyJoseph",
+        from
+      }).then(({ user }) => user),
     {
-      revalidateOnMount,
       shouldRetryOnError: false,
-      revalidateOnFocus: false,
       fallbackData
     }
   );
+};
+
+type ContributionVariables = { login: "icyJoseph"; from: string; to?: string };
+
+export const useGitHubContributions = (
+  from: string,
+  to?: string,
+  initial: IcyJoseph.ContributionCollection | null = null
+) => {
+  const { data, error } = useSWR<IcyJoseph.ContributionCollection | null>(
+    `contributions/${from}/${to}`,
+    async () => {
+      return fetcher<{ user: IcyJoseph.GitHub }, ContributionVariables>(
+        "contributions",
+        {
+          login: "icyJoseph",
+          from,
+          to
+        }
+      ).then(({ user }) => user.contributionsCollection);
+    },
+    { fallbackData: initial }
+  );
+
+  return { data, error };
 };

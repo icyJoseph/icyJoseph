@@ -13,12 +13,12 @@ import { Introduction } from "composition/Introduction";
 import { Tokei } from "composition/Tokei";
 import { GitHub } from "composition/GitHub";
 
+import { queryGitHub } from "github/fetcher";
+import { GET_USER } from "github/queries";
+
 import { getCodeWarsUser } from "pages/api/codewars";
-import { queryGitHub } from "pages/api/github";
 import { fitbitAuth } from "pages/api/fitbit/profile";
 import { getActivityLog } from "pages/api/fitbit/activities/list";
-
-import { GET_USER } from "queries";
 
 import { yearStart, isoStringWithoutMs } from "helpers";
 import { NextSeo } from "next-seo";
@@ -95,10 +95,13 @@ export async function getStaticProps(): Promise<
 > {
   const codewars = await getCodeWarsUser();
 
-  const github = await queryGitHub(GET_USER, {
-    login: "icyJoseph",
-    ...yearStart()
-  }).then(({ data }) => data.user);
+  const github = await queryGitHub<{ data: { user: IcyJoseph.GitHub } }>(
+    GET_USER,
+    {
+      login: "icyJoseph",
+      ...yearStart()
+    }
+  ).then(({ data }) => data.user);
 
   const tokei = await promisify(fs.readFile)(
     path.resolve(process.cwd(), "tokei.json"),

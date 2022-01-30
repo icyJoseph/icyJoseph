@@ -4,6 +4,8 @@ import { Property } from "csstype";
 import { space, SpaceProps } from "@styled-system/space";
 
 const StyledCard = styled.div<SpaceProps>`
+  font-family: Recursive, sans-serif;
+
   ${space({ py: 3, px: 3 })};
   ${space}
   background:var(--softDark);

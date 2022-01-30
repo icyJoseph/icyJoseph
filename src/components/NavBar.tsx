@@ -3,6 +3,7 @@ import { space } from "@styled-system/space";
 import { ComponentPropsWithoutRef } from "react";
 
 const Nav = styled.nav`
+  font-family: Recursive, sans-serif;
   ${space({ py: 2, my: 0 })};
   display: flex;
   flex-direction: column;

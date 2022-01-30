@@ -6,6 +6,7 @@ export const Base = styled.div`
   text-align: right;
 
   & > a {
+    font-family: Recursive, sans-serif;
     text-decoration: underline;
     font-size: 1.4rem;
     color: var(--smokeyWhite);

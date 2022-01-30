@@ -24,8 +24,10 @@ const Language = ({ language, code, blanks, comments }: IcyJoseph.Tokei) => {
             ariaLabel={`Lines of ${language} code`}
             title={`Lines of ${language} code`}
           />
+
           <code>{code}</code>
-          <p>LoC</p>
+
+          <Text>LoC</Text>
         </CircularProgress>
       </Card.Section>
     </Card>

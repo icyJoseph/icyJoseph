@@ -11,6 +11,7 @@ const StyledFooter = styled.footer<SpaceProps>`
 `;
 
 const StyledSection = styled.section`
+  font-family: sans-serif;
   max-width: 90ch;
 
   ${space({ m: "0 auto" })};
@@ -39,6 +40,7 @@ const CopyrightNotice = styled.span`
 `;
 
 const Stack = styled.div`
+  font-family: Recursive, sans-serif;
   ${space};
 
   /* IE11 fallback */
@@ -90,9 +92,14 @@ const Notice = styled.section`
     text-align: center;
   }
 
-  > p {
+  & > div {
     max-width: 30ch;
-    ${space({ mt: 3, mx: "auto" })};
+    ${space({ mx: "auto" })};
+  }
+
+  & p {
+    ${space({ mt: 3 })};
+    font-family: Recursive, sans-serif;
     font-weight: 300;
   }
 `;
@@ -122,27 +129,29 @@ export const Footer = () => {
         </Stack>
 
         <Notice>
-          <p>
-            I am a software developer at{" "}
-            <EvolveLink
-              href="https://evolvetechnology.se"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              Evolve Technology Sweden AB
-            </EvolveLink>
-            .
-          </p>
-          <p>
-            We believe great software will actually change the world!{" "}
-            <EvolveLink
-              href="https://evolvetechnology.se/en/contact"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              Contact us!
-            </EvolveLink>
-          </p>
+          <div>
+            <p>
+              I am a software developer at{" "}
+              <EvolveLink
+                href="https://evolvetechnology.se"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                Evolve Technology Sweden AB
+              </EvolveLink>
+              .
+            </p>
+            <p>
+              We believe great software will actually change the world!{" "}
+              <EvolveLink
+                href="https://evolvetechnology.se/en/contact"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                Contact us!
+              </EvolveLink>
+            </p>
+          </div>
         </Notice>
 
         <FooterNav>

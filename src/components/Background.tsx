@@ -12,10 +12,11 @@ export const Background = (props: ComponentPropsWithoutRef<"div">) => (
 
 type LayoutTags = "main" | "div" | "section";
 
-export const IsolatedLayout = (
-  props: ComponentPropsWithoutRef<LayoutTags> & { renderAs?: LayoutTags }
-) => {
-  const Tag = props.renderAs || "div";
+export const IsolatedLayout = ({
+  renderAs,
+  ...props
+}: ComponentPropsWithoutRef<LayoutTags> & { renderAs?: LayoutTags }) => {
+  const Tag = renderAs || "div";
   return (
     <Tag {...props} className={classnames(props.className, isolatedLayout)} />
   );

@@ -1,7 +1,6 @@
 import type { ComponentPropsWithoutRef } from "react";
 import type { Property } from "csstype";
 
-import styled from "styled-components";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import classnames from "classnames";
 
@@ -10,10 +9,7 @@ import { sprinkles, Sprinkles } from "design-system/styles/sprinkles.css";
 import { theme } from "styles/theme.css";
 
 type TextBaseProps = Sprinkles & {
-  $verticalAlign?: Property.VerticalAlign;
-  $textTransform?: Property.TextTransform;
-  $textAlign?: Property.TextAlign;
-
+  textAlign?: Property.TextAlign;
   fontSize?: Property.FontSize;
   fontWeight?: Property.FontWeight;
   textColor?: string;
@@ -27,11 +23,8 @@ type TimeTextProps = TextBaseProps & {
   renderAs: "time";
 } & ComponentPropsWithoutRef<"time">;
 
-const BaseText = ({
-  $verticalAlign,
-  $textAlign,
-  $textTransform,
-
+export const Text = ({
+  textAlign,
   fontSize,
   textColor,
   fontWeight,
@@ -81,14 +74,9 @@ const BaseText = ({
       style={assignInlineVars(textTheme, {
         fontWeight: `${fontWeight || 400}`,
         color: `var(${textColor})` || theme.colors.smokeyWhite,
-        fontSize: fontSize || "1.6rem"
+        fontSize: fontSize || "1.6rem",
+        textAlign: textAlign || "left"
       })}
     />
   );
 };
-
-export const Text = styled(BaseText)<TextProps | TimeTextProps>`
-  text-align: ${({ $textAlign }) => $textAlign};
-  vertical-align: ${({ $verticalAlign }) => $verticalAlign};
-  text-transform: ${({ $textTransform = "unset" }) => $textTransform};
-`;

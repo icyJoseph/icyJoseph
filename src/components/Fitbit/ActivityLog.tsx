@@ -1,14 +1,16 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, memo } from "react";
 
 import { Button } from "design-system/Button";
 import { Flex } from "design-system/Flex";
 import { Table, Th, Td, Tr } from "design-system/Table";
 import { Text } from "design-system/Text";
+import { Measurement } from "design-system/Measurement";
+
 import { head, exists } from "functional";
 import { isoStringWithoutMs } from "helpers";
+
 import { useFitbitActivityLog } from "hooks/useFitbit";
 import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
-import { Measurement } from "design-system/Measurement";
 
 export const formatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
@@ -33,7 +35,11 @@ const isBaseActivity = (
 const isSwimming = (act: IcyJoseph.Activities): act is IcyJoseph.SwimActivity =>
   act.activityName === "Swim";
 
-const Body = ({ activity }: { activity: IcyJoseph.Activities }) => {
+const Body = memo(function Body({
+  activity
+}: {
+  activity: IcyJoseph.Activities;
+}) {
   if (isSwimming(activity)) {
     return (
       <>
@@ -57,7 +63,7 @@ const Body = ({ activity }: { activity: IcyJoseph.Activities }) => {
   }
 
   return <Measurement value={activity.averageHeartRate} unit="bpm" />;
-};
+});
 
 type ActivityLogProps = {
   initial: IcyJoseph.ActivityLog;
@@ -108,6 +114,7 @@ const useDateQueue = (seed: string, onChange?: (date: string) => void) => {
 };
 
 const noop = () => void 0;
+const defaultActivityLogData: IcyJoseph.ActivityLog = [];
 
 export const ActivityLog = ({
   initial,
@@ -120,7 +127,7 @@ export const ActivityLog = ({
   );
 
   const { data, error } = useFitbitActivityLog(currentDate, initial);
-  const prev = useLastNonNullableValue(data) ?? [];
+  const prev = useLastNonNullableValue(data) ?? defaultActivityLogData;
   const activityLog = data ?? prev;
   const stale = !error && !data;
 
@@ -134,7 +141,7 @@ export const ActivityLog = ({
             <Th />
 
             <Th colSpan={2}>
-              <Text $textAlign="left" fontSize="2rem" fontWeight={100}>
+              <Text fontSize="2rem" fontWeight={100}>
                 Activities
               </Text>
             </Th>
@@ -146,10 +153,11 @@ export const ActivityLog = ({
             <Tr key={activity.logId}>
               <Td />
               <Td>
-                <Text $textAlign="left" fontSize="2rem" fontWeight={300}>
+                <Text fontSize="2rem" fontWeight={300}>
                   {activity.activityName}
                 </Text>
-                <Text $textAlign="left" fontWeight={300}>
+
+                <Text fontWeight={300}>
                   <Text
                     renderAs="time"
                     dateTime={activity.startTime}

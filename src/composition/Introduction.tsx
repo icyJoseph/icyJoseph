@@ -10,7 +10,7 @@ export const Introduction = () => (
     <Flex flexDirection="column" justifyContent="center" alignItems="center">
       <Text
         renderAs="h1"
-        $textAlign="center"
+        textAlign="center"
         fontSize="3rem"
         fontWeight={300}
         my={4}
@@ -18,7 +18,7 @@ export const Introduction = () => (
         Joseph
       </Text>
 
-      <Text $textAlign="center">
+      <Text textAlign="center">
         github:{" "}
         <a
           href="https://github.com/icyJoseph"
@@ -29,7 +29,7 @@ export const Introduction = () => (
         </a>
       </Text>
 
-      <Text $textAlign="center">
+      <Text textAlign="center">
         medium:{" "}
         <a
           href="https://medium.com/@icjoseph"

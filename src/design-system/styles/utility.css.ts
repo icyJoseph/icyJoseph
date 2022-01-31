@@ -4,6 +4,8 @@ export const fullPage = style({ minHeight: "100vh" });
 
 export const underline = style({ textDecoration: "underline" });
 
+export const bolder = style({ fontWeight: 600 });
+
 export const textContainerTheme = createThemeContract({ maxWidth: null });
 
 export const textContainer = style({

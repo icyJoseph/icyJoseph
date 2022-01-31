@@ -124,7 +124,7 @@ export const Footer = () => {
             <li>React</li>
             <li>NodeJS</li>
             <li>Next.js</li>
-            <li>Recursive Font Face</li>
+            <li>Fira Code Font Face</li>
           </List>
         </Stack>
 

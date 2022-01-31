@@ -68,6 +68,12 @@ export default class MyDocument extends Document {
             href="https://cdn.jsdelivr.net/gh/devicons/devicon@master/devicon.min.css"
           />
 
+          <link
+            rel="preconnect"
+            href="https://www.googletagmanager.com"
+            crossOrigin="anonymous"
+          />
+
           <noscript>
             <link
               rel="stylesheet"

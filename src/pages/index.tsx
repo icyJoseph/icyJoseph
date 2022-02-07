@@ -5,6 +5,8 @@ import { promisify } from "util";
 import Head from "next/head";
 import type { GetStaticPropsResult } from "next";
 
+import { NextSeo } from "next-seo";
+
 import { Container } from "design-system/Container";
 import { PageNav } from "components/PageNav";
 
@@ -22,7 +24,6 @@ import { fitbitAuth } from "pages/api/fitbit/profile";
 import { getActivityLog } from "pages/api/fitbit/activities/list";
 
 import { yearStart, isoStringWithoutMs } from "helpers";
-import { NextSeo } from "next-seo";
 
 type HomeProps = {
   codewars: IcyJoseph.CodeWars;
@@ -71,7 +72,7 @@ export function Home({
 
       <Introduction />
 
-      <Container as="main">
+      <Container>
         <PageNav>
           <Tokei tokei={tokei} name="tokei" />
 

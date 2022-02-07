@@ -1,33 +1,26 @@
 [
   {
     "language": "JavaScript",
-    "blanks": 14520,
+    "blanks": 14518,
     "children": {},
-    "code": 113153,
+    "code": 113103,
     "comments": 8446,
     "inaccurate": false
   },
   {
     "language": "TypeScript",
-<<<<<<< HEAD
-    "blanks": 10721,
+    "blanks": 10729,
     "children": {},
-    "code": 105060,
-    "comments": 3679,
-=======
-    "blanks": 10801,
-    "children": {},
-    "code": 105261,
-    "comments": 3687,
->>>>>>> 34c29ca... feat: Move GitHub queries to lambdas
+    "code": 104849,
+    "comments": 3674,
     "inaccurate": false
   },
   {
     "language": "CSS",
-    "blanks": 3708,
+    "blanks": 3720,
     "children": {},
-    "code": 40825,
-    "comments": 340,
+    "code": 40944,
+    "comments": 341,
     "inaccurate": false
   },
   {
@@ -127,8 +120,8 @@
         }
       ]
     },
-    "code": 14578,
-    "comments": 375,
+    "code": 14579,
+    "comments": 373,
     "inaccurate": false
   }
 ]

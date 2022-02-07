@@ -2,47 +2,34 @@ import Link from "next/link";
 
 import { Container } from "design-system/Container";
 import { Emoji } from "design-system/Emoji";
-import { NavBar } from "components/NavBar";
+import {
+  Nav,
+  Brand,
+  Spacer,
+  LinkList,
+  LinkItem
+} from "design-system/Navigation";
 
-export const entries = [
-  // {
-  //   symbol: "🏠",
-  //   href: "/",
-  //   ariaLabel: "Navigate Home",
-  //   title: "Home"
-  // }
-  // {
-  //   symbol: "📰",
-  //   href: "/posts",
-  //   ariaLabel: "Navigate to Posts",
-  //   title: "Posts"
-  // },
-  // {
-  //   symbol: "👨🏽‍💻",
-  //   href: "/contact",
-  //   ariaLabel: "Navigate to contact info",
-  //   title: "Contact"
-  // }
-];
+import { entries } from "config/pages";
 
 export const Navigation = () => {
   return (
     <Container as="header">
-      <NavBar>
-        <NavBar.Brand>
+      <Nav>
+        <Brand>
           <Link href="/">
             <a>
               <h1>icyJoseph</h1>
             </a>
           </Link>
           <span>Señor Developer</span>
-        </NavBar.Brand>
+        </Brand>
 
-        <NavBar.Spacer />
+        <Spacer />
 
-        <NavBar.LinkList>
+        <LinkList>
           {entries.map(({ title, symbol, ariaLabel, href }) => (
-            <NavBar.LinkItem key={title}>
+            <LinkItem key={title}>
               <Link href={href}>
                 <a>
                   <span>{title}</span>
@@ -54,10 +41,10 @@ export const Navigation = () => {
                   />
                 </a>
               </Link>
-            </NavBar.LinkItem>
+            </LinkItem>
           ))}
-        </NavBar.LinkList>
-      </NavBar>
+        </LinkList>
+      </Nav>
     </Container>
   );
 };

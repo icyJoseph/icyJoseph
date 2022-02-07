@@ -2,7 +2,7 @@ import { useEffect, useState, memo } from "react";
 import styled, { css } from "styled-components";
 import { space, SpaceProps } from "@styled-system/space";
 
-import { DevIcon } from "components/DevIcon";
+import { DevIcon } from "design-system/DevIcon";
 import { Box } from "design-system/Box";
 import { Button } from "design-system/Button";
 import { Emoji } from "design-system/Emoji";
@@ -13,6 +13,8 @@ import { useGitHubContributions } from "hooks/useGitHub";
 import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
 
 import { Value, Unit } from "design-system/Measurement";
+
+// TODO: Remove `styled-components` dependency
 
 export const staleMixin = css<{ stale?: boolean }>`
   opacity: ${({ stale = false }) => (stale ? 0.5 : 1)};
@@ -194,7 +196,6 @@ type ContributionCardProps = {
 
 const ContributionCard = ({
   repository,
-
   index,
   contributions
 }: ContributionCardProps) => (

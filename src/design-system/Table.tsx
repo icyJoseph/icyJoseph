@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { space, SpaceProps } from "@styled-system/space";
 
-import { staleMixin } from "components/YearlyContribution";
+import { staleMixin } from "components/GitHub/YearlyContribution";
 
 const cellMixin = css`
   overflow: visible;

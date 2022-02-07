@@ -6,7 +6,7 @@ import Head from "next/head";
 
 import { GlobalStyle } from "styles/global";
 
-import { Background, Layout } from "components/Background";
+import { Background, Layout } from "design-system/Background";
 import { Footer } from "composition/Footer";
 import { Navigation } from "composition/Navigation";
 import { pageview } from "ga";

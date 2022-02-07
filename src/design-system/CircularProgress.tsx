@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { ReactNode } from "react";
 import styled from "styled-components";
 
 const Progress = styled.div`
@@ -43,14 +43,15 @@ type CircularProgressProps = {
   percentage: number;
   size?: number;
   className?: string;
+  children: ReactNode | ReactNode[];
 };
 
-export const CircularProgress: FC<CircularProgressProps> = ({
+export const CircularProgress = ({
   percentage,
   size = 150,
   className,
   children
-}) => {
+}: CircularProgressProps) => {
   const center = size / 2;
   const strokeWidth = size * 0.05;
   const radius = size / 2 - strokeWidth / 2;

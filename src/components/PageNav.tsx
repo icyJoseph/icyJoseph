@@ -1,30 +1,17 @@
 import { Children, Fragment, isValidElement, ReactNode } from "react";
 import Link from "next/link";
-import styled from "styled-components";
-import { space } from "@styled-system/space";
 
-const StyledNav = styled.nav`
-  ${space({ py: [5, 4] })};
-  font-family: Recursive, sans-serif;
-`;
-
-const PageLinks = styled.ul`
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-`;
-
-const PageLink = styled.li`
-  ${space({ mr: 2 })};
-  text-decoration: underline;
-  color: var(--smokeyWhite);
-`;
+import {
+  ContentNav,
+  ContentLinks,
+  ContentLink
+} from "design-system/Navigation";
 
 export const PageNav = ({ children }: { children: ReactNode }) => {
   return (
     <Fragment>
-      <StyledNav>
-        <PageLinks>
+      <ContentNav>
+        <ContentLinks>
           {Children.map(children, (child) => {
             if (!isValidElement(child)) return child;
 
@@ -32,15 +19,15 @@ export const PageNav = ({ children }: { children: ReactNode }) => {
             if (!name) return null;
 
             return (
-              <PageLink>
+              <ContentLink>
                 <Link href={`/#${name}`}>
                   <a>{name}</a>
                 </Link>
-              </PageLink>
+              </ContentLink>
             );
           })}
-        </PageLinks>
-      </StyledNav>
+        </ContentLinks>
+      </ContentNav>
 
       {children}
     </Fragment>

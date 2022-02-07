@@ -2,13 +2,16 @@ import { useState, useRef, useEffect } from "react";
 
 import { Button } from "design-system/Button";
 import { Flex } from "design-system/Flex";
+import { Measurement } from "design-system/Measurement";
 import { Table, Th, Td, Tr } from "design-system/Table";
 import { Text } from "design-system/Text";
+
 import { head, exists } from "functional";
+
 import { isoStringWithoutMs } from "helpers";
+
 import { useFitbitActivityLog } from "hooks/useFitbit";
 import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
-import { Measurement } from "design-system/Measurement";
 
 export const formatter = new Intl.DateTimeFormat("en-US", {
   month: "short",

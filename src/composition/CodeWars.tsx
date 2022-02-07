@@ -1,15 +1,14 @@
-import { BackToTop } from "design-system/BackToTop";
-import { Card } from "design-system/Card";
-import { Flex } from "design-system/Flex";
-import { Section, SectionHeader } from "design-system/Section";
+import { Header } from "components/Header";
+import { Card } from "components/Card";
+import { Summary } from "components/CodeWars/Summary";
+import { Challenges } from "components/CodeWars/Challenges";
+import { Clan } from "components/CodeWars/Clan";
+import { Honor } from "components/CodeWars/Honor";
+import { Leaderboard } from "components/CodeWars/Leaderboard";
 
-import {
-  Clan,
-  Leaderboard,
-  Honor,
-  Challenges,
-  Languages
-} from "components/CodeWarsBlocks";
+import { BackToTop } from "design-system/BackToTop";
+import { Flex } from "design-system/Flex";
+import { Section } from "design-system/Section";
 
 import { Text } from "design-system/Text";
 
@@ -29,13 +28,7 @@ export const CodeWars = ({
 
   return (
     <Section>
-      <SectionHeader id={name} mb={3}>
-        <Text as="h2" $fontSize="3rem">
-          <a href={`#${name}`}>
-            <code>CodeWars</code>
-          </a>
-        </Text>
-      </SectionHeader>
+      <Header name={name} title="CodeWars" />
 
       <Text mt={3} $fontWeight={300}>
         I like to solve coding challenges. For now I am only showing my{" "}
@@ -67,7 +60,10 @@ export const CodeWars = ({
 
           <Card.Section>
             <Clan clan={clan} />
-            <Languages {...ranks} />
+
+            {Object.entries(ranks.languages).map(([name, lang]) => (
+              <Summary key={name} title={name} {...lang} />
+            ))}
           </Card.Section>
 
           <Card.Section>
@@ -80,6 +76,7 @@ export const CodeWars = ({
           </Card.Section>
         </Card>
       </Flex>
+
       <BackToTop />
     </Section>
   );

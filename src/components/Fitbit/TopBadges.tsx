@@ -1,17 +1,11 @@
-import styled from "styled-components";
-import { space } from "@styled-system/space";
-import { DataEntry } from "components/DataEntry";
-import { Card, InfoCard } from "design-system/Card";
-import { Text } from "design-system/Text";
-import { Flex } from "design-system/Flex";
+import NextImage from "next/image";
 
-const BadgeImg = styled.img`
-  ${space({ my: 2, mx: "auto" })};
-  width: 75px;
-  height: 75px;
-  border-radius: 50%;
-  border: 1px solid var(--smokeyWhite);
-`;
+import { Card } from "components/Card";
+
+import { Badge, BadgesWrapper } from "design-system/Fitbit/Badges";
+import { DataEntry } from "design-system/DataEntry";
+import { Flex } from "design-system/Flex";
+import { Text } from "design-system/Text";
 
 export const TopBadges = ({
   profile
@@ -30,29 +24,40 @@ export const TopBadges = ({
       >
         Top Badges
       </Text>
-      <Flex>
+
+      <BadgesWrapper>
         {profile.topBadges.map((badge) => (
-          <InfoCard key={badge.encodedId} my={2} mx="auto">
-            <Card.Header>{badge.shortName}</Card.Header>
-            <Card.Section>
-              <DataEntry>
-                <Text $textColor="--smokeyWhite">{badge.description}</Text>
-                <Text $textColor="--smokeyWhite">
-                  Achived: {badge.timesAchieved} times
-                </Text>
-                <BadgeImg
-                  src={badge.image75px}
-                  alt={badge.shortName}
-                  loading="lazy"
-                />
-                <Text $textColor="--smokeyWhite" $fontWeight={300}>
-                  {badge.shareText}
-                </Text>
-              </DataEntry>
-            </Card.Section>
-          </InfoCard>
+          <Flex key={badge.encodedId} flex={1}>
+            <Card my={2} mx="auto">
+              <Card.Header>{badge.shortName}</Card.Header>
+
+              <Card.Section>
+                <DataEntry>
+                  <Text $textColor="--smokeyWhite">{badge.description}</Text>
+
+                  <Text $textColor="--smokeyWhite">
+                    Achived: {badge.timesAchieved} times
+                  </Text>
+
+                  <Badge>
+                    <NextImage
+                      src={badge.image75px}
+                      width="75"
+                      height="75"
+                      alt={badge.shortName}
+                      loading="lazy"
+                    />
+                  </Badge>
+
+                  <Text $textColor="--smokeyWhite" $fontWeight={300}>
+                    {badge.shareText}
+                  </Text>
+                </DataEntry>
+              </Card.Section>
+            </Card>
+          </Flex>
         ))}
-      </Flex>
+      </BadgesWrapper>
     </>
   );
 };

@@ -1,7 +1,13 @@
 import styled from "styled-components";
 import { space } from "@styled-system/space";
 
-export const Base = styled.div`
+const Base = ({ className = "" }: { className?: string }) => (
+  <div className={className}>
+    <a href="#">Back to top</a>
+  </div>
+);
+
+export const BackToTop = styled(Base)`
   ${space({ mt: 4 })};
   text-align: right;
 
@@ -12,9 +18,3 @@ export const Base = styled.div`
     color: var(--smokeyWhite);
   }
 `;
-
-export const BackToTop = () => (
-  <Base>
-    <a href="#">Back to top</a>
-  </Base>
-);

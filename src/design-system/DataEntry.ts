@@ -8,12 +8,14 @@ export const DataEntry = styled.div`
   flex: 1;
   text-align: center;
 
-  > p {
+  & > p,
+  & > span {
     ${space({ my: 1 })}
     text-transform: capitalize;
   }
 
-  > p:first-child {
+  & > p:first-child,
+  & > span:first-child {
     font-size: 1.8rem;
   }
 `;

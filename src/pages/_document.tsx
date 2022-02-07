@@ -44,7 +44,11 @@ export default class MyDocument extends Document {
             href="https://fonts.gstatic.com"
             crossOrigin="anonymous"
           />
-          {/* eslint-disable-next-line @next/next/google-font-display */}
+          <link
+            rel="preconnect"
+            href="https://www.googletagmanager.com"
+            crossOrigin="anonymous"
+          />
           <link
             href="https://fonts.googleapis.com/css2?family=Recursive:wght@300;400;500;600&display=swap"
             rel="stylesheet"

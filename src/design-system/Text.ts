@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import type { Property } from "csstype";
 import { space, SpaceProps } from "@styled-system/space";
-import { ColorVars } from "styles/theme";
+
+import type { ColorVars } from "design-system/Global/theme";
 
 type BaseTextProps = {
   $verticalAlign?: Property.VerticalAlign;

@@ -3,7 +3,7 @@ import type { Property } from "csstype";
 import { space, SpaceProps } from "@styled-system/space";
 import { ComponentPropsWithoutRef } from "react";
 
-type TextProps = {
+type BaseTextProps = {
   $verticalAlign?: Property.VerticalAlign;
   $display?: Property.Display;
   $fontSize?: Property.FontSize;
@@ -50,17 +50,16 @@ const BaseText = ({
   ...rest
 }: SpaceProps & TextProps & ComponentPropsWithoutRef<"p">) => <p {...rest} />;
 
-export const Text = styled(BaseText)<
-  SpaceProps & TextProps & ComponentPropsWithoutRef<"p">
->`
+type TextProps = SpaceProps & BaseTextProps & ComponentPropsWithoutRef<"p">;
+
+export const Text = styled(BaseText)<TextProps>`
   ${space};
   font-family: Recursive, sans-serif;
   display: ${({ $display }) => $display};
   font-size: ${({ $fontSize = "1.6rem" }) => $fontSize};
   text-align: ${({ $textAlign }) => $textAlign};
   vertical-align: ${({ $verticalAlign }) => $verticalAlign};
-  color: ${({ $textColor = "--smokeyWhite", theme }) =>
-    `var(${$textColor}, ${theme.white})`};
+  color: ${({ $textColor = "--smokeyWhite" }) => `var(${$textColor})`};
   font-weight: ${({ $fontWeight = 400 }) => $fontWeight ?? 400};
   text-transform: ${({ $textTransform = "unset" }) => $textTransform};
 `;

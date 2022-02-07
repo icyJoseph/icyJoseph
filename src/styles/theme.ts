@@ -13,3 +13,5 @@ export const theme = {
   green: "#49a078",
   lightGreen: "#91f5ad"
 };
+
+export type colors = `--${keyof typeof theme}`;

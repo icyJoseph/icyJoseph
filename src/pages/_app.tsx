@@ -4,9 +4,6 @@ import { useEffect } from "react";
 import Router from "next/router";
 import Head from "next/head";
 
-import { ThemeProvider } from "styled-components";
-
-import { theme } from "styles/theme";
 import { GlobalStyle } from "styles/global";
 
 import { Background, Layout } from "components/Background";
@@ -66,19 +63,17 @@ function App({ Component, pageProps }: AppProps) {
         />
       </Head>
 
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
+      <GlobalStyle />
 
-        <Background />
+      <Background />
 
-        <Layout>
-          <Navigation />
+      <Layout>
+        <Navigation />
 
-          <Component {...pageProps} />
+        <Component {...pageProps} />
 
-          <Footer />
-        </Layout>
-      </ThemeProvider>
+        <Footer />
+      </Layout>
     </>
   );
 }

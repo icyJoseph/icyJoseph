@@ -6,8 +6,8 @@ import { root } from "styles/root";
 import { typography } from "styles/typography";
 
 export const GlobalStyle = createGlobalStyle`
-    ${normalize};
     ${reset};
+    ${normalize};
     ${typography};
     
     ${root};

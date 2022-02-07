@@ -53,7 +53,7 @@ export const Introduction = () => (
             $textDecoration="underline"
             title="I do not believe in the value of this number."
           >
-            6 years
+            {new Date().getFullYear() - 2016} years
           </Text>{" "}
           of experience working as a software developer, in telecom, mining,
           freight, real state, news, transport and automotive industries.

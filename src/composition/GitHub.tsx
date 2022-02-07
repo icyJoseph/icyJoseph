@@ -63,7 +63,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
     <Section>
       <Header name={pageName} title="GitHub" />
 
-      <Flex flexDirection="column">
+      <Flex flexDirection="column" alignItems="center">
         <Profile>
           <GitHubImg>
             <NextImage

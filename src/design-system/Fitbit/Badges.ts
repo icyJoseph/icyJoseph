@@ -19,7 +19,7 @@ export const BadgesWrapper = styled(Flex)`
     max-width: 66.66%;
   }
 
-  @media (min-width: 628px) {
+  @media (min-width: 40em) {
     flex-direction: row;
 
     & ${BaseCard} {

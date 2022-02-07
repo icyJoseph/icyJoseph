@@ -55,7 +55,7 @@ declare namespace IcyJoseph {
       /**
        * The query backing this type up, uses only up-to 3 languages
        */
-      edges: Array<LanguageNode | null>;
+      edges: Array<LanguageEdge | null>;
       totalSize: number;
       totalCount: number;
     };

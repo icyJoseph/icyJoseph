@@ -1,8 +1,8 @@
 import { DataEntry } from "design-system/DataEntry";
 import { BlockEmoji } from "design-system/Emoji";
+import { isSupportedColor, type ColorVars } from "design-system/Global/theme";
 import { Text } from "design-system/Text";
 import { capitalize } from "functional";
-import { isSupportedColor, type ColorVars } from "styles/theme";
 
 function summaryColor(color: string): ColorVars {
   const key = `light${capitalize(color)}`;

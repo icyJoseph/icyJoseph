@@ -3,16 +3,16 @@ import type { AppProps } from "next/app";
 import { useEffect } from "react";
 import Router from "next/router";
 import Head from "next/head";
-
-import { GlobalStyle } from "styles/global";
-
-import { Background, Layout } from "design-system/Background";
-import { Footer } from "composition/Footer";
-import { Navigation } from "composition/Navigation";
-import { pageview } from "ga";
-
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+
+import { Footer } from "composition/Footer";
+import { Navigation } from "composition/Navigation";
+
+import { GlobalStyle } from "design-system/Global";
+import { Background, Layout } from "design-system/Background";
+
+import { pageview } from "ga";
 
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -40,6 +40,7 @@ function App({ Component, pageProps }: AppProps) {
 
     return () => Router.events.off("routeChangeComplete", handler);
   }, []);
+
   return (
     <>
       <Head>

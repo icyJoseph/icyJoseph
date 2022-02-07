@@ -1,7 +1,10 @@
 import styled, { css } from "styled-components";
 import { space, SpaceProps } from "@styled-system/space";
 
-import { staleMixin } from "components/GitHub/YearlyContribution";
+const staleMixin = css<{ stale?: boolean }>`
+  opacity: ${({ stale = false }) => (stale ? 0.5 : 1)};
+  transition: opacity 1s ease-in-out;
+`;
 
 const cellMixin = css`
   overflow: visible;

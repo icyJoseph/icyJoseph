@@ -12,7 +12,7 @@ type TokeiProps = {
 
 export const Tokei = ({ tokei, name }: TokeiProps) => (
   <Section>
-    <Header name={name} title="Tokei" />
+    <Header name={name} title="tokei ~/dev" />
 
     <Text mt={3} $fontWeight={300}>
       <Text as="span" $textColor="--lightYellow">

@@ -8,11 +8,13 @@ export const reset = css`
   *::after {
     box-sizing: border-box;
   }
+
   a {
     text-decoration: none;
     color: inherit;
     cursor: pointer;
   }
+
   button {
     background-color: transparent;
     color: inherit;
@@ -20,14 +22,17 @@ export const reset = css`
     padding: 0;
     cursor: pointer;
   }
+
   figure {
     margin: 0;
   }
+
   input::-moz-focus-inner {
     border: 0;
     padding: 0;
     margin: 0;
   }
+
   ul,
   ol,
   dd {
@@ -35,6 +40,7 @@ export const reset = css`
     padding: 0;
     list-style: none;
   }
+
   h1,
   h2,
   h3,

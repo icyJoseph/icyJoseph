@@ -1,98 +1,19 @@
 import { useEffect, useState, Fragment } from "react";
-import styled from "styled-components";
-import { space, SpaceProps } from "@styled-system/space";
 import NextImage from "next/image";
 
-import { YearlyContribution } from "components/YearlyContribution";
+import { Header } from "components/Header";
+import { YearlyContribution } from "components/GitHub/YearlyContribution";
 
+import { BackToTop } from "design-system/BackToTop";
 import { Button } from "design-system/Button";
 import { Flex } from "design-system/Flex";
-import { Section, SectionHeader } from "design-system/Section";
+import { GitHubImg } from "design-system/GitHub/Image";
+import { Profile, Bio } from "design-system/GitHub/Profile";
+import { Section } from "design-system/Section";
 import { Text } from "design-system/Text";
-import { BackToTop } from "design-system/BackToTop";
 
 import { yearStart, yearEnd } from "helpers";
-import { useGitHub } from "hooks/useGitHub";
-
-import { GET_USER } from "queries";
-
-const GitHubImg = styled.span`
-  ${space({ m: "auto" })};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 50%;
-
-  @media (min-width: 540px) {
-    width: 75%;
-  }
-
-  & > span {
-    box-shadow: 0 0 0 2px white;
-    border-radius: 50%;
-  }
-
-  & > span:before {
-    position: absolute;
-    content: "";
-    background-color: var(--background);
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-  }
-`;
-
-const Contributions = styled(Flex)``;
-
-const Profile = styled.div`
-  grid-column: span 2;
-  justify-content: center;
-
-  display: grid;
-  grid-template-columns: 1fr;
-
-  @media (min-width: 540px) {
-    grid-template-columns: minmax(250px, 33.33%) 1fr;
-  }
-
-  > section {
-    ${space({ mx: "auto", mt: 4, px: 2 })};
-
-    @media (min-width: 540px) {
-      ${space({ mt: 0, px: 0 })};
-    }
-  }
-  > section header {
-    text-align: center;
-
-    @media (min-width: 540px) {
-      text-align: left;
-    }
-  }
-`;
-
-const GitHubContainer = styled.div<SpaceProps>`
-  ${space}
-  display: flex;
-  flex-direction: column;
-
-  & ${Contributions}, & ${Profile} {
-    ${space({ mx: "auto" })};
-
-    max-width: unset;
-
-    @media (min-width: 768px) {
-      max-width: 75%;
-    }
-  }
-`;
-
-const Bio = styled(Flex)`
-  overflow: hidden;
-`;
+import { useGitHubProfile } from "hooks/useGitHub";
 
 type SelectYearProps = {
   selectedYear: number;
@@ -114,19 +35,9 @@ const RenderWithSelectedYear = ({
 type GitHubProps = { initial: IcyJoseph.GitHub; name: string };
 
 export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
-  const { data } = useGitHub<
-    { login: "icyJoseph"; from: string },
-    IcyJoseph.GitHub,
-    { user: IcyJoseph.GitHub }
-  >({
-    query: GET_USER,
-    variables: {
-      login: "icyJoseph",
-      ...yearStart()
-    },
-    fallbackData: initial,
-    selector: ({ user }: { user: IcyJoseph.GitHub }) => user,
-    revalidateOnMount: false
+  const { data } = useGitHubProfile({
+    ...yearStart(),
+    fallbackData: initial
   });
 
   const {
@@ -150,15 +61,9 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
 
   return (
     <Section>
-      <SectionHeader id={pageName} mb={3}>
-        <Text as="h2" $fontSize="3rem">
-          <a href={`#${pageName}`}>
-            <code>GitHub</code>
-          </a>
-        </Text>
-      </SectionHeader>
+      <Header name={pageName} title="GitHub" />
 
-      <GitHubContainer>
+      <Flex flexDirection="column" alignItems="center">
         <Profile>
           <GitHubImg>
             <NextImage
@@ -195,7 +100,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
         <RenderWithSelectedYear last={last}>
           {({ selectedYear, setSelectedYear }) => (
             <Fragment>
-              <Contributions justifyContent="center" my={3} mx="auto">
+              <Flex justifyContent="center" my={3} mx="auto">
                 {contributionYears
                   .slice(0)
                   .sort((a, b) => a - b)
@@ -204,12 +109,14 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
                       key={year}
                       variant={year !== selectedYear ? "outlined" : "primary"}
                       m={2}
-                      onClick={() => setSelectedYear(year)}
+                      onClick={() => {
+                        setSelectedYear(year);
+                      }}
                     >
                       {year}
                     </Button>
                   ))}
-              </Contributions>
+              </Flex>
 
               {/* Don't render on SSR */}
               {showContributions && (
@@ -226,7 +133,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
             </Fragment>
           )}
         </RenderWithSelectedYear>
-      </GitHubContainer>
+      </Flex>
 
       <BackToTop />
     </Section>

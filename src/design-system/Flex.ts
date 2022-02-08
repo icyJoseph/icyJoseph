@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { Property } from "csstype";
-import { space, SpaceProps } from "@styled-system/space";
+import type { Property } from "csstype";
+import { space, type SpaceProps } from "@styled-system/space";
 
-export type FlexProps = {
+type BaseFlexProps = {
   flexWrap?: Property.FlexWrap;
   flexDirection?: Property.FlexDirection;
   justifyContent?: Property.JustifyContent;
@@ -11,13 +11,15 @@ export type FlexProps = {
   gap?: Property.Gap;
 };
 
-export const Flex = styled.div<SpaceProps & FlexProps>`
+export type FlexProps = SpaceProps & BaseFlexProps;
+
+export const Flex = styled.div<FlexProps>`
   ${space};
   display: flex;
   flex-wrap: ${({ flexWrap = "wrap" }) => flexWrap};
-  flex-direction: ${({ flexDirection = "unset" }) => flexDirection};
-  justify-content: ${({ justifyContent = "unset" }) => justifyContent};
-  align-items: ${({ alignItems = "unset" }) => alignItems};
-  flex: ${({ flex = "unset" }) => flex};
-  gap: ${({ gap = "unset" }) => gap};
+  flex-direction: ${({ flexDirection }) => flexDirection};
+  justify-content: ${({ justifyContent }) => justifyContent};
+  align-items: ${({ alignItems }) => alignItems};
+  flex: ${({ flex }) => flex};
+  gap: ${({ gap }) => gap};
 `;

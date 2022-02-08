@@ -22,3 +22,7 @@ export const Emoji = styled(Base)<SpaceProps & EmojiOwnProps>`
     segoe ui symbol;
   cursor: default;
 `;
+
+export const BlockEmoji = styled(Emoji)`
+  display: block;
+`;

@@ -1,30 +1,10 @@
-import styled from "styled-components";
-
 import { Flex } from "design-system/Flex";
-import { Box } from "design-system/Box";
+import { Paragraph } from "design-system/Paragraph";
+import { FullPage } from "design-system/Section";
 import { Text } from "design-system/Text";
 
-import { Section } from "design-system/Section";
-
-const StyledSection = styled(Section)`
-  min-height: 100vh;
-
-  & ${Text} {
-    color: var(--smokeyWhite);
-  }
-`;
-
-const IntroCopy = styled(Box)`
-  font-family: sans-serif;
-  max-width: 55ch;
-`;
-
-const Experience = styled.b`
-  text-decoration: underline;
-`;
-
 export const Introduction = () => (
-  <StyledSection my={0} pb={3}>
+  <FullPage my={0} pb={3}>
     <Flex flexDirection="column" justifyContent="center" alignItems="center">
       <Text
         as="h1"
@@ -58,7 +38,7 @@ export const Introduction = () => (
         </a>
       </Text>
 
-      <IntroCopy>
+      <Paragraph chars="55ch">
         <Text mt={4} mx="auto" $fontWeight={300} $fontSize="2rem">
           Developer from <b>Peru</b>, living in <b>Sweden</b>. I have a
           Bachelor&apos;s in Electronics Engineering, and a Master&apos;s degree
@@ -67,9 +47,14 @@ export const Introduction = () => (
 
         <Text mt={3} mx="auto" $fontWeight={300} $fontSize="2rem">
           I have over{" "}
-          <Experience title="I do not believe in the value of this number.">
-            6 years
-          </Experience>{" "}
+          <Text
+            as="b"
+            $fontSize="inherit"
+            $textDecoration="underline"
+            title="I do not believe in the value of this number."
+          >
+            {new Date().getFullYear() - 2016} years
+          </Text>{" "}
           of experience working as a software developer, in telecom, mining,
           freight, real state, news, transport and automotive industries.
         </Text>
@@ -88,7 +73,7 @@ export const Introduction = () => (
         <Text mt={3} mx="auto" $fontWeight={300} $fontSize="2rem">
           I enjoy writing <b>CSS</b>, and keep my <b>HTML</b> semantic.
         </Text>
-      </IntroCopy>
+      </Paragraph>
     </Flex>
-  </StyledSection>
+  </FullPage>
 );

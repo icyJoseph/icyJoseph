@@ -109,7 +109,9 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
                       key={year}
                       variant={year !== selectedYear ? "outlined" : "primary"}
                       m={2}
-                      onClick={() => setSelectedYear(year)}
+                      onClick={() => {
+                        setSelectedYear(year);
+                      }}
                     >
                       {year}
                     </Button>

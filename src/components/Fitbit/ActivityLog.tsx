@@ -12,6 +12,7 @@ import { isoStringWithoutMs } from "helpers";
 
 import { useFitbitActivityLog } from "hooks/useFitbit";
 import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
+import { useLoader } from "hooks/useLoader";
 
 export const formatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
@@ -127,11 +128,13 @@ export const ActivityLog = ({
   const activityLog = data ?? prev;
   const stale = !error && !data;
 
+  useLoader(data, error);
+
   const [last] = activityLog.slice(-1);
 
   return (
     <>
-      <Table my={3} stale={stale}>
+      <Table my={3}>
         <thead>
           <Tr>
             <Th />

@@ -14,6 +14,7 @@ import { circular, circularSlice } from "functional";
 
 import { useGitHubContributions } from "hooks/useGitHub";
 import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
+import { useLoader } from "hooks/useLoader";
 
 type YearlyContributionProps = {
   initial: IcyJoseph.ContributionCollection | null;
@@ -28,13 +29,19 @@ export const YearlyContribution = ({
   from,
   to
 }: YearlyContributionProps) => {
-  const { data, error } = useGitHubContributions(from, to, initial);
+  const { data, error } = useGitHubContributions({
+    from,
+    to,
+    initial
+  });
 
   const [pointer, setPointer] = useState(0);
 
   const prev = useLastNonNullableValue(initial || data);
 
   const stale = !error && !data;
+
+  useLoader(data, error);
 
   useEffect(() => {
     if (!stale) {

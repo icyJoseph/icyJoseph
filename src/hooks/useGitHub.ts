@@ -34,12 +34,17 @@ export const useGitHubProfile = ({
 };
 
 type ContributionVariables = { login: "icyJoseph"; from: string; to?: string };
+type UseGitHubContributions = {
+  from: string;
+  to?: string;
+  initial: IcyJoseph.ContributionCollection | null;
+};
 
-export const useGitHubContributions = (
-  from: string,
-  to?: string,
-  initial: IcyJoseph.ContributionCollection | null = null
-) => {
+export const useGitHubContributions = ({
+  from,
+  to,
+  initial = null
+}: UseGitHubContributions) => {
   const { data, error } = useSWR<IcyJoseph.ContributionCollection | null>(
     `contributions/${from}/${to}`,
     async () => {

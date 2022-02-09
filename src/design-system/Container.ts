@@ -9,7 +9,7 @@ export const Container = styled.section<SpaceProps>`
   display: -ms-grid;
   display: grid;
 
-  -ms-grid-columns: 1fr 85ch 1fr;
+  -ms-grid-columns: 1fr minmax(1fr, 85ch) 1fr;
   grid-template-columns: 1fr min(85ch, 100%) 1fr;
 
   & > section:last-child {

@@ -2,15 +2,21 @@ import type { ComponentPropsWithRef } from "react";
 import styled from "styled-components";
 import { space, type SpaceProps } from "@styled-system/space";
 
+import { theme } from "design-system/Global/theme";
+
 export type CardProps = ComponentPropsWithRef<"div"> & SpaceProps;
 
 export const BaseCard = styled.div<CardProps>`
   font-family: Recursive, sans-serif;
   ${space({ py: 3, px: 3 })};
 
-  ${space}
-  background:var(--softDark);
-  color: var(--white);
+  ${space};
+
+  background: ${theme.softDark};
+  background: var(--softDark);
+
+  color: var(--smokeyWhite);
+
   position: relative;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.16), 0 3px 12px rgba(0, 0, 0, 0.23);
 

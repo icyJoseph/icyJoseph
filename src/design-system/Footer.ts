@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { space, SpaceProps } from "@styled-system/space";
+import { theme } from "design-system/Global/theme";
 
 export const PageFooter = styled.footer<SpaceProps>`
   ${space({ px: 4, py: "5%", mt: 5 })};
@@ -13,6 +14,7 @@ export const PageFooter = styled.footer<SpaceProps>`
     }
   }
 
+  background: ${theme.background};
   background: var(--background);
   color: var(--smokeyWhite);
 

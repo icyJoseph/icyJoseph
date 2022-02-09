@@ -2,7 +2,7 @@ import styled from "styled-components";
 import type { Property } from "csstype";
 import { space, SpaceProps } from "@styled-system/space";
 
-import type { ColorVars } from "design-system/Global/theme";
+import { ColorVars, theme, toThemeColor } from "design-system/Global/theme";
 
 type BaseTextProps = {
   $verticalAlign?: Property.VerticalAlign;
@@ -27,7 +27,10 @@ export const Text = styled.p<TextProps>`
   font-size: ${({ $fontSize = "1.6rem" }) => $fontSize};
   text-align: ${({ $textAlign }) => $textAlign};
   vertical-align: ${({ $verticalAlign }) => $verticalAlign};
+
+  color: ${({ $textColor = fallbackColor }) => theme[toThemeColor($textColor)]};
   color: ${({ $textColor = fallbackColor }) => `var(${$textColor})`};
+
   font-weight: ${({ $fontWeight }) => $fontWeight};
   text-transform: ${({ $textTransform }) => $textTransform};
   text-decoration: ${({ $textDecoration }) => $textDecoration};

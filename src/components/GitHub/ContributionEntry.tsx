@@ -57,13 +57,14 @@ export const ContributionEntry = ({
         </Text>
       </Box>
 
-      <Flex as="footer" mt={3} gap="2rem">
+      <Flex as="footer" mt={3}>
         {validLanguageEdges.map(({ node: { color, name }, size }) => (
           <Flex
             key={name}
             flexDirection="column"
             flex={1}
             justifyContent="flex-end"
+            mr={3}
           >
             <Text $fontWeight={300} mb={1}>
               <DevIcon color={color} language={name} mr={1} $fontSize="2rem" />

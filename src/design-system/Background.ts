@@ -13,11 +13,8 @@ export const Background = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
 
-  display: none;
-
   @supports (isolation: isolate) {
     & {
-      display: block;
       isolation: isolate;
       z-index: unset;
     }

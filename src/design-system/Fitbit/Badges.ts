@@ -16,6 +16,7 @@ export const BadgesWrapper = styled(Flex)`
   flex-direction: column;
 
   & ${BaseCard} {
+    width: 100%;
     max-width: 66.66%;
   }
 
@@ -23,6 +24,7 @@ export const BadgesWrapper = styled(Flex)`
     flex-direction: row;
 
     & ${BaseCard} {
+      width: 100%;
       max-width: 90%;
     }
   }

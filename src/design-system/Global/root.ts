@@ -3,7 +3,7 @@ import { theme } from "design-system/Global/theme";
 
 export const root = css`
   :root {
-    --background: #001220;
+    --background: ${theme.background};
     --black: ${theme.black};
     --dark: ${theme.dark};
     --softDark: ${theme.softDark};

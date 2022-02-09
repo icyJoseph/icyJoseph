@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import styled from "styled-components";
+import { theme } from "design-system/Global/theme";
 
 const Progress = styled.div`
   position: relative;
@@ -15,10 +16,12 @@ const Svg = styled.svg`
 `;
 
 const Circle = styled.circle`
+  stroke: ${theme.dark};
   stroke: var(--dark);
 `;
 
 const CircleFill = styled.circle`
+  stroke: ${theme.smokeyWhite};
   stroke: var(--smokeyWhite);
 `;
 

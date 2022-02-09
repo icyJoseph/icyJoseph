@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { space, SpaceProps } from "@styled-system/space";
 
 export const PageFooter = styled.footer<SpaceProps>`
-  ${space({ px: 4, py: "5%" })};
+  ${space({ px: 4, py: "5%", mt: 5 })};
 
   z-index: 1;
 

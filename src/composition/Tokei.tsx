@@ -8,10 +8,11 @@ import { Text } from "design-system/Text";
 type TokeiProps = {
   tokei: IcyJoseph.Tokei[];
   name: string;
+  row: string;
 };
 
-export const Tokei = ({ tokei, name }: TokeiProps) => (
-  <Section>
+export const Tokei = ({ tokei, name, row }: TokeiProps) => (
+  <Section $row={row}>
     <Header name={name} title="tokei ~/dev" />
 
     <Text mt={3} $fontWeight={300}>

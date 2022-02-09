@@ -33,9 +33,9 @@ const RenderWithSelectedYear = ({
   return children({ selectedYear, setSelectedYear });
 };
 
-type GitHubProps = { initial: IcyJoseph.GitHub; name: string };
+type GitHubProps = { initial: IcyJoseph.GitHub; name: string; row: string };
 
-export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
+export const GitHub = ({ initial, name: pageName, row }: GitHubProps) => {
   const { data } = useGitHubProfile({
     ...yearStart(),
     fallbackData: initial
@@ -61,7 +61,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
   }, []);
 
   return (
-    <Section>
+    <Section $row={row}>
       <Header name={pageName} title="GitHub" />
 
       <Flex flexDirection="column" alignItems="center">

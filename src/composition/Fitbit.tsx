@@ -15,13 +15,15 @@ type FitbitProps = {
   activityLog: IcyJoseph.ActivityLog;
   initialHR: IcyJoseph.HeartRateActivity;
   name: string;
+  row: string;
 };
 
 export const Fitbit = ({
   profile,
   activityLog,
   initialHR,
-  name
+  name,
+  row
 }: FitbitProps) => {
   const { data } = useFitbitHR(
     { date: "today", period: "1m", revalidateOnMount: true },
@@ -32,7 +34,7 @@ export const Fitbit = ({
   const [prevDay = null, today = null] = heartData.slice(-2);
 
   return (
-    <Section>
+    <Section $row={row}>
       <Header name={name} title="Fitbit" />
 
       <Box>

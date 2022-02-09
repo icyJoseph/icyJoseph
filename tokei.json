@@ -9,10 +9,10 @@
   },
   {
     "language": "TypeScript",
-    "blanks": 10987,
+    "blanks": 10988,
     "children": {},
-    "code": 105748,
-    "comments": 3746,
+    "code": 105756,
+    "comments": 3749,
     "inaccurate": false
   },
   {
@@ -83,21 +83,21 @@
           }
         },
         {
-          "name": "/home/joseph/dev/daybook/search-server/src/start.rs",
-          "stats": {
-            "blanks": 0,
-            "blobs": {},
-            "code": 0,
-            "comments": 3
-          }
-        },
-        {
           "name": "/home/joseph/dev/daybook/search-server/src/helpers.rs",
           "stats": {
             "blanks": 0,
             "blobs": {},
             "code": 0,
             "comments": 1
+          }
+        },
+        {
+          "name": "/home/joseph/dev/daybook/search-server/src/start.rs",
+          "stats": {
+            "blanks": 0,
+            "blobs": {},
+            "code": 0,
+            "comments": 3
           }
         },
         {

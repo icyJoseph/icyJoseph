@@ -1,10 +1,10 @@
 import { Flex } from "design-system/Flex";
 import { Paragraph } from "design-system/Paragraph";
-import { FullPage } from "design-system/Section";
+import { Section } from "design-system/Section";
 import { Text } from "design-system/Text";
 
 export const Introduction = () => (
-  <FullPage my={0} pb={3}>
+  <Section py="5%">
     <Flex flexDirection="column" justifyContent="center" alignItems="center">
       <Text
         as="h1"
@@ -75,5 +75,5 @@ export const Introduction = () => (
         </Text>
       </Paragraph>
     </Flex>
-  </FullPage>
+  </Section>
 );

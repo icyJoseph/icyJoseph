@@ -9,10 +9,10 @@
   },
   {
     "language": "TypeScript",
-    "blanks": 10973,
+    "blanks": 10985,
     "children": {},
-    "code": 105716,
-    "comments": 3753,
+    "code": 105740,
+    "comments": 3746,
     "inaccurate": false
   },
   {
@@ -56,21 +56,21 @@
           }
         },
         {
-          "name": "/home/joseph/dev/code_wars/integers-recreation-one/src/main.rs",
-          "stats": {
-            "blanks": 0,
-            "blobs": {},
-            "code": 0,
-            "comments": 6
-          }
-        },
-        {
           "name": "/home/joseph/dev/code_wars/collatz/src/main.rs",
           "stats": {
             "blanks": 3,
             "blobs": {},
             "code": 0,
             "comments": 15
+          }
+        },
+        {
+          "name": "/home/joseph/dev/code_wars/integers-recreation-one/src/main.rs",
+          "stats": {
+            "blanks": 0,
+            "blobs": {},
+            "code": 0,
+            "comments": 6
           }
         },
         {

@@ -14,6 +14,7 @@ import { Text } from "design-system/Text";
 
 import { yearStart, yearEnd } from "helpers";
 import { useGitHubProfile } from "hooks/useGitHub";
+import { Box } from "design-system/Box";
 
 type SelectYearProps = {
   selectedYear: number;
@@ -100,23 +101,25 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
         <RenderWithSelectedYear last={last}>
           {({ selectedYear, setSelectedYear }) => (
             <Fragment>
-              <Flex justifyContent="center" my={3} mx="auto">
-                {contributionYears
-                  .slice(0)
-                  .sort((a, b) => a - b)
-                  .map((year) => (
-                    <Button
-                      key={year}
-                      variant={year !== selectedYear ? "outlined" : "primary"}
-                      m={2}
-                      onClick={() => {
-                        setSelectedYear(year);
-                      }}
-                    >
-                      {year}
-                    </Button>
-                  ))}
-              </Flex>
+              <Box $width="80%">
+                <Flex justifyContent="center" my={3} mx="auto">
+                  {contributionYears
+                    .slice(0)
+                    .sort((a, b) => a - b)
+                    .map((year) => (
+                      <Button
+                        key={year}
+                        variant={year !== selectedYear ? "outlined" : "primary"}
+                        m={2}
+                        onClick={() => {
+                          setSelectedYear(year);
+                        }}
+                      >
+                        {year}
+                      </Button>
+                    ))}
+                </Flex>
+              </Box>
 
               {/* Don't render on SSR */}
               {showContributions && (

@@ -4,7 +4,7 @@ import { Section } from "design-system/Section";
 import { Text } from "design-system/Text";
 
 export const Introduction = () => (
-  <Section py="5%">
+  <Section mt={0} pt={[2, 3, 4]} pb="5%">
     <Flex flexDirection="column" justifyContent="center" alignItems="center">
       <Text
         as="h1"

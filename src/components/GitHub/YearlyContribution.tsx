@@ -9,6 +9,7 @@ import { Divider } from "design-system/Divider";
 import { Emoji } from "design-system/Emoji";
 import { Flex } from "design-system/Flex";
 import { Text } from "design-system/Text";
+import { Stale } from "design-system/Stale";
 
 import { circular, circularSlice } from "functional";
 
@@ -67,37 +68,39 @@ export const YearlyContribution = ({
   const disabledNext = windowSize === contributionCardsLength;
 
   return (
-    <>
+    <Fragment>
       <Flex flexDirection="column" alignItems="center" my={4} px={4}>
         <Text as="h4" $fontSize="2.5rem">
           In {year}
         </Text>
 
-        {joinedGitHubContribution ? (
-          <Flex mt={3}>
-            <Text $fontSize="2rem" $fontWeight={300}>
-              Joined GitHub
-              <Emoji
-                symbol="🎉"
-                title="Joined Github"
-                ariaLabel="Celebration"
-                mx={2}
-              />
-            </Text>
-          </Flex>
-        ) : (
-          <ContributionsSummary
-            totalRepositoryContributions={totalRepositoryContributions}
-            totalCommitContributions={totalCommitContributions}
-            restrictedContributionsCount={restrictedContributionsCount}
-            totalRepositoriesContributedTo={
-              commitContributionsByRepository.length
-            }
-          />
-        )}
+        <Stale $stale={stale}>
+          {joinedGitHubContribution ? (
+            <Flex mt={3}>
+              <Text $fontSize="2rem" $fontWeight={300}>
+                Joined GitHub
+                <Emoji
+                  symbol="🎉"
+                  title="Joined Github"
+                  ariaLabel="Celebration"
+                  mx={2}
+                />
+              </Text>
+            </Flex>
+          ) : (
+            <ContributionsSummary
+              totalRepositoryContributions={totalRepositoryContributions}
+              totalCommitContributions={totalCommitContributions}
+              restrictedContributionsCount={restrictedContributionsCount}
+              totalRepositoriesContributedTo={
+                commitContributionsByRepository.length
+              }
+            />
+          )}
+        </Stale>
       </Flex>
 
-      <Box mt={3} $width="100%">
+      <Stale mt={3} $stale={stale}>
         {circularSlice(
           commitContributionsByRepository,
           pointer,
@@ -113,7 +116,7 @@ export const YearlyContribution = ({
             <Divider />
           </Fragment>
         ))}
-      </Box>
+      </Stale>
 
       <Box mt={3} $width="100%" $display="flex">
         <Button
@@ -156,6 +159,6 @@ export const YearlyContribution = ({
           Next
         </Button>
       </Box>
-    </>
+    </Fragment>
   );
 };

@@ -24,12 +24,7 @@ type BaseDevIconOwnProps = {
   language: string;
 };
 
-const BaseDevIcon = ({
-  color: _,
-  $fontSize: __,
-  className,
-  language
-}: BaseDevIconOwnProps) => (
+const BaseDevIcon = ({ className, language }: BaseDevIconOwnProps) => (
   <i
     className={`devicon-${normalize(language)}-plain ${className} ${
       language === "CSS" ? "colored" : ""

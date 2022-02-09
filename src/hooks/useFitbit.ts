@@ -6,7 +6,7 @@ type Period = "1d" | "7d" | "30d" | "1w" | "1m";
 
 const profileFetcher = () =>
   axios
-    .get<IcyJoseph.FitbitUser>("/api/fitbit/profile")
+    .get<IcyJoseph.Fitbit>("/api/fitbit/profile")
     .then(({ data }) => data.user);
 
 export const useFitbitProfile = (fallbackData = null) => {

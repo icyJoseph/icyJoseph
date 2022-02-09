@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { space } from "@styled-system/space";
-import { ComponentPropsWithoutRef } from "react";
 
-const Nav = styled.nav`
+export const Nav = styled.nav`
   font-family: Recursive, sans-serif;
   ${space({ py: 2, my: 0 })};
   display: flex;
@@ -16,9 +15,7 @@ const Nav = styled.nav`
   }
 `;
 
-const NavBar = (props: ComponentPropsWithoutRef<"nav">) => <Nav {...props} />;
-
-NavBar.Brand = styled.div`
+export const Brand = styled.div`
   font-weight: bold;
   font-size: 2rem;
   text-transform: uppercase;
@@ -35,7 +32,7 @@ NavBar.Brand = styled.div`
   }
 `;
 
-NavBar.Spacer = styled.div`
+export const Spacer = styled.div`
   margin: 0 auto;
   display: none;
   flex: auto;
@@ -45,7 +42,7 @@ NavBar.Spacer = styled.div`
   }
 `;
 
-NavBar.LinkList = styled.ul`
+export const LinkList = styled.ul`
   ${space({ mt: 2 })};
   display: flex;
   flex: auto;
@@ -57,7 +54,7 @@ NavBar.LinkList = styled.ul`
   }
 `;
 
-NavBar.LinkItem = styled.li`
+export const LinkItem = styled.li`
   display: inline-flex;
   flex: 1;
   justify-content: center;
@@ -67,4 +64,19 @@ NavBar.LinkItem = styled.li`
   }
 `;
 
-export { NavBar };
+export const ContentNav = styled.nav`
+  ${space({ py: [5, 4] })};
+  font-family: Recursive, sans-serif;
+`;
+
+export const ContentLinks = styled.ul`
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+`;
+
+export const ContentLink = styled.li`
+  ${space({ mr: 2 })};
+  text-decoration: underline;
+  color: var(--smokeyWhite);
+`;

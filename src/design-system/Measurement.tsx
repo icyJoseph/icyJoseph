@@ -5,7 +5,6 @@ import { Text } from "design-system/Text";
 
 const BaseEntry = styled(Text)`
   white-space: nowrap;
-  color: var(--lightBlue);
 
   &:not(:last-child):after {
     content: "\\A";
@@ -17,6 +16,7 @@ const BaseEntry = styled(Text)`
       content: " / ";
       font-weight: bolder;
       font-size: 3rem;
+      color: var(--lightBlue);
     }
   }
 `;

@@ -1,38 +1,28 @@
-import { FC } from "react";
-import styled from "styled-components";
+import { ActivityLog } from "components/Fitbit/ActivityLog";
+import { Header } from "components/Header";
+import { TopBadges } from "components/Fitbit/TopBadges";
 
 import { BackToTop } from "design-system/BackToTop";
 import { Box } from "design-system/Box";
 import { Flex } from "design-system/Flex";
-import { Section, SectionHeader } from "design-system/Section";
+import { Section } from "design-system/Section";
 import { Text } from "design-system/Text";
-
-import { TopBadges } from "components/Fitbit/TopBadges";
-import { ActivityLog } from "components/Fitbit/ActivityLog";
 
 import { useFitbitHR } from "hooks/useFitbit";
 
-const DataSegment = styled(Flex)`
-  min-width: 80%;
-
-  @media (min-width: 414px) {
-    min-width: 328px;
-  }
-`;
-
 type FitbitProps = {
-  profile: IcyJoseph.FitbitUser;
+  profile: IcyJoseph.FitbitProfile;
   activityLog: IcyJoseph.ActivityLog;
   initialHR: IcyJoseph.HeartRateActivity;
   name: string;
 };
 
-export const Fitbit: FC<FitbitProps> = ({
+export const Fitbit = ({
   profile,
   activityLog,
   initialHR,
   name
-}) => {
+}: FitbitProps) => {
   const { data } = useFitbitHR(
     { date: "today", period: "1m", revalidateOnMount: true },
     initialHR
@@ -43,18 +33,11 @@ export const Fitbit: FC<FitbitProps> = ({
 
   return (
     <Section>
-      <SectionHeader id={name} mb={3}>
-        <Text as="h2" $fontSize="3rem">
-          <a href={`#${name}`}>
-            <code>Fitbit</code>
-          </a>
-        </Text>
-      </SectionHeader>
+      <Header name={name} title="Fitbit" />
 
       <Box>
-        <Flex mt={2} pb={3}>
-          <DataSegment
-            flex={1}
+        <Flex mt={2} pb={3} flexDirection="column" gap="2rem">
+          <Flex
             flexDirection="column"
             justifyContent="flex-start"
             alignItems="center"
@@ -66,10 +49,9 @@ export const Fitbit: FC<FitbitProps> = ({
             <Text m={3} $fontSize="5rem">
               {profile.averageDailySteps}
             </Text>
-          </DataSegment>
+          </Flex>
 
-          <DataSegment
-            flex={1}
+          <Flex
             flexDirection="column"
             justifyContent="center"
             alignItems="center"
@@ -85,7 +67,7 @@ export const Fitbit: FC<FitbitProps> = ({
                 bpm
               </Text>
             </Text>
-          </DataSegment>
+          </Flex>
         </Flex>
 
         <TopBadges profile={profile} />

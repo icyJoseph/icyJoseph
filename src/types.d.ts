@@ -55,7 +55,7 @@ declare namespace IcyJoseph {
       /**
        * The query backing this type up, uses only up-to 3 languages
        */
-      edges: Array<LanguageNode | null>;
+      edges: Array<LanguageEdge | null>;
       totalSize: number;
       totalCount: number;
     };
@@ -97,9 +97,85 @@ declare namespace IcyJoseph {
     inaccurate: boolean;
   };
 
-  export type Fitbit = any;
+  export type FitbitProfile = {
+    age: number;
+    ambassador: boolean;
+    autoStrideEnabled: boolean;
+    avatar: string;
+    avatar150: string;
+    avatar640: string;
+    averageDailySteps: number;
+    challengesBeta: boolean;
+    clockTimeDisplayFormat: string;
+    corporate: boolean;
+    corporateAdmin: boolean;
+    dateOfBirth: string;
+    displayName: string;
+    displayNameSetting: string;
+    distanceUnit: string;
+    encodedId: string;
+    features: {
+      exerciseGoal: true;
+    };
+    firstName: string;
+    foodsLocale: string;
+    fullName: string;
+    gender: string;
+    glucoseUnit: string;
+    height: number;
+    heightUnit: string;
+    isBugReportEnabled: boolean;
+    isChild: boolean;
+    isCoach: boolean;
+    languageLocale: string;
+    lastName: string;
+    legalTermsAcceptRequired: boolean;
+    locale: string;
+    memberSince: string;
+    mfaEnabled: boolean;
+    offsetFromUTCMillis: number;
+    sdkDeveloper: boolean;
+    sleepTracking: string;
+    startDayOfWeek: string;
+    strideLengthRunning: number;
+    strideLengthRunningType: string;
+    strideLengthWalking: number;
+    strideLengthWalkingType: string;
+    swimUnit: string;
+    temperatureUnit: string;
+    timezone: string;
+    topBadges: Array<{
+      badgeGradientEndColor: string;
+      badgeGradientStartColor: string;
+      badgeType: string;
+      category: string;
+      cheers: [];
+      dateTime: string;
+      description: string;
+      earnedMessage: string;
+      encodedId: string;
+      image100px: string;
+      image125px: string;
+      image300px: string;
+      image50px: string;
+      image75px: string;
+      marketingDescription: string;
+      mobileDescription: string;
+      name: string;
+      shareImage640px: string;
+      shareText: string;
+      shortDescription: string;
+      shortName: string;
+      timesAchieved: number;
+      value: number;
+    }>;
+    waterUnit: string;
+    waterUnitName: string;
+    weight: number;
+    weightUnit: string;
+  };
 
-  export type FitbitUser = any;
+  export type Fitbit = { user: FitbitProfile };
 
   type ActivityLevel = {
     minutes: number;

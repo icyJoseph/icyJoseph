@@ -1,8 +1,6 @@
 import styled, { css } from "styled-components";
 import { space, SpaceProps } from "@styled-system/space";
 
-import { staleMixin } from "components/YearlyContribution";
-
 const cellMixin = css`
   overflow: visible;
 
@@ -18,14 +16,12 @@ const cellMixin = css`
   }
 `;
 
-export const Table = styled.table<{ stale?: boolean } & SpaceProps>`
+export const Table = styled.table<SpaceProps>`
   ${space};
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
   empty-cells: show;
-
-  ${staleMixin};
 `;
 
 export const Tr = styled.tr`

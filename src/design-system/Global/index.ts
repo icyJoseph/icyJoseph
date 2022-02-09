@@ -1,13 +1,13 @@
 import { createGlobalStyle } from "styled-components";
 
-import { normalize } from "styles/normalize";
-import { reset } from "styles/reset";
-import { root } from "styles/root";
-import { typography } from "styles/typography";
+import { normalize } from "design-system/Global/normalize";
+import { reset } from "design-system/Global/reset";
+import { root } from "design-system/Global/root";
+import { typography } from "design-system/Global/typography";
 
 export const GlobalStyle = createGlobalStyle`
-    ${normalize};
     ${reset};
+    ${normalize};
     ${typography};
     
     ${root};

@@ -1,14 +1,19 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, Fragment } from "react";
 
 import { Button } from "design-system/Button";
 import { Flex } from "design-system/Flex";
+import { Measurement } from "design-system/Measurement";
 import { Table, Th, Td, Tr } from "design-system/Table";
 import { Text } from "design-system/Text";
+
 import { head, exists } from "functional";
+
 import { isoStringWithoutMs } from "helpers";
+
 import { useFitbitActivityLog } from "hooks/useFitbit";
 import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
-import { Measurement } from "design-system/Measurement";
+import { useLoader } from "hooks/useLoader";
+import { Stale } from "design-system/Stale";
 
 export const formatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
@@ -124,56 +129,60 @@ export const ActivityLog = ({
   const activityLog = data ?? prev;
   const stale = !error && !data;
 
+  useLoader(data, error);
+
   const [last] = activityLog.slice(-1);
 
   return (
-    <>
-      <Table my={3} stale={stale}>
-        <thead>
-          <Tr>
-            <Th />
+    <Fragment>
+      <Stale $stale={stale}>
+        <Table my={3}>
+          <thead>
+            <Tr>
+              <Th />
 
-            <Th colSpan={2}>
-              <Text $textAlign="left" $fontSize="2rem" $fontWeight={100}>
-                Activities
-              </Text>
-            </Th>
-          </Tr>
-        </thead>
-
-        <tbody>
-          {activityLog.map((activity) => (
-            <Tr key={activity.logId}>
-              <Td />
-              <Td>
-                <Text $textAlign="left" $fontSize="2rem" $fontWeight={300}>
-                  {activity.activityName}
+              <Th colSpan={2}>
+                <Text $textAlign="left" $fontSize="2rem" $fontWeight={100}>
+                  Activities
                 </Text>
-                <Text $textAlign="left" $fontWeight={300}>
-                  <Text
-                    as="time"
-                    dateTime={activity.startTime}
-                    $fontWeight={300}
-                  >
-                    {formatter.format(new Date(activity.startTime))}
-                  </Text>
-                </Text>
-              </Td>
-
-              <Td>
-                <Measurement
-                  value={(activity.activeDuration / (60 * 1000)).toFixed(1)}
-                  unit="min"
-                />
-
-                <Measurement value={activity.calories} unit="Cals" />
-
-                <Body activity={activity} />
-              </Td>
+              </Th>
             </Tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+
+          <tbody>
+            {activityLog.map((activity) => (
+              <Tr key={activity.logId}>
+                <Td />
+                <Td>
+                  <Text $textAlign="left" $fontSize="2rem" $fontWeight={300}>
+                    {activity.activityName}
+                  </Text>
+                  <Text $textAlign="left" $fontWeight={300}>
+                    <Text
+                      as="time"
+                      dateTime={activity.startTime}
+                      $fontWeight={300}
+                    >
+                      {formatter.format(new Date(activity.startTime))}
+                    </Text>
+                  </Text>
+                </Td>
+
+                <Td>
+                  <Measurement
+                    value={(activity.activeDuration / (60 * 1000)).toFixed(1)}
+                    unit="min"
+                  />
+
+                  <Measurement value={activity.calories} unit="Cals" />
+
+                  <Body activity={activity} />
+                </Td>
+              </Tr>
+            ))}
+          </tbody>
+        </Table>
+      </Stale>
 
       <Flex justifyContent="space-around">
         <Button
@@ -192,6 +201,6 @@ export const ActivityLog = ({
           More
         </Button>
       </Flex>
-    </>
+    </Fragment>
   );
 };

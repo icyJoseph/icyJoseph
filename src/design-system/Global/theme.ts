@@ -12,4 +12,12 @@ export const theme = {
   lightRed: "#ec4e20",
   green: "#49a078",
   lightGreen: "#91f5ad"
-};
+} as const;
+
+export type SupportedColors = keyof typeof theme;
+
+export type ColorVars = `--${SupportedColors}`;
+
+export function isSupportedColor(color: string): color is SupportedColors {
+  return color in theme;
+}

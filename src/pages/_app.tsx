@@ -72,9 +72,9 @@ function App({ Component, pageProps }: AppProps) {
         <Navigation />
 
         <Component {...pageProps} />
-
-        <Footer />
       </Layout>
+
+      <Footer />
     </>
   );
 }

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { space, SpaceProps } from "@styled-system/space";
 import { ComponentPropsWithoutRef } from "react";
+import { theme } from "design-system/Global/theme";
 
 type ButtonVariants = "primary" | "outlined";
 
@@ -28,9 +29,15 @@ const BaseButton = styled.button<BaseButtonProps>`
   cursor: pointer;
 
   color: ${({ variant }) =>
+    variant === "outlined" ? theme.smokeyWhite : theme.lightYellow};
+
+  color: ${({ variant }) =>
     variant === "outlined" ? "var(--smokeyWhite)" : "var(--lightYellow)"};
 
   &:hover {
+    color: ${({ variant }) =>
+      variant === "outlined" ? theme.white : theme.yellow};
+
     color: ${({ variant }) =>
       variant === "outlined" ? "var(--white)" : "var(--yellow)"};
   }
@@ -43,6 +50,7 @@ const BaseButton = styled.button<BaseButtonProps>`
     position: absolute;
     height: calc(50% - 0.4rem);
     width: 100%;
+    border: 1px solid ${theme.smokeyWhite};
     border: 1px solid var(--smokeyWhite);
     left: 0;
   }
@@ -89,7 +97,12 @@ const Label = styled.span<ButtonLabelProps>`
     width: 100%;
     left: 0;
     bottom: 0;
+
+    border: 1px solid ${theme.smokeyWhite};
     border: 1px solid var(--smokeyWhite);
+
+    background-color: ${({ variant }) =>
+      variant === "outlined" ? "transparent" : theme.softDark};
     background-color: ${({ variant }) =>
       variant === "outlined" ? "transparent" : "var(--softDark)"};
   }
@@ -135,7 +148,10 @@ const Text = styled.span`
     width: 0.6rem;
     right: 0;
     bottom: 0;
+
+    background-color: ${theme.white};
     background-color: var(--white);
+
     transition: background-color 0.2s ease-in;
   }
 
@@ -144,6 +160,7 @@ const Text = styled.span`
   }
 
   ${BaseButton}:hover &:after {
+    background-color: ${theme.softDark};
     background-color: var(--softDark);
   }
 `;

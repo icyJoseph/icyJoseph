@@ -22,7 +22,7 @@ export const Footer = () => {
           <FooterLinks />
         </Flex>
 
-        <Text mx="auto" py={3} $textAlign="center">
+        <Text mx="auto" pt={5} $textAlign="center">
           &#169; {new Date().getFullYear()} icyJoseph AB - Gothenburg, Sweden
         </Text>
       </section>

@@ -71,7 +71,7 @@ export const YearlyContribution = ({
     <Fragment>
       <Flex flexDirection="column" alignItems="center" my={4} px={4}>
         <Text as="h4" $fontSize="2.5rem">
-          In {year}
+          Contributions in {year}
         </Text>
 
         <Stale $stale={stale}>

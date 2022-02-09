@@ -1,4 +1,5 @@
 import { css } from "styled-components";
+import { theme } from "design-system/Global/theme";
 
 export const typography = css`
   html {
@@ -9,5 +10,7 @@ export const typography = css`
     font-family: Recursive, sans-serif;
     font-size: 1.6rem;
     line-height: 1.4;
+    color: ${theme.smokeyWhite};
+    color: var(--white);
   }
 `;

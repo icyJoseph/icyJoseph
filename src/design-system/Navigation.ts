@@ -67,6 +67,7 @@ export const LinkItem = styled.li`
 export const ContentNav = styled.nav`
   ${space({ py: [5, 4] })};
   font-family: Recursive, sans-serif;
+  -ms-grid-row: 1;
 `;
 
 export const ContentLinks = styled.ul`

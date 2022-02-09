@@ -1,4 +1,5 @@
 export const theme = {
+  background: "#001220",
   black: "#000000",
   white: "#ffffff",
   smokeyWhite: "#fbf9ff",
@@ -21,3 +22,11 @@ export type ColorVars = `--${SupportedColors}`;
 export function isSupportedColor(color: string): color is SupportedColors {
   return color in theme;
 }
+
+export const toThemeColor = (color: ColorVars): SupportedColors => {
+  const value = color.replace("--", "");
+
+  if (isSupportedColor(value)) return value;
+
+  throw new Error(`Unsupported color ${color}`);
+};

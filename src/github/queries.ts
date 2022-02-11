@@ -50,6 +50,7 @@ const ContributionsFragment = gql`
         isPrivate
         diskUsage
         homepageUrl
+        url
         languages(first: 3, orderBy: { field: SIZE, direction: DESC }) {
           edges {
             node {

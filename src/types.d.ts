@@ -51,6 +51,7 @@ declare namespace IcyJoseph {
     isPrivate: boolean;
     diskUsage: number;
     homepageUrl: string;
+    url: string;
     languages: {
       /**
        * The query backing this type up, uses only up-to 3 languages

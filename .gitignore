@@ -38,3 +38,9 @@ yarn-error.log*
 
 # msw
 public/mockServiceWorker.js
+
+
+# meilisearch db
+target
+meilisearch
+data.ms

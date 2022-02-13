@@ -34,7 +34,7 @@ export const Tokei = ({ tokei, name, row }: TokeiProps) => (
     </Text>
 
     <Text mt={2} $fontWeight={300}>
-      <i>A full circle means 0 blanks and 0 comments.</i>
+      <i>A full circle means 0 blank lines and 0 comments, only code.</i>
     </Text>
 
     <Flex justifyContent="center" mt={4}>

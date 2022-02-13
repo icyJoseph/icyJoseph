@@ -3,6 +3,9 @@ import { DevIcon } from "design-system/DevIcon";
 import { Flex } from "design-system/Flex";
 import { Text } from "design-system/Text";
 import { IndicatorBar } from "design-system/IndicatorBar";
+import { OneLiner } from "design-system/OneLiner";
+import { ExternalLinkIcon } from "design-system/ExternalLinkIcon";
+import { VisuallyHidden } from "design-system/VisuallyHidden";
 
 const RE_EMOJI = /:\+1:|:-1:|:[\w-]+:/g;
 
@@ -28,8 +31,19 @@ export const ContributionEntry = ({
     (_, i) => i
   );
 
+  const repoDescription = repository.description
+    ? repository.description.replace(RE_EMOJI, "")
+    : `${repository.name} has no description.`;
+
   return (
-    <Flex as="article" py={3} mx="auto" flexDirection="column" gap="1.5rem">
+    <Flex
+      as="article"
+      py={3}
+      mx="auto"
+      flexDirection="column"
+      gap="1.5rem"
+      flexWrap="nowrap"
+    >
       <Flex as="header" alignItems="center" justifyContent="space-between">
         <Box mr={3}>
           <Text as="span" $textColor="--yellow">
@@ -39,6 +53,12 @@ export const ContributionEntry = ({
           <Text as="h4" $fontWeight={300} $fontSize="2rem" $display="inline">
             /{repository.name}
           </Text>
+          <a href={repository.url} target="_blank" rel="noopener noreferrer">
+            <VisuallyHidden>
+              External link to {repository.name} Github repository page
+            </VisuallyHidden>
+            <ExternalLinkIcon />
+          </a>
         </Box>
 
         <Text as="span" $fontWeight={300} $fontSize="2rem">
@@ -50,11 +70,9 @@ export const ContributionEntry = ({
       </Flex>
 
       <Box>
-        <Text $fontWeight={300} $fontSize="2rem">
-          {repository.description
-            ? repository.description.replace(RE_EMOJI, "")
-            : `${repository.name} has no description.`}
-        </Text>
+        <OneLiner $fontWeight={300} $fontSize="2rem" title={repoDescription}>
+          {repoDescription}
+        </OneLiner>
       </Box>
 
       <Flex as="footer" mt={3}>

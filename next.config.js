@@ -8,11 +8,12 @@ const config = {
   poweredByHeader: false,
   reactStrictMode: true,
   productionBrowserSourceMaps: true,
+  swcMinify: true,
+  compiler: {
+    styledComponents: true
+  },
   images: {
     domains: ["avatars.githubusercontent.com", "badges.fitbit.com"]
-  },
-  experimental: {
-    styledComponents: true
   }
 };
 

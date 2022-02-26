@@ -66,9 +66,9 @@ function App({ Component, pageProps }: AppProps) {
 
       <GlobalStyle />
 
-      <Navigation />
-
       <Background />
+
+      <Navigation />
 
       <Layout as="main">
         <Component {...pageProps} />

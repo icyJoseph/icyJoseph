@@ -1,5 +1,5 @@
 import { Flex } from "design-system/Flex";
-import { Paragraph } from "design-system/Paragraph";
+import { TextBox } from "design-system/TextBox";
 import { Section } from "design-system/Section";
 import { Text } from "design-system/Text";
 
@@ -38,7 +38,7 @@ export const Introduction = () => (
         </a>
       </Text>
 
-      <Paragraph chars="55ch">
+      <TextBox chars="65ch">
         <Text mt={4} mx="auto" $fontWeight={300} $fontSize="2rem">
           Developer from <b>Peru</b>, living in <b>Sweden</b>. I have a
           Bachelor&apos;s in Electronics Engineering, and a Master&apos;s degree
@@ -73,7 +73,7 @@ export const Introduction = () => (
         <Text mt={3} mx="auto" $fontWeight={300} $fontSize="2rem">
           I enjoy writing <b>CSS</b>, and keep my <b>HTML</b> semantic.
         </Text>
-      </Paragraph>
+      </TextBox>
     </Flex>
   </Section>
 );

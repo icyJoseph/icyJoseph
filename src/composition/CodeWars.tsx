@@ -37,7 +37,7 @@ export const CodeWars = ({
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Text as="span" $textColor="--lightBlue">
+          <Text as="span" $textColor="--lightBlue" $fontWeight={400}>
             Codewars
           </Text>
         </a>{" "}

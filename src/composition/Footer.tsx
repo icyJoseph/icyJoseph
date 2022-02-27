@@ -2,6 +2,7 @@ import { DevNotice } from "components/Footer/DevNotice";
 import { TechStack } from "components/Footer/TechStack";
 import { FooterLinks } from "components/Footer/FooterLinks";
 
+import { Divider } from "design-system/Divider";
 import { Flex } from "design-system/Flex";
 import { PageFooter } from "design-system/Footer";
 import { Text } from "design-system/Text";
@@ -10,6 +11,8 @@ export const Footer = () => {
   return (
     <PageFooter>
       <section>
+        <Divider mb={5} mt={0} />
+
         <Text as="h2" $fontSize="2rem">
           icyJoseph
         </Text>

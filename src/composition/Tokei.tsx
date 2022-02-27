@@ -15,7 +15,7 @@ export const Tokei = ({ tokei, name }: TokeiProps) => (
     <Header name={name} title="tokei ~/dev" />
 
     <Text mt={3} $fontWeight={300}>
-      <Text as="span" $textColor="--lightYellow">
+      <Text as="span" $textColor="--lightYellow" $fontWeight={400}>
         Lines of Code
       </Text>
       , without counting <strong>blanks</strong> or <strong>comments</strong>,
@@ -26,6 +26,7 @@ export const Tokei = ({ tokei, name }: TokeiProps) => (
         target="_blank"
         rel="noreferrer noopener"
         $textColor="--lightBlue"
+        $fontWeight={400}
       >
         tokei
       </Text>

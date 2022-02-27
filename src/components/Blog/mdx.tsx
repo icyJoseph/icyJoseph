@@ -1,7 +1,7 @@
 import type { ComponentPropsWithoutRef } from "react";
 import Link from "next/link";
-import { Prism } from "react-syntax-highlighter";
-import { nord as prismTheme } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { PrismAsyncLight } from "react-syntax-highlighter";
+import prismTheme from "react-syntax-highlighter/dist/cjs/styles/prism/nord";
 
 import { Text } from "design-system/Text";
 import { Ol, Ul } from "design-system/List";
@@ -126,9 +126,14 @@ export const components = {
     const match = /language-(\w+)/.exec(className || "");
 
     return !inline && match ? (
-      <Prism style={prismTheme} language={match[1]} PreTag="div" {...props}>
+      <PrismAsyncLight
+        style={prismTheme}
+        language={match[1]}
+        PreTag="div"
+        {...props}
+      >
         {String(children).replace(/\n$/, "")}
-      </Prism>
+      </PrismAsyncLight>
     ) : (
       <code className={className} {...props}>
         {children}

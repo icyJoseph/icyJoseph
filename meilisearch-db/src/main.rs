@@ -9,6 +9,8 @@ use futures::executor::block_on;
 use gray_matter::engine::YAML;
 use gray_matter::Matter;
 
+use chrono::Utc;
+
 #[derive(Serialize, Deserialize, Debug)]
 struct Post {
     // Unchangeable publication date
@@ -54,9 +56,11 @@ struct Cli {
 #[derive(Subcommand, Clone, Debug)]
 enum Actions {
     QueryKey,
-    AddDocument {
-        #[clap(short, long)]
+    MutatePost {
+        #[clap(long)]
         post: String,
+        #[clap(long)]
+        index: String,
     },
     SortAttributes,
 }
@@ -81,33 +85,59 @@ fn main() {
 
             println!("Public Key: {:?}", keys);
         }),
-        Actions::AddDocument { post } => {
-            let mut documents: Vec<Post> = Vec::new();
-
+        Actions::MutatePost { post, index } => {
+            // Find the post
             let mut file = File::open(post).expect("Something went wrong reading the file");
 
+            // Create heap container
             let mut content = String::new();
 
+            // Read into the head container
             file.read_to_string(&mut content).unwrap();
 
+            // Parse front matter and content
             let matter = Matter::<YAML>::new();
-
             let result = matter.parse(&content);
 
+            // Turn into struct Post
             let mut post: Post = result.data.unwrap().deserialize().unwrap();
-
+            // Add content to Post
             post.content = Some(result.content);
-
-            documents.push(post);
 
             block_on(async move {
                 let client = Client::new(cli.server_url, cli.server_key);
 
-                client
-                    .index("blog-posts")
-                    .add_documents(&documents, Some("slug"))
+                let current_index = client.index(index);
+
+                // check if document exists
+                match current_index
+                    .get_document::<Post>(post.slug.to_string())
                     .await
-                    .unwrap();
+                {
+                    Ok(doc) => {
+                        // if it exists, copy publish_date, and change update_date
+                        let publish_date = doc.publish_date;
+                        let update_date = Utc::now().timestamp();
+
+                        post.publish_date = publish_date;
+                        post.update_date = Some(update_date);
+
+                        current_index
+                            .add_or_replace(&[post], Some("slug"))
+                            .await
+                            .unwrap();
+                    }
+                    Err(_) => {
+                        // otherwise, create new document, with publish_date
+                        let publish_date = Utc::now().timestamp();
+                        post.publish_date = Some(publish_date);
+
+                        current_index
+                            .add_documents(&[post], Some("slug"))
+                            .await
+                            .unwrap();
+                    }
+                }
             });
         }
     }

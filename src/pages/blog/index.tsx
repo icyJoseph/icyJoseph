@@ -73,9 +73,11 @@ export const getStaticProps: GetStaticProps<BlogProps> = async () => {
       attributesToRetrieve
     });
 
-    return { props: { pages }, revalidate: 1 };
+    return { props: { pages }, revalidate: 20 };
   } catch (e) {
-    return { props: { pages: [] }, revalidate: 1 };
+    console.log("Error while building Blog landing page", e);
+
+    return { props: { pages: [] }, revalidate: 20 };
   }
 };
 

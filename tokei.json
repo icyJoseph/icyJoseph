@@ -1,31 +1,31 @@
 [
   {
     "language": "JavaScript",
-    "blanks": 14518,
+    "blanks": 14446,
     "children": {},
-    "code": 113079,
-    "comments": 8446,
+    "code": 112227,
+    "comments": 8434,
     "inaccurate": false
   },
   {
     "language": "TypeScript",
-    "blanks": 10999,
+    "blanks": 11187,
     "children": {},
-    "code": 105827,
-    "comments": 3746,
+    "code": 106354,
+    "comments": 3829,
     "inaccurate": false
   },
   {
     "language": "CSS",
-    "blanks": 3720,
+    "blanks": 3693,
     "children": {},
-    "code": 40944,
-    "comments": 341,
+    "code": 40736,
+    "comments": 336,
     "inaccurate": false
   },
   {
     "language": "Rust",
-    "blanks": 3002,
+    "blanks": 3046,
     "children": {
       "Markdown": [
         {
@@ -56,21 +56,21 @@
           }
         },
         {
-          "name": "/home/joseph/dev/code_wars/integers-recreation-one/src/main.rs",
-          "stats": {
-            "blanks": 0,
-            "blobs": {},
-            "code": 0,
-            "comments": 6
-          }
-        },
-        {
           "name": "/home/joseph/dev/code_wars/collatz/src/main.rs",
           "stats": {
             "blanks": 3,
             "blobs": {},
             "code": 0,
             "comments": 15
+          }
+        },
+        {
+          "name": "/home/joseph/dev/code_wars/integers-recreation-one/src/main.rs",
+          "stats": {
+            "blanks": 0,
+            "blobs": {},
+            "code": 0,
+            "comments": 6
           }
         },
         {
@@ -83,21 +83,21 @@
           }
         },
         {
-          "name": "/home/joseph/dev/daybook/search-server/src/start.rs",
-          "stats": {
-            "blanks": 0,
-            "blobs": {},
-            "code": 0,
-            "comments": 3
-          }
-        },
-        {
           "name": "/home/joseph/dev/daybook/search-server/src/helpers.rs",
           "stats": {
             "blanks": 0,
             "blobs": {},
             "code": 0,
             "comments": 1
+          }
+        },
+        {
+          "name": "/home/joseph/dev/daybook/search-server/src/start.rs",
+          "stats": {
+            "blanks": 0,
+            "blobs": {},
+            "code": 0,
+            "comments": 3
           }
         },
         {
@@ -120,8 +120,8 @@
         }
       ]
     },
-    "code": 14579,
-    "comments": 373,
+    "code": 14806,
+    "comments": 391,
     "inaccurate": false
   }
 ]

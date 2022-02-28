@@ -8,15 +8,14 @@ import { Text } from "design-system/Text";
 type TokeiProps = {
   tokei: IcyJoseph.Tokei[];
   name: string;
-  row: string;
 };
 
-export const Tokei = ({ tokei, name, row }: TokeiProps) => (
-  <Section $row={row}>
+export const Tokei = ({ tokei, name }: TokeiProps) => (
+  <Section>
     <Header name={name} title="tokei ~/dev" />
 
     <Text mt={3} $fontWeight={300}>
-      <Text as="span" $textColor="--lightYellow">
+      <Text as="span" $textColor="--lightYellow" $fontWeight={400}>
         Lines of Code
       </Text>
       , without counting <strong>blanks</strong> or <strong>comments</strong>,
@@ -27,6 +26,7 @@ export const Tokei = ({ tokei, name, row }: TokeiProps) => (
         target="_blank"
         rel="noreferrer noopener"
         $textColor="--lightBlue"
+        $fontWeight={400}
       >
         tokei
       </Text>

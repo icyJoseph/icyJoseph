@@ -6,18 +6,12 @@ export const Container = styled.section<SpaceProps>`
 
   font-family: sans-serif;
 
-  display: -ms-grid;
-  display: grid;
-
-  -ms-grid-columns: 1fr minmax(1fr, 85ch) 1fr;
-  grid-template-columns: 1fr min(85ch, 100%) 1fr;
+  display: flex;
+  flex-direction: column;
+  max-width: 85ch;
+  ${space({ mx: "auto" })};
 
   & > section:last-child {
     ${space({ mb: 4 })};
-  }
-
-  & > * {
-    -ms-grid-column: 2;
-    grid-column: 2;
   }
 `;

@@ -1,13 +1,14 @@
 import styled from "styled-components";
-import { Box } from "design-system/Box";
 
-type ParagraphProps = {
-  chars: `${string}ch`;
-};
+import { Text } from "design-system/Text";
+import { theme } from "design-system/Global/theme";
 
-const defaultMax: `${string}ch` = "55ch";
+export const Paragraph = styled(Text)`
+  font-weight: 300;
+  line-height: 1.5;
 
-export const Paragraph = styled(Box)<ParagraphProps>`
-  font-family: sans-serif;
-  max-width: ${({ chars = defaultMax }) => chars};
+  & code {
+    color: ${theme.lightGreen};
+    color: var(--lightGreen);
+  }
 `;

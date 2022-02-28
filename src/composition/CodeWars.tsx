@@ -16,12 +16,10 @@ import { useCodeWars } from "hooks/useCodeWars";
 
 export const CodeWars = ({
   initial,
-  name,
-  row
+  name
 }: {
   initial: IcyJoseph.CodeWars;
   name: "codewars";
-  row: string;
 }) => {
   const { data = initial } = useCodeWars(initial);
 
@@ -29,7 +27,7 @@ export const CodeWars = ({
     data;
 
   return (
-    <Section $row={row}>
+    <Section>
       <Header name={name} title="CodeWars" />
 
       <Text mt={3} $fontWeight={300}>
@@ -39,7 +37,7 @@ export const CodeWars = ({
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Text as="span" $textColor="--lightBlue">
+          <Text as="span" $textColor="--lightBlue" $fontWeight={400}>
             Codewars
           </Text>
         </a>{" "}

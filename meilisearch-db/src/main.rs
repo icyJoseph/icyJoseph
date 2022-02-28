@@ -62,11 +62,20 @@ enum Actions {
         #[clap(long)]
         index: String,
     },
+    DeletePost {
+        #[clap(long)]
+        post: String,
+        #[clap(long)]
+        index: String,
+    },
     CreateIndex {
         #[clap(long)]
         index: String,
     },
-    SortAttributes,
+    SortAttributes {
+        #[clap(long)]
+        index: String,
+    },
 }
 
 fn main() {
@@ -75,14 +84,25 @@ fn main() {
     let index_key = Some("slug");
 
     match &cli.action {
-        Actions::SortAttributes => block_on(async move {
-            let sortable_attributes: Vec<String> = Client::new(cli.server_url, cli.server_key)
-                .index("blog-posts")
+        Actions::SortAttributes { index } => block_on(async move {
+            let sortable_attributes: Vec<String> = Client::new(&cli.server_url, &cli.server_key)
+                .index(index)
                 .get_sortable_attributes()
                 .await
                 .unwrap();
 
-            println!("{:?}", sortable_attributes);
+            println!("Sortable Attributes: {:?}", sortable_attributes);
+
+            let task = Client::new(&cli.server_url, &cli.server_key)
+                .index(index)
+                .set_sortable_attributes(&["publish_date", "update_date"])
+                .await
+                .unwrap();
+
+            println!(
+                "Updating sortable attributes, task uid: {:?}",
+                task.get_uid()
+            );
         }),
         Actions::QueryKey => block_on(async move {
             let client = Client::new(cli.server_url, cli.server_key);
@@ -173,5 +193,38 @@ fn main() {
                 }
             });
         }
+        Actions::DeletePost { post, index } => block_on(async move {
+            let client = Client::new(cli.server_url, cli.server_key);
+
+            if let Ok(current_index) = client.get_index(index).await {
+                // require confirmation
+                use dialoguer::Confirm;
+                let prompt = format!("Do you want to delete? {:?}", post);
+
+                match Confirm::new()
+                    .with_prompt(prompt)
+                    .wait_for_newline(true)
+                    .interact()
+                {
+                    Ok(true) => {
+                        println!("Alright, deleting {:?}", post);
+
+                        match current_index.delete_document(post).await {
+                            Ok(_) => {
+                                println!("No going back, {:?} was deleted", post)
+                            }
+                            Err(why) => {
+                                panic!("Failed to delete: {:?}", why)
+                            }
+                        }
+                    }
+                    _ => {
+                        println!("Nothing was deleted.")
+                    }
+                }
+            } else {
+                println!("The index, {:?}, does not exist.", index)
+            }
+        }),
     }
 }

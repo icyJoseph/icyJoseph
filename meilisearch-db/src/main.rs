@@ -62,11 +62,17 @@ enum Actions {
         #[clap(long)]
         index: String,
     },
+    CreateIndex {
+        #[clap(long)]
+        index: String,
+    },
     SortAttributes,
 }
 
 fn main() {
     let cli = Cli::parse();
+
+    let index_key = Some("slug");
 
     match &cli.action {
         Actions::SortAttributes => block_on(async move {
@@ -84,6 +90,21 @@ fn main() {
             let keys = client.get_keys().await.unwrap();
 
             println!("Public Key: {:?}", keys);
+        }),
+
+        Actions::CreateIndex { index } => block_on(async move {
+            let client = Client::new(cli.server_url, cli.server_key);
+
+            if let Ok(_) = client.get_index(index).await {
+                println!("The index, {:?}, already exists", index);
+            } else {
+                match client.create_index(index, index_key).await {
+                    Ok(_) => {
+                        println!("Successfully created index: {:?}", index)
+                    }
+                    Err(why) => panic!("{:?}", why),
+                }
+            }
         }),
         Actions::MutatePost { post, index } => {
             // Find the post
@@ -107,36 +128,48 @@ fn main() {
             block_on(async move {
                 let client = Client::new(cli.server_url, cli.server_key);
 
-                let current_index = client.index(index);
+                let post_slug = post.slug.to_string();
 
-                // check if document exists
-                match current_index
-                    .get_document::<Post>(post.slug.to_string())
-                    .await
-                {
-                    Ok(doc) => {
-                        // if it exists, copy publish_date, and change update_date
-                        let publish_date = doc.publish_date;
-                        let update_date = Utc::now().timestamp();
+                if let Ok(current_index) = client.get_index(index).await {
+                    // check if document exists
+                    match current_index
+                        .get_document::<Post>(post.slug.to_string())
+                        .await
+                    {
+                        Ok(doc) => {
+                            // if it exists, copy publish_date, and change update_date
+                            let publish_date = doc.publish_date;
+                            let update_date = Utc::now().timestamp();
 
-                        post.publish_date = publish_date;
-                        post.update_date = Some(update_date);
+                            post.publish_date = publish_date;
+                            post.update_date = Some(update_date);
 
-                        current_index
-                            .add_or_replace(&[post], Some("slug"))
-                            .await
-                            .unwrap();
+                            match current_index.add_or_replace(&[post], index_key).await {
+                                Ok(_) => {
+                                    println!("Document with slug: {:?}, updated!", post_slug)
+                                }
+                                Err(why) => {
+                                    panic!("{:?}", why)
+                                }
+                            }
+                        }
+                        Err(_) => {
+                            // otherwise, create new document, with publish_date
+                            let publish_date = Utc::now().timestamp();
+                            post.publish_date = Some(publish_date);
+
+                            match current_index.add_documents(&[post], index_key).await {
+                                Ok(_) => {
+                                    println!("Document with slug: {:?}, created!", post_slug)
+                                }
+                                Err(why) => {
+                                    panic!("{:?}", why)
+                                }
+                            }
+                        }
                     }
-                    Err(_) => {
-                        // otherwise, create new document, with publish_date
-                        let publish_date = Utc::now().timestamp();
-                        post.publish_date = Some(publish_date);
-
-                        current_index
-                            .add_documents(&[post], Some("slug"))
-                            .await
-                            .unwrap();
-                    }
+                } else {
+                    panic!("The index, {:?}, does not exist", index);
                 }
             });
         }

@@ -25,7 +25,7 @@
   },
   {
     "language": "Rust",
-    "blanks": 3046,
+    "blanks": 3051,
     "children": {
       "Markdown": [
         {
@@ -56,21 +56,21 @@
           }
         },
         {
-          "name": "/home/joseph/dev/code_wars/collatz/src/main.rs",
-          "stats": {
-            "blanks": 3,
-            "blobs": {},
-            "code": 0,
-            "comments": 15
-          }
-        },
-        {
           "name": "/home/joseph/dev/code_wars/integers-recreation-one/src/main.rs",
           "stats": {
             "blanks": 0,
             "blobs": {},
             "code": 0,
             "comments": 6
+          }
+        },
+        {
+          "name": "/home/joseph/dev/code_wars/collatz/src/main.rs",
+          "stats": {
+            "blanks": 3,
+            "blobs": {},
+            "code": 0,
+            "comments": 15
           }
         },
         {
@@ -120,8 +120,8 @@
         }
       ]
     },
-    "code": 14806,
-    "comments": 391,
+    "code": 14853,
+    "comments": 392,
     "inaccurate": false
   }
 ]

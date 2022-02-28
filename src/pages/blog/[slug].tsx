@@ -1,4 +1,4 @@
-import type { GetServerSideProps } from "next";
+import type { GetStaticPaths, GetStaticProps } from "next";
 import { MeiliSearch } from "meilisearch";
 import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
@@ -7,6 +7,7 @@ import { components } from "components/Blog/mdx";
 
 import { Container } from "design-system/Container";
 import { Text } from "design-system/Text";
+import { useRouter } from "next/router";
 
 type MDXPost = Omit<IcyJoseph.Post, "content"> & {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -17,6 +18,12 @@ type MDXPost = Omit<IcyJoseph.Post, "content"> & {
  */
 
 export const BlogEntry = ({ source, title }: MDXPost) => {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <Container mt={4} px={1}>
@@ -30,9 +37,28 @@ export const BlogEntry = ({ source, title }: MDXPost) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<MDXPost> = async (
-  context
-) => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const client = new MeiliSearch({
+    host: process.env.MEILISEARCH_URL,
+    apiKey: process.env.MEILISEARCH_KEY
+  });
+
+  const index = await client.getIndex<IcyJoseph.Post>(
+    process.env.MEILISEARCH_INDEX
+  );
+
+  const { hits } = await index.search<IcyJoseph.Post>("", {
+    limit: 50,
+    attributesToRetrieve: ["slug"],
+    sort: ["publish_date:desc"]
+  });
+
+  const paths = hits.map(({ slug }) => ({ params: { slug } }));
+
+  return { paths, fallback: true };
+};
+
+export const getStaticProps: GetStaticProps<MDXPost> = async (context) => {
   try {
     const { params } = context;
     const { slug } = params || {};
@@ -53,9 +79,9 @@ export const getServerSideProps: GetServerSideProps<MDXPost> = async (
     // assert content shape
     const source = await serialize(content || "");
 
-    return { props: { ...rest, source } };
+    return { props: { ...rest, source }, revalidate: 120 };
   } catch (e) {
-    return { notFound: true };
+    return { notFound: true, revalidate: 360 };
   }
 };
 

@@ -72,7 +72,10 @@ enum Actions {
         #[clap(long)]
         index: String,
     },
-    SortAttributes,
+    SortAttributes {
+        #[clap(long)]
+        index: String,
+    },
 }
 
 fn main() {
@@ -81,14 +84,25 @@ fn main() {
     let index_key = Some("slug");
 
     match &cli.action {
-        Actions::SortAttributes => block_on(async move {
-            let sortable_attributes: Vec<String> = Client::new(cli.server_url, cli.server_key)
-                .index("blog-posts")
+        Actions::SortAttributes { index } => block_on(async move {
+            let sortable_attributes: Vec<String> = Client::new(&cli.server_url, &cli.server_key)
+                .index(index)
                 .get_sortable_attributes()
                 .await
                 .unwrap();
 
-            println!("{:?}", sortable_attributes);
+            println!("Sortable Attributes: {:?}", sortable_attributes);
+
+            let task = Client::new(&cli.server_url, &cli.server_key)
+                .index(index)
+                .set_sortable_attributes(&["publish_date", "update_date"])
+                .await
+                .unwrap();
+
+            println!(
+                "Updating sortable attributes, task uid: {:?}",
+                task.get_uid()
+            );
         }),
         Actions::QueryKey => block_on(async move {
             let client = Client::new(cli.server_url, cli.server_key);

@@ -9,10 +9,10 @@
   },
   {
     "language": "TypeScript",
-    "blanks": 11187,
+    "blanks": 11181,
     "children": {},
-    "code": 106354,
-    "comments": 3829,
+    "code": 106347,
+    "comments": 3807,
     "inaccurate": false
   },
   {
@@ -25,7 +25,7 @@
   },
   {
     "language": "Rust",
-    "blanks": 3046,
+    "blanks": 3051,
     "children": {
       "Markdown": [
         {
@@ -120,8 +120,8 @@
         }
       ]
     },
-    "code": 14806,
-    "comments": 391,
+    "code": 14853,
+    "comments": 392,
     "inaccurate": false
   }
 ]

@@ -8,11 +8,18 @@ import { Container } from "design-system/Container";
 import { Section } from "design-system/Section";
 import { Text } from "design-system/Text";
 
-type PostPreview = Pick<IcyJoseph.Post, "title" | "tags" | "slug" | "summary">;
+type PostPreview = Pick<
+  IcyJoseph.Post,
+  "title" | "tags" | "slug" | "summary" | "publish_date"
+>;
 
 type BlogProps = {
   pages: PostPreview[];
 };
+
+/**
+ * Search box for articles
+ */
 
 export const Blog = ({ pages }: BlogProps) => {
   return (
@@ -26,19 +33,19 @@ export const Blog = ({ pages }: BlogProps) => {
 
         {pages.length > 0 ? (
           pages.map((page) => (
-            <Section as="article" key={page.slug} mb={2} px={1}>
-              <Link href={`/blog/${page.slug}`}>
-                <a>
+            <Link key={page.slug} href={`/blog/${page.slug}`}>
+              <a>
+                <Section as="article" mb={2} px={1}>
                   <Text as="h3" $textColor="--yellow">
                     {page.title}
                   </Text>
-                </a>
-              </Link>
 
-              <div>
-                <Text>{page.summary}</Text>
-              </div>
-            </Section>
+                  <div>
+                    <Text>{page.summary}</Text>
+                  </div>
+                </Section>
+              </a>
+            </Link>
           ))
         ) : (
           <Section mb={2} px={1}>
@@ -54,7 +61,8 @@ const attributesToRetrieve: Array<keyof PostPreview> = [
   "title",
   "tags",
   "slug",
-  "summary"
+  "summary",
+  "publish_date"
 ];
 
 export const getStaticProps: GetStaticProps<BlogProps> = async () => {
@@ -68,12 +76,13 @@ export const getStaticProps: GetStaticProps<BlogProps> = async () => {
       process.env.MEILISEARCH_INDEX
     );
 
-    const pages = await index.getDocuments({
+    const { hits } = await index.search<IcyJoseph.Post>("", {
       limit: 50,
-      attributesToRetrieve
+      attributesToRetrieve,
+      sort: ["publish_date:desc"]
     });
 
-    return { props: { pages }, revalidate: 20 };
+    return { props: { pages: hits }, revalidate: 20 };
   } catch (e) {
     console.log("Error while building Blog landing page", e);
 

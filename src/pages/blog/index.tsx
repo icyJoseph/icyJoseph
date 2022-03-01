@@ -7,6 +7,7 @@ import { BlogIntro } from "components/Blog/Intro";
 import { Container } from "design-system/Container";
 import { Section } from "design-system/Section";
 import { Text } from "design-system/Text";
+import { Search } from "components/Blog/Search";
 
 type PostPreview = Pick<
   IcyJoseph.Post,
@@ -22,6 +23,7 @@ type BlogProps = {
  */
 
 export const Blog = ({ pages }: BlogProps) => {
+  const hasPages = pages.length > 0;
   return (
     <>
       <BlogIntro />
@@ -31,27 +33,29 @@ export const Blog = ({ pages }: BlogProps) => {
           Posts
         </Text>
 
-        {pages.length > 0 ? (
-          pages.map((page) => (
-            <Link key={page.slug} href={`/blog/${page.slug}`}>
-              <a>
-                <Section as="article" mb={2} px={1}>
-                  <Text as="h3" $textColor="--yellow">
-                    {page.title}
-                  </Text>
+        <Search>
+          {hasPages ? (
+            pages.map((page) => (
+              <Link key={page.slug} href={`/blog/${page.slug}`}>
+                <a>
+                  <Section as="article" mb={2} px={1}>
+                    <Text as="h3" $textColor="--yellow">
+                      {page.title}
+                    </Text>
 
-                  <div>
-                    <Text>{page.summary}</Text>
-                  </div>
-                </Section>
-              </a>
-            </Link>
-          ))
-        ) : (
-          <Section mb={2} px={1}>
-            <Text>Nothing has been published yet.</Text>
-          </Section>
-        )}
+                    <div>
+                      <Text>{page.summary}</Text>
+                    </div>
+                  </Section>
+                </a>
+              </Link>
+            ))
+          ) : (
+            <Section mb={2} px={1}>
+              <Text>Nothing has been published yet.</Text>
+            </Section>
+          )}
+        </Search>
       </Container>
     </>
   );

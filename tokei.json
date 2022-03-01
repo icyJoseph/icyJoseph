@@ -56,21 +56,21 @@
           }
         },
         {
-          "name": "/home/joseph/dev/code_wars/collatz/src/main.rs",
-          "stats": {
-            "blanks": 3,
-            "blobs": {},
-            "code": 0,
-            "comments": 15
-          }
-        },
-        {
           "name": "/home/joseph/dev/code_wars/integers-recreation-one/src/main.rs",
           "stats": {
             "blanks": 0,
             "blobs": {},
             "code": 0,
             "comments": 6
+          }
+        },
+        {
+          "name": "/home/joseph/dev/code_wars/collatz/src/main.rs",
+          "stats": {
+            "blanks": 3,
+            "blobs": {},
+            "code": 0,
+            "comments": 15
           }
         },
         {

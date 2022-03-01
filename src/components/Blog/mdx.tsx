@@ -3,9 +3,25 @@ import Link from "next/link";
 import { PrismAsyncLight } from "react-syntax-highlighter";
 import prismTheme from "react-syntax-highlighter/dist/cjs/styles/prism/nord";
 
+import css from "react-syntax-highlighter/dist/cjs/languages/prism/css";
+import markup from "react-syntax-highlighter/dist/cjs/languages/prism/markup";
+import js from "react-syntax-highlighter/dist/cjs/languages/prism/javascript";
+import jsx from "react-syntax-highlighter/dist/cjs/languages/prism/jsx";
+import ts from "react-syntax-highlighter/dist/cjs/languages/prism/typescript";
+import tsx from "react-syntax-highlighter/dist/cjs/languages/prism/tsx";
+import rust from "react-syntax-highlighter/dist/cjs/languages/prism/rust";
+
 import { Text } from "design-system/Text";
 import { Ol, Ul } from "design-system/List";
 import { Paragraph } from "design-system/Paragraph";
+
+PrismAsyncLight.registerLanguage("css", css);
+PrismAsyncLight.registerLanguage("markup", markup);
+PrismAsyncLight.registerLanguage("js", js);
+PrismAsyncLight.registerLanguage("ts", ts);
+PrismAsyncLight.registerLanguage("jsx", jsx);
+PrismAsyncLight.registerLanguage("tsx", tsx);
+PrismAsyncLight.registerLanguage("rust", rust);
 
 export const components = {
   h1: (props: ComponentPropsWithoutRef<"h1">) => {

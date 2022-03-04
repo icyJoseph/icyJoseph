@@ -11,8 +11,14 @@ const useSearch = (tags: string[]) => {
   );
 };
 
-export const Related = ({ tags }: { tags: IcyJoseph.Post["tags"] }) => {
+export const Related = ({
+  tags,
+  slug
+}: Pick<IcyJoseph.Post, "slug" | "tags">) => {
   const { data } = useSearch(tags);
+
+  if (!data) return null;
+  if (data.hits.length === 0) return null;
 
   return (
     <>
@@ -26,9 +32,11 @@ export const Related = ({ tags }: { tags: IcyJoseph.Post["tags"] }) => {
         Related Posts
       </Text>
 
-      {data?.hits.map((post) => {
-        return <PostLink key={post.slug} post={post} />;
-      })}
+      {data.hits
+        .filter((post) => post.slug !== slug)
+        .map((post) => {
+          return <PostLink key={post.slug} post={post} />;
+        })}
     </>
   );
 };

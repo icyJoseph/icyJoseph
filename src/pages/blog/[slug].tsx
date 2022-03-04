@@ -18,7 +18,7 @@ type MDXPost = Omit<IcyJoseph.Post, "content"> & {
  * TODO: Using MDX Post tags, find similar posts
  */
 
-export const BlogEntry = ({ source, title, tags }: MDXPost) => {
+export const BlogEntry = ({ slug, source, title, tags }: MDXPost) => {
   const router = useRouter();
 
   if (router.isFallback) {
@@ -36,7 +36,7 @@ export const BlogEntry = ({ source, title, tags }: MDXPost) => {
       </Container>
 
       <Container mt={4} px={1}>
-        <Related tags={tags} />
+        <Related tags={tags} slug={slug} />
       </Container>
     </>
   );

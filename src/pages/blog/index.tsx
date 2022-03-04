@@ -1,6 +1,5 @@
 import type { GetStaticProps } from "next";
 import { MeiliSearch } from "meilisearch";
-import Link from "next/link";
 
 import { BlogIntro } from "components/Blog/Intro";
 
@@ -8,22 +7,14 @@ import { Container } from "design-system/Container";
 import { Section } from "design-system/Section";
 import { Text } from "design-system/Text";
 import { Search } from "components/Blog/Search";
-
-type PostPreview = Pick<
-  IcyJoseph.Post,
-  "title" | "tags" | "slug" | "summary" | "publish_date"
->;
+import { PostLink, type PostPreview } from "components/Blog/PostLink";
 
 type BlogProps = {
-  pages: PostPreview[];
+  posts: PostPreview[];
 };
 
-/**
- * Search box for articles
- */
-
-export const Blog = ({ pages }: BlogProps) => {
-  const hasPages = pages.length > 0;
+export const Blog = ({ posts }: BlogProps) => {
+  const hasPosts = posts.length > 0;
   return (
     <>
       <BlogIntro />
@@ -34,22 +25,8 @@ export const Blog = ({ pages }: BlogProps) => {
         </Text>
 
         <Search>
-          {hasPages ? (
-            pages.map((page) => (
-              <Link key={page.slug} href={`/blog/${page.slug}`}>
-                <a>
-                  <Section as="article" mb={2} px={1}>
-                    <Text as="h3" $textColor="--yellow">
-                      {page.title}
-                    </Text>
-
-                    <div>
-                      <Text>{page.summary}</Text>
-                    </div>
-                  </Section>
-                </a>
-              </Link>
-            ))
+          {hasPosts ? (
+            posts.map((post) => <PostLink key={post.slug} post={post} />)
           ) : (
             <Section mb={2} px={1}>
               <Text>Nothing has been published yet.</Text>
@@ -86,11 +63,11 @@ export const getStaticProps: GetStaticProps<BlogProps> = async () => {
       sort: ["publish_date:desc"]
     });
 
-    return { props: { pages: hits }, revalidate: 20 };
+    return { props: { posts: hits }, revalidate: 20 };
   } catch (e) {
     console.log("Error while building Blog landing page", e);
 
-    return { props: { pages: [] }, revalidate: 20 };
+    return { props: { posts: [] }, revalidate: 20 };
   }
 };
 

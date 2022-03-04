@@ -1,6 +1,6 @@
 # Meilisearch DB
 
-This sub project contains binding code to maintain a Meilisearch instance, which is used to feed the blog section of this website.
+This sub-project contains binding code to maintain a Meilisearch instance, which is used to feed the blog section of this website.
 
 This uses the Meilisearch Rust SDK.
 

@@ -8,6 +8,7 @@ import { components } from "components/Blog/mdx";
 import { Container } from "design-system/Container";
 import { Text } from "design-system/Text";
 import { useRouter } from "next/router";
+import { Related } from "components/Blog/Related";
 
 type MDXPost = Omit<IcyJoseph.Post, "content"> & {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -17,7 +18,7 @@ type MDXPost = Omit<IcyJoseph.Post, "content"> & {
  * TODO: Using MDX Post tags, find similar posts
  */
 
-export const BlogEntry = ({ source, title }: MDXPost) => {
+export const BlogEntry = ({ source, title, tags }: MDXPost) => {
   const router = useRouter();
 
   if (router.isFallback) {
@@ -27,11 +28,15 @@ export const BlogEntry = ({ source, title }: MDXPost) => {
   return (
     <>
       <Container mt={4} px={1}>
-        <Text as="header" $fontSize="2.5rem">
+        <Text as="header" $fontSize="2.5rem" $textDecoration="underline">
           {title}
         </Text>
 
         <MDXRemote {...source} components={components} />
+      </Container>
+
+      <Container mt={4} px={1}>
+        <Related tags={tags} />
       </Container>
     </>
   );

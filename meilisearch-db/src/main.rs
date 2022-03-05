@@ -76,6 +76,10 @@ enum Actions {
         #[clap(long)]
         index: String,
     },
+    Stats {
+        #[clap(long)]
+        index: String,
+    },
 }
 
 fn main() {
@@ -84,6 +88,12 @@ fn main() {
     let index_key = Some("slug");
 
     match &cli.action {
+        Actions::Stats { index } => block_on(async move {
+            let current_index = Client::new(&cli.server_url, &cli.server_key).index(index);
+            let stats = current_index.get_stats().await.unwrap();
+
+            println!("{:?} has {:?} documents", index, stats.number_of_documents)
+        }),
         Actions::Configure { index } => block_on(async move {
             let current_index = Client::new(&cli.server_url, &cli.server_key).index(index);
 

@@ -81,6 +81,27 @@ declare namespace IcyJoseph {
     }>;
   };
 
+  type DiscussionAnswers = {
+    totalCount: number;
+    nodes: Array<{
+      id: string;
+      discussion: {
+        id: string;
+        title: string;
+        repository: {
+          id: string;
+          name: string;
+        };
+      };
+      author: {
+        login: string;
+      };
+      isAnswer: boolean;
+      authorAssociation: string;
+      url: string;
+    }>;
+  };
+
   export type GitHub = {
     bio: string;
     name: string;
@@ -89,6 +110,7 @@ declare namespace IcyJoseph {
     login: string;
     avatarUrl: string;
     contributionsCollection: ContributionCollection;
+    repositoryDiscussionComments: DiscussionAnswers;
   };
 
   export type Tokei = {

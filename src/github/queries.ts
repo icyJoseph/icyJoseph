@@ -103,6 +103,26 @@ const GET_USER_DOC = gql`
       contributionsCollection(from: $from, to: $to) {
         ...contributions
       }
+      repositoryDiscussionComments(onlyAnswers: true, last: 50) {
+        totalCount
+        nodes {
+          id
+          discussion {
+            id
+            title
+            repository {
+              id
+              name
+            }
+          }
+          author {
+            login
+          }
+          isAnswer
+          authorAssociation
+          url
+        }
+      }
     }
   }
   ${ItemShowcaseFragment}

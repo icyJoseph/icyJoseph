@@ -25,7 +25,7 @@ const StyledBase = styled(Base)`
   & > a {
     font-family: Recursive, sans-serif;
     text-decoration: underline;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     color: var(--smokeyWhite);
   }
 `;

@@ -18,25 +18,20 @@ export const Related = ({
   const { data } = useSearch(tags);
 
   if (!data) return null;
-  if (data.hits.length === 0) return null;
+
+  const related = data.hits.filter((post) => post.slug !== slug);
+
+  if (related.length === 0) return null;
 
   return (
     <>
-      <Text
-        as="h2"
-        mb={2}
-        $fontSize="2.25rem"
-        px={1}
-        $textDecoration="underline"
-      >
+      <Text as="h2" mb={2} $fontSize="2.25rem" $textColor="--yellow" px={1}>
         Related Posts
       </Text>
 
-      {data.hits
-        .filter((post) => post.slug !== slug)
-        .map((post) => {
-          return <PostLink key={post.slug} post={post} />;
-        })}
+      {related.map((post) => {
+        return <PostLink key={post.slug} post={post} />;
+      })}
     </>
   );
 };

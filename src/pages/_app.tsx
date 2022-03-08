@@ -2,7 +2,7 @@ import type { AppProps } from "next/app";
 
 import { useEffect } from "react";
 import Router from "next/router";
-import Head from "next/head";
+import Script from "next/script";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 
@@ -43,34 +43,33 @@ function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Head>
-        {/* Global Site Tag (gtag.js) - Google Analytics */}
-        <script
-          async
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-        />
+      <Script
+        strategy="lazyOnload"
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+      />
 
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA_TRACKING_ID}', {
-              page_path: window.location.pathname,
-            });
-          `
-          }}
-        />
-      </Head>
+      <Script
+        id="gtag"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_TRACKING_ID}', {
+            page_path: window.location.pathname,
+          });
+        `
+        }}
+      />
 
       <GlobalStyle />
 
       <Background />
 
-      <Layout as="main">
-        <Navigation />
+      <Navigation />
 
+      <Layout as="main">
         <Component {...pageProps} />
       </Layout>
 

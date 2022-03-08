@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import { Container } from "design-system/Container";
-import { Emoji } from "design-system/Emoji";
 import {
   Nav,
   Brand,
@@ -28,17 +27,11 @@ export const Navigation = () => {
         <Spacer />
 
         <LinkList>
-          {entries.map(({ title, symbol, ariaLabel, href }) => (
+          {entries.map(({ title, href }) => (
             <LinkItem key={title}>
               <Link href={href}>
                 <a>
                   <span>{title}</span>
-                  <Emoji
-                    title={title}
-                    symbol={symbol}
-                    ariaLabel={ariaLabel}
-                    ml={1}
-                  />
                 </a>
               </Link>
             </LinkItem>

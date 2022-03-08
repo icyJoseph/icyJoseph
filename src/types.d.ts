@@ -1,8 +1,9 @@
 declare namespace NodeJS {
   interface ProcessEnv {
     NEXT_PUBLIC_GA_TRACKING_ID: string;
-    CRYPTO_KEY: string;
-    CLOAK_PASSWORD: string;
+    MEILISEARCH_URL: string;
+    MEILISEARCH_KEY: string;
+    MEILISEARCH_INDEX: string;
   }
 }
 
@@ -80,6 +81,27 @@ declare namespace IcyJoseph {
     }>;
   };
 
+  type DiscussionAnswers = {
+    totalCount: number;
+    nodes: Array<{
+      id: string;
+      discussion: {
+        id: string;
+        title: string;
+        repository: {
+          id: string;
+          name: string;
+        };
+      };
+      author: {
+        login: string;
+      };
+      isAnswer: boolean;
+      authorAssociation: string;
+      url: string;
+    }>;
+  };
+
   export type GitHub = {
     bio: string;
     name: string;
@@ -88,6 +110,7 @@ declare namespace IcyJoseph {
     login: string;
     avatarUrl: string;
     contributionsCollection: ContributionCollection;
+    repositoryDiscussionComments: DiscussionAnswers;
   };
 
   export type Tokei = {
@@ -231,5 +254,28 @@ declare namespace IcyJoseph {
 
   export type HeartRateActivity = {
     "activities-heart": Array<HeartRatePoint>;
+  };
+
+  type Option<T> = T | null;
+
+  export type Post = {
+    // Unchangeable publication date
+    publish_date: Option<number>;
+    // Last time post was edited
+    update_date: Option<number>;
+    // Post title as seen by the reader
+    title: string;
+    // Post human readable resource name
+    slug: string;
+    // To be used when previewing thepost
+    summary: string;
+    // Post content
+    content: Option<string>;
+    // Optional image to use for previews
+    image: Option<string>;
+    // What subjects is the post about
+    tags: Array<string>;
+    // Who wrote the post
+    authors: Array<string>;
   };
 }

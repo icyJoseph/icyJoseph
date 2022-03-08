@@ -70,7 +70,7 @@ export const YearlyContribution = ({
   return (
     <Fragment>
       <Flex flexDirection="column" alignItems="center" my={4} px={4}>
-        <Text as="h4" $fontSize="2.5rem">
+        <Text as="h3" $fontSize="2.5rem">
           Contributions in {year}
         </Text>
 
@@ -100,7 +100,11 @@ export const YearlyContribution = ({
         </Stale>
       </Flex>
 
-      <Stale mt={3} $stale={stale}>
+      <Stale my={4} $stale={stale}>
+        <Text as="h3" $fontSize="2.5rem">
+          Repositories in {year}
+        </Text>
+
         {circularSlice(
           commitContributionsByRepository,
           pointer,

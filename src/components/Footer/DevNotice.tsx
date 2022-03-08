@@ -15,7 +15,7 @@ export const DevNotice = () => {
           href="https://evolvetechnology.se"
           target="_blank"
           rel="noreferrer noopener"
-          $textColor="--yellow"
+          $textColor="--lightBlue"
           $textDecoration="underline"
           $fontWeight={500}
         >
@@ -34,7 +34,7 @@ export const DevNotice = () => {
           href="https://evolvetechnology.se/en/contact"
           target="_blank"
           rel="noreferrer noopener"
-          $textColor="--yellow"
+          $textColor="--lightBlue"
           $textDecoration="underline"
           $fontWeight={500}
         >

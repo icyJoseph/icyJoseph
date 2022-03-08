@@ -1,4 +1,4 @@
-import { useEffect, useState, Fragment } from "react";
+import { useEffect, useState, Fragment, useMemo } from "react";
 import NextImage from "next/image";
 
 import { Header } from "components/Header";
@@ -33,9 +33,9 @@ const RenderWithSelectedYear = ({
   return children({ selectedYear, setSelectedYear });
 };
 
-type GitHubProps = { initial: IcyJoseph.GitHub; name: string; row: string };
+type GitHubProps = { initial: IcyJoseph.GitHub; name: string };
 
-export const GitHub = ({ initial, name: pageName, row }: GitHubProps) => {
+export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
   const { data } = useGitHubProfile({
     ...yearStart(),
     fallbackData: initial
@@ -48,7 +48,8 @@ export const GitHub = ({ initial, name: pageName, row }: GitHubProps) => {
     location,
     login,
     avatarUrl,
-    contributionsCollection
+    contributionsCollection,
+    repositoryDiscussionComments
   } = data || initial;
 
   const { contributionYears } = contributionsCollection;
@@ -60,8 +61,21 @@ export const GitHub = ({ initial, name: pageName, row }: GitHubProps) => {
     setShowContributions(true);
   }, []);
 
+  const totalAnswers = repositoryDiscussionComments.totalCount;
+
+  const answersToRepos = useMemo(
+    () => [
+      ...new Set(
+        repositoryDiscussionComments.nodes.map(({ discussion }) => {
+          return discussion.repository.name;
+        })
+      )
+    ],
+    [repositoryDiscussionComments]
+  );
+
   return (
-    <Section $row={row}>
+    <Section>
       <Header name={pageName} title="GitHub" />
 
       <Flex flexDirection="column" alignItems="center">
@@ -136,6 +150,34 @@ export const GitHub = ({ initial, name: pageName, row }: GitHubProps) => {
             </Fragment>
           )}
         </RenderWithSelectedYear>
+
+        <Box mt={5}>
+          <Text as="h3" $fontSize="2.5rem" mb={3}>
+            Answers
+          </Text>
+
+          <Text $fontWeight={300}>
+            Whenever possible I try to answer questions on the discussions for
+            GitHub projects I support.
+          </Text>
+
+          <Text $fontWeight={300} mt={2}>
+            In total I have{" "}
+            <Text as="span" $textColor="--yellow" $fontWeight={400}>
+              {totalAnswers}
+            </Text>{" "}
+            accepted answers, in these repositories:{" "}
+            {answersToRepos.map((repo, index, src) => (
+              <Fragment key={repo}>
+                <Text as="span" $textColor="--yellow" $fontWeight={400}>
+                  {repo}
+                </Text>
+                {index < src.length - 1 && <span>, </span>}
+              </Fragment>
+            ))}
+            .
+          </Text>
+        </Box>
       </Flex>
 
       <BackToTop />

@@ -28,7 +28,7 @@ export const BlogEntry = ({ slug, source, title, tags }: MDXPost) => {
   return (
     <>
       <Container mt={4} px={1}>
-        <Text as="header" $fontSize="2.5rem" $textDecoration="underline">
+        <Text as="header" $fontSize="2.5rem">
           {title}
         </Text>
 

@@ -10,5 +10,7 @@ export const Paragraph = styled(Text)`
   & code {
     color: ${theme.lightGreen};
     color: var(--lightGreen);
+    font-family: inherit;
+    font-weight: 400;
   }
 `;

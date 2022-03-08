@@ -168,17 +168,12 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
             </Text>{" "}
             accepted answers, in these repositories:{" "}
             {answersToRepos.map((repo, index, src) => (
-              <>
-                <Text
-                  key={repo}
-                  as="span"
-                  $textColor="--yellow"
-                  $fontWeight={400}
-                >
+              <Fragment key={repo}>
+                <Text as="span" $textColor="--yellow" $fontWeight={400}>
                   {repo}
                 </Text>
                 {index < src.length - 1 && <span>, </span>}
-              </>
+              </Fragment>
             ))}
             .
           </Text>

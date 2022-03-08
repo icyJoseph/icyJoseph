@@ -9,6 +9,7 @@ import { Container } from "design-system/Container";
 import { Text } from "design-system/Text";
 import { useRouter } from "next/router";
 import { Related } from "components/Blog/Related";
+import { BackTo, BackToTop } from "design-system/BackToTop";
 
 type MDXPost = Omit<IcyJoseph.Post, "content"> & {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -37,6 +38,10 @@ export const BlogEntry = ({ slug, source, title, tags }: MDXPost) => {
 
       <Container mt={4} px={1}>
         <Related tags={tags} slug={slug} />
+
+        <BackToTop />
+
+        <BackTo to="/blog" label="Back to Blog" />
       </Container>
     </>
   );

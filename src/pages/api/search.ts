@@ -18,7 +18,7 @@ const search = async (req: NextApiRequest, res: NextApiResponse) => {
   const tagFilter = [tags || ""]
     .flatMap((n) => n)
     .flatMap((n) => n.split(","))
-    .map((tag) => `tags = ${tag}`)
+    .map((tag) => `tags = '${tag}'`)
     .join(" OR ");
 
   const results = await index.search<IcyJoseph.Post>(query, {

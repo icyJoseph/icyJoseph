@@ -8,15 +8,40 @@ import { Section } from "design-system/Section";
 import { Text } from "design-system/Text";
 import { Search } from "components/Blog/Search";
 import { PostLink, type PostPreview } from "components/Blog/PostLink";
+import { NextSeo } from "next-seo";
 
 type BlogProps = {
   posts: PostPreview[];
 };
 
+const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
+
 export const Blog = ({ posts }: BlogProps) => {
   const hasPosts = posts.length > 0;
+
   return (
     <>
+      <NextSeo
+        title="icyJoseph | Blog"
+        description="Here I publish my solutions to coding challenges, and things I learn on my day to day job."
+        openGraph={{
+          url: VERCEL_URL,
+          title: "icyJoseph | Blog",
+          site_name: "icyJoseph",
+          description:
+            "Here I publish my solutions to coding challenges, and things I learn on my day to day job.",
+          images: [
+            {
+              url: `${VERCEL_URL}/waves_background.png`,
+              width: 960,
+              height: 540,
+              alt: "icyJoseph wavy background",
+              type: "image/png",
+            },
+          ],
+        }}
+      />
+
       <BlogIntro />
 
       <Container pt={1} mt={5}>
@@ -43,14 +68,14 @@ const attributesToRetrieve: Array<keyof PostPreview> = [
   "tags",
   "slug",
   "summary",
-  "publish_date"
+  "publish_date",
 ];
 
 export const getStaticProps: GetStaticProps<BlogProps> = async () => {
   try {
     const client = new MeiliSearch({
       host: process.env.MEILISEARCH_URL,
-      apiKey: process.env.MEILISEARCH_KEY
+      apiKey: process.env.MEILISEARCH_KEY,
     });
 
     const index = await client.getIndex<IcyJoseph.Post>(
@@ -60,7 +85,7 @@ export const getStaticProps: GetStaticProps<BlogProps> = async () => {
     const { hits } = await index.search<IcyJoseph.Post>("", {
       limit: 50,
       attributesToRetrieve,
-      sort: ["publish_date:desc"]
+      sort: ["publish_date:desc"],
     });
 
     return { props: { posts: hits }, revalidate: 20 };

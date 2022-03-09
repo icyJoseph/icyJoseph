@@ -42,7 +42,7 @@ export function Home({
   tokei,
   fitbit,
   activityLog,
-  initialHR
+  initialHR,
 }: HomeProps) {
   return (
     <>
@@ -50,7 +50,7 @@ export function Home({
         title="icyJoseph | Señor Developer"
         description="Señor Developer. JavaScript, TypeScript, Rust, CSS. I work with fullstack. I enjoy coding challenges."
         openGraph={{
-          url: `${VERCEL_URL}`,
+          url: VERCEL_URL,
           title: "icyJoseph | Señor Developer",
           site_name: "icyJoseph",
           description:
@@ -61,11 +61,12 @@ export function Home({
               width: 960,
               height: 540,
               alt: "icyJoseph wavy background",
-              type: "image/png"
-            }
-          ]
+              type: "image/png",
+            },
+          ],
         }}
       />
+
       <Head>
         <title>icyJoseph</title>
       </Head>
@@ -101,7 +102,7 @@ export async function getStaticProps(): Promise<
     GET_USER,
     {
       login: "icyJoseph",
-      ...yearStart()
+      ...yearStart(),
     }
   ).then(({ data }) => data.user);
 
@@ -119,12 +120,12 @@ export async function getStaticProps(): Promise<
     .then(({ data }) => data);
 
   const activityLog = await getActivityLog({
-    beforeDate: isoStringWithoutMs(new Date().toISOString())
+    beforeDate: isoStringWithoutMs(new Date().toISOString()),
   });
 
   return {
     props: { codewars, github, tokei, fitbit, activityLog, initialHR },
-    revalidate: 10
+    revalidate: 10,
   };
 }
 

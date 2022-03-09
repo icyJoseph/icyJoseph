@@ -2,8 +2,9 @@
 const { spawn } = require("child_process");
 const fs = require("fs");
 const path = require("path");
+const os = require("os");
 
-const devPath = "/home/joseph/dev";
+const devPath = path.resolve(os.homedir(), "dev");
 
 const args = ["-t", "JavaScript,TypeScript,CSS,Rust", "--output", "json"];
 

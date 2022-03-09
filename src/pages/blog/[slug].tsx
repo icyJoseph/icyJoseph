@@ -10,16 +10,15 @@ import { Text } from "design-system/Text";
 import { useRouter } from "next/router";
 import { Related } from "components/Blog/Related";
 import { BackTo, BackToTop } from "design-system/BackToTop";
+import { NextSeo } from "next-seo";
 
 type MDXPost = Omit<IcyJoseph.Post, "content"> & {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
 };
 
-/**
- * TODO: Using MDX Post tags, find similar posts
- */
+const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
 
-export const BlogEntry = ({ slug, source, title, tags }: MDXPost) => {
+export const BlogEntry = ({ slug, source, summary, title, tags }: MDXPost) => {
   const router = useRouter();
 
   if (router.isFallback) {
@@ -28,6 +27,26 @@ export const BlogEntry = ({ slug, source, title, tags }: MDXPost) => {
 
   return (
     <>
+      <NextSeo
+        title={`icyJoseph | ${title}`}
+        description={summary}
+        openGraph={{
+          url: VERCEL_URL,
+          title: `icyJoseph | ${title}`,
+          site_name: "icyJoseph",
+          description: summary,
+          images: [
+            {
+              url: `${VERCEL_URL}/waves_background.png`,
+              width: 960,
+              height: 540,
+              alt: "icyJoseph wavy background",
+              type: "image/png",
+            },
+          ],
+        }}
+      />
+
       <Container mt={4} px={1}>
         <Text as="header" $fontSize="2.5rem">
           {title}
@@ -50,7 +69,7 @@ export const BlogEntry = ({ slug, source, title, tags }: MDXPost) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   const client = new MeiliSearch({
     host: process.env.MEILISEARCH_URL,
-    apiKey: process.env.MEILISEARCH_KEY
+    apiKey: process.env.MEILISEARCH_KEY,
   });
 
   const index = await client.getIndex<IcyJoseph.Post>(
@@ -60,7 +79,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const { hits } = await index.search<IcyJoseph.Post>("", {
     limit: 50,
     attributesToRetrieve: ["slug"],
-    sort: ["publish_date:desc"]
+    sort: ["publish_date:desc"],
   });
 
   const paths = hits.map(({ slug }) => ({ params: { slug } }));
@@ -77,7 +96,7 @@ export const getStaticProps: GetStaticProps<MDXPost> = async (context) => {
 
     const client = new MeiliSearch({
       host: process.env.MEILISEARCH_URL,
-      apiKey: process.env.MEILISEARCH_KEY
+      apiKey: process.env.MEILISEARCH_KEY,
     });
 
     const index = await client.getIndex<IcyJoseph.Post>(

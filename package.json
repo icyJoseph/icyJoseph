@@ -23,7 +23,7 @@
   },
   "scripts": {
     "bundle": "ANALYZE=true yarn build",
-    "dev": "yarn tokei && next dev",
+    "dev": "next dev",
     "lint": "eslint src",
     "build": "next build",
     "start": "next start",

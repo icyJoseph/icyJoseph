@@ -2,6 +2,7 @@ import type { GetStaticPaths, GetStaticProps } from "next";
 import { MeiliSearch } from "meilisearch";
 import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
+import { NextSeo } from "next-seo";
 
 import { components } from "components/Blog/mdx";
 
@@ -10,7 +11,6 @@ import { Text } from "design-system/Text";
 import { useRouter } from "next/router";
 import { Related } from "components/Blog/Related";
 import { BackTo, BackToTop } from "design-system/BackToTop";
-import { NextSeo } from "next-seo";
 
 type MDXPost = Omit<IcyJoseph.Post, "content"> & {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;

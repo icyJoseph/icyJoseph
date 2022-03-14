@@ -1,7 +1,7 @@
 import type { AppProps } from "next/app";
 
 import { useEffect } from "react";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import Script from "next/script";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
@@ -41,6 +41,8 @@ function App({ Component, pageProps }: AppProps) {
     return () => Router.events.off("routeChangeComplete", handler);
   }, []);
 
+  const isBlog = useRouter().pathname.startsWith("/blog");
+
   return (
     <>
       <Script
@@ -59,13 +61,13 @@ function App({ Component, pageProps }: AppProps) {
           gtag('config', '${GA_TRACKING_ID}', {
             page_path: window.location.pathname,
           });
-        `
+        `,
         }}
       />
 
       <GlobalStyle />
 
-      <Background />
+      <Background readingMode={isBlog} />
 
       <Navigation />
 

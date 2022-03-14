@@ -9,7 +9,9 @@ const supportIsolate = css`
   }
 `;
 
-export const Background = styled.div`
+type BackgroundProps = { readingMode?: boolean };
+
+export const Background = styled.div<BackgroundProps>`
   position: fixed;
 
   z-index: -1;
@@ -22,6 +24,9 @@ export const Background = styled.div`
   background-image: url("/waves.min.svg");
   background-size: cover;
   background-repeat: no-repeat;
+
+  transform: ${(props) => props.readingMode && "translateY(20%)"};
+  transition: transform 0.35s ease-in-out;
 
   ${supportIsolate};
 

@@ -1,6 +1,6 @@
 /* eslint-disable-next-line*/
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true"
+  enabled: process.env.ANALYZE === "true",
 });
 
 /** @type {import('next').NextConfig} */
@@ -10,11 +10,11 @@ const config = {
   productionBrowserSourceMaps: true,
   swcMinify: true,
   compiler: {
-    styledComponents: true
+    styledComponents: true,
   },
   images: {
-    domains: ["avatars.githubusercontent.com", "badges.fitbit.com"]
-  }
+    domains: ["avatars.githubusercontent.com", "badges.fitbit.com"],
+  },
 };
 
 module.exports = withBundleAnalyzer(config);

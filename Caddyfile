@@ -1,5 +1,5 @@
 local.icyjoseph.dev {
-    reverse_proxy localhost:3001
+    reverse_proxy localhost:3000
     tls internal {
         on_demand
     }

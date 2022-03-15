@@ -1,16 +1,18 @@
 import type { GetStaticPaths, GetStaticProps } from "next";
+import { useRouter } from "next/router";
+
 import { MeiliSearch } from "meilisearch";
 import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import { NextSeo } from "next-seo";
 
 import { components } from "components/Blog/mdx";
+import { Related } from "components/Blog/Related";
 
 import { Container } from "design-system/Container";
 import { Text } from "design-system/Text";
-import { useRouter } from "next/router";
-import { Related } from "components/Blog/Related";
 import { BackTo, BackToTop } from "design-system/BackToTop";
+import { usePostViews } from "hooks/usePostViews";
 
 type MDXPost = Omit<IcyJoseph.Post, "content"> & {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -20,6 +22,8 @@ const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
 
 export const BlogEntry = ({ slug, source, summary, title, tags }: MDXPost) => {
   const router = useRouter();
+
+  const views = usePostViews(slug);
 
   if (router.isFallback) {
     return <div>Loading...</div>;
@@ -53,6 +57,17 @@ export const BlogEntry = ({ slug, source, summary, title, tags }: MDXPost) => {
         </Text>
 
         <MDXRemote {...source} components={components} />
+      </Container>
+
+      <Container mt={4} px={1}>
+        <Text $textAlign="end">
+          <Text as="span" $fontWeight={300} $fontSize="3rem">
+            {views}
+          </Text>{" "}
+          <Text as="span" $fontWeight={300}>
+            views
+          </Text>
+        </Text>
       </Container>
 
       <Container mt={4} px={1}>

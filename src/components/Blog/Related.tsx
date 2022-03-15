@@ -13,7 +13,7 @@ const useSearch = (tags: string[]) => {
 
 export const Related = ({
   tags,
-  slug
+  slug,
 }: Pick<IcyJoseph.Post, "slug" | "tags">) => {
   const { data } = useSearch(tags);
 
@@ -25,7 +25,7 @@ export const Related = ({
 
   return (
     <>
-      <Text as="h2" mb={2} $fontSize="2.25rem" $textColor="--yellow" px={1}>
+      <Text as="h2" mb={2} $fontSize="2.25rem" $textColor="--yellow">
         Related Posts
       </Text>
 

@@ -8,7 +8,7 @@ import { Flex } from "design-system/Flex";
 import { Text } from "design-system/Text";
 
 export const TopBadges = ({
-  profile
+  profile,
 }: {
   profile: IcyJoseph.FitbitProfile;
 }) => {
@@ -36,7 +36,7 @@ export const TopBadges = ({
                   <Text $textColor="--smokeyWhite">{badge.description}</Text>
 
                   <Text $textColor="--smokeyWhite">
-                    Achived: {badge.timesAchieved} times
+                    Achieved: {badge.timesAchieved} times
                   </Text>
 
                   <Badge>

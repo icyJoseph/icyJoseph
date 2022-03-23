@@ -28,17 +28,6 @@ const customJestConfig = {
       statements: 75,
     },
   },
-
-  transform: {
-    "<rootDir>/node_modules/next-mdx-remote/serialize.js": [
-      "@swc/jest",
-      {
-        module: { type: "es6" },
-      },
-    ],
-  },
-
-  transformIgnorePatterns: ["/node_modules/next-mdx-remote"],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

@@ -123,7 +123,7 @@ export const getStaticProps: GetStaticProps<MDXPost> = async (context) => {
     // assert content shape
     const source = await serialize(content || "");
 
-    return { props: { ...rest, source }, revalidate: 120 };
+    return { props: { ...rest, source }, revalidate: 360 };
   } catch (e) {
     return { notFound: true, revalidate: 360 };
   }

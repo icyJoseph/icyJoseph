@@ -87,11 +87,11 @@ export const getStaticProps: GetStaticProps<BlogProps> = async () => {
       sort: ["publish_date:desc"],
     });
 
-    return { props: { posts: hits }, revalidate: 20 };
+    return { props: { posts: hits }, revalidate: 360 };
   } catch (e) {
     console.log("Error while building Blog landing page", e);
 
-    return { props: { posts: [] }, revalidate: 20 };
+    return { props: { posts: [] }, revalidate: 360 };
   }
 };
 

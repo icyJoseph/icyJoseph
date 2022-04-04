@@ -15,7 +15,7 @@ import { Tokei } from "composition/Tokei";
 import { Container } from "design-system/Container";
 import { queryGitHub } from "github/fetcher";
 import { GET_USER } from "github/queries";
-import { yearStart, isoStringWithoutMs } from "helpers";
+import { isoStringWithoutMs, yearRange } from "helpers";
 import { getCodeWarsUser } from "pages/api/codewars";
 import { getActivityLog } from "pages/api/fitbit/activities/list";
 import { fitbitAuth } from "pages/api/fitbit/profile";
@@ -97,7 +97,7 @@ export async function getStaticProps(): Promise<
     GET_USER,
     {
       login: "icyJoseph",
-      ...yearStart(),
+      ...yearRange(),
     }
   ).then(({ data }) => data.user);
 

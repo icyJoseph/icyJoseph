@@ -14,14 +14,14 @@ import { useGitHubContributions } from "hooks/useGitHub";
 import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
 
 type YearlyContributionProps = {
-  initial: IcyJoseph.ContributionCollection | null;
+  fallback: IcyJoseph.ContributionCollection | null;
   year: number;
   from: string;
   to?: string;
 };
 
 export const YearlyContribution = ({
-  initial,
+  fallback,
   year,
   from,
   to,
@@ -29,14 +29,13 @@ export const YearlyContribution = ({
   const { data, error } = useGitHubContributions({
     from,
     to,
-    initial,
   });
 
   const [pointer, setPointer] = useState(0);
 
-  const prev = useLastNonNullableValue(initial || data);
+  const prev = useLastNonNullableValue(data, fallback);
 
-  const stale = !error && !data;
+  const stale = prev !== fallback && !error && !data;
 
   useEffect(() => {
     if (!stale) {
@@ -52,7 +51,7 @@ export const YearlyContribution = ({
     totalCommitContributions,
     restrictedContributionsCount,
     commitContributionsByRepository,
-  } = data ?? prev;
+  } = data || prev;
 
   const contributionCardsLength = commitContributionsByRepository.length;
 
@@ -160,3 +159,5 @@ export const YearlyContribution = ({
     </Fragment>
   );
 };
+
+export default YearlyContribution;

@@ -9,8 +9,7 @@ import { Box } from "design-system/Box";
 import { Container } from "design-system/Container";
 import { FullPage } from "design-system/Section";
 import { Text } from "design-system/Text";
-import { isoStringWithoutMs } from "helpers";
-import { getActivityLog } from "pages/api/fitbit/activities/list";
+import { getDailyActivityLog } from "pages/api/fitbit/activities/list";
 
 type ActivitiesProps = {
   activityLog: IcyJoseph.ActivityLog;
@@ -57,7 +56,7 @@ export function Activities({ activityLog, year, month, day }: ActivitiesProps) {
         <FullPage>
           <header>
             <Text as="h2" $fontSize="3rem">
-              Activities for: {formatter.format(date)}
+              {formatter.format(date)}
             </Text>
           </header>
 
@@ -82,14 +81,18 @@ export async function getServerSideProps(
   const [year, month, day] = date;
 
   try {
-    const dateObj = new Date(`${year}/${month}/${day}`);
+    const dailyActivityLog = await getDailyActivityLog(
+      `${year}-${month}-${day}`
+    );
 
-    dateObj.setHours(23);
-    dateObj.setMinutes(59);
-
-    const activityLog = await getActivityLog({
-      beforeDate: isoStringWithoutMs(dateObj.toISOString()),
-    });
+    const activityLog = dailyActivityLog.map(
+      (data: Record<string, unknown>) => ({
+        ...data,
+        activityName: data?.activityParentName || "",
+        activeDuration: data?.duration || "",
+        startTime: data?.startDate || "",
+      })
+    );
 
     return {
       props: { activityLog, year, month, day },

@@ -15,7 +15,6 @@ import { circular, circularSlice } from "functional";
 
 import { useGitHubContributions } from "hooks/useGitHub";
 import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
-import { useLoader } from "hooks/useLoader";
 
 type YearlyContributionProps = {
   initial: IcyJoseph.ContributionCollection | null;
@@ -28,12 +27,12 @@ export const YearlyContribution = ({
   initial,
   year,
   from,
-  to
+  to,
 }: YearlyContributionProps) => {
   const { data, error } = useGitHubContributions({
     from,
     to,
-    initial
+    initial,
   });
 
   const [pointer, setPointer] = useState(0);
@@ -41,8 +40,6 @@ export const YearlyContribution = ({
   const prev = useLastNonNullableValue(initial || data);
 
   const stale = !error && !data;
-
-  useLoader(data, error);
 
   useEffect(() => {
     if (!stale) {
@@ -57,7 +54,7 @@ export const YearlyContribution = ({
     totalRepositoryContributions,
     totalCommitContributions,
     restrictedContributionsCount,
-    commitContributionsByRepository
+    commitContributionsByRepository,
   } = data ?? prev;
 
   const contributionCardsLength = commitContributionsByRepository.length;

@@ -12,12 +12,11 @@ import { isoStringWithoutMs } from "helpers";
 
 import { useFitbitActivityLog } from "hooks/useFitbit";
 import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
-import { useLoader } from "hooks/useLoader";
 import { Stale } from "design-system/Stale";
 
 export const formatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
-  day: "numeric"
+  day: "numeric",
 });
 
 const isBaseActivity = (
@@ -81,7 +80,7 @@ const beforeDateQueue = (initial: string) => {
       set.add(date);
       arr.push(date);
     },
-    get: (index: number) => arr[index]
+    get: (index: number) => arr[index],
   };
 };
 
@@ -116,7 +115,7 @@ const noop = () => void 0;
 
 export const ActivityLog = ({
   initial,
-  onDateChange = noop
+  onDateChange = noop,
 }: ActivityLogProps) => {
   const { startTime: initialStartTime } = head(initial);
   const [currentDate, prevAction, nextAction] = useDateQueue(
@@ -128,8 +127,6 @@ export const ActivityLog = ({
   const prev = useLastNonNullableValue(data) ?? [];
   const activityLog = data ?? prev;
   const stale = !error && !data;
-
-  useLoader(data, error);
 
   const [last] = activityLog.slice(-1);
 

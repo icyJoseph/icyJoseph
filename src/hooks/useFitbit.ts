@@ -1,5 +1,3 @@
-import { useEffect, useRef } from "react";
-
 import axios from "axios";
 import useSWR from "swr";
 
@@ -17,17 +15,18 @@ export const useFitbitProfile = (fallbackData = null) => {
   });
 };
 
-const heartRateFetcher = (date: string, period: Period) => {
-  return axios
+async function heartRateFetcher(date: string, period: Period) {
+  const { data } = await axios
     .get(`/api/fitbit/activities/heart/date/${date}/${period}`)
     .then(({ data }) => data);
-};
 
-const activityLogFetcher = async (beforeDate: string) => {
-  await new Promise((resolve) => setTimeout(resolve, 750));
+  return data;
+}
 
-  return await axios
-    .get<IcyJoseph.ActivityLog>(`/api/fitbit/activities/list`, {
+async function activityLogFetcher(beforeDate: string) {
+  const { data } = await axios.get<IcyJoseph.ActivityLog>(
+    `/api/fitbit/activities/list`,
+    {
       params: { beforeDate },
       paramsSerializer: (params = {}) => {
         return encodeURI(
@@ -36,9 +35,11 @@ const activityLogFetcher = async (beforeDate: string) => {
             .join("&")
         );
       },
-    })
-    .then(({ data }) => data);
-};
+    }
+  );
+
+  return data;
+}
 
 // GET https://api.fitbit.com/1/user/[user-id]/activities/heart/date/[date]/[period].json
 // GET https://api.fitbit.com/1/user/[user-id]/activities/heart/date/[base-date]/[end-date].json
@@ -69,19 +70,18 @@ export const useFitbitHR = (
   );
 };
 
-export const useFitbitActivityLog = (
-  beforeDate: string,
-  initial: IcyJoseph.ActivityLog | null
-) => {
-  const mounted = useRef(false);
+type FitbitActivityLog = {
+  beforeDate: string;
+  initial: IcyJoseph.ActivityLog | null;
+};
 
-  useEffect(() => {
-    mounted.current = true;
-  }, []);
-
+export const useFitbitActivityLog = ({
+  beforeDate,
+  initial,
+}: FitbitActivityLog) => {
   return useSWR<IcyJoseph.ActivityLog | null>(beforeDate, activityLogFetcher, {
     shouldRetryOnError: false,
     revalidateOnFocus: false,
-    fallbackData: mounted.current ? null : initial,
+    fallbackData: initial,
   });
 };

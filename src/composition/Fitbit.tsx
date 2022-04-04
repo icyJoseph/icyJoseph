@@ -70,7 +70,7 @@ export const Fitbit = ({
 
         <TopBadges profile={profile} />
 
-        <ActivityLog initial={activityLog} />
+        <ActivityLog activities={activityLog} />
       </Box>
 
       <BackToTop />

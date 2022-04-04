@@ -2,7 +2,7 @@ import axios from "axios";
 
 const githubAuth = axios.create({
   baseURL: "https://api.github.com/",
-  auth: { username: "icyJoseph", password: process.env.GITHUB_TOKEN || "" }
+  auth: { username: "icyJoseph", password: process.env.GITHUB_TOKEN || "" },
 });
 
 export const queryGitHub = <Response>(
@@ -12,6 +12,6 @@ export const queryGitHub = <Response>(
   githubAuth
     .post<Response>("graphql", {
       query,
-      variables
+      variables,
     })
     .then(({ data }) => data);

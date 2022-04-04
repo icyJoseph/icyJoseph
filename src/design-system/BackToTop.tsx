@@ -1,11 +1,11 @@
-import styled from "styled-components";
 import { space } from "@styled-system/space";
 import Link from "next/link";
+import styled from "styled-components";
 
 const Base = ({
   className = "",
   to,
-  label
+  label,
 }: {
   className?: string;
   to: string;

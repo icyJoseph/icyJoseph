@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
+
 import styled from "styled-components";
+
 import { theme } from "design-system/Global/theme";
 
 const Progress = styled.div`
@@ -53,7 +55,7 @@ export const CircularProgress = ({
   percentage,
   size = 150,
   className,
-  children
+  children,
 }: CircularProgressProps) => {
   const center = size / 2;
   const strokeWidth = size * 0.05;
@@ -62,7 +64,7 @@ export const CircularProgress = ({
   const offset = ((100 - percentage) / 100) * circumference;
 
   const style = {
-    strokeDashoffset: offset
+    strokeDashoffset: offset,
   };
 
   return (

@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import type { Property } from "csstype";
 import { space, type SpaceProps } from "@styled-system/space";
+import type { Property } from "csstype";
+import styled from "styled-components";
 
 type BaseFlexProps = {
   flexWrap?: Property.FlexWrap;

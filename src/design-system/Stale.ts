@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { space, SpaceProps } from "@styled-system/space";
+import styled from "styled-components";
 
 type StaleProps = SpaceProps & { $stale?: boolean };
 

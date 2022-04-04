@@ -1,15 +1,14 @@
 import Link from "next/link";
 
+import { entries } from "config/pages";
 import { Container } from "design-system/Container";
 import {
   Nav,
   Brand,
   Spacer,
   LinkList,
-  LinkItem
+  LinkItem,
 } from "design-system/Navigation";
-
-import { entries } from "config/pages";
 
 export const Navigation = () => {
   return (

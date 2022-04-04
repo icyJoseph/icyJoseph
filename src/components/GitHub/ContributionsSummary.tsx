@@ -14,7 +14,7 @@ export const ContributionsSummary = memo(function ContributionsSummary({
   totalRepositoryContributions,
   totalCommitContributions,
   restrictedContributionsCount,
-  totalRepositoriesContributedTo
+  totalRepositoriesContributedTo,
 }: BaseContributionsSummaryProps) {
   return (
     <Flex flexDirection="column" alignItems="stretch" mt={3} mx="auto">
@@ -22,23 +22,23 @@ export const ContributionsSummary = memo(function ContributionsSummary({
         {
           value: totalRepositoryContributions,
           label: "Newly created repositories",
-          unit: "repos"
+          unit: "repos",
         },
         {
           value: totalRepositoriesContributedTo,
           label: "Repositories contributed to",
-          unit: "repos"
+          unit: "repos",
         },
         {
           value: restrictedContributionsCount,
           label: "Private contributions",
-          unit: "commits"
+          unit: "commits",
         },
         {
           value: totalCommitContributions,
           label: "Total contributions",
-          unit: "commits"
-        }
+          unit: "commits",
+        },
       ].map(({ value, label, unit }) => (
         <Flex
           key={label}

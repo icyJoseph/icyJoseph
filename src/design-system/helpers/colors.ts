@@ -3,7 +3,7 @@ import { css } from "styled-components";
 import {
   type ColorVars,
   theme,
-  toThemeColor
+  toThemeColor,
 } from "design-system/Global/theme";
 
 export const color = css<{ $color: ColorVars }>`

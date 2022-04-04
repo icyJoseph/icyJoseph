@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { space } from "@styled-system/space";
+import styled from "styled-components";
 
 import { BaseCard } from "design-system/Card";
 import { Flex } from "design-system/Flex";

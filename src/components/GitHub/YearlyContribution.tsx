@@ -2,17 +2,14 @@ import { useEffect, useState, Fragment } from "react";
 
 import { ContributionEntry } from "components/GitHub/ContributionEntry";
 import { ContributionsSummary } from "components/GitHub/ContributionsSummary";
-
 import { Box } from "design-system/Box";
 import { Button } from "design-system/Button";
 import { Divider } from "design-system/Divider";
 import { Emoji } from "design-system/Emoji";
 import { Flex } from "design-system/Flex";
-import { Text } from "design-system/Text";
 import { Stale } from "design-system/Stale";
-
+import { Text } from "design-system/Text";
 import { circular, circularSlice } from "functional";
-
 import { useGitHubContributions } from "hooks/useGitHub";
 import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
 

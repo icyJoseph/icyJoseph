@@ -20,7 +20,7 @@ export const Summary = ({
   title = "overall",
   name,
   score,
-  color
+  color,
 }: {
   title: string;
 } & IcyJoseph.Rank) => (

@@ -1,6 +1,6 @@
+import { space, SpaceProps } from "@styled-system/space";
 import type { Property } from "csstype";
 import styled from "styled-components";
-import { space, SpaceProps } from "@styled-system/space";
 
 type SizeProps = { $width?: Property.Width; $height?: Property.Height };
 type LayoutProps = { $display?: Property.Display };

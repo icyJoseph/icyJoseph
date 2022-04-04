@@ -12,7 +12,7 @@ export const theme = {
   red: "#df2935",
   lightRed: "#ec4e20",
   green: "#49a078",
-  lightGreen: "#91f5ad"
+  lightGreen: "#91f5ad",
 } as const;
 
 export type SupportedColors = keyof typeof theme;

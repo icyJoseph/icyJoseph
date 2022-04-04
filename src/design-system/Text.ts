@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import type { Property } from "csstype";
 import { space, SpaceProps } from "@styled-system/space";
+import type { Property } from "csstype";
+import styled from "styled-components";
 
 import { ColorVars, theme, toThemeColor } from "design-system/Global/theme";
 

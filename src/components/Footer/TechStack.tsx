@@ -9,7 +9,7 @@ const techStack = [
   "React",
   "NodeJS",
   "Next.js",
-  "Recursive Font Face"
+  "Recursive Font Face",
 ];
 
 export const TechStack = () => (

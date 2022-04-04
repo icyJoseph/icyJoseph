@@ -1,27 +1,26 @@
 import Link from "next/link";
 
+import { entries } from "config/pages";
 import { Flex } from "design-system/Flex";
 import { Text } from "design-system/Text";
-
-import { entries } from "config/pages";
 
 const externalLinks = [
   {
     href: "https://github.com/icyJoseph",
-    title: "GitHub"
+    title: "GitHub",
   },
   {
     href: "https://www.linkedin.com/in/icyjoseph",
-    title: "LinkedIn"
+    title: "LinkedIn",
   },
   {
     href: "https://dev.to/icyjoseph",
-    title: "dev.to"
+    title: "dev.to",
   },
   {
     href: "https://medium.com/@icjoseph",
-    title: "Medium"
-  }
+    title: "Medium",
+  },
 ];
 
 export const FooterLinks = () => (

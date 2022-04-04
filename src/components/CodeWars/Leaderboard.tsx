@@ -3,7 +3,7 @@ import { BlockEmoji } from "design-system/Emoji";
 import { Text } from "design-system/Text";
 
 export const Leaderboard = ({
-  position
+  position,
 }: {
   position: IcyJoseph.CodeWars["leaderboardPosition"];
 }) => (

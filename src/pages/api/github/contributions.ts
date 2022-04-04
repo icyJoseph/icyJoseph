@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-import { GET_YEAR_CONTRIBUTIONS } from "github/queries";
 import { queryGitHub } from "github/fetcher";
+import { GET_YEAR_CONTRIBUTIONS } from "github/queries";
 
 const github = async (req: NextApiRequest, res: NextApiResponse) => {
   const { data } = await queryGitHub(

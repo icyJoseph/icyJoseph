@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
 import { space, SpaceProps } from "@styled-system/space";
+import styled, { css } from "styled-components";
 
 const cellMixin = css`
   overflow: visible;

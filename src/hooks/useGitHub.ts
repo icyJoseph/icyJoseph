@@ -14,7 +14,7 @@ type ProfileVariables = { login: "icyJoseph"; from: string };
 
 export const useGitHubProfile = ({
   from,
-  fallbackData = null
+  fallbackData = null,
 }: {
   from: string;
   fallbackData: IcyJoseph.GitHub | null;
@@ -24,11 +24,11 @@ export const useGitHubProfile = ({
     async () =>
       fetcher<{ user: IcyJoseph.GitHub }, ProfileVariables>("profile", {
         login: "icyJoseph",
-        from
+        from,
       }).then(({ user }) => user),
     {
       shouldRetryOnError: false,
-      fallbackData
+      fallbackData,
     }
   );
 };
@@ -43,7 +43,7 @@ type UseGitHubContributions = {
 export const useGitHubContributions = ({
   from,
   to,
-  initial = null
+  initial = null,
 }: UseGitHubContributions) => {
   const { data, error } = useSWR<IcyJoseph.ContributionCollection | null>(
     `contributions/${from}/${to}`,
@@ -53,7 +53,7 @@ export const useGitHubContributions = ({
         {
           login: "icyJoseph",
           from,
-          to
+          to,
         }
       ).then(({ user }) => user.contributionsCollection);
     },

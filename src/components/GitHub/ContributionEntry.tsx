@@ -1,10 +1,10 @@
 import { Box } from "design-system/Box";
 import { DevIcon } from "design-system/DevIcon";
+import { ExternalLinkIcon } from "design-system/ExternalLinkIcon";
 import { Flex } from "design-system/Flex";
-import { Text } from "design-system/Text";
 import { IndicatorBar } from "design-system/IndicatorBar";
 import { OneLiner } from "design-system/OneLiner";
-import { ExternalLinkIcon } from "design-system/ExternalLinkIcon";
+import { Text } from "design-system/Text";
 import { VisuallyHidden } from "design-system/VisuallyHidden";
 
 const RE_EMOJI = /:\+1:|:-1:|:[\w-]+:/g;
@@ -22,7 +22,7 @@ type ContributionCardProps = {
 export const ContributionEntry = ({
   repository,
   index,
-  contributions
+  contributions,
 }: ContributionCardProps) => {
   const validLanguageEdges = repository.languages.edges.filter(isLanguageEdge);
 

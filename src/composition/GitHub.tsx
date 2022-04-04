@@ -1,20 +1,19 @@
 import { useEffect, useState, Fragment, useMemo } from "react";
+
 import NextImage from "next/image";
 
-import { Header } from "components/Header";
 import { YearlyContribution } from "components/GitHub/YearlyContribution";
-
+import { Header } from "components/Header";
 import { BackToTop } from "design-system/BackToTop";
+import { Box } from "design-system/Box";
 import { Button } from "design-system/Button";
 import { Flex } from "design-system/Flex";
 import { GitHubImg } from "design-system/GitHub/Image";
 import { Profile, Bio } from "design-system/GitHub/Profile";
 import { Section } from "design-system/Section";
 import { Text } from "design-system/Text";
-
 import { yearStart, yearEnd } from "helpers";
 import { useGitHubProfile } from "hooks/useGitHub";
-import { Box } from "design-system/Box";
 
 type SelectYearProps = {
   selectedYear: number;
@@ -23,7 +22,7 @@ type SelectYearProps = {
 
 const RenderWithSelectedYear = ({
   last,
-  children
+  children,
 }: {
   last: number;
   children: (props: SelectYearProps) => JSX.Element;
@@ -38,7 +37,7 @@ type GitHubProps = { initial: IcyJoseph.GitHub; name: string };
 export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
   const { data } = useGitHubProfile({
     ...yearStart(),
-    fallbackData: initial
+    fallbackData: initial,
   });
 
   const {
@@ -49,7 +48,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
     login,
     avatarUrl,
     contributionsCollection,
-    repositoryDiscussionComments
+    repositoryDiscussionComments,
   } = data || initial;
 
   const { contributionYears } = contributionsCollection;
@@ -69,7 +68,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
         repositoryDiscussionComments.nodes.map(({ discussion }) => {
           return discussion.repository.name;
         })
-      )
+      ),
     ],
     [repositoryDiscussionComments]
   );

@@ -1,29 +1,24 @@
-import path from "path";
 import fs from "fs";
+import path from "path";
 import { promisify } from "util";
 
-import Head from "next/head";
 import type { GetStaticPropsResult } from "next";
-
 import { NextSeo } from "next-seo";
+import Head from "next/head";
 
-import { Container } from "design-system/Container";
 import { PageNav } from "components/PageNav";
-
 import { CodeWars } from "composition/CodeWars";
 import { Fitbit } from "composition/Fitbit";
+import { GitHub } from "composition/GitHub";
 import { Introduction } from "composition/Introduction";
 import { Tokei } from "composition/Tokei";
-import { GitHub } from "composition/GitHub";
-
+import { Container } from "design-system/Container";
 import { queryGitHub } from "github/fetcher";
 import { GET_USER } from "github/queries";
-
-import { getCodeWarsUser } from "pages/api/codewars";
-import { fitbitAuth } from "pages/api/fitbit/profile";
-import { getActivityLog } from "pages/api/fitbit/activities/list";
-
 import { yearStart, isoStringWithoutMs } from "helpers";
+import { getCodeWarsUser } from "pages/api/codewars";
+import { getActivityLog } from "pages/api/fitbit/activities/list";
+import { fitbitAuth } from "pages/api/fitbit/profile";
 
 type HomeProps = {
   codewars: IcyJoseph.CodeWars;

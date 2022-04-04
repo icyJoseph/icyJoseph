@@ -1,19 +1,19 @@
 import type { ComponentPropsWithoutRef } from "react";
+
 import Link from "next/link";
 import { PrismAsyncLight } from "react-syntax-highlighter";
-import prismTheme from "react-syntax-highlighter/dist/cjs/styles/prism/nord";
-
 import css from "react-syntax-highlighter/dist/cjs/languages/prism/css";
-import markup from "react-syntax-highlighter/dist/cjs/languages/prism/markup";
 import js from "react-syntax-highlighter/dist/cjs/languages/prism/javascript";
 import jsx from "react-syntax-highlighter/dist/cjs/languages/prism/jsx";
-import ts from "react-syntax-highlighter/dist/cjs/languages/prism/typescript";
-import tsx from "react-syntax-highlighter/dist/cjs/languages/prism/tsx";
+import markup from "react-syntax-highlighter/dist/cjs/languages/prism/markup";
 import rust from "react-syntax-highlighter/dist/cjs/languages/prism/rust";
+import tsx from "react-syntax-highlighter/dist/cjs/languages/prism/tsx";
+import ts from "react-syntax-highlighter/dist/cjs/languages/prism/typescript";
+import prismTheme from "react-syntax-highlighter/dist/cjs/styles/prism/nord";
 
-import { Text } from "design-system/Text";
 import { Ol, Ul } from "design-system/List";
 import { Paragraph } from "design-system/Paragraph";
+import { Text } from "design-system/Text";
 
 PrismAsyncLight.registerLanguage("css", css);
 PrismAsyncLight.registerLanguage("markup", markup);
@@ -155,5 +155,5 @@ export const components = {
         {children}
       </code>
     );
-  }
+  },
 };

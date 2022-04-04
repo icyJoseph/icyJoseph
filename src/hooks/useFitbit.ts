@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+
 import axios from "axios";
 import useSWR from "swr";
 
@@ -12,7 +13,7 @@ const profileFetcher = () =>
 export const useFitbitProfile = (fallbackData = null) => {
   return useSWR("fitbit/profile", profileFetcher, {
     shouldRetryOnError: false,
-    fallbackData: fallbackData
+    fallbackData: fallbackData,
   });
 };
 
@@ -34,7 +35,7 @@ const activityLogFetcher = async (beforeDate: string) => {
             .map(([key, value]) => `${key}=${value}`)
             .join("&")
         );
-      }
+      },
     })
     .then(({ data }) => data);
 };
@@ -63,7 +64,7 @@ export const useFitbitHR = (
       shouldRetryOnError: false,
       revalidateOnFocus: false,
       revalidateOnMount,
-      fallbackData: fallbackData
+      fallbackData: fallbackData,
     }
   );
 };
@@ -81,6 +82,6 @@ export const useFitbitActivityLog = (
   return useSWR<IcyJoseph.ActivityLog | null>(beforeDate, activityLogFetcher, {
     shouldRetryOnError: false,
     revalidateOnFocus: false,
-    fallbackData: mounted.current ? null : initial
+    fallbackData: mounted.current ? null : initial,
   });
 };

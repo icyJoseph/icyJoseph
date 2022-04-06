@@ -1,5 +1,11 @@
 import { fitbitAuth } from "pages/api/fitbit/profile";
 
+export const getDailyActivityLog = async (date) => {
+  const { data } = await fitbitAuth.get(`/activities/date/${date}.json`);
+
+  return data.activities;
+};
+
 export const getActivityLog = async (params) => {
   const query = encodeURI(
     Object.entries({ ...params, sort: "desc", offset: 0, limit: 7 })

@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-import { GET_USER } from "github/queries";
 import { queryGitHub } from "github/fetcher";
+import { GET_USER } from "github/queries";
 
 const github = async (req: NextApiRequest, res: NextApiResponse) => {
   const { data } = await queryGitHub(GET_USER, req.body.variables);

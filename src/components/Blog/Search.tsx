@@ -1,6 +1,8 @@
+import { ReactNode, useState } from "react";
+
 import type { SearchResponse } from "meilisearch";
-import React, { ReactNode, useState } from "react";
 import useSWRImmutable from "swr/immutable";
+
 import { PostLink } from "./PostLink";
 
 const useSearch = (query: string | null) => {
@@ -10,7 +12,7 @@ const useSearch = (query: string | null) => {
 };
 
 export const Search = ({
-  children
+  children,
 }: {
   children?: ReactNode | ReactNode[];
 }) => {

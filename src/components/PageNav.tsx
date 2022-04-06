@@ -1,10 +1,11 @@
 import { Children, Fragment, isValidElement, ReactNode } from "react";
+
 import Link from "next/link";
 
 import {
   ContentNav,
   ContentLinks,
-  ContentLink
+  ContentLink,
 } from "design-system/Navigation";
 
 export const PageNav = ({ children }: { children: ReactNode }) => {

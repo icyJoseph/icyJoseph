@@ -1,7 +1,7 @@
 import { Text } from "design-system/Text";
 
 export const Challenges = ({
-  completed
+  completed,
 }: {
   completed: IcyJoseph.CodeWars["codeChallenges"]["totalCompleted"];
 }) => (

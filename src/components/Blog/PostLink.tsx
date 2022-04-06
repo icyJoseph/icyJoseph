@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+
 import Link from "next/link";
 
 import { Section } from "design-system/Section";
@@ -11,7 +12,7 @@ export type PostPreview = Pick<
 
 export const PostLink = ({
   post,
-  children
+  children,
 }: {
   post: PostPreview;
   children?: ReactNode | ReactNode[];

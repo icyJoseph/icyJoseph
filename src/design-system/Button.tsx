@@ -1,6 +1,8 @@
-import styled from "styled-components";
-import { space, SpaceProps } from "@styled-system/space";
 import { ComponentPropsWithoutRef } from "react";
+
+import { space, SpaceProps } from "@styled-system/space";
+import styled from "styled-components";
+
 import { theme } from "design-system/Global/theme";
 
 type ButtonVariants = "primary" | "outlined";

@@ -1,4 +1,5 @@
-import { FC } from "react";
+import type { FC } from "react";
+
 import styled from "styled-components";
 
 import { Text } from "design-system/Text";
@@ -44,7 +45,7 @@ const BaseValue = styled(Text)`
 
 export const Unit: FC<{ unit: string; className?: string }> = ({
   unit,
-  className
+  className,
 }) => (
   <BaseUnit as="span" $fontWeight={300} className={className}>
     {unit}
@@ -53,7 +54,7 @@ export const Unit: FC<{ unit: string; className?: string }> = ({
 
 export const Value: FC<{ value: number | string; className?: string }> = ({
   value,
-  className
+  className,
 }) => (
   <BaseValue as="span" $fontWeight={300} className={className}>
     {value ?? "-"}
@@ -71,7 +72,7 @@ const defaultRenderAs = "span";
 export const Measurement = ({
   value,
   unit,
-  renderAs = defaultRenderAs
+  renderAs = defaultRenderAs,
 }: MeasurementProps) => (
   <BaseEntry as={renderAs}>
     <Value value={value} /> <Unit unit={unit} />

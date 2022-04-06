@@ -1,9 +1,9 @@
-import type { NextApiRequest, NextApiResponse } from "next";
 import { MeiliSearch } from "meilisearch";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 const client = new MeiliSearch({
   host: process.env.MEILISEARCH_URL,
-  apiKey: process.env.MEILISEARCH_KEY
+  apiKey: process.env.MEILISEARCH_KEY,
 });
 
 const search = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -26,7 +26,7 @@ const search = async (req: NextApiRequest, res: NextApiResponse) => {
     filter: tags && tagFilter,
     attributesToRetrieve: ["title", "tags", "slug", "summary", "publish_date"],
     attributesToCrop: ["content"],
-    cropLength: 10
+    cropLength: 10,
   });
 
   return res.json(results);

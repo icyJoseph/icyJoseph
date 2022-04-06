@@ -1,6 +1,6 @@
-import type { AppProps } from "next/app";
-
 import { useEffect } from "react";
+
+import type { AppProps } from "next/app";
 import Router, { useRouter } from "next/router";
 import Script from "next/script";
 import NProgress from "nprogress";
@@ -8,10 +8,8 @@ import "nprogress/nprogress.css";
 
 import { Footer } from "composition/Footer";
 import { Navigation } from "composition/Navigation";
-
-import { GlobalStyle } from "design-system/Global";
 import { Background, Layout } from "design-system/Background";
-
+import { GlobalStyle } from "design-system/Global";
 import { pageview } from "ga";
 
 Router.events.on("routeChangeStart", () => NProgress.start());

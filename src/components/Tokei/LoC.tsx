@@ -1,6 +1,6 @@
 import { Card } from "components/Card";
-import { Emoji } from "design-system/Emoji";
 import { CircularProgress } from "design-system/CircularProgress";
+import { Emoji } from "design-system/Emoji";
 import { Text } from "design-system/Text";
 
 export const LoC = ({ language, code, blanks, comments }: IcyJoseph.Tokei) => {

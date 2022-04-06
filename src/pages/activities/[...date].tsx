@@ -1,18 +1,15 @@
-import { useState, useCallback, useEffect } from "react";
-import { useRouter } from "next/router";
-import Head from "next/head";
+import { useState, useEffect } from "react";
 
 import type { GetServerSidePropsResult, GetServerSidePropsContext } from "next";
+import Head from "next/head";
+import { useRouter } from "next/router";
 
+import { ActivityLog } from "components/Fitbit/ActivityLog";
 import { Box } from "design-system/Box";
 import { Container } from "design-system/Container";
 import { FullPage } from "design-system/Section";
 import { Text } from "design-system/Text";
-import { ActivityLog } from "components/Fitbit/ActivityLog";
-
-import { getActivityLog } from "pages/api/fitbit/activities/list";
-
-import { isoStringWithoutMs } from "helpers";
+import { getDailyActivityLog } from "pages/api/fitbit/activities/list";
 
 type ActivitiesProps = {
   activityLog: IcyJoseph.ActivityLog;
@@ -24,10 +21,8 @@ type ActivitiesProps = {
 export const formatter = new Intl.DateTimeFormat("sv-SE", {
   year: "numeric",
   month: "numeric",
-  day: "numeric"
+  day: "numeric",
 });
-
-const withLeadingZero = (num: number) => (num > 9 ? num : `0${num}`);
 
 export function Activities({ activityLog, year, month, day }: ActivitiesProps) {
   const [date, setDate] = useState(() => new Date(`${year}/${month}/${day}`));
@@ -51,41 +46,22 @@ export function Activities({ activityLog, year, month, day }: ActivitiesProps) {
     }
   }, [router]);
 
-  const handleDateChange = useCallback(
-    (str: string) => {
-      const nextDate = new Date(str);
-
-      const nextYear = nextDate.getFullYear();
-      const nextMonth = nextDate.getMonth() + 1;
-      const nextDay = nextDate.getDate();
-
-      router.push(
-        "/activities/[...date]",
-        `${nextYear}/${withLeadingZero(nextMonth)}/${withLeadingZero(nextDay)}`,
-        { shallow: true }
-      );
-    },
-    [router]
-  );
-
   return (
     <>
       <Head>
-        <title>Contact - icyJoseph</title>
+        <title>Activities - icyJoseph</title>
       </Head>
+
       <Container>
         <FullPage>
           <header>
             <Text as="h2" $fontSize="3rem">
-              Activities for: {formatter.format(date)}
+              {formatter.format(date)}
             </Text>
           </header>
 
           <Box mb={2}>
-            <ActivityLog
-              initial={activityLog}
-              onDateChange={handleDateChange}
-            />
+            <ActivityLog activities={activityLog} />
           </Box>
         </FullPage>
       </Container>
@@ -105,17 +81,21 @@ export async function getServerSideProps(
   const [year, month, day] = date;
 
   try {
-    const dateObj = new Date(`${year}/${month}/${day}`);
+    const dailyActivityLog = await getDailyActivityLog(
+      `${year}-${month}-${day}`
+    );
 
-    dateObj.setHours(23);
-    dateObj.setMinutes(59);
-
-    const activityLog = await getActivityLog({
-      beforeDate: isoStringWithoutMs(dateObj.toISOString())
-    });
+    const activityLog = dailyActivityLog.map(
+      (data: Record<string, unknown>) => ({
+        ...data,
+        activityName: data?.activityParentName || "",
+        activeDuration: data?.duration || "",
+        startTime: data?.startDate || "",
+      })
+    );
 
     return {
-      props: { activityLog, year, month, day }
+      props: { activityLog, year, month, day },
     };
   } catch (e) {
     return { notFound: true };

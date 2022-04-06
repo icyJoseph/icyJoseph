@@ -1,29 +1,31 @@
-import { useEffect, useState, Fragment, useMemo } from "react";
+import { useState, Fragment, useMemo } from "react";
+
+import dynamic from "next/dynamic";
 import NextImage from "next/image";
 
 import { Header } from "components/Header";
-import { YearlyContribution } from "components/GitHub/YearlyContribution";
-
 import { BackToTop } from "design-system/BackToTop";
+import { Box } from "design-system/Box";
 import { Button } from "design-system/Button";
 import { Flex } from "design-system/Flex";
 import { GitHubImg } from "design-system/GitHub/Image";
 import { Profile, Bio } from "design-system/GitHub/Profile";
 import { Section } from "design-system/Section";
 import { Text } from "design-system/Text";
-
-import { yearStart, yearEnd } from "helpers";
-import { useGitHubProfile } from "hooks/useGitHub";
-import { Box } from "design-system/Box";
+import { yearRange } from "helpers";
 
 type SelectYearProps = {
   selectedYear: number;
   setSelectedYear: (next: number) => void;
 };
 
+const DynamicYearlyContribution = dynamic(
+  () => import("components/GitHub/YearlyContribution")
+);
+
 const RenderWithSelectedYear = ({
   last,
-  children
+  children,
 }: {
   last: number;
   children: (props: SelectYearProps) => JSX.Element;
@@ -36,11 +38,6 @@ const RenderWithSelectedYear = ({
 type GitHubProps = { initial: IcyJoseph.GitHub; name: string };
 
 export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
-  const { data } = useGitHubProfile({
-    ...yearStart(),
-    fallbackData: initial
-  });
-
   const {
     bio,
     name,
@@ -49,17 +46,11 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
     login,
     avatarUrl,
     contributionsCollection,
-    repositoryDiscussionComments
-  } = data || initial;
+    repositoryDiscussionComments,
+  } = initial;
 
   const { contributionYears } = contributionsCollection;
   const [last = new Date().getFullYear()] = contributionYears;
-
-  const [showContributions, setShowContributions] = useState(false);
-
-  useEffect(() => {
-    setShowContributions(true);
-  }, []);
 
   const totalAnswers = repositoryDiscussionComments.totalCount;
 
@@ -69,7 +60,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
         repositoryDiscussionComments.nodes.map(({ discussion }) => {
           return discussion.repository.name;
         })
-      )
+      ),
     ],
     [repositoryDiscussionComments]
   );
@@ -135,18 +126,11 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
                 </Flex>
               </Box>
 
-              {/* Don't render on SSR */}
-              {showContributions && (
-                <YearlyContribution
-                  year={selectedYear}
-                  initial={
-                    selectedYear === last ? contributionsCollection : null
-                  }
-                  {...(last === selectedYear
-                    ? yearStart(selectedYear)
-                    : yearEnd(selectedYear))}
-                />
-              )}
+              <DynamicYearlyContribution
+                year={selectedYear}
+                fallback={contributionsCollection}
+                {...yearRange(selectedYear)}
+              />
             </Fragment>
           )}
         </RenderWithSelectedYear>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { Box } from "design-system/Box";
 
 type TextBoxProps = {

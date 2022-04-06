@@ -1,7 +1,6 @@
 import { DevNotice } from "components/Footer/DevNotice";
-import { TechStack } from "components/Footer/TechStack";
 import { FooterLinks } from "components/Footer/FooterLinks";
-
+import { TechStack } from "components/Footer/TechStack";
 import { Divider } from "design-system/Divider";
 import { Flex } from "design-system/Flex";
 import { PageFooter } from "design-system/Footer";

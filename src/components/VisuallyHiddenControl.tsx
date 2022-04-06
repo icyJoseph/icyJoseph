@@ -1,4 +1,5 @@
 import { useState, useEffect, type ComponentPropsWithoutRef } from "react";
+
 import { VisuallyHidden } from "design-system/VisuallyHidden";
 
 export const VisuallyHiddenControl = ({

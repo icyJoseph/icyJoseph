@@ -1,6 +1,7 @@
 import type { ComponentPropsWithRef } from "react";
-import styled from "styled-components";
+
 import { space, SpaceProps } from "@styled-system/space";
+import styled from "styled-components";
 
 type SectionProps = ComponentPropsWithRef<"section"> & SpaceProps;
 type HeaderProps = ComponentPropsWithRef<"header"> & SpaceProps;

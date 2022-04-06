@@ -1,8 +1,8 @@
 import { Bold } from "design-system/Bold";
 import { Flex } from "design-system/Flex";
-import { TextBox } from "design-system/TextBox";
 import { Section } from "design-system/Section";
 import { Text } from "design-system/Text";
+import { TextBox } from "design-system/TextBox";
 
 export const Introduction = () => (
   <Section mt={0} pt={[2, 3, 4]} pb="5%">

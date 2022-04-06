@@ -6,6 +6,6 @@ export const Keyword = styled.b`
   display: inline;
   font-weight: 400;
   font-size: inherit;
-  color ${theme.lightGreen};
+  color: ${theme.lightGreen};
   color: var(--lightGreen);
 `;

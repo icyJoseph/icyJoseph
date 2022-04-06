@@ -2,47 +2,40 @@ import { useEffect, useState, Fragment } from "react";
 
 import { ContributionEntry } from "components/GitHub/ContributionEntry";
 import { ContributionsSummary } from "components/GitHub/ContributionsSummary";
-
 import { Box } from "design-system/Box";
 import { Button } from "design-system/Button";
 import { Divider } from "design-system/Divider";
 import { Emoji } from "design-system/Emoji";
 import { Flex } from "design-system/Flex";
-import { Text } from "design-system/Text";
 import { Stale } from "design-system/Stale";
-
+import { Text } from "design-system/Text";
 import { circular, circularSlice } from "functional";
-
 import { useGitHubContributions } from "hooks/useGitHub";
 import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
-import { useLoader } from "hooks/useLoader";
 
 type YearlyContributionProps = {
-  initial: IcyJoseph.ContributionCollection | null;
+  fallback: IcyJoseph.ContributionCollection | null;
   year: number;
   from: string;
   to?: string;
 };
 
 export const YearlyContribution = ({
-  initial,
+  fallback,
   year,
   from,
-  to
+  to,
 }: YearlyContributionProps) => {
   const { data, error } = useGitHubContributions({
     from,
     to,
-    initial
   });
 
   const [pointer, setPointer] = useState(0);
 
-  const prev = useLastNonNullableValue(initial || data);
+  const prev = useLastNonNullableValue(data, fallback);
 
-  const stale = !error && !data;
-
-  useLoader(data, error);
+  const stale = prev !== fallback && !error && !data;
 
   useEffect(() => {
     if (!stale) {
@@ -57,8 +50,8 @@ export const YearlyContribution = ({
     totalRepositoryContributions,
     totalCommitContributions,
     restrictedContributionsCount,
-    commitContributionsByRepository
-  } = data ?? prev;
+    commitContributionsByRepository,
+  } = data || prev;
 
   const contributionCardsLength = commitContributionsByRepository.length;
 
@@ -166,3 +159,5 @@ export const YearlyContribution = ({
     </Fragment>
   );
 };
+
+export default YearlyContribution;

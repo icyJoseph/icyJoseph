@@ -1,22 +1,19 @@
-import { Header } from "components/Header";
 import { Card } from "components/Card";
-import { Summary } from "components/CodeWars/Summary";
 import { Challenges } from "components/CodeWars/Challenges";
 import { Clan } from "components/CodeWars/Clan";
 import { Honor } from "components/CodeWars/Honor";
 import { Leaderboard } from "components/CodeWars/Leaderboard";
-
+import { Summary } from "components/CodeWars/Summary";
+import { Header } from "components/Header";
 import { BackToTop } from "design-system/BackToTop";
 import { Flex } from "design-system/Flex";
 import { Section } from "design-system/Section";
-
 import { Text } from "design-system/Text";
-
 import { useCodeWars } from "hooks/useCodeWars";
 
 export const CodeWars = ({
   initial,
-  name
+  name,
 }: {
   initial: IcyJoseph.CodeWars;
   name: "codewars";

@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { space } from "@styled-system/space";
+import styled from "styled-components";
 
 export const DataEntry = styled.div`
   ${space({ mx: 1, mt: 2 })};

@@ -1,6 +1,7 @@
 import type { ComponentPropsWithRef } from "react";
-import styled from "styled-components";
+
 import { space, type SpaceProps } from "@styled-system/space";
+import styled from "styled-components";
 
 import { theme } from "design-system/Global/theme";
 

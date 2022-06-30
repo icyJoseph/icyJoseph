@@ -7,6 +7,8 @@
 > but most importantly,
 > I React ⚛️!
 
+Follow me on Medium, [@icjoseph](https://medium.com/@icjoseph)!
+
 ## Code Wars
 
 Only Rust 🦀

@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 
-import { trunc } from "helpers";
 import { useEasing } from "use-easing";
 import { easeInQuad } from "use-easing/lib/easings";
+
+import { trunc } from "helpers";
 
 const timeBase = 750;
 
@@ -16,7 +17,7 @@ export function useLanguageEasing({
   blanks,
   comments,
   duration = 3,
-  order
+  order,
 }: LanguageEasingProps) {
   const totalCode = code + blanks + comments;
 
@@ -25,7 +26,7 @@ export function useLanguageEasing({
     duration,
     formatFn: (e) => trunc(e),
     easingFn: easeInQuad,
-    autoStart: false
+    autoStart: false,
   });
 
   useEffect(() => {

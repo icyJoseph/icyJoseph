@@ -8,6 +8,6 @@ export const useCodeWars = (fallbackData?: IcyJoseph.CodeWars) => {
   return useSWR<IcyJoseph.CodeWars>("code-wars", fetcher, {
     shouldRetryOnError: false,
     fallbackData: fallbackData,
-    revalidateOnMount: true
+    revalidateOnMount: true,
   });
 };

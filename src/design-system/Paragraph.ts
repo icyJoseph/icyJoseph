@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import { Text } from "design-system/Text";
 import { theme } from "design-system/Global/theme";
+import { Text } from "design-system/Text";
 
 export const Paragraph = styled(Text)`
   font-weight: 300;

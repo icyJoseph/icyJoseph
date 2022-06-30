@@ -1,10 +1,10 @@
-import type { GetStaticProps } from "next";
 import { MeiliSearch } from "meilisearch";
+import type { GetStaticProps } from "next";
 import { NextSeo } from "next-seo";
 
 import { BlogIntro } from "components/Blog/Intro";
-import { Search } from "components/Blog/Search";
 import { PostLink, type PostPreview } from "components/Blog/PostLink";
+import { Search } from "components/Blog/Search";
 import { Container } from "design-system/Container";
 import { Section } from "design-system/Section";
 import { Text } from "design-system/Text";

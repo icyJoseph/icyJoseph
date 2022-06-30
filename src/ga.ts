@@ -10,8 +10,11 @@ declare global {
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
 export const pageview = (url: string) => {
-  window.gtag("config", process.env.NEXT_PUBLIC_GA_TRACKING_ID, {
-    page_path: url
+  if (process.env.NODE_ENV === "development") {
+    return console.debug({ page_path: url });
+  }
+  return window.gtag("config", process.env.NEXT_PUBLIC_GA_TRACKING_ID, {
+    page_path: url,
   });
 };
 
@@ -20,16 +23,16 @@ export const event = ({
   action,
   category,
   label,
-  value
+  value,
 }: {
   action: string;
   category: string;
   label: string;
   value: string;
 }) => {
-  window.gtag("event", action, {
+  return window.gtag("event", action, {
     event_category: category,
     event_label: label,
-    value: value
+    value: value,
   });
 };

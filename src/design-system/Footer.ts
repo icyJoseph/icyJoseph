@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { space, SpaceProps } from "@styled-system/space";
+import styled from "styled-components";
 
 export const PageFooter = styled.footer<SpaceProps>`
   ${space({ px: 4, pb: 5, mt: 5 })};

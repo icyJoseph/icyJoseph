@@ -1,17 +1,15 @@
-import type { GetStaticPaths, GetStaticProps } from "next";
-import { useRouter } from "next/router";
-
 import { MeiliSearch } from "meilisearch";
+import type { GetStaticPaths, GetStaticProps } from "next";
 import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import { NextSeo } from "next-seo";
+import { useRouter } from "next/router";
 
 import { components } from "components/Blog/mdx";
 import { Related } from "components/Blog/Related";
-
+import { BackTo, BackToTop } from "design-system/BackToTop";
 import { Container } from "design-system/Container";
 import { Text } from "design-system/Text";
-import { BackTo, BackToTop } from "design-system/BackToTop";
 import { usePostViews } from "hooks/usePostViews";
 
 type MDXPost = Omit<IcyJoseph.Post, "content"> & {

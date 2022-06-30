@@ -1,9 +1,8 @@
 import NextImage from "next/image";
 
 import { Card } from "components/Card";
-
-import { Badge, BadgesWrapper } from "design-system/Fitbit/Badges";
 import { DataEntry } from "design-system/DataEntry";
+import { Badge, BadgesWrapper } from "design-system/Fitbit/Badges";
 import { Flex } from "design-system/Flex";
 import { Text } from "design-system/Text";
 

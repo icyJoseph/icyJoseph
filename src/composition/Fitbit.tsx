@@ -1,13 +1,11 @@
 import { ActivityLog } from "components/Fitbit/ActivityLog";
-import { Header } from "components/Header";
 import { TopBadges } from "components/Fitbit/TopBadges";
-
+import { Header } from "components/Header";
 import { BackToTop } from "design-system/BackToTop";
 import { Box } from "design-system/Box";
 import { Flex } from "design-system/Flex";
 import { Section } from "design-system/Section";
 import { Text } from "design-system/Text";
-
 import { useFitbitHR } from "hooks/useFitbit";
 
 type FitbitProps = {
@@ -21,7 +19,7 @@ export const Fitbit = ({
   profile,
   activityLog,
   initialHR,
-  name
+  name,
 }: FitbitProps) => {
   const { data } = useFitbitHR(
     { date: "today", period: "1m", revalidateOnMount: true },
@@ -72,7 +70,7 @@ export const Fitbit = ({
 
         <TopBadges profile={profile} />
 
-        <ActivityLog initial={activityLog} />
+        <ActivityLog activities={activityLog} />
       </Box>
 
       <BackToTop />

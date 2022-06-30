@@ -10,13 +10,15 @@ const fetcher = <Response, Variables>(
     .post<Response>(`/api/github/${query}`, { variables })
     .then(({ data }) => data);
 
-type ProfileVariables = { login: "icyJoseph"; from: string };
+type ProfileVariables = { login: "icyJoseph"; from: string; to: string };
 
 export const useGitHubProfile = ({
   from,
-  fallbackData = null
+  to,
+  fallbackData = null,
 }: {
   from: string;
+  to: string;
   fallbackData: IcyJoseph.GitHub | null;
 }) => {
   return useSWRImmutable<IcyJoseph.GitHub | null>(
@@ -24,11 +26,12 @@ export const useGitHubProfile = ({
     async () =>
       fetcher<{ user: IcyJoseph.GitHub }, ProfileVariables>("profile", {
         login: "icyJoseph",
-        from
+        from,
+        to,
       }).then(({ user }) => user),
     {
       shouldRetryOnError: false,
-      fallbackData
+      fallbackData,
     }
   );
 };
@@ -37,15 +40,13 @@ type ContributionVariables = { login: "icyJoseph"; from: string; to?: string };
 type UseGitHubContributions = {
   from: string;
   to?: string;
-  initial: IcyJoseph.ContributionCollection | null;
 };
 
 export const useGitHubContributions = ({
   from,
   to,
-  initial = null
 }: UseGitHubContributions) => {
-  const { data, error } = useSWR<IcyJoseph.ContributionCollection | null>(
+  return useSWR<IcyJoseph.ContributionCollection | null>(
     `contributions/${from}/${to}`,
     async () => {
       return fetcher<{ user: IcyJoseph.GitHub }, ContributionVariables>(
@@ -53,12 +54,9 @@ export const useGitHubContributions = ({
         {
           login: "icyJoseph",
           from,
-          to
+          to,
         }
       ).then(({ user }) => user.contributionsCollection);
-    },
-    { fallbackData: initial }
+    }
   );
-
-  return { data, error };
 };

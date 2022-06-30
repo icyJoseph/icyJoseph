@@ -1,4 +1,5 @@
 import React from "react";
+
 import type { SearchResponse } from "meilisearch";
 import useSWRImmutable from "swr/immutable";
 

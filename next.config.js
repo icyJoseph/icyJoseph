@@ -13,7 +13,11 @@ const config = {
     styledComponents: true,
   },
   images: {
-    domains: ["avatars.githubusercontent.com", "badges.fitbit.com"],
+    domains: [
+      "avatars.githubusercontent.com",
+      "badges.fitbit.com",
+      "www.gstatic.com",
+    ],
   },
 };
 

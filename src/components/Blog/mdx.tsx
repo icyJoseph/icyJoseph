@@ -66,7 +66,7 @@ export const components = {
   h4: (props: ComponentPropsWithoutRef<"h4">) => {
     return (
       <Text
-        as="h1"
+        as="h4"
         {...props}
         $fontSize="1.9rem"
         $textColor="--yellow"
@@ -79,7 +79,7 @@ export const components = {
   h5: (props: ComponentPropsWithoutRef<"h5">) => {
     return (
       <Text
-        as="h2"
+        as="h5"
         {...props}
         $fontSize="1.8rem"
         $textColor="--yellow"
@@ -92,7 +92,7 @@ export const components = {
   h6: (props: ComponentPropsWithoutRef<"h6">) => {
     return (
       <Text
-        as="h3"
+        as="h6"
         {...props}
         $fontSize="1.75rem"
         $textColor="--yellow"

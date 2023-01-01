@@ -58,9 +58,11 @@ export const CodeWars = ({
           <Card.Section>
             <Clan clan={clan} />
 
-            {Object.entries(ranks.languages).map(([name, lang]) => (
-              <Summary key={name} title={name} {...lang} />
-            ))}
+            {Object.entries(ranks.languages)
+              .filter(([name]) => name === "rust")
+              .map(([name, lang]) => (
+                <Summary key={name} title={name} {...lang} />
+              ))}
           </Card.Section>
 
           <Card.Section>

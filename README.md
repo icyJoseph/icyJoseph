@@ -88,8 +88,8 @@ Only Rust 🦀
 
 ### User Stats
 
-![icyJoseph's GitHub stats](https://github-readme-stats.vercel.app/api?username=icyjoseph&count_private=true&show_icons=true&theme=dracula)
+![icyJoseph's GitHub stats](https://github-readme-stats-9cjg.vercel.app/api?username=icyjoseph&count_private=true&show_icons=true&theme=dracula)
 
 ### Top Languages
 
-![Top languages](https://github-readme-stats.vercel.app/api/top-langs/?username=icyjoseph&hide=erlang,shell,c,c%2B%2B&&layout=compact&theme=dracula)
+![Top languages](https://github-readme-stats-9cjg.vercel.app/api/top-langs/?username=icyjoseph&hide=erlang,shell,c,c%2B%2B&&layout=compact&theme=dracula)

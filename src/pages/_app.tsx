@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
 import type { AppProps } from "next/app";
+import { Recursive } from "next/font/google";
 import Router, { useRouter } from "next/router";
 import Script from "next/script";
 import NProgress from "nprogress";
@@ -29,6 +30,11 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
 }
 
 const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_TRACKING_ID;
+
+const recursive = Recursive({
+  weight: ["300", "400", "500", "600"],
+  subsets: ["latin"],
+});
 
 function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -63,7 +69,7 @@ function App({ Component, pageProps }: AppProps) {
         }}
       />
 
-      <GlobalStyle />
+      <GlobalStyle fontFamily={recursive.style.fontFamily} />
 
       <Background readingMode={isBlog} />
 

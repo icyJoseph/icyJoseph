@@ -18,18 +18,16 @@ export const PostLink = ({
   children?: ReactNode | ReactNode[];
 }) => (
   <Link key={post.slug} href={`/blog/${post.slug}`}>
-    <a>
-      <Section as="article" mb={2} px={1}>
-        <Text as="h3" $textColor="--yellow">
-          {post.title}
-        </Text>
+    <Section as="article" mb={2} px={1}>
+      <Text as="h3" $textColor="--yellow">
+        {post.title}
+      </Text>
 
-        <div>
-          <Text>{post.summary}</Text>
-        </div>
-      </Section>
+      <div>
+        <Text>{post.summary}</Text>
+      </div>
+    </Section>
 
-      <>{children}</>
-    </a>
+    <>{children}</>
   </Link>
 );

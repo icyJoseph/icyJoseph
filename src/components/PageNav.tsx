@@ -21,9 +21,7 @@ export const PageNav = ({ children }: { children: ReactNode }) => {
 
             return (
               <ContentLink>
-                <Link href={`/#${name}`}>
-                  <a>{name}</a>
-                </Link>
+                <Link href={`/#${name}`}>{name}</Link>
               </ContentLink>
             );
           })}

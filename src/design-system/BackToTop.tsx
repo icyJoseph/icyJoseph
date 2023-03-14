@@ -12,9 +12,7 @@ const Base = ({
   label: string;
 }) => (
   <div className={className}>
-    <Link href={to}>
-      <a>{label}</a>
-    </Link>
+    <Link href={to}>{label}</Link>
   </div>
 );
 

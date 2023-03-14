@@ -1,27 +1,13 @@
 import type { ComponentPropsWithoutRef } from "react";
 
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import { PrismAsyncLight } from "react-syntax-highlighter";
-import css from "react-syntax-highlighter/dist/cjs/languages/prism/css";
-import js from "react-syntax-highlighter/dist/cjs/languages/prism/javascript";
-import jsx from "react-syntax-highlighter/dist/cjs/languages/prism/jsx";
-import markup from "react-syntax-highlighter/dist/cjs/languages/prism/markup";
-import rust from "react-syntax-highlighter/dist/cjs/languages/prism/rust";
-import tsx from "react-syntax-highlighter/dist/cjs/languages/prism/tsx";
-import ts from "react-syntax-highlighter/dist/cjs/languages/prism/typescript";
-import prismTheme from "react-syntax-highlighter/dist/cjs/styles/prism/nord";
 
 import { Ol, Ul } from "design-system/List";
 import { Paragraph } from "design-system/Paragraph";
 import { Text } from "design-system/Text";
 
-PrismAsyncLight.registerLanguage("css", css);
-PrismAsyncLight.registerLanguage("markup", markup);
-PrismAsyncLight.registerLanguage("js", js);
-PrismAsyncLight.registerLanguage("ts", ts);
-PrismAsyncLight.registerLanguage("jsx", jsx);
-PrismAsyncLight.registerLanguage("tsx", tsx);
-PrismAsyncLight.registerLanguage("rust", rust);
+const CodeBlock = dynamic(() => import("components/Blog/CodeBlock"));
 
 export const components = {
   h1: (props: ComponentPropsWithoutRef<"h1">) => {
@@ -110,14 +96,17 @@ export const components = {
     return (
       <Text as="span">
         {props.href ? (
-          <Link href={props.href} passHref>
+          <Link
+            href={props.href}
+            passHref
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Text
-              as="a"
+              as="span"
               $textColor="--lightBlue"
               $fontWeight={400}
               {...props}
-              target="_blank"
-              rel="noopener noreferrer"
             />
           </Link>
         ) : (
@@ -132,28 +121,5 @@ export const components = {
   ),
   ol: (props: ComponentPropsWithoutRef<"ol">) => <Ol {...props} my={2} />,
   ul: (props: ComponentPropsWithoutRef<"ul">) => <Ul {...props} my={2} />,
-
-  code({
-    inline,
-    className,
-    children,
-    ...props
-  }: ComponentPropsWithoutRef<"code"> & { inline?: boolean }) {
-    const match = /language-(\w+)/.exec(className || "");
-
-    return !inline && match ? (
-      <PrismAsyncLight
-        style={prismTheme}
-        language={match[1]}
-        PreTag="div"
-        {...props}
-      >
-        {String(children).replace(/\n$/, "")}
-      </PrismAsyncLight>
-    ) : (
-      <code className={className} {...props}>
-        {children}
-      </code>
-    );
-  },
+  code: CodeBlock,
 };

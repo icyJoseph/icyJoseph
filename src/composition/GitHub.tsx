@@ -1,7 +1,7 @@
 import { useState, Fragment, useMemo } from "react";
 
 import dynamic from "next/dynamic";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 
 import { Header } from "components/Header";
 import { BackToTop } from "design-system/BackToTop";

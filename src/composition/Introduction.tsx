@@ -67,8 +67,8 @@ export const Introduction = () => (
         </Text>
 
         <Text mt={3} mx="auto" $fontWeight={300} $fontSize="2rem">
-          I enjoy writing <Bold>CSS</Bold>, and keep my <Bold>HTML</Bold>{" "}
-          semantic.
+          I have started to learn <Bold>Swift</Bold>, mainly by building iOS
+          apps on xcode, and occasionally using it to solve coding challenges.
         </Text>
       </TextBox>
     </Flex>

@@ -111,6 +111,9 @@ declare namespace IcyJoseph {
     avatarUrl: string;
     contributionsCollection: ContributionCollection;
     repositoryDiscussionComments: DiscussionAnswers;
+    followers: {
+      totalCount: number;
+    };
   };
 
   export type Tokei = {

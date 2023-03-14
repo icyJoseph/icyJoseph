@@ -106,8 +106,17 @@ export async function getStaticProps(): Promise<
     }
   ).then(({ data }) => data.user);
 
-  const github = {
+  const github: HomeProps["github"] = {
     ...githubData,
+    contributionsCollection: {
+      ...githubData.contributionsCollection,
+      commitContributionsByRepository:
+        githubData.contributionsCollection.commitContributionsByRepository.filter(
+          ({ repository }) => {
+            return repository.owner.login === "icyJoseph";
+          }
+        ),
+    },
     repositoryDiscussionComments: {
       totalCount: githubData.repositoryDiscussionComments.totalCount,
       repositories: [

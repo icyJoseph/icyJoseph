@@ -1,4 +1,4 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, useMemo } from "react";
 
 import dynamic from "next/dynamic";
 import NextImage from "next/legacy/image";
@@ -55,6 +55,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
     avatarUrl,
     contributionsCollection,
     repositoryDiscussionComments,
+    followers,
   } = initial;
 
   const { contributionYears } = contributionsCollection;
@@ -62,7 +63,34 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
 
   const totalAnswers = repositoryDiscussionComments.totalCount;
 
-  const answeredOn = repositoryDiscussionComments.repositories;
+  const answeredOn = useMemo(
+    () =>
+      repositoryDiscussionComments.repositories.map((repo, index, src) => {
+        if (index === src.length - 2) {
+          return (
+            <Fragment key={repo}>
+              <Text as="span" $textColor="--yellow" $fontWeight={400}>
+                {repo}
+              </Text>
+              <span>, and </span>
+            </Fragment>
+          );
+        }
+
+        return (
+          <Fragment key={repo}>
+            <Text as="span" $textColor="--yellow" $fontWeight={400}>
+              {repo}
+            </Text>
+
+            {index < src.length - 1 && <span>, </span>}
+          </Fragment>
+        );
+      }),
+    [repositoryDiscussionComments.repositories]
+  );
+
+  const totalFollowers = followers.totalCount;
 
   return (
     <Section>
@@ -98,9 +126,27 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
               <Text $textColor="--yellow" mb={2}>
                 {company}
               </Text>
+
+              <Text $fontWeight={300} mb={1}>
+                <Text $textColor="--yellow" as="span" $fontWeight={400}>
+                  {totalFollowers}
+                </Text>{" "}
+                followers
+              </Text>
+
+              <Text $fontWeight={300}>
+                <Text $textColor="--yellow" as="span" $fontWeight={400}>
+                  {totalAnswers}
+                </Text>{" "}
+                resolved discussions on {answeredOn}
+              </Text>
             </Bio>
           </section>
         </Profile>
+
+        <Text as="h3" $fontSize="2.5rem" mt={4} mb={3}>
+          Contributions
+        </Text>
 
         <RenderWithSelectedYear last={last}>
           {({ selectedYear, setSelectedYear }) => (
@@ -133,34 +179,6 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
             </Fragment>
           )}
         </RenderWithSelectedYear>
-
-        <Box mt={5}>
-          <Text as="h3" $fontSize="2.5rem" mb={3}>
-            Answers
-          </Text>
-
-          <Text $fontWeight={300}>
-            Whenever possible I try to answer questions on the discussions for
-            GitHub projects I support.
-          </Text>
-
-          <Text $fontWeight={300} mt={2}>
-            In total I have{" "}
-            <Text as="span" $textColor="--yellow" $fontWeight={400}>
-              {totalAnswers}
-            </Text>{" "}
-            accepted answers, in these repositories:{" "}
-            {answeredOn.map((repo, index, src) => (
-              <Fragment key={repo}>
-                <Text as="span" $textColor="--yellow" $fontWeight={400}>
-                  {repo}
-                </Text>
-                {index < src.length - 1 && <span>, </span>}
-              </Fragment>
-            ))}
-            .
-          </Text>
-        </Box>
       </Flex>
 
       <BackToTop />

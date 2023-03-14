@@ -22,7 +22,12 @@ import { fitbitAuth } from "pages/api/fitbit/profile";
 
 type HomeProps = {
   codewars: IcyJoseph.CodeWars;
-  github: IcyJoseph.GitHub;
+  github: Omit<IcyJoseph.GitHub, "repositoryDiscussionComments"> & {
+    repositoryDiscussionComments: {
+      totalCount: number;
+      repositories: string[];
+    };
+  };
   tokei: IcyJoseph.Tokei[];
   fitbit: IcyJoseph.FitbitProfile;
   activityLog: IcyJoseph.ActivityLog;
@@ -93,13 +98,27 @@ export async function getStaticProps(): Promise<
 > {
   const codewars = await getCodeWarsUser();
 
-  const github = await queryGitHub<{ data: { user: IcyJoseph.GitHub } }>(
+  const githubData = await queryGitHub<{ data: { user: IcyJoseph.GitHub } }>(
     GET_USER,
     {
       login: "icyJoseph",
       ...yearRange(),
     }
   ).then(({ data }) => data.user);
+
+  const github = {
+    ...githubData,
+    repositoryDiscussionComments: {
+      totalCount: githubData.repositoryDiscussionComments.totalCount,
+      repositories: [
+        ...new Set(
+          githubData.repositoryDiscussionComments.nodes.map(
+            ({ discussion }) => discussion.repository.name
+          )
+        ),
+      ],
+    },
+  };
 
   const tokei = await promisify(fs.readFile)(
     path.resolve(process.cwd(), "tokei.json"),

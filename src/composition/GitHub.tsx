@@ -1,4 +1,4 @@
-import { useState, Fragment, useMemo } from "react";
+import { useState, Fragment } from "react";
 
 import dynamic from "next/dynamic";
 import NextImage from "next/legacy/image";
@@ -35,7 +35,15 @@ const RenderWithSelectedYear = ({
   return children({ selectedYear, setSelectedYear });
 };
 
-type GitHubProps = { initial: IcyJoseph.GitHub; name: string };
+type GitHubProps = {
+  initial: Omit<IcyJoseph.GitHub, "repositoryDiscussionComments"> & {
+    repositoryDiscussionComments: {
+      totalCount: number;
+      repositories: string[];
+    };
+  };
+  name: string;
+};
 
 export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
   const {
@@ -54,16 +62,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
 
   const totalAnswers = repositoryDiscussionComments.totalCount;
 
-  const answersToRepos = useMemo(
-    () => [
-      ...new Set(
-        repositoryDiscussionComments.nodes.map(({ discussion }) => {
-          return discussion.repository.name;
-        })
-      ),
-    ],
-    [repositoryDiscussionComments]
-  );
+  const answeredOn = repositoryDiscussionComments.repositories;
 
   return (
     <Section>
@@ -151,7 +150,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
               {totalAnswers}
             </Text>{" "}
             accepted answers, in these repositories:{" "}
-            {answersToRepos.map((repo, index, src) => (
+            {answeredOn.map((repo, index, src) => (
               <Fragment key={repo}>
                 <Text as="span" $textColor="--yellow" $fontWeight={400}>
                   {repo}

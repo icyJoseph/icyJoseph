@@ -1,14 +1,16 @@
-import axios from "axios";
 import useSWR from "swr";
 import useSWRImmutable from "swr/immutable";
+
+import { client } from "utils/client";
 
 const fetcher = <Response, Variables>(
   query: "profile" | "contributions",
   variables: Variables
 ) =>
-  axios
-    .post<Response>(`/api/github/${query}`, { variables })
-    .then(({ data }) => data);
+  client({
+    body: JSON.stringify({ variables }),
+    headers: { "content-type": "application/json" },
+  }).post<Response>(`/api/github/${query}`);
 
 type ProfileVariables = { login: "icyJoseph"; from: string; to: string };
 

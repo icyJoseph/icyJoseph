@@ -16,9 +16,7 @@ export const Navigation = () => {
       <Nav>
         <Brand>
           <Link href="/">
-            <a>
-              <h1>icyJoseph</h1>
-            </a>
+            <h1>icyJoseph</h1>
           </Link>
           <span>Señor Developer</span>
         </Brand>
@@ -29,9 +27,7 @@ export const Navigation = () => {
           {entries.map(({ title, href }) => (
             <LinkItem key={title}>
               <Link href={href}>
-                <a>
-                  <span>{title}</span>
-                </a>
+                <span>{title}</span>
               </Link>
             </LinkItem>
           ))}

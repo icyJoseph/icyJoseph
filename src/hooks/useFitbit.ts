@@ -1,12 +1,16 @@
-import axios from "axios";
 import useSWR from "swr";
+
+import { client } from "utils/client";
 
 type Period = "1d" | "7d" | "30d" | "1w" | "1m";
 
-const profileFetcher = () =>
-  axios
-    .get<IcyJoseph.Fitbit>("/api/fitbit/profile")
-    .then(({ data }) => data.user);
+const profileFetcher = async () => {
+  const data = await client().get<{ user: IcyJoseph.GitHub }>(
+    "/api/fitbit/profile"
+  );
+
+  return data.user;
+};
 
 export const useFitbitProfile = (fallbackData = null) => {
   return useSWR("fitbit/profile", profileFetcher, {
@@ -16,26 +20,16 @@ export const useFitbitProfile = (fallbackData = null) => {
 };
 
 async function heartRateFetcher(date: string, period: Period) {
-  const { data } = await axios
-    .get(`/api/fitbit/activities/heart/date/${date}/${period}`)
-    .then(({ data }) => data);
+  const data = await client().get<IcyJoseph.HeartRateActivity>(
+    `/api/fitbit/activities/heart/date/${date}/${period}`
+  );
 
   return data;
 }
 
 async function activityLogFetcher(beforeDate: string) {
-  const { data } = await axios.get<IcyJoseph.ActivityLog>(
-    `/api/fitbit/activities/list`,
-    {
-      params: { beforeDate },
-      paramsSerializer: (params = {}) => {
-        return encodeURI(
-          Object.entries(params)
-            .map(([key, value]) => `${key}=${value}`)
-            .join("&")
-        );
-      },
-    }
+  const data = await client().get<IcyJoseph.ActivityLog>(
+    `/api/fitbit/activities/list?${encodeURI(`beforeDate=${beforeDate}`)}`
   );
 
   return data;

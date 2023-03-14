@@ -12,9 +12,7 @@ const Base = ({
   label: string;
 }) => (
   <div className={className}>
-    <Link href={to}>
-      <a>{label}</a>
-    </Link>
+    <Link href={to}>{label}</Link>
   </div>
 );
 
@@ -23,7 +21,7 @@ const StyledBase = styled(Base)`
   text-align: right;
 
   & > a {
-    font-family: Recursive, sans-serif;
+    font-family: var(--font-family);
     text-decoration: underline;
     font-size: 1.6rem;
     color: var(--smokeyWhite);

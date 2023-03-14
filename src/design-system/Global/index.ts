@@ -5,7 +5,7 @@ import { reset } from "design-system/Global/reset";
 import { root } from "design-system/Global/root";
 import { typography } from "design-system/Global/typography";
 
-export const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle<{ fontFamily: string }>`
     ${reset};
     ${normalize};
     ${typography};

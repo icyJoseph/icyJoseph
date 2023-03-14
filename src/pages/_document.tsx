@@ -1,9 +1,9 @@
 import Document, {
   Html,
-  Head,
   Main,
   NextScript,
   DocumentContext,
+  Head,
 } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 
@@ -37,44 +37,7 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head>
-          <link
-            rel="preconnect"
-            href="https://fonts.googleapis.com"
-            crossOrigin="anonymous"
-          />
-
-          <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossOrigin="anonymous"
-          />
-
-          <link
-            rel="preconnect"
-            href="https://www.googletagmanager.com"
-            crossOrigin="anonymous"
-          />
-
-          <link
-            rel="preload"
-            as="style"
-            href="https://fonts.googleapis.com/css2?family=Recursive:wght@300;400;500;600&display=swap"
-            crossOrigin="anonymous"
-          />
-
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Recursive:wght@300;400;500;600&display=swap"
-            crossOrigin="anonymous"
-          />
-
-          <link
-            rel="stylesheet"
-            media="screen and (min-width: 768px)"
-            href="https://cdn.jsdelivr.net/gh/devicons/devicon@master/devicon.min.css"
-          />
-        </Head>
+        <Head />
         <body>
           <Main />
           <NextScript />

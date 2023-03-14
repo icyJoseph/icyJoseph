@@ -2,7 +2,7 @@ import { space } from "@styled-system/space";
 import styled from "styled-components";
 
 export const Nav = styled.nav`
-  font-family: Recursive, sans-serif;
+  font-family: var(--font-family);
   ${space({ py: 2, my: 0 })};
   display: flex;
   flex-direction: column;
@@ -66,7 +66,7 @@ export const LinkItem = styled.li`
 
 export const ContentNav = styled.nav`
   ${space({ py: [5, 4] })};
-  font-family: Recursive, sans-serif;
+  font-family: var(--font-family);
   -ms-grid-row: 1;
 `;
 

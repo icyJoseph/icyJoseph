@@ -30,9 +30,7 @@ export const FooterLinks = () => (
     <ul>
       {entries.map(({ href, title }) => (
         <Text key={href} as="li" my={2} $fontWeight={300} $textAlign="end">
-          <Link href={href}>
-            <a>{title}</a>
-          </Link>
+          <Link href={href}>{title}</Link>
         </Text>
       ))}
 

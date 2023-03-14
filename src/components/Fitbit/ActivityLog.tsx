@@ -8,6 +8,7 @@ import { exists } from "functional";
 export const formatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
   day: "numeric",
+  timeZone: "Europe/Stockholm",
 });
 
 const isBaseActivity = (
@@ -87,6 +88,7 @@ export const ActivityLog = ({ activities }: ActivityLogProps) => {
                     as="time"
                     dateTime={activity.startTime}
                     $fontWeight={300}
+                    suppressHydrationWarning
                   >
                     {formatter.format(new Date(activity.startTime))}
                   </Text>

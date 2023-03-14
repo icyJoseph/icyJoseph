@@ -64,7 +64,7 @@ export const YearlyContribution = ({
     <Fragment>
       <Flex flexDirection="column" alignItems="center" my={4} px={4}>
         <Text as="h3" $fontSize="2.5rem">
-          Contributions in {year}
+          In {year}
         </Text>
 
         <Stale $stale={stale}>
@@ -93,69 +93,73 @@ export const YearlyContribution = ({
         </Stale>
       </Flex>
 
-      <Stale my={4} $stale={stale}>
-        <Text as="h3" $fontSize="2.5rem">
-          Repositories in {year}
-        </Text>
+      {commitContributionsByRepository.length > 0 && (
+        <>
+          <Stale my={5} $stale={stale}>
+            <Text as="h3" $fontSize="2.5rem">
+              Repositories in {year}
+            </Text>
 
-        {circularSlice(
-          commitContributionsByRepository,
-          pointer,
-          pointer + windowSize
-        ).map(({ contributions, repository }, index) => (
-          <Fragment key={repository.id}>
-            <ContributionEntry
-              index={(pointer + index) % contributionCardsLength}
-              repository={repository}
-              contributions={contributions}
-            />
+            {circularSlice(
+              commitContributionsByRepository,
+              pointer,
+              pointer + windowSize
+            ).map(({ contributions, repository }, index) => (
+              <Fragment key={repository.id}>
+                <ContributionEntry
+                  index={(pointer + index) % contributionCardsLength}
+                  repository={repository}
+                  contributions={contributions}
+                />
 
-            <Divider />
-          </Fragment>
-        ))}
-      </Stale>
+                <Divider />
+              </Fragment>
+            ))}
+          </Stale>
 
-      <Box mt={3} $width="100%" $display="flex">
-        <Button
-          type="button"
-          onClick={() => {
-            if (disabledPrev) return;
+          <Box mt={3} $width="100%" $display="flex">
+            <Button
+              type="button"
+              onClick={() => {
+                if (disabledPrev) return;
 
-            setPointer((index) =>
-              circular(
-                index,
-                -windowSize,
-                commitContributionsByRepository.length
-              )
-            );
-          }}
-          disabled={disabledPrev}
-          my={2}
-          mx="auto"
-        >
-          Prev
-        </Button>
+                setPointer((index) =>
+                  circular(
+                    index,
+                    -windowSize,
+                    commitContributionsByRepository.length
+                  )
+                );
+              }}
+              disabled={disabledPrev}
+              my={2}
+              mx="auto"
+            >
+              Prev
+            </Button>
 
-        <Button
-          type="button"
-          onClick={() => {
-            if (disabledNext) return;
+            <Button
+              type="button"
+              onClick={() => {
+                if (disabledNext) return;
 
-            setPointer((index) =>
-              circular(
-                index,
-                windowSize,
-                commitContributionsByRepository.length
-              )
-            );
-          }}
-          disabled={disabledNext}
-          my={2}
-          mx="auto"
-        >
-          Next
-        </Button>
-      </Box>
+                setPointer((index) =>
+                  circular(
+                    index,
+                    windowSize,
+                    commitContributionsByRepository.length
+                  )
+                );
+              }}
+              disabled={disabledNext}
+              my={2}
+              mx="auto"
+            >
+              Next
+            </Button>
+          </Box>
+        </>
+      )}
     </Fragment>
   );
 };

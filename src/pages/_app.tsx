@@ -50,7 +50,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Script
-        strategy="lazyOnload"
+        strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
       />
 

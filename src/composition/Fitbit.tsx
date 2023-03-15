@@ -1,4 +1,7 @@
-import { ActivityLog } from "components/Fitbit/ActivityLog";
+import {
+  ActivityLog,
+  type ReducedActivityLog,
+} from "components/Fitbit/ActivityLog";
 import { TopBadges } from "components/Fitbit/TopBadges";
 import { Header } from "components/Header";
 import { BackToTop } from "design-system/BackToTop";
@@ -6,29 +9,22 @@ import { Box } from "design-system/Box";
 import { Flex } from "design-system/Flex";
 import { Section } from "design-system/Section";
 import { Text } from "design-system/Text";
-import { useFitbitHR } from "hooks/useFitbit";
 
 type FitbitProps = {
-  profile: IcyJoseph.FitbitProfile;
-  activityLog: IcyJoseph.ActivityLog;
-  initialHR: IcyJoseph.HeartRateActivity;
+  profile: Pick<IcyJoseph.FitbitProfile, "topBadges" | "averageDailySteps">;
+  activityLog: ReducedActivityLog[];
+  restingHeartRate:
+    | IcyJoseph.HeartRateActivity["activities-heart"][number]["value"]["restingHeartRate"]
+    | undefined;
   name: string;
 };
 
 export const Fitbit = ({
   profile,
   activityLog,
-  initialHR,
+  restingHeartRate,
   name,
 }: FitbitProps) => {
-  const { data } = useFitbitHR(
-    { date: "today", period: "1m", revalidateOnMount: true },
-    initialHR
-  );
-
-  const heartData = data?.["activities-heart"] ?? [];
-  const [prevDay = null, today = null] = heartData.slice(-2);
-
   return (
     <Section>
       <Header name={name} title="Fitbit" />
@@ -59,8 +55,7 @@ export const Fitbit = ({
             </Text>
 
             <Text m={3} $fontSize="5rem">
-              {today?.value?.restingHeartRate ??
-                prevDay?.value?.restingHeartRate}{" "}
+              {restingHeartRate ?? "-"}{" "}
               <Text as="span" $fontWeight={300}>
                 bpm
               </Text>
@@ -68,7 +63,7 @@ export const Fitbit = ({
           </Flex>
         </Flex>
 
-        <TopBadges profile={profile} />
+        <TopBadges badges={profile.topBadges} />
 
         <ActivityLog activities={activityLog} />
       </Box>

@@ -2,8 +2,6 @@ import useSWR from "swr";
 
 import { client } from "utils/client";
 
-type Period = "1d" | "7d" | "30d" | "1w" | "1m";
-
 const profileFetcher = async () => {
   const data = await client().get<{ user: IcyJoseph.GitHub }>(
     "/api/fitbit/profile"
@@ -19,14 +17,6 @@ export const useFitbitProfile = (fallbackData = null) => {
   });
 };
 
-async function heartRateFetcher(date: string, period: Period) {
-  const data = await client().get<IcyJoseph.HeartRateActivity>(
-    `/api/fitbit/activities/heart/date/${date}/${period}`
-  );
-
-  return data;
-}
-
 async function activityLogFetcher(beforeDate: string) {
   const data = await client().get<IcyJoseph.ActivityLog>(
     `/api/fitbit/activities/list?${encodeURI(`beforeDate=${beforeDate}`)}`
@@ -41,28 +31,6 @@ async function activityLogFetcher(beforeDate: string) {
 // end-date	The end date of the range.
 // date	The end date of the period specified in the format yyyy-MM-dd or today.
 // period	The range for which data will be returned. Options are 1d, 7d, 30d, 1w, 1m.
-
-type UseFitbitHRProps = {
-  date: string;
-  period: Period;
-  revalidateOnMount: boolean;
-};
-
-export const useFitbitHR = (
-  { date, period, revalidateOnMount = false }: UseFitbitHRProps,
-  fallbackData: IcyJoseph.HeartRateActivity
-) => {
-  return useSWR<IcyJoseph.HeartRateActivity>(
-    [date, period],
-    (...args: [date: string, period: Period]) => heartRateFetcher(...args),
-    {
-      shouldRetryOnError: false,
-      revalidateOnFocus: false,
-      revalidateOnMount,
-      fallbackData: fallbackData,
-    }
-  );
-};
 
 type FitbitActivityLog = {
   beforeDate: string;

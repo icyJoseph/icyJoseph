@@ -9,19 +9,16 @@ import { BackToTop } from "design-system/BackToTop";
 import { Flex } from "design-system/Flex";
 import { Section } from "design-system/Section";
 import { Text } from "design-system/Text";
-import { useCodeWars } from "hooks/useCodeWars";
 
 export const CodeWars = ({
-  initial,
+  codewars,
   name,
 }: {
-  initial: IcyJoseph.CodeWars;
+  codewars: IcyJoseph.CodeWars;
   name: "codewars";
 }) => {
-  const { data = initial } = useCodeWars(initial);
-
   const { username, honor, clan, leaderboardPosition, ranks, codeChallenges } =
-    data;
+    codewars;
 
   return (
     <Section>

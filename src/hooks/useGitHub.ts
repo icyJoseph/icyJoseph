@@ -59,6 +59,10 @@ export const useGitHubContributions = ({
           to,
         }
       ).then(({ user }) => user.contributionsCollection);
+    },
+    {
+      refreshInterval: 1000 * 60 * 5,
+      revalidateOnFocus: false,
     }
   );
 };

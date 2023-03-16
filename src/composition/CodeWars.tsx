@@ -21,7 +21,7 @@ export const CodeWars = ({
     codewars;
 
   return (
-    <Section>
+    <Section style={{ contentVisibility: "auto" }}>
       <Header name={name} title="CodeWars" />
 
       <Text mt={3} $fontWeight={300}>

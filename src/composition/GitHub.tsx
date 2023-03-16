@@ -93,7 +93,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
   const totalFollowers = followers.totalCount;
 
   return (
-    <Section>
+    <Section style={{ contentVisibility: "auto" }}>
       <Header name={pageName} title="GitHub" />
 
       <Flex flexDirection="column" alignItems="center">

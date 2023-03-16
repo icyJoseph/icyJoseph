@@ -8,7 +8,7 @@ import { Text } from "design-system/Text";
 
 export const Footer = () => {
   return (
-    <PageFooter>
+    <PageFooter style={{ contentVisibility: "auto" }}>
       <section>
         <Divider mb={5} mt={0} />
 

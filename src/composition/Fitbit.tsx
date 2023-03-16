@@ -26,7 +26,7 @@ export const Fitbit = ({
   name,
 }: FitbitProps) => {
   return (
-    <Section>
+    <Section style={{ contentVisibility: "auto" }}>
       <Header name={name} title="Fitbit" />
 
       <Box>

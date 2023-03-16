@@ -37,7 +37,9 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head />
+        <Head>
+          <link rel="preload" as="image" href="waves.min.svg" />
+        </Head>
         <body>
           <Main />
           <NextScript />

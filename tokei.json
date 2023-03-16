@@ -2,7 +2,6 @@
   {
     "language": "JavaScript",
     "blanks": 14446,
-    "children": {},
     "code": 112228,
     "comments": 8434,
     "inaccurate": false
@@ -10,7 +9,6 @@
   {
     "language": "TypeScript",
     "blanks": 11331,
-    "children": {},
     "code": 106822,
     "comments": 3850,
     "inaccurate": false
@@ -18,7 +16,6 @@
   {
     "language": "CSS",
     "blanks": 3695,
-    "children": {},
     "code": 40743,
     "comments": 336,
     "inaccurate": false
@@ -26,100 +23,6 @@
   {
     "language": "Rust",
     "blanks": 3055,
-    "children": {
-      "Markdown": [
-        {
-          "name": "/home/joseph/dev/exercism/rust/react/src/lib.rs",
-          "stats": {
-            "blanks": 2,
-            "blobs": {},
-            "code": 0,
-            "comments": 13
-          }
-        },
-        {
-          "name": "/home/joseph/dev/web/yew-wasm-pack-template/tests/web.rs",
-          "stats": {
-            "blanks": 0,
-            "blobs": {},
-            "code": 0,
-            "comments": 1
-          }
-        },
-        {
-          "name": "/home/joseph/dev/web/yew-clean-wasm-starter/tests/web.rs",
-          "stats": {
-            "blanks": 0,
-            "blobs": {},
-            "code": 0,
-            "comments": 1
-          }
-        },
-        {
-          "name": "/home/joseph/dev/code_wars/integers-recreation-one/src/main.rs",
-          "stats": {
-            "blanks": 0,
-            "blobs": {},
-            "code": 0,
-            "comments": 6
-          }
-        },
-        {
-          "name": "/home/joseph/dev/code_wars/collatz/src/main.rs",
-          "stats": {
-            "blanks": 3,
-            "blobs": {},
-            "code": 0,
-            "comments": 15
-          }
-        },
-        {
-          "name": "/home/joseph/dev/advent_of_code/aoc/src/lib.rs",
-          "stats": {
-            "blanks": 3,
-            "blobs": {},
-            "code": 0,
-            "comments": 5
-          }
-        },
-        {
-          "name": "/home/joseph/dev/daybook/search-server/src/helpers.rs",
-          "stats": {
-            "blanks": 0,
-            "blobs": {},
-            "code": 0,
-            "comments": 1
-          }
-        },
-        {
-          "name": "/home/joseph/dev/daybook/search-server/src/start.rs",
-          "stats": {
-            "blanks": 0,
-            "blobs": {},
-            "code": 0,
-            "comments": 3
-          }
-        },
-        {
-          "name": "/home/joseph/dev/rust/wasm-aes-soft/tests/web.rs",
-          "stats": {
-            "blanks": 0,
-            "blobs": {},
-            "code": 0,
-            "comments": 1
-          }
-        },
-        {
-          "name": "/home/joseph/dev/codejam-js/src/gleb_pizza.rs",
-          "stats": {
-            "blanks": 0,
-            "blobs": {},
-            "code": 0,
-            "comments": 1
-          }
-        }
-      ]
-    },
     "code": 14867,
     "comments": 392,
     "inaccurate": false

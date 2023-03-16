@@ -209,6 +209,8 @@ declare namespace IcyJoseph {
     name: "very" | "fairly" | "lightly" | "sedentary";
   };
 
+  export type HeartRatePeriod = "1d" | "7d" | "30d" | "1w" | "1m";
+
   export type HeartRateZones = {
     max: number;
     min: number;

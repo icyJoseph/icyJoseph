@@ -5,14 +5,34 @@ import { Table, Th, Td, Tr } from "design-system/Table";
 import { Text } from "design-system/Text";
 import { exists } from "functional";
 
+type SharedActivityKeys = Extract<
+  keyof IcyJoseph.Activities,
+  | "logId"
+  | "activityName"
+  | "startTime"
+  | "activeDuration"
+  | "calories"
+  | "averageHeartRate"
+>;
+
+export type ReducedActivityLog = Pick<
+  IcyJoseph.Activities,
+  SharedActivityKeys
+> &
+  (
+    | Pick<IcyJoseph.BaseActivity, "steps" | "averageHeartRate">
+    | Pick<IcyJoseph.SwimActivity, "distance" | "pace">
+    | Pick<IcyJoseph.ActivityWithoutSteps, "averageHeartRate">
+  );
+
 export const formatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
   day: "numeric",
   timeZone: "Europe/Stockholm",
 });
 
-const isBaseActivity = (
-  activity: IcyJoseph.Activities
+export const isBaseActivity = (
+  activity: ReducedActivityLog
 ): activity is IcyJoseph.BaseActivity => {
   switch (activity.activityName) {
     case "Walk":
@@ -26,10 +46,11 @@ const isBaseActivity = (
   }
 };
 
-const isSwimming = (act: IcyJoseph.Activities): act is IcyJoseph.SwimActivity =>
-  act.activityName === "Swim";
+export const isSwimming = (
+  act: ReducedActivityLog
+): act is IcyJoseph.SwimActivity => act.activityName === "Swim";
 
-const Body = ({ activity }: { activity: IcyJoseph.Activities }) => {
+const Body = ({ activity }: { activity: ReducedActivityLog }) => {
   if (isSwimming(activity)) {
     return (
       <>
@@ -56,7 +77,7 @@ const Body = ({ activity }: { activity: IcyJoseph.Activities }) => {
 };
 
 type ActivityLogProps = {
-  activities: IcyJoseph.ActivityLog;
+  activities: ReducedActivityLog[];
 };
 
 export const ActivityLog = ({ activities }: ActivityLogProps) => {

@@ -7,9 +7,9 @@ import { Flex } from "design-system/Flex";
 import { Text } from "design-system/Text";
 
 export const TopBadges = ({
-  profile,
+  badges,
 }: {
-  profile: IcyJoseph.FitbitProfile;
+  badges: IcyJoseph.FitbitProfile["topBadges"];
 }) => {
   return (
     <>
@@ -25,7 +25,7 @@ export const TopBadges = ({
       </Text>
 
       <BadgesWrapper>
-        {profile.topBadges.map((badge) => (
+        {badges.map((badge) => (
           <Flex key={badge.encodedId} flex={1}>
             <Card my={2} mx="auto">
               <Card.Header>{badge.shortName}</Card.Header>

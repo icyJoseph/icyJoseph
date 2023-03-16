@@ -27,6 +27,7 @@ export const Background = styled.div<BackgroundProps>`
 
   transform: ${(props) => props.readingMode && "translateY(20%)"};
   transition: transform 0.35s ease-in-out;
+  will-change: auto;
 
   ${supportIsolate};
 

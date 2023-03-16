@@ -6,6 +6,12 @@ import type { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import Head from "next/head";
 
+import { getCodeWarsUser } from "codewars";
+import {
+  isBaseActivity,
+  isSwimming,
+  type ReducedActivityLog,
+} from "components/Fitbit/ActivityLog";
 import { PageNav } from "components/PageNav";
 import { CodeWars } from "composition/CodeWars";
 import { Fitbit } from "composition/Fitbit";
@@ -16,7 +22,6 @@ import { Container } from "design-system/Container";
 import { queryGitHub } from "github/fetcher";
 import { GET_USER } from "github/queries";
 import { isoStringWithoutMs, yearRange } from "helpers";
-import { getCodeWarsUser } from "pages/api/codewars";
 import { getActivityLog } from "pages/api/fitbit/activities/list";
 import { fitbitAuth } from "pages/api/fitbit/profile";
 
@@ -29,9 +34,11 @@ type HomeProps = {
     };
   };
   tokei: IcyJoseph.Tokei[];
-  fitbit: IcyJoseph.FitbitProfile;
-  activityLog: IcyJoseph.ActivityLog;
-  initialHR: IcyJoseph.HeartRateActivity;
+  fitbit: Pick<IcyJoseph.FitbitProfile, "topBadges" | "averageDailySteps">;
+  activityLog: Array<ReducedActivityLog>;
+  restingHeartRate:
+    | IcyJoseph.HeartRateActivity["activities-heart"][number]["value"]["restingHeartRate"]
+    | undefined;
 };
 
 const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
@@ -42,7 +49,7 @@ export function Home({
   tokei,
   fitbit,
   activityLog,
-  initialHR,
+  restingHeartRate,
 }: HomeProps) {
   return (
     <>
@@ -80,13 +87,13 @@ export function Home({
           <Fitbit
             profile={fitbit}
             activityLog={activityLog}
-            initialHR={initialHR}
+            restingHeartRate={restingHeartRate}
             name="fitbit"
           />
 
           <GitHub initial={github} name="github" />
 
-          <CodeWars initial={codewars} name="codewars" />
+          <CodeWars codewars={codewars} name="codewars" />
         </PageNav>
       </Container>
     </>
@@ -134,20 +141,51 @@ export async function getStaticProps(): Promise<
     "utf-8"
   ).then<IcyJoseph.Tokei[]>(JSON.parse);
 
-  const fitbit = await fitbitAuth
+  const fitbitData = await fitbitAuth
     .get<IcyJoseph.Fitbit>("/profile.json")
     .then(({ data }) => data.user);
 
-  const initialHR = await fitbitAuth
-    .get<IcyJoseph.HeartRateActivity>("/activities/heart/date/today/1m.json")
-    .then(({ data }) => data);
+  const fitbit: Pick<
+    IcyJoseph.FitbitProfile,
+    "topBadges" | "averageDailySteps"
+  > = {
+    averageDailySteps: fitbitData.averageDailySteps,
+    topBadges: fitbitData.topBadges,
+  };
 
-  const activityLog = await getActivityLog({
+  const heartRateData = await fitbitAuth
+    .get<IcyJoseph.HeartRateActivity>("/activities/heart/date/today/1d.json")
+    .then(({ data }) => data["activities-heart"]);
+
+  const restingHeartRate = heartRateData.slice(-1)[0].value.restingHeartRate;
+
+  const fullActivityLog: IcyJoseph.ActivityLog = await getActivityLog({
     beforeDate: isoStringWithoutMs(new Date().toISOString()),
   });
 
+  const activityLog = fullActivityLog.map((entry) => {
+    const base = {
+      logId: entry.logId,
+      activityName: entry.activityName,
+      startTime: entry.startTime,
+      activeDuration: entry.activeDuration,
+      calories: entry.calories,
+      averageHeartRate: entry.averageHeartRate,
+    };
+
+    if (isSwimming(entry)) {
+      return { ...base, distance: entry.distance, pace: entry.pace };
+    }
+
+    if (isBaseActivity(entry)) {
+      return { ...base, steps: entry.steps };
+    }
+
+    return base;
+  });
+
   return {
-    props: { codewars, github, tokei, fitbit, activityLog, initialHR },
+    props: { codewars, github, tokei, fitbit, activityLog, restingHeartRate },
     revalidate: 10,
   };
 }

@@ -36,9 +36,7 @@ type HomeProps = {
   tokei: IcyJoseph.Tokei[];
   fitbit: Pick<IcyJoseph.FitbitProfile, "topBadges" | "averageDailySteps">;
   activityLog: Array<ReducedActivityLog>;
-  restingHeartRate:
-    | IcyJoseph.HeartRateActivity["activities-heart"][number]["value"]["restingHeartRate"]
-    | undefined;
+  restingHeartRate: number | undefined;
 };
 
 const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
@@ -154,10 +152,13 @@ export async function getStaticProps(): Promise<
   };
 
   const heartRateData = await fitbitAuth
-    .get<IcyJoseph.HeartRateActivity>("/activities/heart/date/today/1d.json")
+    .get<IcyJoseph.HeartRateActivity>("/activities/heart/date/today/7d.json")
     .then(({ data }) => data["activities-heart"]);
 
-  const restingHeartRate = heartRateData.slice(-1)[0].value.restingHeartRate;
+  const restingHeartRate = heartRateData
+    .slice(0)
+    .reverse()
+    .find((entry) => Boolean(entry))?.value.restingHeartRate;
 
   const fullActivityLog: IcyJoseph.ActivityLog = await getActivityLog({
     beforeDate: isoStringWithoutMs(new Date().toISOString()),

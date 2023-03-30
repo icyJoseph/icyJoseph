@@ -19,7 +19,7 @@ import { GitHub } from "composition/GitHub";
 import { Introduction } from "composition/Introduction";
 import { Tokei } from "composition/Tokei";
 import { Container } from "design-system/Container";
-import { queryGitHub } from "github/fetcher";
+import { queryGitHub, redactedGitHubRepositoryData } from "github/fetcher";
 import { GET_USER } from "github/queries";
 import { isoStringWithoutMs, yearRange } from "helpers";
 import { getActivityLog } from "pages/api/fitbit/activities/list";
@@ -115,12 +115,9 @@ export async function getStaticProps(): Promise<
     ...githubData,
     contributionsCollection: {
       ...githubData.contributionsCollection,
-      commitContributionsByRepository:
-        githubData.contributionsCollection.commitContributionsByRepository.filter(
-          ({ repository }) => {
-            return repository.owner.login === "icyJoseph";
-          }
-        ),
+      commitContributionsByRepository: redactedGitHubRepositoryData(
+        githubData.contributionsCollection.commitContributionsByRepository
+      ),
     },
     repositoryDiscussionComments: {
       totalCount: githubData.repositoryDiscussionComments.totalCount,

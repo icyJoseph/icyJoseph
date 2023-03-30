@@ -35,6 +35,8 @@ export const ContributionEntry = ({
     ? repository.description.replace(RE_EMOJI, "")
     : `${repository.name} has no description.`;
 
+  const hasRepositoryLink = Boolean(repository.url);
+
   return (
     <Flex
       as="article"
@@ -53,12 +55,14 @@ export const ContributionEntry = ({
           <Text as="h4" $fontWeight={300} $fontSize="2rem" $display="inline">
             /{repository.name}
           </Text>
-          <a href={repository.url} target="_blank" rel="noopener noreferrer">
-            <VisuallyHidden>
-              External link to {repository.name} Github repository page
-            </VisuallyHidden>
-            <ExternalLinkIcon />
-          </a>
+          {hasRepositoryLink && (
+            <a href={repository.url} target="_blank" rel="noopener noreferrer">
+              <VisuallyHidden>
+                External link to {repository.name} Github repository page
+              </VisuallyHidden>
+              <ExternalLinkIcon />
+            </a>
+          )}
         </Box>
 
         <Text as="span" $fontWeight={300} $fontSize="2rem">

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-import { queryGitHub } from "github/fetcher";
+import { queryGitHub, redactedGitHubRepositoryData } from "github/fetcher";
 import { GET_YEAR_CONTRIBUTIONS } from "github/queries";
 
 const github = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -14,12 +14,9 @@ const github = async (req: NextApiRequest, res: NextApiResponse) => {
     user: {
       ...data.user,
 
-      commitContributionsByRepository:
-        data.user.contributionsCollection.commitContributionsByRepository.filter(
-          ({ repository }) => {
-            return repository.owner.login === "icyJoseph";
-          }
-        ),
+      commitContributionsByRepository: redactedGitHubRepositoryData(
+        data.user.contributionsCollection.commitContributionsByRepository
+      ),
     },
   };
 

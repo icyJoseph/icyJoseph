@@ -1,42 +1,12 @@
 import useSWR from "swr";
-import useSWRImmutable from "swr/immutable";
 
 import { client } from "utils/client";
 
-const fetcher = <Response, Variables>(
-  query: "profile" | "contributions",
-  variables: Variables
-) =>
+const fetcher = <Response, Variables>(variables: Variables) =>
   client({
     body: JSON.stringify({ variables }),
     headers: { "content-type": "application/json" },
-  }).post<Response>(`/api/github/${query}`);
-
-type ProfileVariables = { login: "icyJoseph"; from: string; to: string };
-
-export const useGitHubProfile = ({
-  from,
-  to,
-  fallbackData = null,
-}: {
-  from: string;
-  to: string;
-  fallbackData: IcyJoseph.GitHub | null;
-}) => {
-  return useSWRImmutable<IcyJoseph.GitHub | null>(
-    `profile/${from}`,
-    async () =>
-      fetcher<{ user: IcyJoseph.GitHub }, ProfileVariables>("profile", {
-        login: "icyJoseph",
-        from,
-        to,
-      }).then(({ user }) => user),
-    {
-      shouldRetryOnError: false,
-      fallbackData,
-    }
-  );
-};
+  }).post<Response>(`/api/github/contributions`);
 
 type ContributionVariables = { login: "icyJoseph"; from: string; to?: string };
 type UseGitHubContributions = {
@@ -51,14 +21,11 @@ export const useGitHubContributions = ({
   return useSWR<IcyJoseph.ContributionCollection | null>(
     `contributions/${from}/${to}`,
     async () => {
-      return fetcher<{ user: IcyJoseph.GitHub }, ContributionVariables>(
-        "contributions",
-        {
-          login: "icyJoseph",
-          from,
-          to,
-        }
-      ).then(({ user }) => user.contributionsCollection);
+      return fetcher<{ user: IcyJoseph.GitHub }, ContributionVariables>({
+        login: "icyJoseph",
+        from,
+        to,
+      }).then(({ user }) => user.contributionsCollection);
     },
     {
       refreshInterval: 1000 * 60 * 5,

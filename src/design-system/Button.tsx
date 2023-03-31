@@ -18,6 +18,9 @@ type BaseButtonProps = {
 
 const BaseButton = styled.button<BaseButtonProps>`
   ${space};
+  isolation: isolate;
+  z-index: 0;
+
   ${space({ p: 2 })};
   font-size: ${({ fontSize = "1.6rem" }) => fontSize};
   font-weight: 400;
@@ -67,25 +70,29 @@ const BaseButton = styled.button<BaseButtonProps>`
     bottom: 0;
   }
 
-  &:disabled {
+  &:focus,
+  &:focus-visible {
+    outline: none;
+  }
+
+  &[aria-disabled="true"] {
     cursor: not-allowed;
   }
 
-  &:disabled:active {
+  &[aria-disabled="true"]:active {
     pointer-events: none;
   }
 
-  &:focus,
-  &:focus-visible {
-    outline-color: var(--blue);
-    outline-offset: 4px;
-    outline-width: 2px;
-    outline-style: solid;
+  transition: transform 0.2s ease-in-out;
+
+  &[aria-disabled="false"]:active {
+    transform: translateY(1px);
   }
 `;
 
 const Label = styled.span<ButtonLabelProps>`
   /* LABEL  */
+  isolation: isolate;
   display: block;
   position: relative;
   overflow: hidden;
@@ -99,9 +106,15 @@ const Label = styled.span<ButtonLabelProps>`
     width: 100%;
     left: 0;
     bottom: 0;
+    z-index: 0;
 
     border: 1px solid ${theme.smokeyWhite};
     border: 1px solid var(--smokeyWhite);
+
+    ${BaseButton}:focus &,
+  ${BaseButton}:focus-visible & {
+      border: 1px solid var(--lightBlue);
+    }
 
     background-color: ${({ variant }) =>
       variant === "outlined" ? "transparent" : theme.softDark};
@@ -112,7 +125,6 @@ const Label = styled.span<ButtonLabelProps>`
 
 const HoverEffect = styled.span`
   /* Hover Effect */
-  content: "";
   display: block;
   position: absolute;
   height: 100%;
@@ -121,11 +133,11 @@ const HoverEffect = styled.span`
   left: -5%;
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.7);
-  transform: translateX(-100%) skew(-10deg);
+  transform: translateX(-100%);
   transition: transform 0.3s ease-out;
 
   ${BaseButton}:hover & {
-    transform: translateX(0) skew(-10deg);
+    transform: translateX(0);
   }
 `;
 
@@ -161,9 +173,14 @@ const Text = styled.span`
     opacity: 0.5;
   }
 
-  ${BaseButton}:hover &:after {
+  ${BaseButton}[aria-disabled="false"]:hover &:after {
     background-color: ${theme.softDark};
     background-color: var(--softDark);
+  }
+
+  ${BaseButton}:focus &:after,
+  ${BaseButton}:focus-visible &:after {
+    background-color: var(--lightBlue);
   }
 `;
 
@@ -177,7 +194,7 @@ export const Button = ({
   children,
   ...rest
 }: ButtonProps) => (
-  <BaseButton disabled={disabled} variant={variant} {...rest}>
+  <BaseButton aria-disabled={disabled} variant={variant} {...rest}>
     <Label variant={variant}>
       {!disabled && <HoverEffect />}
       <Text data-disabled={disabled}>{children}</Text>

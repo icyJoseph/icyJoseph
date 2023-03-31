@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+
 import { Box } from "design-system/Box";
 import { DevIcon } from "design-system/DevIcon";
 import { ExternalLinkIcon } from "design-system/ExternalLinkIcon";
@@ -17,12 +19,14 @@ type ContributionCardProps = {
   repository: IcyJoseph.Repository;
   index: number;
   contributions: { totalCount: number };
+  style?: CSSProperties;
 };
 
 export const ContributionEntry = ({
   repository,
   index,
   contributions,
+  style,
 }: ContributionCardProps) => {
   const validLanguageEdges = repository.languages.edges.filter(isLanguageEdge);
 
@@ -45,6 +49,7 @@ export const ContributionEntry = ({
       flexDirection="column"
       gap="1.5rem"
       flexWrap="nowrap"
+      style={style}
     >
       <Flex as="header" alignItems="center" justifyContent="space-between">
         <Box mr={3}>

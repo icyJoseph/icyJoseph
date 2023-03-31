@@ -9,7 +9,7 @@ import { Emoji } from "design-system/Emoji";
 import { Flex } from "design-system/Flex";
 import { Stale } from "design-system/Stale";
 import { Text } from "design-system/Text";
-import { circular, circularSlice } from "functional";
+import { circularSlice } from "functional";
 import { useGitHubContributions } from "hooks/useGitHub";
 import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
 
@@ -57,8 +57,8 @@ export const YearlyContribution = ({
 
   const windowSize = Math.min(3, contributionCardsLength);
 
-  const disabledPrev = windowSize === contributionCardsLength;
-  const disabledNext = windowSize === contributionCardsLength;
+  const disabledPrev = pointer === 0;
+  const disabledNext = pointer + windowSize >= contributionCardsLength;
 
   return (
     <Fragment>
@@ -104,17 +104,27 @@ export const YearlyContribution = ({
               commitContributionsByRepository,
               pointer,
               pointer + windowSize
-            ).map(({ contributions, repository }, index) => (
-              <Fragment key={repository.id}>
-                <ContributionEntry
-                  index={(pointer + index) % contributionCardsLength}
-                  repository={repository}
-                  contributions={contributions}
-                />
+            ).map(({ contributions, repository }, position) => {
+              const index = (pointer + position) % contributionCardsLength;
 
-                <Divider />
-              </Fragment>
-            ))}
+              const style =
+                index < pointer
+                  ? ({ visibility: "hidden" } as const)
+                  : undefined;
+
+              return (
+                <Fragment key={repository.id}>
+                  {index !== pointer && <Divider style={style} />}
+
+                  <ContributionEntry
+                    index={index}
+                    repository={repository}
+                    contributions={contributions}
+                    style={style}
+                  />
+                </Fragment>
+              );
+            })}
           </Stale>
 
           <Box mt={3} $width="100%" $display="flex">
@@ -123,13 +133,7 @@ export const YearlyContribution = ({
               onClick={() => {
                 if (disabledPrev) return;
 
-                setPointer((index) =>
-                  circular(
-                    index,
-                    -windowSize,
-                    commitContributionsByRepository.length
-                  )
-                );
+                setPointer((index) => Math.max(0, index - windowSize));
               }}
               disabled={disabledPrev}
               my={2}
@@ -143,13 +147,7 @@ export const YearlyContribution = ({
               onClick={() => {
                 if (disabledNext) return;
 
-                setPointer((index) =>
-                  circular(
-                    index,
-                    windowSize,
-                    commitContributionsByRepository.length
-                  )
-                );
+                setPointer((index) => index + windowSize);
               }}
               disabled={disabledNext}
               my={2}

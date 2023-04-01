@@ -13,9 +13,7 @@ import { Text } from "design-system/Text";
 type FitbitProps = {
   profile: Pick<IcyJoseph.FitbitProfile, "topBadges" | "averageDailySteps">;
   activityLog: ReducedActivityLog[];
-  restingHeartRate:
-    | IcyJoseph.HeartRateActivity["activities-heart"][number]["value"]["restingHeartRate"]
-    | undefined;
+  restingHeartRate: number | undefined;
   name: string;
 };
 

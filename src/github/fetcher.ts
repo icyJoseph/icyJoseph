@@ -15,3 +15,26 @@ export const queryGitHub = <Response>(
       variables,
     })
     .then(({ data }) => data);
+
+export const redactedGitHubRepositoryData = (
+  data: IcyJoseph.GitHub["contributionsCollection"]["commitContributionsByRepository"]
+) => {
+  return data
+    .filter(({ repository }) => {
+      return repository.owner.login === "icyJoseph";
+    })
+    .map((entry) => {
+      const hideUrl =
+        entry.repository.isPrivate ||
+        entry.repository.isArchived ||
+        entry.repository.isDisabled;
+
+      return {
+        ...entry,
+        repository: {
+          ...entry.repository,
+          url: hideUrl ? "" : entry.repository.url,
+        },
+      };
+    });
+};

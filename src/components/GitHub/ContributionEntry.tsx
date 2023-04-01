@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+
 import { Box } from "design-system/Box";
 import { DevIcon } from "design-system/DevIcon";
 import { ExternalLinkIcon } from "design-system/ExternalLinkIcon";
@@ -17,12 +19,14 @@ type ContributionCardProps = {
   repository: IcyJoseph.Repository;
   index: number;
   contributions: { totalCount: number };
+  style?: CSSProperties;
 };
 
 export const ContributionEntry = ({
   repository,
   index,
   contributions,
+  style,
 }: ContributionCardProps) => {
   const validLanguageEdges = repository.languages.edges.filter(isLanguageEdge);
 
@@ -35,6 +39,8 @@ export const ContributionEntry = ({
     ? repository.description.replace(RE_EMOJI, "")
     : `${repository.name} has no description.`;
 
+  const hasRepositoryLink = Boolean(repository.url);
+
   return (
     <Flex
       as="article"
@@ -43,6 +49,7 @@ export const ContributionEntry = ({
       flexDirection="column"
       gap="1.5rem"
       flexWrap="nowrap"
+      style={style}
     >
       <Flex as="header" alignItems="center" justifyContent="space-between">
         <Box mr={3}>
@@ -53,12 +60,14 @@ export const ContributionEntry = ({
           <Text as="h4" $fontWeight={300} $fontSize="2rem" $display="inline">
             /{repository.name}
           </Text>
-          <a href={repository.url} target="_blank" rel="noopener noreferrer">
-            <VisuallyHidden>
-              External link to {repository.name} Github repository page
-            </VisuallyHidden>
-            <ExternalLinkIcon />
-          </a>
+          {hasRepositoryLink && (
+            <a href={repository.url} target="_blank" rel="noopener noreferrer">
+              <VisuallyHidden>
+                External link to {repository.name} Github repository page
+              </VisuallyHidden>
+              <ExternalLinkIcon />
+            </a>
+          )}
         </Box>
 
         <Text as="span" $fontWeight={300} $fontSize="2rem">

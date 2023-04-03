@@ -19,7 +19,7 @@ import { GitHub } from "composition/GitHub";
 import { Introduction } from "composition/Introduction";
 import { Tokei } from "composition/Tokei";
 import { Container } from "design-system/Container";
-import { queryGitHub } from "github/fetcher";
+import { queryGitHub, redactedGitHubRepositoryData } from "github/fetcher";
 import { GET_USER } from "github/queries";
 import { isoStringWithoutMs, yearRange } from "helpers";
 import { getActivityLog } from "pages/api/fitbit/activities/list";
@@ -36,9 +36,7 @@ type HomeProps = {
   tokei: IcyJoseph.Tokei[];
   fitbit: Pick<IcyJoseph.FitbitProfile, "topBadges" | "averageDailySteps">;
   activityLog: Array<ReducedActivityLog>;
-  restingHeartRate:
-    | IcyJoseph.HeartRateActivity["activities-heart"][number]["value"]["restingHeartRate"]
-    | undefined;
+  restingHeartRate: number | undefined;
 };
 
 const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
@@ -117,12 +115,9 @@ export async function getStaticProps(): Promise<
     ...githubData,
     contributionsCollection: {
       ...githubData.contributionsCollection,
-      commitContributionsByRepository:
-        githubData.contributionsCollection.commitContributionsByRepository.filter(
-          ({ repository }) => {
-            return repository.owner.login === "icyJoseph";
-          }
-        ),
+      commitContributionsByRepository: redactedGitHubRepositoryData(
+        githubData.contributionsCollection.commitContributionsByRepository
+      ),
     },
     repositoryDiscussionComments: {
       totalCount: githubData.repositoryDiscussionComments.totalCount,
@@ -154,10 +149,13 @@ export async function getStaticProps(): Promise<
   };
 
   const heartRateData = await fitbitAuth
-    .get<IcyJoseph.HeartRateActivity>("/activities/heart/date/today/1d.json")
+    .get<IcyJoseph.HeartRateActivity>("/activities/heart/date/today/7d.json")
     .then(({ data }) => data["activities-heart"]);
 
-  const restingHeartRate = heartRateData.slice(-1)[0].value.restingHeartRate;
+  const restingHeartRate = heartRateData
+    .slice(0)
+    .reverse()
+    .find((entry) => Boolean(entry))?.value.restingHeartRate;
 
   const fullActivityLog: IcyJoseph.ActivityLog = await getActivityLog({
     beforeDate: isoStringWithoutMs(new Date().toISOString()),

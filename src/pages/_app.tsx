@@ -1,9 +1,7 @@
-import { useEffect } from "react";
-
+import { Analytics } from "@vercel/analytics/react";
 import type { AppProps } from "next/app";
 import { Recursive } from "next/font/google";
 import Router, { useRouter } from "next/router";
-import Script from "next/script";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 
@@ -11,7 +9,6 @@ import { Footer } from "composition/Footer";
 import { Navigation } from "composition/Navigation";
 import { Background, Layout } from "design-system/Background";
 import { GlobalStyle } from "design-system/Global";
-import { pageview } from "ga";
 
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -29,46 +26,16 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   }
 }
 
-const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_TRACKING_ID;
-
 const recursive = Recursive({
   weight: ["300", "400", "500", "600"],
   subsets: ["latin"],
 });
 
 function App({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    const handler = (url: string) => pageview(url);
-
-    Router.events.on("routeChangeComplete", handler);
-
-    return () => Router.events.off("routeChangeComplete", handler);
-  }, []);
-
   const isBlog = useRouter().pathname.startsWith("/blog");
 
   return (
     <>
-      <Script
-        strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-      />
-
-      <Script
-        id="gtag"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${GA_TRACKING_ID}', {
-            page_path: window.location.pathname,
-          });
-        `,
-        }}
-      />
-
       <GlobalStyle fontFamily={recursive.style.fontFamily} />
 
       <Background readingMode={isBlog} />
@@ -80,6 +47,8 @@ function App({ Component, pageProps }: AppProps) {
       </Layout>
 
       <Footer />
+
+      <Analytics />
     </>
   );
 }

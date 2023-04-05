@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@styled-system/space": "5.1.2",
+    "@vercel/analytics": "0.1.11",
     "axios": "0.26.0",
     "graphql": "16.2.0",
     "graphql-tag": "2.12.6",

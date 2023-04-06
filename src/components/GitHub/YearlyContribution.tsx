@@ -1,15 +1,12 @@
-import { useEffect, useState, Fragment } from "react";
+import { Fragment, useMemo } from "react";
 
 import { ContributionEntry } from "components/GitHub/ContributionEntry";
 import { ContributionsSummary } from "components/GitHub/ContributionsSummary";
-import { Box } from "design-system/Box";
-import { Button } from "design-system/Button";
-import { Divider } from "design-system/Divider";
+import { Showcase } from "components/Showcase";
 import { Emoji } from "design-system/Emoji";
 import { Flex } from "design-system/Flex";
 import { Stale } from "design-system/Stale";
 import { Text } from "design-system/Text";
-import { circularSlice } from "functional";
 import { useGitHubContributions } from "hooks/useGitHub";
 import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
 
@@ -31,17 +28,25 @@ export const YearlyContribution = ({
     to,
   });
 
-  const [pointer, setPointer] = useState(0);
-
   const prev = useLastNonNullableValue(data, fallback);
 
   const stale = prev !== fallback && !error && !data;
 
-  useEffect(() => {
-    if (!stale) {
-      setPointer(0);
-    }
-  }, [year, stale]);
+  const commitContributionsByRepository = (data || prev)
+    ?.commitContributionsByRepository;
+
+  const commitContributionsByRepositoryWithId = useMemo(() => {
+    if (!commitContributionsByRepository) return [];
+
+    return commitContributionsByRepository.map(
+      ({ repository, contributions }, index) => ({
+        id: repository.id,
+        index,
+        repository,
+        contributions,
+      })
+    );
+  }, [commitContributionsByRepository]);
 
   if (!prev) return null;
 
@@ -50,15 +55,7 @@ export const YearlyContribution = ({
     totalRepositoryContributions,
     totalCommitContributions,
     restrictedContributionsCount,
-    commitContributionsByRepository,
   } = data || prev;
-
-  const contributionCardsLength = commitContributionsByRepository.length;
-
-  const windowSize = Math.min(3, contributionCardsLength);
-
-  const disabledPrev = pointer === 0;
-  const disabledNext = pointer + windowSize >= contributionCardsLength;
 
   return (
     <Fragment>
@@ -86,76 +83,28 @@ export const YearlyContribution = ({
               totalCommitContributions={totalCommitContributions}
               restrictedContributionsCount={restrictedContributionsCount}
               totalRepositoriesContributedTo={
-                commitContributionsByRepository.length
+                commitContributionsByRepository?.length ?? 0
               }
             />
           )}
         </Stale>
       </Flex>
 
-      {commitContributionsByRepository.length > 0 && (
+      {(commitContributionsByRepository ?? []).length > 0 && (
         <>
           <Stale my={5} $stale={stale}>
             <Text as="h3" $fontSize="2.5rem">
               Repositories in {year}
             </Text>
 
-            {circularSlice(
-              commitContributionsByRepository,
-              pointer,
-              pointer + windowSize
-            ).map(({ contributions, repository }, position) => {
-              const index = (pointer + position) % contributionCardsLength;
-
-              const style =
-                index < pointer
-                  ? ({ visibility: "hidden" } as const)
-                  : undefined;
-
-              return (
-                <Fragment key={repository.id}>
-                  {index !== pointer && <Divider style={style} />}
-
-                  <ContributionEntry
-                    index={index}
-                    repository={repository}
-                    contributions={contributions}
-                    style={style}
-                  />
-                </Fragment>
-              );
-            })}
+            <Showcase
+              Component={ContributionEntry}
+              items={commitContributionsByRepositoryWithId}
+              backIcon={<span>back</span>}
+              forwardIcon={<span>fwd</span>}
+              ariaLabel="Navigate through repositories"
+            />
           </Stale>
-
-          <Box mt={3} $width="100%" $display="flex">
-            <Button
-              type="button"
-              onClick={() => {
-                if (disabledPrev) return;
-
-                setPointer((index) => Math.max(0, index - windowSize));
-              }}
-              disabled={disabledPrev}
-              my={2}
-              mx="auto"
-            >
-              Prev
-            </Button>
-
-            <Button
-              type="button"
-              onClick={() => {
-                if (disabledNext) return;
-
-                setPointer((index) => index + windowSize);
-              }}
-              disabled={disabledNext}
-              my={2}
-              mx="auto"
-            >
-              Next
-            </Button>
-          </Box>
         </>
       )}
     </Fragment>

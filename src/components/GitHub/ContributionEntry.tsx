@@ -16,6 +16,7 @@ const isLanguageEdge = (
 ): edge is IcyJoseph.LanguageEdge => Boolean(edge);
 
 type ContributionCardProps = {
+  id: string;
   repository: IcyJoseph.Repository;
   index: number;
   contributions: { totalCount: number };
@@ -26,7 +27,7 @@ export const ContributionEntry = ({
   repository,
   index,
   contributions,
-  style,
+  style = {},
 }: ContributionCardProps) => {
   const validLanguageEdges = repository.languages.edges.filter(isLanguageEdge);
 

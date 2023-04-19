@@ -32,10 +32,13 @@ export const ItemShowCase = <Data,>({
 
   useEffect(() => {
     const root = itemRef?.current?.parentElement?.parentElement ?? undefined;
-    const disconnect = subscribe((visible) => {
-      onVisibilityChange?.(item, visible);
-      setIsVisible(visible);
-    }, root);
+    const disconnect = subscribe(
+      (visible) => {
+        onVisibilityChange?.(item, visible);
+        setIsVisible(visible);
+      },
+      { root, threshold: 8 / 12 }
+    );
 
     return disconnect;
   }, [subscribe, onVisibilityChange, item]);
@@ -87,13 +90,11 @@ export const Showcase = <Data extends Record<"id", string>>({
   items,
   backIcon,
   forwardIcon,
-  ariaLabel,
 }: {
   Component: RenderElement<Data>;
   items: Data[];
   backIcon: ReactElement;
   forwardIcon: ReactElement;
-  ariaLabel: string;
 }) => {
   const [visibleItems, setVisibleItems] = useState<WithVisibility<Data>[]>([]);
 
@@ -153,30 +154,6 @@ export const Showcase = <Data extends Record<"id", string>>({
           </ItemShowCase>
         ))}
       </ul>
-
-      <nav
-        className={style.spotlightNav}
-        aria-label={ariaLabel}
-        aria-controls={listId}
-      >
-        <ul className={style.spotlightControls}>
-          {items.map((item, index) => (
-            <li key={item.id} aria-label={`Goto ${index + 1}`}>
-              <button
-                className={style.spotlightControlItem}
-                onClick={() => {
-                  const element = listRef.current;
-                  if (!element) return;
-                  scrollListChildIntoView(element, index);
-                }}
-                aria-current={visibleItems[index]?.isVisible ? "true" : "false"}
-              >
-                <VisuallyHidden>Move to {index + 1}</VisuallyHidden>
-              </button>
-            </li>
-          ))}
-        </ul>
-      </nav>
 
       <div
         className={style.sliderControl}

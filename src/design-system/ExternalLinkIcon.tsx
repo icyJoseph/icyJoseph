@@ -24,5 +24,5 @@ export const ExternalLinkIcon = styled(BaseExternalLinkIcon)<SpaceProps>`
   ${space};
 
   cursor: pointer;
-  vertical-align: baseline;
+  vertical-align: middle;
 `;

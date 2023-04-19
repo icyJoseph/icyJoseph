@@ -25,7 +25,7 @@
 }
 
 .listItem {
-  width: 80%;
+  width: calc(1% + 100% * 8 / 12);
   flex-shrink: 0;
   scroll-snap-align: start;
   padding: 0 1rem;
@@ -41,72 +41,10 @@
   left: 50%;
 }
 
-.spotlightNav {
-  padding-top: 0.5rem;
-  display: block;
-  height: 2rem;
-  padding-bottom: 3rem;
-}
-
-.spotlightControls {
-  list-style: none;
-  padding: 0;
-
-  position: absolute;
-  right: 0;
-  left: 0;
-  margin: auto;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  gap: 0.25rem;
-}
-
-.spotlightControlItem {
-  width: 1rem;
-  height: 1rem;
-  padding: 0.5rem;
-  position: relative;
-
-  display: inline-block;
-  background-color: transparent;
-  border: none;
-
-  appearance: none;
-  -webkit-appearance: none;
-}
-
-.spotlightControlItem::after {
-  width: 0.75rem;
-  height: 0.75rem;
-  position: absolute;
-  padding: 0.25rem;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-
-  content: "";
-
-  display: inline-block;
-  border-radius: 50%;
-  text-indent: -999px;
-  border: none;
-  outline: none;
-  background-color: #898989;
-  transition: all 0.2s;
-  cursor: pointer;
-  opacity: 0.7;
-}
-
-.spotlightControlItem[aria-current="true"]::after {
-  opacity: 0.9;
-  background-color: #222222;
-}
-
 .sliderControl {
-  display: none;
+  display: flex;
+  justify-content: space-around;
+  padding: 2rem;
 }
 
 .controlButton {
@@ -122,26 +60,4 @@
 .controlButton[aria-disabled="true"] {
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-@media (min-width: 1024px) {
-  .listItem {
-    width: 25%;
-    scroll-snap-align: none;
-  }
-
-  .list:hover .listItem {
-    scroll-snap-align: start;
-  }
-
-  .spotlightNav {
-    display: none;
-  }
-
-  .sliderControl {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-    padding: 2rem;
-  }
 }

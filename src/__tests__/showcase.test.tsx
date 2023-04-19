@@ -46,7 +46,6 @@ describe("Showcase", () => {
         items={mockData}
         backIcon={BackIcon}
         forwardIcon={FwdIcon}
-        ariaLabel="Demo navigation"
       />
     );
 
@@ -54,20 +53,19 @@ describe("Showcase", () => {
     expect(screen.getByText(/back-icon/i)).toBeInTheDocument();
     expect(screen.getByText(/fwd-icon/i)).toBeInTheDocument();
 
-    const expectedButtonCount =
-      2 + // back and fwd
-      mockData.length; // one for each item
+    const expectedButtonCount = 2; // back and fwd
+
     expect(screen.getAllByRole("button")).toHaveLength(expectedButtonCount);
 
     const getRenderedItems = () =>
       mockData.map(({ id }) => screen.getByTestId(id));
+
     const renderedItems = getRenderedItems();
 
     expect(renderedItems).toHaveLength(mockData.length);
 
-    const visibleWindow = 3;
+    const visibleWindow = 1;
 
-    // make the first 3 items visible
     act(() => {
       const nodes = getRenderedItems()
         .slice(0, visibleWindow)
@@ -120,11 +118,5 @@ describe("Showcase", () => {
     expect(screen.getByLabelText("next").getAttribute("aria-disabled")).toBe(
       "true"
     );
-
-    expect(
-      screen
-        .getAllByRole("button")
-        .filter((el) => el.getAttribute("aria-current") === "true")
-    ).toHaveLength(visibleWindow);
   });
 });

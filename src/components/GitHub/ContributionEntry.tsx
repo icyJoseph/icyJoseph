@@ -1,11 +1,8 @@
-import { CSSProperties } from "react";
-
 import { Box } from "design-system/Box";
 import { DevIcon } from "design-system/DevIcon";
 import { ExternalLinkIcon } from "design-system/ExternalLinkIcon";
 import { Flex } from "design-system/Flex";
 import { IndicatorBar } from "design-system/IndicatorBar";
-import { OneLiner } from "design-system/OneLiner";
 import { Text } from "design-system/Text";
 import { VisuallyHidden } from "design-system/VisuallyHidden";
 
@@ -20,27 +17,28 @@ type ContributionCardProps = {
   repository: IcyJoseph.Repository;
   index: number;
   contributions: { totalCount: number };
-  style?: CSSProperties;
 };
 
 export const ContributionEntry = ({
   repository,
   index,
   contributions,
-  style = {},
 }: ContributionCardProps) => {
-  const validLanguageEdges = repository.languages.edges.filter(isLanguageEdge);
-
-  const padding = Array.from(
-    { length: 3 - validLanguageEdges.length },
-    (_, i) => i
-  );
-
   const repoDescription = repository.description
     ? repository.description.replace(RE_EMOJI, "")
     : `${repository.name} has no description.`;
 
   const hasRepositoryLink = Boolean(repository.url);
+
+  const languagePercentages = repository.languages.edges
+    .filter(isLanguageEdge)
+    .map((lang) => ({
+      ...lang,
+      percentage: Math.round(
+        (100 * lang.size) / repository.languages.totalSize
+      ),
+    }))
+    .filter((lang) => lang.percentage > 0);
 
   return (
     <Flex
@@ -50,49 +48,54 @@ export const ContributionEntry = ({
       flexDirection="column"
       gap="1.5rem"
       flexWrap="nowrap"
-      style={style}
     >
-      <Flex as="header" alignItems="center" justifyContent="space-between">
-        <Box mr={3}>
-          <Text as="span" $textColor="--yellow">
-            #{index + 1}
-          </Text>{" "}
-          <Text as="span">{repository.owner.login}</Text>
-          <Text as="h4" $fontWeight={300} $fontSize="2rem" $display="inline">
-            /{repository.name}
-          </Text>
-          {hasRepositoryLink && (
-            <a href={repository.url} target="_blank" rel="noopener noreferrer">
-              <VisuallyHidden>
-                External link to {repository.name} Github repository page
-              </VisuallyHidden>
-              <ExternalLinkIcon />
-            </a>
-          )}
-        </Box>
+      <header>
+        <Text $textColor="--yellow">#{index + 1}</Text>
 
-        <Text as="span" $fontWeight={300} $fontSize="2rem">
-          +{contributions.totalCount}{" "}
-          <Text as="span" $fontWeight={300}>
-            commits
-          </Text>
+        <Text as="h4" $fontWeight={300} $fontSize="2rem">
+          {repository.name}
         </Text>
-      </Flex>
+        <Text>{repository.owner.login}</Text>
+      </header>
 
-      <Box>
-        <OneLiner $fontWeight={300} $fontSize="2rem" title={repoDescription}>
+      <Text $fontWeight={300} $fontSize="2rem">
+        +{contributions.totalCount}{" "}
+        <Text as="span" $fontWeight={300}>
+          commits
+        </Text>
+      </Text>
+
+      <Box style={{ flex: 1, flexBasis: 75 }}>
+        <Text
+          $fontWeight={300}
+          $fontSize="1.8rem"
+          style={{ overflowWrap: "anywhere" }}
+        >
           {repoDescription}
-        </OneLiner>
+        </Text>
       </Box>
 
-      <Flex as="footer" mt={3}>
-        {validLanguageEdges.map(({ node: { color, name }, size }) => (
+      {hasRepositoryLink && (
+        <a href={repository.url} target="_blank" rel="noopener noreferrer">
+          <Text as="span" aria-hidden="true">
+            Repository
+          </Text>
+
+          <VisuallyHidden>
+            External link to {repository.name} Github repository
+          </VisuallyHidden>
+          <ExternalLinkIcon />
+        </a>
+      )}
+
+      <Flex as="footer" mt={3} flexDirection="column" flex={1}>
+        {languagePercentages.map(({ node: { color, name }, percentage }) => (
           <Flex
             key={name}
             flexDirection="column"
             flex={1}
             justifyContent="flex-end"
-            mr={3}
+            $width="50%"
           >
             <Text $fontWeight={300} mb={1}>
               <DevIcon color={color} language={name} mr={1} $fontSize="2rem" />
@@ -100,15 +103,8 @@ export const ContributionEntry = ({
               <span>{name}</span>
             </Text>
 
-            <IndicatorBar
-              color={color}
-              percentage={(100 * size) / repository.languages.totalSize}
-            />
+            <IndicatorBar color={color} percentage={percentage} />
           </Flex>
-        ))}
-
-        {padding.map((x) => (
-          <Flex key={x} flex={1} />
         ))}
       </Flex>
     </Flex>

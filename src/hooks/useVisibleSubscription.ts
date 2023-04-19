@@ -10,7 +10,7 @@ export function useVisibleSubscription<
   const ref = useRef<Element>(null);
 
   const subscribe = useCallback(
-    (onChange?: onVisibleChange, root?: HTMLElement) => {
+    (onChange?: onVisibleChange, opts?: IntersectionObserverInit) => {
       const element = ref.current;
 
       if (!element) return;
@@ -21,7 +21,7 @@ export function useVisibleSubscription<
 
           onChange?.(entry.isIntersecting);
         },
-        { ...options, root }
+        { ...options, ...opts }
       );
 
       observer.observe(element);

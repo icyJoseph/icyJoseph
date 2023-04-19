@@ -3,6 +3,7 @@ import { Fragment, useMemo } from "react";
 import { ContributionEntry } from "components/GitHub/ContributionEntry";
 import { ContributionsSummary } from "components/GitHub/ContributionsSummary";
 import { Showcase } from "components/Showcase";
+import chevron from "design-system/chevron.module.css";
 import { Emoji } from "design-system/Emoji";
 import { Flex } from "design-system/Flex";
 import { Stale } from "design-system/Stale";
@@ -16,6 +17,9 @@ type YearlyContributionProps = {
   from: string;
   to?: string;
 };
+
+const BackIcon = <i className={chevron.chevronLeft} />;
+const FwdIcon = <i className={chevron.chevronRight} />;
 
 export const YearlyContribution = ({
   fallback,
@@ -91,21 +95,18 @@ export const YearlyContribution = ({
       </Flex>
 
       {(commitContributionsByRepository ?? []).length > 0 && (
-        <>
-          <Stale my={5} $stale={stale}>
-            <Text as="h3" $fontSize="2.5rem">
-              Repositories in {year}
-            </Text>
+        <Stale my={5} $stale={stale}>
+          <Text as="h3" $fontSize="2.5rem">
+            Repositories in {year}
+          </Text>
 
-            <Showcase
-              Component={ContributionEntry}
-              items={commitContributionsByRepositoryWithId}
-              backIcon={<span>back</span>}
-              forwardIcon={<span>fwd</span>}
-              ariaLabel="Navigate through repositories"
-            />
-          </Stale>
-        </>
+          <Showcase
+            Component={ContributionEntry}
+            items={commitContributionsByRepositoryWithId}
+            backIcon={BackIcon}
+            forwardIcon={FwdIcon}
+          />
+        </Stale>
       )}
     </Fragment>
   );

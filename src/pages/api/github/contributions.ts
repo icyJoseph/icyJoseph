@@ -13,14 +13,15 @@ const github = async (req: NextApiRequest, res: NextApiResponse) => {
   const githubData = {
     user: {
       ...data.user,
-
-      commitContributionsByRepository: redactedGitHubRepositoryData(
-        data.user.contributionsCollection.commitContributionsByRepository
-      ),
+      contributionsCollection: {
+        commitContributionsByRepository: redactedGitHubRepositoryData(
+          data.user.contributionsCollection.commitContributionsByRepository
+        ),
+      },
     },
   };
 
-  return res.send(githubData);
+  return res.json(githubData);
 };
 
 export default github;

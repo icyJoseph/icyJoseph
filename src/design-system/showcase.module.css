@@ -25,12 +25,17 @@
 }
 
 .listItem {
-  width: calc(1% + 100% * 8 / 12);
+  width: 100%;
   flex-shrink: 0;
   scroll-snap-align: start;
   padding: 0 1rem;
-
   position: relative;
+}
+
+@media (min-width: 720px) {
+  .listItem {
+    width: calc(1% + 100% * 8 / 12);
+  }
 }
 
 .sentinel {

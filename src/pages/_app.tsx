@@ -1,3 +1,5 @@
+import "design-system/Global/style.css";
+
 import { Analytics } from "@vercel/analytics/react";
 import type { AppProps } from "next/app";
 import { Recursive } from "next/font/google";
@@ -7,7 +9,7 @@ import "nprogress/nprogress.css";
 
 import { Footer } from "composition/Footer";
 import { Navigation } from "composition/Navigation";
-import { Background, Layout } from "design-system/Background";
+import { Background } from "design-system/Background";
 import { GlobalStyle } from "design-system/Global";
 
 Router.events.on("routeChangeStart", () => NProgress.start());
@@ -42,9 +44,9 @@ function App({ Component, pageProps }: AppProps) {
 
       <Navigation />
 
-      <Layout as="main">
+      <main className="block min-h-screen z-10">
         <Component {...pageProps} />
-      </Layout>
+      </main>
 
       <Footer />
 

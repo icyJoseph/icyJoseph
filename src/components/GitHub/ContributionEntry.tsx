@@ -65,7 +65,7 @@ export const ContributionEntry = ({
         </Text>
       </Text>
 
-      <Box style={{ flex: 1, flexBasis: 75 }}>
+      <Box className="flex-1 basis-32">
         <Text
           $fontWeight={300}
           $fontSize="1.8rem"

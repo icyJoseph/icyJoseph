@@ -77,7 +77,7 @@ export const YearlyContribution = ({
                   symbol="🎉"
                   title="Joined Github"
                   ariaLabel="Celebration"
-                  mx={2}
+                  className="mx-3"
                 />
               </Text>
             </Flex>

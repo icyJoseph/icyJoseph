@@ -151,7 +151,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
         <RenderWithSelectedYear last={last}>
           {({ selectedYear, setSelectedYear }) => (
             <Fragment>
-              <Box $width="80%">
+              <Box className="w-4/5">
                 <Flex justifyContent="center" my={3} mx="auto">
                   {contributionYears
                     .slice(0)

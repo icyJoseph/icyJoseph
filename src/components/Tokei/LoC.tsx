@@ -17,7 +17,7 @@ export const LoC = ({ language, code, blanks, comments }: IcyJoseph.Tokei) => {
       <Card.Section>
         <CircularProgress percentage={percentage}>
           <Emoji
-            mb={2}
+            className="mb-3"
             symbol="📜"
             ariaLabel={`Lines of ${language} code`}
             title={`Lines of ${language} code`}

@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 import { queryGitHub, redactedGitHubRepositoryData } from "github/fetcher";
 import { GET_YEAR_CONTRIBUTIONS } from "github/queries";
@@ -13,7 +13,6 @@ const github = async (req: NextApiRequest, res: NextApiResponse) => {
   const githubData = {
     user: {
       ...data.user,
-
       commitContributionsByRepository: redactedGitHubRepositoryData(
         data.user.contributionsCollection.commitContributionsByRepository
       ),

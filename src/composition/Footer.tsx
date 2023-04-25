@@ -25,7 +25,7 @@ export const Footer = () => {
         </Flex>
 
         <Text mx="auto" pt={5} $textAlign="center">
-          &#169; {new Date().getFullYear()} icyJoseph AB - Gothenburg, Sweden
+          &#169; {new Date().getFullYear()} icyJoseph AB - Stockholm, Sweden
         </Text>
       </section>
     </PageFooter>

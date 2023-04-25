@@ -42,7 +42,7 @@ export const ContributionEntry = ({
       <header>
         <Text $textColor="--yellow">#{index + 1}</Text>
 
-        <Text id={headingId} as="h4" $fontWeight={300} $fontSize="2rem">
+        <Text as="h4" id={headingId} className="font-semibold" $fontSize="2rem">
           {repository.name}
         </Text>
 

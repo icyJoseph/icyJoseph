@@ -82,16 +82,16 @@ export function Home({
         <PageNav>
           <Tokei tokei={tokei} name="tokei" />
 
+          <GitHub initial={github} name="github" />
+
+          <CodeWars codewars={codewars} name="codewars" />
+
           <Fitbit
             profile={fitbit}
             activityLog={activityLog}
             restingHeartRate={restingHeartRate}
             name="fitbit"
           />
-
-          <GitHub initial={github} name="github" />
-
-          <CodeWars codewars={codewars} name="codewars" />
         </PageNav>
       </Container>
     </>

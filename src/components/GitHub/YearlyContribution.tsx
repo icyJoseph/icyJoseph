@@ -66,7 +66,7 @@ export const YearlyContribution = ({
 
   return (
     <Fragment>
-      <Flex flexDirection="column" alignItems="center" my={4} px={4}>
+      <div className="flex flex-col items-center my-8 px-5">
         <Text as="h3" $fontSize="2.5rem">
           In {year}
         </Text>
@@ -95,11 +95,16 @@ export const YearlyContribution = ({
             />
           )}
         </Stale>
-      </Flex>
+      </div>
 
       {(commitContributionsByRepository ?? []).length > 0 && (
         <Stale my={5} $stale={stale} as="section" aria-labelledby={headingId}>
-          <Text id={headingId} as="h3" $fontSize="2.5rem" className="mb-10">
+          <Text
+            id={headingId}
+            as="h3"
+            $fontSize="2.5rem"
+            className="mb-10 text-center"
+          >
             Repositories in {year}
           </Text>
 

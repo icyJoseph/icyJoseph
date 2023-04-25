@@ -12,10 +12,6 @@ import { Navigation } from "composition/Navigation";
 import { Background } from "design-system/Background";
 import { GlobalStyle } from "design-system/Global";
 
-Router.events.on("routeChangeStart", () => NProgress.start());
-Router.events.on("routeChangeComplete", () => NProgress.done());
-Router.events.on("routeChangeError", () => NProgress.done());
-
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   if (typeof window === "undefined") {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -28,7 +24,14 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   }
 }
 
+if (typeof window !== "undefined") {
+  Router.events.on("routeChangeStart", () => NProgress.start());
+  Router.events.on("routeChangeComplete", () => NProgress.done());
+  Router.events.on("routeChangeError", () => NProgress.done());
+}
+
 const recursive = Recursive({
+  // variable: '--font-recursive',
   weight: ["300", "400", "500", "600"],
   subsets: ["latin"],
 });

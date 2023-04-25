@@ -30,8 +30,7 @@
     "build": "next build",
     "start": "next start",
     "test": "jest --watch",
-    "test:ci": "jest --ci",
-    "tokei": "node tokei.js"
+    "test:ci": "jest --ci"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "13.2.4",

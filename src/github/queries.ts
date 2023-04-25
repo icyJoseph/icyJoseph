@@ -103,6 +103,21 @@ const GET_USER_DOC = gql`
       contributionsCollection(from: $from, to: $to) {
         ...contributions
       }
+      repositories(ownerAffiliations: OWNER, isFork: false, first: 100) {
+        nodes {
+          name
+          isArchived
+          languages(first: 10, orderBy: { field: SIZE, direction: DESC }) {
+            edges {
+              size
+              node {
+                color
+                name
+              }
+            }
+          }
+        }
+      }
       repositoryDiscussionComments(onlyAnswers: true, last: 50) {
         totalCount
         nodes {

@@ -10,6 +10,7 @@ export const ExternalLinkIcon = ({
       className,
       "inline-block ml-2 align-middle cursor-pointer"
     )}
+    aria-hidden="true"
     width="15"
     height="15"
     viewBox="0 0 15 15"

@@ -30,12 +30,17 @@
   scroll-snap-align: start;
   padding: 0 1rem;
   position: relative;
+  opacity: 1;
+  transition: opacity 0.25s ease-in-out;
+  will-change: contents;
 }
 
-@media (min-width: 720px) {
-  .listItem {
-    width: calc(1% + 100% * 8 / 12);
-  }
+.listItem[aria-hidden="true"] {
+  opacity: 0.5;
+}
+
+.listItem[aria-hidden="true"] a {
+  visibility: hidden;
 }
 
 .sentinel {
@@ -50,6 +55,7 @@
   display: flex;
   justify-content: space-around;
   padding: 2rem;
+  margin-top: 2rem;
 }
 
 .controlButton {

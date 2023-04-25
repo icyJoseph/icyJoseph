@@ -1,4 +1,4 @@
-import { Fragment, useMemo } from "react";
+import { Fragment, memo, useId, useMemo } from "react";
 
 import { ContributionEntry } from "components/GitHub/ContributionEntry";
 import { ContributionsSummary } from "components/GitHub/ContributionsSummary";
@@ -18,8 +18,9 @@ type YearlyContributionProps = {
   to?: string;
 };
 
-const BackIcon = <i className={chevron.chevronLeft} />;
-const FwdIcon = <i className={chevron.chevronRight} />;
+const BackIcon = <i className={chevron.chevronLeft} aria-hidden="true" />;
+const FwdIcon = <i className={chevron.chevronRight} aria-hidden="true" />;
+const MemoContributionEntry = memo(ContributionEntry);
 
 export const YearlyContribution = ({
   fallback,
@@ -51,6 +52,8 @@ export const YearlyContribution = ({
       })
     );
   }, [commitContributionsByRepository]);
+
+  const headingId = useId();
 
   if (!prev) return null;
 
@@ -95,13 +98,14 @@ export const YearlyContribution = ({
       </Flex>
 
       {(commitContributionsByRepository ?? []).length > 0 && (
-        <Stale my={5} $stale={stale}>
-          <Text as="h3" $fontSize="2.5rem">
+        <Stale my={5} $stale={stale} as="section" aria-labelledby={headingId}>
+          <Text id={headingId} as="h3" $fontSize="2.5rem" className="mb-10">
             Repositories in {year}
           </Text>
 
           <Showcase
-            Component={ContributionEntry}
+            labelledBy={headingId}
+            Component={MemoContributionEntry}
             items={commitContributionsByRepositoryWithId}
             backIcon={BackIcon}
             forwardIcon={FwdIcon}

@@ -1,7 +1,6 @@
-import { Box } from "design-system/Box";
-import { DevIcon } from "design-system/DevIcon";
+import { useId } from "react";
+
 import { ExternalLinkIcon } from "design-system/ExternalLinkIcon";
-import { Flex } from "design-system/Flex";
 import { IndicatorBar } from "design-system/IndicatorBar";
 import { Text } from "design-system/Text";
 import { VisuallyHidden } from "design-system/VisuallyHidden";
@@ -24,48 +23,35 @@ export const ContributionEntry = ({
   index,
   contributions,
 }: ContributionCardProps) => {
+  const headingId = useId();
+
   const repoDescription = repository.description
     ? repository.description.replace(RE_EMOJI, "")
     : `${repository.name} has no description.`;
 
   const hasRepositoryLink = Boolean(repository.url);
+  const hasHomepageLink = Boolean(repository.homepageUrl);
 
-  const languagePercentages = repository.languages.edges
-    .filter(isLanguageEdge)
-    .map((lang) => ({
-      ...lang,
-      percentage: Math.round(
-        (100 * lang.size) / repository.languages.totalSize
-      ),
-    }))
-    .filter((lang) => lang.percentage > 0);
+  const languages = repository.languages.edges.filter(isLanguageEdge);
 
   return (
-    <Flex
-      as="article"
-      py={3}
-      mx="auto"
-      flexDirection="column"
-      gap="1.5rem"
-      flexWrap="nowrap"
+    <article
+      className="h-full grid grid-rows-[auto_1fr_auto] w-full md:w-4/5 lg:w-3/5 mx-auto"
+      aria-labelledby={headingId}
     >
       <header>
         <Text $textColor="--yellow">#{index + 1}</Text>
 
-        <Text as="h4" $fontWeight={300} $fontSize="2rem">
+        <Text id={headingId} as="h4" $fontWeight={300} $fontSize="2rem">
           {repository.name}
         </Text>
-        <Text>{repository.owner.login}</Text>
+
+        <Text className="pt-5" $fontWeight={300} $fontSize="2rem">
+          +{contributions.totalCount} <span>commits</span>
+        </Text>
       </header>
 
-      <Text $fontWeight={300} $fontSize="2rem">
-        +{contributions.totalCount}{" "}
-        <Text as="span" $fontWeight={300}>
-          commits
-        </Text>
-      </Text>
-
-      <Box className="flex-1 basis-32">
+      <section aria-label="Repository description" className="pt-5">
         <Text
           $fontWeight={300}
           $fontSize="1.8rem"
@@ -73,40 +59,78 @@ export const ContributionEntry = ({
         >
           {repoDescription}
         </Text>
-      </Box>
+      </section>
 
-      {hasRepositoryLink && (
-        <a href={repository.url} target="_blank" rel="noopener noreferrer">
-          <Text as="span" aria-hidden="true">
-            Repository
-          </Text>
+      <footer className="pt-5">
+        <Text className="mb-4">Languages</Text>
 
-          <VisuallyHidden>
-            External link to {repository.name} Github repository
-          </VisuallyHidden>
-          <ExternalLinkIcon />
-        </a>
-      )}
+        <ul className="mb-4 flex flex-wrap gap-x-10 gap-y-4">
+          {languages.map(({ node: { color, name } /* percentage */ }) => (
+            <li key={name}>
+              <IndicatorBar
+                color={color}
+                // percentage={percentage}
+                aria-hidden="true"
+                className="mr-2 align-middle"
+              />
 
-      <Flex as="footer" mt={3} flexDirection="column" flex={1}>
-        {languagePercentages.map(({ node: { color, name }, percentage }) => (
-          <Flex
-            key={name}
-            flexDirection="column"
-            flex={1}
-            justifyContent="flex-end"
-            $width="50%"
-          >
-            <Text $fontWeight={300} mb={1}>
-              <DevIcon color={color} language={name} mr={1} $fontSize="2rem" />
+              <Text as="span" $fontWeight={300} mb={1}>
+                {name}
+              </Text>
+            </li>
+          ))}
+        </ul>
 
-              <span>{name}</span>
-            </Text>
+        <nav className="pt-5">
+          <ul className="flex flex-wrap gap-x-10">
+            <li className="empty:hidden">
+              {hasRepositoryLink && (
+                <a
+                  href={repository.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Text as="span" aria-hidden="true" $fontSize="1.6rem">
+                    Code
+                  </Text>
 
-            <IndicatorBar color={color} percentage={percentage} />
-          </Flex>
-        ))}
-      </Flex>
-    </Flex>
+                  <VisuallyHidden>
+                    External link to {repository.name} Github repository
+                  </VisuallyHidden>
+                  <ExternalLinkIcon />
+                </a>
+              )}
+            </li>
+
+            <li className="empty:hidden">
+              {hasHomepageLink && (
+                <a
+                  href={repository.homepageUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Text as="span" aria-hidden="true" $fontSize="1.6rem">
+                    Homepage
+                  </Text>
+
+                  <VisuallyHidden>
+                    External link to {repository.name} homepage
+                  </VisuallyHidden>
+                  <ExternalLinkIcon />
+                </a>
+              )}
+            </li>
+            {!hasHomepageLink && !hasRepositoryLink && (
+              <li>
+                <span aria-hidden="true">&nbsp;</span>
+                <VisuallyHidden>
+                  <Text>{repository.name} has no links</Text>
+                </VisuallyHidden>
+              </li>
+            )}
+          </ul>
+        </nav>
+      </footer>
+    </article>
   );
 };

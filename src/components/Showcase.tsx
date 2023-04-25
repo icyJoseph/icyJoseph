@@ -6,10 +6,10 @@ import {
   useState,
   type ReactNode,
   type ReactElement,
+  type FC,
 } from "react";
 
 import style from "design-system/showcase.module.css";
-import { VisuallyHidden } from "design-system/VisuallyHidden";
 import { useVisibleSubscription } from "hooks/useVisibleSubscription";
 
 type VoidVisibilityChangeCallback<Data> = (
@@ -37,7 +37,7 @@ export const ItemShowCase = <Data,>({
         onVisibilityChange?.(item, visible);
         setIsVisible(visible);
       },
-      { root, threshold: 8 / 12 }
+      { root, threshold: 1 }
     );
 
     return disconnect;
@@ -61,7 +61,7 @@ type WithVisibility<T extends Record<"id", unknown>> = {
   item: T;
   isVisible: boolean;
 };
-type RenderElement<T> = (props: T) => ReactElement;
+type RenderElement<T> = FC<T>;
 
 const calcVisibleBounds = <T extends Record<"id", unknown>>(
   visibleItems: WithVisibility<T>[]
@@ -90,11 +90,13 @@ export const Showcase = <Data extends Record<"id", string>>({
   items,
   backIcon,
   forwardIcon,
+  labelledBy,
 }: {
   Component: RenderElement<Data>;
   items: Data[];
   backIcon: ReactElement;
   forwardIcon: ReactElement;
+  labelledBy: string;
 }) => {
   const [visibleItems, setVisibleItems] = useState<WithVisibility<Data>[]>([]);
 
@@ -143,7 +145,12 @@ export const Showcase = <Data extends Record<"id", string>>({
 
   return (
     <div className={style.wrapper}>
-      <ul id={listId} className={style.list} ref={listRef}>
+      <ul
+        id={listId}
+        className={style.list}
+        ref={listRef}
+        aria-labelledby={labelledBy}
+      >
         {items.map((item) => (
           <ItemShowCase
             key={item.id}
@@ -164,19 +171,17 @@ export const Showcase = <Data extends Record<"id", string>>({
         <button
           className={style.controlButton}
           onClick={moveBack}
-          aria-label="previous"
+          aria-label="move to previous"
           aria-disabled={disableMoveBack ? "true" : "false"}
         >
-          <VisuallyHidden>Back</VisuallyHidden>
           {backIcon}
         </button>
         <button
           className={style.controlButton}
           onClick={moveForward}
-          aria-label="next"
+          aria-label="move forward"
           aria-disabled={disableMoveForward ? "true" : "false"}
         >
-          <VisuallyHidden>Forward</VisuallyHidden>
           {forwardIcon}
         </button>
       </div>

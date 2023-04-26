@@ -1,8 +1,8 @@
 import { useState, Fragment, useMemo, ReactNode } from "react";
 
-import dynamic from "next/dynamic";
 import NextImage from "next/image";
 
+import YearlyContribution from "components/GitHub/YearlyContribution";
 import { Header } from "components/Header";
 import { BackToTop } from "design-system/BackToTop";
 import { Box } from "design-system/Box";
@@ -16,10 +16,6 @@ type SelectYearProps = {
   selectedYear: number;
   setSelectedYear: (next: number) => void;
 };
-
-const DynamicYearlyContribution = dynamic(
-  () => import("components/GitHub/YearlyContribution")
-);
 
 const RenderWithSelectedYear = ({
   last,
@@ -173,7 +169,7 @@ export const GitHub = ({ children, initial, name: pageName }: GitHubProps) => {
                 </Flex>
               </Box>
 
-              <DynamicYearlyContribution
+              <YearlyContribution
                 year={selectedYear}
                 fallback={contributionsCollection}
                 {...yearRange(selectedYear)}

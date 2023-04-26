@@ -1,14 +1,10 @@
-import { Text } from "design-system/Text";
-
 type BytesProps = {
   languages: Array<{ name: string; size: number }>;
 };
 
 export const Bytes = ({ languages }: BytesProps) => (
   <>
-    <Text as="h3" $fontSize="2.5rem" mt={4} mb={3}>
-      Top languages
-    </Text>
+    <h3 className="font-sans text-[2.5rem] mt-6 mb-4">Top languages</h3>
 
     <div className="flex flex-wrap mt-4 w-full">
       {languages.map(({ name, size }) => (

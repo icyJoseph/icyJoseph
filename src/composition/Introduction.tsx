@@ -4,10 +4,11 @@ import classNames from "classnames";
 
 import { Bold } from "design-system/Bold";
 
-const paragraph = "font-sans mx-auto mb-6";
+const paragraph = "font-sans mx-auto my-8";
 
 export const Introduction = () => {
   const h1HeadingId = useId();
+
   return (
     <section
       className="flex flex-col justify-center items-center pt-20 pb-28 px-4 md:px-0"
@@ -43,13 +44,13 @@ export const Introduction = () => {
       </p>
 
       <div className="font-mono max-w-[55ch] text-[2rem] font-light mx-auto">
-        <p className={classNames(paragraph, "mt-8")}>
+        <p className={classNames(paragraph, "mt-16")}>
           Developer from <Bold>Peru</Bold>, living in <Bold>Sweden</Bold>. I
           have a Bachelor&apos;s in Electronics Engineering, and a Master&apos;s
           degree on business design.
         </p>
 
-        <p className={classNames(paragraph, "mt-8")}>
+        <p className={paragraph}>
           I have over{" "}
           <Bold title="I do not believe in the value of this number.">
             {new Date().getFullYear() - 2016} years
@@ -58,18 +59,18 @@ export const Introduction = () => {
           freight, real state, news, transport and automotive industries.
         </p>
 
-        <p className={classNames(paragraph, "mt-8")}>
+        <p className={paragraph}>
           I write <Bold>JavaScript</Bold>, and <Bold>TypeScript</Bold>. I am
           comfortable with any runtime, browser and <Bold>NodeJS</Bold>, even a
           little <Bold>Deno</Bold>.
         </p>
 
-        <p className={classNames(paragraph, "mt-8")}>
+        <p className={paragraph}>
           Learning <Bold>Rust</Bold> on my free time, in fact it is my go to
           language for coding challenges.
         </p>
 
-        <p className={classNames(paragraph, "mt-8")}>
+        <p className={paragraph}>
           I have started to learn <Bold>Swift</Bold>, mainly by building iOS
           apps on xcode, and occasionally using it to solve coding challenges.
         </p>

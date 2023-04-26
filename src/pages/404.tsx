@@ -1,21 +1,8 @@
-import { Container } from "design-system/Container";
-import { Flex } from "design-system/Flex";
-import { Text } from "design-system/Text";
-
 export const NotFound = () => {
   return (
-    <Container>
-      <Flex
-        py="15%"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Text as="h1" $fontSize="3rem">
-          404 Not found
-        </Text>
-      </Flex>
-    </Container>
+    <section aria-label="Content not found" className="pt-20 text-center">
+      <h1 className="text-5xl">404 Not found</h1>
+    </section>
   );
 };
 

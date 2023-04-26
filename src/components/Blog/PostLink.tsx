@@ -2,7 +2,6 @@ import type { ReactNode } from "react";
 
 import Link from "next/link";
 
-import { Section } from "design-system/Section";
 import { Text } from "design-system/Text";
 
 export type PostPreview = Pick<
@@ -18,15 +17,15 @@ export const PostLink = ({
   children?: ReactNode | ReactNode[];
 }) => (
   <Link key={post.slug} href={`/blog/${post.slug}`}>
-    <Section as="article" mb={2} px={1}>
+    <article className="mb-8 px-1">
       <Text as="h3" $textColor="--yellow">
         {post.title}
       </Text>
 
-      <div>
-        <Text>{post.summary}</Text>
-      </div>
-    </Section>
+      <p className="font-sans text-2xl max-w-prose font-light">
+        {post.summary}
+      </p>
+    </article>
 
     <>{children}</>
   </Link>

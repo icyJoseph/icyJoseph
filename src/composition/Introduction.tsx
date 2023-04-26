@@ -1,23 +1,26 @@
+import { useId } from "react";
+
+import classNames from "classnames";
+
 import { Bold } from "design-system/Bold";
-import { Flex } from "design-system/Flex";
-import { Section } from "design-system/Section";
-import { Text } from "design-system/Text";
-import { TextBox } from "design-system/TextBox";
 
-export const Introduction = () => (
-  <Section mt={0} pt={[2, 3, 4]} pb="5%">
-    <Flex flexDirection="column" justifyContent="center" alignItems="center">
-      <Text
-        as="h1"
-        $textAlign="center"
-        $fontSize="3rem"
-        $fontWeight={300}
-        my={4}
+const paragraph = "font-sans mx-auto mb-6";
+
+export const Introduction = () => {
+  const h1HeadingId = useId();
+  return (
+    <section
+      className="flex flex-col justify-center items-center pt-20 pb-28 px-4 md:px-0"
+      aria-labelledby={h1HeadingId}
+    >
+      <h1
+        className="text-center text-5xl font-sans font-light my-8"
+        id={h1HeadingId}
       >
-        Joseph
-      </Text>
+        Joseph <span className="sr-only">Software Developer</span>
+      </h1>
 
-      <Text $textAlign="center">
+      <p className="mb-2">
         github:{" "}
         <a
           href="https://github.com/icyJoseph"
@@ -26,9 +29,9 @@ export const Introduction = () => (
         >
           <i>@icyJoseph</i>
         </a>
-      </Text>
+      </p>
 
-      <Text $textAlign="center">
+      <p>
         medium:{" "}
         <a
           href="https://medium.com/@icjoseph"
@@ -37,40 +40,40 @@ export const Introduction = () => (
         >
           <i>@icjoseph</i>
         </a>
-      </Text>
+      </p>
 
-      <TextBox chars="65ch">
-        <Text mt={4} mx="auto" $fontWeight={300} $fontSize="2rem">
+      <div className="font-mono max-w-[55ch] text-[2rem] font-light mx-auto">
+        <p className={classNames(paragraph, "mt-8")}>
           Developer from <Bold>Peru</Bold>, living in <Bold>Sweden</Bold>. I
           have a Bachelor&apos;s in Electronics Engineering, and a Master&apos;s
           degree on business design.
-        </Text>
+        </p>
 
-        <Text mt={3} mx="auto" $fontWeight={300} $fontSize="2rem">
+        <p className={classNames(paragraph, "mt-8")}>
           I have over{" "}
           <Bold title="I do not believe in the value of this number.">
             {new Date().getFullYear() - 2016} years
           </Bold>{" "}
           of experience working as a software developer, in telecom, mining,
           freight, real state, news, transport and automotive industries.
-        </Text>
+        </p>
 
-        <Text mt={3} mx="auto" $fontWeight={300} $fontSize="2rem">
+        <p className={classNames(paragraph, "mt-8")}>
           I write <Bold>JavaScript</Bold>, and <Bold>TypeScript</Bold>. I am
           comfortable with any runtime, browser and <Bold>NodeJS</Bold>, even a
           little <Bold>Deno</Bold>.
-        </Text>
+        </p>
 
-        <Text mt={3} mx="auto" $fontWeight={300} $fontSize="2rem">
+        <p className={classNames(paragraph, "mt-8")}>
           Learning <Bold>Rust</Bold> on my free time, in fact it is my go to
           language for coding challenges.
-        </Text>
+        </p>
 
-        <Text mt={3} mx="auto" $fontWeight={300} $fontSize="2rem">
+        <p className={classNames(paragraph, "mt-8")}>
           I have started to learn <Bold>Swift</Bold>, mainly by building iOS
           apps on xcode, and occasionally using it to solve coding challenges.
-        </Text>
-      </TextBox>
-    </Flex>
-  </Section>
-);
+        </p>
+      </div>
+    </section>
+  );
+};

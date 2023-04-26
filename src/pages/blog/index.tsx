@@ -6,14 +6,29 @@ import { BlogIntro } from "components/Blog/Intro";
 import { PostLink, type PostPreview } from "components/Blog/PostLink";
 import { Search } from "components/Blog/Search";
 import { Container } from "design-system/Container";
-import { Section } from "design-system/Section";
-import { Text } from "design-system/Text";
 
 type BlogProps = {
   posts: PostPreview[];
 };
 
 const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
+
+const blogPageOpenGraph = {
+  url: VERCEL_URL,
+  title: "icyJoseph | Blog",
+  site_name: "icyJoseph",
+  description:
+    "Here I publish my solutions to coding challenges, and things I learn on my day to day job.",
+  images: [
+    {
+      url: `${VERCEL_URL}/waves_background.png`,
+      width: 960,
+      height: 540,
+      alt: "icyJoseph wavy background",
+      type: "image/png",
+    },
+  ],
+};
 
 export const Blog = ({ posts }: BlogProps) => {
   const hasPosts = posts.length > 0;
@@ -23,38 +38,21 @@ export const Blog = ({ posts }: BlogProps) => {
       <NextSeo
         title="icyJoseph | Blog"
         description="Here I publish my solutions to coding challenges, and things I learn on my day to day job."
-        openGraph={{
-          url: VERCEL_URL,
-          title: "icyJoseph | Blog",
-          site_name: "icyJoseph",
-          description:
-            "Here I publish my solutions to coding challenges, and things I learn on my day to day job.",
-          images: [
-            {
-              url: `${VERCEL_URL}/waves_background.png`,
-              width: 960,
-              height: 540,
-              alt: "icyJoseph wavy background",
-              type: "image/png",
-            },
-          ],
-        }}
+        openGraph={blogPageOpenGraph}
       />
 
-      <BlogIntro />
+      <Container>
+        <BlogIntro />
 
-      <Container pt={1} mt={5}>
-        <Text as="h2" mb={2} $fontSize="2.25rem" px={1}>
-          Posts
-        </Text>
+        <h2 className="font-sans text-4xl pt-20 mb-8">Posts</h2>
 
         <Search>
           {hasPosts ? (
             posts.map((post) => <PostLink key={post.slug} post={post} />)
           ) : (
-            <Section mb={2} px={1}>
-              <Text>Nothing has been published yet.</Text>
-            </Section>
+            <p className="font-sans text-3xl">
+              Nothing has been published yet.
+            </p>
           )}
         </Search>
       </Container>

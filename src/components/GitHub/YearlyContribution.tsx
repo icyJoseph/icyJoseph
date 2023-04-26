@@ -1,15 +1,13 @@
-import { useEffect, useState, Fragment } from "react";
+import { Fragment, memo, useId, useMemo } from "react";
 
 import { ContributionEntry } from "components/GitHub/ContributionEntry";
 import { ContributionsSummary } from "components/GitHub/ContributionsSummary";
-import { Box } from "design-system/Box";
-import { Button } from "design-system/Button";
-import { Divider } from "design-system/Divider";
+import { Showcase } from "components/Showcase";
+import chevron from "design-system/chevron.module.css";
 import { Emoji } from "design-system/Emoji";
 import { Flex } from "design-system/Flex";
 import { Stale } from "design-system/Stale";
 import { Text } from "design-system/Text";
-import { circularSlice } from "functional";
 import { useGitHubContributions } from "hooks/useGitHub";
 import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
 
@@ -19,6 +17,10 @@ type YearlyContributionProps = {
   from: string;
   to?: string;
 };
+
+const BackIcon = <i className={chevron.chevronLeft} aria-hidden="true" />;
+const FwdIcon = <i className={chevron.chevronRight} aria-hidden="true" />;
+const MemoContributionEntry = memo(ContributionEntry);
 
 export const YearlyContribution = ({
   fallback,
@@ -31,17 +33,27 @@ export const YearlyContribution = ({
     to,
   });
 
-  const [pointer, setPointer] = useState(0);
-
   const prev = useLastNonNullableValue(data, fallback);
 
   const stale = prev !== fallback && !error && !data;
 
-  useEffect(() => {
-    if (!stale) {
-      setPointer(0);
-    }
-  }, [year, stale]);
+  const commitContributionsByRepository = (data || prev)
+    ?.commitContributionsByRepository;
+
+  const commitContributionsByRepositoryWithId = useMemo(() => {
+    if (!commitContributionsByRepository) return [];
+
+    return commitContributionsByRepository.map(
+      ({ repository, contributions }, index) => ({
+        id: repository.id,
+        index,
+        repository,
+        contributions,
+      })
+    );
+  }, [commitContributionsByRepository]);
+
+  const headingId = useId();
 
   if (!prev) return null;
 
@@ -50,19 +62,11 @@ export const YearlyContribution = ({
     totalRepositoryContributions,
     totalCommitContributions,
     restrictedContributionsCount,
-    commitContributionsByRepository,
   } = data || prev;
-
-  const contributionCardsLength = commitContributionsByRepository.length;
-
-  const windowSize = Math.min(3, contributionCardsLength);
-
-  const disabledPrev = pointer === 0;
-  const disabledNext = pointer + windowSize >= contributionCardsLength;
 
   return (
     <Fragment>
-      <Flex flexDirection="column" alignItems="center" my={4} px={4}>
+      <div className="flex flex-col items-center my-8 px-5">
         <Text as="h3" $fontSize="2.5rem">
           In {year}
         </Text>
@@ -76,7 +80,7 @@ export const YearlyContribution = ({
                   symbol="🎉"
                   title="Joined Github"
                   ariaLabel="Celebration"
-                  mx={2}
+                  className="mx-3"
                 />
               </Text>
             </Flex>
@@ -86,77 +90,32 @@ export const YearlyContribution = ({
               totalCommitContributions={totalCommitContributions}
               restrictedContributionsCount={restrictedContributionsCount}
               totalRepositoriesContributedTo={
-                commitContributionsByRepository.length
+                commitContributionsByRepository?.length ?? 0
               }
             />
           )}
         </Stale>
-      </Flex>
+      </div>
 
-      {commitContributionsByRepository.length > 0 && (
-        <>
-          <Stale my={5} $stale={stale}>
-            <Text as="h3" $fontSize="2.5rem">
-              Repositories in {year}
-            </Text>
+      {(commitContributionsByRepository ?? []).length > 0 && (
+        <Stale my={5} $stale={stale} as="section" aria-labelledby={headingId}>
+          <Text
+            id={headingId}
+            as="h3"
+            $fontSize="2.5rem"
+            className="mb-10 text-center"
+          >
+            Repositories in {year}
+          </Text>
 
-            {circularSlice(
-              commitContributionsByRepository,
-              pointer,
-              pointer + windowSize
-            ).map(({ contributions, repository }, position) => {
-              const index = (pointer + position) % contributionCardsLength;
-
-              const style =
-                index < pointer
-                  ? ({ visibility: "hidden" } as const)
-                  : undefined;
-
-              return (
-                <Fragment key={repository.id}>
-                  {index !== pointer && <Divider style={style} />}
-
-                  <ContributionEntry
-                    index={index}
-                    repository={repository}
-                    contributions={contributions}
-                    style={style}
-                  />
-                </Fragment>
-              );
-            })}
-          </Stale>
-
-          <Box mt={3} $width="100%" $display="flex">
-            <Button
-              type="button"
-              onClick={() => {
-                if (disabledPrev) return;
-
-                setPointer((index) => Math.max(0, index - windowSize));
-              }}
-              disabled={disabledPrev}
-              my={2}
-              mx="auto"
-            >
-              Prev
-            </Button>
-
-            <Button
-              type="button"
-              onClick={() => {
-                if (disabledNext) return;
-
-                setPointer((index) => index + windowSize);
-              }}
-              disabled={disabledNext}
-              my={2}
-              mx="auto"
-            >
-              Next
-            </Button>
-          </Box>
-        </>
+          <Showcase
+            labelledBy={headingId}
+            Component={MemoContributionEntry}
+            items={commitContributionsByRepositoryWithId}
+            backIcon={BackIcon}
+            forwardIcon={FwdIcon}
+          />
+        </Stale>
       )}
     </Fragment>
   );

@@ -1,4 +1,4 @@
-import { useState, Fragment, useMemo } from "react";
+import { useState, Fragment, useMemo, ReactNode } from "react";
 
 import dynamic from "next/dynamic";
 import NextImage from "next/legacy/image";
@@ -36,16 +36,20 @@ const RenderWithSelectedYear = ({
 };
 
 type GitHubProps = {
-  initial: Omit<IcyJoseph.GitHub, "repositoryDiscussionComments"> & {
+  initial: Omit<
+    IcyJoseph.GitHub,
+    "repositoryDiscussionComments" | "repositories"
+  > & {
     repositoryDiscussionComments: {
       totalCount: number;
       repositories: string[];
     };
   };
   name: string;
+  children: ReactNode;
 };
 
-export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
+export const GitHub = ({ children, initial, name: pageName }: GitHubProps) => {
   const {
     bio,
     name,
@@ -144,6 +148,8 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
           </section>
         </Profile>
 
+        {children}
+
         <Text as="h3" $fontSize="2.5rem" mt={4} mb={3}>
           Contributions
         </Text>
@@ -151,7 +157,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
         <RenderWithSelectedYear last={last}>
           {({ selectedYear, setSelectedYear }) => (
             <Fragment>
-              <Box $width="80%">
+              <Box className="w-4/5">
                 <Flex justifyContent="center" my={3} mx="auto">
                   {contributionYears
                     .slice(0)

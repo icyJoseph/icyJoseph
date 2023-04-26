@@ -4,7 +4,7 @@ import { TextBox } from "design-system/TextBox";
 
 export const BlogIntro = () => {
   return (
-    <TextBox chars="85ch" mx="auto" pt={[2, 3, 4]} px={1}>
+    <TextBox chars="85ch" className="mx-auto pt-3 md:pt-4 xl:pt-5 px-2">
       <header>
         <Text as="h1" $fontSize="2.5rem" my={4}>
           Blog

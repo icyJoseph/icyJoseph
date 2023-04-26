@@ -1,11 +1,7 @@
-import { CSSProperties } from "react";
+import { useId } from "react";
 
-import { Box } from "design-system/Box";
-import { DevIcon } from "design-system/DevIcon";
 import { ExternalLinkIcon } from "design-system/ExternalLinkIcon";
-import { Flex } from "design-system/Flex";
 import { IndicatorBar } from "design-system/IndicatorBar";
-import { OneLiner } from "design-system/OneLiner";
 import { Text } from "design-system/Text";
 import { VisuallyHidden } from "design-system/VisuallyHidden";
 
@@ -16,100 +12,125 @@ const isLanguageEdge = (
 ): edge is IcyJoseph.LanguageEdge => Boolean(edge);
 
 type ContributionCardProps = {
+  id: string;
   repository: IcyJoseph.Repository;
   index: number;
   contributions: { totalCount: number };
-  style?: CSSProperties;
 };
 
 export const ContributionEntry = ({
   repository,
   index,
   contributions,
-  style,
 }: ContributionCardProps) => {
-  const validLanguageEdges = repository.languages.edges.filter(isLanguageEdge);
-
-  const padding = Array.from(
-    { length: 3 - validLanguageEdges.length },
-    (_, i) => i
-  );
+  const headingId = useId();
 
   const repoDescription = repository.description
     ? repository.description.replace(RE_EMOJI, "")
     : `${repository.name} has no description.`;
 
   const hasRepositoryLink = Boolean(repository.url);
+  const hasHomepageLink = Boolean(repository.homepageUrl);
+
+  const languages = repository.languages.edges.filter(isLanguageEdge);
 
   return (
-    <Flex
-      as="article"
-      py={3}
-      mx="auto"
-      flexDirection="column"
-      gap="1.5rem"
-      flexWrap="nowrap"
-      style={style}
+    <article
+      className="h-full grid grid-rows-[auto_1fr_auto] w-full md:w-4/5 lg:w-3/5 mx-auto"
+      aria-labelledby={headingId}
     >
-      <Flex as="header" alignItems="center" justifyContent="space-between">
-        <Box mr={3}>
-          <Text as="span" $textColor="--yellow">
-            #{index + 1}
-          </Text>{" "}
-          <Text as="span">{repository.owner.login}</Text>
-          <Text as="h4" $fontWeight={300} $fontSize="2rem" $display="inline">
-            /{repository.name}
-          </Text>
-          {hasRepositoryLink && (
-            <a href={repository.url} target="_blank" rel="noopener noreferrer">
-              <VisuallyHidden>
-                External link to {repository.name} Github repository page
-              </VisuallyHidden>
-              <ExternalLinkIcon />
-            </a>
-          )}
-        </Box>
+      <header>
+        <Text $textColor="--yellow">#{index + 1}</Text>
 
-        <Text as="span" $fontWeight={300} $fontSize="2rem">
-          +{contributions.totalCount}{" "}
-          <Text as="span" $fontWeight={300}>
-            commits
-          </Text>
+        <Text as="h4" id={headingId} className="font-semibold" $fontSize="2rem">
+          {repository.name}
         </Text>
-      </Flex>
 
-      <Box>
-        <OneLiner $fontWeight={300} $fontSize="2rem" title={repoDescription}>
+        <Text className="pt-5" $fontWeight={300} $fontSize="2rem">
+          +{contributions.totalCount} <span>commits</span>
+        </Text>
+      </header>
+
+      <section aria-label="Repository description" className="pt-5">
+        <Text
+          $fontWeight={300}
+          $fontSize="1.8rem"
+          style={{ overflowWrap: "anywhere" }}
+        >
           {repoDescription}
-        </OneLiner>
-      </Box>
+        </Text>
+      </section>
 
-      <Flex as="footer" mt={3}>
-        {validLanguageEdges.map(({ node: { color, name }, size }) => (
-          <Flex
-            key={name}
-            flexDirection="column"
-            flex={1}
-            justifyContent="flex-end"
-            mr={3}
-          >
-            <Text $fontWeight={300} mb={1}>
-              <DevIcon color={color} language={name} mr={1} $fontSize="2rem" />
+      <footer className="pt-5">
+        <Text className="mb-4">Languages</Text>
 
-              <span>{name}</span>
-            </Text>
+        <ul className="mb-4 flex flex-wrap gap-x-10 gap-y-4">
+          {languages.map(({ node: { color, name } /* percentage */ }) => (
+            <li key={name}>
+              <IndicatorBar
+                color={color}
+                // percentage={percentage}
+                aria-hidden="true"
+                className="mr-2 align-middle"
+              />
 
-            <IndicatorBar
-              color={color}
-              percentage={(100 * size) / repository.languages.totalSize}
-            />
-          </Flex>
-        ))}
+              <Text as="span" $fontWeight={300} mb={1}>
+                {name}
+              </Text>
+            </li>
+          ))}
+        </ul>
 
-        {padding.map((x) => (
-          <Flex key={x} flex={1} />
-        ))}
-      </Flex>
-    </Flex>
+        <nav className="pt-5">
+          <ul className="flex flex-wrap gap-x-10">
+            <li className="empty:hidden">
+              {hasRepositoryLink && (
+                <a
+                  href={repository.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Text as="span" aria-hidden="true" $fontSize="1.6rem">
+                    Code
+                  </Text>
+
+                  <VisuallyHidden>
+                    External link to {repository.name} Github repository
+                  </VisuallyHidden>
+                  <ExternalLinkIcon />
+                </a>
+              )}
+            </li>
+
+            <li className="empty:hidden">
+              {hasHomepageLink && (
+                <a
+                  href={repository.homepageUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Text as="span" aria-hidden="true" $fontSize="1.6rem">
+                    Homepage
+                  </Text>
+
+                  <VisuallyHidden>
+                    External link to {repository.name} homepage
+                  </VisuallyHidden>
+                  <ExternalLinkIcon />
+                </a>
+              )}
+            </li>
+            {!hasHomepageLink && !hasRepositoryLink && (
+              <li>
+                <span aria-hidden="true">&nbsp;</span>
+                <VisuallyHidden>
+                  <Text>{repository.name} has no links</Text>
+                </VisuallyHidden>
+              </li>
+            )}
+          </ul>
+        </nav>
+      </footer>
+    </article>
   );
 };

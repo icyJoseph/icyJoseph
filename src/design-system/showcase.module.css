@@ -1,0 +1,74 @@
+.wrapper {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  scroll-behavior: smooth;
+
+  scroll-snap-type: x mandatory;
+
+  overflow-x: auto;
+  -ms-overflow-style: none; /* IE 11 */
+  scrollbar-width: none; /* Firefox 64 */
+}
+
+.list::-webkit-scrollbar {
+  display: none;
+}
+
+.listItem {
+  width: 100%;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  padding: 0 1rem;
+  position: relative;
+  opacity: 1;
+  transition: opacity 0.25s ease-in-out;
+  will-change: contents;
+}
+
+.listItem[aria-hidden="true"] {
+  opacity: 0.5;
+}
+
+.listItem[aria-hidden="true"] a {
+  visibility: hidden;
+}
+
+.sentinel {
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.sliderControl {
+  display: flex;
+  justify-content: space-around;
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.controlButton {
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.controlButton[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

@@ -1,9 +1,16 @@
-import { space, SpaceProps } from "@styled-system/space";
-import styled from "styled-components";
+import classNames from "classnames";
 
-const BaseExternalLinkIcon = ({ className = "" }: { className?: string }) => (
+export const ExternalLinkIcon = ({
+  className = "",
+}: {
+  className?: string;
+}) => (
   <svg
-    className={className}
+    className={classNames(
+      className,
+      "inline-block ml-2 align-middle cursor-pointer"
+    )}
+    aria-hidden="true"
     width="15"
     height="15"
     viewBox="0 0 15 15"
@@ -18,11 +25,3 @@ const BaseExternalLinkIcon = ({ className = "" }: { className?: string }) => (
     />
   </svg>
 );
-
-export const ExternalLinkIcon = styled(BaseExternalLinkIcon)<SpaceProps>`
-  ${space({ ml: 2 })};
-  ${space};
-
-  cursor: pointer;
-  vertical-align: baseline;
-`;

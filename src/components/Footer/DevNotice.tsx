@@ -3,7 +3,7 @@ import { Text } from "design-system/Text";
 
 export const DevNotice = () => {
   return (
-    <Box as="section" py={3}>
+    <Box as="section" className="py-4">
       <Text as="h3" mb={3}>
         Señor Developer
       </Text>

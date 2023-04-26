@@ -5,7 +5,6 @@ const techStack = [
   "GitHub's GraphQL API",
   "CodeWars' REST API",
   "Fitbit's API",
-  "Tokei",
   "React",
   "NodeJS",
   "Next.js",

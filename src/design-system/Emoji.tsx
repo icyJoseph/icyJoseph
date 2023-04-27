@@ -28,7 +28,3 @@ export const Emoji = ({
     {symbol}
   </span>
 );
-
-export const BlockEmoji = (props: EmojiOwnProps) => (
-  <Emoji {...props} className={classNames(props.className, "block")} />
-);

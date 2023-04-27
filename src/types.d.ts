@@ -1,6 +1,5 @@
 declare namespace NodeJS {
   interface ProcessEnv {
-    NEXT_PUBLIC_GA_TRACKING_ID: string;
     MEILISEARCH_URL: string;
     MEILISEARCH_KEY: string;
     MEILISEARCH_INDEX: string;
@@ -8,28 +7,6 @@ declare namespace NodeJS {
 }
 
 declare namespace IcyJoseph {
-  export type Rank = {
-    rank: number;
-    name: string;
-    color: string;
-    score: number;
-  };
-
-  type Ranks = {
-    overall: Rank;
-    languages: Record<string, Rank>;
-  };
-
-  type CodeWars = {
-    name: string;
-    username: string;
-    honor: number;
-    clan: string;
-    leaderboardPosition: number;
-    ranks: Ranks;
-    codeChallenges: { totalCompleted: number };
-  };
-
   export type LanguageEdge = {
     node: {
       id: string;

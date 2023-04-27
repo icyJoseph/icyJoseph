@@ -1,12 +1,9 @@
-import fs from "fs";
-import path from "path";
-import { promisify } from "util";
-
 import type { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import Head from "next/head";
 
 import { getCodeWarsUser } from "codewars";
+import { Bytes } from "components/Bytes";
 import {
   isBaseActivity,
   isSwimming,
@@ -17,7 +14,6 @@ import { CodeWars } from "composition/CodeWars";
 import { Fitbit } from "composition/Fitbit";
 import { GitHub } from "composition/GitHub";
 import { Introduction } from "composition/Introduction";
-import { Tokei } from "composition/Tokei";
 import { Container } from "design-system/Container";
 import { queryGitHub, redactedGitHubRepositoryData } from "github/fetcher";
 import { GET_USER } from "github/queries";
@@ -27,13 +23,16 @@ import { fitbitAuth } from "pages/api/fitbit/profile";
 
 type HomeProps = {
   codewars: IcyJoseph.CodeWars;
-  github: Omit<IcyJoseph.GitHub, "repositoryDiscussionComments"> & {
+  github: Omit<
+    IcyJoseph.GitHub,
+    "repositoryDiscussionComments" | "repositories"
+  > & {
     repositoryDiscussionComments: {
       totalCount: number;
       repositories: string[];
     };
   };
-  tokei: IcyJoseph.Tokei[];
+  languages: Array<{ name: string; size: number }>;
   fitbit: Pick<IcyJoseph.FitbitProfile, "topBadges" | "averageDailySteps">;
   activityLog: Array<ReducedActivityLog>;
   restingHeartRate: number | undefined;
@@ -41,10 +40,27 @@ type HomeProps = {
 
 const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
 
+const landingPageOpenGraph = {
+  url: VERCEL_URL,
+  title: "icyJoseph | Señor Developer",
+  site_name: "icyJoseph",
+  description:
+    "Señor Developer. JavaScript, TypeScript, Rust, CSS. I work with fullstack. I enjoy coding challenges.",
+  images: [
+    {
+      url: `${VERCEL_URL}/waves_background.png`,
+      width: 960,
+      height: 540,
+      alt: "icyJoseph wavy background",
+      type: "image/png",
+    },
+  ],
+};
+
 export function Home({
   codewars,
   github,
-  tokei,
+  languages,
   fitbit,
   activityLog,
   restingHeartRate,
@@ -54,22 +70,7 @@ export function Home({
       <NextSeo
         title="icyJoseph | Señor Developer"
         description="Señor Developer. JavaScript, TypeScript, Rust, CSS. I work with fullstack. I enjoy coding challenges."
-        openGraph={{
-          url: VERCEL_URL,
-          title: "icyJoseph | Señor Developer",
-          site_name: "icyJoseph",
-          description:
-            "Señor Developer. JavaScript, TypeScript, Rust, CSS. I work with fullstack. I enjoy coding challenges.",
-          images: [
-            {
-              url: `${VERCEL_URL}/waves_background.png`,
-              width: 960,
-              height: 540,
-              alt: "icyJoseph wavy background",
-              type: "image/png",
-            },
-          ],
-        }}
+        openGraph={landingPageOpenGraph}
       />
 
       <Head>
@@ -80,7 +81,11 @@ export function Home({
 
       <Container>
         <PageNav>
-          <Tokei tokei={tokei} name="tokei" />
+          <GitHub initial={github} name="github">
+            <Bytes languages={languages} />
+          </GitHub>
+
+          <CodeWars codewars={codewars} name="codewars" />
 
           <Fitbit
             profile={fitbit}
@@ -88,10 +93,6 @@ export function Home({
             restingHeartRate={restingHeartRate}
             name="fitbit"
           />
-
-          <GitHub initial={github} name="github" />
-
-          <CodeWars codewars={codewars} name="codewars" />
         </PageNav>
       </Container>
     </>
@@ -111,8 +112,10 @@ export async function getStaticProps(): Promise<
     }
   ).then(({ data }) => data.user);
 
+  const { repositories, ...otherData } = githubData;
+
   const github: HomeProps["github"] = {
-    ...githubData,
+    ...otherData,
     contributionsCollection: {
       ...githubData.contributionsCollection,
       commitContributionsByRepository: redactedGitHubRepositoryData(
@@ -131,10 +134,26 @@ export async function getStaticProps(): Promise<
     },
   };
 
-  const tokei = await promisify(fs.readFile)(
-    path.resolve(process.cwd(), "tokei.json"),
-    "utf-8"
-  ).then<IcyJoseph.Tokei[]>(JSON.parse);
+  const languagesAggregate: Record<string, number> = {};
+
+  repositories.nodes.forEach((curr) => {
+    if (curr.isArchived) return;
+
+    curr.languages.edges.forEach((lang) => {
+      if (!lang) return;
+
+      languagesAggregate[lang.node.name] =
+        languagesAggregate[lang.node.name] || 0;
+      languagesAggregate[lang.node.name] += lang.size;
+    });
+  });
+
+  const topLanguages = Object.entries(languagesAggregate)
+    .sort((lhs, rhs) => rhs[1] - lhs[1])
+    .map(([key, value]) => ({ name: key, size: value }))
+    .slice(0, 4);
+
+  const languages = topLanguages;
 
   const fitbitData = await fitbitAuth
     .get<IcyJoseph.Fitbit>("/profile.json")
@@ -183,7 +202,14 @@ export async function getStaticProps(): Promise<
   });
 
   return {
-    props: { codewars, github, tokei, fitbit, activityLog, restingHeartRate },
+    props: {
+      codewars,
+      github,
+      languages,
+      fitbit,
+      activityLog,
+      restingHeartRate,
+    },
     revalidate: 10,
   };
 }

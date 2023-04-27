@@ -1,12 +1,12 @@
 import { render, screen } from "@testing-library/react";
 
-import { Tokei } from "composition/Tokei";
+import { Bytes } from "components/Bytes";
 
 import tokeiJSON from "../../tokei.json";
 
 describe("Tokei", () => {
   it("renders with header and credit to tokei", () => {
-    render(<Tokei tokei={tokeiJSON} name="tokei" />);
+    render(<Bytes tokei={tokeiJSON} name="tokei" />);
 
     const [headerAnchor, tokeiAnchor] = screen.getAllByRole("link");
 

@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-type IndicatorBarProps = { percentage: number; color: string };
+type IndicatorBarProps = { color: string };
 
 export const IndicatorBar = styled.div<IndicatorBarProps>`
+  display: inline-block;
   height: 8px;
-  border-radius: 6px;
-
-  width: ${({ percentage }) => `${percentage}%`};
+  width: 8px;
+  border-radius: 50%;
   background: ${({ color }) => color};
 `;

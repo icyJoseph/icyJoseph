@@ -114,14 +114,9 @@ declare namespace IcyJoseph {
     followers: {
       totalCount: number;
     };
-  };
-
-  export type Tokei = {
-    language: string;
-    blanks: number;
-    code: number;
-    comments: number;
-    inaccurate: boolean;
+    repositories: {
+      nodes: Pick<Repository, "name" | "languages" | "isArchived">[];
+    };
   };
 
   export type FitbitProfile = {

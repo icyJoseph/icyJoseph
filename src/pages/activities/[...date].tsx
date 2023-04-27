@@ -60,7 +60,7 @@ export function Activities({ activityLog, year, month, day }: ActivitiesProps) {
             </Text>
           </header>
 
-          <Box mb={2}>
+          <Box className="mb-3">
             <ActivityLog activities={activityLog} />
           </Box>
         </FullPage>

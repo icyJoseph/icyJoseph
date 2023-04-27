@@ -1,15 +1,13 @@
-import { useState, Fragment, useMemo } from "react";
+import { useState, Fragment, useMemo, ReactNode } from "react";
 
-import dynamic from "next/dynamic";
-import NextImage from "next/legacy/image";
+import NextImage from "next/image";
 
+import YearlyContribution from "components/GitHub/YearlyContribution";
 import { Header } from "components/Header";
 import { BackToTop } from "design-system/BackToTop";
 import { Box } from "design-system/Box";
 import { Button } from "design-system/Button";
 import { Flex } from "design-system/Flex";
-import { GitHubImg } from "design-system/GitHub/Image";
-import { Profile, Bio } from "design-system/GitHub/Profile";
 import { Section } from "design-system/Section";
 import { Text } from "design-system/Text";
 import { yearRange } from "helpers";
@@ -18,10 +16,6 @@ type SelectYearProps = {
   selectedYear: number;
   setSelectedYear: (next: number) => void;
 };
-
-const DynamicYearlyContribution = dynamic(
-  () => import("components/GitHub/YearlyContribution")
-);
 
 const RenderWithSelectedYear = ({
   last,
@@ -36,16 +30,20 @@ const RenderWithSelectedYear = ({
 };
 
 type GitHubProps = {
-  initial: Omit<IcyJoseph.GitHub, "repositoryDiscussionComments"> & {
+  initial: Omit<
+    IcyJoseph.GitHub,
+    "repositoryDiscussionComments" | "repositories"
+  > & {
     repositoryDiscussionComments: {
       totalCount: number;
       repositories: string[];
     };
   };
   name: string;
+  children: ReactNode;
 };
 
-export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
+export const GitHub = ({ children, initial, name: pageName }: GitHubProps) => {
   const {
     bio,
     name,
@@ -96,53 +94,53 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
     <Section style={{ contentVisibility: "auto" }}>
       <Header name={pageName} title="GitHub" />
 
-      <Flex flexDirection="column" alignItems="center">
-        <Profile>
-          <GitHubImg>
-            <NextImage
-              src={avatarUrl}
-              alt={`${name} github profile picture`}
-              width="460"
-              height="460"
-            />
-          </GitHubImg>
+      <div className="flex flex-col items-center">
+        <NextImage
+          src={avatarUrl}
+          alt={`${name} github profile picture`}
+          width="460"
+          height="460"
+          className="max-w-sm rounded-full border-white border-2 border-solid shadow-md"
+          priority
+        />
 
-          <section>
-            <header>
-              <Text as="h3" $textColor="--yellow">
-                @{login}
-              </Text>
+        <section className="py-12 mx-auto flex flex-col">
+          <header>
+            <Text as="h3" $textColor="--yellow">
+              @{login}
+            </Text>
 
-              <Text my={2} $fontWeight={300}>
-                <i>{location}</i>
-              </Text>
-            </header>
+            <Text my={2} $fontWeight={300}>
+              <i>{location}</i>
+            </Text>
+          </header>
 
-            <Bio flexDirection="column" py={3}>
-              <Text mb={2} $fontWeight={300}>
-                {bio}
-              </Text>
+          <div className="flex flex-col py-3 overflow-hidden">
+            <Text mb={2} $fontWeight={300} className="max-w-3xl">
+              {bio}
+            </Text>
 
-              <Text $textColor="--yellow" mb={2}>
-                {company}
-              </Text>
+            <Text $textColor="--yellow" mb={2}>
+              {company}
+            </Text>
 
-              <Text $fontWeight={300} mb={1}>
-                <Text $textColor="--yellow" as="span" $fontWeight={400}>
-                  {totalFollowers}
-                </Text>{" "}
-                followers
-              </Text>
+            <Text $fontWeight={300} mb={1}>
+              <Text $textColor="--yellow" as="span" $fontWeight={400}>
+                {totalFollowers}
+              </Text>{" "}
+              followers
+            </Text>
 
-              <Text $fontWeight={300}>
-                <Text $textColor="--yellow" as="span" $fontWeight={400}>
-                  {totalAnswers}
-                </Text>{" "}
-                resolved discussions on {answeredOn}
-              </Text>
-            </Bio>
-          </section>
-        </Profile>
+            <Text $fontWeight={300}>
+              <Text $textColor="--yellow" as="span" $fontWeight={400}>
+                {totalAnswers}
+              </Text>{" "}
+              resolved discussions on {answeredOn}
+            </Text>
+          </div>
+        </section>
+
+        {children}
 
         <Text as="h3" $fontSize="2.5rem" mt={4} mb={3}>
           Contributions
@@ -151,7 +149,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
         <RenderWithSelectedYear last={last}>
           {({ selectedYear, setSelectedYear }) => (
             <Fragment>
-              <Box $width="80%">
+              <Box className="w-4/5">
                 <Flex justifyContent="center" my={3} mx="auto">
                   {contributionYears
                     .slice(0)
@@ -171,7 +169,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
                 </Flex>
               </Box>
 
-              <DynamicYearlyContribution
+              <YearlyContribution
                 year={selectedYear}
                 fallback={contributionsCollection}
                 {...yearRange(selectedYear)}
@@ -179,7 +177,7 @@ export const GitHub = ({ initial, name: pageName }: GitHubProps) => {
             </Fragment>
           )}
         </RenderWithSelectedYear>
-      </Flex>
+      </div>
 
       <BackToTop />
     </Section>

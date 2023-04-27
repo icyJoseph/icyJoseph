@@ -1,32 +1,26 @@
-import { Children, Fragment, isValidElement, ReactNode } from "react";
+import { Children, Fragment, isValidElement, type ReactNode } from "react";
 
 import Link from "next/link";
-
-import {
-  ContentNav,
-  ContentLinks,
-  ContentLink,
-} from "design-system/Navigation";
 
 export const PageNav = ({ children }: { children: ReactNode }) => {
   return (
     <Fragment>
-      <ContentNav>
-        <ContentLinks>
+      <nav className="font-sans pb-12 sm:pb-10">
+        <ul className="flex justify-around flex-wrap gap-4">
           {Children.map(children, (child) => {
             if (!isValidElement(child)) return child;
+            if (!child.props.name) return null;
 
             const { name } = child.props;
-            if (!name) return null;
 
             return (
-              <ContentLink>
+              <li className="underline">
                 <Link href={`/#${name}`}>{name}</Link>
-              </ContentLink>
+              </li>
             );
           })}
-        </ContentLinks>
-      </ContentNav>
+        </ul>
+      </nav>
 
       {children}
     </Fragment>

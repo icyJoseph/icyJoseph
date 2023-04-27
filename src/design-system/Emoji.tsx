@@ -1,5 +1,6 @@
-import { space, SpaceProps } from "@styled-system/space";
-import styled from "styled-components";
+import classNames from "classnames";
+
+import style from "design-system/emoji.module.css";
 
 type EmojiOwnProps = {
   ariaLabel: string;
@@ -8,21 +9,26 @@ type EmojiOwnProps = {
   className?: string;
 };
 
-const Base = ({ className, ariaLabel, symbol, title }: EmojiOwnProps) => (
-  <span className={className} role="img" aria-label={ariaLabel} title={title}>
+export const Emoji = ({
+  className,
+  ariaLabel,
+  symbol,
+  title,
+}: EmojiOwnProps) => (
+  <span
+    className={classNames(
+      className,
+      style.emojiFontFamily,
+      "font-normal cursor-default"
+    )}
+    role="img"
+    aria-label={ariaLabel}
+    title={title}
+  >
     {symbol}
   </span>
 );
 
-export const Emoji = styled(Base)<SpaceProps & EmojiOwnProps>`
-  ${space};
-  font-weight: 400;
-  font-family: apple color emoji, segoe ui emoji, noto color emoji,
-    android emoji, emojisymbols, emojione mozilla, twemoji mozilla,
-    segoe ui symbol;
-  cursor: default;
-`;
-
-export const BlockEmoji = styled(Emoji)`
-  display: block;
-`;
+export const BlockEmoji = (props: EmojiOwnProps) => (
+  <Emoji {...props} className={classNames(props.className, "block")} />
+);

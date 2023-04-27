@@ -36,15 +36,3 @@ export const split = <T extends string | RegExp>(string: string, pattern: T) =>
 
 export const capitalize = (string: string) =>
   `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
-
-export function circular(index: number, step: number, limit: number) {
-  return (limit + ((index + step) % limit)) % limit;
-}
-
-export function circularSlice<T>(arr: T[], from: number, to: number) {
-  const limit = arr.length;
-  return Array.from(
-    { length: to - from },
-    (_, index) => arr[(from + index) % limit]
-  );
-}

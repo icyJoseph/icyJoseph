@@ -2,7 +2,6 @@ import type { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import Head from "next/head";
 
-import { getCodeWarsUser } from "codewars";
 import { Bytes } from "components/Bytes";
 import {
   isBaseActivity,
@@ -10,7 +9,6 @@ import {
   type ReducedActivityLog,
 } from "components/Fitbit/ActivityLog";
 import { PageNav } from "components/PageNav";
-import { CodeWars } from "composition/CodeWars";
 import { Fitbit } from "composition/Fitbit";
 import { GitHub } from "composition/GitHub";
 import { Introduction } from "composition/Introduction";
@@ -22,7 +20,6 @@ import { getActivityLog } from "pages/api/fitbit/activities/list";
 import { fitbitAuth } from "pages/api/fitbit/profile";
 
 type HomeProps = {
-  codewars: IcyJoseph.CodeWars;
   github: Omit<
     IcyJoseph.GitHub,
     "repositoryDiscussionComments" | "repositories"
@@ -58,7 +55,6 @@ const landingPageOpenGraph = {
 };
 
 export function Home({
-  codewars,
   github,
   languages,
   fitbit,
@@ -85,8 +81,6 @@ export function Home({
             <Bytes languages={languages} />
           </GitHub>
 
-          <CodeWars codewars={codewars} name="codewars" />
-
           <Fitbit
             profile={fitbit}
             activityLog={activityLog}
@@ -102,8 +96,6 @@ export function Home({
 export async function getStaticProps(): Promise<
   GetStaticPropsResult<HomeProps>
 > {
-  const codewars = await getCodeWarsUser();
-
   const githubData = await queryGitHub<{ data: { user: IcyJoseph.GitHub } }>(
     GET_USER,
     {
@@ -203,7 +195,6 @@ export async function getStaticProps(): Promise<
 
   return {
     props: {
-      codewars,
       github,
       languages,
       fitbit,

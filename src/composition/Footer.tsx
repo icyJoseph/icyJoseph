@@ -10,7 +10,7 @@ export const Footer = () => {
   return (
     <PageFooter style={{ contentVisibility: "auto" }}>
       <section>
-        <Divider mb={5} mt={0} />
+        <Divider className="mt-0 mb-8" />
 
         <Text as="h2" $fontSize="2rem">
           icyJoseph

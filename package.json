@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@phosphor-icons/react": "2.0.9",
     "@styled-system/space": "5.1.2",
     "@vercel/analytics": "1.0.0",
     "axios": "0.26.0",

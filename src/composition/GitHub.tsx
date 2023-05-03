@@ -5,9 +5,7 @@ import NextImage from "next/image";
 import YearlyContribution from "components/GitHub/YearlyContribution";
 import { Header } from "components/Header";
 import { BackToTop } from "design-system/BackToTop";
-import { Box } from "design-system/Box";
 import { Button } from "design-system/Button";
-import { Flex } from "design-system/Flex";
 import { Section } from "design-system/Section";
 import { Text } from "design-system/Text";
 import { yearRange } from "helpers";
@@ -18,13 +16,13 @@ type SelectYearProps = {
 };
 
 const RenderWithSelectedYear = ({
-  last,
+  initial,
   children,
 }: {
-  last: number;
+  initial: number;
   children: (props: SelectYearProps) => JSX.Element;
 }) => {
-  const [selectedYear, setSelectedYear] = useState(last);
+  const [selectedYear, setSelectedYear] = useState(initial);
 
   return children({ selectedYear, setSelectedYear });
 };
@@ -146,28 +144,23 @@ export const GitHub = ({ children, initial, name: pageName }: GitHubProps) => {
           Contributions
         </Text>
 
-        <RenderWithSelectedYear last={last}>
+        <RenderWithSelectedYear initial={last}>
           {({ selectedYear, setSelectedYear }) => (
             <Fragment>
-              <Box className="w-4/5">
-                <Flex justifyContent="center" my={3} mx="auto">
-                  {contributionYears
-                    .slice(0)
-                    .sort((a, b) => a - b)
-                    .map((year) => (
-                      <Button
-                        key={year}
-                        variant={year !== selectedYear ? "outlined" : "primary"}
-                        m={2}
-                        onClick={() => {
-                          setSelectedYear(year);
-                        }}
-                      >
-                        {year}
-                      </Button>
-                    ))}
-                </Flex>
-              </Box>
+              <div className="w-4/5">
+                <div className="flex flex-wrap-reverse flex-row-reverse justify-center mx-auto my-4">
+                  {contributionYears.map((year) => (
+                    <Button
+                      key={year}
+                      variant={year !== selectedYear ? "outlined" : "primary"}
+                      m={2}
+                      onClick={() => setSelectedYear(year)}
+                    >
+                      {year}
+                    </Button>
+                  ))}
+                </div>
+              </div>
 
               <YearlyContribution
                 year={selectedYear}

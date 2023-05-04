@@ -3,12 +3,12 @@ import { Text } from "design-system/Text";
 
 const techStack = [
   "GitHub's GraphQL API",
-  "CodeWars' REST API",
   "Fitbit's API",
   "React",
   "NodeJS",
   "Next.js",
   "Recursive Font Face",
+  "Phosphor Icons",
 ];
 
 export const TechStack = () => (

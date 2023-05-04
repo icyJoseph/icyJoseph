@@ -1,38 +1,35 @@
 import Link from "next/link";
 
 import { entries } from "config/pages";
-import { Container } from "design-system/Container";
-import {
-  Nav,
-  Brand,
-  Spacer,
-  LinkList,
-  LinkItem,
-} from "design-system/Navigation";
 
 export const Navigation = () => {
   return (
-    <Container as="header">
-      <Nav>
-        <Brand>
+    <header className="font-[sans-serif] max-w-[85ch] mx-auto">
+      <nav className="font-sans flex flex-col sm:flex-row py-3 my-0">
+        <div className="font-bold text-[2rem] px-3 sm:px-0 uppercase">
           <Link href="/">
-            <h1>icyJoseph</h1>
+            <p>icyJoseph</p>
+            <span className="block text-[1.4rem] font-semibold">
+              Señor Developer
+            </span>
           </Link>
-          <span>Señor Developer</span>
-        </Brand>
+        </div>
 
-        <Spacer />
+        <div className="hidden flex-auto mx-auto sm:flex" />
 
-        <LinkList>
+        <ul className="flex flex-auto justify-evenly items-center mt-5 sm:mt-0">
           {entries.map(({ title, href }) => (
-            <LinkItem key={title}>
+            <li
+              key={title}
+              className="inline-flex flex-1 justify-center sm:justify-end"
+            >
               <Link href={href}>
                 <span>{title}</span>
               </Link>
-            </LinkItem>
+            </li>
           ))}
-        </LinkList>
-      </Nav>
-    </Container>
+        </ul>
+      </nav>
+    </header>
   );
 };

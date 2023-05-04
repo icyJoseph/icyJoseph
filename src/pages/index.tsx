@@ -29,7 +29,7 @@ type HomeProps = {
       repositories: string[];
     };
   };
-  languages: Array<{ name: string; size: number }>;
+  languages: Array<IcyJoseph.LanguageEdge>;
   fitbit: Pick<IcyJoseph.FitbitProfile, "topBadges" | "averageDailySteps">;
   activityLog: Array<ReducedActivityLog>;
   restingHeartRate: number | undefined;
@@ -126,7 +126,7 @@ export async function getStaticProps(): Promise<
     },
   };
 
-  const languagesAggregate: Record<string, number> = {};
+  const languagesAggregate: Record<string, IcyJoseph.LanguageEdge> = {};
 
   repositories.nodes.forEach((curr) => {
     if (curr.isArchived) return;
@@ -134,15 +134,16 @@ export async function getStaticProps(): Promise<
     curr.languages.edges.forEach((lang) => {
       if (!lang) return;
 
-      languagesAggregate[lang.node.name] =
-        languagesAggregate[lang.node.name] || 0;
-      languagesAggregate[lang.node.name] += lang.size;
+      languagesAggregate[lang.node.name] = languagesAggregate[
+        lang.node.name
+      ] || { ...lang };
+      languagesAggregate[lang.node.name].size += lang.size;
     });
   });
 
   const topLanguages = Object.entries(languagesAggregate)
-    .sort((lhs, rhs) => rhs[1] - lhs[1])
-    .map(([key, value]) => ({ name: key, size: value }))
+    .sort((lhs, rhs) => rhs[1].size - lhs[1].size)
+    .map(([_, value]) => value)
     .slice(0, 4);
 
   const languages = topLanguages;

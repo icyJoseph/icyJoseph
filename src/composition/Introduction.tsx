@@ -4,7 +4,7 @@ import {
   type IconProps,
   Bird,
   Briefcase,
-  CodeBlock,
+  Code,
   FileRs,
   Student,
 } from "@phosphor-icons/react";
@@ -23,7 +23,7 @@ const ParagraphWithIcon = ({
 }) => (
   <div
     className={classNames(
-      "font-sans flex flex-col sm:flex-row mx-auto my-12 gap-6",
+      "font-sans flex flex-col sm:flex-row mx-auto my-16 md:my-12 gap-6",
       className
     )}
   >
@@ -88,7 +88,7 @@ export const Introduction = () => {
           freight, real state, news, transport and automotive industries.
         </ParagraphWithIcon>
 
-        <ParagraphWithIcon Icon={CodeBlock}>
+        <ParagraphWithIcon Icon={Code}>
           I write <Bold>JavaScript</Bold>, and <Bold>TypeScript</Bold>. I am
           comfortable with any runtime, browser and <Bold>NodeJS</Bold>, even a
           little <Bold>Deno</Bold>.

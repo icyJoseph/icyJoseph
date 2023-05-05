@@ -20,7 +20,7 @@ const config = {
     ],
   },
   experimental: {
-    appDir: false,
+    appDir: true,
   },
 };
 

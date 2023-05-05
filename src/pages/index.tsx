@@ -167,7 +167,8 @@ export async function getStaticProps(): Promise<
   const restingHeartRate = heartRateData
     .slice(0)
     .reverse()
-    .find((entry) => Boolean(entry))?.value.restingHeartRate;
+    .find((entry) => Boolean(entry?.value?.restingHeartRate))
+    ?.value.restingHeartRate;
 
   const fullActivityLog: IcyJoseph.ActivityLog = await getActivityLog({
     beforeDate: isoStringWithoutMs(new Date().toISOString()),

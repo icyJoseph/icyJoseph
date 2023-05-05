@@ -12,7 +12,7 @@ export const Footer = () => {
       <section>
         <Divider className="mt-0 mb-8" />
 
-        <Text as="h2" $fontSize="2rem">
+        <Text as="h2" $fontSize="1.25rem">
           icyJoseph
         </Text>
 

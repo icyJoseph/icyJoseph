@@ -54,7 +54,7 @@ export const ContributionsSummary = memo(function ContributionsSummary({
           </Flex>
 
           <Flex flex={1} flexDirection="column" alignItems="flex-end">
-            <Text $fontWeight={300} $fontSize="3rem">
+            <Text $fontWeight={300} $fontSize="1.875rem">
               {value}
             </Text>{" "}
             <Text $fontWeight={300}>{unit}</Text>

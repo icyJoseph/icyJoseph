@@ -22,9 +22,7 @@ export const PostLink = ({
         {post.title}
       </Text>
 
-      <p className="font-sans text-2xl max-w-prose font-light">
-        {post.summary}
-      </p>
+      <p className="font-sans text-lg max-w-prose font-light">{post.summary}</p>
     </article>
 
     <>{children}</>

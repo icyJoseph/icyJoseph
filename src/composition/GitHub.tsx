@@ -140,7 +140,7 @@ export const GitHub = ({ children, initial, name: pageName }: GitHubProps) => {
 
         {children}
 
-        <Text as="h3" $fontSize="2.5rem" mt={4} mb={3}>
+        <Text as="h3" $fontSize="1.6rem" mt={4} mb={3}>
           Contributions
         </Text>
 

@@ -67,14 +67,14 @@ export const YearlyContribution = ({
   return (
     <Fragment>
       <div className="flex flex-col items-center my-8 px-5">
-        <Text as="h3" $fontSize="2.5rem">
+        <Text as="h3" $fontSize="1.6rem">
           In {year}
         </Text>
 
         <Stale $stale={stale}>
           {joinedGitHubContribution ? (
             <Flex mt={3}>
-              <Text $fontSize="2rem" $fontWeight={300}>
+              <Text $fontSize="1.25rem" $fontWeight={300}>
                 Joined GitHub
                 <Emoji
                   symbol="🎉"
@@ -102,7 +102,7 @@ export const YearlyContribution = ({
           <Text
             id={headingId}
             as="h3"
-            $fontSize="2.5rem"
+            $fontSize="1.6rem"
             className="mb-10 text-center"
           >
             Repositories in {year}

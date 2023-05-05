@@ -44,15 +44,13 @@ export const Blog = ({ posts }: BlogProps) => {
       <Container>
         <BlogIntro />
 
-        <h2 className="font-sans text-4xl pt-20 mb-8">Posts</h2>
+        <h2 className="font-sans text-2xl pt-20 mb-8">Posts</h2>
 
         <Search>
           {hasPosts ? (
             posts.map((post) => <PostLink key={post.slug} post={post} />)
           ) : (
-            <p className="font-sans text-3xl">
-              Nothing has been published yet.
-            </p>
+            <p className="font-sans text-xl">Nothing has been published yet.</p>
           )}
         </Search>
       </Container>

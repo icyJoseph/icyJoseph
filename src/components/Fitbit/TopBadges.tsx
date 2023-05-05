@@ -15,7 +15,7 @@ export const TopBadges = ({
     <>
       <Text
         as="h3"
-        $fontSize="2rem"
+        $fontSize="0.8rem"
         $fontWeight={300}
         mt={3}
         mb={2}

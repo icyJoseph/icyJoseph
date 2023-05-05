@@ -15,7 +15,7 @@ export const components = {
       <Text
         as="h1"
         {...props}
-        $fontSize="2.25rem"
+        $fontSize="1.4rem"
         $textColor="--yellow"
         mt={4}
         mb={3}
@@ -28,7 +28,7 @@ export const components = {
       <Text
         as="h2"
         {...props}
-        $fontSize="2.15rem"
+        $fontSize="1.3rem"
         $textColor="--yellow"
         mt={4}
         mb={3}
@@ -41,7 +41,7 @@ export const components = {
       <Text
         as="h3"
         {...props}
-        $fontSize="2rem"
+        $fontSize="1.25rem"
         $textColor="--yellow"
         mt={4}
         mb={3}
@@ -54,7 +54,7 @@ export const components = {
       <Text
         as="h4"
         {...props}
-        $fontSize="1.9rem"
+        $fontSize="1.2rem"
         $textColor="--yellow"
         mt={4}
         mb={3}
@@ -67,7 +67,7 @@ export const components = {
       <Text
         as="h5"
         {...props}
-        $fontSize="1.8rem"
+        $fontSize="1.125rem"
         $textColor="--yellow"
         mt={4}
         mb={3}
@@ -80,16 +80,16 @@ export const components = {
       <Text
         as="h6"
         {...props}
-        $fontSize="1.75rem"
+        $fontSize="1rem"
         $textColor="--yellow"
-        mt={4}
-        mb={3}
+        mt={5}
+        mb={4}
       />
     );
   },
 
   p: (props: ComponentPropsWithoutRef<"p">) => {
-    return <Paragraph {...props} mb={2} />;
+    return <Paragraph {...props} className="my-2" />;
   },
 
   a: (props: ComponentPropsWithoutRef<"a">) => {
@@ -119,7 +119,7 @@ export const components = {
   li: (props: ComponentPropsWithoutRef<"li">) => (
     <Paragraph as="li" {...props} />
   ),
-  ol: (props: ComponentPropsWithoutRef<"ol">) => <Ol {...props} my={2} />,
-  ul: (props: ComponentPropsWithoutRef<"ul">) => <Ul {...props} my={2} />,
+  ol: (props: ComponentPropsWithoutRef<"ol">) => <Ol {...props} my={3} />,
+  ul: (props: ComponentPropsWithoutRef<"ul">) => <Ul {...props} my={3} />,
   code: CodeBlock,
 };

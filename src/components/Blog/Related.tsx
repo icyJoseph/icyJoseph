@@ -26,7 +26,7 @@ export const Related = ({
 
   return (
     <>
-      <Text as="h2" mb={2} $fontSize="2.25rem" $textColor="--yellow">
+      <Text as="h2" mb={2} $fontSize="1.4rem" $textColor="--yellow">
         Related Posts
       </Text>
 

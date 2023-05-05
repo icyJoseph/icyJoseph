@@ -6,10 +6,10 @@ export const Navigation = () => {
   return (
     <header className="font-[sans-serif] max-w-[85ch] mx-auto">
       <nav className="font-sans flex flex-col sm:flex-row py-3 my-0">
-        <div className="font-bold text-[2rem] px-3 sm:px-0 uppercase">
+        <div className="font-bold text-xl px-3 sm:px-0 uppercase">
           <Link href="/">
             <p>icyJoseph</p>
-            <span className="block text-[1.4rem] font-semibold">
+            <span className="block text-base font-semibold">
               Señor Developer
             </span>
           </Link>

@@ -34,11 +34,11 @@ export const Fitbit = ({
             justifyContent="flex-start"
             alignItems="center"
           >
-            <Text $fontSize="2rem" $fontWeight={300}>
+            <Text $fontSize="1.25rem" $fontWeight={300}>
               Average Daily Steps
             </Text>
 
-            <Text m={3} $fontSize="5rem">
+            <Text m={3} $fontSize="3.125rem">
               {profile.averageDailySteps}
             </Text>
           </Flex>
@@ -48,11 +48,11 @@ export const Fitbit = ({
             justifyContent="center"
             alignItems="center"
           >
-            <Text $fontSize="2rem" $fontWeight={300}>
+            <Text $fontSize="1.25rem" $fontWeight={300}>
               Resting pulse
             </Text>
 
-            <Text m={3} $fontSize="5rem">
+            <Text m={3} $fontSize="3.125rem">
               {restingHeartRate ?? "-"}{" "}
               <Text as="span" $fontWeight={300}>
                 bpm

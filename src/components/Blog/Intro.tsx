@@ -5,7 +5,7 @@ export const BlogIntro = () => {
   return (
     <>
       <header>
-        <Text as="h1" $fontSize="2.5rem" my={4}>
+        <Text as="h1" $fontSize="1.5rem" my={4}>
           Blog
         </Text>
       </header>
@@ -31,7 +31,7 @@ export const BlogIntro = () => {
           .
         </Text>
 
-        <Text as="h2" pt={1} mt={3} mb={2} $fontSize="1.8rem">
+        <Text as="h2" pt={1} mt={3} mb={2} $fontSize="1.125rem">
           Coding Challenges
         </Text>
 
@@ -45,7 +45,7 @@ export const BlogIntro = () => {
           When solving coding challenges, I use the Rust programming language.
         </Text>
 
-        <Text as="h2" pt={1} mt={3} mb={2} $fontSize="1.8rem">
+        <Text as="h2" pt={1} mt={3} mb={2} $fontSize="1.125rem">
           Lessons Learned
         </Text>
 

@@ -143,7 +143,7 @@ const HoverEffect = styled.span`
 
 const Text = styled.span`
   /* Label Text */
-  font-family: var(--font-family);
+  font-family: var(--font-recursive);
   position: relative;
   display: block;
   padding: 1.9rem 3rem;

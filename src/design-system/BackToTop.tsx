@@ -21,9 +21,9 @@ const StyledBase = styled(Base)`
   text-align: right;
 
   & > a {
-    font-family: var(--font-family);
+    font-family: var(--font-recursive);
     text-decoration: underline;
-    font-size: 1.6rem;
+    font-size: 1rem;
     color: var(--smokeyWhite);
   }
 `;

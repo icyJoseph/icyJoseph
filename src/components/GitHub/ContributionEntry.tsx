@@ -42,11 +42,16 @@ export const ContributionEntry = ({
       <header>
         <Text $textColor="--yellow">#{index + 1}</Text>
 
-        <Text as="h4" id={headingId} className="font-semibold" $fontSize="2rem">
+        <Text
+          as="h4"
+          id={headingId}
+          className="font-semibold"
+          $fontSize="1.25rem"
+        >
           {repository.name}
         </Text>
 
-        <Text className="pt-5" $fontWeight={300} $fontSize="2rem">
+        <Text className="pt-5" $fontWeight={300} $fontSize="1.25rem">
           +{contributions.totalCount} <span>commits</span>
         </Text>
       </header>
@@ -54,7 +59,7 @@ export const ContributionEntry = ({
       <section aria-label="Repository description" className="pt-5">
         <Text
           $fontWeight={300}
-          $fontSize="1.8rem"
+          $fontSize="1.125rem"
           style={{ overflowWrap: "anywhere" }}
         >
           {repoDescription}
@@ -90,7 +95,7 @@ export const ContributionEntry = ({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Text as="span" aria-hidden="true" $fontSize="1.6rem">
+                  <Text as="span" aria-hidden="true" $fontSize="1rem">
                     Code
                   </Text>
 
@@ -109,7 +114,7 @@ export const ContributionEntry = ({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Text as="span" aria-hidden="true" $fontSize="1.6rem">
+                  <Text as="span" aria-hidden="true" $fontSize="1rem">
                     Homepage
                   </Text>
 

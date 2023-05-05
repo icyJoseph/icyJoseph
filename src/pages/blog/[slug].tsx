@@ -50,7 +50,7 @@ export const BlogEntry = ({ slug, source, summary, title, tags }: MDXPost) => {
       />
 
       <Container mt={4} px={1}>
-        <Text as="header" $fontSize="2.5rem">
+        <Text as="header" $fontSize="1.6rem">
           {title}
         </Text>
 
@@ -59,7 +59,7 @@ export const BlogEntry = ({ slug, source, summary, title, tags }: MDXPost) => {
 
       <Container mt={4} px={1}>
         <Text $textAlign="end">
-          <Text as="span" $fontWeight={300} $fontSize="3rem">
+          <Text as="span" $fontWeight={300} $fontSize="1.875rem">
             {views}
           </Text>{" "}
           <Text as="span" $fontWeight={300}>

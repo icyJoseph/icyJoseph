@@ -20,11 +20,11 @@ type TextProps = SpaceProps & BaseTextProps;
 const fallbackColor: ColorVars = "--smokeyWhite";
 
 export const Text = styled.p<TextProps>`
-  font-family: var(--font-family);
+  font-family: var(--font-recursive);
   ${space};
 
   display: ${({ $display }) => $display};
-  font-size: ${({ $fontSize = "1.8rem" }) => $fontSize};
+  font-size: ${({ $fontSize = "1.125rem" }) => $fontSize};
   text-align: ${({ $textAlign }) => $textAlign};
   vertical-align: ${({ $verticalAlign }) => $verticalAlign};
 

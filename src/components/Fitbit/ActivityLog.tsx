@@ -89,7 +89,7 @@ export const ActivityLog = ({ activities }: ActivityLogProps) => {
             <Th />
 
             <Th colSpan={2}>
-              <Text $textAlign="left" $fontSize="2rem" $fontWeight={100}>
+              <Text $textAlign="left" $fontSize="1.25rem" $fontWeight={100}>
                 Activities
               </Text>
             </Th>
@@ -101,7 +101,7 @@ export const ActivityLog = ({ activities }: ActivityLogProps) => {
             <Tr key={activity.logId}>
               <Td />
               <Td>
-                <Text $textAlign="left" $fontSize="2rem" $fontWeight={300}>
+                <Text $textAlign="left" $fontSize="1.25rem" $fontWeight={300}>
                   {activity.activityName}
                 </Text>
                 <Text $textAlign="left" $fontWeight={300}>

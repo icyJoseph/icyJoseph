@@ -8,7 +8,7 @@ import { theme } from "design-system/Global/theme";
 export type CardProps = ComponentPropsWithRef<"div"> & SpaceProps;
 
 export const BaseCard = styled.div<CardProps>`
-  font-family: var(--font-family);
+  font-family: var(--font-recursive);
   ${space({ py: 3, px: 3 })};
 
   ${space};

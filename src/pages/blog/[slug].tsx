@@ -1,3 +1,5 @@
+"use client";
+
 import { MeiliSearch } from "meilisearch";
 import type { GetStaticPaths, GetStaticProps } from "next";
 import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";

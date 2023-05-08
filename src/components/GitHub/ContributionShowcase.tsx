@@ -1,5 +1,3 @@
-"use client";
-
 import { memo, useId } from "react";
 
 import { ContributionEntry } from "components/GitHub/ContributionEntry";
@@ -28,7 +26,7 @@ export const ContributionShowcase = ({
 
   return (
     <>
-      <h3 id={headingId} className="text-2xl mb-10 text-center">
+      <h3 id={headingId} className="text-2xl mb-10">
         Repositories
       </h3>
 

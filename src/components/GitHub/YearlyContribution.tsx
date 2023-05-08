@@ -5,6 +5,7 @@ import {
   useMemo,
   useTransition,
   type ChangeEventHandler,
+  Suspense,
 } from "react";
 
 import classNames from "classnames";
@@ -81,9 +82,12 @@ export const YearlyContribution = ({
 
   return (
     <div
-      className={classNames("w-full", isPending ? "opacity-50" : "opacity-100")}
+      className={classNames(
+        "w-full transition-opacity",
+        isPending ? "opacity-50" : "opacity-100"
+      )}
     >
-      <div className={classNames("flex flex-col items-center my-8 px-5")}>
+      <div className={classNames("my-8")}>
         <p className="text-2xl">
           In{" "}
           <select
@@ -92,7 +96,7 @@ export const YearlyContribution = ({
             onChange={handleSelectYear}
           >
             {initial.contributionYears.map((year) => (
-              <option key={year} value={year} className="text-black">
+              <option key={year} value={year}>
                 {year}
               </option>
             ))}
@@ -123,11 +127,13 @@ export const YearlyContribution = ({
           />
         )} */}
 
-      <ContributionShowcaseByYear
-        currentYear={currentYear}
-        selectedYear={selectedYear}
-        initial={initial}
-      />
+      <Suspense fallback={<span>Loading...</span>}>
+        <ContributionShowcaseByYear
+          currentYear={currentYear}
+          selectedYear={selectedYear}
+          initial={initial}
+        />
+      </Suspense>
     </div>
   );
 };

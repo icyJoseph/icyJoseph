@@ -1,10 +1,7 @@
-"use client";
-
 import { useId } from "react";
 
 import { ExternalLinkIcon } from "design-system/ExternalLinkIcon";
 import { IndicatorBar } from "design-system/IndicatorBar";
-import { Text } from "design-system/Text";
 import { VisuallyHidden } from "design-system/VisuallyHidden";
 
 const RE_EMOJI = /:\+1:|:-1:|:[\w-]+:/g;
@@ -38,52 +35,40 @@ export const ContributionEntry = ({
 
   return (
     <article
-      className="h-full grid grid-rows-[auto_1fr_auto] w-full md:w-4/5 lg:w-3/5 mx-auto"
+      className="h-full grid grid-rows-[auto_1fr_auto] w-full md:w-4/5 lg:w-3/5 mx-auto font-sans"
       aria-labelledby={headingId}
     >
       <header>
-        <Text $textColor="--yellow">#{index + 1}</Text>
+        <p className="text-pale-orange text-xl">#{index + 1}</p>
 
-        <Text
-          as="h4"
-          id={headingId}
-          className="font-semibold"
-          $fontSize="1.25rem"
-        >
+        <h4 id={headingId} className="font-medium text-xl">
           {repository.name}
-        </Text>
+        </h4>
 
-        <Text className="pt-5" $fontWeight={300} $fontSize="1.25rem">
+        <p className="pt-5 text-xl font-light">
           +{contributions.totalCount} <span>commits</span>
-        </Text>
+        </p>
       </header>
 
       <section aria-label="Repository description" className="pt-5">
-        <Text
-          $fontWeight={300}
-          $fontSize="1.125rem"
-          style={{ overflowWrap: "anywhere" }}
-        >
+        <p className="font-light text-lg" style={{ overflowWrap: "anywhere" }}>
           {repoDescription}
-        </Text>
+        </p>
       </section>
 
       <footer className="pt-5">
-        <Text className="mb-4">Languages</Text>
+        <h5 className="mb-4 text-base">Languages</h5>
 
-        <ul className="mb-4 flex flex-wrap gap-x-10 gap-y-4">
-          {languages.map(({ node: { color, name } /* percentage */ }) => (
+        <ul className="mb-4 flex flex-wrap gap-x-8 gap-y-4">
+          {languages.map(({ node: { color, name } }) => (
             <li key={name}>
               <IndicatorBar
                 color={color}
-                // percentage={percentage}
                 aria-hidden="true"
                 className="mr-2 align-middle"
               />
 
-              <Text as="span" $fontWeight={300} mb={1}>
-                {name}
-              </Text>
+              <span className="font-light mb-1 text-lg">{name}</span>
             </li>
           ))}
         </ul>
@@ -97,9 +82,9 @@ export const ContributionEntry = ({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Text as="span" aria-hidden="true" $fontSize="1rem">
+                  <span aria-hidden="true" className="text-base">
                     Code
-                  </Text>
+                  </span>
 
                   <VisuallyHidden>
                     External link to {repository.name} Github repository
@@ -116,9 +101,9 @@ export const ContributionEntry = ({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Text as="span" aria-hidden="true" $fontSize="1rem">
+                  <span aria-hidden="true" className="text-base">
                     Homepage
-                  </Text>
+                  </span>
 
                   <VisuallyHidden>
                     External link to {repository.name} homepage
@@ -129,10 +114,10 @@ export const ContributionEntry = ({
             </li>
             {!hasHomepageLink && !hasRepositoryLink && (
               <li>
-                <span aria-hidden="true">&nbsp;</span>
-                <VisuallyHidden>
-                  <Text>{repository.name} has no links</Text>
-                </VisuallyHidden>
+                <span aria-hidden="true" className="text-base">
+                  &nbsp;
+                </span>
+                <VisuallyHidden>{repository.name} has no links</VisuallyHidden>
               </li>
             )}
           </ul>

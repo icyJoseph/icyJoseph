@@ -21,7 +21,7 @@
     "react-dom": "18.2.0",
     "react-syntax-highlighter": "15.4.5",
     "styled-components": "5.3.3",
-    "swr": "1.1.2",
+    "swr": "2.1.5",
     "use-easing": "0.0.9"
   },
   "scripts": {

@@ -2,13 +2,13 @@ import { useState, Fragment, useMemo, ReactNode } from "react";
 
 import NextImage from "next/image";
 
-import YearlyContribution from "components/GitHub/YearlyContribution";
+// import YearlyContribution from "components/GitHub/YearlyContribution";
 import { Header } from "components/Header";
 import { BackToTop } from "design-system/BackToTop";
 import { Button } from "design-system/Button";
 import { Section } from "design-system/Section";
 import { Text } from "design-system/Text";
-import { yearRange } from "helpers";
+// import { yearRange } from "helpers";
 
 type SelectYearProps = {
   selectedYear: number;
@@ -162,11 +162,11 @@ export const GitHub = ({ children, initial, name: pageName }: GitHubProps) => {
                 </div>
               </div>
 
-              <YearlyContribution
+              {/* <YearlyContribution
                 year={selectedYear}
                 fallback={contributionsCollection}
                 {...yearRange(selectedYear)}
-              />
+              /> */}
             </Fragment>
           )}
         </RenderWithSelectedYear>

@@ -1987,7 +1987,7 @@ cookie@^0.4.2:
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.4.2.tgz#0e41f24de5ecf317947c82fc789e06a884824432"
   integrity sha512-aSWTXFzaKWkvHO1Ny/s+ePFpvKsPnjc551iI41v3ny/ow6tBG5Vd+FuqGNhh1LxOmVzOlGUriIlOaokOvhaStA==
 
-cross-fetch@^3.1.4:
+cross-fetch@^3.1.5:
   version "3.1.5"
   resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.5.tgz#e1389f44d9e7ba767907f7af8454787952ab534f"
   integrity sha512-lvb1SBsI0Z7GDwmuid+mU3kWVBwTVUbe7S0H52yaaAdQOXq2YktTCZdlAcNKFzE6QtRz0snpw9bNiPeOIkkQvw==
@@ -4513,12 +4513,12 @@ mdast-util-to-string@^3.0.0, mdast-util-to-string@^3.1.0:
   dependencies:
     "@types/mdast" "^3.0.0"
 
-meilisearch@0.24.0:
-  version "0.24.0"
-  resolved "https://registry.yarnpkg.com/meilisearch/-/meilisearch-0.24.0.tgz#a71454baac058f502b931af17069ab676fbaced6"
-  integrity sha512-qME1dsHZePBQi8qFdhbilcFzaL+oZJgUuls+FZ23hHpdhJI+iMFSmjjcfsxq5hdg2qczbCXv7yAo3Sh8xgfkgA==
+meilisearch@0.32.3:
+  version "0.32.3"
+  resolved "https://registry.yarnpkg.com/meilisearch/-/meilisearch-0.32.3.tgz#cbc224014c3dddc818090f4b501029993f117b6a"
+  integrity sha512-EOgfBuRE5SiIPIpEDYe2HO0D7a4z5bexIgaAdJFma/dH5hx1kwO+u/qb2g3qKyjG+iA3l8MlmTj/Xd72uahaAw==
   dependencies:
-    cross-fetch "^3.1.4"
+    cross-fetch "^3.1.5"
 
 merge-stream@^2.0.0:
   version "2.0.0"

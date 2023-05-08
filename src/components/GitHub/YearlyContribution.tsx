@@ -1,123 +1,134 @@
-import { Fragment, memo, useId, useMemo } from "react";
+"use client";
 
-import { ContributionEntry } from "components/GitHub/ContributionEntry";
-import { ContributionsSummary } from "components/GitHub/ContributionsSummary";
-import { Showcase } from "components/Showcase";
-import chevron from "design-system/chevron.module.css";
-import { Emoji } from "design-system/Emoji";
-import { Flex } from "design-system/Flex";
-import { Stale } from "design-system/Stale";
-import { Text } from "design-system/Text";
+import {
+  useState,
+  useMemo,
+  useTransition,
+  type ChangeEventHandler,
+} from "react";
+
+import classNames from "classnames";
+
+import { ContributionShowcase } from "components/GitHub/ContributionShowcase";
 import { useGitHubContributions } from "hooks/useGitHub";
-import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
 
 type YearlyContributionProps = {
-  fallback: IcyJoseph.ContributionCollection | null;
-  year: number;
-  from: string;
-  to?: string;
+  initial: IcyJoseph.GitHub["contributionsCollection"];
+  currentYear: number;
 };
 
-const BackIcon = <i className={chevron.chevronLeft} aria-hidden="true" />;
-const FwdIcon = <i className={chevron.chevronRight} aria-hidden="true" />;
-const MemoContributionEntry = memo(ContributionEntry);
+type Contribution = {
+  repository: IcyJoseph.Repository;
+  contributions: {
+    totalCount: number;
+  };
+}[];
 
-export const YearlyContribution = ({
-  fallback,
-  year,
-  from,
-  to,
-}: YearlyContributionProps) => {
-  const { data, error } = useGitHubContributions({
-    from,
-    to,
-  });
+const contributionWithId = (contributions: Contribution | undefined) => {
+  if (!contributions) return [];
 
-  const prev = useLastNonNullableValue(data, fallback);
+  return contributions.map(({ repository, contributions }, index) => ({
+    id: repository.id,
+    index,
+    repository,
+    contributions,
+  }));
+};
 
-  const stale = prev !== fallback && !error && !data;
+const ContributionShowcaseByYear = ({
+  selectedYear,
+  currentYear,
+  initial,
+}: YearlyContributionProps & { selectedYear: number }) => {
+  const fallback = useMemo(
+    () => ({
+      [`contributions/${currentYear}`]: initial,
+    }),
+    [currentYear, initial]
+  );
+  const { data } = useGitHubContributions(selectedYear, fallback);
 
-  const commitContributionsByRepository = (data || prev)
-    ?.commitContributionsByRepository;
+  const commitContributionsByRepository = data?.commitContributionsByRepository;
 
-  const commitContributionsByRepositoryWithId = useMemo(() => {
-    if (!commitContributionsByRepository) return [];
-
-    return commitContributionsByRepository.map(
-      ({ repository, contributions }, index) => ({
-        id: repository.id,
-        index,
-        repository,
-        contributions,
-      })
-    );
-  }, [commitContributionsByRepository]);
-
-  const headingId = useId();
-
-  if (!prev) return null;
-
-  const {
-    joinedGitHubContribution,
-    totalRepositoryContributions,
-    totalCommitContributions,
-    restrictedContributionsCount,
-  } = data || prev;
+  const commitContributionsByRepositoryWithId = useMemo(
+    () => contributionWithId(commitContributionsByRepository),
+    [commitContributionsByRepository]
+  );
 
   return (
-    <Fragment>
-      <div className="flex flex-col items-center my-8 px-5">
-        <Text as="h3" $fontSize="1.6rem">
-          In {year}
-        </Text>
+    <ContributionShowcase
+      year={selectedYear}
+      commitContributionsByRepository={commitContributionsByRepositoryWithId}
+    />
+  );
+};
 
-        <Stale $stale={stale}>
-          {joinedGitHubContribution ? (
-            <Flex mt={3}>
-              <Text $fontSize="1.25rem" $fontWeight={300}>
-                Joined GitHub
-                <Emoji
-                  symbol="🎉"
-                  title="Joined Github"
-                  ariaLabel="Celebration"
-                  className="mx-3"
-                />
-              </Text>
-            </Flex>
-          ) : (
-            <ContributionsSummary
-              totalRepositoryContributions={totalRepositoryContributions}
-              totalCommitContributions={totalCommitContributions}
-              restrictedContributionsCount={restrictedContributionsCount}
-              totalRepositoriesContributedTo={
-                commitContributionsByRepository?.length ?? 0
-              }
-            />
-          )}
-        </Stale>
-      </div>
+export const YearlyContribution = ({
+  currentYear,
+  initial,
+}: YearlyContributionProps) => {
+  const [selectedYear, setSelectedYear] = useState(
+    initial.contributionYears[0]
+  );
 
-      {(commitContributionsByRepository ?? []).length > 0 && (
-        <Stale my={5} $stale={stale} as="section" aria-labelledby={headingId}>
-          <Text
-            id={headingId}
-            as="h3"
-            $fontSize="1.6rem"
-            className="mb-10 text-center"
+  const [isPending, startTransition] = useTransition();
+
+  const handleSelectYear: ChangeEventHandler<HTMLSelectElement> = (event) => {
+    startTransition(() => {
+      setSelectedYear(Number(event.target.value));
+    });
+  };
+
+  return (
+    <div
+      className={classNames("w-full", isPending ? "opacity-50" : "opacity-100")}
+    >
+      <div className={classNames("flex flex-col items-center my-8 px-5")}>
+        <p className="text-2xl">
+          In{" "}
+          <select
+            className="bg-transparent underline"
+            value={selectedYear}
+            onChange={handleSelectYear}
           >
-            Repositories in {year}
-          </Text>
-
-          <Showcase
-            labelledBy={headingId}
-            Component={MemoContributionEntry}
-            items={commitContributionsByRepositoryWithId}
-            backIcon={BackIcon}
-            forwardIcon={FwdIcon}
+            {initial.contributionYears.map((year) => (
+              <option key={year} value={year} className="text-black">
+                {year}
+              </option>
+            ))}
+          </select>
+        </p>
+      </div>
+      {/* 
+        {joinedGitHubContribution ? (
+          <Flex mt={3}>
+            <Text $fontSize="1.25rem" $fontWeight={300}>
+              Joined GitHub
+              <Emoji
+                symbol="🎉"
+                title="Joined Github"
+                ariaLabel="Celebration"
+                className="mx-3"
+              />
+            </Text>
+          </Flex>
+        ) : (
+          <ContributionsSummary
+            totalRepositoryContributions={totalRepositoryContributions}
+            totalCommitContributions={totalCommitContributions}
+            restrictedContributionsCount={restrictedContributionsCount}
+            totalRepositoriesContributedTo={
+              commitContributionsByRepository?.length ?? 0
+            }
           />
-        </Stale>
-      )}
-    </Fragment>
+        )} */}
+
+      <ContributionShowcaseByYear
+        currentYear={currentYear}
+        selectedYear={selectedYear}
+        initial={initial}
+      />
+    </div>
   );
 };
 

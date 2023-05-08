@@ -1,5 +1,8 @@
 import axios from "axios";
 
+import { GET_USER, GET_YEAR_CONTRIBUTIONS } from "github/queries";
+import { yearRange } from "helpers";
+
 const githubAuth = axios.create({
   baseURL: "https://api.github.com/",
   auth: { username: "icyJoseph", password: process.env.GITHUB_TOKEN || "" },
@@ -37,4 +40,101 @@ export const redactedGitHubRepositoryData = (
         },
       };
     });
+};
+
+type GitHubProfile = Omit<
+  IcyJoseph.GitHub,
+  "repositoryDiscussionComments" | "repositories"
+> & {
+  repositoryDiscussionComments: {
+    totalCount: number;
+    repositories: string[];
+  };
+};
+
+type GitHubLanguages = Array<IcyJoseph.LanguageEdge>;
+
+export const gitHubProfile = async (): Promise<{
+  profile: GitHubProfile;
+  languages: GitHubLanguages;
+}> => {
+  const githubData = await queryGitHub<{ data: { user: IcyJoseph.GitHub } }>(
+    GET_USER,
+    {
+      login: "icyJoseph",
+      ...yearRange(),
+    }
+  ).then(({ data }) => data.user);
+
+  const { repositories, ...otherData } = githubData;
+
+  const profile: GitHubProfile = {
+    ...otherData,
+    contributionsCollection: {
+      ...githubData.contributionsCollection,
+      commitContributionsByRepository: redactedGitHubRepositoryData(
+        githubData.contributionsCollection.commitContributionsByRepository
+      ),
+    },
+    repositoryDiscussionComments: {
+      totalCount: githubData.repositoryDiscussionComments.totalCount,
+      repositories: [
+        ...new Set(
+          githubData.repositoryDiscussionComments.nodes.map(
+            ({ discussion }) => discussion.repository.name
+          )
+        ),
+      ],
+    },
+  };
+
+  const languagesAggregate: Record<string, IcyJoseph.LanguageEdge> = {};
+
+  repositories.nodes.forEach((curr) => {
+    if (curr.isArchived) return;
+
+    curr.languages.edges.forEach((lang) => {
+      if (!lang) return;
+
+      languagesAggregate[lang.node.name] = languagesAggregate[
+        lang.node.name
+      ] || { ...lang };
+      languagesAggregate[lang.node.name].size += lang.size;
+    });
+  });
+
+  const topLanguages = Object.entries(languagesAggregate)
+    .sort((lhs, rhs) => rhs[1].size - lhs[1].size)
+    .map(([_, value]) => value)
+    .slice(0, 4);
+
+  const languages = topLanguages;
+
+  return {
+    profile,
+    languages,
+  };
+};
+
+type ContributionData = IcyJoseph.GitHub["contributionsCollection"];
+
+export const gitHubContributions = async (
+  year: number
+): Promise<ContributionData> => {
+  const variables = { ...yearRange(year), login: "icyJoseph" };
+
+  const { data } = await queryGitHub<{
+    data: {
+      user: Pick<IcyJoseph.GitHub, "contributionsCollection">;
+    };
+  }>(GET_YEAR_CONTRIBUTIONS, variables);
+
+  const githubData = {
+    ...data.user.contributionsCollection,
+    commitContributionsByRepository: redactedGitHubRepositoryData(
+      data.user.contributionsCollection.commitContributionsByRepository
+    ),
+  };
+
+  return githubData;
 };

@@ -19,9 +19,6 @@ const config = {
       "www.gstatic.com",
     ],
   },
-  experimental: {
-    appDir: true,
-  },
 };
 
 module.exports = withBundleAnalyzer(config);

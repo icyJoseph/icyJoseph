@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 
 import { Bytes } from "components/Bytes";
@@ -10,6 +11,30 @@ import { Bold } from "design-system/Bold";
 import { gitHubProfile } from "github/fetcher";
 
 export const revalidate = 60;
+
+const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
+
+export const metadata: Metadata = {
+  title: "icyJoseph | Señor Developer",
+  description:
+    "Señor Developer. JavaScript, TypeScript, Rust, CSS. I work with fullstack. I enjoy coding challenges.",
+  openGraph: {
+    url: VERCEL_URL,
+    title: "icyJoseph | Señor Developer",
+    siteName: "icyJoseph",
+    description:
+      "Señor Developer. JavaScript, TypeScript, Rust, CSS. I work with fullstack. I enjoy coding challenges.",
+    images: [
+      {
+        url: `${VERCEL_URL}/waves_background.png`,
+        width: 960,
+        height: 540,
+        alt: "icyJoseph wavy background",
+        type: "image/png",
+      },
+    ],
+  },
+};
 
 export default async function Page() {
   const { profile, languages } = await gitHubProfile();

@@ -1,10 +1,9 @@
-import React from "react";
+"use client";
 
 import type { SearchResponse } from "meilisearch";
 import useSWRImmutable from "swr/immutable";
 
 import { PostLink } from "components/Blog/PostLink";
-import { Text } from "design-system/Text";
 
 const useSearch = (tags: string[]) => {
   return useSWRImmutable<SearchResponse<IcyJoseph.Post>>(tags, (...ts) =>
@@ -26,9 +25,7 @@ export const Related = ({
 
   return (
     <>
-      <Text as="h2" mb={2} $fontSize="1.4rem" $textColor="--yellow">
-        Related Posts
-      </Text>
+      <h2 className="text-pale-yellow mb-6 text-2xl">Related Posts</h2>
 
       {related.map((post) => {
         return <PostLink key={post.slug} post={post} />;

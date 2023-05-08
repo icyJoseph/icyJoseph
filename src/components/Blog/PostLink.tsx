@@ -2,8 +2,6 @@ import type { ReactNode } from "react";
 
 import Link from "next/link";
 
-import { Text } from "design-system/Text";
-
 export type PostPreview = Pick<
   IcyJoseph.Post,
   "title" | "tags" | "slug" | "summary" | "publish_date"
@@ -18,9 +16,7 @@ export const PostLink = ({
 }) => (
   <Link key={post.slug} href={`/blog/${post.slug}`}>
     <article className="mb-8 px-1">
-      <Text as="h3" $textColor="--yellow">
-        {post.title}
-      </Text>
+      <h3 className="text-pale-yellow text-xl">{post.title}</h3>
 
       <p className="font-sans text-lg max-w-prose font-light">{post.summary}</p>
     </article>

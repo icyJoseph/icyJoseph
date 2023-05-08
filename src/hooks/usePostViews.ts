@@ -19,6 +19,7 @@ export const usePostViews = (slug: string) => {
         }
       })
       .catch(() => {
+        if (controller.signal.aborted) return;
         console.warn("Error while getting post views");
       });
 

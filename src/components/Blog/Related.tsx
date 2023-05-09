@@ -25,7 +25,7 @@ export const Related = ({
 
   return (
     <>
-      <h2 className="text-pale-yellow mb-6 text-2xl">Related Posts</h2>
+      <h2 className="mb-6 text-2xl">Related Posts</h2>
 
       {related.map((post) => {
         return <PostLink key={post.slug} post={post} />;

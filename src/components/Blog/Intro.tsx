@@ -26,7 +26,7 @@ export const BlogIntro = () => {
           .
         </p>
 
-        <h2 className="pt-1 mt-3 mb-2 text-lg">Coding Challenges</h2>
+        <h2 className="pt-1 mt-4 mb-2 text-xl">Coding Challenges</h2>
 
         <p className="font-light mb-2">
           I put time into coding competitons and coding challengens. I focus
@@ -38,7 +38,7 @@ export const BlogIntro = () => {
           When solving coding challenges, I use the Rust programming language.
         </p>
 
-        <h2 className="pt-1 mt-3 mb-2 text-lg">Lessons Learned</h2>
+        <h2 className="pt-1 mt-4 mb-2 text-xl">Lessons Learned</h2>
 
         <p className="font-light mb-2">
           In this blog, I take the opportunity to document, things I learn, or

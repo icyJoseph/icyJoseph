@@ -8,6 +8,8 @@ import { Related } from "components/Blog/Related";
 import { PostViews } from "components/PostViews";
 import { BackTo, BackToTop } from "design-system/BackToTop";
 
+export const revalidate = 360;
+
 const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
 
 export const generateMetadata = async ({
@@ -79,8 +81,8 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
   const { slug, content, title, tags } = await getPostData(params.slug);
 
   return (
-    <section className="max-w-[85ch] mx-auto py-5">
-      <header className="text-2xl">{title}</header>
+    <section className="max-w-[75ch] mx-auto py-5 text-lg">
+      <header className="text-3xl">{title}</header>
       {/* @ts-expect-error MDX Async Component */}
       <MDXRemote source={content} components={components} />
 

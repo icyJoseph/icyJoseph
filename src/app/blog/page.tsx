@@ -9,6 +9,8 @@ type BlogProps = {
   posts: PostPreview[];
 };
 
+export const revalidate = 360;
+
 const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
 
 export const metadata: Metadata = {
@@ -65,13 +67,7 @@ const Blog = async () => {
 
   return (
     <>
-      {/* <NextSeo
-        title="icyJoseph | Blog"
-        description="Here I publish my solutions to coding challenges, and things I learn on my day to day job."
-        openGraph={blogPageOpenGraph}
-      /> */}
-
-      <section className="max-w-prose mx-auto">
+      <section className="max-w-[75ch] mx-auto text-lg">
         <BlogIntro />
 
         <h2 className="font-sans text-2xl pt-20 mb-8">Posts</h2>

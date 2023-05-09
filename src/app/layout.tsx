@@ -5,7 +5,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { Recursive } from "next/font/google";
 
 import { Footer } from "components/Footer";
-import { Navigation } from "composition/Navigation";
+import { Navigation } from "components/Navigation";
 
 const recursive = Recursive({
   subsets: ["latin"],

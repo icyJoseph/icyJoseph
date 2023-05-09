@@ -4,7 +4,7 @@ import { entries } from "config/pages";
 
 export const Navigation = () => {
   return (
-    <header className="px-4 w-full md:px-0 md:w-4/5 mx-auto">
+    <header className="px-4 w-full md:px-0 md:w-4/5 mx-auto max-w-7xl">
       <nav className="font-sans flex flex-col sm:flex-row py-3 my-0">
         <div className="flex-auto font-bold text-xl px-3 sm:px-0 uppercase">
           <Link href="/">

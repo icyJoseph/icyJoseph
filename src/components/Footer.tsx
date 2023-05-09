@@ -7,7 +7,7 @@ export const Footer = () => {
     <>
       <div className="py-12 md:py-16" />
 
-      <footer className="w-full px-4 mx-auto md:w-4/5 md:px-0">
+      <footer className="w-full px-4 mx-auto md:w-4/5 md:px-0 max-w-5xl">
         <Divider className="mt-0 mb-8" />
 
         <h2 className="text-2xl">

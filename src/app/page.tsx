@@ -69,7 +69,7 @@ export default async function Page() {
         <h2 className="font-sans text-3xl">Me and my Work</h2>
 
         <ParagraphWithIcon Icon={Student} className="mt-16">
-          Developer from <Bold className="text-pale-lue">Peru</Bold>, living in{" "}
+          Developer from <Bold className="text-pale-blue">Peru</Bold>, living in{" "}
           <Bold className="text-pale-blue">Sweden</Bold>. I have a
           Bachelor&apos;s in Electronics Engineering, and a Master&apos;s degree
           on business design.

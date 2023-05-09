@@ -15,38 +15,45 @@ export const generateMetadata = async ({
 }: {
   params: { slug: string };
 }): Promise<Metadata> => {
-  const slug = params.slug;
+  try {
+    const slug = params.slug;
 
-  const client = new MeiliSearch({
-    host: process.env.MEILISEARCH_URL,
-    apiKey: process.env.MEILISEARCH_KEY,
-  });
+    const client = new MeiliSearch({
+      host: process.env.MEILISEARCH_URL,
+      apiKey: process.env.MEILISEARCH_KEY,
+    });
 
-  const index = await client.getIndex<IcyJoseph.Post>(
-    process.env.MEILISEARCH_INDEX
-  );
+    const index = await client.getIndex<IcyJoseph.Post>(
+      process.env.MEILISEARCH_INDEX
+    );
 
-  const post = await index.getDocument(slug);
+    const post = await index.getDocument(slug);
 
-  return {
-    title: `icyJoseph | ${post.title}`,
-    description: post.summary,
-    openGraph: {
-      url: VERCEL_URL,
+    return {
       title: `icyJoseph | ${post.title}`,
-      siteName: "icyJoseph",
       description: post.summary,
-      images: [
-        {
-          url: `${VERCEL_URL}/waves_background.png`,
-          width: 960,
-          height: 540,
-          alt: "icyJoseph wavy background",
-          type: "image/png",
-        },
-      ],
-    },
-  };
+      openGraph: {
+        url: VERCEL_URL,
+        title: `icyJoseph | ${post.title}`,
+        siteName: "icyJoseph",
+        description: post.summary,
+        images: [
+          {
+            url: `${VERCEL_URL}/waves_background.png`,
+            width: 960,
+            height: 540,
+            alt: "icyJoseph wavy background",
+            type: "image/png",
+          },
+        ],
+      },
+    };
+  } catch (e) {
+    return {
+      title: "icyJoseph | Not found",
+      description: "The resource you were looking for does not exist",
+    };
+  }
 };
 
 const getPostData = async (slug: string): Promise<IcyJoseph.Post> => {

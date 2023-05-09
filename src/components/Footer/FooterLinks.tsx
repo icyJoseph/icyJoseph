@@ -1,8 +1,6 @@
 import Link from "next/link";
 
 import { entries } from "config/pages";
-import { Flex } from "design-system/Flex";
-import { Text } from "design-system/Text";
 
 const externalLinks = [
   {
@@ -24,23 +22,23 @@ const externalLinks = [
 ];
 
 export const FooterLinks = () => (
-  <Flex as="nav" flex={1} flexDirection="column" alignItems="end">
-    <Text as="h3">Hot Links</Text>
+  <nav className="flex flex-1 flex-col items-end">
+    <h3 className="text-xl text-pale-yellow">Hot Links</h3>
 
     <ul>
       {entries.map(({ href, title }) => (
-        <Text key={href} as="li" my={2} $fontWeight={300} $textAlign="end">
+        <li key={href} className="my-3 font-light text-end">
           <Link href={href}>{title}</Link>
-        </Text>
+        </li>
       ))}
 
       {externalLinks.map(({ href, title }) => (
-        <Text key={href} as="li" my={2} $fontWeight={300} $textAlign="end">
+        <li key={href} className="my-3 font-light text-end">
           <a href={href} target="_blank" rel="noreferrer noopener">
             {title}
           </a>
-        </Text>
+        </li>
       ))}
     </ul>
-  </Flex>
+  </nav>
 );

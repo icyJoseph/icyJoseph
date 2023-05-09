@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 
 import { Recursive } from "next/font/google";
 
+import { Footer } from "components/Footer";
 import { Navigation } from "composition/Navigation";
 
 const recursive = Recursive({
@@ -20,6 +21,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Navigation />
 
         <main className="px-4 w-full md:px-0 md:w-4/5 mx-auto">{children}</main>
+
+        <Footer />
       </body>
     </html>
   );

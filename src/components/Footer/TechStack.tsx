@@ -1,6 +1,3 @@
-import { Flex } from "design-system/Flex";
-import { Text } from "design-system/Text";
-
 const techStack = [
   "GitHub's GraphQL API",
   "Fitbit's API",
@@ -12,15 +9,15 @@ const techStack = [
 ];
 
 export const TechStack = () => (
-  <Flex flex={1} flexDirection="column">
-    <Text as="h3">Tech Stack</Text>
+  <div className="flex flex-1 flex-col">
+    <h3 className="text-xl text-pale-yellow">Tech Stack</h3>
 
     <ul>
       {techStack.map((entry) => (
-        <Text key={entry} as="li" my={2} $fontWeight={300}>
+        <li key={entry} className="my-3 font-light">
           {entry}
-        </Text>
+        </li>
       ))}
     </ul>
-  </Flex>
+  </div>
 );

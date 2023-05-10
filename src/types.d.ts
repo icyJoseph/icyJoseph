@@ -3,6 +3,9 @@ declare namespace NodeJS {
     MEILISEARCH_URL: string;
     MEILISEARCH_KEY: string;
     MEILISEARCH_INDEX: string;
+    BLOG_VIEWS_URL: string;
+    BLOG_VIEWS_API_KEY: string;
+    BLOG_VIEWS_TABLE: string;
   }
 }
 
@@ -254,5 +257,12 @@ declare namespace IcyJoseph {
     tags: Array<string>;
     // Who wrote the post
     authors: Array<string>;
+  };
+
+  export type PostView = {
+    id: string;
+    host: string;
+    slug: string;
+    views: number;
   };
 }

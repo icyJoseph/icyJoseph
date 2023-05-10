@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
 
+import { CountView } from "components/Blog/CountView";
 import { components } from "components/Blog/mdx";
 import { Related } from "components/Blog/Related";
 import { PostViews } from "components/PostViews";
@@ -85,6 +86,8 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
       <header className="text-3xl">{title}</header>
       {/* @ts-expect-error MDX Async Component */}
       <MDXRemote source={content} components={components} />
+
+      <CountView slug={slug} />
 
       <div className="py-4" />
 

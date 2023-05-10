@@ -63,7 +63,7 @@ export default async function Page() {
 
       <Social />
 
-      <div className="py-2" />
+      <div className="py-6" />
 
       <section className="font-mono max-w-prose mx-auto w-full">
         <h2 className="font-sans text-3xl">Me and my Work</h2>
@@ -90,7 +90,7 @@ export default async function Page() {
         />
       </section>
 
-      <div className="py-4" />
+      <div className="py-6" />
 
       <section className="font-mono max-w-prose mx-auto w-full">
         <h2 className="font-sans text-3xl">Coding</h2>

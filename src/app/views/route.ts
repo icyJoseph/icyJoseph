@@ -42,16 +42,13 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   const slug = request.nextUrl.searchParams.get("slug");
+
   if (!slug) {
     return NextResponse.json(
       { error: "Something is missing" },
       { status: 400, statusText: "Bad Request" }
     );
   }
-
-  await new Promise((next) => {
-    setTimeout(next, 1_000);
-  });
 
   const { data } = await supabase
     .from<string, { Row: IcyJoseph.PostView }>(process.env.BLOG_VIEWS_TABLE)

@@ -1,7 +1,6 @@
 import classNames from "classnames";
 import Link from "next/link";
 
-// TODO: Make use of Tailwind
 const Base = ({
   className = "",
   to,

@@ -3,11 +3,11 @@ import Image from "next/image";
 
 import { Bytes } from "components/Bytes";
 import YearlyContribution from "components/GitHub/YearlyContribution";
-import { Bird, Briefcase, Code, FileRs, Student } from "components/Icons";
 import { Introduction } from "components/Introduction";
 import { ParagraphWithIcon } from "components/ParagraphWithIcon";
 import { Social } from "components/Social";
 import { Bold } from "design-system/Bold";
+import { Bird, Briefcase, Code, FileRs, Student } from "design-system/Icons";
 import { gitHubProfile } from "github/fetcher";
 
 export const revalidate = 60;

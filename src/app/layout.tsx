@@ -1,4 +1,4 @@
-import "design-system/Global/style.css";
+import "design-system/global.css";
 import type { ReactNode } from "react";
 
 import { Analytics } from "@vercel/analytics/react";

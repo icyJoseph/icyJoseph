@@ -1,6 +1,6 @@
 import { useId } from "react";
 
-import { ExternalLinkIcon } from "design-system/ExternalLinkIcon";
+import { ExternalLinkIcon } from "design-system/External";
 import { IndicatorBar } from "design-system/IndicatorBar";
 import { VisuallyHidden } from "design-system/VisuallyHidden";
 

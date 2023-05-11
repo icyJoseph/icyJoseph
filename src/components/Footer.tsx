@@ -1,5 +1,5 @@
-import { FooterLinks } from "components/Footer/FooterLinks";
-import { TechStack } from "components/Footer/TechStack";
+import { FooterLinks } from "components/FooterNav";
+import { TechStack } from "components/TechStack";
 import { Divider } from "design-system/Divider";
 
 export const Footer = () => {

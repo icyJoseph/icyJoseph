@@ -2,7 +2,7 @@ import { type ReactNode, type FC } from "react";
 
 import classNames from "classnames";
 
-import { type IconProps } from "components/Icons";
+import { type IconProps } from "design-system/Icons";
 
 export const ParagraphWithIcon = ({
   className = "",

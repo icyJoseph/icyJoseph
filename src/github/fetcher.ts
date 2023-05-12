@@ -1,25 +1,9 @@
-import axios from "axios";
+import { fromByteArray } from "base64-js";
 
 import { GET_USER, GET_YEAR_CONTRIBUTIONS } from "github/queries";
 import { yearRange } from "helpers";
 
-const githubAuth = axios.create({
-  baseURL: "https://api.github.com/",
-  auth: { username: "icyJoseph", password: process.env.GITHUB_TOKEN || "" },
-});
-
-export const queryGitHub = <Response>(
-  query: string,
-  variables: Record<string, string>
-) =>
-  githubAuth
-    .post<Response>("graphql", {
-      query,
-      variables,
-    })
-    .then(({ data }) => data);
-
-export const redactedGitHubRepositoryData = (
+const redactedGitHubRepositoryData = (
   data: IcyJoseph.GitHub["contributionsCollection"]["commitContributionsByRepository"]
 ) => {
   return data
@@ -54,17 +38,40 @@ type GitHubProfile = Omit<
 
 type GitHubLanguages = Array<IcyJoseph.LanguageEdge>;
 
+const btoa = (str: string) => {
+  const bytes = new TextEncoder().encode(str);
+
+  return fromByteArray(bytes);
+};
+
+const githubAuth = {
+  baseURL: "https://api.github.com",
+  headers: {
+    Authorization: `Basic ${btoa(
+      `icyJoseph:${process.env.GITHUB_TOKEN || ""}`
+    )}`,
+    "Content-Type": "application/json",
+  },
+};
+
+export const queryGitHub = <Response>(
+  query: string,
+  variables: Record<string, string>
+): Promise<{ data: Response }> =>
+  fetch(`${githubAuth.baseURL}/graphql`, {
+    method: "POST",
+    headers: githubAuth.headers,
+    body: JSON.stringify({ query, variables }),
+  }).then((res) => res.json());
+
 export const gitHubProfile = async (): Promise<{
   profile: GitHubProfile;
   languages: GitHubLanguages;
 }> => {
-  const githubData = await queryGitHub<{ data: { user: IcyJoseph.GitHub } }>(
-    GET_USER,
-    {
-      login: "icyJoseph",
-      ...yearRange(),
-    }
-  ).then(({ data }) => data.user);
+  const githubData = await queryGitHub<{ user: IcyJoseph.GitHub }>(GET_USER, {
+    login: "icyJoseph",
+    ...yearRange(),
+  }).then(({ data }) => data.user);
 
   const { repositories, ...otherData } = githubData;
 
@@ -124,9 +131,7 @@ export const gitHubContributions = async (
   const variables = { ...yearRange(year), login: "icyJoseph" };
 
   const { data } = await queryGitHub<{
-    data: {
-      user: Pick<IcyJoseph.GitHub, "contributionsCollection">;
-    };
+    user: Pick<IcyJoseph.GitHub, "contributionsCollection">;
   }>(GET_YEAR_CONTRIBUTIONS, variables);
 
   const githubData = {

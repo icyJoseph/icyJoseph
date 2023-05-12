@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 
 import { Bytes } from "components/Bytes";
 import YearlyContribution from "components/GitHub/YearlyContribution";
 import { Introduction } from "components/Introduction";
 import { ParagraphWithIcon } from "components/ParagraphWithIcon";
-import { Social } from "components/Social";
+import { ProfileCard } from "components/ProfileCard";
 import { Bold } from "design-system/Bold";
 import { Bird, Briefcase, Code, FileRs, Student } from "design-system/Icons";
+import { fitBitProfile } from "fitbit/fetcher";
 import { gitHubProfile } from "github/fetcher";
 
 export const revalidate = 60;
@@ -37,33 +37,44 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const { profile, languages } = await gitHubProfile();
+  const githubData = gitHubProfile();
+  const fitBitData = fitBitProfile();
 
-  const { avatarUrl, name, contributionsCollection } = profile;
+  const [github, fitBit] = await Promise.all([githubData, fitBitData]);
+
+  const { languages } = github;
+
+  const {
+    avatarUrl,
+    name,
+    bio,
+    contributionsCollection,
+    repositoryDiscussionComments,
+    followers,
+  } = github.profile;
 
   const currentYear = contributionsCollection.contributionYears[0];
-
   const yearsOnGitHub = contributionsCollection.contributionYears.length;
-
   const startYear =
     contributionsCollection.contributionYears[yearsOnGitHub - 1];
 
+  const { restingHeartRate /*activityLog*/ } = fitBit;
+
+  const { averageDailySteps } = fitBit.profile;
+
   return (
     <Introduction>
-      <Image
-        priority
-        className="w-4/5 max-w-xs rounded-full border-white border-2 border-solid mx-auto"
-        src={avatarUrl}
+      <ProfileCard
+        avatarUrl={avatarUrl}
         alt={`${name} github profile picture`}
-        width="320"
-        height="320"
+        restingHeartRate={restingHeartRate}
+        bio={bio}
+        averageSteps={averageDailySteps}
+        totalSolvedDiscussions={repositoryDiscussionComments.totalCount}
+        followerCount={followers.totalCount}
       />
 
-      <div className="py-2" />
-
-      <Social />
-
-      <div className="py-6" />
+      <div className="py-12" />
 
       <section className="font-mono max-w-prose mx-auto w-full">
         <h2 className="font-sans text-3xl">Me and my Work</h2>

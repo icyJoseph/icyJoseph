@@ -39,7 +39,13 @@ export function createClamp(min: number, max: number) {
 export const clamp = (val: number, min: number, max: number) =>
   createClamp(min, max)(val);
 
-export const isoStringWithoutMs = (iso: string) => head(iso.split("."));
+export const isoString = (iso: Date) => {
+  const [date, time] = head(iso.toISOString().split("."));
+
+  const [hours] = time.split(":");
+
+  return `${date}T${hours}`;
+};
 
 export const trunc = (num: number) => {
   if (Math.trunc) return Math.trunc(num);

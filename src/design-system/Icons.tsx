@@ -6,4 +6,8 @@ export {
   Code,
   FileRs,
   Student,
+  GithubLogo,
+  ArticleMedium,
+  Heartbeat,
+  ShootingStar,
 } from "@phosphor-icons/react";

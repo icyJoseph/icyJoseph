@@ -25,7 +25,10 @@ const SocialIcon = ({
 const SocialLink = (props: ComponentPropsWithoutRef<"a">) => (
   <a
     {...props}
-    className={classNames(props.className, "inline-block")}
+    className={classNames(
+      props.className,
+      "inline-block hover:text-pale-yellow"
+    )}
     target="_blank"
     rel="noopener noreferrer"
   />
@@ -35,19 +38,18 @@ export const Social = () => (
   <>
     <SocialLink href="https://github.com/icyJoseph">
       <SocialIcon icon={GithubLogo} label="github" />
-
-      <i>@icyJoseph</i>
+      <span>@icyJoseph</span>
     </SocialLink>
 
     <SocialLink href="https://medium.com/@icjoseph">
       <SocialIcon icon={ArticleMedium} label="medium" />
 
-      <i>@icjoseph</i>
+      <span>@icjoseph</span>
     </SocialLink>
 
     <SocialLink href="https://github.com/sponsors/icyJoseph">
       <SocialIcon icon={ShootingStar} label="Github sponsorships" />
-      Sponsor
+      <span>Sponsor</span>
     </SocialLink>
   </>
 );

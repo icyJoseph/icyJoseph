@@ -13,8 +13,7 @@ type ProfileCardProps = {
   followerCount: number;
 };
 
-const cardLayout =
-  "flex-col lg:flex-row max-w-3xl w-4/5 flex flex-wrap py-4 px-2 ";
+const cardLayout = "lg:flex-row max-w-3xl w-full flex flex-wrap py-4 px-2 ";
 const cardBorder = "bg-zinc-900 rounded-lg border border-zinc-700";
 
 export const ProfileCard = ({
@@ -28,36 +27,55 @@ export const ProfileCard = ({
 }: ProfileCardProps) => {
   return (
     <article className={classNames(cardLayout, cardBorder)}>
-      <header className="flex-1 p-4">
+      <header className="flex flex-grow flex-shrink-0 basis-full">
+        <div className="hidden basis-2/5 lg:block" />
+
+        <h1 className="basis-full lg:basis-3/5 text-center text-4xl font-light p-4">
+          Joseph <span className="sr-only">Software Developer</span>
+        </h1>
+      </header>
+
+      <aside className="basis-full lg:basis-2/5 p-4">
         <Image
           priority
-          className="w-full max-w-xs rounded-full mx-auto"
+          className="w-full max-w-xs rounded-full mx-auto p-4"
           src={avatarUrl}
           alt={alt}
           width="320"
           height="320"
         />
-      </header>
+        <div className="flex justify-around flex-wrap">
+          <span className="flex flex-col items-center">
+            <span className="text-xl text-pale-red">{restingHeartRate}</span>{" "}
+            <span>bpm</span>
+          </span>
 
-      <section className="flex-[2]">
-        <h1 className="text-center text-4xl font-light my-8">
-          Joseph <span className="sr-only">Software Developer</span>
-        </h1>
+          <span className="flex flex-col items-center">
+            <span className="text-xl text-pale-red">{averageSteps}</span>{" "}
+            <span>daily steps</span>
+          </span>
+        </div>
+      </aside>
 
-        <p>{bio}</p>
+      <section className="basis-full lg:basis-3/5 p-4 flex flex-col justify-between">
+        <p className="text-lg font-light">{bio}</p>
 
-        <aside>
-          <p>{followerCount} github followers</p>
+        <div className="pt-4 flex justify-around flex-wrap">
+          <span className="flex flex-col items-center">
+            <span className="text-xl text-pale-red">{followerCount}</span>{" "}
+            <span>github followers</span>
+          </span>
 
-          <p>{totalSolvedDiscussions} resolved discussions</p>
-
-          <p>{restingHeartRate} bpm</p>
-
-          <p>{averageSteps} daily steps</p>
-        </aside>
+          <span className="flex flex-col items-center">
+            <span className="text-xl text-pale-red">
+              {totalSolvedDiscussions}
+            </span>{" "}
+            <span>resolved discussions</span>
+          </span>
+        </div>
       </section>
 
-      <footer className="flex-grow flex-shrink-0 basis-full flex justify-around gap-4 pt-6">
+      <footer className="flex-grow flex-shrink-0 basis-full flex flex-wrap justify-around gap-4 p-4">
         <Social />
       </footer>
     </article>

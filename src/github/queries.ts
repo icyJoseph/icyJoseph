@@ -3,21 +3,17 @@ import gql from "graphql-tag";
 
 const ItemShowcaseFragment = gql`
   fragment showcaseItem on Repository {
+    id
     name
     nameWithOwner
     description
-    isMirror
-    stargazerCount
+    url
     primaryLanguage {
       name
       color
     }
-    repositoryTopics(first: 10) {
-      nodes {
-        topic {
-          name
-        }
-      }
+    owner {
+      login
     }
   }
 `;
@@ -79,10 +75,8 @@ const GET_USER_DOC = gql`
       avatarUrl
       itemShowcase {
         items(first: 10) {
-          edges {
-            node {
-              ...showcaseItem
-            }
+          nodes {
+            ...showcaseItem
           }
         }
       }

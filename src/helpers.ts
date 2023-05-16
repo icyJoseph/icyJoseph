@@ -40,7 +40,7 @@ export const clamp = (val: number, min: number, max: number) =>
   createClamp(min, max)(val);
 
 export const isoString = (iso: Date) => {
-  const [date, time] = head(iso.toISOString().split("."));
+  const [date, time] = head(iso.toISOString().split(".")).split("T");
 
   const [hours] = time.split(":");
 

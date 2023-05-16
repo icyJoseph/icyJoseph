@@ -19,6 +19,21 @@ declare namespace IcyJoseph {
     size: number;
   };
 
+  type ItemShowcase = {
+    id: string;
+    name: string;
+    nameWithOwner: string;
+    description: string;
+    primaryLanguage: {
+      name: string;
+      color: string;
+    };
+    url: string;
+    owner: {
+      login: string;
+    };
+  };
+
   export type Repository = {
     id: string;
     name: string;
@@ -96,6 +111,11 @@ declare namespace IcyJoseph {
     };
     repositories: {
       nodes: Pick<Repository, "name" | "languages" | "isArchived">[];
+    };
+    itemShowcase: {
+      items: {
+        nodes: Array<ItemShowcase>;
+      };
     };
   };
 

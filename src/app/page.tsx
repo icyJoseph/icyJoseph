@@ -51,14 +51,20 @@ export default async function Page() {
     contributionsCollection,
     repositoryDiscussionComments,
     followers,
+    itemShowcase,
+    location,
   } = github.profile;
+
+  const highlights = itemShowcase.items.nodes;
 
   const currentYear = contributionsCollection.contributionYears[0];
   const yearsOnGitHub = contributionsCollection.contributionYears.length;
   const startYear =
     contributionsCollection.contributionYears[yearsOnGitHub - 1];
 
-  const { restingHeartRate /*activityLog*/ } = fitBit;
+  const { restingHeartRate } = fitBit;
+
+  // const [mostRecent] = fitbit.activityLog;
 
   const { averageDailySteps } = fitBit.profile;
 
@@ -72,6 +78,8 @@ export default async function Page() {
         averageSteps={averageDailySteps}
         totalSolvedDiscussions={repositoryDiscussionComments.totalCount}
         followerCount={followers.totalCount}
+        highlights={highlights}
+        location={location}
       />
 
       <div className="py-12" />

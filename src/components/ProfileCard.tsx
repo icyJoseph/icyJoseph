@@ -2,6 +2,7 @@ import classNames from "classnames";
 import Image from "next/image";
 
 import { Social } from "components/Social";
+import { ICY_JOSEPH } from "github/constants";
 
 type ProfileCardProps = {
   avatarUrl: string;
@@ -74,7 +75,7 @@ export const ProfileCard = ({
                 rel="noopener noreferrer"
                 target="_blank"
                 className={classNames(
-                  nameWithOwner.startsWith("icyJoseph")
+                  nameWithOwner.startsWith(ICY_JOSEPH)
                     ? "text-pale-blue"
                     : "text-pale-orange",
                   "underline hover:text-pale-yellow"

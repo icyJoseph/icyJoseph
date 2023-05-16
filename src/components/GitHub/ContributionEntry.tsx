@@ -41,9 +41,9 @@ export const ContributionEntry = ({
       <header>
         <p className="text-pale-orange text-xl">#{index + 1}</p>
 
-        <h4 id={headingId} className="font-medium text-xl">
+        <h3 id={headingId} className="font-medium text-xl">
           {repository.name}
-        </h4>
+        </h3>
 
         <p className="pt-5 text-xl font-light">
           +{contributions.totalCount} <span>commits</span>
@@ -57,7 +57,7 @@ export const ContributionEntry = ({
       </section>
 
       <footer className="pt-5">
-        <h5 className="mb-4 text-base">Languages</h5>
+        <h4 className="mb-4 text-base">Languages</h4>
 
         <ul className="mb-4 flex flex-wrap gap-x-8 gap-y-4">
           {languages.map(({ node: { color, name } }) => (

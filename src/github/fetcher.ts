@@ -3,12 +3,21 @@ import { fromByteArray } from "base64-js";
 import { GET_USER, GET_YEAR_CONTRIBUTIONS } from "github/queries";
 import { yearRange } from "helpers";
 
+import { ICY_JOSEPH } from "./constants";
+
 const redactedGitHubRepositoryData = (
   data: IcyJoseph.GitHub["contributionsCollection"]["commitContributionsByRepository"]
 ) => {
   return data
     .filter(({ repository }) => {
-      return repository.owner.login === "icyJoseph";
+      const ownedByViewer = repository.owner.login === ICY_JOSEPH;
+
+      if (ownedByViewer) return true;
+
+      const shouldHide =
+        repository.isPrivate || repository.isArchived || repository.isDisabled;
+
+      return !shouldHide;
     })
     .map((entry) => {
       const hideUrl =
@@ -69,7 +78,7 @@ export const gitHubProfile = async (): Promise<{
   languages: GitHubLanguages;
 }> => {
   const githubData = await queryGitHub<{ user: IcyJoseph.GitHub }>(GET_USER, {
-    login: "icyJoseph",
+    login: ICY_JOSEPH,
     ...yearRange(),
   }).then(({ data }) => data.user);
 
@@ -128,7 +137,7 @@ type ContributionData = IcyJoseph.GitHub["contributionsCollection"];
 export const gitHubContributions = async (
   year: number
 ): Promise<ContributionData> => {
-  const variables = { ...yearRange(year), login: "icyJoseph" };
+  const variables = { ...yearRange(year), login: ICY_JOSEPH };
 
   const { data } = await queryGitHub<{
     user: Pick<IcyJoseph.GitHub, "contributionsCollection">;

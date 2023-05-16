@@ -1,4 +1,4 @@
-import { memo, useId } from "react";
+import { memo } from "react";
 
 import { ContributionEntry } from "components/GitHub/ContributionEntry";
 import { Showcase } from "components/Showcase";
@@ -9,7 +9,7 @@ const FwdIcon = <i className={chevron.chevronRight} aria-hidden="true" />;
 const MemoContributionEntry = memo(ContributionEntry);
 
 export const ContributionShowcase = ({
-  //   year,
+  year,
   commitContributionsByRepository,
 }: {
   year: number;
@@ -22,21 +22,14 @@ export const ContributionShowcase = ({
     };
   }[];
 }) => {
-  const headingId = useId();
-
   return (
-    <>
-      <h3 id={headingId} className="text-2xl mb-10">
-        Repositories
-      </h3>
-
-      <Showcase
-        labelledBy={headingId}
-        Component={MemoContributionEntry}
-        items={commitContributionsByRepository}
-        backIcon={BackIcon}
-        forwardIcon={FwdIcon}
-      />
-    </>
+    <Showcase
+      key={year} // reset carousel when year changes
+      ariaLabel={`Repository contributions in ${year}`}
+      Component={MemoContributionEntry}
+      items={commitContributionsByRepository}
+      backIcon={BackIcon}
+      forwardIcon={FwdIcon}
+    />
   );
 };

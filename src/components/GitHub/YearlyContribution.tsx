@@ -87,21 +87,22 @@ export const YearlyContribution = ({
         isPending ? "opacity-50" : "opacity-100"
       )}
     >
-      <div className={classNames("my-8")}>
-        <p className="text-2xl">
-          In{" "}
-          <select
-            className="bg-transparent underline"
-            value={selectedYear}
-            onChange={handleSelectYear}
-          >
-            {initial.contributionYears.map((year) => (
-              <option key={year} value={year}>
-                {year}
-              </option>
-            ))}
-          </select>
-        </p>
+      <div className={classNames("my-8", "text-2xl")}>
+        <span className="text-2xl" aria-hidden="true">
+          Repositories in
+        </span>{" "}
+        <select
+          className="bg-transparent underline"
+          value={selectedYear}
+          onChange={handleSelectYear}
+          aria-label={`Navigate through repository contributions by year. Showing ${selectedYear}`}
+        >
+          {initial.contributionYears.map((year) => (
+            <option key={year} value={year}>
+              {year}
+            </option>
+          ))}
+        </select>
       </div>
       {/* 
         {joinedGitHubContribution ? (

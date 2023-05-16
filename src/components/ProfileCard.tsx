@@ -16,7 +16,7 @@ type ProfileCardProps = {
   highlights: IcyJoseph.GitHub["itemShowcase"]["items"]["nodes"];
 };
 
-const cardLayout = "lg:flex-row max-w-3xl w-full flex flex-wrap py-4 px-2 ";
+const cardLayout = "lg:flex-row max-w-3xl w-full flex flex-wrap";
 const cardBorder = "bg-zinc-900 rounded-lg border border-zinc-700";
 
 export const ProfileCard = ({
@@ -32,7 +32,7 @@ export const ProfileCard = ({
 }: ProfileCardProps) => {
   return (
     <article className={classNames(cardLayout, cardBorder)}>
-      <header className="flex flex-grow flex-shrink-0 basis-full py-2">
+      <header className="flex flex-grow flex-shrink-0 basis-full py-4">
         <div className="hidden basis-2/5 lg:block" />
 
         <h1 className="basis-full lg:basis-3/5 text-center text-4xl font-light">

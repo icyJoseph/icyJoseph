@@ -7,9 +7,11 @@ export const Navigation = () => {
     <header className="px-4 w-full md:px-0 md:w-4/5 mx-auto max-w-7xl">
       <nav className="font-sans flex flex-col sm:flex-row py-3 my-0">
         <div className="flex-auto font-bold text-xl px-3 sm:px-0 uppercase">
-          <Link href="/">
-            <p className="hover:text-pale-green transition-colors">icyJoseph</p>
-            <span className="block text-base font-semibold text-pale-green">
+          <Link href="/" className="group focus:text-pale-blue">
+            <span className="block hover:text-pale-green transition-colors">
+              icyJoseph
+            </span>
+            <span className="block text-base font-semibold text-pale-green group-focus:text-pale-blue">
               Señor Developer
             </span>
           </Link>

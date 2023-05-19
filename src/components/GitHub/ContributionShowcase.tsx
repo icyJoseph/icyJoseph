@@ -1,6 +1,9 @@
 import { memo } from "react";
 
-import { ContributionEntry } from "components/GitHub/ContributionEntry";
+import {
+  ContributionEntry,
+  type ContributionCardProps,
+} from "components/GitHub/ContributionEntry";
 import { Showcase } from "components/Showcase";
 import chevron from "design-system/chevron.module.css";
 
@@ -13,14 +16,7 @@ export const ContributionShowcase = ({
   commitContributionsByRepository,
 }: {
   year: number;
-  commitContributionsByRepository: {
-    id: string;
-    index: number;
-    repository: IcyJoseph.Repository;
-    contributions: {
-      totalCount: number;
-    };
-  }[];
+  commitContributionsByRepository: Array<ContributionCardProps>;
 }) => {
   return (
     <Showcase

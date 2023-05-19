@@ -42,6 +42,7 @@ export default async function Page() {
 
   const [github, fitBit] = await Promise.all([githubData, fitBitData]);
 
+  console.log({ fitBit });
   const { languages } = github;
 
   const {

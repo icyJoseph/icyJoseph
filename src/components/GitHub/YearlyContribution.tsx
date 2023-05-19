@@ -36,6 +36,27 @@ const contributionWithId = (contributions: Contribution | undefined) => {
   }));
 };
 
+const joinedGitHubContribution = {
+  id: "github-contribution",
+  index: -1,
+  repository: {
+    name: "Joined GitHub",
+    url: "https://github.com/icyJoseph",
+    homepageUrl: "https://icyjoseph.dev/",
+    languages: {
+      edges: [],
+      totalCount: 0,
+      totalSize: 0,
+    },
+    description: `
+    @icyJoseph joins GitHub 🎉
+    `,
+  },
+  contributions: {
+    totalCount: 0,
+  },
+};
+
 const ContributionShowcaseByYear = ({
   selectedYear,
   currentYear,
@@ -51,9 +72,14 @@ const ContributionShowcaseByYear = ({
 
   const commitContributionsByRepository = data?.commitContributionsByRepository;
 
+  const joinedGitHub = Boolean(data?.joinedGitHubContribution);
+
   const commitContributionsByRepositoryWithId = useMemo(
-    () => contributionWithId(commitContributionsByRepository),
-    [commitContributionsByRepository]
+    () =>
+      joinedGitHub
+        ? [joinedGitHubContribution]
+        : contributionWithId(commitContributionsByRepository),
+    [joinedGitHub, commitContributionsByRepository]
   );
 
   return (
@@ -104,29 +130,6 @@ export const YearlyContribution = ({
           ))}
         </select>
       </div>
-      {/* 
-        {joinedGitHubContribution ? (
-          <Flex mt={3}>
-            <Text $fontSize="1.25rem" $fontWeight={300}>
-              Joined GitHub
-              <Emoji
-                symbol="🎉"
-                title="Joined Github"
-                ariaLabel="Celebration"
-                className="mx-3"
-              />
-            </Text>
-          </Flex>
-        ) : (
-          <ContributionsSummary
-            totalRepositoryContributions={totalRepositoryContributions}
-            totalCommitContributions={totalCommitContributions}
-            restrictedContributionsCount={restrictedContributionsCount}
-            totalRepositoriesContributedTo={
-              commitContributionsByRepository?.length ?? 0
-            }
-          />
-        )} */}
 
       <Suspense fallback={<span>Loading...</span>}>
         <ContributionShowcaseByYear

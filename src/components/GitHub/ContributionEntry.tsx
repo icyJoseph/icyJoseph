@@ -10,9 +10,12 @@ const isLanguageEdge = (
   edge: IcyJoseph.LanguageEdge | null
 ): edge is IcyJoseph.LanguageEdge => Boolean(edge);
 
-type ContributionCardProps = {
+export type ContributionCardProps = {
   id: string;
-  repository: IcyJoseph.Repository;
+  repository: Pick<
+    IcyJoseph.Repository,
+    "name" | "description" | "languages" | "homepageUrl" | "url"
+  >;
   index: number;
   contributions: { totalCount: number };
 };

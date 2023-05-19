@@ -1,5 +1,7 @@
 import { type ComponentProps, type ReactNode, useId } from "react";
 
+import classNames from "classnames";
+
 import style from "design-system/select.module.css";
 
 export const Select = ({
@@ -16,7 +18,7 @@ export const Select = ({
       <div className={style.selectWrapper}>
         <select
           {...rest}
-          className={`${style.select} ${className}`.trim()}
+          className={classNames(style.select, className)}
           id={selectId}
         />
         <span className={style.focus} />

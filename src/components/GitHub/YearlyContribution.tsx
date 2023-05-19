@@ -121,7 +121,7 @@ export const YearlyContribution = ({
               Repositories in
             </span>
           }
-          className="bg-transparent underline"
+          className="bg-transparent underline font-[monospace]"
           value={selectedYear}
           onChange={handleSelectYear}
           aria-label={`Navigate through repository contributions by year. Showing ${selectedYear}`}

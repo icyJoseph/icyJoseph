@@ -15,7 +15,7 @@
 }
 
 @layer components {
-  *:focus,
+  button:focus,
   *:focus-visible {
     border-radius: 2px;
     outline-offset: 2px;

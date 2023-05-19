@@ -11,6 +11,7 @@ import {
 import classNames from "classnames";
 
 import { ContributionShowcase } from "components/GitHub/ContributionShowcase";
+import { Select } from "components/Select";
 import { useGitHubContributions } from "hooks/useGitHub";
 
 type YearlyContributionProps = {
@@ -114,10 +115,12 @@ export const YearlyContribution = ({
       )}
     >
       <div className={classNames("my-8", "text-2xl")}>
-        <span className="text-2xl" aria-hidden="true">
-          Repositories in
-        </span>{" "}
-        <select
+        <Select
+          label={
+            <span className="text-2xl" aria-hidden="true">
+              Repositories in
+            </span>
+          }
           className="bg-transparent underline"
           value={selectedYear}
           onChange={handleSelectYear}
@@ -128,7 +131,7 @@ export const YearlyContribution = ({
               {year}
             </option>
           ))}
-        </select>
+        </Select>
       </div>
 
       <Suspense fallback={<span>Loading...</span>}>

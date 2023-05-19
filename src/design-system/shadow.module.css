@@ -1,6 +1,6 @@
 .shadow {
   position: relative;
-  /* transform-style: preserve-3d; */
+  transform-style: flat;
 }
 
 .shadow::before {
@@ -21,7 +21,6 @@
     rgb(var(--pale-yellow))
   );
   filter: blur(10px);
-  transform: translate3d(0px, 0px, -1px);
   pointer-events: none;
   border-radius: inherit;
 }

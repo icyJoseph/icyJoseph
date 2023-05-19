@@ -2,6 +2,7 @@ import classNames from "classnames";
 import Image from "next/image";
 
 import { Social } from "components/Social";
+import style from "design-system/profile-card.module.css";
 import { ICY_JOSEPH } from "github/constants";
 
 type ProfileCardProps = {
@@ -31,7 +32,7 @@ export const ProfileCard = ({
   highlights,
 }: ProfileCardProps) => {
   return (
-    <article className={classNames(cardLayout, cardBorder)}>
+    <article className={classNames(cardLayout, cardBorder, style.shadow)}>
       <aside className="basis-full md:basis-2/5 p-4 flex flex-col justify-between min-w-">
         <Image
           priority

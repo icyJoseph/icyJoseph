@@ -17,7 +17,7 @@ export const ActiveLink = (
       className={classNames(
         props.className,
         "transition-colors",
-        isActive && "text-pale-orange"
+        isActive && "text-pale-orange underline"
       )}
     />
   );

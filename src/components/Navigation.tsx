@@ -8,11 +8,9 @@ export const Navigation = () => {
     <header className="px-4 w-full md:px-0 md:w-4/5 mx-auto max-w-7xl">
       <nav className="font-sans flex flex-col sm:flex-row py-3 my-0">
         <div className="flex-auto font-bold text-xl px-3 sm:px-0 uppercase">
-          <Link href="/" className="group text-pale-orange">
-            <span className="block group-hover:text-pale-green transition-colors">
-              icyJoseph
-            </span>
-            <span className="block text-base font-semibold group-hover:text-pale-green">
+          <Link href="/" className="hover:text-pale-yellow transition-colors">
+            <span className="block">icyJoseph</span>
+            <span className="block text-base font-semibold">
               Señor Developer
             </span>
           </Link>
@@ -26,7 +24,7 @@ export const Navigation = () => {
               key={title}
               className="inline-flex flex-1 justify-center sm:justify-end"
             >
-              <ActiveLink href={href}>
+              <ActiveLink href={href} className="hover:text-pale-yellow">
                 <span>{title}</span>
               </ActiveLink>
             </li>

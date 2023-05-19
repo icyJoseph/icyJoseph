@@ -1,9 +1,10 @@
 .shadow {
   position: relative;
-  transform-style: preserve-3d;
+  /* transform-style: preserve-3d; */
 }
 
 .shadow::before {
+  z-index: -1;
   content: "";
   position: absolute;
   inset: 0px;

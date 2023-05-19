@@ -2,7 +2,7 @@ import classNames from "classnames";
 import Image from "next/image";
 
 import { Social } from "components/Social";
-import style from "design-system/profile-card.module.css";
+import style from "design-system/shadow.module.css";
 import { ICY_JOSEPH } from "github/constants";
 
 type ProfileCardProps = {

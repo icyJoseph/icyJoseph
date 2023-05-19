@@ -1,6 +1,7 @@
 import { FooterLinks } from "components/FooterNav";
 import { TechStack } from "components/TechStack";
 import { Divider } from "design-system/Divider";
+import { Keyword } from "design-system/Keyword";
 
 export const Footer = () => {
   return (
@@ -24,7 +25,8 @@ export const Footer = () => {
         </div>
 
         <p className="mx-auto pt-8 text-center">
-          &#169; {new Date().getFullYear()} icyJoseph AB - Stockholm, Sweden
+          &#169; {new Date().getFullYear()} <Keyword>icyJoseph AB</Keyword> -
+          Stockholm, Sweden
         </p>
 
         <div className="py-6" />

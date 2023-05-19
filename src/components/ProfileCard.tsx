@@ -62,7 +62,7 @@ export const ProfileCard = ({
         </header>
 
         <section className="basis-full md:basis-3/5 flex flex-col justify-between">
-          <p className="text-md italic text-center md:text-left mb-2">
+          <p className="text-md italic text-center md:text-left mb-2 text-pale-orange">
             {location}
           </p>
 

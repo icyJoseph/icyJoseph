@@ -10,10 +10,10 @@ const profileFetcher = async () => {
   return data.user;
 };
 
-export const useFitbitProfile = (fallbackData = null) => {
+export const useFitbitProfile = (/*fallbackData = null*/) => {
   return useSWR("fitbit/profile", profileFetcher, {
     shouldRetryOnError: false,
-    fallbackData: fallbackData,
+    // fallbackData: fallbackData,
   });
 };
 

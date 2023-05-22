@@ -2,34 +2,25 @@ import useSWR from "swr";
 
 import { client } from "utils/client";
 
-const fetcher = <Response, Variables>(variables: Variables) =>
+const fetcher = <Response>(year: number) =>
   client({
-    body: JSON.stringify({ variables }),
     headers: { "content-type": "application/json" },
-  }).post<Response>(`/api/github/contributions`);
+  }).get<Response>(`/api/github/contributions?year=${year}`);
 
-type ContributionVariables = { login: "icyJoseph"; from: string; to?: string };
-type UseGitHubContributions = {
-  from: string;
-  to?: string;
-};
-
-export const useGitHubContributions = ({
-  from,
-  to,
-}: UseGitHubContributions) => {
-  return useSWR<IcyJoseph.ContributionCollection | null>(
-    `contributions/${from}/${to}`,
+export const useGitHubContributions = (
+  year: number,
+  fallback: Record<number, IcyJoseph.GitHub["contributionsCollection"]>
+) => {
+  return useSWR<IcyJoseph.ContributionCollection>(
+    `contributions/${year}`,
     async () => {
-      return fetcher<{ user: IcyJoseph.GitHub }, ContributionVariables>({
-        login: "icyJoseph",
-        from,
-        to,
-      }).then(({ user }) => user.contributionsCollection);
+      return fetcher<IcyJoseph.GitHub["contributionsCollection"]>(year);
     },
     {
       refreshInterval: 1000 * 60 * 5,
       revalidateOnFocus: false,
+      suspense: true,
+      fallback,
     }
   );
 };

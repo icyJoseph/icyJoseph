@@ -1,0 +1,53 @@
+.field {
+  border: 0;
+  padding: 0;
+  padding-bottom: 1rem;
+}
+
+.selectLabel {
+  margin-right: 1rem;
+}
+
+.selectWrapper {
+  position: relative;
+  display: inline-grid;
+  grid-template-areas: "select";
+  align-items: center;
+  padding: 0.25rem 0rem;
+  margin-top: 0.5rem;
+}
+
+.select {
+  /* reset the select element */
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  padding: 0 1.2rem 0 0;
+  margin: 0;
+  font-size: inherit;
+  display: inline;
+  outline: none;
+  color: inherit;
+
+  /* actual styling */
+  font-weight: 300;
+  grid-area: select;
+  cursor: pointer;
+
+  line-height: 1.1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9' viewBox='0 0 16 9' fill='none' %3E %3Cpath d='M15 1L8 8L1 1' stroke='rgba(255%2C%20255%2C%20255%2C%200.92)' stroke-linecap='round' stroke-linejoin='round'%3E %3C/path%3E %3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 15px 7px;
+  background-position: right 0 top 51%;
+}
+
+.select:focus + .focus {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border-radius: 2px;
+  outline-offset: 2px;
+  outline: 2px solid rgb(var(--pale-blue));
+}

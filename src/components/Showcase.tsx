@@ -1,3 +1,5 @@
+"use client";
+
 import {
   useCallback,
   useId,
@@ -90,13 +92,13 @@ export const Showcase = <Data extends Record<"id", string>>({
   items,
   backIcon,
   forwardIcon,
-  labelledBy,
+  ariaLabel,
 }: {
   Component: RenderElement<Data>;
   items: Data[];
   backIcon: ReactElement;
   forwardIcon: ReactElement;
-  labelledBy: string;
+  ariaLabel: string;
 }) => {
   const [visibleItems, setVisibleItems] = useState<WithVisibility<Data>[]>([]);
 
@@ -149,7 +151,7 @@ export const Showcase = <Data extends Record<"id", string>>({
         id={listId}
         className={style.list}
         ref={listRef}
-        aria-labelledby={labelledBy}
+        aria-label={ariaLabel}
       >
         {items.map((item) => (
           <ItemShowCase

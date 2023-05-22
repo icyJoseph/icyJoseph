@@ -3,98 +3,42 @@ import type { ComponentPropsWithoutRef } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 
-import { Ol, Ul } from "design-system/List";
-import { Paragraph } from "design-system/Paragraph";
-import { Text } from "design-system/Text";
-
 const CodeBlock = dynamic(() => import("components/Blog/CodeBlock"));
 
 export const components = {
   h1: (props: ComponentPropsWithoutRef<"h1">) => {
-    return (
-      <Text
-        as="h1"
-        {...props}
-        $fontSize="2.25rem"
-        $textColor="--yellow"
-        mt={4}
-        mb={3}
-      />
-    );
+    return <h1 {...props} className="text-2xl text-pale-yellow mt-8 mb-6" />;
   },
 
   h2: (props: ComponentPropsWithoutRef<"h2">) => {
-    return (
-      <Text
-        as="h2"
-        {...props}
-        $fontSize="2.15rem"
-        $textColor="--yellow"
-        mt={4}
-        mb={3}
-      />
-    );
+    return <h2 {...props} className="text-xl text-pale-yellow mt-8 mb-6" />;
   },
 
   h3: (props: ComponentPropsWithoutRef<"h3">) => {
-    return (
-      <Text
-        as="h3"
-        {...props}
-        $fontSize="2rem"
-        $textColor="--yellow"
-        mt={4}
-        mb={3}
-      />
-    );
+    return <h3 {...props} className="text-lg text-pale-yellow mt-8 mb-6" />;
   },
 
   h4: (props: ComponentPropsWithoutRef<"h4">) => {
-    return (
-      <Text
-        as="h4"
-        {...props}
-        $fontSize="1.9rem"
-        $textColor="--yellow"
-        mt={4}
-        mb={3}
-      />
-    );
+    return <h4 {...props} className="text-base text-pale-yellow mt-8 mb-6" />;
   },
 
   h5: (props: ComponentPropsWithoutRef<"h5">) => {
-    return (
-      <Text
-        as="h5"
-        {...props}
-        $fontSize="1.8rem"
-        $textColor="--yellow"
-        mt={4}
-        mb={3}
-      />
-    );
+    return <h5 {...props} className="text-base text-pale-yellow mt-8 mb-6" />;
   },
 
   h6: (props: ComponentPropsWithoutRef<"h6">) => {
-    return (
-      <Text
-        as="h6"
-        {...props}
-        $fontSize="1.75rem"
-        $textColor="--yellow"
-        mt={4}
-        mb={3}
-      />
-    );
+    return <h6 {...props} className="text-base text-pale-yellow mt-8 mb-6" />;
   },
 
   p: (props: ComponentPropsWithoutRef<"p">) => {
-    return <Paragraph {...props} mb={2} />;
+    return (
+      <p {...props} className="my-4 font-light [&>code]:text-pale-green" />
+    );
   },
 
   a: (props: ComponentPropsWithoutRef<"a">) => {
     return (
-      <Text as="span">
+      <span>
         {props.href ? (
           <Link
             href={props.href}
@@ -102,24 +46,23 @@ export const components = {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Text
-              as="span"
-              $textColor="--lightBlue"
-              $fontWeight={400}
-              {...props}
-            />
+            <span className="text-pale-blue font-medium" {...props} />
           </Link>
         ) : (
-          <Text as="a" $textColor="--lightBlue" {...props} />
+          <a {...props} className="text-pale-blue font-medium" />
         )}
-      </Text>
+      </span>
     );
   },
 
   li: (props: ComponentPropsWithoutRef<"li">) => (
-    <Paragraph as="li" {...props} />
+    <li {...props} className="my-2 font-light" />
   ),
-  ol: (props: ComponentPropsWithoutRef<"ol">) => <Ol {...props} my={2} />,
-  ul: (props: ComponentPropsWithoutRef<"ul">) => <Ul {...props} my={2} />,
+  ol: (props: ComponentPropsWithoutRef<"ol">) => (
+    <ol {...props} className="my-3 list-decimal list-inside" />
+  ),
+  ul: (props: ComponentPropsWithoutRef<"ul">) => (
+    <ul {...props} className="my-3 list-disc list-inside" />
+  ),
   code: CodeBlock,
 };

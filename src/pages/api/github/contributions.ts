@@ -1,34 +1,26 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { queryGitHub, redactedGitHubRepositoryData } from "github/fetcher";
-import { GET_YEAR_CONTRIBUTIONS } from "github/queries";
+import { gitHubContributions } from "github/fetcher";
 
-type ContributionData = {
-  user: Pick<IcyJoseph.GitHub, "contributionsCollection">;
-};
+type ContributionData = IcyJoseph.GitHub["contributionsCollection"];
 
 const github = async (
   req: NextApiRequest,
   res: NextApiResponse<ContributionData>
 ) => {
-  const { data } = await queryGitHub<{
-    data: {
-      user: Pick<IcyJoseph.GitHub, "contributionsCollection">;
-    };
-  }>(GET_YEAR_CONTRIBUTIONS, req.body.variables);
+  if (req.method !== "GET") return res.status(404).end();
 
-  const githubData = {
-    user: {
-      contributionsCollection: {
-        ...data.user.contributionsCollection,
-        commitContributionsByRepository: redactedGitHubRepositoryData(
-          data.user.contributionsCollection.commitContributionsByRepository
-        ),
-      },
-    },
-  };
+  const year = Number(req.query.year);
 
-  return res.json(githubData);
+  if (isNaN(year)) return res.status(400).end();
+
+  try {
+    const data = await gitHubContributions(year);
+
+    return res.json(data);
+  } catch (reason) {
+    return res.status(500).end();
+  }
 };
 
 export default github;

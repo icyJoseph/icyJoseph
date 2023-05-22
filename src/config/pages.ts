@@ -3,14 +3,14 @@ export const entries = [
     symbol: "🏠",
     href: "/",
     ariaLabel: "Navigate Home",
-    title: "Home"
+    title: "Home",
   },
   {
     symbol: "📰",
     href: "/blog",
     ariaLabel: "Navigate to Posts",
-    title: "Posts"
-  }
+    title: "Blog",
+  },
   // {
   //   symbol: "👨🏽‍💻",
   //   href: "/contact",

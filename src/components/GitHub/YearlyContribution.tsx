@@ -3,9 +3,8 @@
 import {
   useState,
   useMemo,
-  useTransition,
+  useDeferredValue,
   type ChangeEventHandler,
-  Suspense,
 } from "react";
 
 import classNames from "classnames";
@@ -69,6 +68,7 @@ const ContributionShowcaseByYear = ({
     }),
     [currentYear, initial]
   );
+
   const { data } = useGitHubContributions(selectedYear, fallback);
 
   const commitContributionsByRepository = data?.commitContributionsByRepository;
@@ -99,13 +99,13 @@ export const YearlyContribution = ({
     initial.contributionYears[0]
   );
 
-  const [isPending, startTransition] = useTransition();
-
   const handleSelectYear: ChangeEventHandler<HTMLSelectElement> = (event) => {
-    startTransition(() => {
-      setSelectedYear(Number(event.target.value));
-    });
+    setSelectedYear(Number(event.target.value));
   };
+
+  const deferredYear = useDeferredValue(selectedYear);
+
+  const isPending = selectedYear !== deferredYear;
 
   return (
     <div
@@ -134,13 +134,11 @@ export const YearlyContribution = ({
         </Select>
       </div>
 
-      <Suspense fallback={<span>Loading...</span>}>
-        <ContributionShowcaseByYear
-          currentYear={currentYear}
-          selectedYear={selectedYear}
-          initial={initial}
-        />
-      </Suspense>
+      <ContributionShowcaseByYear
+        currentYear={currentYear}
+        selectedYear={deferredYear}
+        initial={initial}
+      />
     </div>
   );
 };

@@ -26,10 +26,10 @@ export const metadata: Metadata = {
       "Señor Developer. JavaScript, TypeScript, Rust, CSS. I work with fullstack. I enjoy coding challenges.",
     images: [
       {
-        url: `${VERCEL_URL}/waves_background.png`,
+        url: `${VERCEL_URL}/og-image`,
         width: 960,
         height: 540,
-        alt: "icyJoseph wavy background",
+        alt: "icyJoseph, software developer",
         type: "image/png",
       },
     ],

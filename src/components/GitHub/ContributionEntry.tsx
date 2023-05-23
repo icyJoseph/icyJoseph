@@ -1,5 +1,7 @@
 import { useId } from "react";
 
+import classNames from "classnames";
+
 import { ExternalLinkIcon } from "design-system/External";
 import { IndicatorBar } from "design-system/IndicatorBar";
 import { VisuallyHidden } from "design-system/VisuallyHidden";
@@ -38,7 +40,11 @@ export const ContributionEntry = ({
 
   return (
     <article
-      className="h-full grid grid-rows-[auto_1fr_auto] w-full md:w-4/5 lg:w-3/5 mx-auto font-sans pb-1"
+      className={classNames(
+        "grid grid-rows-[auto_1fr_auto]",
+        "h-full w-full md:w-4/5 lg:w-2/3 mx-auto p-4",
+        "font-sans bg-zinc-900 border border-zinc-700 rounded-lg"
+      )}
       aria-labelledby={headingId}
     >
       <header>

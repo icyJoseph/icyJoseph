@@ -178,6 +178,7 @@ const formatter = new Intl.DateTimeFormat("en-SV", {
   year: "numeric",
   month: "long",
   day: "2-digit",
+  timeZone: "Europe/Stockholm",
 });
 
 const PublishedDate = ({ date }: { date: Date }) => {

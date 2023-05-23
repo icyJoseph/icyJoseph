@@ -7,7 +7,7 @@ import { components } from "components/Blog/mdx";
 import { Related } from "components/Blog/Related";
 import { PostViews } from "components/PostViews";
 import { BackTo, BackToTop } from "design-system/BackToTop";
-import { getPostBySlug } from "posts/lib";
+import { getAllPosts, getPostBySlug } from "posts/lib";
 
 export const revalidate = 360;
 
@@ -57,6 +57,12 @@ const getPostData = async (slug: string): Promise<IcyJoseph.Post> => {
   } catch (e) {
     notFound();
   }
+};
+
+export const generateStaticParams = async () => {
+  const posts = await getAllPosts();
+
+  return posts.map(({ slug }) => ({ slug }));
 };
 
 const BlogEntry = async ({ params }: { params: Record<string, string> }) => {

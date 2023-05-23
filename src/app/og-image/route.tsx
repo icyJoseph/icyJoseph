@@ -9,6 +9,7 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
 
     const slug = searchParams.get("slug");
+    console.log("Processing slug", { slug });
 
     if (!slug) {
       // not a blog post
@@ -27,7 +28,10 @@ export async function GET(request: NextRequest) {
         />
       )
     );
-  } catch {
+  } catch (reason) {
+    const message = reason instanceof Error ? reason.message : reason;
+
+    console.log(message);
     // if we fail, still just show an image
     // consider returning a 404
     return new ImageResponse(<ProfileImage />);

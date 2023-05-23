@@ -35,7 +35,7 @@ export const generateMetadata = async ({
             url: `${VERCEL_URL}/og-image?slug=${slug}`,
             width: 960,
             height: 540,
-            alt: "icyJoseph wavy background",
+            alt: `Blog post: ${post.title}`,
             type: "image/png",
           },
         ],

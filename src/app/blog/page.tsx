@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   description:
     "Here I publish my solutions to coding challenges, and things I learn on my day to day job.",
   openGraph: {
-    url: VERCEL_URL,
+    url: `${VERCEL_URL}/blog`,
     title: "icyJoseph | Blog",
     siteName: "icyJoseph",
     description:

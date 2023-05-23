@@ -26,7 +26,7 @@ export const generateMetadata = async ({
       title: `icyJoseph | ${post.title}`,
       description: post.summary,
       openGraph: {
-        url: VERCEL_URL,
+        url: `${VERCEL_URL}/blog/${slug}`,
         title: `icyJoseph | ${post.title}`,
         siteName: "icyJoseph",
         description: post.summary,

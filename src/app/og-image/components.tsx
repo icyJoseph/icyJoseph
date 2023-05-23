@@ -48,25 +48,35 @@ const Layout = ({ children }: { children: ReactNode }) => (
       display: "flex",
       width: "100%",
       height: "100%",
-      backgroundImage: gradient,
+      background: toRGB(palette["--soft-black"]),
       padding: "0.5rem",
     }}
   >
     <div
       style={{
+        display: "flex",
         width: "100%",
         height: "100%",
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        fontSize: 128,
-        background: toRGB(palette["--soft-black"]),
-        color: toRGB(palette["--smoke-white"]),
-        padding: "2rem",
+        backgroundImage: gradient,
+        padding: "0.5rem",
       }}
     >
-      {children}
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          fontSize: 128,
+          background: toRGB(palette["--soft-black"]),
+          color: toRGB(palette["--smoke-white"]),
+          padding: "2rem",
+        }}
+      >
+        {children}
+      </div>
     </div>
   </div>
 );

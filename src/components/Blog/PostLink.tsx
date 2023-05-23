@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
 import Link from "next/link";
+
 import type { PostPreview } from "posts/lib";
 
 export const PostLink = ({

@@ -12,12 +12,13 @@ const redactedGitHubRepositoryData = (
     .filter(({ repository }) => {
       const ownedByViewer = repository.owner.login === ICY_JOSEPH;
 
-      if (ownedByViewer) return true;
+      const active = !repository.isArchived && !repository.isDisabled;
 
-      const shouldHide =
-        repository.isPrivate || repository.isArchived || repository.isDisabled;
+      if (ownedByViewer) return active;
 
-      return !shouldHide;
+      const isPublic = !repository.isPrivate;
+
+      return isPublic;
     })
     .map((entry) => {
       const hideUrl =
@@ -30,6 +31,7 @@ const redactedGitHubRepositoryData = (
         repository: {
           ...entry.repository,
           url: hideUrl ? "" : entry.repository.url,
+          homepageUrl: hideUrl ? "" : entry.repository.homepageUrl,
         },
       };
     });

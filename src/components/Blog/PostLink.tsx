@@ -1,11 +1,7 @@
 import type { ReactNode } from "react";
 
 import Link from "next/link";
-
-export type PostPreview = Pick<
-  IcyJoseph.Post,
-  "title" | "tags" | "slug" | "summary" | "publish_date"
->;
+import type { PostPreview } from "posts/lib";
 
 export const PostLink = ({
   post,

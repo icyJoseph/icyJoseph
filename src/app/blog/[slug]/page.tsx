@@ -1,4 +1,3 @@
-import { MeiliSearch } from "meilisearch";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
@@ -8,6 +7,7 @@ import { components } from "components/Blog/mdx";
 import { Related } from "components/Blog/Related";
 import { PostViews } from "components/PostViews";
 import { BackTo, BackToTop } from "design-system/BackToTop";
+import { getPostBySlug } from "posts/lib";
 
 export const revalidate = 360;
 
@@ -20,17 +20,7 @@ export const generateMetadata = async ({
 }): Promise<Metadata> => {
   try {
     const slug = params.slug;
-
-    const client = new MeiliSearch({
-      host: process.env.MEILISEARCH_URL,
-      apiKey: process.env.MEILISEARCH_KEY,
-    });
-
-    const index = await client.getIndex<IcyJoseph.Post>(
-      process.env.MEILISEARCH_INDEX
-    );
-
-    const post = await index.getDocument(slug);
+    const post = await getPostBySlug(slug);
 
     return {
       title: `icyJoseph | ${post.title}`,
@@ -42,7 +32,7 @@ export const generateMetadata = async ({
         description: post.summary,
         images: [
           {
-            url: `${VERCEL_URL}/waves_background.png`,
+            url: `${VERCEL_URL}/og-image?slug=${slug}`,
             width: 960,
             height: 540,
             alt: "icyJoseph wavy background",
@@ -61,16 +51,7 @@ export const generateMetadata = async ({
 
 const getPostData = async (slug: string): Promise<IcyJoseph.Post> => {
   try {
-    const client = new MeiliSearch({
-      host: process.env.MEILISEARCH_URL,
-      apiKey: process.env.MEILISEARCH_KEY,
-    });
-
-    const index = await client.getIndex<IcyJoseph.Post>(
-      process.env.MEILISEARCH_INDEX
-    );
-
-    const post = await index.getDocument(slug);
+    const post = await getPostBySlug(slug);
 
     return post;
   } catch (e) {

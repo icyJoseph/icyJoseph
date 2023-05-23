@@ -1,9 +1,9 @@
-import { MeiliSearch } from "meilisearch";
 import type { Metadata } from "next";
 
 import { BlogIntro } from "components/Blog/Intro";
-import { PostLink, type PostPreview } from "components/Blog/PostLink";
+import { PostLink } from "components/Blog/PostLink";
 import { Search } from "components/Blog/Search";
+import { getAllPosts, type PostPreview } from "posts/lib";
 
 type BlogProps = {
   posts: PostPreview[];
@@ -25,10 +25,10 @@ export const metadata: Metadata = {
       "Here I publish my solutions to coding challenges, and things I learn on my day to day job.",
     images: [
       {
-        url: `${VERCEL_URL}/waves_background.png`,
+        url: `${VERCEL_URL}/og-image`,
         width: 960,
         height: 540,
-        alt: "icyJoseph wavy background",
+        alt: "icyJoseph blog page",
         type: "image/png",
       },
     ],
@@ -37,22 +37,8 @@ export const metadata: Metadata = {
 
 const getBlogData = async (): Promise<BlogProps> => {
   try {
-    const client = new MeiliSearch({
-      host: process.env.MEILISEARCH_URL,
-      apiKey: process.env.MEILISEARCH_KEY,
-    });
-
-    const index = await client.getIndex<IcyJoseph.Post>(
-      process.env.MEILISEARCH_INDEX
-    );
-
-    const { hits } = await index.search<IcyJoseph.Post>("", {
-      limit: 50,
-      attributesToRetrieve,
-      sort: ["publish_date:desc"],
-    });
-
-    return { posts: hits };
+    const posts = await getAllPosts();
+    return { posts };
   } catch (e) {
     console.log("Error while building Blog landing page", e);
 
@@ -83,13 +69,5 @@ const Blog = async () => {
     </>
   );
 };
-
-const attributesToRetrieve: Array<keyof PostPreview> = [
-  "title",
-  "tags",
-  "slug",
-  "summary",
-  "publish_date",
-];
 
 export default Blog;

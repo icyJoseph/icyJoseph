@@ -174,11 +174,17 @@ export const ProfileImage = () => (
   </Layout>
 );
 
-const formatted = new Intl.DateTimeFormat("en-SV", {
+const formatter = new Intl.DateTimeFormat("en-SV", {
   year: "numeric",
   month: "long",
   day: "2-digit",
 });
+
+const PublishedDate = ({ date }: { date: Date }) => {
+  const formatted = `Published ${formatter.format(date)}`;
+
+  return <Paragraph style={{ fontSize: 20 }}>{formatted}</Paragraph>;
+};
 
 export const BlogPostImage = ({
   title,
@@ -190,50 +196,45 @@ export const BlogPostImage = ({
   summary: string;
   tags: string[];
   publishDate: number | null;
-}) => (
-  <Layout>
-    <Avatar />
+}) => {
+  return (
+    <Layout>
+      <Avatar />
 
-    <MainContent>
-      <Heading level={1}>@icyJoseph</Heading>
-      <Paragraph
-        style={{
-          fontSize: 36,
-          color: toRGB(palette["--pale-yellow"]),
-        }}
-      >
-        Señor Software Developer
-      </Paragraph>
-
-      <Heading
-        level={2}
-        style={{
-          fontSize: 32,
-          color: toRGB(palette["--pale-orange"]),
-          marginTop: "2rem",
-        }}
-      >
-        {title}
-      </Heading>
-
-      <Paragraph style={{ fontSize: 24, margin: "0.5rem 0" }}>
-        {tags.join(" / ")}
-      </Paragraph>
-
-      <Paragraph style={{ fontSize: 24, margin: "0.5rem 0" }}>
-        {summary}
-      </Paragraph>
-
-      <div style={{ flex: "auto" }} />
-
-      {publishDate && (
-        <Paragraph style={{ fontSize: 20 }}>
-          Published,
-          <span style={{ marginLeft: "1rem" }}>
-            {formatted.format(new Date(publishDate * 1000))}
-          </span>
+      <MainContent>
+        <Heading level={1}>@icyJoseph</Heading>
+        <Paragraph
+          style={{
+            fontSize: 36,
+            color: toRGB(palette["--pale-yellow"]),
+          }}
+        >
+          Señor Software Developer
         </Paragraph>
-      )}
-    </MainContent>
-  </Layout>
-);
+
+        <Heading
+          level={2}
+          style={{
+            fontSize: 32,
+            color: toRGB(palette["--pale-orange"]),
+            marginTop: "2rem",
+          }}
+        >
+          {title}
+        </Heading>
+
+        <Paragraph style={{ fontSize: 24, margin: "0.5rem 0" }}>
+          {tags.join(" / ")}
+        </Paragraph>
+
+        <Paragraph style={{ fontSize: 24, margin: "0.5rem 0" }}>
+          {summary}
+        </Paragraph>
+
+        <div style={{ flex: "auto" }} />
+
+        {publishDate && <PublishedDate date={new Date(publishDate * 1000)} />}
+      </MainContent>
+    </Layout>
+  );
+};

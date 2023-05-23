@@ -32,7 +32,7 @@ export const generateMetadata = async ({
         description: post.summary,
         images: [
           {
-            url: `${VERCEL_URL}/og-image?slug=${slug}`,
+            url: `${VERCEL_URL}/og-image/${slug}`,
             width: 960,
             height: 540,
             alt: `Blog post: ${post.title}`,

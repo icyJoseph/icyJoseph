@@ -114,9 +114,10 @@ const ContributionShowcaseByYear = ({
   return (
     <>
       <div className="my-4">
-        {/* <label
+        <label
           htmlFor={externalSwitch}
           className={classNames(
+            "hidden",
             "transition-opacity",
             hasExternalContributions ? "opacity-100" : "opacity-50"
           )}
@@ -127,11 +128,11 @@ const ContributionShowcaseByYear = ({
         <input
           id={externalSwitch}
           type="checkbox"
-          className="mx-2"
+          className="mx-2 hidden"
           disabled={!hasExternalContributions}
           checked={onlyExternal}
           onChange={(event) => setOnlyExternal(event.target.checked)}
-        /> */}
+        />
       </div>
 
       <ContributionShowcase

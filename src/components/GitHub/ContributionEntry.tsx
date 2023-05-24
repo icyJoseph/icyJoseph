@@ -41,9 +41,10 @@ export const ContributionEntry = ({
   return (
     <article
       className={classNames(
-        "grid grid-rows-[auto_1fr_auto]",
+        "grid grid-rows-[1fr_1fr_auto]",
         "h-full w-full md:w-4/5 lg:w-2/3 mx-auto p-4",
-        "font-sans bg-zinc-900 border border-zinc-700 rounded-lg"
+        "font-sans",
+        "bg-zinc-900 border border-zinc-700 rounded-lg"
       )}
       aria-labelledby={headingId}
     >

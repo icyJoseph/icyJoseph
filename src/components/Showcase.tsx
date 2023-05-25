@@ -39,7 +39,7 @@ export const ItemShowCase = <Data,>({
         onVisibilityChange?.(item, visible);
         setIsVisible(visible);
       },
-      { root, threshold: 1 }
+      { root, threshold: 0 }
     );
 
     return disconnect;

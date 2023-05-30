@@ -36,7 +36,7 @@ export const ProfileCard = ({
       <aside className="basis-full md:basis-2/5 p-4 flex flex-col justify-between min-w-">
         <Image
           priority
-          className="w-full max-w-xs rounded-full mx-auto p-4"
+          className="w-full max-w-xs rounded-full mx-auto p-4 select-none"
           src={avatarUrl}
           alt={alt}
           width="320"

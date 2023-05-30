@@ -41,6 +41,7 @@ export const ProfileCard = ({
           alt={alt}
           width="320"
           height="320"
+          draggable="false"
         />
         <div className="flex justify-around flex-wrap pt-4 w-full max-w-md mx-auto">
           <span className="flex flex-col items-center">

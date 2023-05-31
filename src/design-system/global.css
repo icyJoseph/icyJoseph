@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --pale-blue: 165 200 228;
+    --pale-green: 192 236 204;
+    --pale-yellow: 249 240 193;
+    --pale-orange: 244 205 166;
+    --pale-red: 246 168 166;
+    --soft-black: 29 29 33;
+    --smoke-white: 251 249 255;
+  }
+}
+
+@layer components {
+  body::before {
+    content: "";
+    height: 4px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background-image: linear-gradient(
+      to right,
+      rgb(var(--pale-red) / 1),
+      rgb(var(--pale-orange) / 1),
+      rgb(var(--pale-yellow) / 1),
+      rgb(var(--pale-green) / 1),
+      rgb(var(--pale-blue) / 1)
+    );
+  }
+
+  button:focus,
+  *:focus-visible {
+    border-radius: 2px;
+    outline-offset: 2px;
+    outline: 2px solid rgb(var(--pale-blue) / 1);
+  }
+}

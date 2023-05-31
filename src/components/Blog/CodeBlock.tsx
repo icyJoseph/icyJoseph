@@ -1,5 +1,8 @@
+"use client";
+
 import type { ComponentPropsWithoutRef } from "react";
 
+import classNames from "classnames";
 import { PrismAsyncLight } from "react-syntax-highlighter";
 import css from "react-syntax-highlighter/dist/cjs/languages/prism/css";
 import js from "react-syntax-highlighter/dist/cjs/languages/prism/javascript";
@@ -32,6 +35,7 @@ export const CodeBlock = ({
       language={match[1]}
       PreTag="div"
       {...props}
+      className={classNames(className, "text-base")}
     >
       {String(children).replace(/\n$/, "")}
     </PrismAsyncLight>

@@ -1,9 +1,11 @@
+"use client";
+
 import { ReactNode, useState } from "react";
 
 import type { SearchResponse } from "meilisearch";
 import useSWRImmutable from "swr/immutable";
 
-import { PostLink } from "./PostLink";
+import { PostLink } from "components/Blog/PostLink";
 
 const useSearch = (query: string | null) => {
   return useSWRImmutable<SearchResponse<IcyJoseph.Post>>(query, (q) =>

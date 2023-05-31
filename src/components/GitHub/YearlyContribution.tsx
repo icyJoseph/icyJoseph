@@ -1,123 +1,197 @@
-import { Fragment, memo, useId, useMemo } from "react";
+"use client";
 
-import { ContributionEntry } from "components/GitHub/ContributionEntry";
-import { ContributionsSummary } from "components/GitHub/ContributionsSummary";
-import { Showcase } from "components/Showcase";
-import chevron from "design-system/chevron.module.css";
-import { Emoji } from "design-system/Emoji";
-import { Flex } from "design-system/Flex";
-import { Stale } from "design-system/Stale";
-import { Text } from "design-system/Text";
+import {
+  useState,
+  useMemo,
+  useDeferredValue,
+  type ChangeEventHandler,
+  useId,
+} from "react";
+
+import classNames from "classnames";
+
+import { ContributionShowcase } from "components/GitHub/ContributionShowcase";
+import { Select } from "components/Select";
+import { ICY_JOSEPH } from "github/constants";
 import { useGitHubContributions } from "hooks/useGitHub";
-import { useLastNonNullableValue } from "hooks/useLastNonNullableValue";
 
 type YearlyContributionProps = {
-  fallback: IcyJoseph.ContributionCollection | null;
-  year: number;
-  from: string;
-  to?: string;
+  initial: IcyJoseph.GitHub["contributionsCollection"];
+  currentYear: number;
 };
 
-const BackIcon = <i className={chevron.chevronLeft} aria-hidden="true" />;
-const FwdIcon = <i className={chevron.chevronRight} aria-hidden="true" />;
-const MemoContributionEntry = memo(ContributionEntry);
+type Contribution = {
+  repository: IcyJoseph.Repository;
+  contributions: {
+    totalCount: number;
+  };
+}[];
 
-export const YearlyContribution = ({
-  fallback,
-  year,
-  from,
-  to,
-}: YearlyContributionProps) => {
-  const { data, error } = useGitHubContributions({
-    from,
-    to,
-  });
+const contributionWithId = (contributions: Contribution | undefined) => {
+  if (!contributions) return [];
 
-  const prev = useLastNonNullableValue(data, fallback);
+  return contributions.map(({ repository, contributions }, index) => ({
+    id: repository.id,
+    index,
+    repository,
+    contributions,
+  }));
+};
 
-  const stale = prev !== fallback && !error && !data;
+const joinedGitHubContribution = {
+  id: "github-contribution",
+  index: -1,
+  repository: {
+    id: "github-contribution",
+    name: "Joined GitHub",
+    url: "https://github.com/icyJoseph",
+    homepageUrl: "https://icyjoseph.dev/",
+    languages: {
+      edges: [],
+      totalCount: 0,
+      totalSize: 0,
+    },
+    description: `
+    @icyJoseph joins GitHub 🎉
+    `,
+    owner: {
+      login: "icyJoseph",
+    },
+    isArchived: false,
+    isDisabled: false,
+    isFork: false,
+    isPrivate: false,
+    diskUsage: 0,
+  },
+  contributions: {
+    totalCount: 0,
+  },
+};
 
-  const commitContributionsByRepository = (data || prev)
-    ?.commitContributionsByRepository;
+const ContributionShowcaseByYear = ({
+  selectedYear,
+  currentYear,
+  initial,
+}: YearlyContributionProps & { selectedYear: number }) => {
+  const fallback = useMemo(
+    () => ({
+      [`contributions/${currentYear}`]: initial,
+    }),
+    [currentYear, initial]
+  );
+
+  const externalSwitch = useId();
+  const [onlyExternal, setOnlyExternal] = useState(false);
+
+  const { data } = useGitHubContributions(selectedYear, fallback);
+
+  const commitContributionsByRepository = data?.commitContributionsByRepository;
+
+  const joinedGitHub = Boolean(data?.joinedGitHubContribution);
+
+  const hasExternalContributions = Boolean(
+    commitContributionsByRepository?.some((contrib) => {
+      return contrib.repository.owner.login !== ICY_JOSEPH;
+    })
+  );
 
   const commitContributionsByRepositoryWithId = useMemo(() => {
-    if (!commitContributionsByRepository) return [];
+    if (joinedGitHub) return [joinedGitHubContribution];
 
-    return commitContributionsByRepository.map(
-      ({ repository, contributions }, index) => ({
-        id: repository.id,
-        index,
-        repository,
-        contributions,
-      })
+    const repositoryContributionsWithId = contributionWithId(
+      commitContributionsByRepository
     );
-  }, [commitContributionsByRepository]);
 
-  const headingId = useId();
+    if (onlyExternal) {
+      return repositoryContributionsWithId.filter((contrib) => {
+        return contrib.repository.owner.login !== ICY_JOSEPH;
+      });
+    }
 
-  if (!prev) return null;
-
-  const {
-    joinedGitHubContribution,
-    totalRepositoryContributions,
-    totalCommitContributions,
-    restrictedContributionsCount,
-  } = data || prev;
+    return repositoryContributionsWithId;
+  }, [joinedGitHub, commitContributionsByRepository, onlyExternal]);
 
   return (
-    <Fragment>
-      <div className="flex flex-col items-center my-8 px-5">
-        <Text as="h3" $fontSize="2.5rem">
-          In {year}
-        </Text>
-
-        <Stale $stale={stale}>
-          {joinedGitHubContribution ? (
-            <Flex mt={3}>
-              <Text $fontSize="2rem" $fontWeight={300}>
-                Joined GitHub
-                <Emoji
-                  symbol="🎉"
-                  title="Joined Github"
-                  ariaLabel="Celebration"
-                  className="mx-3"
-                />
-              </Text>
-            </Flex>
-          ) : (
-            <ContributionsSummary
-              totalRepositoryContributions={totalRepositoryContributions}
-              totalCommitContributions={totalCommitContributions}
-              restrictedContributionsCount={restrictedContributionsCount}
-              totalRepositoriesContributedTo={
-                commitContributionsByRepository?.length ?? 0
-              }
-            />
+    <>
+      <div className="my-4">
+        <label
+          htmlFor={externalSwitch}
+          className={classNames(
+            "hidden",
+            "transition-opacity",
+            hasExternalContributions ? "opacity-100" : "opacity-50"
           )}
-        </Stale>
+        >
+          Only external
+        </label>
+
+        <input
+          id={externalSwitch}
+          type="checkbox"
+          className="mx-2 hidden"
+          disabled={!hasExternalContributions}
+          checked={onlyExternal}
+          onChange={(event) => setOnlyExternal(event.target.checked)}
+        />
       </div>
 
-      {(commitContributionsByRepository ?? []).length > 0 && (
-        <Stale my={5} $stale={stale} as="section" aria-labelledby={headingId}>
-          <Text
-            id={headingId}
-            as="h3"
-            $fontSize="2.5rem"
-            className="mb-10 text-center"
-          >
-            Repositories in {year}
-          </Text>
+      <ContributionShowcase
+        year={selectedYear}
+        commitContributionsByRepository={commitContributionsByRepositoryWithId}
+      />
+    </>
+  );
+};
 
-          <Showcase
-            labelledBy={headingId}
-            Component={MemoContributionEntry}
-            items={commitContributionsByRepositoryWithId}
-            backIcon={BackIcon}
-            forwardIcon={FwdIcon}
-          />
-        </Stale>
+export const YearlyContribution = ({
+  currentYear,
+  initial,
+}: YearlyContributionProps) => {
+  const [selectedYear, setSelectedYear] = useState(
+    initial.contributionYears[0]
+  );
+
+  const handleSelectYear: ChangeEventHandler<HTMLSelectElement> = (event) => {
+    setSelectedYear(Number(event.target.value));
+  };
+
+  const deferredYear = useDeferredValue(selectedYear);
+
+  const isPending = selectedYear !== deferredYear;
+
+  return (
+    <div
+      className={classNames(
+        "w-full transition-opacity",
+        isPending ? "opacity-50" : "opacity-100"
       )}
-    </Fragment>
+    >
+      <div className={classNames("mt-8", "text-2xl")}>
+        <Select
+          label={
+            <span className="text-2xl" aria-hidden="true">
+              Repositories in
+            </span>
+          }
+          className="bg-soft-black underline font-[monospace]"
+          value={selectedYear}
+          onChange={handleSelectYear}
+          aria-label={`Navigate through repository contributions by year. Showing ${selectedYear}`}
+        >
+          {initial.contributionYears.map((year) => (
+            <option key={year} value={year}>
+              {year}
+            </option>
+          ))}
+        </Select>
+      </div>
+
+      <ContributionShowcaseByYear
+        currentYear={currentYear}
+        selectedYear={deferredYear}
+        initial={initial}
+      />
+    </div>
   );
 };
 

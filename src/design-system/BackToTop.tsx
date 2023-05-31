@@ -1,35 +1,29 @@
-import { space } from "@styled-system/space";
+import classNames from "classnames";
 import Link from "next/link";
-import styled from "styled-components";
 
 const Base = ({
   className = "",
   to,
   label,
+  renderAs = "a",
 }: {
   className?: string;
   to: string;
   label: string;
-}) => (
-  <div className={className}>
-    <Link href={to}>{label}</Link>
-  </div>
-);
+  renderAs?: typeof Link | "a";
+}) => {
+  const Tag = renderAs;
+  return (
+    <div className={classNames("mt-4 text-right", className)}>
+      <Tag href={to} className="font-sans underline text-base text-smoke-white">
+        {label}
+      </Tag>
+    </div>
+  );
+};
 
-const StyledBase = styled(Base)`
-  ${space({ mt: 4 })};
-  text-align: right;
-
-  & > a {
-    font-family: var(--font-family);
-    text-decoration: underline;
-    font-size: 1.6rem;
-    color: var(--smokeyWhite);
-  }
-`;
-
-export const BackToTop = () => <StyledBase to="#" label="Back to top" />;
+export const BackToTop = () => <Base to="#" label="Back to top" />;
 
 export const BackTo = ({ to, label }: { to: string; label: string }) => (
-  <StyledBase to={to} label={label} />
+  <Base renderAs={Link} to={to} label={label} />
 );

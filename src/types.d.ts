@@ -3,6 +3,9 @@ declare namespace NodeJS {
     MEILISEARCH_URL: string;
     MEILISEARCH_KEY: string;
     MEILISEARCH_INDEX: string;
+    BLOG_VIEWS_URL: string;
+    BLOG_VIEWS_API_KEY: string;
+    BLOG_VIEWS_TABLE: string;
   }
 }
 
@@ -14,6 +17,21 @@ declare namespace IcyJoseph {
       color: string;
     };
     size: number;
+  };
+
+  type ItemShowcase = {
+    id: string;
+    name: string;
+    nameWithOwner: string;
+    description: string;
+    primaryLanguage: {
+      name: string;
+      color: string;
+    };
+    url: string;
+    owner: {
+      login: string;
+    };
   };
 
   export type Repository = {
@@ -93,6 +111,11 @@ declare namespace IcyJoseph {
     };
     repositories: {
       nodes: Pick<Repository, "name" | "languages" | "isArchived">[];
+    };
+    itemShowcase: {
+      items: {
+        nodes: Array<ItemShowcase>;
+      };
     };
   };
 
@@ -254,5 +277,12 @@ declare namespace IcyJoseph {
     tags: Array<string>;
     // Who wrote the post
     authors: Array<string>;
+  };
+
+  export type PostView = {
+    id: string;
+    host: string;
+    slug: string;
+    views: number;
   };
 }

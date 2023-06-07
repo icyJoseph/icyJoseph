@@ -46,4 +46,5 @@ export const CodeBlock = ({
   );
 };
 
+export type CodeBlockComponent = typeof CodeBlock;
 export default CodeBlock;

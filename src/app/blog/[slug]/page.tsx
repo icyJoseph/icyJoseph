@@ -49,11 +49,20 @@ export const generateMetadata = async ({
   }
 };
 
-const getPostData = async (slug: string): Promise<IcyJoseph.Post> => {
+export type NonNullableFields<T> = {
+  [P in keyof T]: NonNullable<T[P]>;
+};
+
+const getPostData = async (
+  slug: string
+): Promise<IcyJoseph.Post & { content: string }> => {
   try {
     const post = await getPostBySlug(slug);
 
-    return post;
+    if (typeof post.content !== "string")
+      throw new Error(`${slug} has no content`);
+
+    return { ...post, content: post.content };
   } catch (e) {
     notFound();
   }
@@ -71,7 +80,7 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
   return (
     <section className="max-w-[75ch] mx-auto py-5 text-lg">
       <header className="text-3xl">{title}</header>
-      {/* @ts-expect-error MDX Async Component */}
+
       <MDXRemote source={content} components={components} />
 
       <CountView slug={slug} />

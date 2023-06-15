@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import { Social } from "components/Social";
 import style from "design-system/shadow.module.css";
-import { ICY_JOSEPH } from "github/constants";
+import { ICY_JOSEPH } from "lib/github/constants";
 
 type ProfileCardProps = {
   avatarUrl: string;

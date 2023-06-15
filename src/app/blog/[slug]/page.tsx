@@ -7,7 +7,7 @@ import { components } from "components/Blog/mdx";
 import { Related } from "components/Blog/Related";
 import { PostViews } from "components/PostViews";
 import { BackTo, BackToTop } from "design-system/BackToTop";
-import { getAllPosts, getPostBySlug } from "posts/lib";
+import { getAllPosts, getPostBySlug } from "lib/posts/db";
 
 export const revalidate = 360;
 
@@ -49,10 +49,6 @@ export const generateMetadata = async ({
   }
 };
 
-export type NonNullableFields<T> = {
-  [P in keyof T]: NonNullable<T[P]>;
-};
-
 const getPostData = async (
   slug: string
 ): Promise<IcyJoseph.Post & { content: string }> => {
@@ -80,6 +76,8 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
   return (
     <section className="max-w-[75ch] mx-auto py-5 text-lg">
       <header className="text-3xl">{title}</header>
+
+      <div />
 
       <MDXRemote source={content} components={components} />
 

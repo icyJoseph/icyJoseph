@@ -12,7 +12,7 @@ import classNames from "classnames";
 
 import { ContributionShowcase } from "components/GitHub/ContributionShowcase";
 import { Select } from "components/Select";
-import { ICY_JOSEPH } from "github/constants";
+import { ICY_JOSEPH } from "lib/github/constants";
 import { useGitHubContributions } from "hooks/useGitHub";
 
 type YearlyContributionProps = {

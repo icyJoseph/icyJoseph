@@ -1,6 +1,6 @@
 import { fromByteArray } from "base64-js";
 
-import { GET_USER, GET_YEAR_CONTRIBUTIONS } from "github/queries";
+import { GET_USER, GET_YEAR_CONTRIBUTIONS } from "lib/github/queries";
 import { yearRange } from "helpers";
 
 import { ICY_JOSEPH } from "./constants";

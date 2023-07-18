@@ -17,14 +17,16 @@
 @layer components {
   body::before {
     content: "";
-    height: 4px;
+    width: 4px;
     position: fixed;
+
     top: 0;
+    bottom: 0;
     left: 0;
-    right: 0;
     z-index: 10;
+
     background-image: linear-gradient(
-      to right,
+      to bottom,
       rgb(var(--pale-red) / 1),
       rgb(var(--pale-orange) / 1),
       rgb(var(--pale-yellow) / 1),

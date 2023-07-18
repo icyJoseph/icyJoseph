@@ -1,0 +1,14 @@
+.borderGradient {
+  border-bottom: 4px;
+  border-style: solid;
+  border-image: linear-gradient(
+      to right,
+      rgb(var(--pale-yellow)),
+      rgb(var(--pale-orange)),
+      rgb(var(--pale-red)),
+      rgb(var(--pale-green)),
+      rgb(var(--pale-blue))
+    )
+    4;
+  border-radius: inherit;
+}

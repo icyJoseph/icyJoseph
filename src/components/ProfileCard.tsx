@@ -2,7 +2,7 @@ import classNames from "classnames";
 import Image from "next/image";
 
 import { Social } from "components/Social";
-import style from "design-system/shadow.module.css";
+import style from "design-system/border-gradient.module.css";
 import { ICY_JOSEPH } from "lib/github/constants";
 
 type ProfileCardProps = {
@@ -18,7 +18,6 @@ type ProfileCardProps = {
 };
 
 const cardLayout = "md:flex-row max-w-3xl w-full flex flex-wrap";
-const cardBorder = "bg-zinc-900 rounded-lg border border-zinc-700";
 
 export const ProfileCard = ({
   avatarUrl,
@@ -32,7 +31,7 @@ export const ProfileCard = ({
   highlights,
 }: ProfileCardProps) => {
   return (
-    <article className={classNames(cardLayout, cardBorder, style.shadow)}>
+    <article className={classNames(cardLayout, style.borderGradient)}>
       <aside className="basis-full md:basis-2/5 p-4 flex flex-col justify-between min-w-">
         <Image
           priority

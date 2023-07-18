@@ -92,13 +92,15 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
       <header className="text-3xl">{title}</header>
 
       <aside className="mt-8 font-light text-base text-end">
-        <span className={style.separated}>{mainAuthor}</span>
+        <span className={`${style.separated} inline-block`}>{mainAuthor}</span>
 
-        <span className={style.separated}>
+        <span className={`${style.separated} inline-block`}>
           {intl.format(new Date(publish_date * 1000))}
         </span>
 
-        <span className={style.separated}>~{minutes} min</span>
+        <span className={`${style.separated} inline-block`}>
+          ~{minutes} min
+        </span>
       </aside>
 
       <MDXRemote source={content} components={components} />

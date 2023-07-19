@@ -7,7 +7,9 @@ import { components } from "components/Blog/mdx";
 import { Related } from "components/Blog/Related";
 import { PostViews } from "components/PostViews";
 import { BackTo, BackToTop } from "design-system/BackToTop";
-import { getAllPosts, getPostBySlug } from "posts/lib";
+import style from "design-system/separated.module.css";
+import { getAllPosts, getPostBySlug } from "lib/posts/db";
+import { estimateReadingTime } from "lib/reading-stats/estimate";
 
 export const revalidate = 360;
 
@@ -49,20 +51,18 @@ export const generateMetadata = async ({
   }
 };
 
-export type NonNullableFields<T> = {
-  [P in keyof T]: NonNullable<T[P]>;
-};
-
 const getPostData = async (
   slug: string
-): Promise<IcyJoseph.Post & { content: string }> => {
+): Promise<IcyJoseph.Post & { content: string; publish_date: number }> => {
   try {
     const post = await getPostBySlug(slug);
 
     if (typeof post.content !== "string")
       throw new Error(`${slug} has no content`);
+    if (typeof post.publish_date !== "number")
+      throw new Error(`${slug} has no publish date`);
 
-    return { ...post, content: post.content };
+    return { ...post, content: post.content, publish_date: post.publish_date };
   } catch (e) {
     notFound();
   }
@@ -74,12 +74,34 @@ export const generateStaticParams = async () => {
   return posts.map(({ slug }) => ({ slug }));
 };
 
+const intl = new Intl.DateTimeFormat("en-SE", {
+  year: "2-digit",
+  month: "2-digit",
+  day: "2-digit",
+});
+
 const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
-  const { slug, content, title, tags } = await getPostData(params.slug);
+  const { slug, content, title, tags, publish_date, authors } =
+    await getPostData(params.slug);
+
+  const { minutes } = await estimateReadingTime(content);
+  const [mainAuthor] = authors;
 
   return (
     <section className="max-w-[75ch] mx-auto py-5 text-lg">
       <header className="text-3xl">{title}</header>
+
+      <aside className="mt-8 font-light text-base text-end">
+        <span className={`${style.separated} inline-block`}>{mainAuthor}</span>
+
+        <span className={`${style.separated} inline-block`}>
+          {intl.format(new Date(publish_date * 1000))}
+        </span>
+
+        <span className={`${style.separated} inline-block`}>
+          ~{minutes} min
+        </span>
+      </aside>
 
       <MDXRemote source={content} components={components} />
 
@@ -93,9 +115,11 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
 
       <Related tags={tags} slug={slug} />
 
-      <BackToTop />
+      <div className="flex flex-wrap justify-between gap-x-4">
+        <BackTo to="/blog" label="Back to blog" />
 
-      <BackTo to="/blog" label="Back to Blog" />
+        <BackToTop />
+      </div>
     </section>
   );
 };

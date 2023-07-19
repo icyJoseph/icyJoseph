@@ -13,13 +13,13 @@ const attributesToRetrieve: Array<keyof PostPreview> = [
   "publish_date",
 ];
 
+const client = new MeiliSearch({
+  host: process.env.MEILISEARCH_URL,
+  apiKey: process.env.MEILISEARCH_KEY,
+});
+
 export const getAllPosts = async (): Promise<PostPreview[]> => {
   try {
-    const client = new MeiliSearch({
-      host: process.env.MEILISEARCH_URL,
-      apiKey: process.env.MEILISEARCH_KEY,
-    });
-
     const index = await client.getIndex<IcyJoseph.Post>(
       process.env.MEILISEARCH_INDEX
     );
@@ -39,11 +39,6 @@ export const getAllPosts = async (): Promise<PostPreview[]> => {
 };
 
 export const getPostBySlug = async (slug: string): Promise<IcyJoseph.Post> => {
-  const client = new MeiliSearch({
-    host: process.env.MEILISEARCH_URL,
-    apiKey: process.env.MEILISEARCH_KEY,
-  });
-
   const index = await client.getIndex<IcyJoseph.Post>(
     process.env.MEILISEARCH_INDEX
   );

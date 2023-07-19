@@ -1,0 +1,8 @@
+.separated::after {
+  content: "/";
+  margin-inline: 0.5rem;
+}
+
+.separated:last-child::after {
+  display: none;
+}

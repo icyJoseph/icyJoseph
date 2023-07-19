@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { ActiveLink } from "components/ActiveLinks";
+import { ActiveLink } from "components/ActiveLink";
 import { entries } from "config/pages";
 
 export const Navigation = () => {

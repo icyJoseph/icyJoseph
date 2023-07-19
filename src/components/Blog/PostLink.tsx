@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 import Link from "next/link";
 
-import type { PostPreview } from "posts/lib";
+import type { PostPreview } from "lib/posts/db";
 
 export const PostLink = ({
   post,

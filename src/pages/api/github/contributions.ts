@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { gitHubContributions } from "github/fetcher";
+import { gitHubContributions } from "lib/github/fetcher";
 
 type ContributionData = IcyJoseph.GitHub["contributionsCollection"];
 

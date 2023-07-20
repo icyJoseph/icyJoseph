@@ -12,8 +12,8 @@ import classNames from "classnames";
 
 import { ContributionShowcase } from "components/GitHub/ContributionShowcase";
 import { Select } from "components/Select";
-import { ICY_JOSEPH } from "github/constants";
 import { useGitHubContributions } from "hooks/useGitHub";
+import { ICY_JOSEPH } from "lib/github/constants";
 
 type YearlyContributionProps = {
   initial: IcyJoseph.GitHub["contributionsCollection"];

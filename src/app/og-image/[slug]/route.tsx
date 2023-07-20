@@ -1,7 +1,7 @@
 import { ImageResponse } from "@vercel/og";
 
 import { BlogPostImage, ProfileImage } from "app/og-image/components";
-import { getAllPosts, getPostBySlug } from "posts/lib";
+import { getAllPosts, getPostBySlug } from "lib/posts/db";
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();

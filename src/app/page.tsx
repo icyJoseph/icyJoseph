@@ -7,8 +7,8 @@ import { ParagraphWithIcon } from "components/ParagraphWithIcon";
 import { ProfileCard } from "components/ProfileCard";
 import { Bold } from "design-system/Bold";
 import { Bird, Briefcase, Code, FileRs, Student } from "design-system/Icons";
-import { fitBitProfile } from "fitbit/fetcher";
-import { gitHubProfile } from "github/fetcher";
+import { fitBitProfile } from "lib/fitbit/fetcher";
+import { gitHubProfile } from "lib/github/fetcher";
 
 export const revalidate = 60;
 

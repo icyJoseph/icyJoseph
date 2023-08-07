@@ -26,12 +26,14 @@ const redactedGitHubRepositoryData = (
         entry.repository.isArchived ||
         entry.repository.isDisabled;
 
+      const ownedByViewer = entry.repository.owner.login === ICY_JOSEPH;
+
       return {
         ...entry,
         repository: {
           ...entry.repository,
           url: hideUrl ? "" : entry.repository.url,
-          homepageUrl: hideUrl ? "" : entry.repository.homepageUrl,
+          homepageUrl: ownedByViewer ? entry.repository.homepageUrl : "",
         },
       };
     });

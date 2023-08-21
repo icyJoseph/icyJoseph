@@ -25,11 +25,9 @@ type Contribution = {
   contributions: {
     totalCount: number;
   };
-}[];
+};
 
-const contributionWithId = (contributions: Contribution | undefined) => {
-  if (!contributions) return [];
-
+const mapContributionsToShowcase = (contributions: Contribution[]) => {
   return contributions.map(({ repository, contributions }, index) => ({
     id: repository.id,
     index,
@@ -81,7 +79,7 @@ const ContributionShowcaseByYear = ({
   );
 
   const externalSwitch = useId();
-  const [onlyExternal, setOnlyExternal] = useState(false);
+  const [externalFirst, setExternalFirst] = useState(true);
 
   const { data } = useGitHubContributions(selectedYear, fallback);
 
@@ -98,18 +96,24 @@ const ContributionShowcaseByYear = ({
   const commitContributionsByRepositoryWithId = useMemo(() => {
     if (joinedGitHub) return [joinedGitHubContribution];
 
-    const repositoryContributionsWithId = contributionWithId(
-      commitContributionsByRepository
-    );
+    if (!commitContributionsByRepository) return [];
 
-    if (onlyExternal) {
-      return repositoryContributionsWithId.filter((contrib) => {
-        return contrib.repository.owner.login !== ICY_JOSEPH;
+    if (externalFirst) {
+      const external: Contribution[] = [];
+      const owned: Contribution[] = [];
+
+      commitContributionsByRepository.forEach((contrib) => {
+        const target =
+          contrib.repository.owner.login === ICY_JOSEPH ? owned : external;
+
+        target.push(contrib);
       });
+
+      return mapContributionsToShowcase([...external, ...owned]);
     }
 
-    return repositoryContributionsWithId;
-  }, [joinedGitHub, commitContributionsByRepository, onlyExternal]);
+    return mapContributionsToShowcase(commitContributionsByRepository);
+  }, [joinedGitHub, commitContributionsByRepository, externalFirst]);
 
   return (
     <>
@@ -117,25 +121,25 @@ const ContributionShowcaseByYear = ({
         <label
           htmlFor={externalSwitch}
           className={classNames(
-            "hidden",
             "transition-opacity",
             hasExternalContributions ? "opacity-100" : "opacity-50"
           )}
         >
-          Only external
+          Sort external first
         </label>
 
         <input
           id={externalSwitch}
           type="checkbox"
-          className="mx-2 hidden"
+          className="mx-2"
           disabled={!hasExternalContributions}
-          checked={onlyExternal}
-          onChange={(event) => setOnlyExternal(event.target.checked)}
+          checked={externalFirst}
+          onChange={(event) => setExternalFirst(event.target.checked)}
         />
       </div>
 
       <ContributionShowcase
+        key={externalFirst ? "external-first" : "normal"}
         year={selectedYear}
         commitContributionsByRepository={commitContributionsByRepositoryWithId}
       />

@@ -11,6 +11,8 @@ import {
   type FC,
 } from "react";
 
+import classNames from "classnames";
+
 import style from "design-system/showcase.module.css";
 import { useVisibleSubscription } from "hooks/useVisibleSubscription";
 
@@ -145,6 +147,10 @@ export const Showcase = <Data extends Record<"id", string>>({
     scrollListChildIntoView(element, lastVisibleIndex + 1);
   };
 
+  const total = items.length;
+
+  const current = firstVisibleIndex + 1;
+
   return (
     <div className={style.wrapper}>
       <ul
@@ -166,9 +172,9 @@ export const Showcase = <Data extends Record<"id", string>>({
 
       <div
         className={style.sliderControl}
-        role="navigation"
+        role="group"
         aria-controls={listId}
-        aria-label="slider"
+        aria-label="Showcase controls"
       >
         <button
           className={style.controlButton}
@@ -178,6 +184,14 @@ export const Showcase = <Data extends Record<"id", string>>({
         >
           {backIcon}
         </button>
+
+        <span
+          aria-hidden="true"
+          className={classNames(current === 0 && "invisible")}
+        >
+          {current} / {total}
+        </span>
+
         <button
           className={style.controlButton}
           onClick={moveForward}

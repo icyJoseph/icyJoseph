@@ -3,62 +3,16 @@
 import {
   useCallback,
   useId,
-  useEffect,
   useRef,
   useState,
-  type ReactNode,
   type ReactElement,
   type FC,
 } from "react";
 
 import classNames from "classnames";
 
+import { ItemShowCase } from "components/ShowcaseItem";
 import style from "design-system/showcase.module.css";
-import { useVisibleSubscription } from "hooks/useVisibleSubscription";
-
-type VoidVisibilityChangeCallback<Data> = (
-  data: Data,
-  isVisible: boolean
-) => void;
-
-export const ItemShowCase = <Data,>({
-  children,
-  onVisibilityChange,
-  item,
-}: {
-  children: ReactNode;
-  onVisibilityChange?: VoidVisibilityChangeCallback<Data>;
-  item: Data;
-}) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [observerRef, subscribe] = useVisibleSubscription();
-  const itemRef = useRef<HTMLLIElement>(null);
-
-  useEffect(() => {
-    const root = itemRef?.current?.parentElement?.parentElement ?? undefined;
-    const disconnect = subscribe(
-      (visible) => {
-        onVisibilityChange?.(item, visible);
-        setIsVisible(visible);
-      },
-      { root, threshold: 0 }
-    );
-
-    return disconnect;
-  }, [subscribe, onVisibilityChange, item]);
-
-  return (
-    <li
-      className={style.listItem}
-      ref={itemRef}
-      aria-hidden={isVisible ? "false" : "true"}
-    >
-      {/* this is a sentinel for intersection */}
-      <span ref={observerRef} aria-hidden="true" className={style.sentinel} />
-      {children}
-    </li>
-  );
-};
 
 type VisibilityChange<T> = (updated: T, isVisible: boolean) => void;
 type WithVisibility<T extends Record<"id", unknown>> = {
@@ -70,8 +24,19 @@ type RenderElement<T> = FC<T>;
 const calcVisibleBounds = <T extends Record<"id", unknown>>(
   visibleItems: WithVisibility<T>[]
 ) => {
-  const firstVisibleIndex = visibleItems.findIndex((item) => item.isVisible);
-  const visibleCount = visibleItems.filter((item) => item.isVisible).length;
+  let firstVisibleIndex = -1;
+  let visibleCount = 0;
+
+  visibleItems.forEach((item, index) => {
+    if (!item.isVisible) return;
+
+    visibleCount = visibleCount + 1;
+
+    if (firstVisibleIndex === -1) {
+      firstVisibleIndex = index;
+    }
+  });
+
   const lastVisibleIndex = firstVisibleIndex + (visibleCount - 1);
 
   return [firstVisibleIndex, lastVisibleIndex];

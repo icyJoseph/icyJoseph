@@ -5,6 +5,7 @@ import classNames from "classnames";
 import { ExternalLinkIcon } from "design-system/External";
 import { IndicatorBar } from "design-system/IndicatorBar";
 import { VisuallyHidden } from "design-system/VisuallyHidden";
+import { ICY_JOSEPH } from "lib/github/constants";
 
 const RE_EMOJI = /:\+1:|:-1:|:[\w-]+:/g;
 
@@ -16,7 +17,7 @@ export type ContributionCardProps = {
   id: string;
   repository: Pick<
     IcyJoseph.Repository,
-    "name" | "description" | "languages" | "homepageUrl" | "url"
+    "name" | "description" | "languages" | "homepageUrl" | "url" | "owner"
   >;
   index: number;
   contributions: { totalCount: number };
@@ -49,9 +50,20 @@ export const ContributionEntry = ({
       aria-labelledby={headingId}
     >
       <header>
-        <p className="text-pale-orange text-xl">#{index + 1}</p>
+        <div className="flex justify-between flex-nowrap">
+          <p className="text-pale-orange">#{index + 1}</p>
 
-        <h3 id={headingId} className="font-medium text-xl">
+          <aside
+            className={classNames(
+              "text-pale-blue capitalize",
+              repository.owner.login === ICY_JOSEPH && "invisible"
+            )}
+          >
+            {repository.owner.login}
+          </aside>
+        </div>
+
+        <h3 id={headingId} className="font-medium text-xl pt-4">
           {repository.name}
         </h3>
 

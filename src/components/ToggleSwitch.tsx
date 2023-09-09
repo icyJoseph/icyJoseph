@@ -23,7 +23,7 @@ export const ToggleSwitch = ({
         disabled={disabled}
       />
 
-      <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 peer-focus:ring-offset-blue-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-smoke-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-smoke-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-400" />
+      <div className="relative w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 peer-focus:ring-offset-blue-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-smoke-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-smoke-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-400" />
 
       <span
         className={classNames(

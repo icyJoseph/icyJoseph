@@ -1,15 +1,15 @@
 import { MeiliSearch } from "meilisearch";
 import type { NextApiRequest, NextApiResponse } from "next";
 
+import type { Post } from "lib/posts/types";
+
 const client = new MeiliSearch({
   host: process.env.MEILISEARCH_URL,
   apiKey: process.env.MEILISEARCH_KEY,
 });
 
 const search = async (req: NextApiRequest, res: NextApiResponse) => {
-  const index = await client.getIndex<IcyJoseph.Post>(
-    process.env.MEILISEARCH_INDEX
-  );
+  const index = await client.getIndex<Post>(process.env.MEILISEARCH_INDEX);
 
   const query = encodeURIComponent(`${req.query.q || ""}`);
 
@@ -21,7 +21,7 @@ const search = async (req: NextApiRequest, res: NextApiResponse) => {
     .map((tag) => `tags = '${tag}'`)
     .join(" OR ");
 
-  const results = await index.search<IcyJoseph.Post>(query, {
+  const results = await index.search<Post>(query, {
     sort: ["publish_date:desc"],
     filter: tags && tagFilter,
     attributesToRetrieve: ["title", "tags", "slug", "summary", "publish_date"],

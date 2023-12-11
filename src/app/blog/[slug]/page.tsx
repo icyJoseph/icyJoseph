@@ -9,6 +9,7 @@ import { PostViews } from "components/PostViews";
 import { BackTo, BackToTop } from "design-system/BackToTop";
 import style from "design-system/separated.module.css";
 import { getAllPosts, getPostBySlug } from "lib/posts/db";
+import type { Post } from "lib/posts/types";
 import { estimateReadingTime } from "lib/reading-stats/estimate";
 
 export const revalidate = 360;
@@ -53,7 +54,7 @@ export const generateMetadata = async ({
 
 const getPostData = async (
   slug: string
-): Promise<IcyJoseph.Post & { content: string; publish_date: number }> => {
+): Promise<Post & { content: string; publish_date: number }> => {
   try {
     const post = await getPostBySlug(slug);
 
@@ -64,6 +65,7 @@ const getPostData = async (
 
     return { ...post, content: post.content, publish_date: post.publish_date };
   } catch (e) {
+    console.log(e);
     notFound();
   }
 };

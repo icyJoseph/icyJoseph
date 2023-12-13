@@ -2,7 +2,7 @@
 import { z } from "zod";
 
 export const postSchema = z.object({
-  publish_date: z.number().nullable(),
+  publish_date: z.number(),
   update_date: z.number().optional().nullable(),
   title: z.string(),
   slug: z.string(),

@@ -39,7 +39,12 @@ export const metadata: Metadata = {
 const getBlogData = async (): Promise<BlogProps> => {
   try {
     const posts = await getAllPosts();
-    return { posts };
+    return {
+      posts: posts
+        .slice()
+        // TODO: When using Node 20, switch to `toSorted`
+        .sort((lhs, rhs) => rhs.publish_date - lhs.publish_date),
+    };
   } catch (e) {
     console.log("Error while building Blog landing page", e);
 

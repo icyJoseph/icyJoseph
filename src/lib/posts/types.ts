@@ -1,6 +1,6 @@
 export type Post = {
   // Unchangeable publication date
-  publish_date: number | null;
+  publish_date: number;
   // Last time post was edited
   update_date?: number | null;
   // Post title as seen by the reader

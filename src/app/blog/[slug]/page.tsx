@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
@@ -26,16 +28,17 @@ export const generateMetadata = async ({
     const post = await getPostBySlug(slug);
 
     return {
+      metadataBase: new URL(VERCEL_URL),
       title: `icyJoseph | ${post.title}`,
       description: post.summary,
       openGraph: {
-        url: `${VERCEL_URL}/blog/${slug}`,
+        url: `/blog/${slug}`,
         title: `icyJoseph | ${post.title}`,
         siteName: "icyJoseph",
         description: post.summary,
         images: [
           {
-            url: `${VERCEL_URL}/og-image/${slug}`,
+            url: `/og-image/${slug}`,
             width: 960,
             height: 540,
             alt: `Blog post: ${post.title}`,
@@ -91,19 +94,23 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
 
   return (
     <section className="max-w-[75ch] mx-auto py-5 text-lg">
-      <header className="text-3xl">{title}</header>
+      <div className="sticky top-0 bg-soft-black">
+        <header className="text-3xl">{title}</header>
 
-      <aside className="mt-8 font-light text-base text-end">
-        <span className={`${style.separated} inline-block`}>{mainAuthor}</span>
+        <aside className="mt-8 font-light text-base text-end">
+          <span className={`${style.separated} inline-block`}>
+            {mainAuthor}
+          </span>
 
-        <span className={`${style.separated} inline-block`}>
-          {intl.format(new Date(publish_date * 1000))}
-        </span>
+          <span className={`${style.separated} inline-block`}>
+            {intl.format(new Date(publish_date * 1000))}
+          </span>
 
-        <span className={`${style.separated} inline-block`}>
-          ~{minutes} min
-        </span>
-      </aside>
+          <span className={`${style.separated} inline-block`}>
+            ~{minutes} min
+          </span>
+        </aside>
+      </div>
 
       <MDXRemote source={content} components={components} />
 
@@ -111,7 +118,11 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
 
       <div className="py-4" />
 
-      <PostViews slug={slug} />
+      <p className="text-end font-light">
+        <Suspense fallback="..">
+          <PostViews slug={slug} />
+        </Suspense>
+      </p>
 
       <div className="py-4" />
 

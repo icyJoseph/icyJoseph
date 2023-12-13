@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import { BlogIntro } from "components/Blog/Intro";
 import { PostLink } from "components/Blog/PostLink";
 import { Search } from "components/Blog/Search";
-import { getAllPosts, type PostPreview } from "lib/posts/db";
+import { getAllPosts } from "lib/posts/db";
+import type { PostPreview } from "lib/posts/types";
 
 type BlogProps = {
   posts: PostPreview[];

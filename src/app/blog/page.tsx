@@ -15,6 +15,7 @@ export const revalidate = 360;
 const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
 
 export const metadata: Metadata = {
+  metadataBase: new URL(VERCEL_URL),
   title: "icyJoseph | Blog",
   description:
     "Here I publish my solutions to coding challenges, and things I learn on my day to day job.",

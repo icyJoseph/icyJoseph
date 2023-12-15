@@ -94,23 +94,19 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
 
   return (
     <section className="max-w-[75ch] mx-auto py-5 text-lg">
-      <div className="sticky top-0 bg-soft-black">
-        <header className="text-3xl">{title}</header>
+      <header className="text-3xl">{title}</header>
 
-        <aside className="mt-8 font-light text-base text-end">
-          <span className={`${style.separated} inline-block`}>
-            {mainAuthor}
-          </span>
+      <aside className="mt-8 font-light text-base text-end">
+        <span className={`${style.separated} inline-block`}>{mainAuthor}</span>
 
-          <span className={`${style.separated} inline-block`}>
-            {intl.format(new Date(publish_date * 1000))}
-          </span>
+        <span className={`${style.separated} inline-block`}>
+          {intl.format(new Date(publish_date * 1000))}
+        </span>
 
-          <span className={`${style.separated} inline-block`}>
-            ~{minutes} min
-          </span>
-        </aside>
-      </div>
+        <span className={`${style.separated} inline-block`}>
+          ~{minutes} min
+        </span>
+      </aside>
 
       <MDXRemote source={content} components={components} />
 

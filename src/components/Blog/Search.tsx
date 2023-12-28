@@ -6,9 +6,10 @@ import type { SearchResponse } from "meilisearch";
 import useSWRImmutable from "swr/immutable";
 
 import { PostLink } from "components/Blog/PostLink";
+import type { Post } from "lib/posts/types";
 
 const useSearch = (query: string | null) => {
-  return useSWRImmutable<SearchResponse<IcyJoseph.Post>>(query, (q) =>
+  return useSWRImmutable<SearchResponse<Post>>(query, (q) =>
     fetch(`/api/search?q=${encodeURIComponent(q)}`).then((res) => res.json())
   );
 };

@@ -5,7 +5,7 @@ type onVisibleChange = (visible: boolean) => void;
 const options: IntersectionObserverInit = { threshold: 1.0 };
 
 export function useVisibleSubscription<
-  Element extends HTMLElement = HTMLElement
+  Element extends HTMLElement = HTMLElement,
 >() {
   const ref = useRef<Element>(null);
 

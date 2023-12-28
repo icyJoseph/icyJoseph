@@ -1,36 +1,31 @@
-import { MeiliSearch } from "meilisearch";
+import fs from "fs/promises";
+import path from "path";
 
-export type PostPreview = Pick<
-  IcyJoseph.Post,
-  "title" | "tags" | "slug" | "summary" | "publish_date"
->;
+import matter from "gray-matter";
+import type { SafeParseSuccess } from "zod";
 
-const attributesToRetrieve: Array<keyof PostPreview> = [
-  "title",
-  "tags",
-  "slug",
-  "summary",
-  "publish_date",
-];
-
-const client = new MeiliSearch({
-  host: process.env.MEILISEARCH_URL,
-  apiKey: process.env.MEILISEARCH_KEY,
-});
+import { postSchema, postPreviewSchema } from "./parser";
+import type { Post, PostPreview } from "./types";
 
 export const getAllPosts = async (): Promise<PostPreview[]> => {
   try {
-    const index = await client.getIndex<IcyJoseph.Post>(
-      process.env.MEILISEARCH_INDEX
+    // with extension
+    const slugs = await fs.readdir(path.resolve(process.cwd(), "./posts"));
+
+    const postsContent = await Promise.all(
+      slugs.map<Promise<string>>((slug) =>
+        fs.readFile(path.resolve(process.cwd(), "./posts", slug), "utf-8")
+      )
     );
 
-    const { hits } = await index.search<IcyJoseph.Post>("", {
-      limit: 50,
-      attributesToRetrieve,
-      sort: ["publish_date:desc"],
-    });
+    const posts = postsContent
+      .map((content) => matter(content))
+      .map(({ data, content }) => ({ ...data, content }))
+      .map((post) => postPreviewSchema.safeParse(post))
+      .filter((result): result is SafeParseSuccess<Post> => result.success)
+      .map(({ data }) => data);
 
-    return hits;
+    return posts;
   } catch (e) {
     console.log("Error while building Blog landing page", e);
 
@@ -38,12 +33,13 @@ export const getAllPosts = async (): Promise<PostPreview[]> => {
   }
 };
 
-export const getPostBySlug = async (slug: string): Promise<IcyJoseph.Post> => {
-  const index = await client.getIndex<IcyJoseph.Post>(
-    process.env.MEILISEARCH_INDEX
+export const getPostBySlug = async (slug: string): Promise<Post> => {
+  const postsContent = await fs.readFile(
+    path.resolve(process.cwd(), "./posts", `${slug}.md`),
+    "utf-8"
   );
 
-  const post = await index.getDocument(slug);
-
+  const { content, data } = matter(postsContent);
+  const post = postSchema.parse({ ...data, content });
   return post;
 };

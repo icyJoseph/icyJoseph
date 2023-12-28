@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
@@ -9,6 +11,7 @@ import { PostViews } from "components/PostViews";
 import { BackTo, BackToTop } from "design-system/BackToTop";
 import style from "design-system/separated.module.css";
 import { getAllPosts, getPostBySlug } from "lib/posts/db";
+import type { Post } from "lib/posts/types";
 import { estimateReadingTime } from "lib/reading-stats/estimate";
 
 export const revalidate = 360;
@@ -25,16 +28,17 @@ export const generateMetadata = async ({
     const post = await getPostBySlug(slug);
 
     return {
+      metadataBase: new URL(VERCEL_URL),
       title: `icyJoseph | ${post.title}`,
       description: post.summary,
       openGraph: {
-        url: `${VERCEL_URL}/blog/${slug}`,
+        url: `/blog/${slug}`,
         title: `icyJoseph | ${post.title}`,
         siteName: "icyJoseph",
         description: post.summary,
         images: [
           {
-            url: `${VERCEL_URL}/og-image/${slug}`,
+            url: `/og-image/${slug}`,
             width: 960,
             height: 540,
             alt: `Blog post: ${post.title}`,
@@ -53,7 +57,7 @@ export const generateMetadata = async ({
 
 const getPostData = async (
   slug: string
-): Promise<IcyJoseph.Post & { content: string; publish_date: number }> => {
+): Promise<Post & { content: string; publish_date: number }> => {
   try {
     const post = await getPostBySlug(slug);
 
@@ -64,6 +68,7 @@ const getPostData = async (
 
     return { ...post, content: post.content, publish_date: post.publish_date };
   } catch (e) {
+    console.log(e);
     notFound();
   }
 };
@@ -109,7 +114,11 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
 
       <div className="py-4" />
 
-      <PostViews slug={slug} />
+      <p className="text-end font-light">
+        <Suspense fallback="..">
+          <PostViews slug={slug} />
+        </Suspense>
+      </p>
 
       <div className="py-4" />
 

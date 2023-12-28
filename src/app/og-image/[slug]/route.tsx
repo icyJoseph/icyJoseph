@@ -1,4 +1,4 @@
-import { ImageResponse } from "@vercel/og";
+import { ImageResponse } from "next/og";
 
 import { BlogPostImage, ProfileImage } from "app/og-image/components";
 import { getAllPosts, getPostBySlug } from "lib/posts/db";

@@ -43,12 +43,22 @@ export const ProfileCard = ({
           draggable="false"
         />
         <div className="flex justify-around flex-wrap pt-4 w-full max-w-md mx-auto">
-          <span className="flex flex-col items-center">
-            <span className="text-xl text-pale-red">{restingHeartRate}</span>{" "}
+          <span
+            className={`flex flex-col items-center ${
+              restingHeartRate == null ? "hidden" : "visible"
+            }`}
+          >
+            <span className="text-xl text-pale-red">
+              {restingHeartRate ?? "-"}
+            </span>{" "}
             <span>bpm</span>
           </span>
 
-          <span className="flex flex-col items-center">
+          <span
+            className={`flex flex-col items-center ${
+              averageSteps === 0 ? "hidden" : "visible"
+            }`}
+          >
             <span className="text-xl text-pale-red">{averageSteps}</span>{" "}
             <span>daily steps</span>
           </span>

@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import { BlogIntro } from "components/Blog/Intro";
 import { PostLink } from "components/Blog/PostLink";
 import { Search } from "components/Blog/Search";
-import { getAllPosts, type PostPreview } from "lib/posts/db";
+import { getAllPosts } from "lib/posts/db";
+import type { PostPreview } from "lib/posts/types";
 
 type BlogProps = {
   posts: PostPreview[];
@@ -14,6 +15,7 @@ export const revalidate = 360;
 const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
 
 export const metadata: Metadata = {
+  metadataBase: new URL(VERCEL_URL),
   title: "icyJoseph | Blog",
   description:
     "Here I publish my solutions to coding challenges, and things I learn on my day to day job.",
@@ -38,7 +40,12 @@ export const metadata: Metadata = {
 const getBlogData = async (): Promise<BlogProps> => {
   try {
     const posts = await getAllPosts();
-    return { posts };
+    return {
+      posts: posts
+        .slice()
+        // TODO: When using Node 20, switch to `toSorted`
+        .sort((lhs, rhs) => rhs.publish_date - lhs.publish_date),
+    };
   } catch (e) {
     console.log("Error while building Blog landing page", e);
 

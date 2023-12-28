@@ -1,13 +1,8 @@
 import type { ComponentPropsWithoutRef } from "react";
 
-import dynamic from "next/dynamic";
 import Link from "next/link";
 
-import type { CodeBlockComponent } from "components/Blog/CodeBlock";
-
-const CodeBlock = dynamic(
-  () => import("components/Blog/CodeBlock")
-) as CodeBlockComponent;
+import { CodeBlock } from "components/Blog/CodeBlock";
 
 export const components = {
   h1: (props: ComponentPropsWithoutRef<"h1">) => {

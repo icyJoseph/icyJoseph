@@ -1,21 +1,3 @@
-// Pipe
-export const pipe =
-  (...funcs: any[]) =>
-  (...args: any[]) =>
-    funcs.reduce((val, func, i) => (i === 0 ? func(...val) : func(val)), args);
-
-export const curry =
-  <A, B, C>(f: (a: A, ...b: Array<B>) => C) =>
-  (a: A) =>
-  (...b: Array<B>) =>
-    f(a, ...b);
-
-export const curryRight =
-  <A, B, C>(f: (a: A, ...b: Array<B>) => C) =>
-  (...b: Array<B>) =>
-  (a: A) =>
-    f(a, ...b);
-
 export const take =
   (n: number, m = 0) =>
   <T>(array: Array<T>) =>

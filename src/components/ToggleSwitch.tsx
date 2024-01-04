@@ -14,7 +14,12 @@ export const ToggleSwitch = ({
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }) => {
   return (
-    <label className="relative inline-flex items-center mb-5 cursor-pointer">
+    <label
+      className={classNames(
+        "relative inline-flex items-center mb-5 cursor-pointer",
+        disabled ? "cursor-not-allowed" : "cursor-default"
+      )}
+    >
       <input
         type="checkbox"
         checked={checked}

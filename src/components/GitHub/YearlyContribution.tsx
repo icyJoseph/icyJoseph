@@ -63,5 +63,3 @@ export const YearlyContribution = ({
     </div>
   );
 };
-
-export default YearlyContribution;

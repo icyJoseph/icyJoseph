@@ -67,7 +67,12 @@ export const ContributionEntry = ({
           {repository.name}
         </h3>
 
-        <p className="pt-5 text-xl font-light">
+        <p
+          className={classNames(
+            "pt-5 text-xl font-light",
+            contributions.totalCount === 0 && "invisible"
+          )}
+        >
           +{contributions.totalCount} <span>commits</span>
         </p>
       </header>
@@ -79,7 +84,14 @@ export const ContributionEntry = ({
       </section>
 
       <footer className="pt-5">
-        <h4 className="mb-4 text-base">Languages</h4>
+        <h4
+          className={classNames(
+            "mb-4 text-base",
+            languages.length === 0 && "invisible"
+          )}
+        >
+          Languages
+        </h4>
 
         <ul className="mb-4 flex flex-wrap gap-x-8 gap-y-4">
           {languages.map(({ node: { color, name } }) => (

@@ -5,7 +5,11 @@ import { Showcase } from "components/Showcase";
 import { ToggleSwitch } from "components/ToggleSwitch";
 import chevron from "design-system/chevron.module.css";
 import { useGitHubContributions } from "hooks/useGitHub";
-import { ICY_JOSEPH } from "lib/github/constants";
+import {
+  ICY_JOSEPH,
+  zeroContributions,
+  joinedGitHubContribution,
+} from "lib/github/constants";
 
 const BackIcon = <i className={chevron.chevronLeft} aria-hidden="true" />;
 const FwdIcon = <i className={chevron.chevronRight} aria-hidden="true" />;
@@ -31,36 +35,6 @@ const mapContributionsToShowcase = (contributions: Contribution[]) => {
     repository,
     contributions,
   }));
-};
-
-const joinedGitHubContribution = {
-  id: "github-contribution",
-  index: -1,
-  repository: {
-    id: "github-contribution",
-    name: "Joined GitHub",
-    url: "https://github.com/icyJoseph",
-    homepageUrl: "https://icyjoseph.dev/",
-    languages: {
-      edges: [],
-      totalCount: 0,
-      totalSize: 0,
-    },
-    description: `
-    @icyJoseph joins GitHub 🎉
-    `,
-    owner: {
-      login: "icyJoseph",
-    },
-    isArchived: false,
-    isDisabled: false,
-    isFork: false,
-    isPrivate: false,
-    diskUsage: 0,
-  },
-  contributions: {
-    totalCount: 0,
-  },
 };
 
 export const ContributionShowcase = ({
@@ -92,7 +66,11 @@ export const ContributionShowcase = ({
   const commitContributionsByRepositoryWithId = useMemo(() => {
     if (joinedGitHub) return [joinedGitHubContribution];
 
-    if (!commitContributionsByRepository) return [];
+    if (
+      !commitContributionsByRepository ||
+      commitContributionsByRepository.length === 0
+    )
+      return [zeroContributions];
 
     if (externalFirst) {
       const external: Contribution[] = [];

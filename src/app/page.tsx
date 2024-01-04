@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { Bytes } from "components/Bytes";
-import YearlyContribution from "components/GitHub/YearlyContribution";
+import { YearlyContribution } from "components/GitHub/YearlyContribution";
 import { Introduction } from "components/Introduction";
 import { ParagraphWithIcon } from "components/ParagraphWithIcon";
 import { ProfileCard } from "components/ProfileCard";

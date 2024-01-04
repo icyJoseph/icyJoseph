@@ -1,35 +1,35 @@
-import { rest } from "msw";
+import { http, HttpResponse } from "msw";
 
 import codewarsJSON from "./data/codewars.json";
 import heartRateJSON from "./data/fitbit/heart-activity.json";
 import listJSON from "./data/fitbit/list.json";
 import profileJSON from "./data/fitbit/profile.json";
 
-const fitbitProfile = rest.get(
+const fitbitProfile = http.get(
   "https://api.fitbit.com/1/user/-/profile.json",
-  (req, res, ctx) => {
-    return res(ctx.json(profileJSON));
+  () => {
+    return HttpResponse.json(profileJSON);
   }
 );
 
-const fitbitHeartRate = rest.get(
+const fitbitHeartRate = http.get(
   "https://api.fitbit.com/1/user/-/activities/heart/date/today/1m.json",
-  (req, res, ctx) => {
-    return res(ctx.json(heartRateJSON));
+  () => {
+    return HttpResponse.json(heartRateJSON);
   }
 );
 
-const fitbitList = rest.get(
+const fitbitList = http.get(
   "https://api.fitbit.com/1/user/-/activities/list.json",
-  (req, res, ctx) => {
-    return res(ctx.json(listJSON));
+  () => {
+    return HttpResponse.json(listJSON);
   }
 );
 
-const codewars = rest.get(
+const codewars = http.get(
   "https://www.codewars.com/api/v1/users/icyJoseph",
-  (req, res, ctx) => {
-    return res(ctx.json(codewarsJSON));
+  () => {
+    return HttpResponse.json(codewarsJSON);
   }
 );
 

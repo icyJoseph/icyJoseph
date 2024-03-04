@@ -63,5 +63,8 @@ export const components = {
   ul: (props: ComponentPropsWithoutRef<"ul">) => (
     <ul {...props} className="my-3 list-disc list-inside" />
   ),
+  blockquote: (props: ComponentPropsWithoutRef<"blockquote">) => (
+    <blockquote className="pl-4 italic" {...props} />
+  ),
   code: CodeBlock,
 };

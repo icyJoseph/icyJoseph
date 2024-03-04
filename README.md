@@ -9,6 +9,7 @@
 
 - Follow me on Medium, [@icjoseph](https://medium.com/@icjoseph)
 - On LinkedIn, [@icyjoseph](https://www.linkedin.com/in/icyjoseph/)
+- Sponsorship and tutoring, [@icyjoseph](https://github.com/sponsors/icyJoseph)
 
 ## Code Wars
 
@@ -46,6 +47,8 @@ Only Rust 🦀
 
 ## Open Source Contributions
 
+Some contributions made in the past years
+
 - [next.js](https://github.com/vercel/next.js)
   - [PR 37434](https://github.com/vercel/next.js/pull/37434)
   - [PR 36951](https://github.com/vercel/next.js/pull/36951)
@@ -60,36 +63,3 @@ Only Rust 🦀
 - [useStateMachine](https://github.com/cassiozen/useStateMachine)
   - [PR 2](https://github.com/cassiozen/useStateMachine/pull/2)
 
-## [`tokei`](https://github.com/XAMPPRocky/tokei) on my `dev` folder
-
-```
-➜ tokei -t=JavaScript,TypeScript,CSS,HTML,Rust ~/dev
-===============================================================================
- Language            Files        Lines         Code     Comments       Blanks
-===============================================================================
- CSS                   185        44882        40835          341         3706
- JavaScript           2080       136485       113500         8438        14547
- TypeScript           1185       112375        98599         3539        10237
--------------------------------------------------------------------------------
- HTML                  115         4187         3033         1057           97
- |- CSS                 14          192          176            0           16
- |- JavaScript          20          544          468           10           66
- (Total)                           4923         3677         1067          179
--------------------------------------------------------------------------------
- Rust                  206        17856        14498          375         2983
- |- Markdown            10           55            0           47            8
- (Total)                          17911        14498          422         2991
-===============================================================================
- Total                3771       315785       270465        13750        31570
-===============================================================================
-```
-
-## Fancy GitHub Cards
-
-### User Stats
-
-![icyJoseph's GitHub stats](https://github-readme-stats-9cjg.vercel.app/api?username=icyJoseph&count_private=true&show_icons=true&theme=dracula)
-
-### Top Languages
-
-![Top languages](https://github-readme-stats-9cjg.vercel.app/api/top-langs/?username=icyJoseph&hide=apl,scss,scala,lua,makefile,css,html,bash,python,perl,roff,erlang,roff,shell,c,c%2B%2B&layout=compact&theme=dracula)

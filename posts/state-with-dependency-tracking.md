@@ -19,11 +19,19 @@ A state hook that can keep track of which parts of the state are being used.
 
 It does this to render the consumer component, only when the pieces of state it consumes change, otherwise, it ignores the change.
 
-The [swr code](https://github.com/vercel/swr/blob/master/src/utils/state.ts) summarizes it better than I can:
+The [swr@1.3.0 code](https://github.com/vercel/swr/blob/1.3.0/src/utils/state.ts#L12) summarizes it better than I can:
 
 > If a state property (data, error or isValidating) is accessed by the render function, we mark the property as a dependency so if it is updated again in the future, we trigger a re-render.
 > 
 > This is also known as dependency-tracking.
+
+### Update
+
+After `swr@2`, and further, `swr` uses `useSyncExternalStore`, but the idea of tracking accessed properties lives on:
+
+- [`isEqual` function](https://github.com/vercel/swr/blob/main/src/core/use-swr.ts#L152)
+- Which [is used here](https://github.com/vercel/swr/blob/main/src/core/use-swr.ts#L245)
+- Code [comment explanation](https://github.com/vercel/swr/blob/main/src/core/use-swr.ts#L219)
 
 ## Code
 

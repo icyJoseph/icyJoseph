@@ -1,6 +1,9 @@
 import { useRef, useCallback } from "react";
 
-type onVisibleChange = (visible: boolean) => void;
+type onVisibleChange = (
+  visible: boolean,
+  observer?: IntersectionObserver
+) => void;
 
 const options: IntersectionObserverInit = { threshold: 1.0 };
 
@@ -16,10 +19,10 @@ export function useVisibleSubscription<
       if (!element) return;
 
       const observer = new IntersectionObserver(
-        (entries) => {
+        (entries, reference) => {
           const [entry] = entries;
 
-          onChange?.(entry.isIntersecting);
+          onChange?.(entry.isIntersecting, reference);
         },
         { ...options, ...opts }
       );

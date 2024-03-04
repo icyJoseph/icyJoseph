@@ -1,8 +1,5 @@
 declare namespace NodeJS {
   interface ProcessEnv {
-    MEILISEARCH_URL: string;
-    MEILISEARCH_KEY: string;
-    MEILISEARCH_INDEX: string;
     BLOG_VIEWS_URL: string;
     BLOG_VIEWS_API_KEY: string;
     BLOG_VIEWS_TABLE: string;

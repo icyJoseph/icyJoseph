@@ -1,4 +1,4 @@
-import type { ComponentPropsWithoutRef } from "react";
+import { Suspense, type ComponentPropsWithoutRef } from "react";
 
 import { Code } from "bright";
 import classNames from "classnames";
@@ -12,13 +12,15 @@ export const CodeBlock = ({
   const match = /language-(\w+)/.exec(className || "");
 
   return !inline && match ? (
-    <Code
-      lang={match[1]}
-      {...props}
-      className={classNames(className, "text-base")}
-    >
-      {String(children).replace(/\n$/, "")}
-    </Code>
+    <Suspense fallback={<code className="text-base">{children}</code>}>
+      <Code
+        lang={match[1]}
+        {...props}
+        className={classNames(className, "text-base")}
+      >
+        {String(children).replace(/\n$/, "")}
+      </Code>
+    </Suspense>
   ) : (
     <code className={className} {...props}>
       {children}

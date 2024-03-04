@@ -28,7 +28,7 @@ export const PostViews = async ({ slug }: { slug: string }) => {
 
   return (
     <>
-      <span className="text-3xl">{data?.views ?? "-"}</span> <span>views</span>
+      <span>{data?.views ?? "-"}</span> <span>views</span>
     </>
   );
 };

@@ -6,7 +6,6 @@ import { notFound } from "next/navigation";
 
 import { CountView } from "components/Blog/CountView";
 import { components } from "components/Blog/mdx";
-import { Related } from "components/Blog/Related";
 import { PostViews } from "components/PostViews";
 import { BackTo, BackToTop } from "design-system/BackToTop";
 import style from "design-system/separated.module.css";
@@ -86,10 +85,17 @@ const intl = new Intl.DateTimeFormat("en-SE", {
 });
 
 const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
-  const { slug, content, title, tags, publish_date, authors } =
-    await getPostData(params.slug);
+  const {
+    slug,
+    content,
+    title,
+    // tags,
+    publish_date,
+    authors,
+  } = await getPostData(params.slug);
 
   const { minutes } = await estimateReadingTime(content);
+
   const [mainAuthor] = authors;
 
   return (
@@ -114,15 +120,11 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
 
       <div className="py-4" />
 
-      <p className="text-end font-light">
+      <p className="text-end font-light text-3xl">
         <Suspense fallback="..">
           <PostViews slug={slug} />
         </Suspense>
       </p>
-
-      <div className="py-4" />
-
-      <Related tags={tags} slug={slug} />
 
       <div className="flex flex-wrap justify-between gap-x-4">
         <BackTo to="/blog" label="Back to blog" />

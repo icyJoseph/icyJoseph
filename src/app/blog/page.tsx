@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import { BlogIntro } from "components/Blog/Intro";
 import { PostLink } from "components/Blog/PostLink";
-import { Search } from "components/Blog/Search";
 import { getAllPosts } from "lib/posts/db";
 import type { PostPreview } from "lib/posts/types";
 
@@ -65,13 +64,11 @@ const Blog = async () => {
 
         <h2 className="font-sans text-2xl pt-20 mb-8">Posts</h2>
 
-        <Search>
-          {hasPosts ? (
-            posts.map((post) => <PostLink key={post.slug} post={post} />)
-          ) : (
-            <p className="font-sans text-xl">Nothing has been published yet.</p>
-          )}
-        </Search>
+        {hasPosts ? (
+          posts.map((post) => <PostLink key={post.slug} post={post} />)
+        ) : (
+          <p className="font-sans text-xl">Nothing has been published yet.</p>
+        )}
       </section>
     </>
   );

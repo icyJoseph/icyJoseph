@@ -6,12 +6,12 @@ import { notFound } from "next/navigation";
 
 import { CountView } from "components/Blog/CountView";
 import { components } from "components/Blog/mdx";
+import { ReadingTime } from "components/Blog/ReadingTime";
 import { PostViews } from "components/PostViews";
 import { BackTo, BackToTop } from "design-system/BackToTop";
 import style from "design-system/separated.module.css";
 import { getAllPosts, getPostBySlug } from "lib/posts/db";
 import type { Post } from "lib/posts/types";
-import { estimateReadingTime } from "lib/reading-stats/estimate";
 
 export const revalidate = 360;
 
@@ -94,8 +94,6 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
     authors,
   } = await getPostData(params.slug);
 
-  const { minutes } = await estimateReadingTime(content);
-
   const [mainAuthor] = authors;
 
   return (
@@ -109,9 +107,9 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
           {intl.format(new Date(publish_date * 1000))}
         </span>
 
-        <span className={`${style.separated} inline-block`}>
-          ~{minutes} min
-        </span>
+        <Suspense fallback={<span className="inline-block">..</span>}>
+          <ReadingTime content={content} />
+        </Suspense>
       </aside>
 
       <MDXRemote source={content} components={components} />

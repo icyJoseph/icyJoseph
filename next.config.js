@@ -9,9 +9,6 @@ const config = {
   reactStrictMode: true,
   productionBrowserSourceMaps: true,
   swcMinify: true,
-  compiler: {
-    styledComponents: true,
-  },
   images: {
     domains: [
       "avatars.githubusercontent.com",

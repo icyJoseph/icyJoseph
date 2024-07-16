@@ -13,8 +13,6 @@ import style from "design-system/separated.module.css";
 import { getAllPosts, getPostBySlug } from "lib/posts/db";
 import type { Post } from "lib/posts/types";
 
-export const revalidate = 360;
-
 const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
 
 export const generateMetadata = async ({

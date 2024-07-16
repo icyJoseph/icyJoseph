@@ -96,6 +96,8 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
 
   const [mainAuthor] = authors;
 
+  const [initial, ...rest] = content.split("\n---\n");
+
   return (
     <section className="max-w-[75ch] mx-auto py-5 text-lg">
       <header className="text-3xl">{title}</header>
@@ -112,7 +114,13 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
         </Suspense>
       </aside>
 
-      <MDXRemote source={content} components={components} />
+      <MDXRemote source={initial} components={components} />
+
+      {rest.map((txt, pos) => (
+        <Suspense key={txt.slice(0, 5).trim() + pos}>
+          <MDXRemote source={txt} components={components} />
+        </Suspense>
+      ))}
 
       <CountView slug={slug} />
 

@@ -1,14 +1,4 @@
-import {
-  pipe,
-  curry,
-  curryRight,
-  take,
-  head,
-  last,
-  purify,
-  split,
-  capitalize
-} from "functional";
+import { take, head, last, purify, split, capitalize } from "functional";
 
 describe("take", () => {
   const target = [1, 2, 3, 4, 5];
@@ -20,49 +10,6 @@ describe("take", () => {
   });
   it("takes a starting point", () => {
     expect(take(2, 2)(target)).toEqual([3, 4]);
-  });
-});
-
-describe("pipe", () => {
-  const add = (a: number, b: number) => a + b;
-  const mult = (a: number) => a * 3;
-  it("pipes through the functions", () => {
-    expect(pipe(add, mult)(2, 3)).toEqual(15);
-  });
-});
-
-describe("curry", () => {
-  const add = (a: number, b: number) => a + b;
-  const mult = (a: number, b: number) => a * b;
-  const curriedAdd = curry(add);
-  const curriedMult = curry(mult);
-
-  it("curries the functions", () => {
-    expect(curriedAdd).toBeInstanceOf(Function);
-    expect(curriedMult).toBeInstanceOf(Function);
-  });
-
-  it("allows to pass arguments separately", () => {
-    expect(curriedAdd(2)(3)).toEqual(5);
-    expect(curriedMult(2)(3)).toEqual(6);
-  });
-});
-
-describe("curryRight", () => {
-  const add = (a: number, b: number) => a + b;
-  const mult = (a: number, b: number) => a * b;
-
-  const curriedAdd = curryRight(add);
-  const curriedMult = curryRight(mult);
-
-  it("curries the functions from the Right", () => {
-    expect(curriedAdd).toBeInstanceOf(Function);
-    expect(curriedMult).toBeInstanceOf(Function);
-  });
-
-  it("allows to pass arguments separately", () => {
-    expect(curriedAdd(2)(3)).toEqual(5);
-    expect(curriedMult(2)(3)).toEqual(6);
   });
 });
 

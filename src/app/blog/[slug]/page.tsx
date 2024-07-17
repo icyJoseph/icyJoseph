@@ -1,8 +1,9 @@
-import { Suspense } from "react";
+import { Suspense, Fragment } from "react";
 
+import { compile, run } from "@mdx-js/mdx";
 import type { Metadata } from "next";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
+import * as runtime from "react/jsx-runtime";
 
 import { CountView } from "components/Blog/CountView";
 import { components } from "components/Blog/mdx";
@@ -92,9 +93,17 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
     authors,
   } = await getPostData(params.slug);
 
-  const [mainAuthor] = authors;
+  const asFunctionBody = await compile(content, {
+    outputFormat: "function-body",
+  });
 
-  const [initial, ...rest] = content.split("\n---\n");
+  const { default: MDXContent } = await run(asFunctionBody, {
+    Fragment,
+    ...runtime,
+    baseUrl: import.meta.url,
+  });
+
+  const [mainAuthor] = authors;
 
   return (
     <section className="max-w-[75ch] mx-auto py-5 text-lg">
@@ -112,13 +121,13 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
         </Suspense>
       </aside>
 
-      <MDXRemote source={initial} components={components} />
+      <MDXContent components={components} />
 
-      {rest.map((txt, pos) => (
+      {/* {rest.map((txt, pos) => (
         <Suspense key={txt.slice(0, 5).trim() + pos}>
-          <MDXRemote source={txt} components={components} />
+          <MDXContent source={txt} components={components} />
         </Suspense>
-      ))}
+      ))} */}
 
       <CountView slug={slug} />
 

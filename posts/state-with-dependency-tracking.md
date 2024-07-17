@@ -143,8 +143,6 @@ const useLength = (label: string) => {
 
 But the issue here is that `useData` would still be contained within who ever is calling this hook, and that'll make those render.
 
----
-
 ### Empty objects as default values and React rendering
 
 The above often happens in another less obvious way. That is when we use de-structuring default values. In the snippet below, every time we toggle, the data reference is a different empty array, so the effect is triggered.

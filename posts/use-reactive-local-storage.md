@@ -76,8 +76,6 @@ It is important to be aware of this, because naively, the serialization and dese
 
 Of course one could optimize this away, by keeping a look-up table of strings and references, but there's always a trade-off going on, because now we consume memory storing such a table.
 
----
-
 ## Problem
 
 Could we possibly use the `localStorage` API, to avoid having to lift state, prop drilling or context?

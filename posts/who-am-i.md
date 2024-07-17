@@ -22,8 +22,6 @@ I moved to Sweden in 2014 to study a Master's Degree. After I finished it, I got
 
 I've been coding ever since university days. I remember my first programming course used `C++`, and I took over a summer as preparation for the third semester of electronics engineering school.
 
----
-
 ## Higher Education
 
 Talking about university, I studied in the `Universidad Nacional de Ingenieria`, which translates to National University of Engineering, popularly known as UNI.

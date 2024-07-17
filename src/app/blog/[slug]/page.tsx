@@ -123,12 +123,6 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
 
       <MDXContent components={components} />
 
-      {/* {rest.map((txt, pos) => (
-        <Suspense key={txt.slice(0, 5).trim() + pos}>
-          <MDXContent source={txt} components={components} />
-        </Suspense>
-      ))} */}
-
       <CountView slug={slug} />
 
       <div className="py-4" />

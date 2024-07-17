@@ -83,16 +83,7 @@ const intl = new Intl.DateTimeFormat("en-SE", {
   day: "2-digit",
 });
 
-const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
-  const {
-    slug,
-    content,
-    title,
-    // tags,
-    publish_date,
-    authors,
-  } = await getPostData(params.slug);
-
+async function BlogLoader({ content }: { content: string }) {
   const asFunctionBody = await compile(content, {
     outputFormat: "function-body",
   });
@@ -102,6 +93,19 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
     ...runtime,
     baseUrl: import.meta.url,
   });
+
+  return <MDXContent components={components} />;
+}
+
+const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
+  const {
+    slug,
+    content,
+    title,
+    // tags,
+    publish_date,
+    authors,
+  } = await getPostData(params.slug);
 
   const [mainAuthor] = authors;
 
@@ -121,7 +125,9 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
         </Suspense>
       </aside>
 
-      <MDXContent components={components} />
+      <Suspense fallback="...">
+        <BlogLoader content={content} />
+      </Suspense>
 
       <CountView slug={slug} />
 

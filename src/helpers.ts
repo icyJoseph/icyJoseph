@@ -44,7 +44,7 @@ export const isoString = (iso: Date) => {
 
   const [hours] = time.split(":");
 
-  return `${date}T${hours}`;
+  return `${date}T${hours}:00:00`;
 };
 
 export const trunc = (num: number) => {

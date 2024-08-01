@@ -10,7 +10,6 @@ import { components } from "components/Blog/mdx";
 import { ReadingTime } from "components/Blog/ReadingTime";
 import { PostViews } from "components/PostViews";
 import { BackTo, BackToTop } from "design-system/BackToTop";
-import { Spinner } from "design-system/Icons";
 import style from "design-system/separated.module.css";
 import { getAllPosts, getPostBySlug } from "lib/posts/db";
 import type { Post } from "lib/posts/types";
@@ -127,15 +126,7 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
       </aside>
 
       <div className="min-h-screen">
-        <Suspense
-          fallback={
-            <div className="flex justify-center pt-16">
-              <Spinner className="animate-spin" size={32} />
-            </div>
-          }
-        >
-          <BlogLoader content={content} />
-        </Suspense>
+        <BlogLoader content={content} />
       </div>
 
       <CountView slug={slug} />

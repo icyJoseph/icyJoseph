@@ -10,4 +10,5 @@ export {
   ArticleMedium,
   Heartbeat,
   ShootingStar,
+  Spinner,
 } from "@phosphor-icons/react";

@@ -89,8 +89,8 @@ export const fitBitProfile = async () => {
   const restingHeartRate = heartRateData
     .slice(0)
     .reverse()
-    .find((entry) => Boolean(entry?.value?.restingHeartRate))
-    ?.value.restingHeartRate;
+    .find((entry) => Boolean(entry?.value?.restingHeartRate))?.value
+    .restingHeartRate;
 
   const fullActivityLog: IcyJoseph.ActivityLog = await getActivityLog({
     beforeDate: isoString(new Date()),

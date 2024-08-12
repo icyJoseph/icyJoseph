@@ -29,6 +29,7 @@
   width: 100%;
   flex-shrink: 0;
   scroll-snap-align: start;
+  scroll-snap-stop: always;
   padding: 0 1rem;
   position: relative;
   opacity: 1;

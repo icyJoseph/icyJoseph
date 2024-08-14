@@ -9,14 +9,14 @@ const config = {
   reactStrictMode: true,
   productionBrowserSourceMaps: true,
   swcMinify: true,
-  compiler: {
-    styledComponents: true,
-  },
   images: {
-    domains: [
-      "avatars.githubusercontent.com",
-      "badges.fitbit.com",
-      "www.gstatic.com",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+      },
+      { protocol: "https", hostname: "badges.fitbit.com" },
+      { protocol: "https", hostname: "www.gstatic.com" },
     ],
   },
 };

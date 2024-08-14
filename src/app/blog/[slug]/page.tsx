@@ -1,19 +1,18 @@
-import { Suspense } from "react";
+import { Suspense, Fragment } from "react";
 
+import { compile, run } from "@mdx-js/mdx";
 import type { Metadata } from "next";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
+import * as runtime from "react/jsx-runtime";
 
 import { CountView } from "components/Blog/CountView";
 import { components } from "components/Blog/mdx";
+import { ReadingTime } from "components/Blog/ReadingTime";
 import { PostViews } from "components/PostViews";
 import { BackTo, BackToTop } from "design-system/BackToTop";
 import style from "design-system/separated.module.css";
 import { getAllPosts, getPostBySlug } from "lib/posts/db";
 import type { Post } from "lib/posts/types";
-import { estimateReadingTime } from "lib/reading-stats/estimate";
-
-export const revalidate = 360;
 
 const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
 
@@ -84,6 +83,20 @@ const intl = new Intl.DateTimeFormat("en-SE", {
   day: "2-digit",
 });
 
+async function BlogLoader({ content }: { content: string }) {
+  const asFunctionBody = await compile(content, {
+    outputFormat: "function-body",
+  });
+
+  const { default: MDXContent } = await run(asFunctionBody, {
+    Fragment,
+    ...runtime,
+    baseUrl: import.meta.url,
+  });
+
+  return <MDXContent components={components} />;
+}
+
 const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
   const {
     slug,
@@ -93,8 +106,6 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
     publish_date,
     authors,
   } = await getPostData(params.slug);
-
-  const { minutes } = await estimateReadingTime(content);
 
   const [mainAuthor] = authors;
 
@@ -109,12 +120,14 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
           {intl.format(new Date(publish_date * 1000))}
         </span>
 
-        <span className={`${style.separated} inline-block`}>
-          ~{minutes} min
-        </span>
+        <Suspense fallback={<span className="inline-block">..</span>}>
+          <ReadingTime content={content} />
+        </Suspense>
       </aside>
 
-      <MDXRemote source={content} components={components} />
+      <div className="min-h-screen">
+        <BlogLoader content={content} />
+      </div>
 
       <CountView slug={slug} />
 

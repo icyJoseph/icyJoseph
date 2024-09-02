@@ -46,6 +46,7 @@ describe("Showcase", () => {
         items={mockData}
         backIcon={BackIcon}
         forwardIcon={FwdIcon}
+        ariaLabel="unit-test"
       />
     );
 

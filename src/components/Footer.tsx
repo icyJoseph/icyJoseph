@@ -25,7 +25,7 @@ export const Footer = () => {
         </div>
 
         <p className="mx-auto pt-8 text-center">
-          &#169; {new Date().getFullYear()} <Keyword>icyJoseph AB</Keyword> -
+          &#169; {new Date().getFullYear()} <Keyword>icyJoseph</Keyword> -
           Stockholm, Sweden
         </p>
 

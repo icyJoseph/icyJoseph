@@ -1041,22 +1041,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opentelemetry/api-logs@npm:^0.51.1":
-  version: 0.51.1
-  resolution: "@opentelemetry/api-logs@npm:0.51.1"
-  dependencies:
-    "@opentelemetry/api": "npm:^1.0.0"
-  checksum: 10c0/bb469406a1b6f8310c2623b66688d1187731f55516fe3866090ac048d0f58ff88e7d2ad050378d66ca9ce9074529385c884c3a47a8200275abf4dd83b0eaf90a
-  languageName: node
-  linkType: hard
-
-"@opentelemetry/api@npm:^1.0.0":
-  version: 1.9.0
-  resolution: "@opentelemetry/api@npm:1.9.0"
-  checksum: 10c0/9aae2fe6e8a3a3eeb6c1fdef78e1939cf05a0f37f8a4fae4d6bf2e09eb1e06f966ece85805626e01ba5fab48072b94f19b835449e58b6d26720ee19a58298add
-  languageName: node
-  linkType: hard
-
 "@phosphor-icons/react@npm:2.0.9":
   version: 2.0.9
   resolution: "@phosphor-icons/react@npm:2.0.9"
@@ -1808,21 +1792,6 @@ __metadata:
   peerDependencies:
     react: ^16.8||^17||^18
   checksum: 10c0/92a4f43496fe727c29c5cf6cb6a4e0786ee4b654b10f9e338692d68139a91242821b596f8f9c12026901c3045811a3928ed8cfc20be333ae22d4bc3aca32522b
-  languageName: node
-  linkType: hard
-
-"@vercel/otel@npm:^1.8.2":
-  version: 1.9.1
-  resolution: "@vercel/otel@npm:1.9.1"
-  peerDependencies:
-    "@opentelemetry/api": ^1.7.0
-    "@opentelemetry/api-logs": "*"
-    "@opentelemetry/instrumentation": "*"
-    "@opentelemetry/resources": ^1.19.0
-    "@opentelemetry/sdk-logs": "*"
-    "@opentelemetry/sdk-metrics": ^1.19.0
-    "@opentelemetry/sdk-trace-base": ^1.19.0
-  checksum: 10c0/6c8022c44f4a2bd97680e807fa0c2ca912adf0e556d669a81c81c32e80ea58f3c27417168c7d94ca43b18240ada8ead65cda68bb7373b156619a4450bb5996b8
   languageName: node
   linkType: hard
 
@@ -4675,7 +4644,6 @@ __metadata:
   dependencies:
     "@mdx-js/mdx": "npm:3.0.1"
     "@next/bundle-analyzer": "npm:14.2.3"
-    "@opentelemetry/api-logs": "npm:^0.51.1"
     "@phosphor-icons/react": "npm:2.0.9"
     "@supabase/supabase-js": "npm:2.21.0"
     "@testing-library/jest-dom": "npm:5.16.5"
@@ -4686,7 +4654,6 @@ __metadata:
     "@types/react-syntax-highlighter": "npm:13.5.2"
     "@typescript-eslint/eslint-plugin": "npm:7.8.0"
     "@vercel/analytics": "npm:1.0.0"
-    "@vercel/otel": "npm:^1.8.2"
     autoprefixer: "npm:10.4.14"
     base64-js: "npm:^1.5.1"
     bright: "npm:^0.8.4"

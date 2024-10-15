@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 import { isoString } from "helpers";
 
 const fitbitAuth = {
@@ -7,15 +9,18 @@ const fitbitAuth = {
   },
 };
 
-export const getActivityLog = async (params: Record<string, string>) => {
-  const query = encodeURI(
-    Object.entries({ ...params, sort: "desc", offset: 0, limit: 7 })
-      .map(([key, value]) => `${key}=${value}`)
-      .join("&")
-  );
+export const getActivityLog = async (
+  beforeDate = new Date()
+): Promise<Array<ReducedActivityLog>> => {
+  const search = new URLSearchParams({
+    sort: "desc",
+    offset: "0",
+    limit: "7",
+    beforeDate: isoString(beforeDate),
+  });
 
   const response = await fetch(
-    `${fitbitAuth.baseURL}/activities/list.json?${query}`,
+    `${fitbitAuth.baseURL}/activities/list.json?${search}`,
     {
       headers: fitbitAuth.headers,
     }
@@ -25,7 +30,32 @@ export const getActivityLog = async (params: Record<string, string>) => {
 
   const data = await response.json();
 
-  return data.activities;
+  const activities = data?.activities ?? [];
+
+  if (!Array.isArray(activities)) {
+    // invalid shape
+    return [];
+  }
+
+  const activityLog = activities
+    .map((entry) => {
+      const base = parseBaseData(entry);
+
+      if (!base) return null;
+
+      if (isSwimming(entry)) {
+        return { ...base, distance: entry.distance, pace: entry.pace };
+      }
+
+      if (isBaseActivity(entry)) {
+        return { ...base, steps: entry.steps };
+      }
+
+      return base;
+    })
+    .filter(<T>(v: T | null): v is T => !!v);
+
+  return activityLog;
 };
 
 type SharedActivityKeys = Extract<
@@ -44,6 +74,25 @@ type ReducedActivityLog = Pick<IcyJoseph.Activities, SharedActivityKeys> &
     | Pick<IcyJoseph.SwimActivity, "distance" | "pace">
     | Pick<IcyJoseph.ActivityWithoutSteps, "averageHeartRate">
   );
+
+const baseDataObject = z.object({
+  logId: z.number(),
+  activityName: z.string(),
+  startTime: z.string(),
+  activeDuration: z.number(),
+  calories: z.number(),
+  averageHeartRate: z.number(),
+});
+
+const parseBaseData = (
+  entry: unknown
+): Pick<IcyJoseph.Activities, SharedActivityKeys> | null => {
+  const result = baseDataObject.safeParse(entry);
+
+  if (result.success) return result.data;
+
+  return null;
+};
 
 const isBaseActivity = (
   activity: ReducedActivityLog
@@ -64,58 +113,36 @@ const isSwimming = (act: ReducedActivityLog): act is IcyJoseph.SwimActivity =>
   act.activityName === "Swim";
 
 export const fitBitProfile = async () => {
-  const fitbitData: IcyJoseph.Fitbit["user"] = await fetch(
+  const fitbitData: Promise<IcyJoseph.Fitbit["user"]> = fetch(
     `${fitbitAuth.baseURL}/profile.json`,
     { headers: fitbitAuth.headers }
   )
     .then((res) => res.json())
     .then((data) => data.user);
 
+  const heartRateData: Promise<
+    IcyJoseph.HeartRateActivity["activities-heart"]
+  > = fetch(`${fitbitAuth.baseURL}/activities/heart/date/today/7d.json`, {
+    headers: fitbitAuth.headers,
+  })
+    .then((res) => res.json())
+    .then((data) => data["activities-heart"]);
+
+  await Promise.allSettled([fitbitData, heartRateData]);
+
   const profile: Pick<
     IcyJoseph.FitbitProfile,
     "topBadges" | "averageDailySteps"
   > = {
-    averageDailySteps: fitbitData.averageDailySteps,
-    topBadges: fitbitData.topBadges,
+    averageDailySteps: (await fitbitData).averageDailySteps,
+    topBadges: (await fitbitData).topBadges,
   };
 
-  const heartRateData: IcyJoseph.HeartRateActivity["activities-heart"] =
-    await fetch(`${fitbitAuth.baseURL}/activities/heart/date/today/7d.json`, {
-      headers: fitbitAuth.headers,
-    })
-      .then((res) => res.json())
-      .then((data) => data["activities-heart"]);
-
-  const restingHeartRate = heartRateData
+  const restingHeartRate = (await heartRateData)
     .slice(0)
     .reverse()
     .find((entry) => Boolean(entry?.value?.restingHeartRate))?.value
     .restingHeartRate;
 
-  const fullActivityLog: IcyJoseph.ActivityLog = await getActivityLog({
-    beforeDate: isoString(new Date()),
-  });
-
-  const activityLog = fullActivityLog.map((entry) => {
-    const base = {
-      logId: entry.logId,
-      activityName: entry.activityName,
-      startTime: entry.startTime,
-      activeDuration: entry.activeDuration,
-      calories: entry.calories,
-      averageHeartRate: entry.averageHeartRate,
-    };
-
-    if (isSwimming(entry)) {
-      return { ...base, distance: entry.distance, pace: entry.pace };
-    }
-
-    if (isBaseActivity(entry)) {
-      return { ...base, steps: entry.steps };
-    }
-
-    return base;
-  });
-
-  return { profile, restingHeartRate, activityLog };
+  return { profile, restingHeartRate };
 };

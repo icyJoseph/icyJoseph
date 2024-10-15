@@ -65,8 +65,6 @@ export default async function Page() {
 
   const { restingHeartRate } = fitBit;
 
-  // const [mostRecent] = fitbit.activityLog;
-
   const { averageDailySteps } = fitBit.profile;
 
   return (
@@ -89,10 +87,10 @@ export default async function Page() {
         <h2 className="font-sans text-3xl text-pale-yellow">Me and my Work</h2>
 
         <ParagraphWithIcon Icon={Student} className="mt-16">
-          Developer from <Bold className="text-pale-blue">Peru</Bold>, living in{" "}
-          <Bold className="text-pale-blue">Sweden</Bold>. I have a
-          Bachelor&apos;s in Electronics Engineering, and a Master&apos;s degree
-          on business design.
+          I have a Bachelor&apos;s in{" "}
+          <Bold className="text-pale-blue">Electronics Engineering</Bold>,
+          focused on control, and automation. I also have a Master&apos;s degree
+          on <Bold className="text-pale-blue">Business Design</Bold>.
         </ParagraphWithIcon>
 
         <div className="py-6" />
@@ -129,8 +127,8 @@ export default async function Page() {
         <ParagraphWithIcon Icon={Code}>
           I write <Bold className="text-pale-red">JavaScript</Bold>, and{" "}
           <Bold className="text-pale-red">TypeScript</Bold>. I am comfortable
-          with any runtime, browser and{" "}
-          <Bold className="text-pale-blue">NodeJS</Bold>, even a little{" "}
+          with any runtime, be it, the browser,{" "}
+          <Bold className="text-pale-blue">NodeJS</Bold>, or{" "}
           <Bold className="text-pale-blue">Deno</Bold>.
         </ParagraphWithIcon>
 

@@ -14,16 +14,16 @@
     "graphql": "16.2.0",
     "graphql-tag": "2.12.6",
     "gray-matter": "4.0.3",
-    "next": "14.2.3",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "next": "15.0.0",
+    "react": "19.0.0-rc-65a56d0e-20241020",
+    "react-dom": "19.0.0-rc-65a56d0e-20241020",
     "swr": "2.1.5",
     "use-easing": "0.0.9",
     "zod": "^3.22.4"
   },
   "scripts": {
     "bundle": "ANALYZE=true yarn build",
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "lint": "eslint src",
     "build": "next build",
     "start": "next start",
@@ -32,17 +32,17 @@
     "auto-gen-zod": "yarn ts-to-zod src/lib/posts/types.ts src/lib/posts/parser.ts"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "14.2.3",
+    "@next/bundle-analyzer": "15.0.0",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "14.0.0",
     "@types/node": "17.0.8",
-    "@types/react": "18.2.8",
-    "@types/react-dom": "18.2.4",
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
     "@types/react-syntax-highlighter": "13.5.2",
     "@typescript-eslint/eslint-plugin": "7.8.0",
     "autoprefixer": "10.4.14",
     "eslint": "8",
-    "eslint-config-next": "14.2.3",
+    "eslint-config-next": "15.0.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-import": "2.25.4",
     "identity-obj-proxy": "3.0.0",
@@ -55,5 +55,9 @@
     "ts-to-zod": "3.5.0",
     "typescript": "5.4.5"
   },
-  "packageManager": "yarn@4.3.1"
+  "packageManager": "yarn@4.3.1",
+  "resolutions": {
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
+  }
 }

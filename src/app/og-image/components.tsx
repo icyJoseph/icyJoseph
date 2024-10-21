@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from "react";
+import type { CSSProperties, ReactNode, JSX } from "react";
 
 const palette = {
   "--pale-blue": "165 200 228",

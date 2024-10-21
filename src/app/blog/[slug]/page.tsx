@@ -16,11 +16,12 @@ import type { Post } from "lib/posts/types";
 
 const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
 
-export const generateMetadata = async ({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> => {
+export const generateMetadata = async (
+  props: {
+    params: Promise<{ slug: string }>;
+  }
+): Promise<Metadata> => {
+  const params = await props.params;
   try {
     const slug = params.slug;
     const post = await getPostBySlug(slug);
@@ -97,7 +98,8 @@ async function BlogLoader({ content }: { content: string }) {
   return <MDXContent components={components} />;
 }
 
-const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
+const BlogEntry = async (props: { params: Promise<Record<string, string>> }) => {
+  const params = await props.params;
   const {
     slug,
     content,

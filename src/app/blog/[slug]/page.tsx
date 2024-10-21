@@ -1,4 +1,4 @@
-import { Suspense, Fragment } from "react";
+import { Suspense } from "react";
 
 import { compile, run } from "@mdx-js/mdx";
 import type { Metadata } from "next";
@@ -16,11 +16,9 @@ import type { Post } from "lib/posts/types";
 
 const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
 
-export const generateMetadata = async (
-  props: {
-    params: Promise<{ slug: string }>;
-  }
-): Promise<Metadata> => {
+export const generateMetadata = async (props: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> => {
   const params = await props.params;
   try {
     const slug = params.slug;
@@ -90,15 +88,18 @@ async function BlogLoader({ content }: { content: string }) {
   });
 
   const { default: MDXContent } = await run(asFunctionBody, {
-    Fragment,
     ...runtime,
+    // @ts-expect-error JSX prop
+    jsx: runtime.jsx,
     baseUrl: import.meta.url,
   });
 
   return <MDXContent components={components} />;
 }
 
-const BlogEntry = async (props: { params: Promise<Record<string, string>> }) => {
+const BlogEntry = async (props: {
+  params: Promise<Record<string, string>>;
+}) => {
   const params = await props.params;
   const {
     slug,

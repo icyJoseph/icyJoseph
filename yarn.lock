@@ -1084,7 +1084,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supabase/functions-js@npm:^2.1.0":
+"@supabase/auth-js@npm:2.65.1":
+  version: 2.65.1
+  resolution: "@supabase/auth-js@npm:2.65.1"
+  dependencies:
+    "@supabase/node-fetch": "npm:^2.6.14"
+  checksum: 10c0/af9708fb959d77e0dd50543163b42c3441b27a3024899fd96c7c55ceda755b338247a82d17947abc37cbc918f5d83ea28df4d00cbe0cd95ebe76a458444fdd1d
+  languageName: node
+  linkType: hard
+
+"@supabase/functions-js@npm:2.4.3":
   version: 2.4.3
   resolution: "@supabase/functions-js@npm:2.4.3"
   dependencies:
@@ -1093,16 +1102,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supabase/gotrue-js@npm:^2.23.0":
-  version: 2.65.1
-  resolution: "@supabase/gotrue-js@npm:2.65.1"
-  dependencies:
-    "@supabase/node-fetch": "npm:^2.6.14"
-  checksum: 10c0/c261d5a59d7adf884657c442cdf1dc3526ee1c599d51866bc7452dc799ec5a4556411579b081fba54a76a26ac78b09073542710934d9760dfa7d3a190cdc4b3b
-  languageName: node
-  linkType: hard
-
-"@supabase/node-fetch@npm:^2.6.14":
+"@supabase/node-fetch@npm:2.6.15, @supabase/node-fetch@npm:^2.6.14":
   version: 2.6.15
   resolution: "@supabase/node-fetch@npm:2.6.15"
   dependencies:
@@ -1111,16 +1111,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supabase/postgrest-js@npm:^1.1.1":
-  version: 1.17.0
-  resolution: "@supabase/postgrest-js@npm:1.17.0"
+"@supabase/postgrest-js@npm:1.16.3":
+  version: 1.16.3
+  resolution: "@supabase/postgrest-js@npm:1.16.3"
   dependencies:
     "@supabase/node-fetch": "npm:^2.6.14"
-  checksum: 10c0/d427a302b38cdfc0cf60f4acff91809a485b2eac1a4fef6cdb165f42f975ba4d33ec478d8815a74d0db4f2847c6eca2116ae90804414563afcb5829b377f53c6
+  checksum: 10c0/bc84dbf90bda96d05c7887ca1d6725e2ef03a2519d299087a43001442ba047ecdda9c454cc9208d320a6ec05a77b3649232f17a82e518d1ac3a8aaaa445b193f
   languageName: node
   linkType: hard
 
-"@supabase/realtime-js@npm:^2.7.2":
+"@supabase/realtime-js@npm:2.10.7":
   version: 2.10.7
   resolution: "@supabase/realtime-js@npm:2.10.7"
   dependencies:
@@ -1132,7 +1132,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supabase/storage-js@npm:^2.5.1":
+"@supabase/storage-js@npm:2.7.1":
   version: 2.7.1
   resolution: "@supabase/storage-js@npm:2.7.1"
   dependencies:
@@ -1141,17 +1141,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supabase/supabase-js@npm:2.21.0":
-  version: 2.21.0
-  resolution: "@supabase/supabase-js@npm:2.21.0"
+"@supabase/supabase-js@npm:2.46.1":
+  version: 2.46.1
+  resolution: "@supabase/supabase-js@npm:2.46.1"
   dependencies:
-    "@supabase/functions-js": "npm:^2.1.0"
-    "@supabase/gotrue-js": "npm:^2.23.0"
-    "@supabase/postgrest-js": "npm:^1.1.1"
-    "@supabase/realtime-js": "npm:^2.7.2"
-    "@supabase/storage-js": "npm:^2.5.1"
-    cross-fetch: "npm:^3.1.5"
-  checksum: 10c0/f3fe4df36503d453c0a0e3ff5aa2a82e0344cf3ee13998fcb317028b5eda6e88745940971da5b338e0913d8786aa0aaf86d6f1a2fe353c4bd421092e84131363
+    "@supabase/auth-js": "npm:2.65.1"
+    "@supabase/functions-js": "npm:2.4.3"
+    "@supabase/node-fetch": "npm:2.6.15"
+    "@supabase/postgrest-js": "npm:1.16.3"
+    "@supabase/realtime-js": "npm:2.10.7"
+    "@supabase/storage-js": "npm:2.7.1"
+  checksum: 10c0/ecdcc3b6561b531cd0f1a1796e8f2657997e4bce9b0ea4016e4df05cbfba49526c77378dc843fd81121c38b62c72139103b9b2d72c65391046f26dc1f37c06be
   languageName: node
   linkType: hard
 
@@ -2760,15 +2760,6 @@ __metadata:
   bin:
     create-jest: bin/create-jest.js
   checksum: 10c0/e7e54c280692470d3398f62a6238fd396327e01c6a0757002833f06d00afc62dd7bfe04ff2b9cd145264460e6b4d1eb8386f2925b7e567f97939843b7b0e812f
-  languageName: node
-  linkType: hard
-
-"cross-fetch@npm:^3.1.5":
-  version: 3.1.8
-  resolution: "cross-fetch@npm:3.1.8"
-  dependencies:
-    node-fetch: "npm:^2.6.12"
-  checksum: 10c0/4c5e022ffe6abdf380faa6e2373c0c4ed7ef75e105c95c972b6f627c3f083170b6886f19fb488a7fa93971f4f69dcc890f122b0d97f0bf5f41ca1d9a8f58c8af
   languageName: node
   linkType: hard
 
@@ -4583,7 +4574,7 @@ __metadata:
     "@mdx-js/mdx": "npm:3.0.1"
     "@next/bundle-analyzer": "npm:14.2.3"
     "@phosphor-icons/react": "npm:2.0.9"
-    "@supabase/supabase-js": "npm:2.21.0"
+    "@supabase/supabase-js": "npm:2.46.1"
     "@testing-library/jest-dom": "npm:5.16.5"
     "@testing-library/react": "npm:14.0.0"
     "@types/node": "npm:17.0.8"
@@ -6970,7 +6961,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:^2.6.12, node-fetch@npm:^2.6.7":
+"node-fetch@npm:^2.6.7":
   version: 2.7.0
   resolution: "node-fetch@npm:2.7.0"
   dependencies:

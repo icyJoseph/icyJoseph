@@ -108,7 +108,7 @@ export const gitHubProfile = async (): Promise<{
     },
   };
 
-  const languagesAggregate: Record<string, IcyJoseph.LanguageEdge> = {};
+  const languagesAggregate: Map<string, IcyJoseph.LanguageEdge> = new Map();
 
   repositories.nodes.forEach((curr) => {
     if (curr.isArchived) return;
@@ -116,14 +116,17 @@ export const gitHubProfile = async (): Promise<{
     curr.languages.edges.forEach((lang) => {
       if (!lang) return;
 
-      languagesAggregate[lang.node.name] = languagesAggregate[
-        lang.node.name
-      ] || { ...lang };
-      languagesAggregate[lang.node.name].size += lang.size;
+      const current = languagesAggregate.get(lang.node.name) || lang;
+
+      if (current !== lang) {
+        current.size += lang.size;
+      }
+
+      languagesAggregate.set(lang.node.name, current);
     });
   });
 
-  const topLanguages = Object.entries(languagesAggregate)
+  const topLanguages = Array.from(languagesAggregate.entries())
     .sort((lhs, rhs) => rhs[1].size - lhs[1].size)
     .map(([_, value]) => value)
     .slice(0, 4);

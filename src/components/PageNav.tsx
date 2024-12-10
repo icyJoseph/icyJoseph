@@ -9,9 +9,15 @@ export const PageNav = ({ children }: { children: ReactNode }) => {
         <ul className="flex justify-around flex-wrap gap-4">
           {Children.map(children, (child) => {
             if (!isValidElement(child)) return child;
-            if (!child.props.name) return null;
+            if (typeof child.props !== "object") return child;
+            if (child.props == null) return child;
 
-            const { name } = child.props;
+            const props = child.props as Record<string, unknown>;
+            if (!props.name) return child;
+
+            const name = props?.name;
+
+            if (typeof name !== "string") return child;
 
             return (
               <li className="underline">

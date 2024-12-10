@@ -8,7 +8,6 @@ const config = {
   poweredByHeader: false,
   reactStrictMode: true,
   productionBrowserSourceMaps: true,
-  swcMinify: true,
   images: {
     remotePatterns: [
       {

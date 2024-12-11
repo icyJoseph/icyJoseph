@@ -33,8 +33,9 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "15.1.0",
+    "@testing-library/dom": "10.4.0",
     "@testing-library/jest-dom": "5.16.5",
-    "@testing-library/react": "14.0.0",
+    "@testing-library/react": "16.1.0",
     "@types/node": "18",
     "@types/react": "19.0.1",
     "@types/react-dom": "19.0.2",

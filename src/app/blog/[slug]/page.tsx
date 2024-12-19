@@ -44,7 +44,7 @@ export const generateMetadata = async (props: {
         ],
       },
     };
-  } catch (e) {
+  } catch (_) {
     return {
       title: "icyJoseph | Not found",
       description: "The resource you were looking for does not exist",

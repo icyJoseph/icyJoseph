@@ -32,6 +32,8 @@
     "auto-gen-zod": "yarn ts-to-zod src/lib/posts/types.ts src/lib/posts/parser.ts"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "3.2.0",
+    "@eslint/js": "9.17.0",
     "@next/bundle-analyzer": "15.1.0",
     "@testing-library/dom": "10.4.0",
     "@testing-library/jest-dom": "5.16.5",
@@ -47,6 +49,7 @@
     "eslint-config-next": "15.1.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-import": "2.31.0",
+    "globals": "15.14.0",
     "identity-obj-proxy": "3.0.0",
     "jest": "29.7.0",
     "jest-environment-jsdom": "29.5.0",

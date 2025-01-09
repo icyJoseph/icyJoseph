@@ -1,5 +1,3 @@
-import { fromByteArray } from "base64-js";
-
 import { yearRange } from "helpers";
 import { GET_USER, GET_YEAR_CONTRIBUTIONS } from "lib/github/queries";
 
@@ -51,18 +49,10 @@ type GitHubProfile = Omit<
 
 type GitHubLanguages = Array<IcyJoseph.LanguageEdge>;
 
-const btoa = (str: string) => {
-  const bytes = new TextEncoder().encode(str);
-
-  return fromByteArray(bytes);
-};
-
 const githubAuth = {
   baseURL: "https://api.github.com",
   headers: {
-    Authorization: `Basic ${btoa(
-      `icyJoseph:${process.env.GITHUB_TOKEN || ""}`
-    )}`,
+    Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
     "Content-Type": "application/json",
   },
 };

@@ -71,6 +71,8 @@ export default async function Page() {
     <Introduction>
       <ProfileCard
         avatarUrl={avatarUrl}
+        company={github.profile.company}
+        companyAvatarUrl={github.companyAvatarUrl}
         alt={`${name} github profile picture`}
         restingHeartRate={restingHeartRate}
         bio={bio}

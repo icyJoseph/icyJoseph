@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import Image from "next/image";
+import Link from "next/link";
 
 import { Social } from "components/Social";
 import style from "design-system/border-gradient.module.css";
@@ -7,6 +8,8 @@ import { ICY_JOSEPH } from "lib/github/constants";
 
 type ProfileCardProps = {
   avatarUrl: string;
+  companyAvatarUrl: string;
+  company: string;
   alt: string;
   bio: string;
   location: string;
@@ -21,6 +24,8 @@ const cardLayout = "md:flex-row max-w-3xl w-full flex flex-wrap";
 
 export const ProfileCard = ({
   avatarUrl,
+  companyAvatarUrl,
+  company,
   alt,
   bio,
   location,
@@ -33,25 +38,46 @@ export const ProfileCard = ({
   return (
     <article className={classNames(cardLayout, style.borderGradient)}>
       <aside className="basis-full md:basis-2/5 p-4 flex flex-col justify-between min-w-">
-        <Image
-          priority
-          className="w-full max-w-xs rounded-full mx-auto p-4 select-none"
-          src={avatarUrl}
-          alt={alt}
-          width="320"
-          height="320"
-          draggable="false"
-        />
+        <div className="relative mx-auto p4">
+          <Image
+            priority
+            className="w-full max-w-xs rounded-full select-none"
+            src={avatarUrl}
+            alt={alt}
+            width="320"
+            height="320"
+            draggable="false"
+          />
+
+          {company && companyAvatarUrl && (
+            <Link href={`https://github.com/${company.replace("@", "")}`}>
+              <Image
+                src={companyAvatarUrl}
+                title={`Employed at ${company}`}
+                alt={`${company} avatar url - github`}
+                width="32"
+                height="32"
+                className="absolute rounded-full"
+                style={{
+                  left: "calc(50% + calc(50% * 0.707))",
+                  top: "calc(50% + calc(50% * 0.707))",
+                  transform: "translate(-50%, -50%)",
+                }}
+              />
+            </Link>
+          )}
+        </div>
         <div className="flex justify-around flex-wrap pt-4 w-full max-w-md mx-auto">
           <span
             className={`flex flex-col items-center ${
               restingHeartRate == null ? "hidden" : "visible"
             }`}
           >
-            <span className="text-xl text-pale-red">
+            <span title="resting heart rate" className="text-xl text-pale-red">
               {restingHeartRate ?? "-"}
             </span>{" "}
-            <span>bpm</span>
+            <span className="sr-only">Beats per minute</span>
+            <span aria-hidden>bpm</span>
           </span>
 
           <span

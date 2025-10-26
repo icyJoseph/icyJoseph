@@ -8,8 +8,6 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
 
-export const dynamicParams = false;
-
 export async function GET(
   _request: Request,
   props: RouteContext<"/og-image/[slug]">

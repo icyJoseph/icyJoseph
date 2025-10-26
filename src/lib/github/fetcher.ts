@@ -79,7 +79,7 @@ export const gitHubProfile = async (): Promise<{
   companyAvatarUrl: string;
 }> => {
   "use cache";
-  cacheLife("minutes");
+  cacheLife("days");
 
   const response = await queryGitHub<{ user: IcyJoseph.GitHub }>(GET_USER, {
     login: ICY_JOSEPH,

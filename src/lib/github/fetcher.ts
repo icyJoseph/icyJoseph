@@ -1,7 +1,11 @@
-import { fromByteArray } from "base64-js";
+import { cacheLife } from "next/cache";
 
 import { yearRange } from "helpers";
-import { GET_USER, GET_YEAR_CONTRIBUTIONS } from "lib/github/queries";
+import {
+  GET_ORG_AVATAR_URL,
+  GET_USER,
+  GET_YEAR_CONTRIBUTIONS,
+} from "lib/github/queries";
 
 import { ICY_JOSEPH } from "./constants";
 
@@ -51,18 +55,10 @@ type GitHubProfile = Omit<
 
 type GitHubLanguages = Array<IcyJoseph.LanguageEdge>;
 
-const btoa = (str: string) => {
-  const bytes = new TextEncoder().encode(str);
-
-  return fromByteArray(bytes);
-};
-
 const githubAuth = {
   baseURL: "https://api.github.com",
   headers: {
-    Authorization: `Basic ${btoa(
-      `icyJoseph:${process.env.GITHUB_TOKEN || ""}`
-    )}`,
+    Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
     "Content-Type": "application/json",
   },
 };
@@ -80,13 +76,25 @@ export const queryGitHub = <Response>(
 export const gitHubProfile = async (): Promise<{
   profile: GitHubProfile;
   languages: GitHubLanguages;
+  companyAvatarUrl: string;
 }> => {
-  const githubData = await queryGitHub<{ user: IcyJoseph.GitHub }>(GET_USER, {
+  "use cache";
+  cacheLife("days");
+
+  const response = await queryGitHub<{ user: IcyJoseph.GitHub }>(GET_USER, {
     login: ICY_JOSEPH,
     ...yearRange(),
-  }).then(({ data }) => data.user);
+  });
+  const githubData = response.data.user;
 
   const { repositories, ...otherData } = githubData;
+
+  const orgAvatarUrlData = await queryGitHub<{
+    organization: { avatarUrl: string | null };
+  }>(GET_ORG_AVATAR_URL, { login: githubData.company.replace("@", "") });
+
+  const companyAvatarUrl =
+    orgAvatarUrlData?.data?.organization?.avatarUrl ?? "";
 
   const profile: GitHubProfile = {
     ...otherData,
@@ -136,6 +144,7 @@ export const gitHubProfile = async (): Promise<{
   return {
     profile,
     languages,
+    companyAvatarUrl,
   };
 };
 

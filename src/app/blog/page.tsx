@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cacheLife } from "next/cache";
 
 import { BlogIntro } from "components/Blog/Intro";
 import { PostLink } from "components/Blog/PostLink";
@@ -8,8 +9,6 @@ import type { PostPreview } from "lib/posts/types";
 type BlogProps = {
   posts: PostPreview[];
 };
-
-export const revalidate = 360;
 
 const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
 
@@ -37,6 +36,9 @@ export const metadata: Metadata = {
 };
 
 const getBlogData = async (): Promise<BlogProps> => {
+  "use cache";
+  cacheLife("weeks");
+
   try {
     const posts = await getAllPosts();
     return {

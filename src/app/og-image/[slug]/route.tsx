@@ -10,8 +10,9 @@ export async function generateStaticParams() {
 
 export async function GET(
   _request: Request,
-  { params }: { params: { slug: string } }
+  props: RouteContext<"/og-image/[slug]">
 ) {
+  const params = await props.params;
   try {
     const { slug } = params;
 

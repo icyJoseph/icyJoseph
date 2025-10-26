@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import { notFound } from "next/navigation";
+import { connection } from "next/server";
 
 const supabase = createClient(
   process.env.BLOG_VIEWS_URL,
@@ -16,8 +16,16 @@ const supabase = createClient(
 const host =
   process.env.NODE_ENV === "production" ? "icyjoseph.dev" : "development";
 
+const Views = ({ count }: { count?: number | undefined }) => (
+  <>
+    <span>{count ?? "-"}</span> <span>views</span>
+  </>
+);
+
 export const PostViews = async ({ slug }: { slug: string }) => {
-  if (!slug) notFound();
+  await connection();
+
+  if (!slug) return <Views />;
 
   const { data } = await supabase
     .from<string, { Row: IcyJoseph.PostView }>(process.env.BLOG_VIEWS_TABLE)
@@ -26,9 +34,5 @@ export const PostViews = async ({ slug }: { slug: string }) => {
     .eq("host", host)
     .single();
 
-  return (
-    <>
-      <span>{data?.views ?? "-"}</span> <span>views</span>
-    </>
-  );
+  return <Views count={data?.views} />;
 };

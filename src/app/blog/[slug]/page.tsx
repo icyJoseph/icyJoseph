@@ -1,9 +1,9 @@
-import { Suspense, Fragment } from "react";
+import { Suspense } from "react";
 
-import { compile, run } from "@mdx-js/mdx";
 import type { Metadata } from "next";
+import { cacheLife } from "next/cache";
 import { notFound } from "next/navigation";
-import * as runtime from "react/jsx-runtime";
+import { MDXRemote } from "next-mdx-remote-client/rsc";
 
 import { CountView } from "components/Blog/CountView";
 import { components } from "components/Blog/mdx";
@@ -16,11 +16,10 @@ import type { Post } from "lib/posts/types";
 
 const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
 
-export const generateMetadata = async ({
-  params,
-}: {
-  params: { slug: string };
+export const generateMetadata = async (props: {
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> => {
+  const params = await props.params;
   try {
     const slug = params.slug;
     const post = await getPostBySlug(slug);
@@ -45,29 +44,11 @@ export const generateMetadata = async ({
         ],
       },
     };
-  } catch (e) {
+  } catch (_) {
     return {
       title: "icyJoseph | Not found",
       description: "The resource you were looking for does not exist",
     };
-  }
-};
-
-const getPostData = async (
-  slug: string
-): Promise<Post & { content: string; publish_date: number }> => {
-  try {
-    const post = await getPostBySlug(slug);
-
-    if (typeof post.content !== "string")
-      throw new Error(`${slug} has no content`);
-    if (typeof post.publish_date !== "number")
-      throw new Error(`${slug} has no publish date`);
-
-    return { ...post, content: post.content, publish_date: post.publish_date };
-  } catch (e) {
-    console.log(e);
-    notFound();
   }
 };
 
@@ -83,21 +64,40 @@ const intl = new Intl.DateTimeFormat("en-SE", {
   day: "2-digit",
 });
 
-async function BlogLoader({ content }: { content: string }) {
-  const asFunctionBody = await compile(content, {
-    outputFormat: "function-body",
-  });
+const getPostData = async (
+  slug: string
+): Promise<Post & { content: string; publish_date: number }> => {
+  "use cache";
 
-  const { default: MDXContent } = await run(asFunctionBody, {
-    Fragment,
-    ...runtime,
-    baseUrl: import.meta.url,
-  });
+  try {
+    const post = await getPostBySlug(slug);
 
-  return <MDXContent components={components} />;
+    cacheLife("weeks");
+
+    if (typeof post.content !== "string")
+      throw new Error(`${slug} has no content`);
+    if (typeof post.publish_date !== "number")
+      throw new Error(`${slug} has no publish date`);
+
+    return {
+      ...post,
+      content: post.content,
+      publish_date: post.publish_date,
+    };
+  } catch (e) {
+    console.log(e);
+    cacheLife({ expire: 0 });
+    notFound();
+  }
+};
+
+function PublishDate({ publish_date }: { publish_date: number }) {
+  return intl.format(new Date(publish_date * 1000));
 }
 
-const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
+const BlogEntry = async (props: PageProps<"/blog/[slug]">) => {
+  const params = await props.params;
+
   const {
     slug,
     content,
@@ -117,16 +117,17 @@ const BlogEntry = async ({ params }: { params: Record<string, string> }) => {
         <span className={`${style.separated} inline-block`}>{mainAuthor}</span>
 
         <span className={`${style.separated} inline-block`}>
+          <PublishDate publish_date={publish_date} />
+        </span>
+        <span className={`${style.separated} inline-block`}>
           {intl.format(new Date(publish_date * 1000))}
         </span>
 
-        <Suspense fallback={<span className="inline-block">..</span>}>
-          <ReadingTime content={content} />
-        </Suspense>
+        <ReadingTime content={content} />
       </aside>
 
       <div className="min-h-screen">
-        <BlogLoader content={content} />
+        <MDXRemote source={content} components={components} />
       </div>
 
       <CountView slug={slug} />

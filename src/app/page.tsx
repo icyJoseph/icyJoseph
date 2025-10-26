@@ -10,8 +10,6 @@ import { Bird, Briefcase, Code, FileRs, Student } from "design-system/Icons";
 import { fitBitProfile } from "lib/fitbit/fetcher";
 import { gitHubProfile } from "lib/github/fetcher";
 
-export const revalidate = 60;
-
 const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
 
 export const metadata: Metadata = {
@@ -71,6 +69,8 @@ export default async function Page() {
     <Introduction>
       <ProfileCard
         avatarUrl={avatarUrl}
+        company={github.profile.company}
+        companyAvatarUrl={github.companyAvatarUrl}
         alt={`${name} github profile picture`}
         restingHeartRate={restingHeartRate}
         bio={bio}

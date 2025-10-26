@@ -43,6 +43,7 @@ async function intoWords(text: string): Promise<number> {
 export const estimateReadingTime = async (
   text: string
 ): Promise<ReadingTimeStats> => {
+  "use cache";
   const words = await intoWords(text);
   const { time, minutes } = inverseWPM(words, 200);
 

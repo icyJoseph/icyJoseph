@@ -59,3 +59,31 @@ export const zeroContributions = {
     totalCount: 0,
   },
 };
+
+export const loadingContributions = {
+  id: "loading-github-contributions",
+  index: -1,
+  repository: {
+    id: "loading-github-contributions",
+    name: "",
+    url: "",
+    homepageUrl: "",
+    languages: {
+      edges: [],
+      totalCount: 0,
+      totalSize: 0,
+    },
+    description: "...",
+    owner: {
+      login: "icyJoseph",
+    },
+    isArchived: false,
+    isDisabled: false,
+    isFork: false,
+    isPrivate: false,
+    diskUsage: 0,
+  },
+  contributions: {
+    totalCount: 0,
+  },
+};

@@ -1,65 +1,145 @@
-"use client";
-
-import { useState, useDeferredValue, type ChangeEventHandler } from "react";
-
-import classNames from "classnames";
-
 import { ContributionShowcase } from "components/GitHub/ContributionShowcase";
-import { Select } from "components/Select";
+import {
+  ICY_JOSEPH,
+  joinedGitHubContribution,
+  loadingContributions,
+  zeroContributions,
+} from "lib/github/constants";
+import { gitHubContributions } from "lib/github/fetcher";
+import { YearSelect, YearSelectLabel } from "components/GitHub/YearSelect";
+import classNames from "classnames";
+import { Suspense } from "react";
+import { OuterSuspense } from "components/GitHub/Suspend";
+import { cacheLife } from "next/cache";
+import { Fieldset } from "components/Fieldset";
 
-type YearlyContributionProps = {
-  initial: IcyJoseph.GitHub["contributionsCollection"];
-  currentYear: number;
+export type Contribution = {
+  repository: Pick<
+    IcyJoseph.Repository,
+    | "id"
+    | "name"
+    | "description"
+    | "languages"
+    | "homepageUrl"
+    | "url"
+    | "owner"
+  >;
+  contributions: {
+    totalCount: number;
+  };
 };
 
-export const YearlyContribution = ({
-  currentYear,
-  initial,
-}: YearlyContributionProps) => {
-  const [selectedYear, setSelectedYear] = useState(
-    initial.contributionYears[0]
-  );
+const buildCommitContributionsByRepositoryWithId = async (year: number) => {
+  "use cache: remote";
+  const yearData = await gitHubContributions(year);
 
-  const handleSelectYear: ChangeEventHandler<HTMLSelectElement> = (event) => {
-    setSelectedYear(Number(event.target.value));
+  if (yearData.contributionYears[0] === year) {
+    cacheLife("days");
+  } else {
+    cacheLife("max");
+  }
+
+  const commitContributionsByRepository =
+    yearData?.commitContributionsByRepository ?? [];
+
+  const joinedGitHub = Boolean(yearData?.joinedGitHubContribution);
+
+  const external: Contribution[] = [];
+  if (joinedGitHub) return { external, owned: [joinedGitHubContribution] };
+
+  if (
+    !commitContributionsByRepository ||
+    commitContributionsByRepository.length === 0
+  )
+    return { external, owned: [zeroContributions] };
+
+  const owned: Contribution[] = [];
+
+  commitContributionsByRepository.forEach((item) => {
+    const target =
+      item.repository.owner.login === ICY_JOSEPH ? owned : external;
+
+    target.push({
+      contributions: item.contributions,
+      repository: {
+        id: item.repository.id,
+        name: item.repository.name,
+        description: item.repository.description,
+        languages: item.repository.languages,
+        homepageUrl: item.repository.homepageUrl,
+        url: item.repository.url,
+        owner: item.repository.owner,
+      },
+    });
+  });
+
+  return {
+    external,
+    owned,
   };
+};
 
-  const deferredYear = useDeferredValue(selectedYear);
+async function YearlyShowcase({
+  currentYear,
+  contributionYears,
+}: {
+  currentYear: Promise<string | string[] | undefined>;
+  contributionYears: number[];
+}) {
+  let yearInput = await currentYear;
 
-  const isPending = selectedYear !== deferredYear;
+  let year = Number(yearInput);
+
+  if (Number.isNaN(year)) {
+    year = contributionYears[0];
+  }
+
+  let yearData: {
+    external: Contribution[];
+    owned: Contribution[];
+  } = { external: [], owned: [zeroContributions] };
+
+  if (contributionYears.indexOf(year) !== -1) {
+    yearData = await buildCommitContributionsByRepositoryWithId(year);
+  }
 
   return (
-    <div
-      className={classNames(
-        "w-full transition-opacity",
-        isPending ? "opacity-50" : "opacity-100"
-      )}
-    >
-      <div className={classNames("mt-8", "text-2xl")}>
-        <Select
-          label={
-            <span className="text-2xl" aria-hidden="true">
-              Repositories in
-            </span>
-          }
-          className="bg-soft-black underline font-[monospace]"
-          value={selectedYear}
-          onChange={handleSelectYear}
-          aria-label={`Navigate through repository contributions by year. Showing ${selectedYear}`}
-        >
-          {initial.contributionYears.map((year) => (
-            <option key={year} value={year}>
-              {year}
-            </option>
-          ))}
-        </Select>
-      </div>
+    <ContributionShowcase
+      external={yearData.external}
+      owned={yearData.owned}
+      year={year}
+    />
+  );
+}
 
-      <ContributionShowcase
-        currentYear={currentYear}
-        selectedYear={deferredYear}
-        initial={initial}
-      />
+export async function YearlyContribution({
+  currentYear,
+  contributionYears,
+}: {
+  contributionYears: number[];
+  currentYear: Promise<string | string[] | undefined>;
+}) {
+  return (
+    <div className={classNames("mt-8", "text-2xl")}>
+      <Fieldset>
+        <Suspense fallback={YearSelectLabel}>
+          <YearSelect contributionYears={contributionYears} />
+        </Suspense>
+      </Fieldset>
+
+      <OuterSuspense
+        fallback={
+          <ContributionShowcase
+            owned={[loadingContributions]}
+            year={contributionYears[0]}
+          />
+        }
+      >
+        <YearlyShowcase
+          currentYear={currentYear}
+          contributionYears={contributionYears}
+        />
+      </OuterSuspense>
     </div>
   );
-};
+}

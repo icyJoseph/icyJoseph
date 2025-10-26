@@ -67,7 +67,7 @@ declare namespace IcyJoseph {
     contributionYears: number[];
     commitContributionsByRepository: Array<{
       contributions: {
-        totalCount;
+        totalCount: number;
       };
       repository: Repository;
     }>;

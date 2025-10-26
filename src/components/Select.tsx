@@ -11,7 +11,7 @@ export const Select = ({
 }: ComponentProps<"select"> & { label: ReactNode }) => {
   const selectId = useId();
   return (
-    <fieldset className={style.field}>
+    <>
       <label htmlFor={selectId} className={style.selectLabel}>
         {label}
       </label>
@@ -23,6 +23,6 @@ export const Select = ({
         />
         <span className={style.focus} />
       </div>
-    </fieldset>
+    </>
   );
 };

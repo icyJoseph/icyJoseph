@@ -9,6 +9,7 @@ import { Bold } from "design-system/Bold";
 import { Bird, Briefcase, Code, FileRs, Student } from "design-system/Icons";
 import { fitBitProfile } from "lib/fitbit/fetcher";
 import { gitHubProfile } from "lib/github/fetcher";
+import { Suspense } from "react";
 
 const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
 
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function Page() {
+export default async function Page(props: PageProps<"/">) {
   const githubData = gitHubProfile();
   const fitBitData = fitBitProfile();
 
@@ -105,8 +106,8 @@ export default async function Page() {
         </ParagraphWithIcon>
 
         <YearlyContribution
-          currentYear={currentYear}
-          initial={contributionsCollection}
+          contributionYears={contributionsCollection.contributionYears}
+          currentYear={props.searchParams.then((search) => search.year)}
         />
       </section>
 

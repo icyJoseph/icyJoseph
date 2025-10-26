@@ -39,12 +39,7 @@ export const components = {
     return (
       <span>
         {props.href ? (
-          <Link
-            href={props.href}
-            passHref
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <Link href={props.href} target="_blank" rel="noopener noreferrer">
             <span className="text-pale-blue font-medium" {...props} />
           </Link>
         ) : (

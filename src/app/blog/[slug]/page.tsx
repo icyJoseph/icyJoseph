@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 
 import type { Metadata } from "next";
+import { cacheLife } from "next/cache";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote-client/rsc";
 
@@ -66,8 +67,12 @@ const intl = new Intl.DateTimeFormat("en-SE", {
 const getPostData = async (
   slug: string
 ): Promise<Post & { content: string; publish_date: number }> => {
+  "use cache";
+
   try {
     const post = await getPostBySlug(slug);
+
+    cacheLife("weeks");
 
     if (typeof post.content !== "string")
       throw new Error(`${slug} has no content`);
@@ -81,14 +86,18 @@ const getPostData = async (
     };
   } catch (e) {
     console.log(e);
+    cacheLife({ expire: 0 });
     notFound();
   }
 };
 
-const BlogEntry = async (props: {
-  params: Promise<Record<string, string>>;
-}) => {
+function PublishDate({ publish_date }: { publish_date: number }) {
+  return intl.format(new Date(publish_date * 1000));
+}
+
+const BlogEntry = async (props: PageProps<"/blog/[slug]">) => {
   const params = await props.params;
+
   const {
     slug,
     content,
@@ -107,6 +116,9 @@ const BlogEntry = async (props: {
       <aside className="mt-8 font-light text-base text-end">
         <span className={`${style.separated} inline-block`}>{mainAuthor}</span>
 
+        <span className={`${style.separated} inline-block`}>
+          <PublishDate publish_date={publish_date} />
+        </span>
         <span className={`${style.separated} inline-block`}>
           {intl.format(new Date(publish_date * 1000))}
         </span>

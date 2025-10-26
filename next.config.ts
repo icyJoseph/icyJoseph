@@ -1,9 +1,4 @@
-import createBundleAnalyzer from "@next/bundle-analyzer";
 import type { NextConfig } from "next";
-
-const withBundleAnalyzer = createBundleAnalyzer({
-  enabled: process.env.ANALYZE === "true",
-});
 
 const HTTPS = "https";
 
@@ -23,6 +18,10 @@ const config: NextConfig = {
   images: {
     remotePatterns,
   },
+  cacheComponents: true,
+  experimental: {
+    browserDebugInfoInTerminal: true,
+  },
 };
 
-export default withBundleAnalyzer(config);
+export default config;

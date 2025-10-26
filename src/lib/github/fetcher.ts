@@ -1,3 +1,5 @@
+import { cacheLife } from "next/cache";
+
 import { yearRange } from "helpers";
 import {
   GET_ORG_AVATAR_URL,
@@ -76,6 +78,9 @@ export const gitHubProfile = async (): Promise<{
   languages: GitHubLanguages;
   companyAvatarUrl: string;
 }> => {
+  "use cache";
+  cacheLife("minutes");
+
   const response = await queryGitHub<{ user: IcyJoseph.GitHub }>(GET_USER, {
     login: ICY_JOSEPH,
     ...yearRange(),

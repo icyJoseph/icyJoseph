@@ -2,12 +2,15 @@ import fs from "fs/promises";
 import path from "path";
 
 import matter from "gray-matter";
+import { cacheLife, cacheTag } from "next/cache";
 import type { SafeParseSuccess } from "zod";
 
 import { postSchema, postPreviewSchema } from "./parser";
 import type { Post, PostPreview } from "./types";
 
 export const getAllPosts = async (): Promise<PostPreview[]> => {
+  "use cache";
+  cacheTag("all-posts");
   try {
     // with extension
     const slugs = await fs.readdir(path.resolve(process.cwd(), "./posts"));
@@ -34,6 +37,8 @@ export const getAllPosts = async (): Promise<PostPreview[]> => {
 };
 
 export const getPostBySlug = async (slug: string): Promise<Post> => {
+  "use cache";
+
   const postsContent = await fs.readFile(
     path.resolve(process.cwd(), "./posts", `${slug}.md`),
     "utf-8"
@@ -41,5 +46,9 @@ export const getPostBySlug = async (slug: string): Promise<Post> => {
 
   const { content, data } = matter(postsContent);
   const post = postSchema.parse({ ...data, content });
+
+  cacheLife("weeks");
+  cacheTag(post.slug);
+
   return post;
 };

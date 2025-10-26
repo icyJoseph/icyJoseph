@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import { connection } from "next/server";
 
 const supabase = createClient(
   process.env.BLOG_VIEWS_URL,
@@ -22,6 +23,8 @@ const Views = ({ count }: { count?: number | undefined }) => (
 );
 
 export const PostViews = async ({ slug }: { slug: string }) => {
+  await connection();
+
   if (!slug) return <Views />;
 
   const { data } = await supabase

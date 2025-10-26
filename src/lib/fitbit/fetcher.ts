@@ -1,3 +1,4 @@
+import { cacheLife } from "next/cache";
 import { z } from "zod";
 
 import { isoString } from "helpers";
@@ -113,6 +114,9 @@ const isSwimming = (act: ReducedActivityLog): act is IcyJoseph.SwimActivity =>
   act.activityName === "Swim";
 
 export const fitBitProfile = async () => {
+  "use cache";
+  cacheLife("days");
+
   const fitbitData: Promise<IcyJoseph.Fitbit["user"]> = fetch(
     `${fitbitAuth.baseURL}/profile.json`,
     { headers: fitbitAuth.headers }

@@ -49,7 +49,6 @@ type GitHubProfile = Omit<
 > & {
   repositoryDiscussionComments: {
     totalCount: number;
-    repositories: string[];
   };
 };
 
@@ -106,13 +105,6 @@ export const gitHubProfile = async (): Promise<{
     },
     repositoryDiscussionComments: {
       totalCount: githubData.repositoryDiscussionComments.totalCount,
-      repositories: [
-        ...new Set(
-          githubData.repositoryDiscussionComments.nodes.map(
-            ({ discussion }) => discussion.repository.name
-          )
-        ),
-      ],
     },
   };
 

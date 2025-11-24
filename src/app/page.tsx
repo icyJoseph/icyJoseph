@@ -9,7 +9,6 @@ import { Bold } from "design-system/Bold";
 import { Bird, Briefcase, Code, FileRs, Student } from "design-system/Icons";
 import { fitBitProfile } from "lib/fitbit/fetcher";
 import { gitHubProfile } from "lib/github/fetcher";
-import { Suspense } from "react";
 
 const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
 
@@ -106,6 +105,7 @@ export default async function Page(props: PageProps<"/">) {
         </ParagraphWithIcon>
 
         <YearlyContribution
+          fallbackData={contributionsCollection.commitContributionsByRepository}
           contributionYears={contributionsCollection.contributionYears}
           currentYear={props.searchParams.then((search) => search.year)}
         />

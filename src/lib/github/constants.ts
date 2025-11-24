@@ -35,7 +35,7 @@ export const zeroContributions = {
   index: -1,
   repository: {
     id: "zero-github-contribution",
-    name: "New Year",
+    name: "...",
     url: "",
     homepageUrl: "https://icyjoseph.dev/",
     languages: {

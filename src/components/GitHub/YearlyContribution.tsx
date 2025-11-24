@@ -2,16 +2,13 @@ import { ContributionShowcase } from "components/GitHub/ContributionShowcase";
 import {
   ICY_JOSEPH,
   joinedGitHubContribution,
-  loadingContributions,
   zeroContributions,
 } from "lib/github/constants";
 import { gitHubContributions } from "lib/github/fetcher";
 import { YearSelect, YearSelectLabel } from "components/GitHub/YearSelect";
-import classNames from "classnames";
-import { Suspense } from "react";
-import { OuterSuspense } from "components/GitHub/Suspend";
+import { Suspense, ViewTransition } from "react";
 import { cacheLife } from "next/cache";
-import { Fieldset } from "components/Fieldset";
+import classNames from "classnames";
 
 export type Contribution = {
   repository: Pick<
@@ -29,21 +26,10 @@ export type Contribution = {
   };
 };
 
-const buildCommitContributionsByRepositoryWithId = async (year: number) => {
-  "use cache: remote";
-  const yearData = await gitHubContributions(year);
-
-  if (yearData.contributionYears[0] === year) {
-    cacheLife("days");
-  } else {
-    cacheLife("max");
-  }
-
-  const commitContributionsByRepository =
-    yearData?.commitContributionsByRepository ?? [];
-
-  const joinedGitHub = Boolean(yearData?.joinedGitHubContribution);
-
+function groupBySource(
+  commitContributionsByRepository: Contribution[],
+  joinedGitHub: boolean
+) {
   const external: Contribution[] = [];
   if (joinedGitHub) return { external, owned: [joinedGitHubContribution] };
 
@@ -77,6 +63,25 @@ const buildCommitContributionsByRepositoryWithId = async (year: number) => {
     external,
     owned,
   };
+}
+
+const buildCommitContributionsByRepositoryWithId = async (year: number) => {
+  "use cache: remote";
+  const yearData = await gitHubContributions(year);
+
+  if (yearData.contributionYears[0] === year) {
+    cacheLife("days");
+  } else {
+    cacheLife("max");
+  }
+
+  const commitContributionsByRepository =
+    yearData?.commitContributionsByRepository ?? [];
+
+  return groupBySource(
+    commitContributionsByRepository,
+    Boolean(yearData?.joinedGitHubContribution)
+  );
 };
 
 async function YearlyShowcase({
@@ -117,29 +122,32 @@ export async function YearlyContribution({
   contributionYears,
 }: {
   contributionYears: number[];
+  fallbackData: Contribution[];
   currentYear: Promise<string | string[] | undefined>;
 }) {
   return (
     <div className={classNames("mt-8", "text-2xl")}>
-      <Fieldset>
-        <Suspense fallback={YearSelectLabel}>
-          <YearSelect contributionYears={contributionYears} />
-        </Suspense>
-      </Fieldset>
-
-      <OuterSuspense
+      <Suspense
         fallback={
-          <ContributionShowcase
-            owned={[loadingContributions]}
-            year={contributionYears[0]}
-          />
+          <>
+            {YearSelectLabel}
+
+            <YearlyShowcase
+              currentYear={Promise.resolve(`${contributionYears[0]}`)}
+              contributionYears={contributionYears}
+            />
+          </>
         }
       >
-        <YearlyShowcase
-          currentYear={currentYear}
-          contributionYears={contributionYears}
-        />
-      </OuterSuspense>
+        <YearSelect contributionYears={contributionYears} />
+
+        <ViewTransition>
+          <YearlyShowcase
+            currentYear={currentYear}
+            contributionYears={contributionYears}
+          />
+        </ViewTransition>
+      </Suspense>
     </div>
   );
 }

@@ -23,7 +23,7 @@ export const YearSelect = ({
     <Select
       label={YearSelectLabel}
       className="bg-soft-black underline font-[monospace]"
-      defaultValue={year}
+      value={year}
       onChange={handleYearChange}
       aria-label={`Navigate through repository contributions by year.`}
     >

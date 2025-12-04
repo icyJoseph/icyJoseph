@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { CodeBlock } from "components/Blog/CodeBlock";
 
+
 export const components = {
   h1: (props: ComponentPropsWithoutRef<"h1">) => {
     return <h1 {...props} className="text-3xl text-pale-yellow mt-8 mb-6" />;

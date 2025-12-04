@@ -1,14 +1,16 @@
+import { Suspense, ViewTransition } from "react";
+
+import classNames from "classnames";
+import { cacheLife } from "next/cache";
+
 import { ContributionShowcase } from "components/GitHub/ContributionShowcase";
+import { YearSelect, YearSelectLabel } from "components/GitHub/YearSelect";
 import {
   ICY_JOSEPH,
   joinedGitHubContribution,
   zeroContributions,
 } from "lib/github/constants";
 import { gitHubContributions } from "lib/github/fetcher";
-import { YearSelect, YearSelectLabel } from "components/GitHub/YearSelect";
-import { Suspense, ViewTransition } from "react";
-import { cacheLife } from "next/cache";
-import classNames from "classnames";
 
 export type Contribution = {
   repository: Pick<

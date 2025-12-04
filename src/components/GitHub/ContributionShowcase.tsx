@@ -2,10 +2,10 @@
 import { useState, useMemo, memo } from "react";
 
 import { ContributionEntry } from "components/GitHub/ContributionEntry";
+import type { Contribution } from "components/GitHub/YearlyContribution";
 import { Showcase } from "components/Showcase";
 import { ToggleSwitch } from "components/ToggleSwitch";
 import chevron from "design-system/chevron.module.css";
-import type { Contribution } from "components/GitHub/YearlyContribution";
 
 const BackIcon = <i className={chevron.chevronLeft} aria-hidden="true" />;
 const FwdIcon = <i className={chevron.chevronRight} aria-hidden="true" />;

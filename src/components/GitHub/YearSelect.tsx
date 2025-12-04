@@ -1,8 +1,10 @@
 "use client";
 
-import { Select } from "components/Select";
-import { useRouter, useSearchParams } from "next/navigation";
 import type { ChangeEvent } from "react";
+
+import { useRouter, useSearchParams } from "next/navigation";
+
+import { Select } from "components/Select";
 
 export const YearSelectLabel = (
   <span className="text-2xl" aria-hidden="true">

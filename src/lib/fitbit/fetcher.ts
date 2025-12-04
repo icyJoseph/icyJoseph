@@ -3,6 +3,7 @@ import { z } from "zod";
 
 import { isoString } from "helpers";
 
+
 const fitbitAuth = {
   baseURL: "https://api.fitbit.com/1/user/-",
   headers: {

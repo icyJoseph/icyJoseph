@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import { cacheLife } from "next/cache";
 

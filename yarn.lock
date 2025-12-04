@@ -5423,6 +5423,7 @@ __metadata:
     postcss: "npm:8.4.22"
     react: "npm:19.2.1"
     react-dom: "npm:19.2.1"
+    swr: "npm:2.3.7"
     tailwindcss: "npm:3.3.1"
     ts-to-zod: "npm:3.5.0"
     typescript: "npm:5.4.5"
@@ -9723,6 +9724,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"swr@npm:2.3.7":
+  version: 2.3.7
+  resolution: "swr@npm:2.3.7"
+  dependencies:
+    dequal: "npm:^2.0.3"
+    use-sync-external-store: "npm:^1.4.0"
+  peerDependencies:
+    react: ^16.11.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/a3f3fbf86f0734d38005d08e7c1401019a752d1a0f831a0c631f1e8a2cfa34a9945e4ae842cfc5a7aefa002a458b296f48f7f2d6e921ddc7465b91542df97e78
+  languageName: node
+  linkType: hard
+
 "symbol-tree@npm:^3.2.4":
   version: 3.2.4
   resolution: "symbol-tree@npm:3.2.4"
@@ -10414,6 +10427,15 @@ __metadata:
     react: ">= 16.8.1"
     react-dom: ">= 16.8.1"
   checksum: 10c0/13858c2d26b5ecf1b2d520e4e8318ee29288d4bbb1a46921bc498ffa541b4aa107ebc0052bc7224ccf74af116ebcc69ea9524c9a2413dfb6ce878d6c6ef664a8
+  languageName: node
+  linkType: hard
+
+"use-sync-external-store@npm:^1.4.0":
+  version: 1.6.0
+  resolution: "use-sync-external-store@npm:1.6.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/35e1179f872a53227bdf8a827f7911da4c37c0f4091c29b76b1e32473d1670ebe7bcd880b808b7549ba9a5605c233350f800ffab963ee4a4ee346ee983b6019b
   languageName: node
   linkType: hard
 

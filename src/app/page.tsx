@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 
 import { Bytes } from "components/Bytes";
-import { YearlyContribution } from "components/GitHub/YearlyContribution";
+import { ContributionsSection } from "components/GitHub/ContributionsSection";
 import { Introduction } from "components/Introduction";
 import { ParagraphWithIcon } from "components/ParagraphWithIcon";
 import { ProfileCard } from "components/ProfileCard";
 import { Bold } from "design-system/Bold";
 import { Bird, Briefcase, Code, FileRs, Student } from "design-system/Icons";
 import { fitBitProfile } from "lib/fitbit/fetcher";
+import { getAllContributions } from "lib/github/aggregator";
 import { gitHubProfile } from "lib/github/fetcher";
 
 const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
@@ -35,11 +36,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function Page(props: PageProps<"/">) {
+export default async function Page(_props: PageProps<"/">) {
   const githubData = gitHubProfile();
   const fitBitData = fitBitProfile();
+  const allContributionsData = getAllContributions();
 
-  const [github, fitBit] = await Promise.all([githubData, fitBitData]);
+  const [github, fitBit, allContributions] = await Promise.all([
+    githubData,
+    fitBitData,
+    allContributionsData,
+  ]);
 
   const { languages } = github;
 
@@ -103,15 +109,7 @@ export default async function Page(props: PageProps<"/">) {
           of experience working as a software developer, in telecom, mining,
           freight, real state, news, transport and automotive industries.
         </ParagraphWithIcon>
-
-        <YearlyContribution
-          fallbackData={contributionsCollection.commitContributionsByRepository}
-          contributionYears={contributionsCollection.contributionYears}
-          currentYear={props.searchParams.then((search) => search.year)}
-        />
       </section>
-
-      <div className="py-12" />
 
       <section className="font-mono max-w-prose mx-auto w-full">
         <h2 className="font-sans text-3xl text-pale-yellow">Coding</h2>
@@ -147,6 +145,9 @@ export default async function Page(props: PageProps<"/">) {
           mainly by building iOS apps on xcode, and occasionally using it to
           solve coding challenges.
         </ParagraphWithIcon>
+
+
+        <ContributionsSection data={allContributions.aggregated} />
       </section>
     </Introduction>
   );

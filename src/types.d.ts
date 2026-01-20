@@ -35,6 +35,7 @@ declare namespace IcyJoseph {
     id: string;
     name: string;
     description: string | undefined | null;
+    stargazerCount: number;
     owner: {
       login: string;
     };

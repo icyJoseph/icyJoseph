@@ -37,6 +37,7 @@ const ContributionsFragment = gql`
         id
         name
         description
+        stargazerCount
         owner {
           login
         }

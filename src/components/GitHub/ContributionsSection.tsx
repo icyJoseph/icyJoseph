@@ -8,6 +8,7 @@ import { formatYearBreakdown } from "lib/github/utils";
 
 type ContributionsSectionProps = {
   data: AggregatedContributionData;
+  privateContributions: number;
 };
 
 type EnrichedContribution = AggregatedContribution & {
@@ -59,7 +60,12 @@ function groupByLanguage(
   const ordered = [...orderedMain, ...othersEntry];
 
   return ordered.map(([language, repos]) => {
-    if (language === "Others") return [language, repos, null];
+    if (language === "Others") {
+      const filteredRepos = repos.filter((repo) =>
+        Boolean(repo.repository.description)
+      );
+      return [language, filteredRepos, null];
+    }
 
     const primaryLangEdge = repos[0].repository.languages.edges.find(isLanguageEdge);
     const color = primaryLangEdge?.node.color ?? null;
@@ -68,7 +74,10 @@ function groupByLanguage(
   });
 }
 
-export function ContributionsSection({ data }: ContributionsSectionProps) {
+export function ContributionsSection({
+  data,
+  privateContributions,
+}: ContributionsSectionProps) {
   const external = data.external ?? [];
   const owned = data.owned ?? [];
 
@@ -80,7 +89,10 @@ export function ContributionsSection({ data }: ContributionsSectionProps) {
     (a, b) => b.totalContributions - a.totalContributions
   );
 
-  const contributions: AggregatedContribution[] = [...sortedExternal, ...sortedOwned];
+  const contributions: AggregatedContribution[] = [
+    ...sortedExternal,
+    ...sortedOwned,
+  ]
 
   const enriched: EnrichedContribution[] = contributions.map((contribution) => ({
     ...contribution,
@@ -89,5 +101,10 @@ export function ContributionsSection({ data }: ContributionsSectionProps) {
 
   const groups = groupByLanguage(enriched);
 
-  return <ContributionsList groups={groups} />;
+  return (
+    <ContributionsList
+      groups={groups}
+      privateContributions={privateContributions}
+    />
+  );
 }

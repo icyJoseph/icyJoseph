@@ -146,8 +146,10 @@ export default async function Page(_props: PageProps<"/">) {
           solve coding challenges.
         </ParagraphWithIcon>
 
-
-        <ContributionsSection data={allContributions.aggregated} />
+        <ContributionsSection
+          data={allContributions.aggregated}
+          privateContributions={allContributions.totalRestrictedContributions}
+        />
       </section>
     </Introduction>
   );

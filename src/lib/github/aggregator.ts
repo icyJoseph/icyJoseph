@@ -32,16 +32,25 @@ export async function getAllContributions() {
     return {
       year,
       data: grouped,
+      restrictedContributionsCount: yearData.restrictedContributionsCount ?? 0,
     };
   });
 
   const contributionsByYear = await Promise.all(yearDataPromises);
 
+  const totalRestrictedContributions = contributionsByYear.reduce(
+    (sum, entry) => sum + entry.restrictedContributionsCount,
+    0
+  );
+
   // Aggregate all contributions by repository
-  const aggregated = aggregateContributionsByRepo(contributionsByYear);
+  const aggregated = aggregateContributionsByRepo(
+    contributionsByYear.map(({ year, data }) => ({ year, data }))
+  );
 
   return {
     aggregated,
     contributionYears,
+    totalRestrictedContributions,
   };
 }

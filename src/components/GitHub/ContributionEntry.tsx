@@ -16,9 +16,15 @@ type EnrichedContribution = AggregatedContribution & {
 
 type ContributionEntryProps = {
   item: EnrichedContribution;
+  index?: number;
+  total?: number;
 };
 
-export const ContributionEntry = ({ item }: ContributionEntryProps) => {
+export const ContributionEntry = ({
+  item,
+  index,
+  total,
+}: ContributionEntryProps) => {
   const repo = item.repository;
   const isOwned = repo.owner.login === ICY_JOSEPH;
   const languages = repo.languages.edges.filter(isLanguageEdge);
@@ -28,7 +34,14 @@ export const ContributionEntry = ({ item }: ContributionEntryProps) => {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex-1">
-        <h4 className="text-lg font-medium text-smoke-white">{repo.name}</h4>
+        <div className="flex items-baseline gap-2">
+          {typeof index === "number" && typeof total === "number" && (
+            <span className="text-xs font-light text-pale-orange/60">
+              {index + 1}/{total}
+            </span>
+          )}
+          <h4 className="text-lg font-medium text-smoke-white">{repo.name}</h4>
+        </div>
 
         {!isOwned && (
           <p className="text-xs text-pale-blue capitalize mt-0.5">

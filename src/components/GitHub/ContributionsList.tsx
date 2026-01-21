@@ -18,42 +18,47 @@ type ContributionsListProps = {
   privateContributions: number;
 };
 
-type ShowMoreListProps = {
-  visibleCount: number;
-  children: React.ReactNode;
-};
+function getLanguageDisplayName(language: string, isMobile: boolean): string {
+  if (!isMobile) return language;
 
-function ShowMoreList({ visibleCount, children }: ShowMoreListProps) {
-  const containerRef = useRef<HTMLUListElement | null>(null);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    const childrenArray = Array.from(el.children) as HTMLElement[];
-    childrenArray.forEach((child, index) => {
-      if (visibleCount === Infinity || index < visibleCount) {
-        child.style.display = "";
-      } else {
-        child.style.display = "none";
-      }
-    });
-  }, [visibleCount, children]);
-
-  return (
-    <ul ref={containerRef} className="space-y-6">
-      {children}
-    </ul>
-  );
+  if (language === "TypeScript") return "TS";
+  if (language === "JavaScript") return "JS";
+  return language;
 }
 
 export function ContributionsList({
   groups,
   privateContributions,
 }: ContributionsListProps) {
-  const [expandedLanguages, setExpandedLanguages] = useState<Set<string>>(
-    new Set()
+  const [selectedLanguage, setSelectedLanguage] = useState<string>(
+    groups[0]?.[0] ?? ""
   );
+  const contentRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const isInitialMount = useRef(true);
+
+  useEffect(() => {
+    // Skip scroll on initial mount
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+
+    // Only scroll on language changes (clicks)
+    if (headerRef.current) {
+      const rect = headerRef.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const topThreshold = viewportHeight * 0.1;
+      const bottomThreshold = viewportHeight * 0.9;
+
+      // Check if header is NOT within 10-90% of viewport height
+      const isOutsideRange = rect.top < topThreshold || rect.top > bottomThreshold;
+
+      if (isOutsideRange) {
+        headerRef.current.scrollIntoView({ behavior: "auto", block: "start" });
+      }
+    }
+  }, [selectedLanguage]);
 
   if (groups.length === 0) {
     return (
@@ -63,69 +68,123 @@ export function ContributionsList({
     );
   }
 
-  const toggleLanguage = (language: string) => {
-    setExpandedLanguages((prev) => {
-      const next = new Set(prev);
-      if (next.has(language)) {
-        next.delete(language);
-      } else {
-        next.add(language);
-      }
-      return next;
-    });
-  };
-
-  const INITIAL_SHOW_COUNT = 5;
+  const selectedLanguageData = groups.find(
+    ([lang]) => lang === selectedLanguage
+  );
+  const selectedRepos = selectedLanguageData?.[1] ?? [];
+  const selectedColor = selectedLanguageData?.[2] ?? null;
 
   return (
     <>
-      <h3 className="font-sans text-2xl mt-12 mb-1">
-        Public GitHub contributions
+      <h3 className="font-sans text-2xl mt-12 mb-4">
+        Contributions
       </h3>
-      <p className="text-sm text-pale-orange">
+
+      <p className="font-sans text-lg font-light">
         {ICY_JOSEPH} has also made{" "}
         <span className="text-pale-yellow">
           {privateContributions.toLocaleString()}
         </span>{" "}
-        private contributions that are not shown here.
+        private contributions that are not shown here. These are only public contributions.
       </p>
 
-      <div className="mt-8 space-y-12">
-        {groups.map(([language, repos, color]) => {
-          const isExpanded = expandedLanguages.has(language);
-          const shouldShowMore = repos.length > INITIAL_SHOW_COUNT;
-          const visibleCount = isExpanded ? Infinity : INITIAL_SHOW_COUNT;
-
-          return (
-            <section key={language} className="space-y-4">
-              <div className="sticky top-0 z-10 bg-soft-black border-b border-zinc-700">
-                <h3 className="flex items-center justify-between gap-4 text-xl text-pale-yellow font-sans py-3">
-                  <span className="flex items-center gap-2">
-                    {color && (
-                      <IndicatorBar
-                        color={color}
-                        aria-hidden="true"
-                        className="w-4 h-4"
-                      />
-                    )}
-                    {language}
-                    <span className="text-sm font-light text-pale-orange">
-                      ({repos.length})
-                    </span>
-                  </span>
-                  {shouldShowMore && (
-                    <button
-                      onClick={() => toggleLanguage(language)}
-                      className="text-xs text-pale-blue hover:text-pale-yellow underline font-light"
-                    >
-                      {isExpanded ? "Show less" : "Show more"}
-                    </button>
+      <div className="mt-8 flex flex-col md:flex-row gap-8 md:gap-12">
+        {/* Mobile: Wrapping Tabs */}
+        <div className="md:hidden sticky top-0 z-10 bg-soft-black border-b border-zinc-700 -mx-4 px-4 py-2">
+          <div className="flex flex-wrap gap-2">
+            {groups.map(([language, repos, color]) => {
+              const isActive = language === selectedLanguage;
+              return (
+                <button
+                  key={language}
+                  onClick={() => setSelectedLanguage(language)}
+                  className={`
+                    group flex items-center gap-1.5 px-3 py-2 text-xs font-sans
+                    transition-colors rounded focus:outline-none focus-visible:outline-none
+                    ${isActive
+                      ? "bg-pale-blue/20 text-pale-yellow border border-pale-blue"
+                      : "text-pale-orange hover:bg-zinc-800 hover:text-pale-yellow border border-transparent"
+                    }
+                  `}
+                >
+                  {color && (
+                    <IndicatorBar
+                      color={color}
+                      aria-hidden="true"
+                      className="w-3 h-3 flex-shrink-0"
+                    />
                   )}
+                  <span className={`group-focus-visible:underline ${isActive ? "font-bold" : ""}`}>
+                    {getLanguageDisplayName(language, true)}
+                  </span>
+                  <span className="text-[0.65rem] font-light opacity-70">
+                    ({repos.length})
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Desktop: Sidebar */}
+        <aside className="hidden md:block w-64 flex-shrink-0 sticky top-0 h-screen overflow-y-auto pr-4">
+          <nav className="space-y-2 py-2">
+            {groups.map(([language, repos, color]) => {
+              const isActive = language === selectedLanguage;
+              return (
+                <button
+                  key={language}
+                  onClick={() => setSelectedLanguage(language)}
+                  className={`
+                    group w-full flex items-center gap-2.5 px-3 py-2.5 text-sm text-left font-sans
+                    transition-colors rounded focus:outline-none focus-visible:outline-none
+                    ${isActive
+                      ? "bg-pale-blue/20 text-pale-yellow border-l-2 border-pale-blue"
+                      : "text-pale-orange hover:bg-zinc-800 hover:text-pale-yellow"
+                    }
+                  `}
+                >
+                  {color && (
+                    <IndicatorBar
+                      color={color}
+                      aria-hidden="true"
+                      className="w-3 h-3 flex-shrink-0"
+                    />
+                  )}
+                  <span className={`flex-1 text-sm group-focus-visible:underline ${isActive ? "font-bold" : ""}`}>
+                    {language}
+                  </span>
+                  <span className="text-xs font-light opacity-70">
+                    {repos.length}
+                  </span>
+                </button>
+              );
+            })}
+          </nav>
+        </aside>
+
+        {/* Content Panel */}
+        <main ref={contentRef} className="flex-1 min-w-0">
+          {selectedLanguage && selectedRepos.length > 0 && (
+            <div>
+              <div ref={headerRef} className="mb-8 pb-4 border-b border-zinc-700">
+                <h3 className="flex items-center gap-2 text-xl text-pale-yellow font-sans">
+                  {selectedColor && (
+                    <IndicatorBar
+                      color={selectedColor}
+                      aria-hidden="true"
+                      className="w-4 h-4"
+                    />
+                  )}
+                  {selectedLanguage}
+                  <span className="text-sm font-light text-pale-orange">
+                    ({selectedRepos.length})
+                  </span>
                 </h3>
               </div>
 
-              <ShowMoreList visibleCount={visibleCount}>
-                {repos.map((item, index) => (
+              <ul className="space-y-6">
+                {selectedRepos.map((item, index) => (
                   <li
                     key={item.repository.id}
                     className="border-b border-zinc-700 pb-3 last:border-0"
@@ -133,14 +192,14 @@ export function ContributionsList({
                     <ContributionEntry
                       item={item}
                       index={index}
-                      total={repos.length}
+                      total={selectedRepos.length}
                     />
                   </li>
                 ))}
-              </ShowMoreList>
-            </section>
-          );
-        })}
+              </ul>
+            </div>
+          )}
+        </main>
       </div>
     </>
   );

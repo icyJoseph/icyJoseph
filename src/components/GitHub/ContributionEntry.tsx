@@ -32,7 +32,7 @@ export const ContributionEntry = ({
   const hasHomepageLink = Boolean(repo.homepageUrl);
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <div className="flex-1">
         <div className="flex items-baseline gap-2">
           {typeof index === "number" && typeof total === "number" && (
@@ -40,23 +40,25 @@ export const ContributionEntry = ({
               {index + 1}/{total}
             </span>
           )}
-          <h4 className="text-lg font-medium text-smoke-white">{repo.name}</h4>
+          <h4 className="text-lg font-medium text-smoke-white overflow-hidden text-ellipsis whitespace-nowrap min-w-0">
+            {hasRepositoryLink ? (
+              <a
+                href={repo.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-smoke-white hover:text-pale-yellow transition-colors"
+              >
+                {repo.name}
+              </a>
+            ) : (
+              repo.name
+            )}
+          </h4>
         </div>
 
         {!isOwned && (
-          <p className="text-xs text-pale-blue capitalize mt-0.5">
+          <p className="text-[0.7rem] text-pale-blue capitalize mt-0.5">
             {repo.owner.login}
-          </p>
-        )}
-
-        {item.totalContributions > 0 && (
-          <p className="text-xs font-light text-pale-red mt-1">
-            {item.totalContributions} commits{" "}
-            {item.formattedYearBreakdown && (
-              <span className="text-[0.7rem] text-pale-orange">
-                ({item.formattedYearBreakdown})
-              </span>
-            )}
           </p>
         )}
 
@@ -67,13 +69,13 @@ export const ContributionEntry = ({
         )}
 
         {repo.description && (
-          <p className="text-sm font-light text-pale-orange mt-1">
+          <p className="text-sm font-light text-pale-orange mt-1.5">
             {repo.description.replace(RE_EMOJI, "")}
           </p>
         )}
 
         {languages.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-2">
+          <div className="flex flex-wrap gap-2 mt-1.5">
             {languages.slice(0, 3).map(({ node: { name, color } }) => (
               <span key={name} className="text-xs flex items-center gap-1">
                 <IndicatorBar
@@ -91,23 +93,20 @@ export const ContributionEntry = ({
             )}
           </div>
         )}
+
+        {item.totalContributions > 0 && (
+          <p className="text-xs font-light text-pale-red mt-2">
+            {item.totalContributions} commits{" "}
+            {item.formattedYearBreakdown && (
+              <span className="text-[0.7rem] text-pale-orange">
+                ({item.formattedYearBreakdown})
+              </span>
+            )}
+          </p>
+        )}
       </div>
 
-      <div className="flex gap-3 text-sm">
-        {hasRepositoryLink && (
-          <a
-            href={repo.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-pale-blue hover:text-pale-yellow flex items-center gap-1"
-          >
-            <span aria-hidden="true">Code</span>
-            <VisuallyHidden>
-              External link to {repo.name} Github repository
-            </VisuallyHidden>
-            <ExternalLinkIcon />
-          </a>
-        )}
+      <div className="flex gap-4 text-xs items-center">
         {hasHomepageLink && (
           <a
             href={repo.homepageUrl}
@@ -118,6 +117,21 @@ export const ContributionEntry = ({
             <span aria-hidden="true">Homepage</span>
             <VisuallyHidden>
               External link to {repo.name} homepage
+            </VisuallyHidden>
+            <ExternalLinkIcon />
+          </a>
+        )}
+
+        {hasRepositoryLink && (
+          <a
+            href={repo.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-pale-blue hover:text-pale-yellow flex items-center gap-1"
+          >
+            <span aria-hidden="true">Code</span>
+            <VisuallyHidden>
+              External link to {repo.name} Github repository
             </VisuallyHidden>
             <ExternalLinkIcon />
           </a>

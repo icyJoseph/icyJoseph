@@ -1,11 +1,8 @@
-import { useId } from "react";
-
-import classNames from "classnames";
-
 import { ExternalLinkIcon } from "design-system/External";
 import { IndicatorBar } from "design-system/IndicatorBar";
 import { VisuallyHidden } from "design-system/VisuallyHidden";
 import { ICY_JOSEPH } from "lib/github/constants";
+import type { AggregatedContribution } from "lib/github/utils";
 
 const RE_EMOJI = /:\+1:|:-1:|:[\w-]+:/g;
 
@@ -13,150 +10,141 @@ const isLanguageEdge = (
   edge: IcyJoseph.LanguageEdge | null
 ): edge is IcyJoseph.LanguageEdge => Boolean(edge);
 
-export type ContributionCardProps = {
-  id: string;
-  repository: Pick<
-    IcyJoseph.Repository,
-    "name" | "description" | "languages" | "homepageUrl" | "url" | "owner"
-  >;
-  index: number;
-  contributions: { totalCount: number };
+type EnrichedContribution = AggregatedContribution & {
+  formattedYearBreakdown: string;
+};
+
+type ContributionEntryProps = {
+  item: EnrichedContribution;
+  index?: number;
+  total?: number;
 };
 
 export const ContributionEntry = ({
-  repository,
+  item,
   index,
-  contributions,
-}: ContributionCardProps) => {
-  const headingId = useId();
-
-  const repoDescription = repository.description
-    ? repository.description.replace(RE_EMOJI, "")
-    : `${repository.name} has no description.`;
-
-  const hasRepositoryLink = Boolean(repository.url);
-  const hasHomepageLink = Boolean(repository.homepageUrl);
-
-  const languages = repository.languages.edges.filter(isLanguageEdge);
+  total,
+}: ContributionEntryProps) => {
+  const repo = item.repository;
+  const isOwned = repo.owner.login === ICY_JOSEPH;
+  const languages = repo.languages.edges.filter(isLanguageEdge);
+  const hasRepositoryLink = Boolean(repo.url);
+  const hasHomepageLink = Boolean(repo.homepageUrl);
 
   return (
-    <article
-      className={classNames(
-        "grid grid-rows-[1fr_1fr_auto]",
-        "h-full w-full md:w-4/5 lg:w-2/3 mx-auto p-4",
-        "font-sans",
-        "bg-zinc-900 border border-zinc-700 rounded-lg"
-      )}
-      aria-labelledby={headingId}
-    >
-      <header>
-        <div className="flex justify-between flex-nowrap">
-          <p className="text-pale-orange">#{index + 1}</p>
-
-          <aside
-            className={classNames(
-              "text-pale-blue capitalize",
-              repository.owner.login === ICY_JOSEPH && "invisible"
+    <div className="flex flex-col gap-3">
+      <div className="flex-1">
+        <div className="flex items-baseline gap-2">
+          {typeof index === "number" && typeof total === "number" && (
+            <span className="text-xs font-light text-pale-orange/60">
+              {index + 1}/{total}
+            </span>
+          )}
+          <h4 className="text-lg font-medium text-smoke-white overflow-hidden text-ellipsis whitespace-nowrap min-w-0">
+            {hasRepositoryLink ? (
+              <a
+                href={repo.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-smoke-white hover:text-pale-yellow transition-colors"
+              >
+                {repo.name}
+              </a>
+            ) : (
+              repo.name
             )}
-          >
-            {repository.owner.login}
-          </aside>
+          </h4>
         </div>
 
-        <h3 id={headingId} className="font-medium text-xl pt-4">
-          {repository.name}
-        </h3>
+        {!isOwned && (
+          <p className="text-[0.7rem] text-pale-blue capitalize mt-0.5">
+            {repo.owner.login}
+          </p>
+        )}
 
-        <p
-          className={classNames(
-            "pt-5 text-xl font-light",
-            contributions.totalCount === 0 && "invisible"
-          )}
-        >
-          +{contributions.totalCount} <span>commits</span>
-        </p>
-      </header>
+        {typeof repo.stargazerCount === "number" && repo.stargazerCount > 0 && (
+          <p className="text-[0.7rem] font-light text-smoke-white/70 mt-0.5">
+            ★ {repo.stargazerCount.toLocaleString()} stars
+          </p>
+        )}
 
-      <section aria-label="Repository description" className="pt-5">
-        <p className="font-light text-lg" style={{ overflowWrap: "anywhere" }}>
-          {repoDescription}
-        </p>
-      </section>
+        {repo.description && (
+          <p className="text-sm font-light text-pale-orange mt-1.5">
+            {repo.description.replace(RE_EMOJI, "")}
+          </p>
+        )}
 
-      <footer className="pt-5">
-        <h4
-          className={classNames(
-            "mb-4 text-base",
-            languages.length === 0 && "invisible"
-          )}
-        >
-          Languages
-        </h4>
-
-        <ul className="mb-4 flex flex-wrap gap-x-8 gap-y-4">
-          {languages.map(({ node: { color, name } }) => (
-            <li key={name}>
-              <IndicatorBar
-                color={color}
-                aria-hidden="true"
-                className="mr-2 align-middle"
-              />
-
-              <span className="font-light mb-1 text-lg">{name}</span>
-            </li>
-          ))}
-        </ul>
-
-        <nav className="pt-5">
-          <ul className="flex flex-wrap gap-x-10">
-            <li className="empty:hidden">
-              {hasRepositoryLink && (
-                <a
-                  href={repository.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span aria-hidden="true" className="text-base">
-                    Code
-                  </span>
-
-                  <VisuallyHidden>
-                    External link to {repository.name} Github repository
-                  </VisuallyHidden>
-                  <ExternalLinkIcon />
-                </a>
-              )}
-            </li>
-
-            <li className="empty:hidden">
-              {hasHomepageLink && (
-                <a
-                  href={repository.homepageUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span aria-hidden="true" className="text-base">
-                    Homepage
-                  </span>
-
-                  <VisuallyHidden>
-                    External link to {repository.name} homepage
-                  </VisuallyHidden>
-                  <ExternalLinkIcon />
-                </a>
-              )}
-            </li>
-            {!hasHomepageLink && !hasRepositoryLink && (
-              <li>
-                <span aria-hidden="true" className="text-base">
-                  &nbsp;
-                </span>
-                <VisuallyHidden>{repository.name} has no links</VisuallyHidden>
-              </li>
+        {languages.length > 0 && (
+          <div className="flex flex-wrap gap-2 mt-1.5">
+            {languages.slice(0, 3).map(({ node: { name, color } }) => (
+              <span key={name} className="text-xs flex items-center gap-1">
+                <IndicatorBar
+                  color={color}
+                  aria-hidden="true"
+                  className="w-2 h-2"
+                />
+                {name}
+              </span>
+            ))}
+            {languages.length > 3 && (
+              <span className="text-xs text-pale-orange">
+                +{languages.length - 3} more
+              </span>
             )}
-          </ul>
-        </nav>
-      </footer>
-    </article>
+          </div>
+        )}
+
+        {item.totalContributions > 0 && (
+          <p className="text-xs font-light text-pale-red mt-2">
+            {item.totalContributions} commits{" "}
+            {item.formattedYearBreakdown && (
+              <span className="text-[0.7rem] text-pale-orange">
+                ({item.formattedYearBreakdown})
+              </span>
+            )}
+          </p>
+        )}
+      </div>
+
+      <div className="flex gap-4 text-xs items-center">
+        {hasHomepageLink && (
+          <a
+            href={repo.homepageUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-pale-blue hover:text-pale-yellow flex items-center gap-1"
+          >
+            <span aria-hidden="true">Homepage</span>
+            <VisuallyHidden>
+              External link to {repo.name} homepage
+            </VisuallyHidden>
+            <ExternalLinkIcon />
+          </a>
+        )}
+
+        {hasRepositoryLink && (
+          <a
+            href={repo.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-pale-blue hover:text-pale-yellow flex items-center gap-1"
+          >
+            <span aria-hidden="true">Code</span>
+            <VisuallyHidden>
+              External link to {repo.name} Github repository
+            </VisuallyHidden>
+            <ExternalLinkIcon />
+          </a>
+        )}
+        {!hasHomepageLink && !hasRepositoryLink && (
+          <span aria-hidden="true" className="text-pale-blue">
+            &nbsp;
+          </span>
+        )}
+        {!hasHomepageLink && !hasRepositoryLink && (
+          <VisuallyHidden>{repo.name} has no links</VisuallyHidden>
+        )}
+      </div>
+    </div>
   );
 };

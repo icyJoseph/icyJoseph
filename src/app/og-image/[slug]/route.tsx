@@ -33,7 +33,7 @@ export async function GET(
         />
       )
     );
-  } catch (reason) {
+  } catch (_) {
     return new ImageResponse(<ProfileImage />);
   }
 }

@@ -3,6 +3,7 @@ import { z } from "zod";
 
 import { isoString } from "helpers";
 
+
 const fitbitAuth = {
   baseURL: "https://api.fitbit.com/1/user/-",
   headers: {
@@ -132,18 +133,27 @@ export const fitBitProfile = async () => {
     .then((res) => res.json())
     .then((data) => data["activities-heart"]);
 
-  await Promise.allSettled([fitbitData, heartRateData]);
+  const [fitbitResult, heartResult] = await Promise.allSettled([
+    fitbitData,
+    heartRateData,
+  ]);
+
+  const fitbitUser =
+    fitbitResult.status === "fulfilled" ? fitbitResult.value : null;
 
   const profile: Pick<
     IcyJoseph.FitbitProfile,
     "topBadges" | "averageDailySteps"
   > = {
-    averageDailySteps: (await fitbitData).averageDailySteps,
-    topBadges: (await fitbitData).topBadges,
+    averageDailySteps: fitbitUser?.averageDailySteps ?? 0,
+    topBadges: fitbitUser?.topBadges ?? [],
   };
 
-  const restingHeartRate = (await heartRateData)
-    .slice(0)
+  const heartSeries =
+    heartResult.status === "fulfilled" ? heartResult.value : null;
+
+  const restingHeartRate = heartSeries
+    ?.slice(0)
     .reverse()
     .find((entry) => Boolean(entry?.value?.restingHeartRate))?.value
     .restingHeartRate;

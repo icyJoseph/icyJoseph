@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { entries } from "config/pages";
 
+
 const externalLinks = [
   {
     href: "https://github.com/icyJoseph",

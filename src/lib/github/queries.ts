@@ -37,6 +37,7 @@ const ContributionsFragment = gql`
         id
         name
         description
+        stargazerCount
         owner {
           login
         }
@@ -108,23 +109,6 @@ const GET_USER_DOC = gql`
       }
       repositoryDiscussionComments(onlyAnswers: true, last: 50) {
         totalCount
-        nodes {
-          id
-          discussion {
-            id
-            title
-            repository {
-              id
-              name
-            }
-          }
-          author {
-            login
-          }
-          isAnswer
-          authorAssociation
-          url
-        }
       }
     }
   }

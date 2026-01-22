@@ -1,54 +1,22 @@
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-
-import { FlatCompat } from "@eslint/eslintrc";
-import js from "@eslint/js";
-import typescriptEslint from "@typescript-eslint/eslint-plugin";
+import nextVitals from "eslint-config-next/core-web-vitals";
+import prettierConfig from "eslint-config-prettier";
 import globals from "globals";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
-});
-
 const eslintConfig = [
-  ...compat.extends(
-    "next",
-    "next/core-web-vitals",
-    "plugin:@typescript-eslint/recommended",
-    "prettier"
-  ),
+  ...nextVitals,
+  prettierConfig,
   {
-    plugins: {
-      "@typescript-eslint": typescriptEslint,
-    },
-
+    ignores: [".next/**", "out/**", "build/**", "next-env.d.ts"],
+  },
+  {
+    files: ["**/*.{js,jsx,ts,tsx}"],
     languageOptions: {
       globals: {
         ...globals.browser,
         ...globals.jest,
         IcyJoseph: true,
       },
-
-      ecmaVersion: 12,
-      sourceType: "module",
-
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
     },
-
-    settings: {
-      react: {
-        version: "detect",
-      },
-    },
-
     rules: {
       "react/self-closing-comp": [
         "error",
@@ -57,24 +25,21 @@ const eslintConfig = [
           html: true,
         },
       ],
-
       "no-unused-vars": "off",
-
       "@typescript-eslint/no-unused-vars": [
         "error",
         {
           argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          caughtErrorsIgnorePattern: "^_",
           ignoreRestSiblings: true,
         },
       ],
-
       "@typescript-eslint/explicit-module-boundary-types": "off",
-
       "import/order": [
         "error",
         {
           groups: ["builtin", "external", "internal"],
-
           pathGroups: [
             {
               pattern: "react",
@@ -82,10 +47,8 @@ const eslintConfig = [
               position: "before",
             },
           ],
-
           pathGroupsExcludedImportTypes: ["react"],
           "newlines-between": "always",
-
           alphabetize: {
             order: "asc",
             caseInsensitive: true,

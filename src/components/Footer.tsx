@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 
+
 import { cacheLife } from "next/cache";
 
 import { FooterLinks } from "components/FooterNav";

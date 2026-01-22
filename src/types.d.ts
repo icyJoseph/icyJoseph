@@ -35,6 +35,7 @@ declare namespace IcyJoseph {
     id: string;
     name: string;
     description: string | undefined | null;
+    stargazerCount: number;
     owner: {
       login: string;
     };
@@ -67,7 +68,7 @@ declare namespace IcyJoseph {
     contributionYears: number[];
     commitContributionsByRepository: Array<{
       contributions: {
-        totalCount;
+        totalCount: number;
       };
       repository: Repository;
     }>;

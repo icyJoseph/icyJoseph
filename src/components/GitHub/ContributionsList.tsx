@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 import { ContributionEntry } from "components/GitHub/ContributionEntry";
+import { ShowMore } from "components/ShowMore";
 import { IndicatorBar } from "design-system/IndicatorBar";
 import { ICY_JOSEPH } from "lib/github/constants";
 import type { AggregatedContribution } from "lib/github/utils";
@@ -35,16 +36,21 @@ export function ContributionsList({
   );
   const contentRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
-  const isInitialMount = useRef(true);
 
-  useEffect(() => {
-    // Skip scroll on initial mount
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-      return;
-    }
+  const selectedLanguageData = useMemo(
+    () => groups.find(([lang]) => lang === selectedLanguage),
+    [groups, selectedLanguage]
+  );
+  const selectedRepos = useMemo(
+    () => selectedLanguageData?.[1] ?? [],
+    [selectedLanguageData]
+  );
+  const selectedColor = selectedLanguageData?.[2] ?? null;
 
-    // Only scroll on language changes (clicks)
+  const handleLanguageChange = (language: string) => {
+    setSelectedLanguage(language);
+
+    // Scroll to header if it's outside the viewport range
     if (headerRef.current) {
       const rect = headerRef.current.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
@@ -58,7 +64,8 @@ export function ContributionsList({
         headerRef.current.scrollIntoView({ behavior: "auto", block: "start" });
       }
     }
-  }, [selectedLanguage]);
+  };
+
 
   if (groups.length === 0) {
     return (
@@ -68,11 +75,6 @@ export function ContributionsList({
     );
   }
 
-  const selectedLanguageData = groups.find(
-    ([lang]) => lang === selectedLanguage
-  );
-  const selectedRepos = selectedLanguageData?.[1] ?? [];
-  const selectedColor = selectedLanguageData?.[2] ?? null;
 
   return (
     <>
@@ -97,7 +99,7 @@ export function ContributionsList({
               return (
                 <button
                   key={language}
-                  onClick={() => setSelectedLanguage(language)}
+                  onClick={() => handleLanguageChange(language)}
                   className={`
                     group flex items-center gap-1.5 px-3 py-2 text-xs font-sans
                     transition-colors rounded focus:outline-none focus-visible:outline-none
@@ -127,14 +129,14 @@ export function ContributionsList({
         </div>
 
         {/* Desktop: Sidebar */}
-        <aside className="hidden md:block w-64 flex-shrink-0 sticky top-0 h-screen overflow-y-auto pr-4">
+        <aside className="hidden md:block w-64 flex-shrink-0 sticky top-0 h-full overflow-y-auto pr-4">
           <nav className="space-y-2 py-2">
             {groups.map(([language, repos, color]) => {
               const isActive = language === selectedLanguage;
               return (
                 <button
                   key={language}
-                  onClick={() => setSelectedLanguage(language)}
+                  onClick={() => handleLanguageChange(language)}
                   className={`
                     group w-full flex items-center gap-2.5 px-3 py-2.5 text-sm text-left font-sans
                     transition-colors rounded focus:outline-none focus-visible:outline-none
@@ -164,10 +166,13 @@ export function ContributionsList({
         </aside>
 
         {/* Content Panel */}
-        <main ref={contentRef} className="flex-1 min-w-0">
+        <section ref={contentRef} className="flex-1 min-w-0">
           {selectedLanguage && selectedRepos.length > 0 && (
-            <div>
-              <div ref={headerRef} className="mb-8 pb-4 border-b border-zinc-700">
+            <ShowMore
+              key={selectedLanguage}
+              initial={5}
+              total={selectedRepos.length}
+              header={
                 <h3 className="flex items-center gap-2 text-xl text-pale-yellow font-sans">
                   {selectedColor && (
                     <IndicatorBar
@@ -177,12 +182,10 @@ export function ContributionsList({
                     />
                   )}
                   {selectedLanguage}
-                  <span className="text-sm font-light text-pale-orange">
-                    ({selectedRepos.length})
-                  </span>
                 </h3>
-              </div>
-
+              }
+              headerRef={headerRef}
+            >
               <ul className="space-y-6">
                 {selectedRepos.map((item, index) => (
                   <li
@@ -197,9 +200,9 @@ export function ContributionsList({
                   </li>
                 ))}
               </ul>
-            </div>
+            </ShowMore>
           )}
-        </main>
+        </section>
       </div>
     </>
   );

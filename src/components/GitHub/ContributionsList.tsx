@@ -211,6 +211,7 @@ function MobileTabs({
         })}
         {selectedRepos.length > 5 && (
           <ToggleButton
+            key={selectedLanguage}
             onToggle={handleToggle}
             activeLabel="Show less"
             inactiveLabel="Show more"

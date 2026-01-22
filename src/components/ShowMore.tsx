@@ -10,6 +10,8 @@ type ShowMoreProps = {
     total: number;
     header?: ReactNode;
     headerRef?: React.RefObject<HTMLDivElement | null>;
+    containerRef?: React.RefObject<HTMLDivElement | null>;
+    stickyHeader?: boolean;
     className?: string;
 };
 
@@ -33,9 +35,12 @@ export function ShowMore({
     total,
     header,
     headerRef: externalHeaderRef,
+    containerRef: externalContainerRef,
+    stickyHeader = true,
     className,
 }: ShowMoreProps) {
-    const containerRef = useRef<HTMLDivElement>(null);
+    const internalContainerRef = useRef<HTMLDivElement>(null);
+    const containerRef = externalContainerRef || internalContainerRef;
     const internalHeaderRef = useRef<HTMLDivElement>(null);
     const headerRef = externalHeaderRef || internalHeaderRef;
     const sentinelRef = useRef<HTMLDivElement>(null);
@@ -89,7 +94,7 @@ export function ShowMore({
                     <div ref={sentinelRef} className="h-0" aria-hidden="true" />
                     <div
                         ref={headerRef}
-                        className="sticky top-0 z-10 bg-soft-black -mx-4 px-4 pt-4 pb-4 mb-8 border-b border-zinc-700"
+                        className={`${stickyHeader ? "sticky top-0" : ""} z-10 bg-soft-black -mx-4 px-4 pt-4 pb-4 mb-8 border-b border-zinc-700`}
                     >
                         <div className="flex items-center justify-between gap-4">
                             {header}

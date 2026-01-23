@@ -42,6 +42,7 @@ type FormatHelpers = {
   formatSubtitle: (text: string) => string;
   formatBullet: (text: string) => string;
   formatAccent: (text: string) => string;
+  formatNumber: (num: number | string) => string;
 };
 
 export function createAnsiFormatters(): FormatHelpers {
@@ -51,6 +52,7 @@ export function createAnsiFormatters(): FormatHelpers {
     formatSubtitle: (text: string) => color(COLORS.subtle, text),
     formatBullet: (text: string) => `${color(COLORS.bullet, "•")} ${text}`,
     formatAccent: (text: string) => color(COLORS.accent, text),
+    formatNumber: (num: number | string) => color(COLORS.accent, String(num)),
   };
 }
 
@@ -61,6 +63,7 @@ export function createMarkdownFormatters(): FormatHelpers {
     formatSubtitle: (text: string) => text,
     formatBullet: (text: string) => `- ${text}`,
     formatAccent: (text: string) => `**${text}**`,
+    formatNumber: (num: number | string) => `**${num}**`,
   };
 }
 
@@ -78,6 +81,8 @@ export async function generateTextLanding(isMarkdown: boolean): Promise<string> 
   const handle = profile.login ?? "icyJoseph";
   const location = profile.location ?? "";
   const company = profile.company ?? "";
+  const followerCount = profile.followers?.totalCount ?? 0;
+  const resolvedDiscussions = profile.repositoryDiscussionComments?.totalCount ?? 0;
 
   const currentYear = profile.contributionsCollection.contributionYears[0];
   const yearsOnGitHub =
@@ -95,6 +100,7 @@ export async function generateTextLanding(isMarkdown: boolean): Promise<string> 
     formatSubtitle,
     formatBullet,
     formatAccent,
+    formatNumber,
   } = formatters;
 
   const lines: string[] = [];
@@ -102,11 +108,27 @@ export async function generateTextLanding(isMarkdown: boolean): Promise<string> 
   lines.push(formatTitle(`${name} — Señor Developer`));
   lines.push(formatSubtitle("JavaScript, TypeScript, Rust, CSS — full‑stack developer."));
   lines.push(formatSubtitle(`GitHub: @${handle}`));
-  lines.push(
-    formatSubtitle(
-      "Links: github.com/icyJoseph  ·  linkedin.com/in/icyjoseph  ·  dev.to/icyjoseph  ·  medium.com/@icjoseph  ·  github.com/sponsors/icyJoseph"
-    )
-  );
+  if (followerCount > 0) {
+    lines.push(
+      formatSubtitle(
+        `${formatNumber(followerCount.toLocaleString())} GitHub ${followerCount === 1 ? "follower" : "followers"}`
+      )
+    );
+  }
+  if (resolvedDiscussions > 0) {
+    lines.push(
+      formatSubtitle(
+        `${formatNumber(resolvedDiscussions.toLocaleString())} resolved ${resolvedDiscussions === 1 ? "discussion" : "discussions"}`
+      )
+    );
+  }
+  lines.push("");
+  lines.push(formatSubtitle("Links:"));
+  lines.push(formatBullet("github.com/icyJoseph"));
+  lines.push(formatBullet("linkedin.com/in/icyjoseph"));
+  lines.push(formatBullet("dev.to/icyjoseph"));
+  lines.push(formatBullet("medium.com/@icjoseph"));
+  lines.push(formatBullet("github.com/sponsors/icyJoseph"));
   if (location) {
     lines.push(formatSubtitle(`Based in ${location}.`));
   }
@@ -131,13 +153,13 @@ export async function generateTextLanding(isMarkdown: boolean): Promise<string> 
     if (averageDailySteps) {
       lines.push(
         formatBullet(
-          `Average daily steps (Fitbit): ${averageDailySteps.toLocaleString()}`
+          `Average daily steps (Fitbit): ${formatNumber(averageDailySteps.toLocaleString())}`
         )
       );
     }
     if (restingHeartRate) {
       lines.push(
-        formatBullet(`Resting heart rate (recent): ${restingHeartRate} bpm`)
+        formatBullet(`Resting heart rate (recent): ${formatNumber(restingHeartRate)} bpm`)
       );
     }
     lines.push("");
@@ -149,7 +171,7 @@ export async function generateTextLanding(isMarkdown: boolean): Promise<string> 
   );
   lines.push(
     formatBullet(
-      `${currentYear - startYear} years as a software developer across telecom, mining, freight, real estate, news, transport, and automotive.`
+      `${formatNumber(currentYear - startYear)} years as a software developer across telecom, mining, freight, real estate, news, transport, and automotive.`
     )
   );
   if (company) {
@@ -203,7 +225,7 @@ export async function generateTextLanding(isMarkdown: boolean): Promise<string> 
   MAIN_LANGUAGES_ORDER.forEach((lang) => {
     const value = totalsByLanguage.get(lang);
     if (value && value > 0) {
-      languageSummaryParts.push(`${lang} ${formatAccent(value.toString())}`);
+      languageSummaryParts.push(`${lang} ${formatNumber(value)}`);
     }
   });
 
@@ -232,22 +254,17 @@ export async function generateTextLanding(isMarkdown: boolean): Promise<string> 
   }
 
   if (notableLabels.length > 0) {
-    const formattedNotables = notableLabels.map((label) => formatAccent(label));
-    const separator = isMarkdown
-      ? ", "
-      : color(COLORS.subtle, ", ");
-    lines.push(
-      formatBullet(
-        `Notable repositories: ${formattedNotables.join(separator)}.`
-      )
-    );
+    lines.push(formatSubtitle("Notable repositories:"));
+    notableLabels.forEach((label) => {
+      lines.push(formatBullet(formatAccent(label)));
+    });
   }
   lines.push("");
 
   if (totalRestrictedContributions > 0) {
     lines.push(
       formatSubtitle(
-        `+ ${totalRestrictedContributions} private contributions across all years.`
+        `+ ${formatNumber(totalRestrictedContributions.toLocaleString())} private contributions across all years.`
       )
     );
     lines.push("");

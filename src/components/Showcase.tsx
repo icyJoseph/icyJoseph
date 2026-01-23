@@ -3,6 +3,7 @@
 import {
   useCallback,
   useId,
+  useMemo,
   useRef,
   useState,
   type ReactElement,
@@ -89,8 +90,11 @@ export const Showcase = <Data extends Record<"id", string>>({
     [items]
   );
 
-  // Might be worth doing `useMemo`
-  const [firstVisibleIndex, lastVisibleIndex] = calcVisibleBounds(visibleItems);
+  // Memoize visible bounds calculation to avoid recalculating on every render
+  const [firstVisibleIndex, lastVisibleIndex] = useMemo(
+    () => calcVisibleBounds(visibleItems),
+    [visibleItems]
+  );
 
   const disableMoveBack = firstVisibleIndex === 0;
 

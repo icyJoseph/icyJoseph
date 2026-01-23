@@ -1,9 +1,9 @@
 import "design-system/global.css";
 import type { ReactNode } from "react";
 
-import { Analytics } from "@vercel/analytics/react";
 import { Recursive } from "next/font/google";
 
+import { DeferredAnalytics } from "components/DeferredAnalytics";
 import { Footer } from "components/Footer";
 import { Navigation } from "components/Navigation";
 
@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
         <Footer />
 
-        <Analytics />
+        <DeferredAnalytics />
       </body>
     </html>
   );

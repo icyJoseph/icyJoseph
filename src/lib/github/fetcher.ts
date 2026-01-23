@@ -1,4 +1,3 @@
-
 import { cacheLife } from "next/cache";
 
 import { yearRange } from "helpers";
@@ -11,7 +10,7 @@ import {
 import { ICY_JOSEPH } from "./constants";
 
 const redactedGitHubRepositoryData = (
-  data: IcyJoseph.GitHub["contributionsCollection"]["commitContributionsByRepository"]
+  data: IcyJoseph.GitHub["contributionsCollection"]["commitContributionsByRepository"],
 ) => {
   return data
     .filter(({ repository }) => {
@@ -65,7 +64,7 @@ const githubAuth = {
 
 export const queryGitHub = <Response>(
   query: string,
-  variables: Record<string, string>
+  variables: Record<string, string>,
 ): Promise<{ data: Response }> =>
   fetch(`${githubAuth.baseURL}/graphql`, {
     method: "POST",
@@ -89,19 +88,18 @@ export const gitHubProfile = async (): Promise<{
 
   const { repositories, ...otherData } = githubData;
 
-  const orgAvatarUrlData = await queryGitHub<{
-    organization: { avatarUrl: string | null };
-  }>(GET_ORG_AVATAR_URL, { login: githubData.company.replace("@", "") });
-
-  const companyAvatarUrl =
-    orgAvatarUrlData?.data?.organization?.avatarUrl ?? "";
+  const orgAvatarUrlPromise = githubData.company
+    ? queryGitHub<{
+        organization: { avatarUrl: string | null };
+      }>(GET_ORG_AVATAR_URL, { login: githubData.company.replace("@", "") })
+    : Promise.resolve({ data: { organization: { avatarUrl: null } } });
 
   const profile: GitHubProfile = {
     ...otherData,
     contributionsCollection: {
       ...githubData.contributionsCollection,
       commitContributionsByRepository: redactedGitHubRepositoryData(
-        githubData.contributionsCollection.commitContributionsByRepository
+        githubData.contributionsCollection.commitContributionsByRepository,
       ),
     },
     repositoryDiscussionComments: {
@@ -134,6 +132,10 @@ export const gitHubProfile = async (): Promise<{
 
   const languages = topLanguages;
 
+  const orgAvatarUrlData = await orgAvatarUrlPromise;
+  const companyAvatarUrl =
+    orgAvatarUrlData?.data?.organization?.avatarUrl ?? "";
+
   return {
     profile,
     languages,
@@ -144,7 +146,7 @@ export const gitHubProfile = async (): Promise<{
 type ContributionData = IcyJoseph.GitHub["contributionsCollection"];
 
 export const gitHubContributions = async (
-  year: number
+  year: number,
 ): Promise<ContributionData> => {
   const variables = { ...yearRange(year), login: ICY_JOSEPH };
 
@@ -155,7 +157,7 @@ export const gitHubContributions = async (
   const githubData = {
     ...data.user.contributionsCollection,
     commitContributionsByRepository: redactedGitHubRepositoryData(
-      data.user.contributionsCollection.commitContributionsByRepository
+      data.user.contributionsCollection.commitContributionsByRepository,
     ),
   };
 

@@ -20,6 +20,9 @@ type ContributionsListProps = {
   privateContributions: number;
 };
 
+// Tailwind md breakpoint (matches md: prefix)
+const DESKTOP_BREAKPOINT = 768;
+
 function getLanguageDisplayName(language: string, isMobile: boolean): string {
   if (!isMobile) return language;
 
@@ -56,17 +59,15 @@ export function ContributionsList({
     setSelectedLanguage(language);
 
     // Scroll to sentinel based on viewport size
-    if (typeof window !== "undefined") {
-      if (window.innerWidth >= 768) {
-        // Desktop: scroll to desktop sentinel
-        if (desktopSentinelRef.current) {
-          desktopSentinelRef.current.scrollIntoView({ behavior: "auto", block: "start" });
-        }
-      } else {
-        // Mobile: scroll to mobile tabs sentinel
-        if (mobileTabsSentinelRef.current) {
-          mobileTabsSentinelRef.current.scrollIntoView({ behavior: "auto", block: "start" });
-        }
+    if (window.innerWidth >= DESKTOP_BREAKPOINT) {
+      // Desktop: scroll to desktop sentinel
+      if (desktopSentinelRef.current) {
+        desktopSentinelRef.current.scrollIntoView({ behavior: "auto", block: "start" });
+      }
+    } else {
+      // Mobile: scroll to mobile tabs sentinel
+      if (mobileTabsSentinelRef.current) {
+        mobileTabsSentinelRef.current.scrollIntoView({ behavior: "auto", block: "start" });
       }
     }
   };
@@ -95,7 +96,7 @@ export function ContributionsList({
         private contributions that are not shown here. These are only public contributions.
       </p>
 
-      <div className="mt-8 flex flex-col md:flex-row gap-8 md:gap-12">
+      <div className="mt-8 flex flex-col md:flex-row gap-8">
         <div ref={mobileTabsSentinelRef} className="h-0" aria-hidden="true" />
         <MobileTabs
           groups={groups}

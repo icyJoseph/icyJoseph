@@ -3,7 +3,6 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import { cacheLife } from "next/cache";
 import { notFound } from "next/navigation";
-import { MDXRemote } from "next-mdx-remote-client/rsc";
 
 import { CountView } from "components/Blog/CountView";
 import { components } from "components/Blog/mdx";
@@ -11,6 +10,7 @@ import { ReadingTime } from "components/Blog/ReadingTime";
 import { PostViews } from "components/PostViews";
 import { BackTo, BackToTop } from "design-system/BackToTop";
 import style from "design-system/separated.module.css";
+import { MDXContent } from "lib/mdx-client/render";
 import { getAllPosts, getPostBySlug } from "lib/posts/db";
 import type { Post } from "lib/posts/types";
 
@@ -127,7 +127,7 @@ const BlogEntry = async (props: PageProps<"/blog/[slug]">) => {
       </aside>
 
       <div className="min-h-screen">
-        <MDXRemote source={content} components={components} />
+        <MDXContent source={content} components={components} />
       </div>
 
       <CountView slug={slug} />

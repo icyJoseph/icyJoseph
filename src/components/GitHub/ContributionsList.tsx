@@ -58,17 +58,24 @@ export function ContributionsList({
   const handleLanguageChange = (language: string) => {
     setSelectedLanguage(language);
 
+    // Only scroll if the sentinel is above the viewport (user has scrolled past the list start)
+    const scrollIfSentinelAboveViewport = (sentinel: HTMLElement | null) => {
+      if (!sentinel) return;
+
+      const rect = sentinel.getBoundingClientRect();
+      // Threshold: only scroll if sentinel is above viewport (with some margin for sticky header)
+      const threshold = 100; // px above viewport top
+
+      if (rect.top < -threshold) {
+        sentinel.scrollIntoView({ behavior: "auto", block: "start" });
+      }
+    };
+
     // Scroll to sentinel based on viewport size
     if (window.innerWidth >= DESKTOP_BREAKPOINT) {
-      // Desktop: scroll to desktop sentinel
-      if (desktopSentinelRef.current) {
-        desktopSentinelRef.current.scrollIntoView({ behavior: "auto", block: "start" });
-      }
+      scrollIfSentinelAboveViewport(desktopSentinelRef.current);
     } else {
-      // Mobile: scroll to mobile tabs sentinel
-      if (mobileTabsSentinelRef.current) {
-        mobileTabsSentinelRef.current.scrollIntoView({ behavior: "auto", block: "start" });
-      }
+      scrollIfSentinelAboveViewport(mobileTabsSentinelRef.current);
     }
   };
 

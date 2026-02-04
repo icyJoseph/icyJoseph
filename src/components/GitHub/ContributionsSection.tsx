@@ -74,6 +74,56 @@ function groupByLanguage(
   });
 }
 
+/**
+ * Get the most recent year with contributions for a repository
+ * Returns the year and the contribution count for that year
+ */
+function getMostRecentYear(
+  contributionsByYear: Record<number, number>
+): { year: number; count: number } | null {
+  const years = Object.keys(contributionsByYear)
+    .map(Number)
+    .sort((a, b) => b - a); // Sort descending (most recent first)
+
+  if (years.length === 0) return null;
+
+  const mostRecentYear = years[0];
+  return {
+    year: mostRecentYear,
+    count: contributionsByYear[mostRecentYear],
+  };
+}
+
+/**
+ * Sort contributions by recency - repos with contributions in more recent years
+ * float to the top, then by contribution count in that year
+ */
+function sortByRecency(
+  a: AggregatedContribution,
+  b: AggregatedContribution
+): number {
+  const aRecent = getMostRecentYear(a.contributionsByYear);
+  const bRecent = getMostRecentYear(b.contributionsByYear);
+
+  // If one has no contributions, put it at the bottom
+  if (!aRecent && !bRecent) return 0;
+  if (!aRecent) return 1;
+  if (!bRecent) return -1;
+
+  // Sort by most recent year first (descending)
+  if (aRecent.year !== bRecent.year) {
+    return bRecent.year - aRecent.year;
+  }
+
+  // If same year, sort by contribution count in that year (descending)
+  if (aRecent.count !== bRecent.count) {
+    return bRecent.count - aRecent.count;
+  }
+
+  // Fallback to total contributions
+  return b.totalContributions - a.totalContributions;
+}
+
 export function ContributionsSection({
   data,
   privateContributions,
@@ -81,13 +131,17 @@ export function ContributionsSection({
   const external = data.external ?? [];
   const owned = data.owned ?? [];
 
-  const sortedExternal = [...external].sort(
-    (a, b) => (b.repository.stargazerCount ?? 0) - (a.repository.stargazerCount ?? 0)
-  );
+  // Sort by recency - repos with recent contributions float to the top
+  const sortedExternal = [...external].sort((a, b) => {
+    // First try recency-based sorting
+    const recencyDiff = sortByRecency(a, b);
+    if (recencyDiff !== 0) return recencyDiff;
+    
+    // If recency is the same, fallback to stargazer count for external repos
+    return (b.repository.stargazerCount ?? 0) - (a.repository.stargazerCount ?? 0);
+  });
 
-  const sortedOwned = [...owned].sort(
-    (a, b) => b.totalContributions - a.totalContributions
-  );
+  const sortedOwned = [...owned].sort(sortByRecency);
 
   const contributions: AggregatedContribution[] = [
     ...sortedExternal,

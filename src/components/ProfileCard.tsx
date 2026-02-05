@@ -41,6 +41,8 @@ export const ProfileCard = ({
         <div className="relative mx-auto p4">
           <Image
             priority
+            fetchPriority="high"
+            sizes="(max-width: 768px) 200px, 320px"
             className="w-full max-w-xs rounded-full select-none"
             src={avatarUrl}
             alt={alt}

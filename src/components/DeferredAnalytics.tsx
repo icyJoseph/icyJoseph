@@ -1,5 +1,7 @@
 "use client";
 
+import { Suspense } from "react";
+
 import dynamic from "next/dynamic";
 
 /**
@@ -25,9 +27,9 @@ const SpeedInsights = dynamic(
 
 export function DeferredAnalytics() {
   return (
-    <>
+    <Suspense fallback={null}>
       <Analytics />
       <SpeedInsights />
-    </>
+    </Suspense>
   );
 }

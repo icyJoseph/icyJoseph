@@ -1,17 +1,11 @@
 "use server";
-import { createClient } from "@supabase/supabase-js";
+
+import { incrementViews, validateSlug } from "lib/views/client";
 
 export const addView = async ({ slug }: { slug: string }) => {
-  const supabase = createClient(
-    process.env.BLOG_VIEWS_URL,
-    process.env.BLOG_VIEWS_API_KEY
-  );
+  const validated = await validateSlug(slug);
 
-  const host =
-    process.env.NODE_ENV === "production" ? "icyjoseph.dev" : "development";
+  if (!validated) return;
 
-  await supabase.rpc("increment_views", {
-    target: slug,
-    site: host,
-  });
+  await incrementViews(validated);
 };

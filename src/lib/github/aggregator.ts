@@ -1,4 +1,4 @@
-import { cacheLife } from "next/cache";
+import { cacheLife, cacheTag } from "next/cache";
 
 import { gitHubProfile } from "./fetcher";
 import { gitHubContributions } from "./fetcher";
@@ -6,6 +6,7 @@ import { groupBySource, aggregateContributionsByRepo, type Contribution } from "
 
 export async function getAllContributions() {
   "use cache: remote";
+  cacheTag("github");
 
   // Get all available years
   const github = await gitHubProfile();

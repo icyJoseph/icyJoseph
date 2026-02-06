@@ -1,4 +1,4 @@
-import { cacheLife } from "next/cache";
+import { cacheLife, cacheTag } from "next/cache";
 
 import { yearRange } from "helpers";
 import {
@@ -79,6 +79,7 @@ export const gitHubProfile = async (): Promise<{
 }> => {
   "use cache";
   cacheLife("days");
+  cacheTag("github");
 
   const response = await queryGitHub<{ user: IcyJoseph.GitHub }>(GET_USER, {
     login: ICY_JOSEPH,

@@ -28,6 +28,16 @@ const config: NextConfig = {
   experimental: {
     browserDebugInfoInTerminal: true,
   },
+  headers: async () => [
+    {
+      source: "/",
+      headers: [{ key: "Vary", value: "Accept" }],
+    },
+    {
+      source: "/blog/:slug",
+      headers: [{ key: "Vary", value: "Accept" }],
+    },
+  ],
   rewrites: async () => ({
     beforeFiles: [
       // Anyone requesting markdown gets markdown

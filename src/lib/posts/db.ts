@@ -3,7 +3,6 @@ import path from "path";
 
 import matter from "gray-matter";
 import { cacheLife, cacheTag } from "next/cache";
-import type { SafeParseSuccess } from "zod";
 
 import { postSchema, postPreviewSchema } from "./parser";
 import type { Post, PostPreview } from "./types";
@@ -23,12 +22,11 @@ export const getAllPosts = async (): Promise<PostPreview[]> => {
       slugs.map<Promise<string>>((slug) => importPost(slug)),
     );
 
-    const posts = postsContent
-      .map((content) => matter(content))
-      .map(({ data, content }) => ({ ...data, content }))
-      .map((post) => postPreviewSchema.safeParse(post))
-      .filter((result): result is SafeParseSuccess<Post> => result.success)
-      .map(({ data }) => data);
+    const posts = postsContent.flatMap((content) => {
+      const { data, content: body } = matter(content);
+      const result = postPreviewSchema.safeParse({ ...data, content: body });
+      return result.success ? [result.data] : [];
+    });
 
     return posts;
   } catch (e) {

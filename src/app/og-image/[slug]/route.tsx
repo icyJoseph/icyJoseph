@@ -23,6 +23,10 @@ export async function GET(
 
     const post = await getPostBySlug(slug);
 
+    if (!post) {
+      return new ImageResponse(<ProfileImage />);
+    }
+
     return new ImageResponse(
       (
         <BlogPostImage

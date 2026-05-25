@@ -25,8 +25,16 @@ const config: NextConfig = {
     remotePatterns,
   },
   cacheComponents: true,
-  experimental: {
-    browserDebugInfoInTerminal: true,
+  turbopack: {
+    rules: {
+      "*.md": {
+        loaders: ["./loaders/raw-loader.js"],
+        as: "*.js",
+      },
+    },
+  },
+  logging: {
+    browserToTerminal: true,
   },
   headers: async () => [
     {

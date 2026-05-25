@@ -119,9 +119,6 @@ const BlogEntry = async (props: PageProps<"/blog/[slug]">) => {
         <span className={`${style.separated} inline-block`}>
           <PublishDate publish_date={publish_date} />
         </span>
-        <span className={`${style.separated} inline-block`}>
-          {intl.format(new Date(publish_date * 1000))}
-        </span>
 
         <ReadingTime content={content} />
       </aside>

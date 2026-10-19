@@ -46,6 +46,10 @@ const config: NextConfig = {
       source: "/blog/:slug",
       headers: [{ key: "Vary", value: "Accept" }],
     },
+    {
+      source: "/design",
+      headers: [{ key: "Vary", value: "Accept" }],
+    },
   ],
   rewrites: async () => ({
     beforeFiles: [
@@ -59,6 +63,16 @@ const config: NextConfig = {
         source: "/blog/:slug",
         has: [{ type: "header", key: "accept", value: ".*text/markdown.*" }],
         destination: "/text/blog/:slug",
+      },
+      {
+        source: "/design",
+        has: [{ type: "header", key: "accept", value: ".*text/markdown.*" }],
+        destination: "/text/design",
+      },
+      // Explicit .md URLs
+      {
+        source: "/design.md",
+        destination: "/text/design",
       },
       // Known CLI clients get plain text by default
       {

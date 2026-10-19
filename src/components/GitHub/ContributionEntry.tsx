@@ -2,10 +2,7 @@ import { ExternalLinkIcon } from "design-system/External";
 import { IndicatorBar } from "design-system/IndicatorBar";
 import { VisuallyHidden } from "design-system/VisuallyHidden";
 import { ICY_JOSEPH } from "lib/github/constants";
-import {
-  mostRecentContributionYear,
-  type AggregatedContribution,
-} from "lib/github/utils";
+import type { AggregatedContribution } from "lib/github/utils";
 
 const RE_EMOJI = /:\+1:|:-1:|:[\w-]+:/g;
 
@@ -19,94 +16,97 @@ type EnrichedContribution = AggregatedContribution & {
 
 type ContributionEntryProps = {
   item: EnrichedContribution;
+  index?: number;
+  total?: number;
 };
 
-export const ContributionEntry = ({ item }: ContributionEntryProps) => {
+export const ContributionEntry = ({
+  item,
+  index,
+  total,
+}: ContributionEntryProps) => {
   const repo = item.repository;
   const isOwned = repo.owner.login === ICY_JOSEPH;
   const languages = repo.languages.edges.filter(isLanguageEdge);
   const hasRepositoryLink = Boolean(repo.url);
   const hasHomepageLink = Boolean(repo.homepageUrl);
-  const stars = repo.stargazerCount ?? 0;
-  const latestYear = mostRecentContributionYear(item.contributionsByYear);
-  const yearCount = Object.keys(item.contributionsByYear).length;
 
   return (
-    <div className="flex flex-col gap-1.5">
-      <div className="flex items-baseline justify-between gap-3 min-w-0">
-        <h4 className="text-lg font-medium text-smoke-white min-w-0 break-words">
-          {hasRepositoryLink ? (
-            <a
-              href={repo.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-smoke-white hover:text-pale-yellow transition-colors"
-            >
-              {repo.name}
-            </a>
-          ) : (
-            repo.name
+    <div className="flex flex-col gap-3">
+      <div className="flex-1">
+        <div className="flex items-baseline gap-2">
+          {typeof index === "number" && typeof total === "number" && (
+            <span className="text-xs font-light text-pale-orange/60">
+              {index + 1}/{total}
+            </span>
           )}
-        </h4>
+          <h4 className="text-lg font-medium text-smoke-white overflow-hidden text-ellipsis whitespace-nowrap min-w-0">
+            {hasRepositoryLink ? (
+              <a
+                href={repo.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-smoke-white hover:text-pale-yellow transition-colors"
+              >
+                {repo.name}
+              </a>
+            ) : (
+              repo.name
+            )}
+          </h4>
+        </div>
 
-        {stars > 0 && (
-          <p className="shrink-0 text-sm tabular-nums text-pale-yellow">
-            <span aria-hidden="true">★ </span>
-            {stars.toLocaleString()}
-            <VisuallyHidden> stars</VisuallyHidden>
+        {!isOwned && (
+          <p className="text-[0.7rem] text-pale-blue capitalize mt-0.5">
+            {repo.owner.login}
+          </p>
+        )}
+
+        {typeof repo.stargazerCount === "number" && repo.stargazerCount > 0 && (
+          <p className="text-[0.7rem] font-light text-smoke-white/70 mt-0.5">
+            ★ {repo.stargazerCount.toLocaleString()} stars
+          </p>
+        )}
+
+        {repo.description && (
+          <p className="text-sm font-light text-pale-orange mt-1.5">
+            {repo.description.replace(RE_EMOJI, "")}
+          </p>
+        )}
+
+        {languages.length > 0 && (
+          <div className="flex flex-wrap gap-2 mt-1.5">
+            {languages.slice(0, 3).map(({ node: { name, color } }) => (
+              <span key={name} className="text-xs flex items-center gap-1">
+                <IndicatorBar
+                  color={color}
+                  aria-hidden="true"
+                  className="w-2 h-2"
+                />
+                {name}
+              </span>
+            ))}
+            {languages.length > 3 && (
+              <span className="text-xs text-pale-orange">
+                +{languages.length - 3} more
+              </span>
+            )}
+          </div>
+        )}
+
+        {item.totalContributions > 0 && (
+          <p className="text-xs font-light text-pale-red mt-2">
+            {item.totalContributions} commits{" "}
+            {item.formattedYearBreakdown && (
+              <span className="text-[0.7rem] text-pale-orange">
+                ({item.formattedYearBreakdown})
+              </span>
+            )}
           </p>
         )}
       </div>
 
-      {!isOwned && (
-        <p className="text-xs text-pale-blue capitalize">{repo.owner.login}</p>
-      )}
-
-      {repo.description && (
-        <p className="text-sm font-light text-pale-orange">
-          {repo.description.replace(RE_EMOJI, "")}
-        </p>
-      )}
-
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
-        {item.totalContributions > 0 && (
-          <p className="font-light text-pale-red">
-            {yearCount > 1 && item.formattedYearBreakdown ? (
-              <>
-                {item.totalContributions.toLocaleString()}{" "}
-                {item.totalContributions === 1 ? "commit" : "commits"}
-                <span className="text-pale-orange">
-                  {" "}
-                  ({item.formattedYearBreakdown})
-                </span>
-              </>
-            ) : (
-              <>
-                {latestYear > 0 && (
-                  <span className="text-pale-orange">{latestYear}</span>
-                )}
-                {latestYear > 0 && " · "}
-                {item.totalContributions.toLocaleString()}{" "}
-                {item.totalContributions === 1 ? "commit" : "commits"}
-              </>
-            )}
-          </p>
-        )}
-
-        {languages.slice(0, 3).map(({ node: { name, color } }) => (
-          <span key={name} className="flex items-center gap-1 text-pale-orange">
-            <IndicatorBar
-              color={color}
-              aria-hidden="true"
-              className="w-2 h-2"
-            />
-            {name}
-          </span>
-        ))}
-        {languages.length > 3 && (
-          <span className="text-pale-orange">+{languages.length - 3}</span>
-        )}
-
+      <div className="flex gap-4 text-xs items-center">
         {hasHomepageLink && (
           <a
             href={repo.homepageUrl}
@@ -135,6 +135,14 @@ export const ContributionEntry = ({ item }: ContributionEntryProps) => {
             </VisuallyHidden>
             <ExternalLinkIcon />
           </a>
+        )}
+        {!hasHomepageLink && !hasRepositoryLink && (
+          <span aria-hidden="true" className="text-pale-blue">
+            &nbsp;
+          </span>
+        )}
+        {!hasHomepageLink && !hasRepositoryLink && (
+          <VisuallyHidden>{repo.name} has no links</VisuallyHidden>
         )}
       </div>
     </div>

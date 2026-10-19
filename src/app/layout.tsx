@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body
-        className={`${recursive.className} ${recursive.variable} text-smoke-white bg-soft-black`}
+        className={`${recursive.className} ${recursive.variable} text-paper-cool bg-room`}
       >
         <Navigation />
 

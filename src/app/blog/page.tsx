@@ -61,19 +61,21 @@ const Blog = async () => {
   const hasPosts = posts.length > 0;
 
   return (
-    <>
-      <section className="max-w-[75ch] mx-auto text-lg">
-        <BlogIntro />
+    <section className="blog-index max-w-[75ch] mx-auto text-lg">
+      <BlogIntro />
 
-        <h2 className="font-sans text-2xl pt-20 mb-8">Posts</h2>
+      <h2 className="blog-index__section-title font-sans text-2xl pt-20 mb-8">
+        Posts
+      </h2>
 
-        {hasPosts ? (
-          posts.map((post) => <PostLink key={post.slug} post={post} />)
-        ) : (
-          <p className="font-sans text-xl">Nothing has been published yet.</p>
-        )}
-      </section>
-    </>
+      {hasPosts ? (
+        posts.map((post) => <PostLink key={post.slug} post={post} />)
+      ) : (
+        <p className="font-sans text-xl text-leaf">
+          Nothing has been published yet.
+        </p>
+      )}
+    </section>
   );
 };
 

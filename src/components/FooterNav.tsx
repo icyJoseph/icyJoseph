@@ -2,7 +2,6 @@ import Link from "next/link";
 
 import { entries } from "config/pages";
 
-
 const externalLinks = [
   {
     href: "https://github.com/icyJoseph",
@@ -24,18 +23,25 @@ const externalLinks = [
 
 export const FooterLinks = () => (
   <nav className="flex flex-1 flex-col items-end">
-    <h3 className="text-xl text-pale-yellow">Hot Links</h3>
+    <h3 className="site-footer__heading text-xl">Hot Links</h3>
 
     <ul>
       {entries.map(({ href, title }) => (
         <li key={href} className="my-3 font-light text-end">
-          <Link href={href}>{title}</Link>
+          <Link href={href} className="site-footer__link">
+            {title}
+          </Link>
         </li>
       ))}
 
       {externalLinks.map(({ href, title }) => (
         <li key={href} className="my-3 font-light text-end">
-          <a href={href} target="_blank" rel="noreferrer noopener">
+          <a
+            href={href}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="site-footer__link"
+          >
             {title}
           </a>
         </li>

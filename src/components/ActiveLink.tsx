@@ -7,7 +7,7 @@ import Link, { LinkProps } from "next/link";
 import { usePathname } from "next/navigation";
 
 export const ActiveLink = (
-  props: ComponentPropsWithoutRef<"a"> & { href: LinkProps["href"] }
+  props: ComponentPropsWithoutRef<"a"> & { href: LinkProps["href"] },
 ) => {
   const pathname = usePathname();
   const isActive = props.href === pathname;
@@ -17,7 +17,7 @@ export const ActiveLink = (
       className={classNames(
         props.className,
         "transition-colors",
-        isActive && "text-pale-orange underline"
+        isActive && "site-nav__link--active",
       )}
     />
   );

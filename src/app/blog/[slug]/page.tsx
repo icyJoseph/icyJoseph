@@ -110,10 +110,10 @@ const BlogEntry = async (props: PageProps<"/blog/[slug]">) => {
   const [mainAuthor] = authors;
 
   return (
-    <section className="max-w-[75ch] mx-auto py-5 text-lg">
-      <header className="text-3xl">{title}</header>
+    <article className="blog-entry max-w-[75ch] mx-auto py-5 text-lg">
+      <header className="blog-entry__title">{title}</header>
 
-      <aside className="mt-8 font-light text-base text-end">
+      <aside className="blog-entry__meta mt-8 font-light text-base text-end">
         <span className={`${style.separated} inline-block`}>{mainAuthor}</span>
 
         <span className={`${style.separated} inline-block`}>
@@ -123,7 +123,7 @@ const BlogEntry = async (props: PageProps<"/blog/[slug]">) => {
         <ReadingTime content={content} />
       </aside>
 
-      <div className="min-h-screen">
+      <div className="blog-entry__prose min-h-screen">
         <MDXContent source={content} components={components} />
       </div>
 
@@ -131,18 +131,22 @@ const BlogEntry = async (props: PageProps<"/blog/[slug]">) => {
 
       <div className="py-4" />
 
-      <p className="text-end font-light text-3xl">
+      <p className="blog-entry__views text-end text-3xl">
         <Suspense fallback="..">
           <PostViews slug={slug} />
         </Suspense>
       </p>
 
       <div className="flex flex-wrap justify-between gap-x-4">
-        <BackTo to="/blog" label="Back to blog" />
+        <BackTo
+          to="/blog"
+          label="Back to blog"
+          linkClassName="blog-entry__nav-link !text-flare-wet"
+        />
 
-        <BackToTop />
+        <BackToTop linkClassName="blog-entry__nav-link !text-flare-wet" />
       </div>
-    </section>
+    </article>
   );
 };
 

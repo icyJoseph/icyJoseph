@@ -10,9 +10,9 @@ const techStack = [
 
 export const TechStack = () => (
   <div className="flex flex-1 flex-col">
-    <h3 className="text-xl text-pale-yellow">Tech Stack</h3>
+    <h3 className="site-footer__heading text-xl">Tech Stack</h3>
 
-    <ul>
+    <ul className="site-footer__list">
       {techStack.map((entry) => (
         <li key={entry} className="my-3 font-light">
           {entry}

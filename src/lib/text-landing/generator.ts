@@ -2,6 +2,7 @@ import { fitBitProfile } from "lib/fitbit/fetcher";
 import { getAllContributions } from "lib/github/aggregator";
 import { MAIN_LANGUAGES } from "lib/github/constants";
 import { gitHubProfile } from "lib/github/fetcher";
+import { compareAggregatedContributions } from "lib/github/utils";
 
 const RESET = "\x1b[0m";
 
@@ -232,10 +233,7 @@ export async function generateTextLanding(isMarkdown: boolean): Promise<string> 
   // Pick notable repositories across all languages by stars
   const sortedByStars = [...allContributions]
     .filter((item) => (item.repository.stargazerCount ?? 0) > 0)
-    .sort(
-      (a, b) =>
-        (b.repository.stargazerCount ?? 0) - (a.repository.stargazerCount ?? 0)
-    );
+    .sort(compareAggregatedContributions);
 
   const topNotable = sortedByStars.slice(0, 6);
   const notableLabels = topNotable.map((item) => {

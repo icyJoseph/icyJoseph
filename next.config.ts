@@ -32,6 +32,10 @@ const config: NextConfig = {
         loaders: ["./loaders/raw-loader.js"],
         as: "*.js",
       },
+      "*.wgsl": {
+        loaders: ["@vgpu/wgsl/loader-webpack"],
+        as: "*.js",
+      },
     },
   },
   logging: {

@@ -1,11 +1,12 @@
 const techStack = [
-  "GitHub's GraphQL API",
-  "Fitbit's API",
-  "React",
-  "NodeJS",
   "Next.js",
-  "Recursive Font Face",
-  "Phosphor Icons",
+  "React",
+  "WebGPU",
+  "GitHub GraphQL API",
+  "Fitbit API",
+  "Tailwind CSS",
+  "MDX",
+  "Recursive",
 ];
 
 export const TechStack = () => (

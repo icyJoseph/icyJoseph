@@ -10,10 +10,16 @@ export const ActiveLink = (
   props: ComponentPropsWithoutRef<"a"> & { href: LinkProps["href"] },
 ) => {
   const pathname = usePathname();
-  const isActive = props.href === pathname;
+  const href = typeof props.href === "string" ? props.href : "";
+  const isActive =
+    href === "/"
+      ? pathname === "/"
+      : pathname === href || pathname.startsWith(`${href}/`);
+
   return (
     <Link
       {...props}
+      aria-current={isActive ? "page" : undefined}
       className={classNames(
         props.className,
         "transition-colors",

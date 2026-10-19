@@ -22,3 +22,505 @@
     outline: 2px solid rgb(var(--pale-blue) / 1);
   }
 }
+
+/* --- /design mockup: sunset through a dark-room window --- */
+html[data-design-mock] body > header,
+html[data-design-mock] body > footer,
+html[data-design-mock] body > div.py-12 {
+  display: none !important;
+}
+
+html[data-design-mock] body > main {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html[data-design-mock] body {
+  background: #030806;
+}
+
+.design-mock {
+  /* Ohuhu FY02 Fluorescent Red: wet neon ≈ #F97979, dried chart ≈ #C46E6D */
+  --room: #030806;
+  --shade: #0a1612;
+  --shade-mid: #14352c;
+  --leaf: #5f8f7a;
+  --flare: #c46e6d;
+  --flare-wet: #f97979;
+  --flare-hot: #ff6b7c;
+  --flare-glow: #ff9aa8;
+  --paper-warm: #f0e4df;
+  --paper-cool: #9bb5a8;
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  background: var(--room);
+  animation: design-mock-fade 1s ease-out both;
+}
+
+.design-mock__atmosphere {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  /* layered marker washes: emerald base, then dried red, then wet neon */
+  background:
+    radial-gradient(
+      70% 55% at 92% 0%,
+      rgb(249 121 121 / 0.16) 0%,
+      rgb(196 110 109 / 0.07) 34%,
+      transparent 62%
+    ),
+    radial-gradient(
+      55% 45% at 78% 18%,
+      rgb(255 107 124 / 0.1) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      70% 55% at 0% 100%,
+      rgb(10 22 18 / 1) 0%,
+      transparent 55%
+    ),
+    linear-gradient(
+      165deg,
+      #071410 0%,
+      var(--room) 48%,
+      #020504 100%
+    );
+}
+
+.design-mock__beam {
+  pointer-events: none;
+  position: fixed;
+  top: -28%;
+  right: -16%;
+  z-index: 0;
+  width: 90vw;
+  max-width: 880px;
+  height: 150%;
+  /* second + third coats, offset like a marker pass after drying */
+  background:
+    radial-gradient(
+      ellipse 42% 52% at 68% 14%,
+      rgb(255 107 124 / 0.22) 0%,
+      rgb(249 121 121 / 0.1) 30%,
+      transparent 62%
+    ),
+    radial-gradient(
+      ellipse 48% 58% at 58% 22%,
+      rgb(196 110 109 / 0.14) 0%,
+      transparent 60%
+    );
+  filter: blur(16px);
+  opacity: 0.85;
+  transform-origin: 75% 0%;
+  animation: design-mock-beam 18s ease-in-out infinite alternate;
+}
+
+.design-mock__eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  color: var(--leaf);
+}
+
+.design-mock__mute-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.design-mock__mute-link:hover {
+  color: var(--flare-glow);
+}
+
+.design-mock__brand {
+  font-size: clamp(2.75rem, 8vw, 5.5rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--paper-warm);
+  text-shadow:
+    0 0 24px rgb(249 121 121 / 0.35),
+    0 0 56px rgb(255 107 124 / 0.2);
+  animation: design-mock-rise 0.8s ease-out 0.1s both;
+}
+
+.design-mock__headline {
+  margin-top: 0.35rem;
+  font-size: clamp(1.35rem, 3.2vw, 2rem);
+  font-weight: 500;
+  color: var(--flare-wet);
+  text-shadow: 0 0 28px rgb(249 121 121 / 0.45);
+  animation: design-mock-rise 0.8s ease-out 0.2s both;
+}
+
+.design-mock__lede {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--paper-cool);
+  animation: design-mock-rise 0.8s ease-out 0.3s both;
+}
+
+.design-mock__section-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--flare-wet);
+  margin-bottom: 0.5rem;
+}
+
+.design-mock__section-copy {
+  color: var(--leaf);
+  line-height: 1.5;
+}
+
+.design-mock__swatch {
+  padding: 0.85rem;
+  border-radius: 0.35rem;
+  background: rgb(10 22 18 / 0.78);
+  border: 1px solid rgb(20 53 44 / 0.95);
+}
+
+.design-mock__swatch-chip {
+  height: 4.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid rgb(255 255 255 / 0.06);
+}
+
+.design-mock__swatch-chip--neon {
+  box-shadow:
+    inset 0 0 24px rgb(255 107 124 / 0.35),
+    0 0 18px rgb(249 121 121 / 0.35);
+}
+
+.design-mock__layers {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.design-mock__layer {
+  position: relative;
+  height: 5.5rem;
+  border-radius: 0.3rem;
+  overflow: hidden;
+  border: 1px solid rgb(20 53 44 / 0.9);
+  background: var(--shade);
+}
+
+.design-mock__layer::before,
+.design-mock__layer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+/* coat 1: thin wash */
+.design-mock__layer--1::before {
+  background: rgb(196 110 109 / 0.35);
+}
+
+/* coat 2: dried + second pass offset */
+.design-mock__layer--2::before {
+  background: rgb(196 110 109 / 0.45);
+}
+.design-mock__layer--2::after {
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgb(249 121 121 / 0.45) 45%,
+    rgb(249 121 121 / 0.2) 70%,
+    transparent 85%
+  );
+}
+
+/* coat 3: wet neon on top */
+.design-mock__layer--3::before {
+  background: rgb(196 110 109 / 0.5);
+}
+.design-mock__layer--3::after {
+  background:
+    linear-gradient(
+      118deg,
+      transparent 15%,
+      rgb(249 121 121 / 0.55) 40%,
+      transparent 75%
+    ),
+    radial-gradient(
+      ellipse at 60% 40%,
+      rgb(255 107 124 / 0.55),
+      transparent 65%
+    );
+  box-shadow: inset 0 0 30px rgb(255 154 168 / 0.25);
+}
+
+.design-mock__type-sun {
+  font-weight: 600;
+  color: var(--flare-wet);
+  text-shadow: 0 0 32px rgb(249 121 121 / 0.4);
+}
+
+.design-mock__type-shade {
+  font-weight: 500;
+  color: var(--leaf);
+}
+
+.design-mock__article {
+  padding: 1.75rem 1.5rem;
+  border-radius: 0.4rem;
+  background:
+    linear-gradient(
+      145deg,
+      rgb(249 121 121 / 0.07) 0%,
+      transparent 36%
+    ),
+    linear-gradient(
+      145deg,
+      rgb(10 22 18 / 0.82) 0%,
+      rgb(3 8 6 / 0.94) 100%
+    );
+  border: 1px solid rgb(20 53 44 / 0.95);
+  box-shadow: inset 0 1px 0 rgb(249 121 121 / 0.08);
+}
+
+.design-mock__meta {
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+  color: var(--leaf);
+}
+
+.design-mock__article-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  color: var(--paper-warm);
+  line-height: 1.2;
+}
+
+.design-mock__inline-link {
+  color: var(--flare-wet);
+  text-decoration: underline;
+  text-decoration-color: rgb(249 121 121 / 0.4);
+  text-underline-offset: 0.18em;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease, text-shadow 0.15s ease;
+}
+
+.design-mock__inline-link:hover {
+  color: var(--flare-glow);
+  text-decoration-color: var(--flare-glow);
+  text-shadow: 0 0 16px rgb(255 107 124 / 0.45);
+}
+
+.design-mock__quote {
+  border-left: 2px solid var(--flare-wet);
+  padding-left: 1rem;
+  font-style: italic;
+  color: var(--paper-warm);
+  background: linear-gradient(
+    90deg,
+    rgb(249 121 121 / 0.12),
+    transparent 70%
+  );
+  box-shadow: -2px 0 16px rgb(249 121 121 / 0.12);
+}
+
+.design-mock__details {
+  margin-top: 1.25rem;
+  border: 1px solid rgb(20 53 44 / 0.95);
+  border-radius: 0.35rem;
+  background: rgb(3 8 6 / 0.6);
+}
+
+.design-mock__details summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 0.85rem 1rem;
+  font-weight: 500;
+  color: var(--flare-wet);
+}
+
+.design-mock__details summary::-webkit-details-marker {
+  display: none;
+}
+
+.design-mock__details[open] {
+  border-color: rgb(249 121 121 / 0.4);
+}
+
+.design-mock__details > :not(summary) {
+  padding: 0 1rem 1rem;
+}
+
+.design-mock__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 1.15rem;
+  border-radius: 0.25rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.design-mock__btn:hover {
+  transform: translateY(-1px);
+}
+
+.design-mock__btn--sun {
+  background: linear-gradient(180deg, var(--flare-hot), var(--flare-wet));
+  color: #1a080c;
+  border: 1px solid rgb(255 154 168 / 0.45);
+  box-shadow:
+    0 0 18px rgb(249 121 121 / 0.35),
+    0 0 40px rgb(255 107 124 / 0.18);
+}
+
+.design-mock__btn--sun:hover {
+  background: linear-gradient(180deg, var(--flare-glow), var(--flare-hot));
+  box-shadow:
+    0 0 22px rgb(255 107 124 / 0.45),
+    0 0 48px rgb(249 121 121 / 0.22);
+}
+
+.design-mock__btn--shade {
+  background: rgb(10 22 18 / 0.9);
+  color: var(--paper-cool);
+  border: 1px solid var(--shade-mid);
+}
+
+.design-mock__btn--shade:hover {
+  border-color: var(--leaf);
+  color: var(--paper-warm);
+}
+
+.design-mock__btn--ghost {
+  background: transparent;
+  color: var(--flare-wet);
+  border: 1px solid transparent;
+}
+
+.design-mock__btn--ghost:hover {
+  border-color: rgb(249 121 121 / 0.35);
+  color: var(--flare-glow);
+}
+
+.design-mock__btn:disabled,
+.design-mock__btn[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.design-mock__icon-line {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+}
+
+.design-mock__inline-icon {
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+  color: var(--flare-wet);
+  filter: drop-shadow(0 0 10px rgb(249 121 121 / 0.45));
+}
+
+.design-mock__bright {
+  overflow: hidden;
+  border-radius: 0.35rem;
+  border: 1px solid rgb(20 53 44 / 0.95);
+  box-shadow:
+    inset 0 1px 0 rgb(249 121 121 / 0.06),
+    0 0 24px rgb(249 121 121 / 0.06);
+}
+
+.design-mock__bright pre {
+  margin: 0 !important;
+  border-radius: 0 !important;
+  background: #0a1612 !important;
+}
+
+.design-mock__field {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--leaf);
+}
+
+.design-mock__field input,
+.design-mock__field textarea {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--shade-mid);
+  background: rgb(10 22 18 / 0.9);
+  color: var(--paper-warm);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.design-mock__field input::placeholder,
+.design-mock__field textarea::placeholder {
+  color: rgb(95 143 122 / 0.65);
+}
+
+.design-mock__field input:focus,
+.design-mock__field textarea:focus {
+  border-color: rgb(249 121 121 / 0.55);
+  box-shadow: 0 0 0 3px rgb(249 121 121 / 0.15);
+}
+
+.design-mock__check {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--paper-cool);
+  cursor: pointer;
+}
+
+.design-mock__check input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--flare-wet);
+}
+
+@keyframes design-mock-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes design-mock-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes design-mock-beam {
+  from {
+    opacity: 0.7;
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0.95;
+    transform: scale(1.03) translate3d(-10px, 6px, 0);
+  }
+}

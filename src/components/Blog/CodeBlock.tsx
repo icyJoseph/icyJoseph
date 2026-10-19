@@ -3,6 +3,8 @@ import { type ComponentPropsWithoutRef } from "react";
 import { Code } from "bright";
 import classNames from "classnames";
 
+import { flareTheme } from "design-system/flare-theme";
+
 export const CodeBlock = async ({
   inline,
   className,
@@ -17,6 +19,7 @@ export const CodeBlock = async ({
     <Code
       lang={match[1]}
       {...props}
+      theme={flareTheme}
       className={classNames(className, "text-base")}
     >
       {String(children).replace(/\n$/, "")}

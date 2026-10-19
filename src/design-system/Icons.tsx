@@ -11,4 +11,5 @@ export {
   Heartbeat,
   ShootingStar,
   Spinner,
+  Robot,
 } from "@phosphor-icons/react";

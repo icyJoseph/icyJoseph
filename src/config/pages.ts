@@ -11,10 +11,10 @@ export const entries = [
     ariaLabel: "Navigate to Posts",
     title: "Blog",
   },
-  // {
-  //   symbol: "👨🏽‍💻",
-  //   href: "/contact",
-  //   ariaLabel: "Navigate to contact info",
-  //   title: "Contact"
-  // }
+  {
+    symbol: "📊",
+    href: "/contributions",
+    ariaLabel: "Navigate to Contributions",
+    title: "XP",
+  },
 ];

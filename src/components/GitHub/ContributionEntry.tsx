@@ -36,17 +36,17 @@ export const ContributionEntry = ({
       <div className="flex-1">
         <div className="flex items-baseline gap-2">
           {typeof index === "number" && typeof total === "number" && (
-            <span className="text-xs font-light text-pale-orange/60">
+            <span className="text-xs font-light text-leaf/70">
               {index + 1}/{total}
             </span>
           )}
-          <h4 className="text-lg font-medium text-smoke-white overflow-hidden text-ellipsis whitespace-nowrap min-w-0">
+          <h4 className="text-lg font-medium text-paper-warm overflow-hidden text-ellipsis whitespace-nowrap min-w-0">
             {hasRepositoryLink ? (
               <a
                 href={repo.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-smoke-white hover:text-pale-yellow transition-colors"
+                className="text-paper-warm hover:text-flare-wet transition-colors"
               >
                 {repo.name}
               </a>
@@ -57,19 +57,19 @@ export const ContributionEntry = ({
         </div>
 
         {!isOwned && (
-          <p className="text-[0.7rem] text-pale-blue capitalize mt-0.5">
+          <p className="text-[0.7rem] text-flare-wet capitalize mt-0.5">
             {repo.owner.login}
           </p>
         )}
 
         {typeof repo.stargazerCount === "number" && repo.stargazerCount > 0 && (
-          <p className="text-[0.7rem] font-light text-smoke-white/70 mt-0.5">
+          <p className="text-[0.7rem] font-light text-paper-cool mt-0.5">
             ★ {repo.stargazerCount.toLocaleString()} stars
           </p>
         )}
 
         {repo.description && (
-          <p className="text-sm font-light text-pale-orange mt-1.5">
+          <p className="text-sm font-light text-leaf mt-1.5">
             {repo.description.replace(RE_EMOJI, "")}
           </p>
         )}
@@ -87,7 +87,7 @@ export const ContributionEntry = ({
               </span>
             ))}
             {languages.length > 3 && (
-              <span className="text-xs text-pale-orange">
+              <span className="text-xs text-leaf">
                 +{languages.length - 3} more
               </span>
             )}
@@ -95,10 +95,10 @@ export const ContributionEntry = ({
         )}
 
         {item.totalContributions > 0 && (
-          <p className="text-xs font-light text-pale-red mt-2">
+          <p className="text-xs font-light text-flare mt-2">
             {item.totalContributions} commits{" "}
             {item.formattedYearBreakdown && (
-              <span className="text-[0.7rem] text-pale-orange">
+              <span className="text-[0.7rem] text-leaf">
                 ({item.formattedYearBreakdown})
               </span>
             )}
@@ -112,7 +112,7 @@ export const ContributionEntry = ({
             href={repo.homepageUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-pale-blue hover:text-pale-yellow flex items-center gap-1"
+            className="text-flare-wet hover:text-flare-glow flex items-center gap-1"
           >
             <span aria-hidden="true">Homepage</span>
             <VisuallyHidden>
@@ -127,7 +127,7 @@ export const ContributionEntry = ({
             href={repo.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-pale-blue hover:text-pale-yellow flex items-center gap-1"
+            className="text-flare-wet hover:text-flare-glow flex items-center gap-1"
           >
             <span aria-hidden="true">Code</span>
             <VisuallyHidden>
@@ -137,7 +137,7 @@ export const ContributionEntry = ({
           </a>
         )}
         {!hasHomepageLink && !hasRepositoryLink && (
-          <span aria-hidden="true" className="text-pale-blue">
+          <span aria-hidden="true" className="text-flare-wet">
             &nbsp;
           </span>
         )}

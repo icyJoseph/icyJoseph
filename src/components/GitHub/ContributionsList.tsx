@@ -18,6 +18,7 @@ type LanguageGroup = [string, EnrichedContribution[], string | null];
 type ContributionsListProps = {
   groups: LanguageGroup[];
   privateContributions: number;
+  year?: number;
 };
 
 // Tailwind md breakpoint (matches md: prefix)
@@ -34,6 +35,7 @@ function getLanguageDisplayName(language: string, isMobile: boolean): string {
 export function ContributionsList({
   groups,
   privateContributions,
+  year,
 }: ContributionsListProps) {
   const [selectedLanguage, setSelectedLanguage] = useState<string>(
     groups[0]?.[0] ?? ""
@@ -82,8 +84,9 @@ export function ContributionsList({
 
   if (groups.length === 0) {
     return (
-      <p className="text-center text-lg text-pale-orange mt-8">
-        No public GitHub contributions found yet.
+      <p className="text-center text-lg text-flare mt-8">
+        No public GitHub contributions found
+        {year ? ` for ${year}` : " yet"}.
       </p>
     );
   }
@@ -91,16 +94,18 @@ export function ContributionsList({
 
   return (
     <>
-      <h3 className="font-sans text-2xl mt-12 mb-4">
-        Contributions
+      <h3 className="font-sans text-2xl mt-12 mb-4 text-paper-warm">
+        {year ? `Repos in ${year}` : "Contributions"}
       </h3>
 
-      <p className="font-sans text-lg font-light">
-        {ICY_JOSEPH} has also made{" "}
-        <span className="text-pale-yellow">
-          {privateContributions.toLocaleString()}
+      <p className="font-sans text-lg font-light text-paper-cool">
+        {ICY_JOSEPH} also made{" "}
+        <span className="text-flare-wet">
+          {privateContributions.toLocaleString("en-SE")}
         </span>{" "}
-        private contributions that are not shown here. These are only public contributions.
+        private contributions
+        {year ? ` in ${year}` : ""} that are not listed below — only public
+        repos show here.
       </p>
 
       <div className="mt-8 flex flex-col md:flex-row gap-8">
@@ -184,7 +189,7 @@ function MobileTabs({
   };
 
   return (
-    <div className="md:hidden sticky top-0 z-10 bg-soft-black border-b border-zinc-700 -mx-4 px-4 py-2">
+    <div className="md:hidden sticky top-0 z-10 bg-room border-b border-shade-mid/60 -mx-4 px-4 py-2">
       <div className="flex flex-wrap gap-2 items-center">
         {groups.map(([language, repos, color]) => {
           const isActive = language === selectedLanguage;
@@ -196,8 +201,8 @@ function MobileTabs({
                 group flex items-center gap-1.5 px-3 py-2 text-xs font-sans
                 transition-colors rounded focus:outline-none focus-visible:outline-none
                 ${isActive
-                  ? "bg-pale-blue/20 text-pale-yellow border border-pale-blue"
-                  : "text-pale-orange hover:bg-zinc-800 hover:text-pale-yellow border border-transparent"
+                  ? "bg-flare-wet/15 text-flare-wet border border-flare-wet"
+                  : "text-leaf hover:bg-shade hover:text-flare-wet border border-transparent"
                 }
               `}
             >
@@ -223,7 +228,7 @@ function MobileTabs({
             onToggle={handleToggle}
             activeLabel="Show less"
             inactiveLabel="Show more"
-            className="text-pale-blue hover:text-pale-yellow text-sm font-sans ml-auto"
+            className="text-flare-wet hover:text-flare-glow text-sm font-sans ml-auto"
           />
         )}
       </div>
@@ -255,8 +260,8 @@ function DesktopSidebar({
                 group w-full flex items-center gap-2.5 px-3 py-2.5 text-sm text-left font-sans
                 transition-colors rounded focus:outline-none focus-visible:outline-none
                 ${isActive
-                  ? "bg-pale-blue/20 text-pale-yellow border-l-2 border-pale-blue"
-                  : "text-pale-orange hover:bg-zinc-800 hover:text-pale-yellow"
+                  ? "bg-flare-wet/15 text-flare-wet border-l-2 border-flare-wet"
+                  : "text-leaf hover:bg-shade hover:text-flare-wet"
                 }
               `}
             >
@@ -307,7 +312,7 @@ function ContentPanel({
       {selectedRepos.map((item, index) => (
         <li
           key={item.repository.id}
-          className="border-b border-zinc-700 pb-3 last:border-0"
+          className="border-b border-shade-mid/60 pb-3 last:border-0"
         >
           <ContributionEntry
             item={item}
@@ -343,7 +348,7 @@ function ContentPanel({
             initial={5}
             total={selectedRepos.length}
             header={
-              <h3 className="flex items-center gap-2 text-xl text-pale-yellow font-sans">
+              <h3 className="flex items-center gap-2 text-xl text-flare-wet font-sans">
                 {selectedColor && (
                   <IndicatorBar
                     color={selectedColor}

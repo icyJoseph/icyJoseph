@@ -25,8 +25,17 @@ const config: NextConfig = {
     remotePatterns,
   },
   cacheComponents: true,
-  experimental: {
-    browserDebugInfoInTerminal: true,
+  turbopack: {
+    rules: {
+      // `type: "raw"` is not async-chunkable; wrap as JS for dynamic import().
+      "*.md": {
+        loaders: ["./loaders/raw-loader.js"],
+        as: "*.js",
+      },
+    },
+  },
+  logging: {
+    browserToTerminal: true,
   },
   headers: async () => [
     {

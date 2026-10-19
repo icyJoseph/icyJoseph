@@ -53,3 +53,8 @@ meilisearch
 data.ms
 mdx
 .http
+
+# agent skills / tooling (local installs, not part of the site)
+.agents/
+.claude/
+skills-lock.json

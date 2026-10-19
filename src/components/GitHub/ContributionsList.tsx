@@ -303,17 +303,13 @@ function ContentPanel({
   const hasContent = selectedLanguage && selectedRepos.length > 0;
 
   const reposList = (
-    <ul className="space-y-6">
-      {selectedRepos.map((item, index) => (
+    <ul className="space-y-4">
+      {selectedRepos.map((item) => (
         <li
           key={item.repository.id}
           className="border-b border-zinc-700 pb-3 last:border-0"
         >
-          <ContributionEntry
-            item={item}
-            index={index}
-            total={selectedRepos.length}
-          />
+          <ContributionEntry item={item} />
         </li>
       ))}
     </ul>

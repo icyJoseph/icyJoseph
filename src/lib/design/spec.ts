@@ -25,11 +25,11 @@ export function generateDesignSpecMarkdown(): string {
   lines.push("## Vibe");
   lines.push("");
   lines.push(
-    "Late afternoon. The laptop is still open. Orange-red light from the window cuts across the desk; everything else sits in cool green shade.",
+    "Late afternoon. A dev still sitting at the desk, laptop open, not really in the source code anymore. Orange-red light from the window cuts across the keyboard, the rest of the room sits in the shade.",
   );
   lines.push("");
   lines.push(
-    "🤖 That is the frame for this design system: fluorescent where attention lands, dark emerald where it does not. Less startup neon, more end-of-day coding. The old developer era is closing, and the room is getting quieter.",
+    "🤖 Fluorescent where attention lands, dark emerald where it does not. Not everything is equally important anymore. Less startup neon, more end-of-day coding. The old developer era is closing, and the room is getting quieter. People prompt and ship. The code is not what anyone looks at anymore.",
   );
   lines.push("");
   lines.push("Keywords: late light, window beam, marker layers, quiet room.");
@@ -128,6 +128,14 @@ export function generateDesignSpecMarkdown(): string {
   lines.push("- Subhead / accent titles: wet flare (`#F97979`) with neon bloom.");
   lines.push("- Body: paper cool on room.");
   lines.push("- Meta / dates / asides: leaf.");
+  lines.push("");
+  lines.push(
+    "Display line “Late light on the sill” carries the plate: two-ink poster, thick even outlines. The field is the room — #030806, #0a1612, #14352c — with leaf only on the code marks. Flare is layered: window is hit (#FF6B7C) with a glow center (#FF9AA8), the beam is wet (#F97979), the desk and chair seat are dry (#C46E6D), the agent harness is hit with dry cards. Desk against the back wall, window on the right-hand wall, empty chair. Code pane stays in the dark.",
+  );
+  lines.push("");
+  lines.push(
+    "Credit to [Benji on Paper](https://www.benjionpaper.com/), for inspiring this kind of theme.",
+  );
   lines.push("");
   lines.push("---");
   lines.push("");

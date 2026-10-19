@@ -42,8 +42,9 @@ export default function DesignMockupPage() {
           <h2 className="design-mock__section-title">Vibe</h2>
           <div className="space-y-4 text-base leading-relaxed text-[var(--paper-cool)]/90">
             <p>
-              Late afternoon. The laptop is still open. Orange-red light from the
-              window cuts across the desk; everything else sits in cool green
+              Late afternoon. A dev still sitting at the desk, laptop open,
+              not really in the source code anymore. Orange-red light from the
+              window cuts across the keyboard, the rest of the room sits in the
               shade.
             </p>
             <p className="design-mock__icon-line">
@@ -54,10 +55,11 @@ export default function DesignMockupPage() {
                 aria-hidden
               />
               <span>
-                That is the frame for this design system: fluorescent where
-                attention lands, dark emerald where it does not. Less startup
+                Fluorescent where attention lands, dark emerald where it does
+                not. Not everything is equally important anymore. Less startup
                 neon, more end-of-day coding — the sense that the old developer
-                era is closing, and the room is getting quieter.
+                era is closing, and the room is getting quieter. People prompt
+                and ship. The code is not what anyone looks at anymore.
               </span>
             </p>
           </div>

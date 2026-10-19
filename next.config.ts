@@ -27,6 +27,7 @@ const config: NextConfig = {
   cacheComponents: true,
   turbopack: {
     rules: {
+      // `type: "raw"` is not async-chunkable; wrap as JS for dynamic import().
       "*.md": {
         loaders: ["./loaders/raw-loader.js"],
         as: "*.js",

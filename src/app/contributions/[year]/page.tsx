@@ -166,8 +166,15 @@ async function ContributionYearDetail({
 
   if (!Number.isFinite(year)) notFound();
 
-  const years = await getContributionYears();
-  if (!years.includes(year)) notFound();
+  const [years, calendarYear] = await Promise.all([
+    getContributionYears(),
+    getCurrentYear(),
+  ]);
+  if (!years.includes(year) && year !== calendarYear) notFound();
+
+  const navYearList = years.includes(calendarYear)
+    ? years
+    : [calendarYear, ...years];
 
   return (
     <article className="contrib-year max-w-5xl mx-auto py-6">
@@ -180,7 +187,7 @@ async function ContributionYearDetail({
         <YearRubric />
       </header>
 
-      <YearNav years={years} year={year} />
+      <YearNav years={navYearList} year={year} />
 
       <Suspense fallback={<ExploreFallback year={year} />}>
         <YearExplore year={year} />

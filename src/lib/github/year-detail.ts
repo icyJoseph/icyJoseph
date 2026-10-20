@@ -12,6 +12,7 @@ import {
   type Contribution,
 } from "lib/github/utils";
 import { getContributionYearTotals } from "lib/github/year-totals";
+import { getCurrentYear } from "lib/time/current-year";
 
 export type YearContributionDetail = {
   year: number;
@@ -28,17 +29,26 @@ export async function getContributionYears(): Promise<number[]> {
   return years.map((entry) => entry.year);
 }
 
+function navYears(activityYears: number[], calendarYear: number): number[] {
+  if (activityYears.includes(calendarYear)) return activityYears;
+  return [calendarYear, ...activityYears];
+}
+
 export async function getContributionsForYear(
   year: number,
 ): Promise<YearContributionDetail | null> {
   "use cache";
   cacheTag("github");
 
-  const years = await getContributionYears();
-  if (!years.includes(year)) return null;
+  const [years, calendarYear] = await Promise.all([
+    getContributionYears(),
+    getCurrentYear(),
+  ]);
 
-  const currentYear = years[0];
-  if (year === currentYear) cacheLife("days");
+  // Allow the calendar year even with zero activity (index redirects here).
+  if (!years.includes(year) && year !== calendarYear) return null;
+
+  if (year === calendarYear) cacheLife("days");
   else cacheLife("max");
 
   const [yearData, side] = await Promise.all([
@@ -64,7 +74,7 @@ export async function getContributionsForYear(
 
   return {
     year,
-    years,
+    years: navYears(years, calendarYear),
     publicTotal: merged.publicTotal,
     privateTotal,
     total: merged.publicTotal + privateTotal,

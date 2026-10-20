@@ -6,6 +6,7 @@ import { ContributionEntry } from "components/GitHub/ContributionEntry";
 import { ShowMore } from "components/ShowMore";
 import { ToggleButton } from "components/ToggleButton";
 import { IndicatorBar } from "design-system/IndicatorBar";
+import { formatCount } from "lib/format";
 import { ICY_JOSEPH } from "lib/github/constants";
 import type { AggregatedContribution } from "lib/github/utils";
 
@@ -37,9 +38,17 @@ export function ContributionsList({
   privateContributions,
   year,
 }: ContributionsListProps) {
-  const [selectedLanguage, setSelectedLanguage] = useState<string>(
-    groups[0]?.[0] ?? ""
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    () => groups[0]?.[0] ?? "",
   );
+  const [listYear, setListYear] = useState(year);
+
+  // Reset language tab when navigating between years without a remount.
+  if (year !== listYear) {
+    setListYear(year);
+    setSelectedLanguage(groups[0]?.[0] ?? "");
+  }
+
   const contentRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const mobileContentRef = useRef<HTMLDivElement>(null);
@@ -101,7 +110,7 @@ export function ContributionsList({
       <p className="font-sans text-lg font-light text-paper-cool">
         {ICY_JOSEPH} also made{" "}
         <span className="text-flare-wet">
-          {privateContributions.toLocaleString("en-SE")}
+          {formatCount(privateContributions)}
         </span>{" "}
         private contributions
         {year ? ` in ${year}` : ""} that are not listed below — only public

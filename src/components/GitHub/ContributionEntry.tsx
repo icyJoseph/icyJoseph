@@ -1,6 +1,7 @@
 import { ExternalLinkIcon } from "design-system/External";
 import { IndicatorBar } from "design-system/IndicatorBar";
 import { VisuallyHidden } from "design-system/VisuallyHidden";
+import { formatCount } from "lib/format";
 import { ICY_JOSEPH } from "lib/github/constants";
 import type { AggregatedContribution } from "lib/github/utils";
 
@@ -64,7 +65,7 @@ export const ContributionEntry = ({
 
         {typeof repo.stargazerCount === "number" && repo.stargazerCount > 0 && (
           <p className="text-[0.7rem] font-light text-paper-cool mt-0.5">
-            ★ {repo.stargazerCount.toLocaleString()} stars
+            ★ {formatCount(repo.stargazerCount)} stars
           </p>
         )}
 

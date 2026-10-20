@@ -1,13 +1,17 @@
+import { Suspense } from "react";
+
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { ContributionsSection } from "components/GitHub/ContributionsSection";
 import { BackTo, BackToTop } from "design-system/BackToTop";
+import { formatCount } from "lib/format";
 import {
   getContributionYears,
   getContributionsForYear,
 } from "lib/github/year-detail";
+import { getCurrentYear } from "lib/time/current-year";
 
 type PageProps = {
   params: Promise<{ year: string }>;
@@ -34,16 +38,37 @@ export const generateMetadata = async (
   };
 };
 
-export default async function ContributionYearPage(props: PageProps) {
-  const { year: yearParam } = await props.params;
+function ContributionYearFallback() {
+  return (
+    <article className="contrib-year max-w-5xl mx-auto py-6">
+      <p className="contrib-year__eyebrow">
+        <Link href="/" className="contrib-year__mute">
+          ← icyJoseph
+        </Link>
+        <span className="mx-3 opacity-35">·</span>
+        contributions
+      </p>
+      <p className="contrib-year__signal opacity-50 mt-6">Loading year…</p>
+    </article>
+  );
+}
+
+async function ContributionYearDetail({
+  params,
+}: {
+  params: Promise<{ year: string }>;
+}) {
+  const { year: yearParam } = await params;
   const year = Number(yearParam);
 
   if (!Number.isFinite(year)) notFound();
 
-  const detail = await getContributionsForYear(year);
+  const [detail, currentYear] = await Promise.all([
+    getContributionsForYear(year),
+    getCurrentYear(),
+  ]);
   if (!detail) notFound();
 
-  const currentYear = new Date().getFullYear();
   const isCurrent = year === currentYear;
 
   return (
@@ -58,17 +83,15 @@ export default async function ContributionYearPage(props: PageProps) {
         </p>
         <h1 className="contrib-year__title">{year}</h1>
         <p className="contrib-year__signal">
-          <span className="contrib-year__stat">
-            {detail.total.toLocaleString("en-SE")}
-          </span>{" "}
+          <span className="contrib-year__stat">{formatCount(detail.total)}</span>{" "}
           contributions
           {isCurrent ? (
             <span className="contrib-year__ytd"> year to date</span>
           ) : null}
           <span className="contrib-year__hint">
             {" "}
-            · public {detail.publicTotal.toLocaleString("en-SE")} · private{" "}
-            {detail.privateTotal.toLocaleString("en-SE")}
+            · public {formatCount(detail.publicTotal)} · private{" "}
+            {formatCount(detail.privateTotal)}
           </span>
         </p>
         <p className="contrib-year__rubric">
@@ -89,6 +112,7 @@ export default async function ContributionYearPage(props: PageProps) {
                 : "contrib-year__chip"
             }
             aria-current={y === year ? "page" : undefined}
+            prefetch
           >
             {y}
           </Link>
@@ -96,6 +120,7 @@ export default async function ContributionYearPage(props: PageProps) {
       </nav>
 
       <ContributionsSection
+        key={year}
         data={detail.aggregated}
         privateContributions={detail.privateTotal}
         year={year}
@@ -110,5 +135,13 @@ export default async function ContributionYearPage(props: PageProps) {
         <BackToTop linkClassName="!text-flare-wet blog-entry__nav-link" />
       </div>
     </article>
+  );
+}
+
+export default function ContributionYearPage(props: PageProps) {
+  return (
+    <Suspense fallback={<ContributionYearFallback />}>
+      <ContributionYearDetail params={props.params} />
+    </Suspense>
   );
 }

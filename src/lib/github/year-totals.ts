@@ -69,7 +69,7 @@ export async function getContributionYearTotals(): Promise<{
   // from the graph today, so delta === full rest count (empty graph map).
   const emptyGraphRepos = new Map<string, number>();
 
-  const years = await Promise.all(
+  const withTotals = await Promise.all(
     allYears.map(async (year, index) => {
       if (index === 0) cacheLife("days");
       else cacheLife("max");
@@ -91,6 +91,8 @@ export async function getContributionYearTotals(): Promise<{
     }),
   );
 
+  // Drop empty calendar years (e.g. account created in 2016 with 0 commits).
+  const years = withTotals.filter((entry) => entry.total > 0);
   const careerTotal = years.reduce((sum, entry) => sum + entry.total, 0);
 
   return { years, careerTotal };

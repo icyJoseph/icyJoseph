@@ -1,6 +1,6 @@
 import { cacheLife, cacheTag } from "next/cache";
 
-import { gitHubContributions, gitHubProfile } from "lib/github/fetcher";
+import { gitHubContributions } from "lib/github/fetcher";
 import {
   getSideChannelCommitData,
   mergeSideChannelIntoYear,
@@ -11,6 +11,7 @@ import {
   type AggregatedContributionData,
   type Contribution,
 } from "lib/github/utils";
+import { getContributionYearTotals } from "lib/github/year-totals";
 
 export type YearContributionDetail = {
   year: number;
@@ -21,22 +22,10 @@ export type YearContributionDetail = {
   aggregated: AggregatedContributionData;
 };
 
+/** Years with at least one contribution (public or private), newest first. */
 export async function getContributionYears(): Promise<number[]> {
-  "use cache";
-  cacheTag("github");
-  cacheLife("days");
-
-  const [{ profile }, side] = await Promise.all([
-    gitHubProfile(),
-    getSideChannelCommitData(),
-  ]);
-
-  const years = new Set<number>([
-    ...(profile.contributionsCollection.contributionYears ?? []),
-    ...Object.keys(side.byYear).map(Number),
-  ]);
-
-  return Array.from(years).sort((a, b) => b - a);
+  const { years } = await getContributionYearTotals();
+  return years.map((entry) => entry.year);
 }
 
 export async function getContributionsForYear(

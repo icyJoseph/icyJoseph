@@ -75,6 +75,11 @@ export const Footer = async () => {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link href="/design" className="site-footer__link">
+                Design system
+              </Link>
+            </li>
             {externalLinks.map(({ href, title }) => (
               <li key={href}>
                 <a

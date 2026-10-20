@@ -1,0 +1,13 @@
+# Single-package app — pnpm 11+ reads install settings here (not package.json / .npmrc).
+nodeLinker: hoisted
+confirmModulesPurge: false
+# Exact pins in package.json; skip the default "wait N days after publish" gate.
+minimumReleaseAge: 0
+peerDependencyRules:
+  allowedVersions:
+    typescript: "*"
+allowBuilds:
+  "@vgpu/adapter-node": true
+  msw: true
+  unrs-resolver: true
+  webgpu: true

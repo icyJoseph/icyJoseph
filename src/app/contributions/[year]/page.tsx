@@ -38,71 +38,24 @@ export const generateMetadata = async (
   };
 };
 
-function ContributionYearFallback() {
+function YearEyebrow() {
   return (
-    <article className="contrib-year max-w-5xl mx-auto py-6">
-      <p className="contrib-year__eyebrow">
-        <Link href="/" className="contrib-year__mute">
-          ← icyJoseph
-        </Link>
-        <span className="mx-3 opacity-35">·</span>
-        contributions
-      </p>
-      <p className="contrib-year__signal opacity-50 mt-6">Loading year…</p>
-    </article>
+    <p className="contrib-year__eyebrow">
+      <Link href="/" className="contrib-year__mute">
+        ← icyJoseph
+      </Link>
+      <span className="mx-3 opacity-35">·</span>
+      contributions
+    </p>
   );
 }
 
-async function ContributionYearDetail({
-  params,
-}: {
-  params: Promise<{ year: string }>;
-}) {
-  const { year: yearParam } = await params;
-  const year = Number(yearParam);
-
-  if (!Number.isFinite(year)) notFound();
-
-  const [detail, currentYear] = await Promise.all([
-    getContributionsForYear(year),
-    getCurrentYear(),
-  ]);
-  if (!detail) notFound();
-
-  const isCurrent = year === currentYear;
-
+function YearNav({ years, year }: { years: number[]; year: number }) {
   return (
-    <article className="contrib-year max-w-5xl mx-auto py-6">
-      <header className="contrib-year__header mb-10">
-        <p className="contrib-year__eyebrow">
-          <Link href="/" className="contrib-year__mute">
-            ← icyJoseph
-          </Link>
-          <span className="mx-3 opacity-35">·</span>
-          contributions
-        </p>
-        <h1 className="contrib-year__title">{year}</h1>
-        <p className="contrib-year__signal">
-          <span className="contrib-year__stat">{formatCount(detail.total)}</span>{" "}
-          contributions
-          {isCurrent ? (
-            <span className="contrib-year__ytd"> year to date</span>
-          ) : null}
-          <span className="contrib-year__hint">
-            {" "}
-            · public {formatCount(detail.publicTotal)} · private{" "}
-            {formatCount(detail.privateTotal)}
-          </span>
-        </p>
-        <p className="contrib-year__rubric">
-          Public repos listed below. Private count comes from the GitHub API —
-          some org work never appears here, even as private, when the org hides
-          it.
-        </p>
-      </header>
-
-      <nav className="contrib-year__years" aria-label="Contribution years">
-        {detail.years.map((y) => (
+    <nav className="contrib-year__years" aria-label="Contribution years">
+      <p className="contrib-year__years-label">Years</p>
+      <div className="contrib-year__years-track">
+        {years.map((y) => (
           <Link
             key={y}
             href={`/contributions/${y}`}
@@ -117,14 +70,121 @@ async function ContributionYearDetail({
             {y}
           </Link>
         ))}
-      </nav>
+      </div>
+    </nav>
+  );
+}
 
-      <ContributionsSection
-        key={year}
-        data={detail.aggregated}
-        privateContributions={detail.privateTotal}
-        year={year}
-      />
+function YearRubric() {
+  return (
+    <p className="contrib-year__rubric">
+      Public repos listed below. Private count comes from the GitHub API — some
+      org work never appears here, even as private, when the org hides it.
+    </p>
+  );
+}
+
+/** Fixed-height slot so the count line doesn’t shove the rubric/nav. */
+function SignalFallback() {
+  return (
+    <p className="contrib-year__signal contrib-year__signal--slot" aria-hidden>
+      <span className="contrib-year__skel contrib-year__skel--inline" />
+    </p>
+  );
+}
+
+/** Same card chrome as the real grid — no fake chip/rubric swap. */
+function ExploreFallback({ year }: { year: number }) {
+  return (
+    <div className="contrib-explore" aria-busy aria-label="Loading">
+      <h3 className="contrib-explore__title">Work in {year}</h3>
+      <h4 className="contrib-explore__section-label">Highlights</h4>
+      <ul className="contrib-explore__grid contrib-explore__grid--highlights">
+        {Array.from({ length: 2 }, (_, i) => (
+          <li key={i}>
+            <div className="contrib-card contrib-card--highlight contrib-card--skel" />
+          </li>
+        ))}
+      </ul>
+      <h4 className="contrib-explore__section-label">More from this year</h4>
+      <ul className="contrib-explore__grid contrib-explore__grid--tiles">
+        {Array.from({ length: 6 }, (_, i) => (
+          <li key={i}>
+            <div className="contrib-card contrib-card--skel" />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+async function YearSignal({ year }: { year: number }) {
+  const [detail, currentYear] = await Promise.all([
+    getContributionsForYear(year),
+    getCurrentYear(),
+  ]);
+  if (!detail) notFound();
+
+  const isCurrent = year === currentYear;
+
+  return (
+    <p className="contrib-year__signal contrib-year__signal--slot">
+      <span className="contrib-year__stat">{formatCount(detail.total)}</span>{" "}
+      contributions
+      {isCurrent ? (
+        <span className="contrib-year__ytd"> year to date</span>
+      ) : null}
+      <span className="contrib-year__hint">
+        {" "}
+        · public {formatCount(detail.publicTotal)} · private{" "}
+        {formatCount(detail.privateTotal)}
+      </span>
+    </p>
+  );
+}
+
+async function YearExplore({ year }: { year: number }) {
+  const detail = await getContributionsForYear(year);
+  if (!detail) notFound();
+
+  return (
+    <ContributionsSection
+      key={year}
+      data={detail.aggregated}
+      year={year}
+    />
+  );
+}
+
+async function ContributionYearDetail({
+  params,
+}: {
+  params: Promise<{ year: string }>;
+}) {
+  const { year: yearParam } = await params;
+  const year = Number(yearParam);
+
+  if (!Number.isFinite(year)) notFound();
+
+  const years = await getContributionYears();
+  if (!years.includes(year)) notFound();
+
+  return (
+    <article className="contrib-year max-w-5xl mx-auto py-6">
+      <header className="contrib-year__header mb-10">
+        <YearEyebrow />
+        <h1 className="contrib-year__title">{year}</h1>
+        <Suspense fallback={<SignalFallback />}>
+          <YearSignal year={year} />
+        </Suspense>
+        <YearRubric />
+      </header>
+
+      <YearNav years={years} year={year} />
+
+      <Suspense fallback={<ExploreFallback year={year} />}>
+        <YearExplore year={year} />
+      </Suspense>
 
       <div className="flex flex-wrap justify-between gap-x-4 mt-12">
         <BackTo
@@ -134,6 +194,23 @@ async function ContributionYearDetail({
         />
         <BackToTop linkClassName="!text-flare-wet blog-entry__nav-link" />
       </div>
+    </article>
+  );
+}
+
+/** Params only — keep tiny; real chrome waits for years list (cached). */
+function ContributionYearFallback() {
+  return (
+    <article className="contrib-year max-w-5xl mx-auto py-6">
+      <header className="contrib-year__header mb-10">
+        <YearEyebrow />
+        <div
+          className="contrib-year__skel contrib-year__skel--title"
+          aria-hidden
+        />
+        <SignalFallback />
+        <YearRubric />
+      </header>
     </article>
   );
 }

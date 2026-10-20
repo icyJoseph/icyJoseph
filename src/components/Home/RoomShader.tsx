@@ -4,52 +4,22 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { flareTokens, roomTokens } from "lib/design/tokens";
+import {
+  hasWebGpu,
+  prefersReducedMotion,
+  roomBeamColors,
+} from "lib/gpu/room-colors";
 import roomBeamSource from "shaders/room-beam.wgsl";
-
-function hexToRgb(hex: string): [number, number, number] {
-  const h = hex.replace("#", "");
-  return [
-    parseInt(h.slice(0, 2), 16) / 255,
-    parseInt(h.slice(2, 4), 16) / 255,
-    parseInt(h.slice(4, 6), 16) / 255,
-  ];
-}
-
-const room = hexToRgb(roomTokens[0].hex);
-const shade = hexToRgb(roomTokens[1].hex);
-const mid = hexToRgb(roomTokens[2].hex);
-const flareDry = hexToRgb(flareTokens[0].hex);
-const flareWet = hexToRgb(flareTokens[1].hex);
-const flareHot = hexToRgb(flareTokens[2].hex);
-
-function prefersReducedMotion() {
-  return (
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  );
-}
 
 export function RoomShader() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [fallback, setFallback] = useState(false);
+  const [live, setLive] = useState(false);
 
   useEffect(() => {
-    if (
-      prefersReducedMotion() ||
-      typeof navigator === "undefined" ||
-      !("gpu" in navigator) ||
-      !(navigator as Navigator & { gpu?: unknown }).gpu
-    ) {
-      setFallback(true);
-      return;
-    }
+    if (prefersReducedMotion() || !hasWebGpu()) return;
 
     const canvas = canvasRef.current;
-    if (!canvas) {
-      setFallback(true);
-      return;
-    }
+    if (!canvas) return;
 
     let disposed = false;
     let stopLoop: (() => void) | undefined;
@@ -62,6 +32,7 @@ export function RoomShader() {
     (async () => {
       try {
         const { init, effect, surface, clock, frameLoop } = await import("vgpu");
+        type Frame = Parameters<Parameters<typeof frameLoop>[1]>[0];
 
         if (disposed) return;
 
@@ -78,19 +49,18 @@ export function RoomShader() {
             params: {
               time: 0,
               pointer: [pointer.x, pointer.y],
-              room,
-              shade,
-              mid,
-              flare_dry: flareDry,
-              flare_wet: flareWet,
-              flare_hot: flareHot,
+              origin: [1.02, 1.05],
+              ang0: 0.75,
+              intensity: 1,
+              mode: 0,
+              ...roomBeamColors,
             },
           },
         });
 
         const time = clock(gpu);
 
-        const paint = (frame: { pass: (s: unknown, e: unknown) => void }) => {
+        const paint = (frame: Frame) => {
           beam.set({
             params: {
               time: time.time,
@@ -124,8 +94,10 @@ export function RoomShader() {
 
         document.addEventListener("visibilitychange", onVisibility);
         window.addEventListener("pointermove", onPointer, { passive: true });
+
+        if (!disposed) setLive(true);
       } catch {
-        if (!disposed) setFallback(true);
+        // Stay on CSS fallback.
       }
     })();
 
@@ -144,14 +116,14 @@ export function RoomShader() {
 
   return (
     <div
-      className={
-        fallback ? "home-room home-room--fallback" : "home-room"
-      }
+      className={live ? "home-room" : "home-room home-room--fallback"}
       aria-hidden
     >
-      {!fallback ? (
-        <canvas ref={canvasRef} className="home-room__canvas" />
-      ) : null}
+      <canvas
+        ref={canvasRef}
+        className="home-room__canvas"
+        style={live ? undefined : { opacity: 0 }}
+      />
     </div>
   );
 }

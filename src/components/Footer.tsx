@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
-import Link from "next/link";
 import { cacheLife } from "next/cache";
+import Link from "next/link";
 
 import { entries } from "config/pages";
 

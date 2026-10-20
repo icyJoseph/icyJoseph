@@ -1,15 +1,17 @@
 import { Suspense } from "react";
 
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { CountView } from "components/Blog/CountView";
+import { FlarePlate } from "components/Blog/FlarePlate";
 import { components } from "components/Blog/mdx";
 import { ReadingTime } from "components/Blog/ReadingTime";
 import { PostViews } from "components/PostViews";
 import { BackTo, BackToTop } from "design-system/BackToTop";
-import style from "design-system/separated.module.css";
 import { MDXContent } from "lib/mdx-client/render";
+import { flareSeedFrom } from "lib/og/seed";
 import { getAllPosts, getPostBySlug } from "lib/posts/db";
 import type { Post } from "lib/posts/types";
 
@@ -22,7 +24,6 @@ export const generateMetadata = async (props: {
   const slug = params.slug;
   const post = await getPostBySlug(slug);
 
-
   if (!post) {
     return {
       metadataBase: new URL(VERCEL_URL),
@@ -30,7 +31,6 @@ export const generateMetadata = async (props: {
       description: "The resource you were looking for does not exist",
     };
   }
-
 
   return {
     metadataBase: new URL(VERCEL_URL),
@@ -51,7 +51,7 @@ export const generateMetadata = async (props: {
         },
       ],
     },
-  }
+  };
 };
 
 export const generateStaticParams = async () => {
@@ -67,20 +67,18 @@ const intl = new Intl.DateTimeFormat("en-SE", {
 });
 
 const getPostData = async (
-  slug: string
+  slug: string,
 ): Promise<Post & { content: string; publish_date: number }> => {
   const post = await getPostBySlug(slug);
 
   if (!post) notFound();
 
   if (typeof post.content !== "string") {
-    console.log(new Error(`${slug} has no content`))
-
+    console.log(new Error(`${slug} has no content`));
     notFound();
   }
   if (typeof post.publish_date !== "number") {
-
-    console.log(new Error(`${slug} has no publish date`))
+    console.log(new Error(`${slug} has no publish date`));
     notFound();
   }
 
@@ -88,7 +86,7 @@ const getPostData = async (
     ...post,
     content: post.content,
     publish_date: post.publish_date,
-  }
+  };
 };
 
 function PublishDate({ publish_date }: { publish_date: number }) {
@@ -102,50 +100,74 @@ const BlogEntry = async (props: PageProps<"/blog/[slug]">) => {
     slug,
     content,
     title,
-    // tags,
     publish_date,
     authors,
   } = await getPostData(params.slug);
 
   const [mainAuthor] = authors;
+  const seed = flareSeedFrom(slug, title);
 
   return (
-    <article className="blog-entry max-w-[75ch] mx-auto py-5 text-lg">
-      <header className="blog-entry__title">{title}</header>
+    <article className="blog-entry">
+      <header className="blog-entry__header">
+        <p className="blog-entry__eyebrow">
+          <Link href="/blog" prefetch className="blog-entry__mute">
+            ← Blog
+          </Link>
+          <span className="mx-3 opacity-35">·</span>
+          notes
+        </p>
+        <h1 className="blog-entry__title">{title}</h1>
+        <p className="blog-entry__meta">
+          <span>{mainAuthor}</span>
+          <span aria-hidden className="blog-entry__dot">
+            ·
+          </span>
+          <span>
+            <PublishDate publish_date={publish_date} />
+          </span>
+          <span aria-hidden className="blog-entry__dot">
+            ·
+          </span>
+          <ReadingTime content={content} />
+        </p>
+        <FlarePlate
+          seed={seed}
+          fallbackSrc={`/og-image/${slug}`}
+          className="blog-entry__plate"
+          imageClassName="blog-entry__plate-image"
+          canvasClassName="blog-entry__plate-canvas"
+          sizes="(max-width: 672px) 100vw, 672px"
+          priority
+        />
+      </header>
 
-      <aside className="blog-entry__meta mt-8 font-light text-base text-end">
-        <span className={`${style.separated} inline-block`}>{mainAuthor}</span>
-
-        <span className={`${style.separated} inline-block`}>
-          <PublishDate publish_date={publish_date} />
-        </span>
-
-        <ReadingTime content={content} />
-      </aside>
-
-      <div className="blog-entry__prose min-h-screen">
+      <div className="blog-entry__prose">
         <MDXContent source={content} components={components} />
       </div>
 
       <CountView slug={slug} />
 
-      <div className="py-4" />
+      <footer className="blog-entry__foot">
+        <p className="blog-entry__views">
+          <Suspense fallback="··">
+            <PostViews slug={slug} />
+          </Suspense>
+        </p>
 
-      <p className="blog-entry__views text-end text-3xl">
-        <Suspense fallback="..">
-          <PostViews slug={slug} />
-        </Suspense>
-      </p>
-
-      <div className="flex flex-wrap justify-between gap-x-4">
-        <BackTo
-          to="/blog"
-          label="Back to blog"
-          linkClassName="blog-entry__nav-link !text-flare-wet"
-        />
-
-        <BackToTop linkClassName="blog-entry__nav-link !text-flare-wet" />
-      </div>
+        <div className="blog-entry__nav">
+          <BackTo
+            to="/blog"
+            label="Back to blog"
+            className="!mt-0 !text-start"
+            linkClassName="blog-entry__nav-link"
+          />
+          <BackToTop
+            className="!mt-0"
+            linkClassName="blog-entry__nav-link"
+          />
+        </div>
+      </footer>
     </article>
   );
 };

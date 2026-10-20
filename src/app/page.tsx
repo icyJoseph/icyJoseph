@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
-import { HomeChrome } from "components/Home/HomeChrome";
 import { HomeHero } from "components/Home/Hero";
+import { HomeChrome } from "components/Home/HomeChrome";
 import { HumanStrip } from "components/Home/HumanStrip";
 import { RoomShader } from "components/Home/RoomShader";
 import { fitBitProfile } from "lib/fitbit/fetcher";

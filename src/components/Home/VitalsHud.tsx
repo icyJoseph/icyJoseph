@@ -1,5 +1,5 @@
-import { formatCount } from "lib/format";
 import type { VitalTrend } from "lib/fitbit/trend";
+import { formatCount } from "lib/format";
 
 type VitalsHudProps = {
   restingHeartRate: number | undefined;

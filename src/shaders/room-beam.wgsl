@@ -1,7 +1,12 @@
 // Two-ink room: emerald shade field, fluorescent red only in the window beam.
+// Seeded origin / mode / intensity — same shader for home hero and blog plates.
 struct Params {
   time: f32,
   pointer: vec2f,
+  origin: vec2f,
+  ang0: f32,
+  intensity: f32,
+  mode: f32,
   room: vec3f,
   shade: vec3f,
   mid: vec3f,
@@ -20,42 +25,58 @@ fn saturate(x: f32) -> f32 {
   // Poster space: origin bottom-left, y up.
   let p = vec2f(uv.x, 1.0 - uv.y);
 
-  // Soft pointer + slow breathe on the window corner.
-  let breathe = 0.015 * sin(params.time * 0.4);
-  let ptr = (params.pointer - vec2f(0.75, 0.2)) * 0.1;
-  let window_c = vec2f(1.02 + ptr.x, 1.05 + ptr.y + breathe);
+  let breathe = 0.018 * sin(params.time * 0.45);
+  let sway = 0.012 * sin(params.time * 0.27 + params.ang0);
 
-  // Hard diagonal cut — print-like two-ink split across the room.
+  // Pointer nudges the seeded window (home: cursor; cards: mild or fixed).
+  let ptr = (params.pointer - vec2f(0.5, 0.35)) * 0.12;
+  var window_c = params.origin + vec2f(ptr.x + sway, ptr.y + breathe);
+
+  // Mode 1 overhead: pull toward top-center and widen.
+  // Mode 2 desk bounce: drop the hot spot and soften the wedge.
+  if (params.mode > 1.5) {
+    window_c = mix(window_c, vec2f(window_c.x, 0.42 + 0.08 * sin(params.time * 0.35)), 0.55);
+  } else if (params.mode > 0.5) {
+    window_c = mix(window_c, vec2f(0.5, 1.08), 0.35);
+  }
+
   let diagonal = (p.x - 0.28) * 0.85 + (p.y - 0.15) * 1.15;
   let light_side = smoothstep(0.02, 0.22, diagonal);
 
-  // Distance falloff from the window corner (beam intensity).
   let to_window = p - window_c;
+  let dist_scale = select(0.95, 0.72, params.mode > 0.5);
   let dist = length(to_window * vec2f(0.85, 1.05));
-  let near_window = saturate(1.0 - dist * 0.95);
+  let near_window = saturate(1.0 - dist * dist_scale);
 
-  // Beam wedge from the upper-right.
   let ang = atan2(-to_window.y, -to_window.x);
-  let wedge = smoothstep(0.55, 0.15, abs(ang - 0.75));
-  let beam = light_side * near_window * (0.35 + 0.65 * wedge);
+  let wedge_w = select(0.4, 0.7, params.mode > 0.5);
+  let wedge = smoothstep(wedge_w, 0.12, abs(ang - params.ang0));
+  var beam = near_window * (0.3 + 0.7 * wedge) * params.intensity;
+  if (params.mode < 0.5) {
+    beam *= light_side;
+  }
 
-  // Room ground — cooler emerald where the beam does not hit.
   let floor_mix = smoothstep(0.0, 0.7, p.y);
   var color = mix(params.room, params.shade, floor_mix);
   color = mix(color, params.mid * 0.55, (1.0 - p.x) * 0.12 * (1.0 - beam));
 
-  // Marker coats: dry wash → wet neon → hot hit near the glass.
+  // Desk bounce: lift a soft floor wash under the beam.
+  if (params.mode > 1.5) {
+    let floor_glow = saturate(1.0 - length((p - vec2f(window_c.x, 0.12)) * vec2f(1.6, 3.2)));
+    color = mix(color, params.flare_dry, floor_glow * 0.22 * params.intensity);
+  }
+
   let wash = beam * 0.9;
   let wet = beam * beam * 1.1;
-  let hot = pow(near_window * wedge, 2.2) * light_side;
+  let hot = pow(near_window * wedge, 2.2) * select(light_side, 1.0, params.mode > 0.5);
 
   color = mix(color, params.flare_dry, saturate(wash) * 0.75);
   color = mix(color, params.flare_wet, saturate(wet) * 0.9);
   color = mix(color, params.flare_hot, saturate(hot) * 0.95);
 
-  // Keep a readable dark pocket for brand type (lower-left).
+  // Readable dark pocket for brand type on full OG / home (lower-left).
   let type_well = smoothstep(0.55, 0.15, length((p - vec2f(0.22, 0.28)) * vec2f(1.4, 1.1)));
-  color = mix(color, params.room, type_well * 0.45);
+  color = mix(color, params.room, type_well * 0.35);
 
   let n = fract(sin(dot(p * 900.0 + params.time * 0.02, vec2f(12.9898, 78.233))) * 43758.5453);
   color += (n - 0.5) * 0.014;

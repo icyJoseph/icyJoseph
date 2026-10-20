@@ -2,8 +2,8 @@ import Image from "next/image";
 
 import { VitalsHud } from "components/Home/VitalsHud";
 import { YearXp } from "components/Home/YearXp";
-import { ICY_JOSEPH } from "lib/github/constants";
 import type { VitalTrend } from "lib/fitbit/trend";
+import { ICY_JOSEPH } from "lib/github/constants";
 import type { YearContributionTotal } from "lib/github/year-totals";
 
 type Pin = {

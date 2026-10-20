@@ -23,7 +23,7 @@ export function YearXp({ years, careerTotal, currentYear }: YearXpProps) {
       <p className="home-xp__rubric">
         Public + private via the GitHub API. {currentYear} is year-to-date.
         Some org work never shows up here — even as private — when the org
-        hides it. Tap a year to explore repos.
+        hides it. Tap a year to see the work.
       </p>
 
       <ol className="home-xp__list">

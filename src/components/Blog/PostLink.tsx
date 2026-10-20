@@ -1,32 +1,45 @@
-import type { ReactNode } from "react";
-
 import Link from "next/link";
 
+import { FlarePlate } from "components/Blog/FlarePlate";
+import { flareSeedFrom } from "lib/og/seed";
 import type { PostPreview } from "lib/posts/types";
 
-export const PostLink = ({
-  post,
-  children,
-}: {
-  post: PostPreview;
-  children?: ReactNode | ReactNode[];
-}) => (
-  <article className="mb-8 px-1 relative">
-    <h3 className="blog-index__post-title text-xl">
-      <Link
-        key={post.slug}
-        href={`/blog/${post.slug}`}
-        prefetch
-        className="hover:underline after:absolute after:content-[''] after:top-0 after:left-0 after:bottom-0 after:right-0 after:inset-0"
-      >
-        {post.title}
+const dateFmt = new Intl.DateTimeFormat("en-SE", {
+  year: "numeric",
+  month: "short",
+  day: "2-digit",
+  timeZone: "Europe/Stockholm",
+});
+
+export const PostLink = ({ post }: { post: PostPreview }) => {
+  const href = `/blog/${post.slug}`;
+  const imageSrc = `/og-image/${post.slug}`;
+  const when = dateFmt.format(new Date(post.publish_date * 1000));
+  const tags = post.tags.slice(0, 3);
+  const seed = flareSeedFrom(post.slug, post.title);
+
+  return (
+    <article className="blog-card">
+      <Link href={href} prefetch className="blog-card__hit">
+        <FlarePlate seed={seed} fallbackSrc={imageSrc} />
+        <div className="blog-card__body">
+          <p className="blog-card__meta">
+            <time dateTime={new Date(post.publish_date * 1000).toISOString()}>
+              {when}
+            </time>
+            {tags.length > 0 ? (
+              <>
+                <span aria-hidden className="blog-card__dot">
+                  ·
+                </span>
+                <span>{tags.join(" · ")}</span>
+              </>
+            ) : null}
+          </p>
+          <h2 className="blog-card__title">{post.title}</h2>
+          <p className="blog-card__summary">{post.summary}</p>
+        </div>
       </Link>
-    </h3>
-
-    <p className="blog-index__summary font-sans text-lg max-w-prose font-light">
-      {post.summary}
-    </p>
-
-    <>{children}</>
-  </article>
-);
+    </article>
+  );
+};

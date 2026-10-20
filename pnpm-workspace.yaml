@@ -1,5 +1,4 @@
-# Single-package app — pnpm 11+ reads install settings here (not package.json / .npmrc).
-nodeLinker: hoisted
+# pnpm 11+ install settings (peer rules, builds, release-age).
 confirmModulesPurge: false
 # Exact pins in package.json; skip the default "wait N days after publish" gate.
 minimumReleaseAge: 0

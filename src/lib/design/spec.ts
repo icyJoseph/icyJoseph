@@ -130,10 +130,6 @@ export function generateDesignSpecMarkdown(): string {
   lines.push("- Meta / dates / asides: leaf.");
   lines.push("");
   lines.push(
-    "Display line “Late light on the sill” carries the plate: two-ink poster, thick even outlines. The field is the room — #030806, #0a1612, #14352c — with leaf only on the code marks. Flare is layered: window is hit (#FF6B7C) with a glow center (#FF9AA8), the beam is wet (#F97979), the desk and chair seat are dry (#C46E6D), the agent harness is hit with dry cards. Desk against the back wall, window on the right-hand wall, empty chair. Code pane stays in the dark.",
-  );
-  lines.push("");
-  lines.push(
     "Credit to [Benji on Paper](https://www.benjionpaper.com/), for inspiring this kind of theme.",
   );
   lines.push("");

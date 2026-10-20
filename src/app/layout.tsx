@@ -1,6 +1,7 @@
 import "design-system/global.css";
 import type { ReactNode } from "react";
 
+import type { Metadata, Viewport } from "next";
 import { Recursive } from "next/font/google";
 
 import { DeferredAnalytics } from "components/DeferredAnalytics";
@@ -11,6 +12,21 @@ const recursive = Recursive({
   subsets: ["latin"],
   variable: "--font-recursive",
 });
+
+export const metadata: Metadata = {
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+  },
+  manifest: "/manifest.json",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0a1612",
+};
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (

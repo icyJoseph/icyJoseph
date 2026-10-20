@@ -11,6 +11,7 @@ import { Navigation } from "components/Navigation";
 const recursive = Recursive({
   subsets: ["latin"],
   variable: "--font-recursive",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -30,10 +31,8 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
-      <body
-        className={`${recursive.className} ${recursive.variable} text-paper-cool bg-room`}
-      >
+    <html lang="en" className={recursive.variable}>
+      <body className="font-sans text-paper-cool bg-room">
         <Navigation />
 
         <main className="px-4 w-full md:px-0 md:w-4/5 mx-auto max-w-7xl">

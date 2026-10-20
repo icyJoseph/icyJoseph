@@ -63,8 +63,6 @@ export function FlarePlate({
     let onVisibility: (() => void) | undefined;
     let running = false;
 
-    const pointer = { x: beam.pointer[0], y: beam.pointer[1] };
-
     const stop = () => {
       stopLoop?.();
       stopLoop = undefined;
@@ -96,7 +94,6 @@ export function FlarePlate({
           set: {
             params: {
               time: 0,
-              pointer: [pointer.x, pointer.y],
               origin: beam.origin,
               ang0: beam.ang0,
               intensity: beam.intensity,
@@ -112,7 +109,6 @@ export function FlarePlate({
           fx.set({
             params: {
               time: time.time,
-              pointer: [pointer.x, pointer.y],
             },
           });
           frame.pass(canvasSurface, fx);
@@ -162,18 +158,9 @@ export function FlarePlate({
 
     io.observe(root);
 
-    const onPointer = (e: PointerEvent) => {
-      const rect = root.getBoundingClientRect();
-      if (rect.width < 1 || rect.height < 1) return;
-      pointer.x = (e.clientX - rect.left) / rect.width;
-      pointer.y = (e.clientY - rect.top) / rect.height;
-    };
-    root.addEventListener("pointermove", onPointer, { passive: true });
-
     return () => {
       disposed = true;
       io.disconnect();
-      root.removeEventListener("pointermove", onPointer);
       stop();
       if (onVisibility) {
         document.removeEventListener("visibilitychange", onVisibility);

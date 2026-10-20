@@ -25,9 +25,6 @@ export function RoomShader() {
     let stopLoop: (() => void) | undefined;
     let disposeGpu: (() => void) | undefined;
     let onVisibility: (() => void) | undefined;
-    let onPointer: ((e: PointerEvent) => void) | undefined;
-
-    const pointer = { x: 0.72, y: 0.18 };
 
     (async () => {
       try {
@@ -48,7 +45,6 @@ export function RoomShader() {
           set: {
             params: {
               time: 0,
-              pointer: [pointer.x, pointer.y],
               origin: [1.02, 1.05],
               ang0: 0.75,
               intensity: 1,
@@ -64,7 +60,6 @@ export function RoomShader() {
           beam.set({
             params: {
               time: time.time,
-              pointer: [pointer.x, pointer.y],
             },
           });
           frame.pass(canvasSurface, beam);
@@ -87,13 +82,7 @@ export function RoomShader() {
           }
         };
 
-        onPointer = (e: PointerEvent) => {
-          pointer.x = e.clientX / window.innerWidth;
-          pointer.y = e.clientY / window.innerHeight;
-        };
-
         document.addEventListener("visibilitychange", onVisibility);
-        window.addEventListener("pointermove", onPointer, { passive: true });
 
         if (!disposed) setLive(true);
       } catch {
@@ -106,9 +95,6 @@ export function RoomShader() {
       stopLoop?.();
       if (onVisibility) {
         document.removeEventListener("visibilitychange", onVisibility);
-      }
-      if (onPointer) {
-        window.removeEventListener("pointermove", onPointer);
       }
       disposeGpu?.();
     };

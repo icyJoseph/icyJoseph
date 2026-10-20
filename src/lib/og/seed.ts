@@ -95,8 +95,6 @@ export type BeamShaderParams = {
   ang0: number;
   intensity: number;
   mode: number;
-  /** Neutral pointer rest — cards stay here; home overrides with cursor. */
-  pointer: [number, number];
 };
 
 export function beamParamsFromSeed(seed: FlareSeed): BeamShaderParams {
@@ -122,6 +120,5 @@ export function beamParamsFromSeed(seed: FlareSeed): BeamShaderParams {
     ang0,
     intensity: 0.75 + seed.wash * 1.1,
     mode: seed.mode,
-    pointer: [x, 1 - y],
   };
 }

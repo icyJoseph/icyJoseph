@@ -1,8 +1,7 @@
 // Two-ink room: emerald shade field, fluorescent red only in the window beam.
-// Seeded origin / mode / intensity — same shader for home hero and blog plates.
+// Light drifts on a slow Lissajous path (sun / cloud), not the cursor.
 struct Params {
   time: f32,
-  pointer: vec2f,
   origin: vec2f,
   ang0: f32,
   intensity: f32,
@@ -21,15 +20,28 @@ fn saturate(x: f32) -> f32 {
   return clamp(x, 0.0, 1.0);
 }
 
+/** 3:2 Lissajous in the window pocket — slow, closed, sun-like. */
+fn light_drift(t: f32, phase: f32) -> vec2f {
+  // Frequencies in a small-integer ratio; period ~ 2π / gcd-ish ≈ a long loop.
+  let wx = 0.11;
+  let wy = wx * (2.0 / 3.0);
+  let ax = 0.10;
+  let ay = 0.065;
+  // Soft second harmonic so the path doesn’t look mechanical.
+  let x = 0.78 + ax * sin(t * wx + phase) + 0.022 * sin(t * wx * 0.5 + phase * 1.3);
+  let y = 0.20 + ay * sin(t * wy + phase + 0.85) + 0.018 * sin(t * wy * 0.5 + 1.1);
+  return vec2f(x, y);
+}
+
 @fragment fn fs_main(@location(0) uv: vec2f) -> @location(0) vec4f {
   // Poster space: origin bottom-left, y up.
   let p = vec2f(uv.x, 1.0 - uv.y);
 
-  let breathe = 0.018 * sin(params.time * 0.45);
-  let sway = 0.012 * sin(params.time * 0.27 + params.ang0);
+  let breathe = 0.014 * sin(params.time * 0.38);
+  let sway = 0.01 * sin(params.time * 0.22 + params.ang0);
 
-  // Pointer nudges the seeded window (home: cursor; cards: mild or fixed).
-  let ptr = (params.pointer - vec2f(0.5, 0.35)) * 0.12;
+  let drift = light_drift(params.time, params.ang0 * 0.35);
+  let ptr = (drift - vec2f(0.5, 0.35)) * 0.14;
   var window_c = params.origin + vec2f(ptr.x + sway, ptr.y + breathe);
 
   // Mode 1 overhead: pull toward top-center and widen.

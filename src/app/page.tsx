@@ -8,6 +8,7 @@ import { fitBitProfile } from "lib/fitbit/fetcher";
 import { FEATURED_REPOS } from "lib/github/featured";
 import { gitHubProfile } from "lib/github/fetcher";
 import { getContributionYearTotals } from "lib/github/year-totals";
+import { getCurrentYear } from "lib/time/current-year";
 
 const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
 
@@ -35,10 +36,11 @@ export const metadata: Metadata = {
 };
 
 export default async function Page(_props: PageProps<"/">) {
-  const [github, fitBit, contributionTotals] = await Promise.all([
+  const [github, fitBit, contributionTotals, currentYear] = await Promise.all([
     gitHubProfile(),
     fitBitProfile(),
     getContributionYearTotals(),
+    getCurrentYear(),
   ]);
 
   const { profile } = github;
@@ -63,8 +65,11 @@ export default async function Page(_props: PageProps<"/">) {
           pins={pins}
           restingHeartRate={fitBit.restingHeartRate}
           averageDailySteps={fitBit.profile.averageDailySteps}
+          heartTrend={fitBit.heartTrend}
+          stepsTrend={fitBit.stepsTrend}
           contributionYears={contributionTotals.years}
           careerTotal={contributionTotals.careerTotal}
+          currentYear={currentYear}
         />
       </div>
     </HomeChrome>

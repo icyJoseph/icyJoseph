@@ -1,12 +1,44 @@
+import { formatCount } from "lib/format";
+import type { VitalTrend } from "lib/fitbit/trend";
+
 type VitalsHudProps = {
   restingHeartRate: number | undefined;
   averageDailySteps: number;
+  heartTrend?: VitalTrend;
+  stepsTrend?: VitalTrend;
 };
+
+function TrendMark({ trend, label }: { trend?: VitalTrend; label: string }) {
+  if (!trend || trend === "flat") {
+    return (
+      <span className="home-vitals__trend home-vitals__trend--flat" aria-hidden>
+        ·
+      </span>
+    );
+  }
+
+  const up = trend === "up";
+  return (
+    <span
+      className={
+        up
+          ? "home-vitals__trend home-vitals__trend--up"
+          : "home-vitals__trend home-vitals__trend--down"
+      }
+      aria-label={`${label} trending ${trend}`}
+      title={`${label} ${trend}`}
+    >
+      {up ? "↑" : "↓"}
+    </span>
+  );
+}
 
 /** Compact game-style vitals readout — Fitbit as HUD, not a marketing strip. */
 export function VitalsHud({
   restingHeartRate,
   averageDailySteps,
+  heartTrend,
+  stepsTrend,
 }: VitalsHudProps) {
   const hasHeart = restingHeartRate != null && restingHeartRate > 0;
   const hasSteps = averageDailySteps > 0;
@@ -44,6 +76,7 @@ export function VitalsHud({
             <span className="home-vitals__val">
               {restingHeartRate}
               <span className="home-vitals__unit">bpm</span>
+              <TrendMark trend={heartTrend} label="Resting heart rate" />
             </span>
           </div>
         ) : null}
@@ -65,8 +98,9 @@ export function VitalsHud({
               />
             </div>
             <span className="home-vitals__val">
-              {averageDailySteps.toLocaleString("en-SE")}
+              {formatCount(averageDailySteps)}
               <span className="home-vitals__unit">steps</span>
+              <TrendMark trend={stepsTrend} label="Daily steps" />
             </span>
           </div>
         ) : null}

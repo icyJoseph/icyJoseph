@@ -1,24 +1,23 @@
 import Link from "next/link";
 
+import { formatCount } from "lib/format";
 import type { YearContributionTotal } from "lib/github/year-totals";
 
 type YearXpProps = {
   years: YearContributionTotal[];
   careerTotal: number;
+  currentYear: number;
 };
 
-export function YearXp({ years, careerTotal }: YearXpProps) {
+export function YearXp({ years, careerTotal, currentYear }: YearXpProps) {
   if (years.length === 0) return null;
 
   const peak = Math.max(...years.map((y) => y.total), 1);
-  const currentYear = new Date().getFullYear();
 
   return (
     <div className="home-xp" aria-label="Contributions by year">
       <p className="home-xp__career">
-        <span className="home-human__stat">
-          {careerTotal.toLocaleString("en-SE")}
-        </span>{" "}
+        <span className="home-human__stat">{formatCount(careerTotal)}</span>{" "}
         career contributions
       </p>
       <p className="home-xp__rubric">
@@ -61,7 +60,7 @@ export function YearXp({ years, careerTotal }: YearXpProps) {
                   />
                 </div>
                 <span className="home-xp__total">
-                  {entry.total.toLocaleString("en-SE")}
+                  {formatCount(entry.total)}
                 </span>
               </Link>
             </li>

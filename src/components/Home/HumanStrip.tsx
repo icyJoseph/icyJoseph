@@ -1,9 +1,9 @@
 import Image from "next/image";
-import Link from "next/link";
 
 import { VitalsHud } from "components/Home/VitalsHud";
 import { YearXp } from "components/Home/YearXp";
 import { ICY_JOSEPH } from "lib/github/constants";
+import type { VitalTrend } from "lib/fitbit/trend";
 import type { YearContributionTotal } from "lib/github/year-totals";
 
 type Pin = {
@@ -22,8 +22,11 @@ type HumanStripProps = {
   pins: Pin[];
   restingHeartRate: number | undefined;
   averageDailySteps: number;
+  heartTrend?: VitalTrend;
+  stepsTrend?: VitalTrend;
   contributionYears: YearContributionTotal[];
   careerTotal: number;
+  currentYear: number;
 };
 
 const preferences = [
@@ -41,8 +44,11 @@ export function HumanStrip({
   pins,
   restingHeartRate,
   averageDailySteps,
+  heartTrend,
+  stepsTrend,
   contributionYears,
   careerTotal,
+  currentYear,
 }: HumanStripProps) {
   return (
     <section className="home-human" aria-label="About">
@@ -68,6 +74,8 @@ export function HumanStrip({
       <VitalsHud
         restingHeartRate={restingHeartRate}
         averageDailySteps={averageDailySteps}
+        heartTrend={heartTrend}
+        stepsTrend={stepsTrend}
       />
 
       <div className="home-human__block">
@@ -86,7 +94,11 @@ export function HumanStrip({
           GitHub
         </p>
 
-        <YearXp years={contributionYears} careerTotal={careerTotal} />
+        <YearXp
+          years={contributionYears}
+          careerTotal={careerTotal}
+          currentYear={currentYear}
+        />
 
         {pins.length > 0 ? (
           <>
@@ -109,12 +121,6 @@ export function HumanStrip({
             </ul>
           </>
         ) : null}
-
-        <p className="home-human__more">
-          <Link href="/blog" className="home-human__more-link">
-            Writing and notes on the blog →
-          </Link>
-        </p>
       </div>
     </section>
   );

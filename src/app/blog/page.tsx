@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 
 const getBlogData = async (): Promise<BlogProps> => {
   "use cache";
-  cacheLife("weeks");
+  cacheLife("max");
 
   try {
     const posts = await getAllPosts();

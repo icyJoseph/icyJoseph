@@ -14,8 +14,7 @@ import { MDXContent } from "lib/mdx-client/render";
 import { flareSeedFrom } from "lib/og/seed";
 import { getAllPosts, getPostBySlug } from "lib/posts/db";
 import type { Post } from "lib/posts/types";
-
-const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
+import { siteOrigin } from "lib/site-url";
 
 export const generateMetadata = async (props: {
   params: Promise<{ slug: string }>;
@@ -23,17 +22,18 @@ export const generateMetadata = async (props: {
   const params = await props.params;
   const slug = params.slug;
   const post = await getPostBySlug(slug);
+  const origin = siteOrigin();
 
   if (!post) {
     return {
-      metadataBase: new URL(VERCEL_URL),
+      metadataBase: new URL(origin),
       title: "icyJoseph | Not found",
       description: "The resource you were looking for does not exist",
     };
   }
 
   return {
-    metadataBase: new URL(VERCEL_URL),
+    metadataBase: new URL(origin),
     title: `icyJoseph | ${post.title}`,
     description: post.summary,
     openGraph: {

@@ -5,27 +5,28 @@ import { BlogIntro } from "components/Blog/Intro";
 import { PostLink } from "components/Blog/PostLink";
 import { getAllPosts } from "lib/posts/db";
 import type { PostPreview } from "lib/posts/types";
+import { siteOrigin } from "lib/site-url";
 
 type BlogProps = {
   posts: PostPreview[];
 };
 
-const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
+const origin = siteOrigin();
 
 export const metadata: Metadata = {
-  metadataBase: new URL(VERCEL_URL),
+  metadataBase: new URL(origin),
   title: "icyJoseph | Blog",
   description:
     "Notes from the desk — App Router, challenges, and the craft of shipping UI.",
   openGraph: {
-    url: `${VERCEL_URL}/blog`,
+    url: `${origin}/blog`,
     title: "icyJoseph | Blog",
     siteName: "icyJoseph",
     description:
       "Notes from the desk — App Router, challenges, and the craft of shipping UI.",
     images: [
       {
-        url: `${VERCEL_URL}/og-image`,
+        url: `${origin}/og-image`,
         width: 960,
         height: 540,
         alt: "icyJoseph blog page",

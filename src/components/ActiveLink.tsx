@@ -3,12 +3,13 @@
 import type { ComponentPropsWithoutRef } from "react";
 
 import classNames from "classnames";
-import Link, { LinkProps } from "next/link";
+import Link, { type LinkProps } from "next/link";
 import { usePathname } from "next/navigation";
 
-export const ActiveLink = (
-  props: ComponentPropsWithoutRef<"a"> & { href: LinkProps["href"] },
-) => {
+type ActiveLinkProps = Omit<ComponentPropsWithoutRef<"a">, keyof LinkProps> &
+  LinkProps;
+
+export const ActiveLink = (props: ActiveLinkProps) => {
   const pathname = usePathname();
   const href = typeof props.href === "string" ? props.href : "";
   const isActive =

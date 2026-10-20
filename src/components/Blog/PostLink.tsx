@@ -16,6 +16,7 @@ export const PostLink = ({
       <Link
         key={post.slug}
         href={`/blog/${post.slug}`}
+        prefetch
         className="hover:underline after:absolute after:content-[''] after:top-0 after:left-0 after:bottom-0 after:right-0 after:inset-0"
       >
         {post.title}

@@ -7,18 +7,21 @@ const Base = ({
   to,
   label,
   renderAs = "a",
+  prefetch,
 }: {
   className?: string;
   linkClassName?: string;
   to: string;
   label: string;
   renderAs?: typeof Link | "a";
+  prefetch?: boolean;
 }) => {
   const Tag = renderAs;
   return (
     <div className={classNames("mt-4 text-right", className)}>
       <Tag
         href={to}
+        {...(Tag === Link ? { prefetch } : {})}
         className={classNames(
           "font-sans underline text-base text-smoke-white",
           linkClassName,
@@ -62,5 +65,6 @@ export const BackTo = ({
     label={label}
     className={className}
     linkClassName={linkClassName}
+    prefetch={to === "/blog" || to.startsWith("/blog/") ? true : undefined}
   />
 );

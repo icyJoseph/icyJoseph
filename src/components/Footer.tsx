@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { cacheLife } from "next/cache";
 import Link from "next/link";
 
-import { entries } from "config/pages";
+import { getNavEntries } from "config/pages";
 
 const techStack = [
   "Next.js",
@@ -36,6 +36,8 @@ async function FooterCopy() {
 }
 
 export const Footer = async () => {
+  const entries = await getNavEntries();
+
   return (
     <footer className="site-footer">
       <div className="site-footer__rule" aria-hidden />
@@ -63,7 +65,11 @@ export const Footer = async () => {
                 <Link
                   href={href}
                   className="site-footer__link"
-                  prefetch={href === "/blog" ? true : undefined}
+                  prefetch={
+                    href === "/blog" || href.startsWith("/contributions/")
+                      ? true
+                      : undefined
+                  }
                 >
                   {title}
                 </Link>

@@ -1,17 +1,19 @@
 import Link from "next/link";
 
-import { entries } from "config/pages";
+import { getNavEntries } from "config/pages";
 
-/** Destinations for the landing — topbar is hidden so the beam stays clear. */
-const landingLinks = entries
-  .filter((entry) => entry.href !== "/")
-  .map((entry) => ({
-    href: entry.href,
-    title: entry.title,
-    prefetch: entry.href === "/blog" ? (true as const) : undefined,
-  }));
+export async function HomeHero() {
+  const landingLinks = (await getNavEntries())
+    .filter((entry) => entry.href !== "/")
+    .map((entry) => ({
+      href: entry.href,
+      title: entry.title,
+      prefetch:
+        entry.href === "/blog" || entry.href.startsWith("/contributions/")
+          ? (true as const)
+          : undefined,
+    }));
 
-export function HomeHero() {
   return (
     <header className="home-hero">
       <p className="home-hero__brand">icyJoseph</p>

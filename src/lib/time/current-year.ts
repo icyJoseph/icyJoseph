@@ -1,8 +1,8 @@
 import { cacheLife } from "next/cache";
 
-/** Calendar year for labels — cached so Cache Components can prerender. */
+/** Calendar year for labels / XP links — weeks is enough across year boundaries. */
 export async function getCurrentYear(): Promise<number> {
   "use cache";
-  cacheLife("days");
+  cacheLife("weeks");
   return new Date().getFullYear();
 }

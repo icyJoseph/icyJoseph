@@ -1,9 +1,11 @@
 import Link from "next/link";
 
 import { ActiveLink } from "components/ActiveLink";
-import { entries } from "config/pages";
+import { getNavEntries } from "config/pages";
 
-export const Navigation = () => {
+export const Navigation = async () => {
+  const entries = await getNavEntries();
+
   return (
     <header className="site-nav px-4 py-5 w-full md:px-0 md:w-4/5 mx-auto max-w-7xl">
       <nav
@@ -29,7 +31,11 @@ export const Navigation = () => {
               <ActiveLink
                 href={href}
                 className="site-nav__link"
-                prefetch={href === "/blog" ? true : undefined}
+                prefetch={
+                  href === "/blog" || href.startsWith("/contributions/")
+                    ? true
+                    : undefined
+                }
               >
                 <span className="site-nav__link-label">{title}</span>
               </ActiveLink>

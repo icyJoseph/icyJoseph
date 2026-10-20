@@ -36,10 +36,15 @@
 }
 
 /* --- site chrome: nav + footer --- */
-/* Nav must sit above <main> — same z-index lets the home room canvas cover it. */
+/*
+  Layer order on `/`:
+    nav (1) < room beam (2) < main/home/footer (3)
+  Nav stays in normal flow — the fixed room simply paints over it.
+  Other routes have no `.home-room`, so nav sits above page content as usual.
+*/
 .site-nav {
   position: relative;
-  z-index: 10;
+  z-index: 1;
 }
 
 .site-nav__brand {
@@ -122,7 +127,7 @@
 /* Match site-nav / main: 80% width, max-w-7xl. */
 .site-footer {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   width: 100%;
   max-width: 80rem;
   margin: 4rem auto 0;
@@ -243,22 +248,11 @@
 }
 
 /* --- home (/): GPU room + CSS fallback --- */
-/* Landing keeps the beam clear — site topbar lives on other routes. */
-html[data-home] body > header.site-nav {
-  display: none !important;
-}
-
-html[data-home] body > main,
-html[data-home] body > footer {
-  position: relative;
-  z-index: 1;
-}
-
 .home-room {
   pointer-events: none;
   position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: 2;
   overflow: hidden;
   background: var(--room);
 }
@@ -292,7 +286,7 @@ html[data-home] body > footer {
 
 .home-page {
   position: relative;
-  z-index: 1;
+  z-index: 3;
   color: var(--paper-cool);
   padding-bottom: 4rem;
 }

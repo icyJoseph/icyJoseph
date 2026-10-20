@@ -301,7 +301,6 @@
   font-weight: 700;
   line-height: 0.95;
   letter-spacing: -0.02em;
-  text-transform: uppercase;
   color: var(--paper-warm);
   text-shadow: 0 0 40px rgb(249 121 121 / 0.25);
 }

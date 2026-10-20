@@ -43,6 +43,7 @@
     "@types/testing-library__jest-dom": "5.14.9",
     "@typescript-eslint/eslint-plugin": "8.72.0",
     "@typescript-eslint/parser": "8.72.0",
+    "@typescript/native-preview": "npm:typescript@7.0.2",
     "@webgpu/types": "0.1.74",
     "autoprefixer": "10.4.14",
     "eslint": "9.39.5",
@@ -59,7 +60,7 @@
     "postcss": "8.4.22",
     "tailwindcss": "3.3.1",
     "ts-to-zod": "3.5.0",
-    "typescript": "5.4.5"
+    "typescript": "npm:@typescript/typescript6@6.0.2"
   },
   "packageManager": "pnpm@11.28.6+sha512.55d90390c3b39042f1505a2697789f0256c6d95bb28bdd7cb731af1887c9f2629ef581acb9f4e4ec772024c8203c2aed22a03299b97103fdcf32668e905d0024",
   "engines": {

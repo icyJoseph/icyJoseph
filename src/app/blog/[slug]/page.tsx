@@ -138,7 +138,6 @@ const BlogEntry = async (props: PageProps<"/blog/[slug]">) => {
           imageClassName="blog-entry__plate-image"
           canvasClassName="blog-entry__plate-canvas"
           sizes="(max-width: 672px) 100vw, 672px"
-          priority
         />
       </header>
 

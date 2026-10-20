@@ -21,7 +21,7 @@ export async function HomeHero() {
       <p className="home-hero__line">
         Late light through the window. Still at the desk — shipping what others
         can see.{" "}
-        <Link href="/blog/who-am-i" prefetch className="home-hero__whoami">
+        <Link href="/blog/who-am-i" prefetch={false} className="home-hero__whoami">
           @whoami
         </Link>
       </p>

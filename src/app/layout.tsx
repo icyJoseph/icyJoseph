@@ -20,7 +20,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       >
         <Navigation />
 
-        <main className="px-4 w-full md:px-0 md:w-4/5 mx-auto">{children}</main>
+        <main className="px-4 w-full md:px-0 md:w-4/5 mx-auto max-w-7xl">
+          {children}
+        </main>
 
         <Footer />
 

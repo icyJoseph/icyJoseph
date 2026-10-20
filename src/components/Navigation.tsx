@@ -24,23 +24,17 @@ export const Navigation = () => {
         <div className="hidden flex-auto mx-auto sm:flex" />
 
         <ul className="site-nav__menu flex justify-evenly items-center mt-5 sm:mt-0 gap-3 sm:gap-4">
-          {entries.map(({ title, href }, index) => {
-            const slot = String(index + 1).padStart(2, "0");
-            return (
-              <li key={title} className="inline-flex">
-                <ActiveLink
-                  href={href}
-                  className="site-nav__link"
-                  data-slot={slot}
-                >
-                  <span className="site-nav__slot" aria-hidden>
-                    {slot}
-                  </span>
-                  <span className="site-nav__link-label">{title}</span>
-                </ActiveLink>
-              </li>
-            );
-          })}
+          {entries.map(({ title, href }) => (
+            <li key={title} className="inline-flex">
+              <ActiveLink
+                href={href}
+                className="site-nav__link"
+                prefetch={href === "/blog" ? true : undefined}
+              >
+                <span className="site-nav__link-label">{title}</span>
+              </ActiveLink>
+            </li>
+          ))}
         </ul>
       </nav>
     </header>

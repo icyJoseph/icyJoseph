@@ -1,19 +1,35 @@
 import { Suspense } from "react";
 
+import Link from "next/link";
 import { cacheLife } from "next/cache";
 
-import { FooterLinks } from "components/FooterNav";
-import { TechStack } from "components/TechStack";
-import { Divider } from "design-system/Divider";
-import { Keyword } from "design-system/Keyword";
+import { entries } from "config/pages";
 
-async function FooterWithDate() {
+const techStack = [
+  "Next.js",
+  "React",
+  "WebGPU",
+  "GitHub GraphQL API",
+  "Fitbit API",
+  "Tailwind CSS",
+  "MDX",
+  "Recursive",
+];
+
+const externalLinks = [
+  { href: "https://github.com/icyJoseph", title: "GitHub" },
+  { href: "https://www.linkedin.com/in/icyjoseph", title: "LinkedIn" },
+  { href: "https://dev.to/icyjoseph", title: "dev.to" },
+  { href: "https://medium.com/@icjoseph", title: "Medium" },
+];
+
+async function FooterCopy() {
   "use cache";
   cacheLife("weeks");
   return (
-    <p className="site-footer__copy mx-auto pt-8 text-center">
-      &#169; {new Date().getFullYear()}{" "}
-      <Keyword className="!text-flare-wet">icyJoseph</Keyword> — Stockholm,
+    <p className="site-footer__copy">
+      © {new Date().getFullYear()}{" "}
+      <span className="site-footer__copy-name">icyJoseph</span> — Stockholm,
       Sweden
     </p>
   );
@@ -21,31 +37,57 @@ async function FooterWithDate() {
 
 export const Footer = async () => {
   return (
-    <>
-      <div className="py-12 md:py-16" />
+    <footer className="site-footer">
+      <div className="site-footer__rule" aria-hidden />
 
-      <footer className="site-footer w-full px-4 mx-auto md:w-4/5 md:px-0 max-w-5xl">
-        <Divider className="mt-0 mb-8" />
+      <h2 className="site-footer__brand">
+        icyJoseph
+        <span className="site-footer__tagline block">Señor Developer</span>
+      </h2>
 
-        <h2 className="site-footer__brand text-2xl">
-          icyJoseph
-          <p className="site-footer__tagline mt-2 text-lg">Señor Developer</p>
-        </h2>
-
-        <div className="py-4" />
-
-        <div className="flex justify-between gap-8 flex-wrap">
-          <TechStack />
-
-          <FooterLinks />
+      <div className="site-footer__columns">
+        <div className="site-footer__col">
+          <h3 className="site-footer__heading">Tech Stack</h3>
+          <ul className="site-footer__list">
+            {techStack.map((entry) => (
+              <li key={entry}>{entry}</li>
+            ))}
+          </ul>
         </div>
 
-        <Suspense>
-          <FooterWithDate />
-        </Suspense>
+        <nav className="site-footer__col site-footer__col--end" aria-label="Footer">
+          <h3 className="site-footer__heading">Links</h3>
+          <ul className="site-footer__list">
+            {entries.map(({ href, title }) => (
+              <li key={href}>
+                <Link
+                  href={href}
+                  className="site-footer__link"
+                  prefetch={href === "/blog" ? true : undefined}
+                >
+                  {title}
+                </Link>
+              </li>
+            ))}
+            {externalLinks.map(({ href, title }) => (
+              <li key={href}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="site-footer__link"
+                >
+                  {title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
 
-        <div className="py-6" />
-      </footer>
-    </>
+      <Suspense>
+        <FooterCopy />
+      </Suspense>
+    </footer>
   );
 };

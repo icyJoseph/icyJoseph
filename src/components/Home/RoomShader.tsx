@@ -89,19 +89,18 @@ export function RoomShader() {
         });
 
         const time = clock(gpu);
-        let handle = frameLoop(
-          gpu,
-          (frame) => {
-            beam.set({
-              params: {
-                time: time.time,
-                pointer: [pointer.x, pointer.y],
-              },
-            });
-            frame.pass(canvasSurface, beam);
-          },
-          { fps: 30 },
-        );
+
+        const paint = (frame: { pass: (s: unknown, e: unknown) => void }) => {
+          beam.set({
+            params: {
+              time: time.time,
+              pointer: [pointer.x, pointer.y],
+            },
+          });
+          frame.pass(canvasSurface, beam);
+        };
+
+        let handle = frameLoop(gpu, paint, { fps: 30 });
 
         stopLoop = () => {
           handle.stop();
@@ -111,19 +110,7 @@ export function RoomShader() {
           if (document.hidden) {
             handle.stop();
           } else if (!disposed) {
-            handle = frameLoop(
-              gpu,
-              (frame) => {
-                beam.set({
-                  params: {
-                    time: time.time,
-                    pointer: [pointer.x, pointer.y],
-                  },
-                });
-                frame.pass(canvasSurface, beam);
-              },
-              { fps: 30 },
-            );
+            handle = frameLoop(gpu, paint, { fps: 30 });
             stopLoop = () => {
               handle.stop();
             };

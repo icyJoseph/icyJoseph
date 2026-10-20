@@ -1,5 +1,10 @@
 import Link from "next/link";
 
+import { entries } from "config/pages";
+
+/** Destinations for the landing — topbar is hidden so the beam stays clear. */
+const landingLinks = entries.filter((entry) => entry.href !== "/");
+
 export function HomeHero() {
   return (
     <header className="home-hero">
@@ -9,19 +14,27 @@ export function HomeHero() {
         Late light through the window. Still at the desk — shipping what others
         can see.
       </p>
-      <div className="home-hero__cta">
-        <Link href="/blog" className="home-hero__btn home-hero__btn--primary">
-          Read the blog
-        </Link>
+
+      <nav className="home-hero__links" aria-label="Primary">
+        {landingLinks.map(({ href, title }) => (
+          <Link
+            key={href}
+            href={href}
+            className="home-hero__link"
+            prefetch={href === "/blog" ? true : undefined}
+          >
+            {title}
+          </Link>
+        ))}
         <a
           href="https://github.com/icyJoseph"
-          className="home-hero__btn home-hero__btn--ghost"
+          className="home-hero__link"
           target="_blank"
           rel="noopener noreferrer"
         >
           GitHub
         </a>
-      </div>
+      </nav>
     </header>
   );
 }

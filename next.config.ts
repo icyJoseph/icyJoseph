@@ -25,6 +25,8 @@ const config: NextConfig = {
     remotePatterns,
   },
   cacheComponents: true,
+  // Pair with cacheComponents; required once Partial Prefetching shipped.
+  partialPrefetching: true,
   turbopack: {
     rules: {
       // `type: "raw"` is not async-chunkable; wrap as JS for dynamic import().

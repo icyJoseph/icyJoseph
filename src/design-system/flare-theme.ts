@@ -1,4 +1,4 @@
-import type { Theme } from "bright";
+import type { Theme } from "@code-hike/lighter";
 
 /**
  * Bright / VS Code theme for the sunset-window system:

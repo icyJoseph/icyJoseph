@@ -56,18 +56,8 @@
   text-shadow: 0 0 18px rgb(255 107 124 / 0.35);
 }
 
-.site-nav__tagline {
-  color: var(--leaf);
-  font-weight: 500;
-  transition: color 0.15s ease;
-}
-
-.site-nav__brand:hover .site-nav__tagline {
-  color: var(--flare-glow);
-}
-
 .site-nav__hud {
-  align-items: center;
+  align-items: flex-start;
 }
 
 .site-nav__menu {

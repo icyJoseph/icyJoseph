@@ -9,7 +9,7 @@ import {
 
 type ContributionsSectionProps = {
   data: AggregatedContributionData;
-  privateContributions: number;
+  year?: number;
 };
 
 type EnrichedContribution = AggregatedContribution & {
@@ -77,7 +77,7 @@ function groupByLanguage(
 
 export function ContributionsSection({
   data,
-  privateContributions,
+  year,
 }: ContributionsSectionProps) {
   const external = data.external ?? [];
   const owned = data.owned ?? [];
@@ -94,9 +94,6 @@ export function ContributionsSection({
   const groups = groupByLanguage(enriched);
 
   return (
-    <ContributionsList
-      groups={groups}
-      privateContributions={privateContributions}
-    />
+    <ContributionsList groups={groups} year={year} />
   );
 }

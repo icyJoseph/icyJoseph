@@ -83,7 +83,8 @@ export const gitHubProfile = async (): Promise<{
 
   const response = await queryGitHub<{ user: IcyJoseph.GitHub }>(GET_USER, {
     login: ICY_JOSEPH,
-    ...yearRange(),
+    // `new Date()` is allowed inside `"use cache"` (this function).
+    ...yearRange(new Date().getFullYear()),
   });
   const githubData = response.data.user;
 

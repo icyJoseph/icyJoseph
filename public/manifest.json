@@ -1,6 +1,6 @@
 {
   "short_name": "icyJoseph",
-  "name": "Personal website",
+  "name": "icyJoseph",
   "icons": [
     {
       "src": "web_512x512.png",
@@ -48,8 +48,8 @@
       "type": "image/png"
     }
   ],
-  "start_url": "./index.html",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#0a1612",
+  "background_color": "#030806"
 }

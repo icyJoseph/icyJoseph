@@ -30,12 +30,13 @@ export async function GET(
     return new ImageResponse(
       (
         <BlogPostImage
+          slug={slug}
           title={post.title}
           summary={post.summary}
           tags={post.tags}
           publishDate={post.publish_date}
         />
-      )
+      ),
     );
   } catch (_) {
     return new ImageResponse(<ProfileImage />);

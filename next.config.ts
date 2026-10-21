@@ -25,11 +25,17 @@ const config: NextConfig = {
     remotePatterns,
   },
   cacheComponents: true,
+  // Pair with cacheComponents; required once Partial Prefetching shipped.
+  partialPrefetching: true,
   turbopack: {
     rules: {
       // `type: "raw"` is not async-chunkable; wrap as JS for dynamic import().
       "*.md": {
         loaders: ["./loaders/raw-loader.js"],
+        as: "*.js",
+      },
+      "*.wgsl": {
+        loaders: ["@vgpu/wgsl/loader-webpack"],
         as: "*.js",
       },
     },
@@ -46,6 +52,10 @@ const config: NextConfig = {
       source: "/blog/:slug",
       headers: [{ key: "Vary", value: "Accept" }],
     },
+    {
+      source: "/design",
+      headers: [{ key: "Vary", value: "Accept" }],
+    },
   ],
   rewrites: async () => ({
     beforeFiles: [
@@ -59,6 +69,16 @@ const config: NextConfig = {
         source: "/blog/:slug",
         has: [{ type: "header", key: "accept", value: ".*text/markdown.*" }],
         destination: "/text/blog/:slug",
+      },
+      {
+        source: "/design",
+        has: [{ type: "header", key: "accept", value: ".*text/markdown.*" }],
+        destination: "/text/design",
+      },
+      // Explicit .md URLs
+      {
+        source: "/design.md",
+        destination: "/text/design",
       },
       // Known CLI clients get plain text by default
       {

@@ -127,6 +127,22 @@ const GET_YEAR_CONTRIBUTIONS_DOC = gql`
   ${ContributionsFragment}
 `;
 
+/** Lightweight totals only — for landing XP bars (public + private). */
+const GET_YEAR_CONTRIBUTION_TOTALS_DOC = gql`
+  query getYearContributionTotals(
+    $login: String!
+    $from: DateTime
+    $to: DateTime
+  ) {
+    user(login: $login) {
+      contributionsCollection(from: $from, to: $to) {
+        totalCommitContributions
+        restrictedContributionsCount
+      }
+    }
+  }
+`;
+
 const GET_ORG_AVATAR_URL_DOC = gql`
   query getOrganizationAvatarURL($login: String!) {
     organization(login: $login) {
@@ -137,5 +153,8 @@ const GET_ORG_AVATAR_URL_DOC = gql`
 
 export const GET_USER = print(GET_USER_DOC);
 export const GET_YEAR_CONTRIBUTIONS = print(GET_YEAR_CONTRIBUTIONS_DOC);
+export const GET_YEAR_CONTRIBUTION_TOTALS = print(
+  GET_YEAR_CONTRIBUTION_TOTALS_DOC,
+);
 
 export const GET_ORG_AVATAR_URL = print(GET_ORG_AVATAR_URL_DOC);

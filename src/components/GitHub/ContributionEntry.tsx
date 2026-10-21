@@ -1,13 +1,14 @@
 import { ExternalLinkIcon } from "design-system/External";
 import { IndicatorBar } from "design-system/IndicatorBar";
 import { VisuallyHidden } from "design-system/VisuallyHidden";
+import { formatCount } from "lib/format";
 import { ICY_JOSEPH } from "lib/github/constants";
 import type { AggregatedContribution } from "lib/github/utils";
 
 const RE_EMOJI = /:\+1:|:-1:|:[\w-]+:/g;
 
 const isLanguageEdge = (
-  edge: IcyJoseph.LanguageEdge | null
+  edge: IcyJoseph.LanguageEdge | null,
 ): edge is IcyJoseph.LanguageEdge => Boolean(edge);
 
 type EnrichedContribution = AggregatedContribution & {
@@ -16,135 +17,135 @@ type EnrichedContribution = AggregatedContribution & {
 
 type ContributionEntryProps = {
   item: EnrichedContribution;
-  index?: number;
-  total?: number;
+  /** Featured highlight vs denser tile — same content, different hierarchy. */
+  variant?: "highlight" | "tile";
+  /** When set, show that year's commit count (page already names the year). */
+  year?: number;
 };
 
 export const ContributionEntry = ({
   item,
-  index,
-  total,
+  variant = "tile",
+  year,
 }: ContributionEntryProps) => {
   const repo = item.repository;
   const isOwned = repo.owner.login === ICY_JOSEPH;
   const languages = repo.languages.edges.filter(isLanguageEdge);
   const hasRepositoryLink = Boolean(repo.url);
   const hasHomepageLink = Boolean(repo.homepageUrl);
+  const description = repo.description?.replace(RE_EMOJI, "").trim() ?? "";
+
+  const commitsForYear =
+    year != null ? item.contributionsByYear[year] : undefined;
+  const commitLabel =
+    commitsForYear != null && commitsForYear > 0
+      ? `${formatCount(commitsForYear)} commits`
+      : item.totalContributions > 0
+        ? `${formatCount(item.totalContributions)} commits`
+        : null;
+
+  const rootClass =
+    variant === "highlight"
+      ? "contrib-card contrib-card--highlight"
+      : "contrib-card";
 
   return (
-    <div className="flex flex-col gap-3">
-      <div className="flex-1">
-        <div className="flex items-baseline gap-2">
-          {typeof index === "number" && typeof total === "number" && (
-            <span className="text-xs font-light text-pale-orange/60">
-              {index + 1}/{total}
-            </span>
+    <article className={rootClass}>
+      <div className="contrib-card__top">
+        {!isOwned ? (
+          <p className="contrib-card__owner">{repo.owner.login}</p>
+        ) : null}
+
+        <h4 className="contrib-card__name">
+          {hasRepositoryLink ? (
+            <a
+              href={repo.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contrib-card__name-link"
+            >
+              {repo.name}
+            </a>
+          ) : (
+            repo.name
           )}
-          <h4 className="text-lg font-medium text-smoke-white overflow-hidden text-ellipsis whitespace-nowrap min-w-0">
-            {hasRepositoryLink ? (
-              <a
-                href={repo.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-smoke-white hover:text-pale-yellow transition-colors"
-              >
-                {repo.name}
-              </a>
-            ) : (
-              repo.name
-            )}
-          </h4>
-        </div>
+        </h4>
 
-        {!isOwned && (
-          <p className="text-[0.7rem] text-pale-blue capitalize mt-0.5">
-            {repo.owner.login}
-          </p>
-        )}
+        <p className="contrib-card__meta">
+          {typeof repo.stargazerCount === "number" &&
+          repo.stargazerCount > 0 ? (
+            <span>★ {formatCount(repo.stargazerCount)}</span>
+          ) : null}
+          {typeof repo.stargazerCount === "number" &&
+          repo.stargazerCount > 0 &&
+          commitLabel ? (
+            <span aria-hidden className="contrib-card__dot">
+              ·
+            </span>
+          ) : null}
+          {commitLabel ? <span>{commitLabel}</span> : null}
+        </p>
+      </div>
 
-        {typeof repo.stargazerCount === "number" && repo.stargazerCount > 0 && (
-          <p className="text-[0.7rem] font-light text-smoke-white/70 mt-0.5">
-            ★ {repo.stargazerCount.toLocaleString()} stars
-          </p>
-        )}
+      <p
+        className={
+          description
+            ? "contrib-card__desc"
+            : "contrib-card__desc contrib-card__desc--empty"
+        }
+      >
+        {description || "\u00a0"}
+      </p>
 
-        {repo.description && (
-          <p className="text-sm font-light text-pale-orange mt-1.5">
-            {repo.description.replace(RE_EMOJI, "")}
-          </p>
-        )}
-
-        {languages.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-1.5">
-            {languages.slice(0, 3).map(({ node: { name, color } }) => (
-              <span key={name} className="text-xs flex items-center gap-1">
+      <div className="contrib-card__foot">
+        {languages.length > 0 ? (
+          <ul className="contrib-card__langs">
+            {languages.slice(0, 2).map(({ node: { name, color } }) => (
+              <li key={name} className="contrib-card__lang">
                 <IndicatorBar
                   color={color}
-                  aria-hidden="true"
-                  className="w-2 h-2"
+                  aria-hidden
+                  className="contrib-card__swatch"
                 />
                 {name}
-              </span>
+              </li>
             ))}
-            {languages.length > 3 && (
-              <span className="text-xs text-pale-orange">
-                +{languages.length - 3} more
-              </span>
-            )}
-          </div>
+          </ul>
+        ) : (
+          <span className="contrib-card__langs-empty" />
         )}
 
-        {item.totalContributions > 0 && (
-          <p className="text-xs font-light text-pale-red mt-2">
-            {item.totalContributions} commits{" "}
-            {item.formattedYearBreakdown && (
-              <span className="text-[0.7rem] text-pale-orange">
-                ({item.formattedYearBreakdown})
-              </span>
-            )}
-          </p>
-        )}
+        <div className="contrib-card__links">
+          {hasHomepageLink ? (
+            <a
+              href={repo.homepageUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contrib-card__link"
+            >
+              <span aria-hidden>Home</span>
+              <VisuallyHidden>
+                External link to {repo.name} homepage
+              </VisuallyHidden>
+              <ExternalLinkIcon />
+            </a>
+          ) : null}
+          {hasRepositoryLink ? (
+            <a
+              href={repo.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contrib-card__link"
+            >
+              <span aria-hidden>Code</span>
+              <VisuallyHidden>
+                External link to {repo.name} Github repository
+              </VisuallyHidden>
+              <ExternalLinkIcon />
+            </a>
+          ) : null}
+        </div>
       </div>
-
-      <div className="flex gap-4 text-xs items-center">
-        {hasHomepageLink && (
-          <a
-            href={repo.homepageUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-pale-blue hover:text-pale-yellow flex items-center gap-1"
-          >
-            <span aria-hidden="true">Homepage</span>
-            <VisuallyHidden>
-              External link to {repo.name} homepage
-            </VisuallyHidden>
-            <ExternalLinkIcon />
-          </a>
-        )}
-
-        {hasRepositoryLink && (
-          <a
-            href={repo.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-pale-blue hover:text-pale-yellow flex items-center gap-1"
-          >
-            <span aria-hidden="true">Code</span>
-            <VisuallyHidden>
-              External link to {repo.name} Github repository
-            </VisuallyHidden>
-            <ExternalLinkIcon />
-          </a>
-        )}
-        {!hasHomepageLink && !hasRepositoryLink && (
-          <span aria-hidden="true" className="text-pale-blue">
-            &nbsp;
-          </span>
-        )}
-        {!hasHomepageLink && !hasRepositoryLink && (
-          <VisuallyHidden>{repo.name} has no links</VisuallyHidden>
-        )}
-      </div>
-    </div>
+    </article>
   );
 };

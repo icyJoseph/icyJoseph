@@ -1,99 +1,99 @@
 import type { CSSProperties, ReactNode, JSX } from "react";
 
-const palette = {
-  "--pale-blue": "165 200 228",
-  "--pale-green": "192 236 204",
-  "--pale-yellow": "249 240 193",
-  "--pale-orange": "244 205 166",
-  "--pale-red": "246 168 166",
-  "--soft-black": "29 29 33",
-  "--smoke-white": "251 249 255",
-};
+import { flareSeedFrom, type FlareSeed } from "lib/og/seed";
 
-function componentToHex(c: number) {
-  const hex = c.toString(16);
-  return hex.length == 1 ? "0" + hex : hex;
+const room = "#030806";
+const shade = "#0a1612";
+const mid = "#14352c";
+const leaf = "#5f8f7a";
+const paperWarm = "#E8DCCF";
+const paperCool = "#9BB5A8";
+const flareWet = "#F97979";
+const flareHot = "#FF6B7C";
+const flareDry = "#C46E6D";
+
+function hexAlpha(n: number): string {
+  return Math.max(0, Math.min(255, Math.round(n)))
+    .toString(16)
+    .padStart(2, "0");
 }
 
-function rgbToHex(base: string) {
-  const [r, g, b] = base.split(" ").map(Number);
-  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+/**
+ * One composition per seed: window / overhead / desk bounce.
+ * Structure first; flare is the accent (Refactoring UI).
+ */
+function roomBackdrop(seed: FlareSeed): CSSProperties {
+  const hotA = hexAlpha(0x28 + seed.wash * 180);
+  const wetA = hexAlpha(0x14 + seed.wash * 100);
+  const dryA = hexAlpha(0x10 + seed.wash * 70);
+  const rim = seed.cool > 0.55 ? leaf : flareDry;
+  const rimA = hexAlpha(0x18 + seed.cool * 40);
+  const floorA = hexAlpha(0x10 + seed.floor * 55);
+
+  const beam = `radial-gradient(${seed.hotSize}% ${seed.hotSize * 0.82}% at ${seed.beamX}% ${seed.beamY}%, ${flareHot}${hotA} 0%, ${flareWet}${wetA} 28%, ${flareDry}${dryA} 48%, transparent 68%)`;
+
+  const wash = `linear-gradient(${seed.angle}deg, transparent 20%, ${rim}${rimA} 48%, transparent 78%)`;
+
+  const floor =
+    seed.mode === 2
+      ? `radial-gradient(70% 40% at ${seed.beamX}% 92%, ${flareWet}${floorA} 0%, transparent 55%)`
+      : `radial-gradient(80% 35% at 50% 100%, ${mid}${hexAlpha(28 + seed.floor * 40)} 0%, transparent 55%)`;
+
+  const windowEdge =
+    seed.mode === 0
+      ? seed.side === "right"
+        ? `linear-gradient(90deg, transparent 82%, ${mid}55 92%, ${leaf}22 100%)`
+        : `linear-gradient(270deg, transparent 82%, ${mid}55 92%, ${leaf}22 100%)`
+      : `linear-gradient(180deg, ${shade}88 0%, transparent 22%)`;
+
+  return {
+    display: "flex",
+    width: "100%",
+    height: "100%",
+    position: "relative",
+    backgroundColor: room,
+    backgroundImage: [beam, wash, floor, windowEdge, `linear-gradient(180deg, ${shade} 0%, ${room} 58%, #020504 100%)`].join(
+      ", ",
+    ),
+  };
 }
 
-const hexPalette = {
-  "--pale-blue": rgbToHex(palette["--pale-blue"]),
-  "--pale-green": rgbToHex(palette["--pale-green"]),
-  "--pale-yellow": rgbToHex(palette["--pale-yellow"]),
-  "--pale-orange": rgbToHex(palette["--pale-orange"]),
-  "--pale-red": rgbToHex(palette["--pale-red"]),
-  "--soft-black": rgbToHex(palette["--soft-black"]),
-  "--smoke-white": rgbToHex(palette["--smoke-white"]),
-};
-
-const toRGB = (base: string, opacity = 1) => `rgb(${base} / ${opacity})`;
-
-const hexGradient = [
-  hexPalette["--pale-blue"],
-  hexPalette["--pale-red"],
-  hexPalette["--pale-yellow"],
-  hexPalette["--pale-green"],
-  hexPalette["--pale-orange"],
-].join(", ");
-
-const gradient = `linear-gradient(45deg, ${hexGradient})`;
-
-const Layout = ({ children }: { children: ReactNode }) => (
-  <div
-    style={{
-      display: "flex",
-      width: "100%",
-      height: "100%",
-      background: toRGB(palette["--soft-black"]),
-      padding: "0.5rem",
-    }}
-  >
+const Layout = ({
+  children,
+  seed,
+}: {
+  children: ReactNode;
+  seed: FlareSeed;
+}) => (
+  <div style={roomBackdrop(seed)}>
     <div
       style={{
         display: "flex",
-        width: "100%",
-        height: "100%",
-        backgroundImage: gradient,
-        padding: "0.5rem",
-      }}
-    >
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          fontSize: 128,
-          background: toRGB(palette["--soft-black"]),
-          color: toRGB(palette["--smoke-white"]),
-          padding: "2rem",
-        }}
-      >
-        {children}
-      </div>
-    </div>
-  </div>
-);
-
-const Avatar = () => (
-  <>
-    {/* eslint-disable-next-line @next/next/no-img-element */}
-    <img
-      src="https://github.com/icyjoseph.png"
-      alt="icyJoseph user avatar"
-      style={{
-        borderRadius: "50%",
-        flexBasis: "33.33%",
-        margin: 0,
+        position: "absolute",
+        inset: 0,
+        borderBottom: `1px solid ${mid}`,
+        background: `linear-gradient(90deg, transparent 0%, ${mid}66 50%, transparent 100%)`,
+        backgroundSize: "100% 1px",
+        backgroundPosition: "bottom",
+        backgroundRepeat: "no-repeat",
+        opacity: 0.45,
       }}
     />
-  </>
+    <div
+      style={{
+        display: "flex",
+        position: "relative",
+        width: "100%",
+        height: "100%",
+        flexDirection: "column",
+        justifyContent: "flex-end",
+        padding: "3rem 3.25rem",
+        color: paperWarm,
+      }}
+    >
+      {children}
+    </div>
+  </div>
 );
 
 const Heading = ({
@@ -109,21 +109,6 @@ const Heading = ({
   return <Tag style={{ fontSize: 48, margin: 0, ...style }}>{children}</Tag>;
 };
 
-const MainContent = ({ children }: { children: ReactNode }) => (
-  <div
-    style={{
-      display: "flex",
-      flex: "auto",
-      height: "100%",
-      flexDirection: "column",
-      justifyContent: "flex-start",
-      padding: "2rem",
-    }}
-  >
-    {children}
-  </div>
-);
-
 const Paragraph = ({
   children,
   style,
@@ -131,111 +116,109 @@ const Paragraph = ({
   children: ReactNode;
   style?: CSSProperties;
 }) => (
-  <p
-    style={{
-      margin: 0,
-      fontSize: 48,
-      ...style,
-    }}
-  >
-    {children}
-  </p>
+  <p style={{ margin: 0, fontSize: 24, ...style }}>{children}</p>
 );
 
+const defaultSeed = flareSeedFrom("profile", "icyJoseph");
+
 export const ProfileImage = () => (
-  <Layout>
-    <Avatar />
-
-    <MainContent>
-      <Heading level={1}>@icyJoseph</Heading>
-      <Paragraph
-        style={{
-          fontSize: 36,
-          color: toRGB(palette["--pale-yellow"]),
-        }}
-      >
-        Señor Software Developer
-      </Paragraph>
-
-      <Paragraph style={{ fontSize: 28, margin: "1rem 0" }}>
-        JavaScript / TypeScript / Rust / Swift / CSS
-      </Paragraph>
-
-      <Paragraph>🇵🇪 🇸🇪</Paragraph>
-
-      <Paragraph style={{ fontSize: 32, margin: "1rem 0" }}>
-        I build both front-end and back-end applications.
-      </Paragraph>
-
-      <div style={{ flex: "auto" }} />
-
-      <span style={{ fontSize: 28 }}>icyjoseph.dev</span>
-    </MainContent>
+  <Layout seed={defaultSeed}>
+    <Paragraph
+      style={{
+        fontSize: 18,
+        letterSpacing: "0.1em",
+        textTransform: "uppercase",
+        color: leaf,
+        marginBottom: "0.75rem",
+      }}
+    >
+      icyjoseph.dev
+    </Paragraph>
+    <Heading
+      level={1}
+      style={{ fontSize: 64, lineHeight: 1.05, color: paperWarm, fontWeight: 700 }}
+    >
+      icyJoseph
+    </Heading>
+    <Paragraph
+      style={{
+        fontSize: 28,
+        color: flareWet,
+        marginTop: "0.5rem",
+        fontWeight: 500,
+      }}
+    >
+      Señor Developer
+    </Paragraph>
   </Layout>
 );
 
-const formatter = new Intl.DateTimeFormat("en-SV", {
+const formatter = new Intl.DateTimeFormat("en-SE", {
   year: "numeric",
-  month: "long",
+  month: "short",
   day: "2-digit",
   timeZone: "Europe/Stockholm",
 });
 
-const PublishedDate = ({ date }: { date: Date }) => {
-  const formatted = `Published ${formatter.format(date)}`;
-
-  return <Paragraph style={{ fontSize: 20 }}>{formatted}</Paragraph>;
-};
-
 export const BlogPostImage = ({
+  slug,
   title,
-  summary,
+  summary: _summary,
   tags,
   publishDate,
 }: {
+  slug: string;
   title: string;
   summary: string;
   tags: string[];
   publishDate: number | null;
 }) => {
+  const seed = flareSeedFrom(slug, title);
+  const tag = tags[0];
+
   return (
-    <Layout>
-      <Avatar />
+    <Layout seed={seed}>
+      <Paragraph
+        style={{
+          fontSize: 18,
+          letterSpacing: "0.1em",
+          textTransform: "uppercase",
+          color: leaf,
+          marginBottom: "0.85rem",
+        }}
+      >
+        {tag ? `Notes · ${tag}` : "Notes"}
+      </Paragraph>
 
-      <MainContent>
-        <Heading level={1}>@icyJoseph</Heading>
-        <Paragraph
-          style={{
-            fontSize: 36,
-            color: toRGB(palette["--pale-yellow"]),
-          }}
-        >
-          Señor Software Developer
-        </Paragraph>
+      <Heading
+        level={1}
+        style={{
+          fontSize: title.length > 42 ? 44 : 56,
+          lineHeight: 1.12,
+          color: paperWarm,
+          fontWeight: 700,
+          maxWidth: "92%",
+        }}
+      >
+        {title}
+      </Heading>
 
-        <Heading
-          level={2}
-          style={{
-            fontSize: 32,
-            color: toRGB(palette["--pale-orange"]),
-            marginTop: "2rem",
-          }}
-        >
-          {title}
-        </Heading>
-
-        <Paragraph style={{ fontSize: 24, margin: "0.5rem 0" }}>
-          {tags.join(" / ")}
-        </Paragraph>
-
-        <Paragraph style={{ fontSize: 24, margin: "0.5rem 0" }}>
-          {summary}
-        </Paragraph>
-
-        <div style={{ flex: "auto" }} />
-
-        {publishDate && <PublishedDate date={new Date(publishDate * 1000)} />}
-      </MainContent>
+      <div
+        style={{
+          display: "flex",
+          marginTop: "1.5rem",
+          alignItems: "center",
+          gap: "0.75rem",
+        }}
+      >
+        {publishDate ? (
+          <span style={{ fontSize: 20, color: paperCool }}>
+            {formatter.format(new Date(publishDate * 1000))}
+          </span>
+        ) : null}
+        <span style={{ fontSize: 18, color: mid }}>·</span>
+        <span style={{ fontSize: 20, color: leaf }}>icyJoseph</span>
+      </div>
     </Layout>
   );
 };

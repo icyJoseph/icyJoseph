@@ -1,5 +1,3 @@
-import { Suspense } from "react";
-
 import { cacheLife } from "next/cache";
 import Link from "next/link";
 
@@ -25,7 +23,7 @@ const externalLinks = [
 
 async function FooterCopy() {
   "use cache";
-  cacheLife("weeks");
+  cacheLife("max");
   return (
     <p className="site-footer__copy">
       © {new Date().getFullYear()}{" "}
@@ -36,7 +34,7 @@ async function FooterCopy() {
 }
 
 export const Footer = async () => {
-  const entries = await getNavEntries();
+  const [entries, copy] = await Promise.all([getNavEntries(), FooterCopy()]);
 
   return (
     <footer className="site-footer">
@@ -96,9 +94,7 @@ export const Footer = async () => {
         </nav>
       </div>
 
-      <Suspense>
-        <FooterCopy />
-      </Suspense>
+      {copy}
     </footer>
   );
 };

@@ -5,8 +5,9 @@ minimumReleaseAge: 0
 peerDependencyRules:
   allowedVersions:
     typescript: "*"
+# Only scripts we actually need. Others: deny (browser WebGPU / no msw worker dir).
 allowBuilds:
-  "@vgpu/adapter-node": true
-  msw: true
+  "@vgpu/adapter-node": false
+  msw: false
   unrs-resolver: true
-  webgpu: true
+  webgpu: false

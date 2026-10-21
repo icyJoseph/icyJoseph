@@ -15,7 +15,10 @@ export const ActiveLink = (props: ActiveLinkProps) => {
   const isActive =
     href === "/"
       ? pathname === "/"
-      : pathname === href || pathname.startsWith(`${href}/`);
+      : href.startsWith("/contributions/")
+        ? pathname === "/contributions" ||
+          pathname.startsWith("/contributions/")
+        : pathname === href || pathname.startsWith(`${href}/`);
 
   return (
     <Link

@@ -10,198 +10,149 @@ function table(
   return [head, sep, body].join("\n");
 }
 
+function tokenTable(
+  tokens: ReadonlyArray<{ name: string; css: string; hex: string; role: string }>,
+): string {
+  return table(
+    ["Token", "CSS", "Hex", "Use"],
+    tokens.map((t) => [t.name, `\`--${t.css}\``, `\`${t.hex}\``, t.role]),
+  );
+}
+
 /** Markdown design system for humans and agents. Served at /design.md */
 export function generateDesignSpecMarkdown(): string {
-  const lines: string[] = [];
+  const cssVars = [...roomTokens, ...flareTokens, ...paperTokens]
+    .map((t) => `  --${t.css}: ${t.hex.toLowerCase()};`)
+    .join("\n");
 
-  lines.push("# icyJoseph design system");
-  lines.push("");
-  lines.push("_Señor Developer · sunset window · flare + emerald_");
-  lines.push("");
-  lines.push("Visual reference: [/design](/design)");
-  lines.push("");
-  lines.push("---");
-  lines.push("");
-  lines.push("## Vibe");
-  lines.push("");
-  lines.push(
-    "Late afternoon. A dev still sitting at the desk, laptop open, not really in the source code anymore. Orange-red light from the window cuts across the keyboard, the rest of the room sits in the shade.",
-  );
-  lines.push("");
-  lines.push(
-    "🤖 Fluorescent where attention lands, dark emerald where it does not. Not everything is equally important anymore. Less startup neon, more end-of-day coding. The old developer era is closing, and the room is getting quieter. People prompt and ship. The code is not what anyone looks at anymore.",
-  );
-  lines.push("");
-  lines.push("Keywords: late light, window beam, marker layers, quiet room.");
-  lines.push("");
-  lines.push("---");
-  lines.push("");
-  lines.push("## Color");
-  lines.push("");
-  lines.push("Two families.");
-  lines.push("");
-  lines.push(
-    "- **Room** — emerald shadow. The parts of the UI that never catch the beam.",
-  );
-  lines.push(
-    "- **Flare** — Ohuhu FY02 fluorescent red. Wet for glow on screen (`#F97979`), dry after a second coat (`#C46E6D`).",
-  );
-  lines.push("");
-  lines.push("### Room");
-  lines.push("");
-  lines.push(
-    table(
-      ["Token", "CSS", "Hex", "Use"],
-      roomTokens.map((t) => [
-        t.name,
-        `\`--${t.css}\``,
-        `\`${t.hex}\``,
-        t.role,
-      ]),
-    ),
-  );
-  lines.push("");
-  lines.push("### Flare");
-  lines.push("");
-  lines.push(
-    table(
-      ["Token", "CSS", "Hex", "Use"],
-      flareTokens.map((t) => [
-        t.name,
-        `\`--${t.css}\``,
-        `\`${t.hex}\``,
-        t.role,
-      ]),
-    ),
-  );
-  lines.push("");
-  lines.push("### Paper");
-  lines.push("");
-  lines.push(
-    table(
-      ["Token", "CSS", "Hex", "Use"],
-      paperTokens.map((t) => [
-        t.name,
-        `\`--${t.css}\``,
-        `\`${t.hex}\``,
-        t.role,
-      ]),
-    ),
-  );
-  lines.push("");
-  lines.push("### CSS variables");
-  lines.push("");
-  lines.push("```css");
-  lines.push(":root {");
-  for (const t of [...roomTokens, ...flareTokens, ...paperTokens]) {
-    lines.push(`  --${t.css}: ${t.hex.toLowerCase()};`);
-  }
-  lines.push("}");
-  lines.push("```");
-  lines.push("");
-  lines.push("---");
-  lines.push("");
-  lines.push("## Layers");
-  lines.push("");
-  lines.push(
-    "Treat flare like alcohol marker ink. Same pigment, multiple coats:",
-  );
-  lines.push("");
-  lines.push("1. **Wash** — thin dry red over shade (`#C46E6D` ~35% opacity).");
-  lines.push(
-    "2. **Dry + pass** — first coat settled, second pass offset (dry + wet mix).",
-  );
-  lines.push(
-    "3. **Wet neon** — top bloom with `#F97979` / `#FF6B7C` and soft glow.",
-  );
-  lines.push("");
-  lines.push(
-    "Background atmosphere should be soft radial spills — no hard borders or clip-path seams.",
-  );
-  lines.push("");
-  lines.push("---");
-  lines.push("");
-  lines.push("## Type");
-  lines.push("");
-  lines.push("- Font: **Recursive** (site-wide).");
-  lines.push("- Brand / display in light: paper warm, optional flare glow.");
-  lines.push("- Subhead / accent titles: wet flare (`#F97979`) with neon bloom.");
-  lines.push("- Body: paper cool on room.");
-  lines.push("- Meta / dates / asides: leaf.");
-  lines.push("");
-  lines.push(
-    "Credit to [Benji on Paper](https://www.benjionpaper.com/), for inspiring this kind of theme.",
-  );
-  lines.push("");
-  lines.push("---");
-  lines.push("");
-  lines.push("## Controls");
-  lines.push("");
-  lines.push("| Control | Treatment |");
-  lines.push("| --- | --- |");
-  lines.push(
-    "| Primary button | Hit fill (`#FF6B7C` → `#F97979`), dark text, soft neon shadow |",
-  );
-  lines.push("| Secondary | Shade fill, emerald mid border, paper cool text |");
-  lines.push("| Ghost | Transparent, wet flare text |");
-  lines.push("| Disabled | 40% opacity, no glow |");
-  lines.push("| Inline link | Wet flare underline; glow on hover |");
-  lines.push("| Quiet link | Leaf; glow on hover |");
-  lines.push(
-    "| Fields | Shade background, emerald mid border; focus ring wet flare |",
-  );
-  lines.push("| Checkbox | Accent wet flare |");
-  lines.push("");
-  lines.push("---");
-  lines.push("");
-  lines.push("## Code (Bright)");
-  lines.push("");
-  lines.push(
-    "Theme name: `flare-emerald`. Background shade. Keywords and tags wet flare. Functions hit. Strings glow. Comments leaf. Types paper warm.",
-  );
-  lines.push("");
-  lines.push("| Scope | Hex |");
-  lines.push("| --- | --- |");
-  lines.push("| editor.background | `#0a1612` |");
-  lines.push("| editor.foreground / variables | `#9bb5a8` |");
-  lines.push("| comment | `#5f8f7a` |");
-  lines.push("| keyword / tag | `#F97979` |");
-  lines.push("| function | `#FF6B7C` |");
-  lines.push("| string / attribute | `#FF9AA8` |");
-  lines.push("| constant / number | `#C46E6D` |");
-  lines.push("| type / class | `#E8DCCF` |");
-  lines.push("");
-  lines.push("Source: `src/design-system/flare-theme.ts`");
-  lines.push("");
-  lines.push("---");
-  lines.push("");
-  lines.push("## Icons");
-  lines.push("");
-  lines.push(
-    "Phosphor via `design-system/Icons`. Robot (duotone, wet flare) marks design-system framing lines.",
-  );
-  lines.push("");
-  lines.push("---");
-  lines.push("");
-  lines.push("## Do / don't");
-  lines.push("");
-  lines.push("**Do**");
-  lines.push("");
-  lines.push("- Keep the room dark; warmth is a spotlight, not a wash.");
-  lines.push("- Layer flare like marker coats.");
-  lines.push("- Use leaf for quiet UI chrome.");
-  lines.push("");
-  lines.push("**Don't**");
-  lines.push("");
-  lines.push("- Hard vertical window-frame lines (they bleed).");
-  lines.push("- Default purple/indigo AI gradients.");
-  lines.push("- Cool blue shadows. Emerald only.");
-  lines.push("- Stock Bright themes once this system is active.");
-  lines.push("");
-  lines.push("---");
-  lines.push("");
-  lines.push("_Text for implementers. Visual: `/design`._");
-  lines.push("");
+  return `# icyJoseph design system
 
-  return lines.join("\n");
+_Señor Developer · sunset window · flare + emerald_
+
+Visual reference: [/design](/design)
+
+---
+
+## Vibe
+
+Late afternoon. A dev still sitting at the desk, laptop open, not really in the source code anymore. Orange-red light from the window cuts across the keyboard, the rest of the room sits in the shade.
+
+🤖 Fluorescent where attention lands, dark emerald where it does not. Not everything is equally important anymore. Less startup neon, more end-of-day coding. The old developer era is closing, and the room is getting quieter. People prompt and ship. The code is not what anyone looks at anymore.
+
+Keywords: late light, window beam, marker layers, quiet room.
+
+---
+
+## Color
+
+Two families.
+
+- **Room** — emerald shadow. The parts of the UI that never catch the beam.
+- **Flare** — Ohuhu FY02 fluorescent red. Wet for glow on screen (\`#F97979\`), dry after a second coat (\`#C46E6D\`).
+
+### Room
+
+${tokenTable(roomTokens)}
+
+### Flare
+
+${tokenTable(flareTokens)}
+
+### Paper
+
+${tokenTable(paperTokens)}
+
+### CSS variables
+
+\`\`\`css
+:root {
+${cssVars}
+}
+\`\`\`
+
+---
+
+## Layers
+
+Treat flare like alcohol marker ink. Same pigment, multiple coats:
+
+1. **Wash** — thin dry red over shade (\`#C46E6D\` ~35% opacity).
+2. **Dry + pass** — first coat settled, second pass offset (dry + wet mix).
+3. **Wet neon** — top bloom with \`#F97979\` / \`#FF6B7C\` and soft glow.
+
+Background atmosphere should be soft radial spills — no hard borders or clip-path seams.
+
+---
+
+## Type
+
+- Font: **Recursive** (site-wide).
+- Brand / display in light: paper warm, optional flare glow.
+- Subhead / accent titles: wet flare (\`#F97979\`) with neon bloom.
+- Body: paper cool on room.
+- Meta / dates / asides: leaf.
+
+Credit to [Benji on Paper](https://www.benjionpaper.com/), for inspiring this kind of theme.
+
+---
+
+## Controls
+
+| Control | Treatment |
+| --- | --- |
+| Primary button | Hit fill (\`#FF6B7C\` → \`#F97979\`), dark text, soft neon shadow |
+| Secondary | Shade fill, emerald mid border, paper cool text |
+| Ghost | Transparent, wet flare text |
+| Disabled | 40% opacity, no glow |
+| Inline link | Wet flare underline; glow on hover |
+| Quiet link | Leaf; glow on hover |
+| Fields | Shade background, emerald mid border; focus ring wet flare |
+| Checkbox | Accent wet flare |
+
+---
+
+## Code (Bright)
+
+Theme name: \`flare-emerald\`. Background shade. Keywords and tags wet flare. Functions hit. Strings glow. Comments leaf. Types paper warm.
+
+| Scope | Hex |
+| --- | --- |
+| editor.background | \`#0a1612\` |
+| editor.foreground / variables | \`#9bb5a8\` |
+| comment | \`#5f8f7a\` |
+| keyword / tag | \`#F97979\` |
+| function | \`#FF6B7C\` |
+| string / attribute | \`#FF9AA8\` |
+| constant / number | \`#C46E6D\` |
+| type / class | \`#E8DCCF\` |
+
+Source: \`src/design-system/flare-theme.ts\`
+
+---
+
+## Icons
+
+Phosphor via \`design-system/Icons\`. Robot (duotone, wet flare) marks design-system framing lines.
+
+---
+
+## Do / don't
+
+**Do**
+
+- Keep the room dark; warmth is a spotlight, not a wash.
+- Layer flare like marker coats.
+- Use leaf for quiet UI chrome.
+
+**Don't**
+
+- Hard vertical window-frame lines (they bleed).
+- Default purple/indigo AI gradients.
+- Cool blue shadows. Emerald only.
+- Stock Bright themes once this system is active.
+
+---
+
+_Text for implementers. Visual: \`/design\`._
+`;
 }

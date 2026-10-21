@@ -5,8 +5,10 @@ minimumReleaseAge: 0
 peerDependencyRules:
   allowedVersions:
     typescript: "*"
+# Deny all third-party build scripts (browser WebGPU; msw has no worker dir;
+# unrs-resolver ships optional native bindings without needing postinstall).
 allowBuilds:
-  "@vgpu/adapter-node": true
-  msw: true
-  unrs-resolver: true
-  webgpu: true
+  "@vgpu/adapter-node": false
+  msw: false
+  unrs-resolver: false
+  webgpu: false

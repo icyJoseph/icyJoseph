@@ -2,7 +2,7 @@ import { cacheLife } from "next/cache";
 import { z } from "zod";
 
 import { isoString } from "helpers";
-
+import { trendFromSeries, type VitalTrend } from "lib/fitbit/trend";
 
 const fitbitAuth = {
   baseURL: "https://api.fitbit.com/1/user/-",
@@ -114,13 +114,20 @@ const isBaseActivity = (
 const isSwimming = (act: ReducedActivityLog): act is IcyJoseph.SwimActivity =>
   act.activityName === "Swim";
 
-export const fitBitProfile = async () => {
+type StepsPoint = { dateTime: string; value: string };
+
+export const fitBitProfile = async (): Promise<{
+  profile: Pick<IcyJoseph.FitbitProfile, "topBadges" | "averageDailySteps">;
+  restingHeartRate: number | undefined;
+  heartTrend: VitalTrend | undefined;
+  stepsTrend: VitalTrend | undefined;
+}> => {
   "use cache";
   cacheLife("days");
 
   const fitbitData: Promise<IcyJoseph.Fitbit["user"]> = fetch(
     `${fitbitAuth.baseURL}/profile.json`,
-    { headers: fitbitAuth.headers }
+    { headers: fitbitAuth.headers },
   )
     .then((res) => res.json())
     .then((data) => data.user);
@@ -133,9 +140,17 @@ export const fitBitProfile = async () => {
     .then((res) => res.json())
     .then((data) => data["activities-heart"]);
 
-  const [fitbitResult, heartResult] = await Promise.allSettled([
+  const stepsData: Promise<StepsPoint[]> = fetch(
+    `${fitbitAuth.baseURL}/activities/steps/date/today/7d.json`,
+    { headers: fitbitAuth.headers },
+  )
+    .then((res) => res.json())
+    .then((data) => data["activities-steps"] ?? []);
+
+  const [fitbitResult, heartResult, stepsResult] = await Promise.allSettled([
     fitbitData,
     heartRateData,
+    stepsData,
   ]);
 
   const fitbitUser =
@@ -150,13 +165,26 @@ export const fitBitProfile = async () => {
   };
 
   const heartSeries =
-    heartResult.status === "fulfilled" ? heartResult.value : null;
+    heartResult.status === "fulfilled" ? (heartResult.value ?? []) : [];
 
-  const restingHeartRate = heartSeries
-    ?.slice(0)
-    .reverse()
-    .find((entry) => Boolean(entry?.value?.restingHeartRate))?.value
-    .restingHeartRate;
+  const restingRates = heartSeries
+    .map((entry) => entry?.value?.restingHeartRate)
+    .filter((n): n is number => typeof n === "number" && n > 0);
 
-  return { profile, restingHeartRate };
+  const restingHeartRate =
+    restingRates.length > 0 ? restingRates[restingRates.length - 1] : undefined;
+
+  // 1 bpm noise floor — RHR wobbles a little day to day.
+  const heartTrend = trendFromSeries(restingRates, 1);
+
+  const stepsSeries =
+    stepsResult.status === "fulfilled" ? (stepsResult.value ?? []) : [];
+  const dailySteps = stepsSeries
+    .map((entry) => Number(entry.value))
+    .filter((n) => Number.isFinite(n) && n > 0);
+
+  // ~300 steps feels like flat noise on a 7-day glance.
+  const stepsTrend = trendFromSeries(dailySteps, 300);
+
+  return { profile, restingHeartRate, heartTrend, stepsTrend };
 };

@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import { cacheLife } from "next/cache";
 
@@ -6,27 +5,28 @@ import { BlogIntro } from "components/Blog/Intro";
 import { PostLink } from "components/Blog/PostLink";
 import { getAllPosts } from "lib/posts/db";
 import type { PostPreview } from "lib/posts/types";
+import { siteOrigin } from "lib/site-url";
 
 type BlogProps = {
   posts: PostPreview[];
 };
 
-const VERCEL_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
+const origin = siteOrigin();
 
 export const metadata: Metadata = {
-  metadataBase: new URL(VERCEL_URL),
+  metadataBase: new URL(origin),
   title: "icyJoseph | Blog",
   description:
-    "Here I publish my solutions to coding challenges, and things I learn on my day to day job.",
+    "Notes from the desk — App Router, challenges, and the craft of shipping UI.",
   openGraph: {
-    url: `${VERCEL_URL}/blog`,
+    url: `${origin}/blog`,
     title: "icyJoseph | Blog",
     siteName: "icyJoseph",
     description:
-      "Here I publish my solutions to coding challenges, and things I learn on my day to day job.",
+      "Notes from the desk — App Router, challenges, and the craft of shipping UI.",
     images: [
       {
-        url: `${VERCEL_URL}/og-image`,
+        url: `${origin}/og-image`,
         width: 960,
         height: 540,
         alt: "icyJoseph blog page",
@@ -38,14 +38,13 @@ export const metadata: Metadata = {
 
 const getBlogData = async (): Promise<BlogProps> => {
   "use cache";
-  cacheLife("weeks");
+  cacheLife("max");
 
   try {
     const posts = await getAllPosts();
     return {
       posts: posts
         .slice()
-        // TODO: When using Node 20, switch to `toSorted`
         .sort((lhs, rhs) => rhs.publish_date - lhs.publish_date),
     };
   } catch (e) {
@@ -61,19 +60,21 @@ const Blog = async () => {
   const hasPosts = posts.length > 0;
 
   return (
-    <>
-      <section className="max-w-[75ch] mx-auto text-lg">
-        <BlogIntro />
+    <section className="blog-index">
+      <BlogIntro />
 
-        <h2 className="font-sans text-2xl pt-20 mb-8">Posts</h2>
+      <h2 className="blog-index__section-title">Posts</h2>
 
-        {hasPosts ? (
-          posts.map((post) => <PostLink key={post.slug} post={post} />)
-        ) : (
-          <p className="font-sans text-xl">Nothing has been published yet.</p>
-        )}
-      </section>
-    </>
+      {hasPosts ? (
+        <div className="blog-index__grid">
+          {posts.map((post) => (
+            <PostLink key={post.slug} post={post} />
+          ))}
+        </div>
+      ) : (
+        <p className="blog-index__empty">Nothing has been published yet.</p>
+      )}
+    </section>
   );
 };
 

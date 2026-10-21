@@ -15,6 +15,8 @@ async function importPost(slug: string): Promise<string> {
 export const getAllPosts = async (): Promise<PostPreview[]> => {
   "use cache";
   cacheTag("all-posts");
+  // Static MD on disk — only changes on deploy.
+  cacheLife("max");
   try {
     const slugs = await fs.readdir(path.resolve(process.cwd(), "./posts"));
 
@@ -47,7 +49,7 @@ export const getPostBySlug = async (slug: string): Promise<Post | null> => {
     const { content, data } = matter(postsContent);
     const post = postSchema.parse({ ...data, content });
 
-    cacheLife("weeks");
+    cacheLife("max");
     return post;
   } catch (e) {
     console.log("Error while getting post by slug", e);

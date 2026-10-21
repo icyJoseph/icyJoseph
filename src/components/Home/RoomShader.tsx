@@ -14,6 +14,7 @@ import roomBeamSource from "shaders/room-beam.wgsl";
 export function RoomShader() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [live, setLive] = useState(false);
+  const [on, setOn] = useState(false);
 
   useEffect(() => {
     if (prefersReducedMotion() || !hasWebGpu()) return;
@@ -25,6 +26,7 @@ export function RoomShader() {
     let stopLoop: (() => void) | undefined;
     let disposeGpu: (() => void) | undefined;
     let onVisibility: (() => void) | undefined;
+    let revealFrame = 0;
 
     (async () => {
       try {
@@ -41,13 +43,15 @@ export function RoomShader() {
         disposeGpu = () => gpu.dispose();
 
         const canvasSurface = surface(gpu, canvas, { dpr: [1, 2] });
+        // Start dark — intensity ramps so the beam reads as light coming on,
+        // not a hard cut from the CSS underpaint.
         const beam = effect(gpu, roomBeamSource, {
           set: {
             params: {
               time: 0,
               origin: [1.02, 1.05],
               ang0: 0.75,
-              intensity: 1,
+              intensity: 0,
               mode: 0,
               ...roomBeamColors,
             },
@@ -55,11 +59,17 @@ export function RoomShader() {
         });
 
         const time = clock(gpu);
+        const startedAt = performance.now();
+        const warmMs = 1400;
 
         const paint = (frame: Frame) => {
+          const t = Math.min(1, (performance.now() - startedAt) / warmMs);
+          // Ease-out: quick enough to feel present, soft at the end.
+          const intensity = 1 - (1 - t) ** 2.4;
           beam.set({
             params: {
               time: time.time,
+              intensity,
             },
           });
           frame.pass(canvasSurface, beam);
@@ -84,7 +94,13 @@ export function RoomShader() {
 
         document.addEventListener("visibilitychange", onVisibility);
 
-        if (!disposed) setLive(true);
+        if (!disposed) {
+          setLive(true);
+          // Paint one frame under opacity:0, then fade the canvas in.
+          revealFrame = requestAnimationFrame(() => {
+            if (!disposed) setOn(true);
+          });
+        }
       } catch {
         // Stay on CSS fallback.
       }
@@ -92,6 +108,7 @@ export function RoomShader() {
 
     return () => {
       disposed = true;
+      cancelAnimationFrame(revealFrame);
       stopLoop?.();
       if (onVisibility) {
         document.removeEventListener("visibilitychange", onVisibility);
@@ -101,14 +118,14 @@ export function RoomShader() {
   }, []);
 
   return (
-    <div
-      className={live ? "home-room" : "home-room home-room--fallback"}
-      aria-hidden
-    >
+    <div className="home-room home-room--fallback" aria-hidden>
       <canvas
         ref={canvasRef}
-        className="home-room__canvas"
-        style={live ? undefined : { opacity: 0 }}
+        className={
+          live && on
+            ? "home-room__canvas home-room__canvas--on"
+            : "home-room__canvas"
+        }
       />
     </div>
   );

@@ -38,9 +38,8 @@
 /* --- site chrome: nav + footer --- */
 /*
   Layer order on `/`:
-    nav (1) < room beam (2) < main/home/footer (3)
-  Nav stays in normal flow — the fixed room simply paints over it.
-  Other routes have no `.home-room`, so nav sits above page content as usual.
+    room beam (0) < nav (1) < main/home/footer (3)
+  Room is atmosphere behind chrome — nav stays put like other routes.
 */
 .site-nav {
   position: relative;
@@ -233,7 +232,7 @@
   pointer-events: none;
   position: fixed;
   inset: 0;
-  z-index: 2;
+  z-index: 0;
   overflow: hidden;
   background: var(--room);
 }
@@ -242,6 +241,12 @@
   display: block;
   width: 100%;
   height: 100%;
+  opacity: 0;
+  transition: opacity 1.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.home-room__canvas--on {
+  opacity: 1;
 }
 
 .home-room--fallback {

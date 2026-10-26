@@ -31,7 +31,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={recursive.variable}>
+    <html lang="en" className={`${recursive.variable} ${recursive.className}`}>
       <body className="font-sans text-paper-cool bg-room">
         <Navigation />
 

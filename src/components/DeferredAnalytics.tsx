@@ -26,6 +26,9 @@ const SpeedInsights = dynamic(
 );
 
 export function DeferredAnalytics() {
+  // Scripts 404 off Vercel (/_vercel/insights) and tank Best Practices in LH.
+  if (process.env.VERCEL !== "1") return null;
+
   return (
     <Suspense fallback={null}>
       <Analytics />

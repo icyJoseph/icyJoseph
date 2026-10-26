@@ -30,6 +30,11 @@ export function RoomShader() {
 
     (async () => {
       try {
+        // Probe adapter *before* downloading vgpu — LH/headless often has
+        // `navigator.gpu` but no adapter; importing anyway wastes ~50kb.
+        const adapter = await navigator.gpu?.requestAdapter();
+        if (!adapter || disposed) return;
+
         const { init, effect, surface, clock, frameLoop } = await import("vgpu");
         type Frame = Parameters<Parameters<typeof frameLoop>[1]>[0];
 

@@ -26,6 +26,9 @@ const SpeedInsights = dynamic(
 );
 
 export function DeferredAnalytics() {
+  // Outside the intended deploy environment this should not execute.
+  if (process.env.VERCEL !== "1") return null;
+
   return (
     <Suspense fallback={null}>
       <Analytics />

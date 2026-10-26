@@ -54,8 +54,6 @@ export function HumanStrip({
     <section className="home-human" aria-label="About">
       <div className="home-human__face">
         <Image
-          priority
-          fetchPriority="high"
           sizes="(max-width: 768px) 120px, 160px"
           className="home-human__avatar"
           src={avatarUrl}

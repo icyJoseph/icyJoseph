@@ -74,6 +74,12 @@ export function FlarePlate({
       running = true;
 
       try {
+        const adapter = await navigator.gpu?.requestAdapter();
+        if (!adapter || disposed || !visible) {
+          running = false;
+          return;
+        }
+
         const { init, effect, surface, clock, frameLoop } = await import("vgpu");
         type Frame = Parameters<Parameters<typeof frameLoop>[1]>[0];
         if (disposed || !visible) {

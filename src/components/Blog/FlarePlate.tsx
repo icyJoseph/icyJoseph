@@ -80,9 +80,7 @@ export function FlarePlate({
           return;
         }
 
-        const { init, effect, surface, clock, frameLoop } = await import(
-          /* webpackPrefetch: false */ "vgpu"
-        );
+        const { init, effect, surface, clock, frameLoop } = await import("vgpu");
         type Frame = Parameters<Parameters<typeof frameLoop>[1]>[0];
         if (disposed || !visible) {
           running = false;

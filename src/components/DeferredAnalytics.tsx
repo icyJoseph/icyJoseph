@@ -26,7 +26,7 @@ const SpeedInsights = dynamic(
 );
 
 export function DeferredAnalytics() {
-  // Scripts 404 off Vercel (/_vercel/insights) and tank Best Practices in LH.
+  // Outside the intended deploy environment this should not execute.
   if (process.env.VERCEL !== "1") return null;
 
   return (

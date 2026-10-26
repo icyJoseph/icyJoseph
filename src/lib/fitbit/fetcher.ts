@@ -119,6 +119,8 @@ type StepsPoint = { dateTime: string; value: string };
 export const fitBitProfile = async (): Promise<{
   profile: Pick<IcyJoseph.FitbitProfile, "topBadges" | "averageDailySteps">;
   restingHeartRate: number | undefined;
+  /** 7-day mean from the steps time series (HUD); not the lifetime profile avg. */
+  stepsAverage: number;
   heartTrend: VitalTrend | undefined;
   stepsTrend: VitalTrend | undefined;
 }> => {
@@ -174,17 +176,32 @@ export const fitBitProfile = async (): Promise<{
   const restingHeartRate =
     restingRates.length > 0 ? restingRates[restingRates.length - 1] : undefined;
 
-  // 1 bpm noise floor — RHR wobbles a little day to day.
+  // 1 bpm — ignore tiny RHR noise across the week halves.
   const heartTrend = trendFromSeries(restingRates, 1);
 
   const stepsSeries =
     stepsResult.status === "fulfilled" ? (stepsResult.value ?? []) : [];
-  const dailySteps = stepsSeries
+  // Fitbit’s last point is usually today (partial) — drop it without Date()
+  // so this stays safe under `"use cache"`.
+  const completedSeries =
+    stepsSeries.length > 0 ? stepsSeries.slice(0, -1) : stepsSeries;
+  const dailySteps = completedSeries
     .map((entry) => Number(entry.value))
     .filter((n) => Number.isFinite(n) && n > 0);
 
-  // ~300 steps feels like flat noise on a 7-day glance.
+  const stepsAverage =
+    dailySteps.length > 0
+      ? Math.round(dailySteps.reduce((a, b) => a + b, 0) / dailySteps.length)
+      : (profile.averageDailySteps ?? 0);
+
+  // Later half of the week vs earlier. ~300 steps = flat noise.
   const stepsTrend = trendFromSeries(dailySteps, 300);
 
-  return { profile, restingHeartRate, heartTrend, stepsTrend };
+  return {
+    profile,
+    restingHeartRate,
+    stepsAverage,
+    heartTrend,
+    stepsTrend,
+  };
 };

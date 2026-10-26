@@ -90,7 +90,7 @@ export function VitalsHud({
               aria-valuenow={averageDailySteps}
               aria-valuemin={0}
               aria-valuemax={10000}
-              aria-label={`Average daily steps ${averageDailySteps}`}
+              aria-label={`Average daily steps (7 day) ${averageDailySteps}`}
             >
               <span
                 className="home-vitals__fill home-vitals__fill--steps"
@@ -100,7 +100,7 @@ export function VitalsHud({
             <span className="home-vitals__val">
               {formatCount(averageDailySteps)}
               <span className="home-vitals__unit">steps</span>
-              <TrendMark trend={stepsTrend} label="Daily steps" />
+              <TrendMark trend={stepsTrend} label="Daily steps (7 day)" />
             </span>
           </div>
         ) : null}

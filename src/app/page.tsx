@@ -64,7 +64,7 @@ export default async function Page(_props: PageProps<"/">) {
           yearsOnGitHub={yearsOnGitHub}
           pins={pins}
           restingHeartRate={fitBit.restingHeartRate}
-          averageDailySteps={fitBit.profile.averageDailySteps}
+          averageDailySteps={fitBit.stepsAverage}
           heartTrend={fitBit.heartTrend}
           stepsTrend={fitBit.stepsTrend}
           contributionYears={contributionTotals.years}

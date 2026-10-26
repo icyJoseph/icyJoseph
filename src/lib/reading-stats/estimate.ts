@@ -1,3 +1,5 @@
+import { cacheLife } from "next/cache";
+
 type ReadingTimeStats = {
   time: number;
   minutes: number;
@@ -44,6 +46,7 @@ export const estimateReadingTime = async (
   text: string
 ): Promise<ReadingTimeStats> => {
   "use cache";
+  cacheLife("max");
   const words = await intoWords(text);
   const { time, minutes } = inverseWPM(words, 200);
 

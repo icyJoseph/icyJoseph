@@ -55,6 +55,38 @@ export function formatYearBreakdown(
     .join(", ");
 }
 
+export function mostRecentContributionYear(
+  contributionsByYear: Record<number, number>
+): number {
+  let latest = 0;
+
+  for (const year of Object.keys(contributionsByYear)) {
+    const value = Number(year);
+    if (value > latest) latest = value;
+  }
+
+  return latest;
+}
+
+/**
+ * Landing-page order: stars, then most recent contribution year, then total commits.
+ */
+export function compareAggregatedContributions(
+  a: AggregatedContribution,
+  b: AggregatedContribution
+): number {
+  const stars =
+    (b.repository.stargazerCount ?? 0) - (a.repository.stargazerCount ?? 0);
+  if (stars !== 0) return stars;
+
+  const year =
+    mostRecentContributionYear(b.contributionsByYear) -
+    mostRecentContributionYear(a.contributionsByYear);
+  if (year !== 0) return year;
+
+  return b.totalContributions - a.totalContributions;
+}
+
 export function groupBySource(
   commitContributionsByRepository: Contribution[],
 ): ContributionData {

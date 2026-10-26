@@ -1,32 +1,36 @@
-
 import Link from "next/link";
 
 import { ActiveLink } from "components/ActiveLink";
-import { entries } from "config/pages";
+import { getNavEntries } from "config/pages";
 
-export const Navigation = () => {
+export const Navigation = async () => {
+  const entries = await getNavEntries();
+
   return (
-    <header className="px-4 py-5 w-full md:px-0 md:w-4/5 mx-auto max-w-7xl">
-      <nav className="font-sans flex flex-col sm:flex-row py-3 my-0">
-        <div className="flex-auto font-bold text-xl px-3 sm:px-0 uppercase">
-          <Link href="/" className="hover:text-pale-yellow transition-colors">
-            <span className="block">icyJoseph</span>
-            <span className="block text-base font-semibold">
-              Señor Developer
-            </span>
-          </Link>
-        </div>
+    <header className="site-nav px-4 py-5 w-full md:px-0 md:w-4/5 mx-auto max-w-7xl">
+      <nav
+        className="site-nav__hud font-sans flex flex-col items-start py-3 my-0 gap-2"
+        aria-label="Primary"
+      >
+        <Link href="/" className="site-nav__brand group inline-block">
+          <span className="site-nav__name block text-xl font-bold uppercase tracking-wide">
+            icyJoseph
+          </span>
+        </Link>
 
-        <div className="hidden flex-auto mx-auto sm:flex" />
-
-        <ul className="flex justify-evenly items-center mt-5 sm:mt-0 gap-12">
+        <ul className="site-nav__menu flex flex-wrap items-center gap-3 sm:gap-4">
           {entries.map(({ title, href }) => (
-            <li
-              key={title}
-              className="inline-flex flex-1 justify-center sm:justify-end"
-            >
-              <ActiveLink href={href} className="hover:text-pale-yellow">
-                <span>{title}</span>
+            <li key={title} className="inline-flex">
+              <ActiveLink
+                href={href}
+                className="site-nav__link"
+                prefetch={
+                  href === "/blog" || href.startsWith("/contributions/")
+                    ? true
+                    : undefined
+                }
+              >
+                <span className="site-nav__link-label">{title}</span>
               </ActiveLink>
             </li>
           ))}

@@ -29,10 +29,10 @@ type HumanStripProps = {
   currentYear: number;
 };
 
-const preferences = [
-  "JavaScript, TypeScript, and Rust on the side.",
-  "Coding challenges — Hash Code, Advent of Code, the long night ones.",
-  "Fullstack work. Quiet rooms. Things that ship.",
+const foundation = [
+  "Electronics engineering. C, assembler, microcontrollers, FPGAs.",
+  "Industrial UIs before the web, wired to PLCs, pumps and motors.",
+  "Moved to Sweden in 2014 for a Master's at Chalmers. Stayed.",
 ];
 
 export function HumanStrip({
@@ -77,9 +77,9 @@ export function HumanStrip({
       />
 
       <div className="home-human__block">
-        <h3 className="home-human__heading">Preferences</h3>
+        <h3 className="home-human__heading">Foundation</h3>
         <ul className="home-human__prefs">
-          {preferences.map((line) => (
+          {foundation.map((line) => (
             <li key={line}>{line}</li>
           ))}
         </ul>

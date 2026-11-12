@@ -19,8 +19,8 @@ export async function HomeHero() {
       <p className="home-hero__brand">icyJoseph</p>
       <h1 className="home-hero__title">Señor Developer</h1>
       <p className="home-hero__line">
-        Late light through the window. Still at the desk — shipping what others
-        can see.{" "}
+        Ten years building for the web. Now on Next.js education at Vercel: how
+        people learn it, and how agents use it.{" "}
         <Link href="/blog/who-am-i" prefetch className="home-hero__whoami">
           @whoami
         </Link>

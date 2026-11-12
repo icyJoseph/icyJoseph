@@ -1,20 +1,12 @@
 # Blog
 
-Welcome to my blog. Here I publish analysis of coding challenges, and document things I learn while learning both front and back end frameworks.
+Welcome to my blog. Here I publish small studies of things I want to understand, mostly React and Next.js, and the occasional coding challenge.
 
 ## Problem-Solving
 
-During the year, when I am not working with my personal projects, I put time into coding competitions and coding challenges.
+For years I put a lot of time into coding competitions: Google's Hash Code, Code Jam and Kick Start, and Advent of Code. Google has since retired its competitions, but that practice is part of my foundation, and it is how I learned Rust. I still enjoy a challenge every now and then.
 
-I focus mostly on Google Competitions, that is Hash Code, Code Jam and Kick-Start.
-
-Of course, I also solve Advent of Code, though I am not as fast as I would like to.
-
-Otherwise, I solve any time of problems that come my way.
-
-The actual code and solutions for these challenges, live on their own repository. On this repository I only document a few problems, and explore my thought process.
-
-A very nice side effect of problem-solving like this, is that I have learned the Rust programming language.
+The solutions live in their own repositories. Here I only document a few problems, and my thought process.
 
 ## Frameworks
 

@@ -32,7 +32,7 @@ type HumanStripProps = {
 const foundation = [
   "Electronics engineering. C, assembler, microcontrollers, FPGAs.",
   "Industrial UIs before the web, wired to PLCs, pumps and motors.",
-  "Moved to Sweden in 2014 for a Master's at Chalmers. Stayed.",
+  "Business design and entrepreneurship. Venture growth, IP, market research and software.",
 ];
 
 export function HumanStrip({

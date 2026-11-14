@@ -7,6 +7,27 @@ export const BlogIntro = () => {
         App Router edges, challenge writeups, and the craft of shipping UI —
         short posts when something sticks.
       </p>
+      <p className="blog-index__lead">
+        Other posts I wrote are on{" "}
+        <a
+          href="https://medium.com/@icjoseph"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="blog-index__link"
+        >
+          Medium
+        </a>{" "}
+        and{" "}
+        <a
+          href="https://dev.to/icyjoseph"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="blog-index__link"
+        >
+          dev.to
+        </a>
+        .
+      </p>
     </header>
   );
 };

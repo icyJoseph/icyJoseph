@@ -521,6 +521,13 @@
   border-left: 2px solid rgb(249 121 121 / 0.45);
 }
 
+.home-human__more {
+  margin: 0.9rem 0 0;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--paper-cool);
+}
+
 .home-human__signal {
   font-weight: 300;
   line-height: 1.6;

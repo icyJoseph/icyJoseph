@@ -83,6 +83,18 @@ export function HumanStrip({
             <li key={line}>{line}</li>
           ))}
         </ul>
+        <p className="home-human__more">
+          Follow my career on{" "}
+          <a
+            href="https://www.linkedin.com/in/icyjoseph/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="home-human__pin"
+          >
+            LinkedIn
+          </a>
+          .
+        </p>
       </div>
 
       <div className="home-human__block">

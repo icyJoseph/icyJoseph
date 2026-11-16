@@ -1,5 +1,6 @@
 "use client";
 
+// TODO: Push client boundary further down
 import { useMemo, useState } from "react";
 
 import { ContributionEntry } from "components/GitHub/ContributionEntry";
@@ -68,10 +69,7 @@ function pickHighlights(
   return picks;
 }
 
-export function ContributionsList({
-  groups,
-  year,
-}: ContributionsListProps) {
+export function ContributionsList({ groups, year }: ContributionsListProps) {
   const [filter, setFilter] = useState(ALL);
 
   const allRepos = useMemo(
@@ -115,12 +113,19 @@ export function ContributionsList({
       </h3>
 
       {showHighlights ? (
-        <section className="contrib-explore__highlights" aria-label="Highlights">
+        <section
+          className="contrib-explore__highlights"
+          aria-label="Highlights"
+        >
           <h4 className="contrib-explore__section-label">Highlights</h4>
           <ul className="contrib-explore__grid contrib-explore__grid--highlights">
             {highlights.map((item) => (
               <li key={item.repository.id}>
-                <ContributionEntry item={item} variant="highlight" year={year} />
+                <ContributionEntry
+                  item={item}
+                  variant="highlight"
+                  year={year}
+                />
               </li>
             ))}
           </ul>

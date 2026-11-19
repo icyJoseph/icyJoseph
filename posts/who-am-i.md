@@ -12,6 +12,7 @@ tags:
 authors:
   - Joseph Chamochumbi
 publish_date: 1646152804
+update_date: 1794233413
 ---
 
 # Who am I
@@ -20,13 +21,21 @@ My name is Joseph Chamochumbi, I am a software developer from Peru, living in Sw
 
 I moved to Sweden in 2014 to study a Master's Degree. After I finished it, I got a couple of job offers, and decided to take one of them.
 
+### Update
+
+I wrote this post in 2022. Since May 2025, I work at Vercel, on the Next.js team. My focus is education and usage of Next.js. That started as classic DX, maintaining the Next.js site and issue triage, and has grown into how agents use Next.js, and how humans can still learn it, so that both are efficient with it.
+
+These days, even though I still write code, orchestrating agents has turned reading code into one of my main activities, and even that is starting to give way to architectural reasoning. It also leaves more time to help the community and to build demo apps. I probably see more Next.js apps in a day than most developers do.
+
+The rest of the post is kept as it was, with a few corrections.
+
 I've been coding ever since university days. I remember my first programming course used `C++`, and I took over a summer as preparation for the third semester of electronics engineering school.
 
 ## Higher Education
 
 Talking about university, I studied in the `Universidad Nacional de Ingenieria`, which translates to National University of Engineering, popularly known as UNI.
 
-It was madly hard to get into the school I wanted, `Eletronics Engineering`, and it was even harder to complete the program. During the second half of the program I did quite a bit of `Assembler`, `C` and `Matlab`. At the time I was very much into microcontrollers programming. I even played around with FPGA's.
+It was madly hard to get into the school I wanted, `Electronics Engineering`, and it was even harder to complete the program. During the second half of the program I did quite a bit of `Assembler`, `C` and `Matlab`. At the time I was very much into microcontrollers programming. I even played around with FPGA's.
 
 Out in the work force, engineering skills were very useful while performing tasks, but often employers under appreciated them. At entry level, most jobs really just want to you be good with technical abilities, rather than engineering.
 
@@ -58,7 +67,9 @@ As soon as I was done with university I got a job, where I helped to build UI fo
 
 I did that for nearly 2 years. It was fun, but incredibly hard, physically and mentally.
 
-After that I did my Master's degree, and soon after I got a job as a consultant for a large telecom company. I then worked as a consultant for a large truck manufacturer, and after nearly two years, I joined Evolve Technology, where I've continued to work as a consultant for many customers.
+After that I did my Master's degree, and soon after I got a job as a consultant for a large telecom company. I then worked as a consultant for a large truck manufacturer, and after nearly two years, I joined Evolve Technology, where I worked as a consultant for many customers.
+
+In 2025, I joined Vercel, to work on Next.js.
 
 ## Coding Challenges
 
@@ -74,7 +85,9 @@ I still need to become better at multi-threading without fear, and perhaps be in
 
 ## This blog
 
-This blog runs on `Rust`, and `TypeScript`, batteries. `MeiliSearch`, and `Next.js` to be precise. I will most likely write-up on how I set it up sometime in the future.
+This blog started out running on `Rust`, and `TypeScript`, batteries. `MeiliSearch`, and `Next.js` to be precise.
+
+These days, the posts are markdown files in the repository, rendered by `Next.js`.
 
 You can expect heavy technical posts. I usually think of them as a small research, or study, project. The subjects will most likely touch on both front end and back end technology.
 

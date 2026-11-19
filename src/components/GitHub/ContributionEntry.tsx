@@ -83,7 +83,11 @@ export const ContributionEntry = ({
               ·
             </span>
           ) : null}
-          {commitLabel ? <span>{commitLabel}</span> : null}
+          {commitLabel ? (
+            <span>
+              <b>{commitLabel}</b>
+            </span>
+          ) : null}
         </p>
       </div>
 

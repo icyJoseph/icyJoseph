@@ -22,9 +22,7 @@ export const generateStaticParams = async () => {
   return years.map((year) => ({ year: String(year) }));
 };
 
-export const generateMetadata = async (
-  props: PageProps,
-): Promise<Metadata> => {
+export const generateMetadata = async (props: PageProps): Promise<Metadata> => {
   const { year: yearParam } = await props.params;
   const year = Number(yearParam);
 
@@ -66,6 +64,7 @@ function YearNav({ years, year }: { years: number[]; year: number }) {
             }
             aria-current={y === year ? "page" : undefined}
             prefetch
+            scroll={false}
           >
             {y}
           </Link>
@@ -148,11 +147,7 @@ async function YearExplore({ year }: { year: number }) {
   if (!detail) notFound();
 
   return (
-    <ContributionsSection
-      key={year}
-      data={detail.aggregated}
-      year={year}
-    />
+    <ContributionsSection key={year} data={detail.aggregated} year={year} />
   );
 }
 

@@ -16,13 +16,13 @@ export const metadata: Metadata = {
   metadataBase: new URL(origin),
   title: "icyJoseph | Señor Developer",
   description:
-    "Señor Developer. JavaScript, TypeScript, Rust, CSS. I work with fullstack. I enjoy coding challenges.",
+    "Señor Developer. Ten years building for the web, now on Next.js education at Vercel, for people and for agents. Electronics engineer by training.",
   openGraph: {
     url: origin,
     title: "icyJoseph | Señor Developer",
     siteName: "icyJoseph",
     description:
-      "Señor Developer. JavaScript, TypeScript, Rust, CSS. I work with fullstack. I enjoy coding challenges.",
+      "Señor Developer. Ten years building for the web, now on Next.js education at Vercel, for people and for agents. Electronics engineer by training.",
     images: [
       {
         url: `${origin}/og-image`,
